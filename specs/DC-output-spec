@@ -1,0 +1,15 @@
+
+## Documentation Configuration File, Input File Format of Style Checker
+## ====================================================================
+
+
+## Basics
+MAIN="art.stylecheck.input.xml"
+ROOTID="art.stylecheck.input"
+
+## Profiling
+PROFOS="osuse"
+PROFARCH="x86;amd64"
+
+## enable sourcing
+export DOCCONF=$BASH_SOURCE

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="urn:x-suse:xslt:profiling:novdoc-profile.xsl"
+ type="text/xml"
+ title="Profiling step"?>
+<!DOCTYPE section PUBLIC
+  "-//Novell//DTD NovDoc XML V1.0//EN" "novdocx.dtd"
+[
+  <!ENTITY % NOVDOC.DEACTIVATE.IDREF "INCLUDE">
+]>
+<set id="set.stylecheck.specs" lang="en">
+  <title>File Format Specifications for Style Checker</title>
+  <setinfo>
+    <author>
+      <firstname>Stefan</firstname><surname>Knorr</surname>
+    </author>
+    <date><?dbtimestamp?></date>
+  </setinfo>
+
+  <xi:include href="article.stylecheck.input.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="article.stylecheck.output.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</set>
