@@ -19,8 +19,147 @@
   <sect1>
     <title>Objectives</title>
 
-    <para/>
+    <para>Lalala.
+    </para>
   </sect1>
+  <sect1>
+    <title>Terminology</title>
+
+    <para>The following table lists terminology used in this specification.
+    </para>
+
+    <informaltable>
+      <tgroup cols="2">
+        <thead>
+          <entry>Term</entry>
+          <entry>Usage</entry>
+        </thead>
+        <tbody>
+          <row>
+            <entry>origin</entry>
+            <entry>Typical DocBook documents are split up into smaller separate
+              files. To create a style checker input file, these files have to be
+              combined. The specific line and file that any string of text came
+              from is called the <emphasis>origin</emphasis>.
+            </entry>
+          </row>
+          <row>
+            <entry>input file</entry>
+            <entry>A single flat XML that serves as the input for the style
+              checker.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+
+  </sect1>
+  <sect1>
+    <title>Accepted File Types</title>
+
+    <para>The style checker accepts only a single input file per invocation
+      as input. The input file must be a valid DocBook 4.5 XML file using the
+      UTF-8 standard. The DOCTYPE Declaration will be ignored by the style
+      checker, so that any document written in a syntax-compatible file format
+      may also be analyzed. One example of a compatible syntax is NovDoc 1.0.
+      For best results, the file should also be profiled already, that is, they
+      should be stripped of text that is relevant only for a particular other
+      version of a product.
+    </para>
+    <para>The input file must not contain XIncludes or similar elements
+      referencing other files. It must not include entities or references to
+      entity files. An exception to this are the following predeclared entities:
+    </para>
+    <itemizedlist>
+      <listitem><sgmltag>&amp;amp;</sgmltag> (<literal>&amp;</literal>),</listitem>
+      <listitem><sgmltag>&amp;lt;</sgmltag> (<literal>&lt;</literal>),</listitem>
+      <listitem><sgmltag>&amp;gt;</sgmltag> (<literal>&gt;</literal>),</listitem>
+      <listitem><sgmltag>&amp;quot;</sgmltag> (<literal>&quot;</literal>), and</listitem>
+      <listitem><sgmltag>&amp;apos;</sgmltag> (<literal>&apos;</literal>)</listitem>
+    </itemizedlist>
+    <para>International characters must be written using the appropriate UTF-8
+      bit sequence.
+    </para>
+  </sect1>
+  <sect1>
+    <title>Annotation Markup</title>
+
+    <para>To be able to properly analyze documents and track down any findings
+      to the source document, the style checker needs the input file to be
+      annotated. There are two basic types of annotations:
+    </para>
+    <itemizedlist>
+      <listitem>Origin Trackers&mdash;these annotations store information about
+        where a particular string of text originated
+      </listitem>
+      <listitem>Ignore Marks&mdash;these annotations store information about
+        strings of text that should be ignored (or only partially evaluated)
+        by the style checker
+      </listitem>
+      <para>Annotations stored in the input as XML tags would lead conflicting
+        XML trees and are generally not flexible enough. Therefore, annotations
+        are realized as XML processing instructions.
+      </para>
+      <para>Annotations must only occur after the DOCTYPE declaration. If in the
+        following, the phrases <quote>all lines</quote> or
+        <quote>every line</quote> are used, all lines before the end of the
+        DOCTYPE declaration should be assumed to be excluded.
+      </para>
+
+      <sect2>
+        <title>Origin Trackers</title>
+
+        <para>Origin trackers mark occurences of line breaks in the originating
+          text as well as occurences of XIncludes and entities. This is
+          necessary to be able to point out problems in specific originating
+          files even though only a single file can be checked by the style
+          checker at once.
+        </para>
+        <para>Origin trackers only have an opening instruction, as the next
+          occurring origin tracker overwrites conflicting origin information.
+        </para>
+
+        <sect3>
+          <title>Base Directory Tracker</title>
+
+          <para>The optional basic directory tracker shall occur directly after
+            the DOCTYPE definition. It defines a directory that all other
+            referenced originating files are assumed to be relative to. The
+            directory name must be preceded by the appropriate protocol. The
+            only protocol that can be assumed to be supported is
+            <literal>file://</literal>.
+          </para>
+          <screen>&gt;?ann:origin dir=&quot;<replaceable>file:///home/example/book/</replaceable>&quot; ?&lt;</screen>
+        </sect3>
+
+        <sect3>
+          <title>File Trackers</title>
+
+          <para>File trackers shall be positioned before the introduction of
+            a new source of text. File trackers contain the name of the file.
+            References to a DocBook XML file included via XInclude shall take
+            this form:
+          </para>
+          <screen>&gt;?ann:origin include=&quot;<replaceable>example.xml</replaceable>&quot; ?&lt;</screen>
+          <para>References to external entity files shall take this form:</para>
+          <screen>&gt;?ann:origin entity=&quot;<replaceable>example.ent</replaceable>&quot; ?&lt;</screen>
+          <para>References to inline entity files shall take this form (note
+            that the value <emphasis>inline</emphasis> is not quoted):</para>
+          <screen>&gt;?ann:origin entity=&quot;example.ent&quot; ?&lt;</screen>
+        </sect3>
+
+        <sect3>
+          <title>Line Trackers</title>
+
+          <para>Line trackers shall be positioned before a new line begins and
+            after every file tracker. Line trackers reference the line number
+            any string of text originates from. Line trackers shall take this
+            form  (note that the line nuumber is not quoted):
+          </para>
+          <screen>&gt;?ann:origin line=12 ?&lt;</screen>
+        </sect3>
+
+      </sect2>
 
 </article>
 
