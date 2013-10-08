@@ -15,15 +15,52 @@
     </author>
     <date><?dbtimestamp?></date>
   </articleinfo>
-
-  <sect1>
-    <title>Objectives</title>
-
-    <para>
+  <abstract>
+    <para>This document specifies the required input format for the
+      style checker. While following the specification in
+      <xref linkend="sec.acc.type"/> is mandatory, adding the markup described
+      in <xref linkend="sec.ann.markup"/> is voluntary but greatly enhances the
+      style checker's output.
     </para>
-  </sect1>
+  </abstract>
 
   <sect1>
+    <title>Terminology</title>
+
+    <para>The following table lists terminology used in this specification.
+    </para>
+
+    <informaltable>
+      <tgroup cols="2">
+        <colspec colnum="1" colname="1" colwidth="30*"/>
+        <colspec colnum="2" colname="2" colwidth="70*"/>
+        <thead>
+          <row>
+            <entry><para>Term</para></entry>
+            <entry><para>Usage</para></entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><para>origin (file)</para></entry>
+            <entry><para>Typical DocBook documents are split up into smaller separate
+              files. To create a style checker input file, these files have to be
+              combined. The specific line and file that any string of text came
+              from is called the <emphasis>origin</emphasis>.</para>
+            </entry>
+          </row>
+          <row>
+            <entry><para>input file</para></entry>
+            <entry><para>A single flat XML that serves as the input for the style
+              checker.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+
+  </sect1>
+  <sect1 id="sec.acc.type">
     <title>Accepted File Types</title>
 
     <para>The style checker accepts only a single input file per invocation
@@ -32,26 +69,17 @@
       checker, so that any document written in a syntax-compatible file format
       may also be analyzed. One example of a syntax-compatible format is
       NovDoc 1.0.
-      For best results, the file should also be profiled already, that is, they
-      should be stripped of text that is relevant only for a particular other
-      version of a product.
+      The file must also be profiled already, that is, it must be stripped of
+      text that is relevant only to another version or revision of a product.
     </para>
-    <para>The input file must not contain XIncludes or similar elements
-      referencing other source files. It must not include entities or references
-      to entity files. The following predeclared entities are allowed:
-    </para>
-    <itemizedlist>
-      <listitem><para><literal>&amp;amp;</literal> (<literal>&amp;</literal>),</para></listitem>
-      <listitem><para><literal>&amp;lt;</literal> (<literal>&lt;</literal>),</para></listitem>
-      <listitem><para><literal>&amp;gt;</literal> (<literal>&gt;</literal>),</para></listitem>
-      <listitem><para><literal>&amp;quot;</literal> (<literal>&quot;</literal>), and</para></listitem>
-      <listitem><para><literal>&amp;apos;</literal> (<literal>&apos;</literal>)</para></listitem>
-    </itemizedlist>
-    <para>International characters must be written using the appropriate UTF-8
-      bit sequence.
+    <para>The input file must not reference further XML source files. As such,
+      XIncludes must not occur. The input file must not include entities or
+      references to entity files. Using predeclared entities is allowed.
+      References to external media such as graphics or movies will be
+      silently ignored.
     </para>
   </sect1>
-  <sect1>
+  <sect1 id="sec.ann.markup">
     <title>Annotation Markup</title>
 
     <para>To be able to properly analyze documents and track down any findings
@@ -78,23 +106,24 @@
     </para>
     <para>The basic structure of any annotation instruction follows the pattern
       <literal>&lt;?</literal> (opening sequence for processing instructions),
-      <literal>ann </literal> (for <quote>annotation</quote>, namespace, similar
-      to XML usage), <literal><replaceable>element </replaceable></literal>
+      <literal>ann</literal> (for <quote>annotation</quote>, namespace, similar
+      to XML usage), <literal><replaceable>element</replaceable></literal>
       (element name, similar to XML usage), optional attribute value pairs
-      <literal><replaceable>attribute</replaceable>="<replaceable>value</replaceable>" </literal>
+      <literal><replaceable>attribute</replaceable>="<replaceable>value</replaceable>"</literal>
       (again similar to XML usage), and <literal>?&gt;</literal>
       (closing sequence for processing
       instruction).
     </para>
     <para>If a closing annotation is necessary, follow the same pattern but
-      precede the <emphasis>element name</emphasis> with a forward slash <literal>/</literal> and
+      precede the <emphasis>element name</emphasis> with a forward slash
+      (<literal>/</literal>) and
       omit any attribute-value pairs.
     </para>
     <sect2>
       <title>Origin Trackers</title>
 
-      <para>Origin trackers mark occurences of line breaks in the originating
-        text as well as occurences of XIncludes and entities. This is
+      <para>Origin trackers mark occurrences of line breaks in the originating
+        text as well as occurrences of XIncludes and entities. This is
         necessary to be able to point out problems in specific originating
         files even though only a single file can be checked by the style
         checker at once.
@@ -109,11 +138,10 @@
         <para>The optional basic directory tracker shall occur directly after
           the DOCTYPE definition. It defines a directory that all other
           referenced originating files are assumed to be relative to. The
-          directory name must be preceded by the appropriate protocol. The
-          only protocol that can be assumed to be supported is
-          <literal>file://</literal>.
+          directory name must be accessible via the <filename>file://</filename>
+          protocol.
         </para>
-        <screen>&lt;?ann origin dir="<replaceable>file:///home/example/book/</replaceable>" ?&gt;</screen>
+        <screen>&lt;?ann origin dir="<replaceable>/home/example/book/</replaceable>" ?&gt;</screen>
       </sect3>
 
       <sect3>
@@ -134,12 +162,29 @@
       <sect3>
         <title>Line Trackers</title>
 
-        <para>Line trackers shall be positioned before a new line begins and
-          after every file tracker. Line trackers reference the line number
+        <para>Line trackers shall be positioned before a new line in most cases
+          and after every file tracker. Line trackers reference the line number
           any string of text originates from. Line trackers shall take this
           form:
         </para>
         <screen>&lt;?ann origin line="<replaceable>12</replaceable>" ?&gt;</screen>
+        <para>There are two exceptions to this rule:</para>
+        <itemizedlist>
+          <listitem>
+            <para>If a line begins inside a tag, move the line tracker after the
+              ending <literal>&gt;</literal> of the tag.
+            </para>
+            <screen>&lt;?ann origin line="<replaceable>1</replaceable>" ?&gt;&lt;para
+&gt;&lt;?ann origin line="<replaceable>2</replaceable>" ?&gt;</screen>
+          </listitem>
+          <listitem>
+            <para>In the case of entity files or inline entities, make sure all
+              line trackers are inside of the quotes surrounding entity values.
+            </para>
+            <screen>&lt;!ENTITY "&lt;?ann origin line="<replaceable>1</replaceable>" ?&gt;This is
+&lt;?ann origin line="<replaceable>2</replaceable>" ?&gt;an example entity"&gt;</screen>
+          </listitem>
+        </itemizedlist>
       </sect3>
       <sect3>
         <title>Combined File and Line Trackers</title>
@@ -187,42 +232,6 @@
 &lt;?ann auto-ignore type="sentence" ?&gt;Ignored word or phrase&lt;?ann /ignore ?&gt;</screen>
 
     </sect2>
-  </sect1>
-    <sect1>
-    <title>Terminology</title>
-
-    <para>The following table lists terminology used in this specification.
-    </para>
-
-    <informaltable>
-      <tgroup cols="2">
-        <colspec colnum="1" colname="1" colwidth="30*"/>
-        <colspec colnum="2" colname="2" colwidth="70*"/>
-        <thead>
-          <row>
-            <entry><para>Term</para></entry>
-            <entry><para>Usage</para></entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry><para>origin</para></entry>
-            <entry><para>Typical DocBook documents are split up into smaller separate
-              files. To create a style checker input file, these files have to be
-              combined. The specific line and file that any string of text came
-              from is called the <emphasis>origin</emphasis>.</para>
-            </entry>
-          </row>
-          <row>
-            <entry><para>input file</para></entry>
-            <entry><para>A single flat XML that serves as the input for the style
-              checker.</para>
-            </entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </informaltable>
-
   </sect1>
 </article>
 
