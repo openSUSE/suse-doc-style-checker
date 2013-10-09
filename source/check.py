@@ -25,6 +25,8 @@ if ( "--version" in arguments ) or ( "-v" in arguments ):
   sys.exit( "Style Checker 0.1.0" )
 
 if ("--open" in arguments ) or ( "-o" in arguments ):
+  if ( os.environ.get('BROWSER') == None ):
+    sys.exit( "Before using the --open option, do: export BROWSER=\"MY/FAVORITE/BROWSER\"" )
   openfile = True
   arguments = list(filter(('--open').__ne__, arguments))
   arguments = list(filter(('-o').__ne__, arguments))
@@ -38,7 +40,7 @@ if ("--dc" in arguments) or ( "-d" in arguments ):
 if len( arguments ) < 2:
   sys.exit( """Not enough arguments provided.
 Usage: %s [OPTIONS] FILE
-To see all options, do %s --help""" % ( arguments[0], arguments[0] ) )
+To see all options, do: %s --help""" % ( arguments[0], arguments[0] ) )
 
 if not os.path.exists( arguments[-1] ):
   sys.exit( "File %s does not exist.\n" % arguments[-1] )
@@ -66,5 +68,5 @@ result.write( '/tmp/checkresult.xml',
 
 shutil.copyfile( location + 'check.css', '/tmp/checkresult.css' )
 
-if openfile == True and os.environ['BROWSER']:
+if openfile == True:
   subprocess.call( [ os.environ['BROWSER'] , '/tmp/checkresult.xml' ] )
