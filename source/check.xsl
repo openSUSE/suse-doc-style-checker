@@ -9,7 +9,7 @@
     <xsl:apply-templates/>
   </xsl:template>
 
-  <xsl:template match="step[11]|substep[11]">
+  <xsl:template match="step[11]">
     <xsl:param name="id">
       <xsl:choose>
         <xsl:when test="parent::procedure[@id]">
@@ -27,12 +27,8 @@
       <xsl:apply-templates select="parent::procedure/step[last()]" mode="count"/>
     </xsl:param>
 
-    <xsl:message>+ Procedure <xsl:value-of select="$id"/> has <xsl:value-of select="$number-steps"/> steps.
-  Procedures may contain up to 10 steps.</xsl:message>
-  </xsl:template>
-
-  <xsl:template match="substep" mode="count">
-    <xsl:number select="step"/>
+    <xsl:message>(!) Procedure <xsl:value-of select="$id"/> has <xsl:value-of select="$number-steps"/> steps.
+    Procedures may contain up to 10 steps.</xsl:message>
   </xsl:template>
 
   <xsl:template match="step" mode="count">
