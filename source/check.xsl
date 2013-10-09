@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method = "xml" indent = "yes" />
 
   <xsl:template match="*">
     <xsl:apply-templates/>
@@ -7,6 +8,12 @@
 
   <xsl:template match="text()">
     <xsl:apply-templates/>
+  </xsl:template>
+
+  <xsl:template match="/">
+    <results>
+      <xsl:apply-templates/>
+    </results>
   </xsl:template>
 
   <xsl:template match="step[11]">
@@ -27,8 +34,10 @@
       <xsl:apply-templates select="parent::procedure/step[last()]" mode="count"/>
     </xsl:param>
 
-    <xsl:message>(!) Procedure <xsl:value-of select="$id"/> has <xsl:value-of select="$number-steps"/> steps.
-    Procedures may contain up to 10 steps.</xsl:message>
+    <result>
+      <warning>Procedure <xsl:value-of select="$id"/> has <xsl:value-of select="$number-steps"/> steps.</warning>
+      <expectation>Procedures may contain up to 10 steps.</expectation>
+    </result>
   </xsl:template>
 
   <xsl:template match="step" mode="count">

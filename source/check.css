@@ -1,0 +1,63 @@
+results {
+  margin: 10px auto;
+  max-width: 800px;
+  font-family: Cantarell, sans-serif;
+  background-color: #FFF;
+  color: #333;
+  line-height: 1.25em;
+  display: block;
+}
+
+results:before {
+  content: 'Checker Results';
+  font-size: 25px;
+  margin: 20px 10px;
+  display: block;
+}
+result {
+  border: 1px solid #999;
+  margin: 10px;
+  padding: 10px;
+  background-color: #FEFEFE;
+  display: block;
+}
+
+result:hover, result:focus {
+  border: 1px solid #999;
+  margin: 10px;
+  padding: 10px;
+  background-color: #FEFEFE;
+  display: block;
+}
+
+warning:before, info:before {
+  font-size: 16px;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 20px;
+  width: 20px;
+  text-align: center;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+warning:before {
+  content: '!';
+  color: #FFF;
+  background-color: #C00;
+}
+
+info:before {
+  content: 'i';
+  background-color: #ED0;
+}
+
+warning, info {
+  font-size: 20px;
+  display: block;
+}
+
+expectation {
+  font-size: 16px;
+  display: block;
+}
