@@ -22,7 +22,7 @@ Options:
     --help  Show this screen""" % arguments[0] )
 
 if ( "--version" in arguments ) or ( "-v" in arguments ):
-  sys.exit( "Style Checker 0.1.0" )
+  sys.exit( "Documentation Style Checker 0.1.0pre" )
 
 if ("--open" in arguments ) or ( "-o" in arguments ):
   if ( os.environ.get('BROWSER') == None ):
