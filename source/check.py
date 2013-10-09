@@ -16,7 +16,7 @@ if ( "--help" in arguments ) or ( "-h" in arguments ):
   sys.exit( """Usage: %s [OPTIONS] FILE
 
 Options:
-      --dc  Use a DC file is input, this will invoke DAPS to create a bigfile
+      --dc  Use a DC file as input, this will invoke DAPS to create a bigfile
     --open  Open final report in $BROWSER
  --version  Print version number
     --help  Show this screen""" % arguments[0] )
