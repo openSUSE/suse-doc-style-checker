@@ -61,12 +61,12 @@ result = transform( inputfile )
 
 root = result.getroot()
 
-result.write( '/tmp/checkresult.xml',
+result.write( resultpath + 'checkresult.xml',
               xml_declaration=True,
               encoding="UTF-8",
               pretty_print=True)
 
-shutil.copyfile( location + 'check.css', '/tmp/checkresult.css' )
+shutil.copyfile( location + 'check.css', resultpath + 'checkresult.css' )
 
 if openfile == True:
-  subprocess.call( [ os.environ['BROWSER'] , '/tmp/checkresult.xml' ] )
+  subprocess.call( [ os.environ['BROWSER'] , resultpath + 'checkresult.xml' ] )
