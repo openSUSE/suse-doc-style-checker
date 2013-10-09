@@ -16,7 +16,7 @@ if not os.path.exists( sys.argv[1] ):
   sys.exit( "File %s provided does not exist.\n" % sys.argv[1] )
 else:
   inputfile = etree.parse( sys.argv[1] )
-  transform = etree.XSLT( etree.parse( "/home/work/svn/stylecheck/source/check.xsl" ) )
+  transform = etree.XSLT( etree.parse( "check.xsl" ) )
   result = transform( inputfile )
 
   estring = etree.tostring( result, pretty_print=True )
