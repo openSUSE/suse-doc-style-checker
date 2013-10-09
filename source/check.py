@@ -56,7 +56,7 @@ parser = etree.XMLParser(ns_clean=True,
                          remove_pis=False,
                          dtd_validation=False)
 inputfile = etree.parse( inputfile, parser )
-transform = etree.XSLT( etree.parse( location + 'check.xsl', parser ) )
+transform = etree.XSLT( etree.parse( location + 'xsl-checks/procedure-steps.xsl', parser ) )
 result = transform( inputfile )
 
 root = result.getroot()
