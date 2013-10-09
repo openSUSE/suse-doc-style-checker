@@ -11,13 +11,6 @@ dcfile = False
 resultpath = "/tmp/"
 arguments = sys.argv
 
-def showusage():
-  sys.exit( """No arguments provided.
-Usage: %s [OPTIONS] FILE
-To see all options, do %s --help""" % ( arguments[0], arguments[0] ) )
-
-if len( arguments ) < 2:
-  showusage()
 
 if ( "--help" in arguments ) or ( "-h" in arguments ):
   sys.exit( """Usage: %s [OPTIONS] FILE
@@ -43,7 +36,9 @@ if ("--dc" in arguments) or ( "-d" in arguments ):
   arguments = list(filter(('-d').__ne__, arguments))
 
 if len( arguments ) < 2:
-  showusage()
+  sys.exit( """Not enough arguments provided.
+Usage: %s [OPTIONS] FILE
+To see all options, do %s --help""" % ( arguments[0], arguments[0] ) )
 
 if not os.path.exists( arguments[-1] ):
   sys.exit( "File %s does not exist.\n" % arguments[-1] )
