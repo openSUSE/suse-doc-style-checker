@@ -23,11 +23,7 @@ result {
 }
 
 result:hover, result:focus {
-  border: 1px solid #999;
-  margin: 10px;
-  padding: 10px;
-  background-color: #FEFEFE;
-  display: block;
+  background-color: #EEE;
 }
 
 warning:before, info:before {
