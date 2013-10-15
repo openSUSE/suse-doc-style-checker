@@ -12,6 +12,7 @@ resultpath = "/tmp/"
 arguments = sys.argv
 location = os.path.dirname(os.path.realpath(__file__)) + '/'
 
+# Handle arguments
 if ( "--help" in arguments ) or ( "-h" in arguments ):
   sys.exit( """Usage: %s [OPTIONS] FILE
 
@@ -48,25 +49,37 @@ if not os.path.exists( arguments[-1] ):
 
 inputfile = arguments[-1]
 
+# Some crazy DAPS integration
 if dcfile == True:
   inputfile = (subprocess.check_output( [ 'daps', '-d', arguments[-1], 'bigfile' ] )
               .decode( 'UTF-8' ) ).replace( '\n', '' )
 
+
+
+output = etree.XML('<?xml-stylesheet type="text/css" href="check.css"?><results></results>')
+rootelement = output.xpath( '/results' )
+
+# Checking via XSLT
 parser = etree.XMLParser(ns_clean=True,
                          remove_pis=False,
                          dtd_validation=False)
 inputfile = etree.parse( inputfile, parser )
 transform = etree.XSLT( etree.parse( location + 'xsl-checks/procedure-steps.xsl', parser ) )
-result = transform( inputfile )
+result = transform( inputfile ).getroot()
 
-root = result.getroot()
+print(rootelement[0])
 
-result.write( resultpath + 'checkresult.xml',
-              xml_declaration=True,
-              encoding="UTF-8",
-              pretty_print=True)
+if not result == None:
+  output = rootelement[0].append(result)
+print(output)
 
-shutil.copyfile( location + 'check.css', resultpath + 'checkresult.css' )
 
-if openfile == True:
-  subprocess.call( [ os.environ['BROWSER'] , resultpath + 'checkresult.xml' ] )
+# output.getroottree().write( resultpath + 'checkresult.xml',
+#               xml_declaration=True,
+#               encoding="UTF-8",
+#               pretty_print=True)
+
+# shutil.copyfile( location + 'check.css', resultpath + 'checkresult.css' )
+
+# if openfile == True:
+#   subprocess.call( [ os.environ['BROWSER'] , resultpath + 'checkresult.xml' ] )
