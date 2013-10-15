@@ -5,6 +5,7 @@
 
 import sys, os, subprocess, shutil
 from lxml import etree
+# import pdb
 
 openfile = False
 dcfile = False
@@ -54,7 +55,7 @@ if dcfile == True:
   inputfile = (subprocess.check_output( [ 'daps', '-d', arguments[-1], 'bigfile' ] )
               .decode( 'UTF-8' ) ).replace( '\n', '' )
 
-
+# pdb.set_trace()
 
 output = etree.XML('<?xml-stylesheet type="text/css" href="check.css"?><results></results>')
 rootelement = output.xpath( '/results' )
