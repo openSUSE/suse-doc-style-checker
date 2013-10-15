@@ -4,16 +4,21 @@
 # This might check style & grammar one day. I'm hopeful. Kinda.
 
 import sys, os, subprocess, shutil
+import os.path
 from lxml import etree
+import tempfile
 # import pdb
 
 openfile = False
 dcfile = False
-resultpath = "/tmp/"
+
+# TODO: Create temporary directory withtempfile.mkdtemp (?) 
+resultpath = None
 arguments = sys.argv
 location = os.path.dirname(os.path.realpath(__file__)) + '/'
 
 # Handle arguments
+# TODO: Use argparse module
 if ( "--help" in arguments ) or ( "-h" in arguments ):
   sys.exit( """Usage: %s [OPTIONS] FILE
 
@@ -49,6 +54,8 @@ if not os.path.exists( arguments[-1] ):
 
 
 inputfile = arguments[-1]
+resultpath = os.path.dirname(os.path.realpath(inputfile))
+
 
 # Some crazy DAPS integration
 if dcfile == True:
@@ -71,16 +78,17 @@ result = transform( inputfile ).getroot()
 print(rootelement[0])
 
 if not result == None:
-  output = rootelement[0].append(result)
-print(output)
+  rootelement[0].append(result)
+# print(output)
 
 
-# output.getroottree().write( resultpath + 'checkresult.xml',
-#               xml_declaration=True,
-#               encoding="UTF-8",
-#               pretty_print=True)
+rootelement[0].getroottree().write( os.path.join(resultpath, 'checkresult.xml'),
+               xml_declaration=True,
+               encoding="UTF-8",
+               pretty_print=True)
 
 # shutil.copyfile( location + 'check.css', resultpath + 'checkresult.css' )
 
+# TODO: Use webbrowser module (detects BROWSER env)
 # if openfile == True:
 #   subprocess.call( [ os.environ['BROWSER'] , resultpath + 'checkresult.xml' ] )
