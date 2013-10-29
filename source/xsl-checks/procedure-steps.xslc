@@ -10,7 +10,7 @@
   <xsl:template match="procedure">
     <xsl:variable name="steps" select="count(step)"/>
     <xsl:choose>
-      <xsl:when test="$steps > 10">
+      <xsl:when test="$steps &gt; 10">
         <result>
           <warning>Procedure <xsl:call-template name="createid"/> has <xsl:value-of select="$steps"/> steps.</warning>
           <expectation>Procedures may contain up to 10 steps.</expectation>
