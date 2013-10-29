@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+
+
+  <xsl:template match="*" mode="part-title">Lists</xsl:template>
+
+  <xsl:template match="itemizedlist|orderedlist|variablelist">
+    <xsl:variable name="items" select="count(listitem|varlistentry)"/>
+    <xsl:if test="$items &lt; 2">
+      <result>
+        <warning>List <xsl:call-template name="createid"/> has <xsl:value-of select="$items"/> item.</warning>
+        <expectation>Lists must contain at least 2 items.</expectation>
+      </result>
+    </xsl:if>
+  </xsl:template>
+
+</xsl:stylesheet>
