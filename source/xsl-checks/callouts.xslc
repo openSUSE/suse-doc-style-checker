@@ -12,7 +12,7 @@
     <xsl:choose>
       <xsl:when test="$callouts &gt; 10">
         <result>
-          <warning>Calloutlist <xsl:call-template name="createid"/> has <xsl:value-of select="$callouts"/> callouts.</warning>
+          <warning>Calloutlist <xsl:call-template name="createid"/> contains <xsl:value-of select="$callouts"/> callouts.</warning>
           <expectation>Calloutlists may contain up to 10 callouts.</expectation>
         </result>
       </xsl:when>

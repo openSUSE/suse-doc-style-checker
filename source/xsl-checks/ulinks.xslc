@@ -14,7 +14,7 @@
       <xsl:when test="*|text()">
         <result>
           <warning>Ulink <xsl:call-template name="createid"/> includes text.</warning>
-          <expectation>Remove all text from inside ulink. This allows for printing the URL.</expectation>
+          <expectation>Remove all text from inside <tag>ulink</tag>. This allows for printing the URL.</expectation>
         </result>
       </xsl:when>
       <xsl:otherwise>
