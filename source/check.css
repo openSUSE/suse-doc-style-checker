@@ -87,7 +87,7 @@ tag:before {
 }
 
 tag:after {
-  content: '>';
+  content: '/>';
 }
 part {
   display: block;
