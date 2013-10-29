@@ -4,6 +4,9 @@
 
   <xsl:include href="../library.xsl"/>
 
+
+  <xsl:template match="*" mode="part-title">Procedures</xsl:template>
+
   <xsl:template match="procedure">
     <xsl:variable name="steps" select="count(step)"/>
     <xsl:choose>

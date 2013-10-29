@@ -12,6 +12,7 @@
 
   <xsl:template match="/">
     <part>
+      <part-title><xsl:apply-templates mode="part-title" /></part-title>
       <xsl:apply-templates/>
     </part>
   </xsl:template>

@@ -1,29 +1,30 @@
 results {
   margin: 10px auto;
   max-width: 800px;
-  font-family: Cantarell, sans-serif;
+  font-family: sans-serif;
   background-color: #FFF;
   color: #333;
   line-height: 1.25em;
   display: block;
 }
 
-results:before {
-  content: 'Checker Results';
+results-title {
   font-size: 25px;
   margin: 20px 10px;
   display: block;
 }
 result {
-  border: 1px solid #999;
-  margin: 10px;
-  padding: 10px;
-  background-color: #FEFEFE;
+  border: none;
+  margin: 10px 0;
+  padding: 11px;
+  background-color: #FFF;
   display: block;
 }
 
 result:hover, result:focus {
   background-color: #EEE;
+  border: 1px solid #CCC;
+  padding: 10px;
 }
 
 warning:before, info:before {
@@ -34,7 +35,8 @@ warning:before, info:before {
   width: 20px;
   text-align: center;
   border-radius: 10px;
-  margin-right: 5px;
+  position: absolute;
+  left: 0px;
 }
 
 warning:before {
@@ -51,9 +53,28 @@ info:before {
 warning, info {
   font-size: 20px;
   display: block;
+  padding-left: 25px;
+  position: relative;
 }
 
 expectation {
   font-size: 16px;
   display: block;
+  padding-left: 25px;
+}
+
+part {
+  display: block;
+  border-bottom: 1px solid #EEE;
+}
+
+part:last-child {
+  display: block;
+  border-bottom: none;
+}
+part-title {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 15px 10px 10px;
 }

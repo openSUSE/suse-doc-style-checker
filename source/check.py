@@ -3,17 +3,18 @@
 #
 # This might check style & grammar one day. I'm hopeful. Kinda.
 
-import sys, os, subprocess, shutil
-import os.path
+import sys, os.path, subprocess, webbrowser
 from lxml import etree
 import tempfile
-# import pdb
+
+programname = "Documentation Style Checker"
+programversion = "0.1.0pre"
 
 openfile = False
 dcfile = False
 
-# TODO: Create temporary directory withtempfile.mkdtemp (?) 
-resultpath = None
+# TODO: make paths a little more OS-agnostic
+resultpath = "/tmp"
 arguments = sys.argv
 location = os.path.dirname(os.path.realpath(__file__)) + '/'
 
@@ -23,24 +24,27 @@ if ( "--help" in arguments ) or ( "-h" in arguments ):
   sys.exit( """Usage: %s [OPTIONS] FILE
 
 Options:
-      --dc  Use a DC file as input, this will invoke DAPS to create a bigfile
-    --open  Open final report in $BROWSER
- --version  Print version number
-    --help  Show this screen""" % arguments[0] )
+      --dc  -d  Use a DC file as input, this will invoke DAPS to create a
+                bigfile.
+    --open  -o  Open final report in $BROWSER, or default browser if unset.
+                Not all browsers open report files correctly and for some
+                users, a text editor will open. In such cases, set the
+                BROWSER variable with: export BROWSER=/MY/FAVORITE/BROWSER
+                Chromium or Firefox will both do the right thing.
+ --version  -v  Print version number.
+    --help  -h  Show this screen.
+""" % arguments[0] )
 
 if ( "--version" in arguments ) or ( "-v" in arguments ):
-  sys.exit( "Documentation Style Checker 0.1.0pre" )
+  sys.exit( programname + " " + programversion )
 
 if ("--open" in arguments ) or ( "-o" in arguments ):
-  if ( os.environ.get('BROWSER') == None ):
-    sys.exit( "Before using the --open option, do: export BROWSER=\"MY/FAVORITE/BROWSER\"" )
   openfile = True
   arguments = list(filter(('--open').__ne__, arguments))
   arguments = list(filter(('-o').__ne__, arguments))
 
 if ("--dc" in arguments) or ( "-d" in arguments ):
   dcfile = True
-  resultpath = "build/.tmp/"
   arguments = list(filter(('--dc').__ne__, arguments))
   arguments = list(filter(('-d').__ne__, arguments))
 
@@ -54,18 +58,21 @@ if not os.path.exists( arguments[-1] ):
 
 
 inputfile = arguments[-1]
-resultpath = os.path.dirname(os.path.realpath(inputfile))
 
+# TODO: separate input file name from path & prepend that to output file name
 
 # Some crazy DAPS integration
 if dcfile == True:
+  resultpath = "build/.tmp"
   inputfile = (subprocess.check_output( [ 'daps', '-d', arguments[-1], 'bigfile' ] )
               .decode( 'UTF-8' ) ).replace( '\n', '' )
 
-# pdb.set_trace()
-
-output = etree.XML('<?xml-stylesheet type="text/css" href="check.css"?><results></results>')
+output = etree.XML('<?xml-stylesheet type="text/css" href="%scheck.css"?><results></results>'
+                    % location)
 rootelement = output.xpath( '/results' )
+
+rootelement[0].append(etree.XML('<results-title>Checker Results</results-title>'))
+
 
 # Checking via XSLT
 parser = etree.XMLParser(ns_clean=True,
@@ -75,20 +82,13 @@ inputfile = etree.parse( inputfile, parser )
 transform = etree.XSLT( etree.parse( location + 'xsl-checks/procedure-steps.xsl', parser ) )
 result = transform( inputfile ).getroot()
 
-print(rootelement[0])
-
 if not result == None:
   rootelement[0].append(result)
-# print(output)
 
-
-rootelement[0].getroottree().write( os.path.join(resultpath, 'checkresult.xml'),
+output.getroottree().write( os.path.join(resultpath, 'checkresult.xml'),
                xml_declaration=True,
                encoding="UTF-8",
                pretty_print=True)
 
-# shutil.copyfile( location + 'check.css', resultpath + 'checkresult.css' )
-
-# TODO: Use webbrowser module (detects BROWSER env)
-# if openfile == True:
-#   subprocess.call( [ os.environ['BROWSER'] , resultpath + 'checkresult.xml' ] )
+if openfile == True:
+  webbrowser.open( os.path.join(resultpath, 'checkresult.xml') , new=0 , autoraise=True )
