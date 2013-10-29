@@ -63,6 +63,13 @@ expectation {
   padding-left: 25px;
 }
 
+expectation:before {
+  content: '– ';
+}
+expectation:nth-child(2):last-child:before {
+  content: '';
+}
+
 em {
   font-style: italic;
 }
@@ -75,6 +82,13 @@ quote:after {
   content: '”';
 }
 
+tag:before {
+  content: '<';
+}
+
+tag:after {
+  content: '>';
+}
 part {
   display: block;
   border-bottom: 1px solid #EEE;

@@ -18,7 +18,9 @@
   </xsl:template>
 
   <xsl:template name="createid">
+    <xsl:param name="use-url-attribute" select="0"/>
     <xsl:param name="node" select="."/>
+
 
     <xsl:choose>
       <xsl:when test="$node/@id">
@@ -27,8 +29,31 @@
       <xsl:when test="$node/title">
         <em><xsl:value-of select="normalize-space($node/title)"/></em>
       </xsl:when>
+      <xsl:when test="$use-url-attribute = 1">
+        <xsl:variable name="shortened">
+          <xsl:choose>
+            <xsl:when test="string-length(normalize-space($node/@url)) &gt; 50">
+              <xsl:value-of select="substring(normalize-space($node/@url), 1, 50)"/>…
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="normalize-space($node/@url)"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <quote><xsl:value-of select="$shortened"/></quote>
+      </xsl:when>
       <xsl:otherwise>
-        <quote><xsl:value-of select="substring(normalize-space($node), 1, 50)"/>...</quote>
+        <xsl:variable name="shortened">
+          <xsl:choose>
+            <xsl:when test="string-length(normalize-space($node)) &gt; 50">
+              <xsl:value-of select="substring(normalize-space($node), 1, 50)"/>…
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="normalize-space($node)"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <quote><xsl:value-of select="$shortened"/></quote>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
