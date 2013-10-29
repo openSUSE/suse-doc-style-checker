@@ -3,7 +3,7 @@
 #
 # This might check style & grammar one day. I'm hopeful. Kinda.
 
-import sys, os.path, subprocess, webbrowser
+import sys, os.path, subprocess, webbrowser, glob
 from lxml import etree
 import tempfile
 
@@ -75,15 +75,18 @@ rootelement[0].append(etree.XML('<results-title>Checker Results</results-title>'
 
 
 # Checking via XSLT
+
 parser = etree.XMLParser(ns_clean=True,
                          remove_pis=False,
                          dtd_validation=False)
 inputfile = etree.parse( inputfile, parser )
-transform = etree.XSLT( etree.parse( location + 'xsl-checks/procedure-steps.xsl', parser ) )
-result = transform( inputfile ).getroot()
 
-if not result == None:
-  rootelement[0].append(result)
+for check in glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) ):
+  transform = etree.XSLT( etree.parse( check, parser ) )
+  result = transform( inputfile ).getroot()
+
+  if not result == None:
+    rootelement[0].append(result)
 
 output.getroottree().write( os.path.join(resultpath, 'checkresult.xml'),
                xml_declaration=True,
