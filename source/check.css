@@ -63,6 +63,18 @@ expectation {
   padding-left: 25px;
 }
 
+em {
+  font-style: italic;
+}
+
+quote:before {
+  content: '“';
+}
+
+quote:after {
+  content: '”';
+}
+
 part {
   display: block;
   border-bottom: 1px solid #EEE;

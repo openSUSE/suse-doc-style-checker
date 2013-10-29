@@ -22,13 +22,13 @@
 
     <xsl:choose>
       <xsl:when test="$node/@id">
-        <xsl:value-of select="$node/@id"/>
+        <em><xsl:value-of select="$node/@id"/></em>
       </xsl:when>
       <xsl:when test="$node/title">
-        <xsl:value-of select="normalize-space($node/title)"/>
+        <em><xsl:value-of select="normalize-space($node/title)"/></em>
       </xsl:when>
       <xsl:otherwise>
-        "<xsl:value-of select="substring(normalize-space($node), 1, 50)"/>..."
+        <quote><xsl:value-of select="substring(normalize-space($node), 1, 50)"/>...</quote>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
