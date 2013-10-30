@@ -28,7 +28,7 @@
       <xsl:otherwise>
         <xsl:choose>
           <xsl:when test="$node/title">
-            <em><xsl:value-of select="normalize-space($node/title)"/></em>
+            <quote><xsl:value-of select="normalize-space($node/title)"/></quote>
           </xsl:when>
           <xsl:when test="$use-url-attribute = 1">
             <xsl:variable name="shortened">
