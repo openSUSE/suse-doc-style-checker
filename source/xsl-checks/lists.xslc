@@ -9,12 +9,52 @@
 
   <xsl:template match="itemizedlist|orderedlist|variablelist">
     <xsl:variable name="items" select="count(listitem|varlistentry)"/>
+    <xsl:variable name="nesting-level">
+      <xsl:apply-templates mode="nesting-level" select="."/>
+    </xsl:variable>
+
     <xsl:if test="$items &lt; 2">
       <result>
         <warning>List <xsl:call-template name="createid"/> contains <xsl:value-of select="$items"/> item.</warning>
-        <expectation>Lists must contain at least 2 items.</expectation>
+        <expectation>Lists should contain at least 2 items.</expectation>
       </result>
     </xsl:if>
+
+    <xsl:if test="$nesting-level &gt; 0">
+      <result>
+        <info>List <xsl:call-template name="createid"/> is nested inside
+          <xsl:value-of select="$nesting-level"/> other lists.
+        </info>
+        <expectation>Try to avoid nesting lists so deeply.</expectation>
+      </result>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="itemizedlist|orderedlist|variablelist|procedure" mode="nesting-level">
+    <xsl:param name="current-level" select="0"/>
+    <xsl:variable name="actual-current-level" select="$current-level + 1"/>
+
+    <xsl:choose>
+      <xsl:when test="parent::*">
+        <xsl:apply-templates mode="nesting-level" select="parent::*">
+          <xsl-with-param name="current-level" select="$actual-current-level"/>
+        </xsl:apply-templates>
+      </xsl:when>
+      <xsl:otherwise><xsl:value-of select="$current-level"/></xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="*" mode="nesting-level">
+    <xsl:param name="current-level" select="0"/>
+
+    <xsl:choose>
+      <xsl:when test="parent::*">
+        <xsl:apply-templates mode="nesting-level" select="parent::*">
+          <xsl-with-param name="current-level" select="$current-level"/>
+        </xsl:apply-templates>
+      </xsl:when>
+      <xsl:otherwise><xsl:value-of select="$current-level"/></xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 </xsl:stylesheet>
