@@ -7,33 +7,25 @@
 
   <xsl:template match="*" mode="part-title">Sections</xsl:template>
 
-  <xsl:template match="chapter|preface|appendix|colophon|section">
+
+
+  <xsl:template match="article|chapter|reference|refentry|preface|appendix|colophon|
+                       section|sect1|sect2|sect3|sect4|sect5">
 
     <xsl:choose>
       <xsl:when test="not(para|abstract)">
         <result>
           <warning>Section <xsl:call-template name="createid"/> lacks an
             introductory paragraph or abstract.</warning>
-          <expectation>Add an introductory paragraph or abstract.</expectation>
-          <expectation>Use <tag>glossary</tag> or <tag>bibliography</tag> for
-            bibliographies or glossaries, respectively. These elements do not
-            need an introduction.</expectation>
-        </result>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:apply-templates/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-
-  <xsl:template match="article|reference|refentry|sect1|sect2|sect3|sect4|sect5">
-
-    <xsl:choose>
-      <xsl:when test="not(para|abstract)">
-        <result>
-          <warning>Section <xsl:call-template name="createid"/> lacks an
-            introductory paragraph or abstract.</warning>
-          <expectation>Add an introductory paragraph or abstract.</expectation>
+          <expectation>Add a <tag>para</tag> or <tag>abstract</tag>.</expectation>
+          <xsl:if test="local-name(.) = 'chapter' or local-name(.) = 'preface' or
+                        local-name(.) = 'appendix' or local-name(.) = 'colophon' or
+                        local-name(.) = 'section'">
+            <expectation>Use <tag>glossary</tag> or <tag>bibliography</tag> for
+              glossaries or bibliographies, respectively. These elements do not
+              need an introduction.
+            </expectation>
+          </xsl:if>
         </result>
       </xsl:when>
       <xsl:otherwise>
