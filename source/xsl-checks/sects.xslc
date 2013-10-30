@@ -14,8 +14,9 @@
         <warning>Section <xsl:call-template name="createid"/> lacks an
           introductory paragraph or abstract.</warning>
         <expectation>Add an introductory paragraph or abstract.</expectation>
-        <expectation>Make sure to use <tag>glossary</tag> for glossaries or
-          <tag>bibliography</tag> for bibliographies, respectively.</expectation>
+        <expectation>Use <tag>glossary</tag> or <tag>bibliography</tag> for
+          bibliographies or glossaries, respectively. These elements do not
+          need an introduction.</expectation>
       </result>
     </xsl:if>
   </xsl:template>
