@@ -16,6 +16,12 @@
           <expectation>Procedures may contain up to 10 steps.</expectation>
         </result>
       </xsl:when>
+      <xsl:when test="$steps &lt; 2">
+        <result>
+          <warning>Procedure <xsl:call-template name="createid"/> contains <xsl:value-of select="$steps"/> step.</warning>
+          <expectation>Procedures should contain at least 2 steps.</expectation>
+        </result>
+      </xsl:when>
       <xsl:otherwise>
         <xsl:apply-templates/>
       </xsl:otherwise>
