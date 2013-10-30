@@ -58,15 +58,16 @@ if not os.path.exists( arguments[-1] ):
 
 inputfile = arguments[-1]
 
-resultfilename = re.sub(r'(([Dd][Cc]|[Ee][Nn][Vv])-|(_bigfile)?\.xml)', r'', inputfile, count=0, flags=0)
+resultfilename = os.path.basename( os.path.realpath( inputfile ) )
+resultfilename = re.sub( r'(([Dd][Cc]|[Ee][Nn][Vv])-|(_bigfile)?\.xml)', r'', resultfilename )
 resultfilename = 'style-check-%s.xml' % resultfilename
 
 # TODO: separate input file name from path & prepend that to output file name
 
 # Some crazy DAPS integration
 if dcfile == True:
-  resultpath = os.path.join( "build", ".tmp" )
-  inputfile = ( subprocess.check_output( [ 'daps', '-d', arguments[-1], 'bigfile' ] )
+  resultpath = os.path.join( os.path.dirname( os.path.realpath( inputfile ) ), "build", ".tmp" )
+  inputfile = ( subprocess.check_output( [ 'daps', '-d', inputfile, 'bigfile' ] )
               .decode( 'UTF-8' ) ).replace( '\n', '' )
 
 output = etree.XML('<?xml-stylesheet type="text/css" href="%s"?><results></results>'
