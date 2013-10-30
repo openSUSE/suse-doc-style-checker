@@ -3,9 +3,8 @@
 #
 # This might check style & grammar one day. I'm hopeful. Kinda.
 
-import sys, os.path, subprocess, webbrowser, glob
+import sys, os.path, subprocess, webbrowser, glob, re
 from lxml import etree
-import tempfile
 
 programname = "Documentation Style Checker"
 programversion = "0.1.0pre"
@@ -13,10 +12,10 @@ programversion = "0.1.0pre"
 openfile = False
 dcfile = False
 
-# TODO: make paths a little more OS-agnostic
+# TODO: make this path more OS-agnostic
 resultpath = "/tmp"
 arguments = sys.argv
-location = os.path.dirname(os.path.realpath(__file__)) + '/'
+location = os.path.dirname( os.path.realpath(__file__) )
 
 # Handle arguments
 # TODO: Use argparse module
@@ -59,39 +58,46 @@ if not os.path.exists( arguments[-1] ):
 
 inputfile = arguments[-1]
 
+resultfilename = re.sub(r'(([Dd][Cc]|[Ee][Nn][Vv])-|(_bigfile)?\.xml)', r'', inputfile, count=0, flags=0)
+resultfilename = 'style-check-%s.xml' % resultfilename
+
 # TODO: separate input file name from path & prepend that to output file name
 
 # Some crazy DAPS integration
 if dcfile == True:
-  resultpath = "build/.tmp"
-  inputfile = (subprocess.check_output( [ 'daps', '-d', arguments[-1], 'bigfile' ] )
+  resultpath = os.path.join( "build", ".tmp" )
+  inputfile = ( subprocess.check_output( [ 'daps', '-d', arguments[-1], 'bigfile' ] )
               .decode( 'UTF-8' ) ).replace( '\n', '' )
 
-output = etree.XML('<?xml-stylesheet type="text/css" href="%scheck.css"?><results></results>'
-                    % location)
+output = etree.XML('<?xml-stylesheet type="text/css" href="%s"?><results></results>'
+                    % os.path.join( location, 'check.css' ) )
 rootelement = output.xpath( '/results' )
 
-rootelement[0].append(etree.XML('<results-title>Checker Results</results-title>'))
+rootelement[0].append( etree.XML( '<results-title>Checker Results</results-title>' ) )
 
 
 # Checking via XSLT
 
-parser = etree.XMLParser(ns_clean=True,
-                         remove_pis=False,
-                         dtd_validation=False)
+parser = etree.XMLParser( ns_clean=True,
+                          remove_pis=False,
+                          dtd_validation=False )
 inputfile = etree.parse( inputfile, parser )
 
-for check in glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) ):
-  transform = etree.XSLT( etree.parse( check, parser ) )
+for checkfile in glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) ):
+  transform = etree.XSLT( etree.parse( checkfile, parser ) )
   result = transform( inputfile ).getroot()
 
   if not result == None:
     rootelement[0].append(result)
 
-output.getroottree().write( os.path.join(resultpath, 'checkresult.xml'),
-               xml_declaration=True,
-               encoding="UTF-8",
-               pretty_print=True)
+resultfile = os.path.join( resultpath, resultfilename )
+
+output.getroottree().write( resultfile,
+                            xml_declaration=True,
+                            encoding="UTF-8",
+                            pretty_print=True)
 
 if openfile == True:
-  webbrowser.open( os.path.join(resultpath, 'checkresult.xml') , new=0 , autoraise=True )
+  webbrowser.open( resultfile, new=0 , autoraise=True )
+else:
+  print( resultfile )
