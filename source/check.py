@@ -20,7 +20,10 @@ location = os.path.dirname( os.path.realpath(__file__) )
 # Handle arguments
 # TODO: Use argparse module
 if ( "--help" in arguments ) or ( "-h" in arguments ):
-  sys.exit( """Usage: %s [OPTIONS] FILE
+  sys.exit( """Checks a given DocBook XML file or DAPS DC file for
+stylistic errors.
+
+Usage: %s [OPTIONS] FILE
 
 Options:
       --dc  -d  Use a DC file as input, this will invoke DAPS to create a
