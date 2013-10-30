@@ -11,7 +11,9 @@
     <xsl:variable name="url" select="normalize-space(@url)"/>
 
     <xsl:choose>
-      <xsl:when test="*|text()">
+      <!-- Tanja questioned if this was helping much, we could just as well
+           change the appropriate stylesheet to do the right thing. -->
+      <!-- <xsl:when test="*|text()">
         <result>
           <warning>Ulink <xsl:call-template name="createid"/> includes text.</warning>
           <expectation>Remove all text from inside <tag>ulink</tag>. This allows for printing the URL.</expectation>
@@ -20,7 +22,7 @@
       <xsl:otherwise>
         <xsl:apply-templates/>
       </xsl:otherwise>
-    </xsl:choose>
+    </xsl:choose> -->
 
     <xsl:choose>
       <!-- Probably non-exhaustive. -->
