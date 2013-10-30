@@ -12,81 +12,71 @@
 
     <!-- Tanja questioned if this was helping much, we could just as well
          change the appropriate stylesheet to do the right thing. -->
-    <!-- <xsl:choose>
-      <xsl:when test="*|text()">
-        <result>
-          <warning>Ulink <xsl:call-template name="createid"/> includes text.</warning>
-          <expectation>Remove all text from inside <tag>ulink</tag>. This allows for printing the URL.</expectation>
-        </result>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:apply-templates/>
-      </xsl:otherwise>
-    </xsl:choose> -->
+    <!-- <xsl:if test="*|text()">
+      <result>
+        <warning>Ulink <xsl:call-template name="createid"/> includes text.</warning>
+        <expectation>Remove all text from inside <tag>ulink</tag>. This allows for printing the URL.</expectation>
+      </result>
+    </xsl:if> -->
 
-    <xsl:choose>
-      <!-- Probably non-exhaustive. -->
-      <xsl:when test="not(starts-with($url, 'http:') or
-                          starts-with($url, 'https:') or
-                          starts-with($url, 'ftp:') or
-                          starts-with($url, 'gopher:') or
-                          starts-with($url, 'nntp:') or
-                          starts-with($url, 'rtsp:') or
-                          starts-with($url, 'mms:'))">
-        <xsl:choose>
-          <xsl:when test="starts-with($url, 'file:') or
-                          starts-with($url, 'info:') or
-                          starts-with($url, 'smb:')">
-            <result>
-              <warning>Ulink
-                <xsl:call-template name="createid">
-                  <xsl:with-param name="use-url-attribute" select="1"/>
-                </xsl:call-template>
-                links to a local file, directory or network.
-              </warning>
-              <expectation>To reference local files, directories, or networks,
-                use the <tag>filename</tag> element.
-              </expectation>
-            </result>
-          </xsl:when>
-          <xsl:when test="starts-with($url, 'mailto:')">
-            <result>
-              <warning>Ulink
-                <xsl:call-template name="createid">
-                  <xsl:with-param name="use-url-attribute" select="1"/>
-                </xsl:call-template>
-                contains an e-mail address.
-              </warning>
-              <expectation>To reference e-mail addresses, use the
-                <tag>email</tag> element.
-              </expectation>
-            </result>
-          </xsl:when>
-          <xsl:otherwise>
-            <result>
-              <warning>Ulink
-                <xsl:call-template name="createid">
-                  <xsl:with-param name="use-url-attribute" select="1"/>
-                </xsl:call-template>
-                appears to contain no a protocol identifier.
-              </warning>
-              <expectation>If you have forgotten an <quote>http://</quote>
-                or similar prefix, add it.
-              </expectation>
-              <expectation>To reference local files, directories,
-                or networks, use the <tag>filename</tag> element.
-              </expectation>
-              <expectation>To reference e-mail addresses, use the
-                <tag>email</tag> element.
-              </expectation>
-            </result>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:apply-templates/>
-      </xsl:otherwise>
-    </xsl:choose>
+    <!-- Probably non-exhaustive. -->
+    <xsl:if test="not(starts-with($url, 'http:') or
+                      starts-with($url, 'https:') or
+                      starts-with($url, 'ftp:') or
+                      starts-with($url, 'gopher:') or
+                      starts-with($url, 'nntp:') or
+                      starts-with($url, 'rtsp:') or
+                      starts-with($url, 'mms:'))">
+      <xsl:choose>
+        <xsl:when test="starts-with($url, 'file:') or
+                        starts-with($url, 'info:') or
+                        starts-with($url, 'smb:')">
+          <result>
+            <warning>Ulink
+              <xsl:call-template name="createid">
+                <xsl:with-param name="use-url-attribute" select="1"/>
+              </xsl:call-template>
+              links to a local file, directory or network.
+            </warning>
+            <expectation>To reference local files, directories, or networks,
+              use the <tag>filename</tag> element.
+            </expectation>
+          </result>
+        </xsl:when>
+        <xsl:when test="starts-with($url, 'mailto:')">
+          <result>
+            <warning>Ulink
+              <xsl:call-template name="createid">
+                <xsl:with-param name="use-url-attribute" select="1"/>
+              </xsl:call-template>
+              contains an e-mail address.
+            </warning>
+            <expectation>To reference e-mail addresses, use the
+              <tag>email</tag> element.
+            </expectation>
+          </result>
+        </xsl:when>
+        <xsl:otherwise>
+          <result>
+            <warning>Ulink
+              <xsl:call-template name="createid">
+                <xsl:with-param name="use-url-attribute" select="1"/>
+              </xsl:call-template>
+              appears to contain no a protocol identifier.
+            </warning>
+            <expectation>If you have forgotten an <quote>http://</quote>
+              or similar prefix, add it.
+            </expectation>
+            <expectation>To reference local files, directories,
+              or networks, use the <tag>filename</tag> element.
+            </expectation>
+            <expectation>To reference e-mail addresses, use the
+              <tag>email</tag> element.
+            </expectation>
+          </result>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
   </xsl:template>
 
 </xsl:stylesheet>
