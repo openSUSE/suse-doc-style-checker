@@ -60,12 +60,21 @@ warning, info {
 expectation {
   font-size: 16px;
   display: block;
-  padding-left: 25px;
+  padding-left: 40px;
+  position: relative;
 }
 
 expectation:before {
-  content: '– ';
+  content: '–';
+  position: absolute;
+  left: 25px;
+  display: inline-block;
 }
+
+expectation:nth-child(2):last-child {
+  padding-left: 25px;
+}
+
 expectation:nth-child(2):last-child:before {
   content: '';
 }
