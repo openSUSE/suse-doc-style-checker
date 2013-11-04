@@ -77,7 +77,7 @@ output = etree.XML('<?xml-stylesheet type="text/css" href="%s"?><results></resul
                     % os.path.join( location, 'check.css' ) )
 rootelement = output.xpath( '/results' )
 
-rootelement[0].append( etree.XML( '<results-title>Checker Results</results-title>' ) )
+rootelement[0].append( etree.XML( '<results-title>Style Checker Results</results-title>' ) )
 
 
 # Checking via XSLT
