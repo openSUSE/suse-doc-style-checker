@@ -12,11 +12,11 @@
 
     <xsl:if test="$callouts &gt; 10">
       <result>
-        <warning>Calloutlist
+        <error>Calloutlist
           <xsl:call-template name="createid"/> contains
           <xsl:value-of select="$callouts"/> callouts.
-        </warning>
-        <expectation>Calloutlists may contain up to 10 callouts.</expectation>
+        </error>
+        <suggestion>Calloutlists may contain up to 10 callouts.</suggestion>
       </result>
     </xsl:if>
   </xsl:template>

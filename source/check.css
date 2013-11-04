@@ -27,55 +27,62 @@ result:hover, result:focus {
   padding: 10px;
 }
 
-warning:before, info:before {
-  font-size: 16px;
+info:before, warning:before, error:before {
+  font-size: 14px;
   font-weight: bold;
   display: inline-block;
-  line-height: 20px;
-  width: 20px;
+  line-height: 18px;
+  width: 18px;
   text-align: center;
   border-radius: 10px;
   position: absolute;
   left: 0px;
+  border: 1px solid transparent;
+}
+
+info:before {
+  content: 'i';
+  color: #FFF;
+  background-color: #248;
 }
 
 warning:before {
+  content: '?';
+  background-color: #ED0;
+}
+
+error:before {
   content: '!';
   color: #FFF;
   background-color: #C00;
 }
 
-info:before {
-  content: 'i';
-  background-color: #ED0;
-}
-
-warning, info {
+info, warning, error {
   font-size: 20px;
   display: block;
   padding-left: 25px;
   position: relative;
 }
 
-expectation {
+suggestion {
   font-size: 16px;
   display: block;
   padding-left: 40px;
   position: relative;
 }
 
-expectation:before {
+suggestion:before {
   content: '–';
   position: absolute;
   left: 25px;
   display: inline-block;
 }
 
-expectation:nth-child(2):last-child {
+suggestion:nth-child(2):last-child {
   padding-left: 25px;
 }
 
-expectation:nth-child(2):last-child:before {
+suggestion:nth-child(2):last-child:before {
   content: '';
 }
 

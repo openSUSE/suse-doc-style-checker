@@ -31,8 +31,7 @@
     <xsl:if test="local-name(.) = 'sect4' or local-name(.) = 'sect5'">
       <result>
         <warning>Section <xsl:call-template name="createid"/> is nested deeply.</warning>
-        <suggestion>Try to avoid using <tag>sect4</tag> and <tag>sect5</tag>
-          elements.
+        <suggestion>Avoid using <tag>sect4</tag> and <tag>sect5</tag> elements.
         </suggestion>
       </result>
     </xsl:if>

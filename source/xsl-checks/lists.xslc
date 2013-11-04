@@ -16,17 +16,17 @@
 
     <xsl:if test="$items &lt; 2">
       <result>
-        <warning>List <xsl:call-template name="createid"/> contains <xsl:value-of select="$items"/> item.</warning>
-        <expectation>Lists should contain at least 2 items.</expectation>
+        <error>List <xsl:call-template name="createid"/> contains <xsl:value-of select="$items"/> item.</error>
+        <suggestion>Lists should contain at least 2 items.</suggestion>
       </result>
     </xsl:if>
 
     <xsl:if test="$nesting-level &gt; 1">
       <result>
-        <info>List <xsl:call-template name="createid"/> is nested inside
+        <warning>List <xsl:call-template name="createid"/> is nested inside
           <xsl:value-of select="$nesting-level"/> other lists.
-        </info>
-        <expectation>Try to avoid nesting lists so deeply.</expectation>
+        </warning>
+        <suggestion>Avoid nesting lists so deeply.</suggestion>
       </result>
     </xsl:if>
 

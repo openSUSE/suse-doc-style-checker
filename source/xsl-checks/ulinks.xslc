@@ -14,8 +14,8 @@
          change the appropriate stylesheet to do the right thing. -->
     <!-- <xsl:if test="*|text()">
       <result>
-        <warning>Ulink <xsl:call-template name="createid"/> includes text.</warning>
-        <expectation>Remove all text from inside <tag>ulink</tag>. This allows for printing the URL.</expectation>
+        <error>Ulink <xsl:call-template name="createid"/> includes text.</error>
+        <suggestion>Remove all text from inside <tag>ulink</tag>. This allows for printing the URL.</suggestion>
       </result>
     </xsl:if> -->
 
@@ -32,28 +32,28 @@
                         starts-with($url, 'info:') or
                         starts-with($url, 'smb:')">
           <result>
-            <warning>Ulink
+            <error>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
               links to a local file, directory or network.
-            </warning>
-            <expectation>To reference local files, directories, or networks,
+            </error>
+            <suggestion>To reference local files, directories, or networks,
               use the <tag>filename</tag> element.
-            </expectation>
+            </suggestion>
           </result>
         </xsl:when>
         <xsl:when test="starts-with($url, 'mailto:') or contains($url, '@')">
           <result>
-            <warning>Ulink
+            <error>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
               links to an e-mail address.
-            </warning>
-            <expectation>To reference e-mail addresses, use the
+            </error>
+            <suggestion>To reference e-mail addresses, use the
               <tag>email</tag> element.
-            </expectation>
+            </suggestion>
           </result>
         </xsl:when>
         <xsl:when test="contains($url, '.com') or contains($url, '.net') or
@@ -64,34 +64,34 @@
                         contains($url, '.ru') or contains($url, '.br') or
                         contains($url, '.cn') or contains($url, '.in')">
           <result>
-            <warning>Ulink
+            <error>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
               appears to contain no a protocol identifier.
-            </warning>
-            <expectation>If you have forgotten an <quote>http://</quote>
+            </error>
+            <suggestion>If you have forgotten an <quote>http://</quote>
               or similar prefix, add it.
-            </expectation>
+            </suggestion>
           </result>
         </xsl:when>
         <xsl:otherwise>
           <result>
-            <warning>Ulink
+            <error>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
               appears to contain no a protocol identifier.
-            </warning>
-            <expectation>If you have forgotten an <quote>http://</quote>
+            </error>
+            <suggestion>If you have forgotten an <quote>http://</quote>
               or similar prefix, add it.
-            </expectation>
-            <expectation>To reference local files, directories,
+            </suggestion>
+            <suggestion>To reference local files, directories,
               or networks, use the <tag>filename</tag> element.
-            </expectation>
-            <expectation>To reference e-mail addresses, use the
+            </suggestion>
+            <suggestion>To reference e-mail addresses, use the
               <tag>email</tag> element.
-            </expectation>
+            </suggestion>
           </result>
         </xsl:otherwise>
       </xsl:choose>
