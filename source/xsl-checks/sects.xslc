@@ -14,26 +14,26 @@
 
     <xsl:if test="not(para|abstract) and not(ancestor-or-self::*/@role = 'legal')">
       <result>
-        <warning>Section <xsl:call-template name="createid"/> lacks an
-          introductory paragraph or abstract.</warning>
-        <expectation>Add a <tag>para</tag> or <tag>abstract</tag>.</expectation>
+        <error>Section <xsl:call-template name="createid"/> lacks an
+          introductory paragraph or abstract.</error>
+        <suggestion>Add a <tag>para</tag> or <tag>abstract</tag>.</suggestion>
         <xsl:if test="local-name(.) = 'chapter' or local-name(.) = 'preface' or
                       local-name(.) = 'appendix' or local-name(.) = 'colophon' or
                       local-name(.) = 'section'">
-          <expectation>Use <tag>glossary</tag> or <tag>bibliography</tag> for
+          <suggestion>Use <tag>glossary</tag> or <tag>bibliography</tag> for
             glossaries or bibliographies, respectively. These elements do not
             need an introduction.
-          </expectation>
+          </suggestion>
         </xsl:if>
       </result>
     </xsl:if>
 
     <xsl:if test="local-name(.) = 'sect4' or local-name(.) = 'sect5'">
       <result>
-        <info>Section <xsl:call-template name="createid"/><xsl:value-of select="local-name(.)"/> is nested deeply.</info>
-        <expectation>Try to avoid using <tag>sect4</tag> and <tag>sect5</tag>
+        <warning>Section <xsl:call-template name="createid"/> is nested deeply.</warning>
+        <suggestion>Try to avoid using <tag>sect4</tag> and <tag>sect5</tag>
           elements.
-        </expectation>
+        </suggestion>
       </result>
     </xsl:if>
 
