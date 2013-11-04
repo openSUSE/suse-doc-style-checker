@@ -9,9 +9,10 @@
 
   <xsl:template match="itemizedlist|orderedlist|variablelist">
     <xsl:variable name="items" select="count(listitem|varlistentry)"/>
-    <xsl:variable name="nesting-level">
-      <xsl:apply-templates mode="nesting-level" select="."/>
+    <xsl:variable name="nesting-level-candidate">
+      <xsl:apply-templates mode="nesting-level" select=".."/>
     </xsl:variable>
+    <xsl:variable name="nesting-level" select="string-length(normalize-space($nesting-level-candidate))"/>
 
     <xsl:if test="$items &lt; 2">
       <result>
@@ -20,7 +21,7 @@
       </result>
     </xsl:if>
 
-    <xsl:if test="$nesting-level &gt; 0">
+    <xsl:if test="$nesting-level &gt; 2">
       <result>
         <info>List <xsl:call-template name="createid"/> is nested inside
           <xsl:value-of select="$nesting-level"/> other lists.
@@ -28,32 +29,29 @@
         <expectation>Try to avoid nesting lists so deeply.</expectation>
       </result>
     </xsl:if>
+
+    <xsl:apply-templates/>
   </xsl:template>
 
-  <xsl:template match="itemizedlist|orderedlist|variablelist|procedure" mode="nesting-level">
-    <xsl:param name="current-level" select="0"/>
-    <xsl:variable name="actual-current-level" select="$current-level + 1"/>
 
+  <!-- Find out nesting level by traversing the XML tree upwards. If we find
+       another list we output a character. -->
+  <xsl:template match="itemizedlist|orderedlist|variablelist|procedure" mode="nesting-level" priority="1">
+    <xsl:text>1</xsl:text>
     <xsl:choose>
       <xsl:when test="parent::*">
-        <xsl:apply-templates mode="nesting-level" select="parent::*">
-          <xsl-with-param name="current-level" select="$actual-current-level"/>
-        </xsl:apply-templates>
+        <xsl:apply-templates mode="nesting-level" select="parent::*"/>
       </xsl:when>
-      <xsl:otherwise><xsl:value-of select="$current-level"/></xsl:otherwise>
+      <xsl:otherwise/>
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="*" mode="nesting-level">
-    <xsl:param name="current-level" select="0"/>
-
+  <xsl:template match="*" mode="nesting-level" priority="1">
     <xsl:choose>
       <xsl:when test="parent::*">
-        <xsl:apply-templates mode="nesting-level" select="parent::*">
-          <xsl-with-param name="current-level" select="$current-level"/>
-        </xsl:apply-templates>
+        <xsl:apply-templates mode="nesting-level" select="parent::*"/>
       </xsl:when>
-      <xsl:otherwise><xsl:value-of select="$current-level"/></xsl:otherwise>
+      <xsl:otherwise/>
     </xsl:choose>
   </xsl:template>
 
