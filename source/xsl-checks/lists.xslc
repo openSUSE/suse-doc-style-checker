@@ -21,7 +21,7 @@
       </result>
     </xsl:if>
 
-    <xsl:if test="$nesting-level &gt; 2">
+    <xsl:if test="$nesting-level &gt; 1">
       <result>
         <info>List <xsl:call-template name="createid"/> is nested inside
           <xsl:value-of select="$nesting-level"/> other lists.
