@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+
+  <xsl:template match="*" mode="part-title">Keycaps</xsl:template>
+
+
+  <xsl:template match="keycap[@function]">
+    <xsl:variable name="function">
+      <xsl:value-of select="normalize-space(@function)"/>
+    </xsl:variable>
+    <xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
+    <xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
+    <xsl:variable name="text" select="normalize-space(translate(text(),$upper,$lower))"/>
+
+    <xsl:choose>
+      <xsl:when test="$function = '' or not($function = 'alt' or
+                      $function = 'backspace' or $function = 'command' or
+                      $function = 'control' or $function = 'delete' or
+                      $function = 'down' or $function = 'end' or
+                      $function = 'enter' or $function = 'escape' or
+                      $function = 'home' or $function = 'insert' or
+                      $function = 'left' or $function = 'meta' or
+                      $function = 'pagedown' or $function = 'pageup' or
+                      $function = 'right' or $function = 'shift' or
+                      $function = 'space' or $function = 'tab' or
+                      $function = 'up' or $function = 'option')">
+        <xsl:variable name="attrib">
+          <xsl:call-template name="correct-attribute">
+            <xsl:with-param name="raw" select="$text"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="use-function-attribute">
+          <xsl:choose>
+            <xsl:when test="$function = ''">0</xsl:when>
+            <xsl:otherwise>1</xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <result>
+          <error>Keycap
+            <xsl:call-template name="createid">
+              <xsl:with-param name="use-function-attribute" select="$use-function-attribute"/>
+            </xsl:call-template>
+            has an invalid function attribute.
+          </error>
+          <xsl:choose>
+            <xsl:when test="$attrib != '?'">
+              <suggestion>Use <tag>keycap function="<xsl:value-of
+                select="$attrib"/>"</tag> instead.
+              </suggestion>
+            </xsl:when>
+            <xsl:otherwise>
+              <suggestion>If you were trying to refer to a function key, add
+                the <quote>function</quote> attribute with the appropriate value
+                to the <tag>keycap</tag>.
+              </suggestion>
+            </xsl:otherwise>
+          </xsl:choose>
+        </result>
+      </xsl:when>
+      <xsl:when test="not($function = 0) and not($text = '')">
+        <result>
+          <error>Function keycap
+            <xsl:call-template name="createid"/>
+            has inline text.
+          </error>
+          <suggestion>Use self-closing <tag>keycap</tag> elements.</suggestion>
+        </result>
+      </xsl:when>
+      <xsl:otherwise/>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="keycap">
+    <xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
+    <xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
+    <xsl:variable name="text" select="normalize-space(translate(text(),$upper,$lower))"/>
+
+    <xsl:if test="$text = 'alt' or $text = 'backspace' or
+                  $text = 'back' or $text = '&lt;—' or
+                  $text = '⌘' or $text = 'command' or $text = 'cmd' or
+                  $text = 'ctrl' or $text = 'control' or $text = 'del' or
+                  $text = 'delete' or $text = 'down' or
+                  $text = '↓' or $text = 'end' or
+                  $text = 'enter' or $text = 'return' or
+                  $text = 'esc' or $text = 'escape' or
+                  $text = 'home' or $text = 'ins' or
+                  $text = 'insert' or $text = 'left' or
+                  $text = '←' or $text = 'meta' or $text = 'super' or
+                  $text = 'win' or $text = 'windows' or
+                  $text = 'windows logo' or $text = 'windows-logo' or
+                  $text = 'page down' or $text = 'pg down' or
+                  $text = 'pagedown' or
+                  $text = 'page ↓' or $text = 'pg ↓' or
+                  $text = 'page up' or $text = 'pg up' or
+                  $text = 'pageup' or
+                  $text = 'page ↑' or $text = 'pg ↑' or
+                  $text = 'right' or $text = '→' or
+                  $text = 'shift' or $text = 'space' or
+                  $text = 'spacebar' or $text = 'space bar' or
+                  $text = 'tab' or $text = '→|' or
+                  $text = 'up' or $text = '↑'">
+      <result>
+        <error>Function keycap
+         <xsl:call-template name="createid"/>
+          does not use function attribute.
+        </error>
+        <suggestion>Use <tag>keycap function="<xsl:call-template
+          name="correct-attribute">
+            <xsl:with-param name="raw" select="$text"/>
+          </xsl:call-template>"</tag> instead.
+        </suggestion>
+      </result>
+    </xsl:if>
+  </xsl:template>
+
+
+  <xsl:template name="correct-attribute">
+    <xsl:param name="raw" select="'?'"/>
+
+    <xsl:choose>
+      <xsl:when test="$raw = 'alt'">alt</xsl:when>
+      <xsl:when test="$raw = 'backspace' or $raw = 'back' or
+                      $raw = '&lt;—'">backspace</xsl:when>
+      <xsl:when test="$raw = '⌘' or $raw = 'command' or
+                      $raw = 'cmd'">command</xsl:when>
+      <xsl:when test="$raw = 'ctrl' or $raw = 'control'">control</xsl:when>
+      <xsl:when test="$raw = 'del' or $raw = 'delete'">delete</xsl:when>
+      <xsl:when test="$raw = 'down' or $raw = '↓'">down</xsl:when>
+      <xsl:when test="$raw = 'end'">end</xsl:when>
+      <xsl:when test="$raw = 'enter' or $raw = 'return'">enter</xsl:when>
+      <xsl:when test="$raw = 'esc' or $raw = 'escape'">escape</xsl:when>
+      <xsl:when test="$raw = 'home'">home</xsl:when>
+      <xsl:when test="$raw = 'ins' or $raw = 'insert'">insert</xsl:when>
+      <xsl:when test="$raw = 'left' or $raw = '←'">left</xsl:when>
+      <xsl:when test="$raw = 'meta' or $raw = 'super' or $raw = 'win' or
+                      $raw = 'windows' or $raw = 'windows logo' or
+                      $raw = 'windows-logo'">meta</xsl:when>
+      <!-- missing "option" key since DocBook only gives "??" as output there-->
+      <xsl:when test="$raw = 'page down' or $raw = 'pg down' or
+                      $raw = 'pagedown' or $raw = 'page ↓' or
+                      $raw = 'pg ↓'">pagedown</xsl:when>
+      <xsl:when test="$raw = 'page up' or $raw = 'pg up' or
+                      $raw = 'pageup' or $raw = 'page ↑' or
+                      $raw = 'pg ↑'">pageup</xsl:when>
+      <xsl:when test="$raw = 'right' or $raw = '→'">right</xsl:when>
+      <xsl:when test="$raw = 'shift'">shift</xsl:when>
+      <xsl:when test="$raw = 'space' or $raw = 'spacebar' or
+                      $raw = 'space bar'">space</xsl:when>
+      <xsl:when test="$raw = 'tab' or $raw = '→|'">tab</xsl:when>
+      <xsl:when test="$raw = 'up' or $raw = '↑'">up</xsl:when>
+      <xsl:otherwise>?</xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+</xsl:stylesheet>

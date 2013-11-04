@@ -19,6 +19,7 @@
 
   <xsl:template name="createid">
     <xsl:param name="use-url-attribute" select="0"/>
+    <xsl:param name="use-function-attribute" select="0"/>
     <xsl:param name="node" select="."/>
 
     <xsl:choose>
@@ -38,6 +39,19 @@
                 </xsl:when>
                 <xsl:otherwise>
                   <xsl:value-of select="normalize-space($node/@url)"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:variable>
+            <quote><xsl:value-of select="$shortened"/></quote>
+          </xsl:when>
+          <xsl:when test="$use-function-attribute = 1">
+            <xsl:variable name="shortened">
+              <xsl:choose>
+                <xsl:when test="string-length(normalize-space($node/@function)) &gt; 50">
+                  <xsl:value-of select="substring(normalize-space($node/@function), 1, 50)"/>…
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="normalize-space($node/@function)"/>
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:variable>
