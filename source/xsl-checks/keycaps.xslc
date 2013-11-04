@@ -6,86 +6,41 @@
 
   <xsl:template match="*" mode="part-title">Keycaps</xsl:template>
 
-
   <xsl:template match="keycap[@function]">
     <xsl:variable name="function">
       <xsl:value-of select="normalize-space(@function)"/>
     </xsl:variable>
-    <xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
-    <xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
-    <xsl:variable name="text" select="normalize-space(translate(text(),$upper,$lower))"/>
+    <xsl:variable name="text">
+      <xsl:call-template name="text">
+        <xsl:with-param name="text" select="text()"/>
+      </xsl:call-template>
+    </xsl:variable>
 
-    <xsl:choose>
-      <xsl:when test="$function = '' or not($function = 'alt' or
-                      $function = 'backspace' or $function = 'command' or
-                      $function = 'control' or $function = 'delete' or
-                      $function = 'down' or $function = 'end' or
-                      $function = 'enter' or $function = 'escape' or
-                      $function = 'home' or $function = 'insert' or
-                      $function = 'left' or $function = 'meta' or
-                      $function = 'pagedown' or $function = 'pageup' or
-                      $function = 'right' or $function = 'shift' or
-                      $function = 'space' or $function = 'tab' or
-                      $function = 'up' or $function = 'option')">
-        <xsl:variable name="attrib">
-          <xsl:call-template name="correct-attribute">
-            <xsl:with-param name="raw" select="$text"/>
-          </xsl:call-template>
-        </xsl:variable>
-        <xsl:variable name="use-function-attribute">
-          <xsl:choose>
-            <xsl:when test="$function = ''">0</xsl:when>
-            <xsl:otherwise>1</xsl:otherwise>
-          </xsl:choose>
-        </xsl:variable>
-        <result>
-          <error>Keycap
-            <xsl:call-template name="createid">
-              <xsl:with-param name="use-function-attribute" select="$use-function-attribute"/>
-            </xsl:call-template>
-            has an invalid function attribute.
-          </error>
-          <xsl:choose>
-            <xsl:when test="$attrib != '?'">
-              <suggestion>Use <tag>keycap function="<xsl:value-of
-                select="$attrib"/>"</tag> instead.
-              </suggestion>
-            </xsl:when>
-            <xsl:otherwise>
-              <suggestion>If you were trying to refer to a function key, add
-                the <quote>function</quote> attribute with the appropriate value
-                to the <tag>keycap</tag>.
-              </suggestion>
-            </xsl:otherwise>
-          </xsl:choose>
-        </result>
-      </xsl:when>
-      <xsl:when test="not($function = 0) and not($text = '')">
-        <xsl:variable name="correct-attribute">
-          <xsl:call-template
-            name="correct-attribute">
-            <xsl:with-param name="raw" select="$text"/>
-          </xsl:call-template>
-        </xsl:variable>
-        <result>
-          <error>Function keycap
-            <xsl:call-template name="createid"/>
-            has inline text.
-          </error>
-          <suggestion>Use a self-closing <tag>keycap</tag> element<xsl:if
-            test="$correct-attribute = 'meta'">, unless you are introducing the
-            key for the first time in this chapter</xsl:if>.
-          </suggestion>
-        </result>
-      </xsl:when>
-      <xsl:otherwise/>
-    </xsl:choose>
+    <xsl:if test="not($function = 0) and not($text = '')">
+      <xsl:variable name="correct-attribute">
+        <xsl:call-template name="correct-attribute">
+          <xsl:with-param name="raw" select="$text"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <result>
+        <warning>Function keycap
+          <xsl:call-template name="createid"/>
+          contains text.
+        </warning>
+        <suggestion>Use a self-closing <tag>keycap</tag> element<xsl:if
+          test="$correct-attribute = 'meta'">, unless you are introducing this
+          key for the first time in this chapter</xsl:if>.
+        </suggestion>
+      </result>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template match="keycap">
-    <xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
-    <xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
-    <xsl:variable name="text" select="normalize-space(translate(text(),$upper,$lower))"/>
+    <xsl:variable name="text">
+      <xsl:call-template name="text">
+        <xsl:with-param name="text" select="text()"/>
+      </xsl:call-template>
+    </xsl:variable>
 
     <xsl:if test="$text = 'alt' or $text = 'backspace' or
                   $text = 'back' or $text = '&lt;—' or
@@ -121,7 +76,7 @@
       <result>
         <error>Function keycap
          <xsl:call-template name="createid"/>
-          does not use function attribute.
+          does not use <quote>function</quote> attribute.
         </error>
         <suggestion>Use <tag>keycap function="<xsl:value-of
           select="$correct-attribute"/>"</tag> instead<xsl:if
@@ -130,6 +85,16 @@
         </suggestion>
       </result>
     </xsl:if>
+  </xsl:template>
+
+
+  <xsl:template name="text">
+    <xsl:param name="text" select="'?'"/>
+    <xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
+    <xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
+
+
+    <xsl:value-of select="normalize-space(translate(text(),$upper,$lower))"/>
   </xsl:template>
 
 
