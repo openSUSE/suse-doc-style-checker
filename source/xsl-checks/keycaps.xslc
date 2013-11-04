@@ -61,12 +61,21 @@
         </result>
       </xsl:when>
       <xsl:when test="not($function = 0) and not($text = '')">
+        <xsl:variable name="correct-attribute">
+          <xsl:call-template
+            name="correct-attribute">
+            <xsl:with-param name="raw" select="$text"/>
+          </xsl:call-template>
+        </xsl:variable>
         <result>
           <error>Function keycap
             <xsl:call-template name="createid"/>
             has inline text.
           </error>
-          <suggestion>Use a self-closing <tag>keycap</tag> element.</suggestion>
+          <suggestion>Use a self-closing <tag>keycap</tag> element<xsl:if
+            test="$correct-attribute = 'meta'">, unless you are introducing the
+            key for the first time in this chapter</xsl:if>.
+          </suggestion>
         </result>
       </xsl:when>
       <xsl:otherwise/>
@@ -102,15 +111,22 @@
                   $text = 'spacebar' or $text = 'space bar' or
                   $text = 'tab' or $text = '→|' or
                   $text = 'up' or $text = '↑'">
+      <xsl:variable name="correct-attribute">
+        <xsl:call-template
+          name="correct-attribute">
+          <xsl:with-param name="raw" select="$text"/>
+        </xsl:call-template>
+      </xsl:variable>
+
       <result>
         <error>Function keycap
          <xsl:call-template name="createid"/>
           does not use function attribute.
         </error>
-        <suggestion>Use <tag>keycap function="<xsl:call-template
-          name="correct-attribute">
-            <xsl:with-param name="raw" select="$text"/>
-          </xsl:call-template>"</tag> instead.
+        <suggestion>Use <tag>keycap function="<xsl:value-of
+          select="$correct-attribute"/>"</tag> instead<xsl:if
+          test="$correct-attribute = 'meta'">, unless you are introducing the
+          key for the first time in this chapter</xsl:if>.
         </suggestion>
       </result>
     </xsl:if>
