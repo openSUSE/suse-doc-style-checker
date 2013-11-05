@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Result Flagging Bookmarklet</title>
+  </head>
+  <body>
+    <p style="text-align: center;">
+      Add a bookmark allowing you to flag checker result items to your browser by dragging <a style="display: inline-block; color: #333; padding: 3px; background-color: #EEE; border: 1px solid #CCC; text-decoration: none;" href="javascript:(function(){e=document.getElementsByTagName('result');for(i=0;i<e.length;++i%20){e[i].addEventListener('click',function(){d=document.createElement('done');this.appendChild(d);},false)};})()">⚑ Flag</a> to your bookmarks bar.<br>
+    </p>
+  </body>
+</html>
