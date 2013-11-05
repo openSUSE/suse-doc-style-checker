@@ -91,10 +91,14 @@ for checkfile in glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) ):
   transform = etree.XSLT( etree.parse( checkfile, parser ) )
   result = transform( inputfile ).getroot()
 
-  if not result == None:
+  if not ( len( result.xpath( '/part/result' ) ) ) == 0 :
     rootelement[0].append(result)
 
 resultfile = os.path.join( resultpath, resultfilename )
+
+if ( len( output.xpath( '/results/part' ) ) ) == 0:
+  rootelement[0].append( etree.XML( '<result><info>No problems detected.</info><suggestion>Celebrate!</suggestion></result>' ) )
+
 
 output.getroottree().write( resultfile,
                             xml_declaration=True,
