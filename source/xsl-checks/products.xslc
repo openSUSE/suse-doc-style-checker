@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+
+
+  <xsl:template match="*" mode="part-title">Productnames, Productnumbers, &amp; Dates</xsl:template>
+
+  <xsl:template match="book|article|set">
+
+    <xsl:if test="not(bookinfo/productname|articleinfo/productname|
+                      setinfo/productname)">
+      <result>
+        <error>Deliverable <xsl:call-template name="createid"/> contains no
+          productname.</error>
+        <suggestion>Add a <tag>productname</tag> element.</suggestion>
+      </result>
+    </xsl:if>
+
+    <xsl:if test="not(bookinfo/productnumber|articleinfo/productnumber|
+                      setinfo/productnumber)">
+      <result>
+        <error>Deliverable <xsl:call-template name="createid"/> contains no
+          productnumber.</error>
+        <suggestion>Add a <tag>productnumber</tag> element.</suggestion>
+      </result>
+    </xsl:if>
+
+    <xsl:if test="not(bookinfo/date|articleinfo/date|
+                      setinfo/date)">
+      <result>
+        <error>Deliverable <xsl:call-template name="createid"/> contains no
+          date.</error>
+        <suggestion>Add a <tag>date</tag> element, use &lt;?dbtimestamp?&gt; inside.</suggestion>
+      </result>
+    </xsl:if>
+
+    <xsl:apply-templates/>
+  </xsl:template>
+
+  <xsl:template match="appendixinfo/productname|application/productname|
+                       attribution/productname|biblioentry/productname|
+                       bibliographyinfo/productname|bibliomisc/productname|
+                       bibliomixed/productname|bibliomset/productname|
+                       biblioset/productname|blockinfo/productname|
+                       bridgehead/productname|chapterinfo/productname|
+                       citation/productname|citetitle/productname|
+                       emphasis/productname|entry/productname|
+                       firstterm/productname|foreignphrase/productname|
+                       glossaryinfo/productname|glosssee/productname|
+                       glossseealso/productname|glossterm/productname|
+                       indexinfo/productname|lineannotation/productname|
+                       link/productname|literallayout/productname|
+                       lotentry/productname|member/productname|
+                       msgaud/productname|objectinfo/productname|
+                       olink/productname|para/productname|partinfo/productname|
+                       phrase/productname|prefaceinfo/productname|
+                       primary/productname|primaryie/productname|
+                       productname/productname|programlisting/productname|
+                       quote/productname|refentryinfo/productname|
+                       refentrytitle/productname|referenceinfo/productname|
+                       refpurpose/productname|refsect1info/productname|
+                       refsect2info/productname|refsect3info/productname|
+                       refsectioninfo/productname|
+                       refsynopsisdivinfo/productname|remark/productname|
+                       screen/productname|screeninfo/productname|
+                       secondary/productname|secondaryie/productname|
+                       sect1info/productname|sect2info/productname|
+                       sect3info/productname|sect4info/productname|
+                       sect5info/productname|sectioninfo/productname|
+                       see/productname|seealso/productname|
+                       seealsoie/productname|seeie/productname|seg/productname|
+                       segtitle/productname|setindexinfo/productname|
+                       sidebarinfo/productname|simpara/productname|
+                       subtitle/productname|synopsis/productname|
+                       td/productname|term/productname|termdef/productname|
+                       tertiary/productname|tertiaryie/productname|
+                       th/productname|title/productname|titleabbrev/productname|
+                       tocback/productname|tocentry/productname|
+                       tocfront/productname|ulink">
+    <result>
+      <error>Section <xsl:call-template name="createid"/> contains a
+        productname.
+      </error>
+      <suggestion>Remove the <tag>productname</tag> element</suggestion>
+      <suggestion>Use <tag>productname</tag> only in sets, books, and articles.
+      </suggestion>
+    </result>
+    <xsl:apply-templates/>
+  </xsl:template>
+
+  <xsl:template match="appendixinfo/productnumber|application/productnumber|
+                       attribution/productnumber|biblioentry/productnumber|
+                       bibliographyinfo/productnumber|bibliomisc/productnumber|
+                       bibliomixed/productnumber|bibliomset/productnumber|
+                       biblioset/productnumber|blockinfo/productnumber|
+                       bridgehead/productnumber|chapterinfo/productnumber|
+                       citation/productnumber|citetitle/productnumber|
+                       emphasis/productnumber|entry/productnumber|
+                       firstterm/productnumber|foreignphrase/productnumber|
+                       glossaryinfo/productnumber|glosssee/productnumber|
+                       glossseealso/productnumber|glossterm/productnumber|
+                       indexinfo/productnumber|lineannotation/productnumber|
+                       link/productnumber|literallayout/productnumber|
+                       lotentry/productnumber|member/productnumber|
+                       msgaud/productnumber|objectinfo/productnumber|
+                       olink/productnumber|para/productnumber|partinfo/productnumber|
+                       phrase/productnumber|prefaceinfo/productnumber|
+                       primary/productnumber|primaryie/productnumber|
+                       productnumber/productnumber|programlisting/productnumber|
+                       quote/productnumber|refentryinfo/productnumber|
+                       refentrytitle/productnumber|referenceinfo/productnumber|
+                       refpurpose/productnumber|refsect1info/productnumber|
+                       refsect2info/productnumber|refsect3info/productnumber|
+                       refsectioninfo/productnumber|
+                       refsynopsisdivinfo/productnumber|remark/productnumber|
+                       screen/productnumber|screeninfo/productnumber|
+                       secondary/productnumber|secondaryie/productnumber|
+                       sect1info/productnumber|sect2info/productnumber|
+                       sect3info/productnumber|sect4info/productnumber|
+                       sect5info/productnumber|sectioninfo/productnumber|
+                       see/productnumber|seealso/productnumber|
+                       seealsoie/productnumber|seeie/productnumber|seg/productnumber|
+                       segtitle/productnumber|setindexinfo/productnumber|
+                       sidebarinfo/productnumber|simpara/productnumber|
+                       subtitle/productnumber|synopsis/productnumber|
+                       td/productnumber|term/productnumber|termdef/productnumber|
+                       tertiary/productnumber|tertiaryie/productnumber|
+                       th/productnumber|title/productnumber|titleabbrev/productnumber|
+                       tocback/productnumber|tocentry/productnumber|
+                       tocfront/productnumber|ulink">
+    <result>
+      <error>Section <xsl:call-template name="createid"/> contains a
+        productnumber.
+      </error>
+      <suggestion>Remove the <tag>productnumber</tag> element</suggestion>
+      <suggestion>Use <tag>productnumber</tag> only in sets, books, and articles.
+      </suggestion>
+    </result>
+    <xsl:apply-templates/>
+  </xsl:template>
+
+</xsl:stylesheet>
