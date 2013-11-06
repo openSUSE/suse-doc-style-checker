@@ -9,7 +9,7 @@
 
   <xsl:template match="book|article|set">
 
-    <xsl:if test="not(bookinfo/productname|articleinfo/productname|
+    <xsl:if test="not(bookinfo/productname or articleinfo/productname or
                       setinfo/productname)">
       <result>
         <error>Deliverable <xsl:call-template name="createid"/> contains no
@@ -18,7 +18,7 @@
       </result>
     </xsl:if>
 
-    <xsl:if test="not(bookinfo/productnumber|articleinfo/productnumber|
+    <xsl:if test="not(bookinfo/productnumber or articleinfo/productnumber or
                       setinfo/productnumber)">
       <result>
         <error>Deliverable <xsl:call-template name="createid"/> contains no
@@ -27,7 +27,7 @@
       </result>
     </xsl:if>
 
-    <xsl:if test="not(bookinfo/date|articleinfo/date|
+    <xsl:if test="not(bookinfo/date or articleinfo/date or
                       setinfo/date)">
       <result>
         <error>Deliverable <xsl:call-template name="createid"/> does not contain
