@@ -30,8 +30,8 @@
     <xsl:if test="not(bookinfo/date|articleinfo/date|
                       setinfo/date)">
       <result>
-        <error>Deliverable <xsl:call-template name="createid"/> contains no
-          date.</error>
+        <error>Deliverable <xsl:call-template name="createid"/> does not contain
+          a date.</error>
         <suggestion>Add a <tag>date</tag> element, use &lt;?dbtimestamp?&gt; inside.</suggestion>
       </result>
     </xsl:if>
@@ -78,7 +78,7 @@
                        tertiary/productname|tertiaryie/productname|
                        th/productname|title/productname|titleabbrev/productname|
                        tocback/productname|tocentry/productname|
-                       tocfront/productname|ulink">
+                       tocfront/productname|ulink/productname">
     <result>
       <error>Section <xsl:call-template name="createid"/> contains a
         productname.
@@ -129,7 +129,7 @@
                        tertiary/productnumber|tertiaryie/productnumber|
                        th/productnumber|title/productnumber|titleabbrev/productnumber|
                        tocback/productnumber|tocentry/productnumber|
-                       tocfront/productnumber|ulink">
+                       tocfront/productnumber|ulink/productnumber">
     <result>
       <error>Section <xsl:call-template name="createid"/> contains a
         productnumber.
