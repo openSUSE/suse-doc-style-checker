@@ -55,6 +55,7 @@
                   $text = '←' or $text = 'meta' or $text = 'super' or
                   $text = 'win' or $text = 'windows' or
                   $text = 'windows logo' or $text = 'windows-logo' or
+                  $text = 'option' or $text = '⌥' or
                   $text = 'page down' or $text = 'pg down' or
                   $text = 'pagedown' or
                   $text = 'page ↓' or $text = 'pg ↓' or
@@ -62,8 +63,9 @@
                   $text = 'pageup' or
                   $text = 'page ↑' or $text = 'pg ↑' or
                   $text = 'right' or $text = '→' or
-                  $text = 'shift' or $text = 'space' or
+                  $text = 'shift' or $text = 'space' or $text = ' ' or
                   $text = 'spacebar' or $text = 'space bar' or
+
                   $text = 'tab' or $text = '→|' or
                   $text = 'up' or $text = '↑'">
       <xsl:variable name="correct-attribute">
@@ -119,7 +121,7 @@
       <xsl:when test="$raw = 'meta' or $raw = 'super' or $raw = 'win' or
                       $raw = 'windows' or $raw = 'windows logo' or
                       $raw = 'windows-logo'">meta</xsl:when>
-      <!-- missing "option" key since DocBook only gives "??" as output there-->
+      <xsl:when test="$raw = 'option' or $raw = '⌥'">option</xsl:when>
       <xsl:when test="$raw = 'page down' or $raw = 'pg down' or
                       $raw = 'pagedown' or $raw = 'page ↓' or
                       $raw = 'pg ↓'">pagedown</xsl:when>
@@ -128,7 +130,7 @@
                       $raw = 'pg ↑'">pageup</xsl:when>
       <xsl:when test="$raw = 'right' or $raw = '→'">right</xsl:when>
       <xsl:when test="$raw = 'shift'">shift</xsl:when>
-      <xsl:when test="$raw = 'space' or $raw = 'spacebar' or
+      <xsl:when test="$raw = 'space' or $raw = 'spacebar' or $raw = ' ' or
                       $raw = 'space bar'">space</xsl:when>
       <xsl:when test="$raw = 'tab' or $raw = '→|'">tab</xsl:when>
       <xsl:when test="$raw = 'up' or $raw = '↑'">up</xsl:when>
