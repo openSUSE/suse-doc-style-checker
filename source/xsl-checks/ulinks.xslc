@@ -120,7 +120,7 @@
         <suggestion>Try to shorten this URL by leaving away some parts of it.
         </suggestion>
         <suggestion>Some pages
-          <xsl:if test="contains($url, '.the-h.com')">such as The H</xsl:if>
+          <xsl:if test="contains($url, '.h-online.com')">such as The H</xsl:if>
           <xsl:if test="contains($url, '.heise.de')">such as Heise online</xsl:if>
           <xsl:if test="contains($url, '.youtube.com')">such as YouTube</xsl:if>
           <xsl:if test="contains($url, '.flickr.com')">such as Flickr</xsl:if>
