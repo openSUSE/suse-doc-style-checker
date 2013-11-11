@@ -10,15 +10,6 @@
   <xsl:template match="ulink">
     <xsl:variable name="url" select="normalize-space(@url)"/>
 
-    <!-- Tanja questioned if this was helping much, we could just as well
-         change the appropriate stylesheet to do the right thing. -->
-    <!-- <xsl:if test="*|text()">
-      <result>
-        <error>Ulink <xsl:call-template name="createid"/> includes text.</error>
-        <suggestion>Remove all text from inside <tag>ulink</tag>. This allows for printing the URL.</suggestion>
-      </result>
-    </xsl:if> -->
-
     <!-- Probably non-exhaustive. -->
     <xsl:if test="not(starts-with($url, 'http:') or
                       starts-with($url, 'https:') or
@@ -26,8 +17,25 @@
                       starts-with($url, 'gopher:') or
                       starts-with($url, 'nntp:') or
                       starts-with($url, 'rtsp:') or
-                      starts-with($url, 'mms:'))">
+                      starts-with($url, 'mms:') or
+                      starts-with($url, 'rm:'))">
       <xsl:choose>
+        <xsl:when test="starts-with($url, 'ssh:') or
+                        starts-with($url, 'ssh+svn:') or
+                        starts-with($url, 'git:') or
+                        starts-with($url, 'bzr:')">
+          <result>
+            <error>Ulink
+              <xsl:call-template name="createid">
+                <xsl:with-param name="use-url-attribute" select="1"/>
+              </xsl:call-template>
+              links to URL that most browsers cannot open.
+            </error>
+            <suggestion>To reference URLs browser cannot open, use the
+              <tag>filename</tag> element.
+            </suggestion>
+          </result>
+        </xsl:when>
         <xsl:when test="starts-with($url, 'file:') or
                         starts-with($url, 'info:') or
                         starts-with($url, 'smb:')">
@@ -95,6 +103,45 @@
           </result>
         </xsl:otherwise>
       </xsl:choose>
+    </xsl:if>
+    <!-- These URL checks are pretty crude but should exclude some
+         unshortenable URLs. -->
+    <xsl:if test="string-length($url) &gt; 70 and
+                  not(contains($url, '.suse.com/documentation') or
+                      contains($url, '.suse.com/releasenotes') or
+                      contains($url, 'en.opensuse.org'))">
+      <result>
+        <warning>Ulink
+          <xsl:call-template name="createid">
+            <xsl:with-param name="use-url-attribute" select="1"/>
+          </xsl:call-template>
+          contains a very long URL.
+        </warning>
+        <suggestion>Try to shorten this URL by leaving away some parts of it.
+        </suggestion>
+        <suggestion>Some pages
+          <xsl:if test="contains($url, '.the-h.com')">such as The H</xsl:if>
+          <xsl:if test="contains($url, '.heise.de')">such as Heise online</xsl:if>
+          <xsl:if test="contains($url, '.youtube.com')">such as YouTube</xsl:if>
+          <xsl:if test="contains($url, '.flickr.com')">such as Flickr</xsl:if>
+          <xsl:if test="contains($url, '.amazon.com')">such as Amazon</xsl:if>
+          offer a permanent link or short link function.
+        </suggestion>
+      </result>
+    </xsl:if>
+    <xsl:if test="contains($url, '.sun.com') or
+                  contains($url, '.macromedia.com') or
+                  contains($url, '.ati.com')">
+      <result>
+        <error>Ulink
+          <xsl:call-template name="createid">
+            <xsl:with-param name="use-url-attribute" select="1"/>
+          </xsl:call-template>
+          contains a link to the website of a company that does not exist
+          anymore.
+        </error>
+        <suggestion>Find out where the link redirects to now.</suggestion>
+      </result>
     </xsl:if>
   </xsl:template>
 
