@@ -5,6 +5,10 @@ import sys
 import os
 import re
 
+sys.path.append("source")
+
+import docstylecheck
+
 try:
     from distutils.core import setup
 except ImportError, excp:
@@ -28,14 +32,14 @@ def listdir(path, ignore=None):
 print("All files: %s" % listdir("specs") )
 
 setup(  name = 'docstylecheck',
-  version = "1.0",
-  description = '',
+  version = docstylecheck.__version__,
+  description = docstylecheck.__description__,
   long_description="",
-  author = 'Stefan Knorr',
+  author = docstylecheck.__author__,
   author_email = 'sknorr@suse.de',
   url = 'git@gitorious.org:style-checker/style-checker.git',
   download_url = 'git@gitorious.org:style-checker/style-checker.git' ,
-  license = 'MIT',
+  license = docstylecheck.__license__,
   # keywords = '',
   # classifiers=[],
   # install_requires=["lxml"],
