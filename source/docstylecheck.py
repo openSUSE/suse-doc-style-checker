@@ -10,10 +10,6 @@ __author__ = "Stefan Knorr"
 __license__ = "MIT"
 __description__ = "checks a given DocBook XML file for stylistic errors"
 
-openfile = False
-
-arguments = sys.argv
-location = os.path.dirname( os.path.realpath( __file__ ) )
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
 # (self-explanatory anyway). Get rid of "optional arguments" header. Make sure
@@ -40,10 +36,20 @@ def parseargs():
 
    return parser.parse_args()
 
-args = parseargs()
-# print(args)
+def printcolor( message, type = None ):
+  if sys.stdout.isatty():
+    if type == 'error':
+      print( "\033[0;31m" + message + "\033[0m" )
+    else:
+      print( "\033[0;32m" + message + "\033[0m" )
+  else:
+    print( resultfile )
 
-# Handle arguments
+
+location = os.path.dirname( os.path.realpath( __file__ ) )
+
+args = parseargs()
+
 resultfilename = args.inputfile
 resultfilename = os.path.basename( os.path.realpath( resultfilename ) )
 resultfilename = re.sub( r'(_bigfile)?\.xml', r'', resultfilename )
@@ -83,7 +89,7 @@ output.getroottree().write( resultfile,
                             encoding="UTF-8",
                             pretty_print=True)
 
-if openfile == True:
+if args.show == True:
   webbrowser.open( resultfile, new=0 , autoraise=True )
-else:
-  print( resultfile )
+
+printcolor( resultfile )
