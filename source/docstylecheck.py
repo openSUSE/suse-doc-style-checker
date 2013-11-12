@@ -46,50 +46,54 @@ def printcolor( message, type = None ):
     print( resultfile )
 
 
-location = os.path.dirname( os.path.realpath( __file__ ) )
+def main():
+   location = os.path.dirname( os.path.realpath( __file__ ) )
 
-args = parseargs()
+   args = parseargs()
 
-resultfilename = args.inputfile
-resultfilename = os.path.basename( os.path.realpath( resultfilename ) )
-resultfilename = re.sub( r'(_bigfile)?\.xml', r'', resultfilename )
-resultfilename = 'style-check-%s.xml' % resultfilename
-resultpath = os.path.dirname( os.path.realpath( args.inputfile ) )
-resultfile = os.path.join( resultpath, resultfilename )
-
-
-
-output = etree.XML('<?xml-stylesheet type="text/css" href="%s"?><results></results>'
-                    % os.path.join( location, 'check.css' ) )
-rootelement = output.xpath( '/results' )
-
-rootelement[0].append( etree.XML( '<results-title>Style Checker Results</results-title>' ) )
+   resultfilename = args.inputfile
+   resultfilename = os.path.basename( os.path.realpath( resultfilename ) )
+   resultfilename = re.sub( r'(_bigfile)?\.xml', r'', resultfilename )
+   resultfilename = 'style-check-%s.xml' % resultfilename
+   resultpath = os.path.dirname( os.path.realpath( args.inputfile ) )
+   resultfile = os.path.join( resultpath, resultfilename )
 
 
-# Checking via XSLT
 
-parser = etree.XMLParser( ns_clean=True,
-                          remove_pis=False,
-                          dtd_validation=False )
-inputfile = etree.parse( args.inputfile, parser )
+   output = etree.XML('<?xml-stylesheet type="text/css" href="%s"?><results></results>'
+                     % os.path.join( location, 'check.css' ) )
+   rootelement = output.xpath( '/results' )
 
-for checkfile in glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) ):
-  transform = etree.XSLT( etree.parse( checkfile, parser ) )
-  result = transform( inputfile ).getroot()
-
-  if not ( len( result.xpath( '/part/result' ) ) ) == 0 :
-    rootelement[0].append(result)
-
-if ( len( output.xpath( '/results/part' ) ) ) == 0:
-  rootelement[0].append( etree.XML( '<result><info>No problems detected.</info><suggestion>Celebrate!</suggestion></result>' ) )
+   rootelement[0].append( etree.XML( '<results-title>Style Checker Results</results-title>' ) )
 
 
-output.getroottree().write( resultfile,
-                            xml_declaration=True,
-                            encoding="UTF-8",
-                            pretty_print=True)
+   # Checking via XSLT
 
-if args.show == True:
-  webbrowser.open( resultfile, new=0 , autoraise=True )
+   parser = etree.XMLParser( ns_clean=True,
+                           remove_pis=False,
+                           dtd_validation=False )
+   inputfile = etree.parse( args.inputfile, parser )
 
-printcolor( resultfile )
+   for checkfile in glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) ):
+      transform = etree.XSLT( etree.parse( checkfile, parser ) )
+      result = transform( inputfile ).getroot()
+
+      if not ( len( result.xpath( '/part/result' ) ) ) == 0 :
+         rootelement[0].append(result)
+
+   if ( len( output.xpath( '/results/part' ) ) ) == 0:
+      rootelement[0].append( etree.XML( '<result><info>No problems detected.</info><suggestion>Celebrate!</suggestion></result>' ) )
+
+
+   output.getroottree().write( resultfile,
+                              xml_declaration=True,
+                              encoding="UTF-8",
+                              pretty_print=True)
+
+   if args.show == True:
+      webbrowser.open( resultfile, new=0 , autoraise=True )
+
+   printcolor( resultfile )
+
+if __name__ == "__main__":
+   main()
