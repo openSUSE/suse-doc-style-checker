@@ -1,60 +1,56 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
-import sys, os.path, subprocess, webbrowser, glob, re
+import sys, os.path, subprocess, webbrowser, glob, re, argparse
 from lxml import etree
 
 programname = "Documentation Style Checker"
-programversion = "0.1.0pre"
+__version__ = "0.1.0pre"
+__author__  = "Stefan Knorr"
+__license__ = "..."
+__description__ = "Documentation Style Checker"
 
 openfile = False
 
 arguments = sys.argv
 location = os.path.dirname( os.path.realpath(__file__) )
 
+def parseargs():
+   parser = argparse.ArgumentParser(description=__description__,
+                                    )
+   parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + __version__)
+   parser.add_argument( '-s', '--show',
+      action='store_true',
+      default=False,
+      help="Show final report in $BROWSER, or default browser if unset. "
+           "Not all browsers open report files correctly and for some "
+           "users, a text editor will open. In such cases, set the "
+           "BROWSER variable with: export BROWSER=/MY/FAVORITE/BROWSER "
+           "Chromium or Firefox will both do the right thing."
+           )
+   # 
+   parser.add_argument('inputfile',
+            #type=argparse.FileType('r'),
+            )
+   parser.add_argument('outputfile',
+            nargs="?",
+            #default=sys.stdout,
+            #type=argparse.FileType('r'),
+            )
+    
+   return parser.parse_args()
+
+args = parseargs()
+# print(args)
+
 # Handle arguments
-# TODO: Use argparse module
-if ( "--help" in arguments ) or ( "-h" in arguments ):
-  sys.exit( """Checks a given DocBook XML file for stylistic errors.
+resultfilename = args.inputfile
+resultfilename = os.path.basename( os.path.realpath( resultfilename ) )
+resultfilename = re.sub( r'(_bigfile)?\.xml', r'', resultfilename )
+resultfilename = 'style-check-%s.xml' % resultfilename
+resultpath = os.path.dirname( os.path.realpath( args.inputfile ) )
+resultfile = os.path.join( resultpath, resultfilename )
 
-Usage: %s [OPTIONS] INPUTFILE [OUTPUTFILE]
-
-Options:
-    --show  -s  Show final report in $BROWSER, or default browser if unset.
-                Not all browsers open report files correctly and for some
-                users, a text editor will open. In such cases, set the
-                BROWSER variable with: export BROWSER=/MY/FAVORITE/BROWSER
-                Chromium or Firefox will both do the right thing.
- --version  -v  Print version number.
-    --help  -h  Show this screen.
-""" % arguments[0] )
-
-if ( "--version" in arguments ) or ( "-v" in arguments ):
-  sys.exit( programname + " " + programversion )
-
-if ("--show" in arguments ) or ( "-s" in arguments ):
-  openfile = True
-  arguments = list(filter(('--show').__ne__, arguments))
-  arguments = list(filter(('-s').__ne__, arguments))
-
-if len( arguments ) < 2:
-  sys.exit( """Not enough arguments provided.
-Usage: %s [OPTIONS] FILE
-To see all options, do: %s --help""" % ( arguments[0], arguments[0] ) )
-
-if len( arguments ) > 2:
-  inputfile = arguments[-2]
-  resultfile = arguments[-1]
-else:
-  inputfile = arguments[-1]
-  resultfilename = os.path.basename( os.path.realpath( inputfile ) )
-  resultfilename = re.sub( r'(_bigfile)?\.xml', r'', resultfilename )
-  resultfilename = 'style-check-%s.xml' % resultfilename
-  resultpath = os.path.dirname( os.path.realpath( inputfile ) )
-  resultfile = os.path.join( resultpath, resultfilename )
-
-if not os.path.exists( inputfile ):
-  sys.exit( "File %s does not exist.\n" % inputfile )
 
 
 output = etree.XML('<?xml-stylesheet type="text/css" href="%s"?><results></results>'
@@ -69,7 +65,7 @@ rootelement[0].append( etree.XML( '<results-title>Style Checker Results</results
 parser = etree.XMLParser( ns_clean=True,
                           remove_pis=False,
                           dtd_validation=False )
-inputfile = etree.parse( inputfile, parser )
+inputfile = etree.parse( args.inputfile, parser )
 
 for checkfile in glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) ):
   transform = etree.XSLT( etree.parse( checkfile, parser ) )
