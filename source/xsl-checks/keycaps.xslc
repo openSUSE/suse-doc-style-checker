@@ -95,7 +95,6 @@
     <xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
     <xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
 
-
     <xsl:value-of select="normalize-space(translate(text(),$upper,$lower))"/>
   </xsl:template>
 
