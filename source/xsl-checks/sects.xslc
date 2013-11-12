@@ -7,10 +7,25 @@
 
   <xsl:template match="*" mode="part-title">Sections</xsl:template>
 
-
-
   <xsl:template match="article|chapter|reference|refentry|preface|appendix|colophon|
                        section|sect1|sect2|sect3|sect4|sect5">
+    <xsl:variable name="lone">
+      <xsl:choose>
+        <xsl:when test="(local-name(.) = 'article' or
+                         local-name(.) = 'chapter' or
+                         local-name(.) = 'preface' or
+                         local-name(.) = 'appendix' or
+                         local-name(.) = 'colophon') and
+                        (count(section) = 1 or count(sect1) = 1)">1</xsl:when>
+        <xsl:when test="local-name(.) = 'section' and count(section) = 1">1</xsl:when>
+        <xsl:when test="local-name(.) = 'sect1' and count(sect2) = 1">1</xsl:when>
+        <xsl:when test="local-name(.) = 'sect2' and count(sect3) = 1">1</xsl:when>
+        <xsl:when test="local-name(.) = 'sect3' and count(sect4) = 1">1</xsl:when>
+        <xsl:when test="local-name(.) = 'sect4' and count(sect5) = 1">1</xsl:when>
+        <xsl:otherwise>0</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
 
     <xsl:if test="not(para|abstract) and not(ancestor-or-self::*/@role = 'legal')">
       <result>
@@ -30,9 +45,29 @@
 
     <xsl:if test="local-name(.) = 'sect4' or local-name(.) = 'sect5'">
       <result>
-        <warning>Section <xsl:call-template name="createid"/> is nested deeply.</warning>
+        <warning>Section <xsl:call-template name="createid"/> is nested deeply.
+        </warning>
         <suggestion>Avoid using <tag>sect4</tag> and <tag>sect5</tag> elements.
         </suggestion>
+      </result>
+    </xsl:if>
+
+    <xsl:if test="not(@id) and not(ancestor-or-self::preface
+                                   or ancestor-or-self::*/@role = 'legal')">
+      <result>
+        <warning>Section <xsl:call-template name="createid"/> has no ID.
+        </warning>
+        <suggestion>Add an <em>id</em> attribute.
+        </suggestion>
+      </result>
+    </xsl:if>
+
+    <xsl:if test="$lone = 1">
+      <result>
+        <warning>Section <xsl:call-template name="createid"/> contains a lone
+          subsection.
+        </warning>
+        <suggestion>Flatten the subsection structure.</suggestion>
       </result>
     </xsl:if>
 
