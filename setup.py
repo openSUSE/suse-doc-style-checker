@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 from __future__ import print_function
 import sys
@@ -11,10 +11,11 @@ import docstylecheck
 
 try:
     from distutils.core import setup
-except ImportError, excp:
+except ImportError:
     print("No distutils module found.", file=sys.stderr)
-    sys.exit(10)
     #from setuptools import setup
+    sys.exit(10)
+
 
 def listdir(path, ignore=None):
     """Lists all files recursively, starting from a given directory
@@ -45,6 +46,7 @@ setup(  name = 'docstylecheck',
   # install_requires=["lxml"],
   scripts=["source/docstylecheck.py"],
   data_files = [('.',     ['LICENSE', 'README.md'] ),
+                ('source/xsl-checks/', listdir('source/xsl-checks/') ),
                 ('specs', listdir("specs", (".tmp", ".profiled")) ),
                ],
   # package_data={ 'specs': ['specs']},
