@@ -20,36 +20,35 @@ except ImportError:
 def listdir(path, ignore=None):
     """Lists all files recursively, starting from a given directory
     """
-    all=[]
+    all = []
     for root, sub, files in os.walk(path):
         for f in files:
-           all.append( os.path.join(root, f) )
+            all.append(os.path.join(root, f))
 
     if ignore:
-        all = [ i for i in all for j in ignore if not re.search(j, i) ]
+        all = [i for i in all for j in ignore if not re.search(j, i)]
 
     return all
 
-print("All files: %s" % listdir("specs") )
+print("All files: %s" % listdir("specs"))
 
-setup(  name = 'docstylecheck',
-  version = docstylecheck.__version__,
-  description = docstylecheck.__description__,
-  long_description="",
-  author = docstylecheck.__author__,
-  author_email = 'sknorr@suse.de',
-  url = 'git@gitorious.org:style-checker/style-checker.git',
-  download_url = 'git@gitorious.org:style-checker/style-checker.git' ,
-  license = docstylecheck.__license__,
-  # keywords = '',
-  # classifiers=[],
-  # install_requires=["lxml"],
-  scripts=["source/docstylecheck.py"],
-  data_files = [('.',     ['LICENSE', 'README.md'] ),
-                ('source/xsl-checks/', listdir('source/xsl-checks/') ),
-                ('specs', listdir("specs", (".tmp", ".profiled")) ),
-               ],
-  # package_data={ 'specs': ['specs']},
-)
+setup(name='docstylecheck',
+      version=docstylecheck.__version__,
+      description=docstylecheck.__description__,
+      long_description="",
+      author=docstylecheck.__author__,
+      author_email='sknorr@suse.de',
+      url='git@gitorious.org:style-checker/style-checker.git',
+      download_url='git@gitorious.org:style-checker/style-checker.git',
+      license=docstylecheck.__license__,
+      # keywords = '',
+      # classifiers=[],
+      # install_requires=["lxml"],
+      scripts=["source/docstylecheck.py"],
+      data_files=[('.',     ['LICENSE', 'README.md']),
+                  ('source/xsl-checks/', listdir('source/xsl-checks/')),
+                  ('specs', listdir("specs", (".tmp", ".profiled"))), ],
+      # package_data={ 'specs': ['specs']},
+      )
 
 # EOF
