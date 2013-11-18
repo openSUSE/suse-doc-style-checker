@@ -36,8 +36,33 @@
             </suggestion>
           </result>
         </xsl:when>
+        <xsl:when test="starts-with($url, 'info:')">
+          <result>
+            <error>Ulink
+              <xsl:call-template name="createid">
+                <xsl:with-param name="use-url-attribute" select="1"/>
+              </xsl:call-template>
+              links to an info page.
+            </error>
+            <suggestion>To reference info pages, use the phrase
+              <quote>see the info page of <em>command</em></quote>.
+            </suggestion>
+          </result>
+        </xsl:when>
+        <xsl:when test="starts-with($url, 'man:')">
+          <result>
+            <error>Ulink
+              <xsl:call-template name="createid">
+                <xsl:with-param name="use-url-attribute" select="1"/>
+              </xsl:call-template>
+              links to a man page.
+            </error>
+            <suggestion>To reference man pages, use the phrase
+              <quote>see the man page of <em>command</em></quote>.
+            </suggestion>
+          </result>
+        </xsl:when>
         <xsl:when test="starts-with($url, 'file:') or
-                        starts-with($url, 'info:') or
                         starts-with($url, 'smb:')">
           <result>
             <error>Ulink
@@ -127,20 +152,6 @@
           <xsl:if test="contains($url, '.amazon.com')">such as Amazon</xsl:if>
           offer a permanent link or short link function.
         </suggestion>
-      </result>
-    </xsl:if>
-    <xsl:if test="contains($url, '.sun.com') or
-                  contains($url, '.macromedia.com') or
-                  contains($url, '.ati.com')">
-      <result>
-        <error>Ulink
-          <xsl:call-template name="createid">
-            <xsl:with-param name="use-url-attribute" select="1"/>
-          </xsl:call-template>
-          contains a link to the website of a company that does not exist
-          anymore.
-        </error>
-        <suggestion>Find out where the link redirects to now.</suggestion>
       </result>
     </xsl:if>
   </xsl:template>
