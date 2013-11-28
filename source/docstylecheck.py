@@ -50,13 +50,17 @@ location = os.path.dirname( os.path.realpath( __file__ ) )
 
 args = parseargs()
 
-resultfilename = args.inputfile
-resultfilename = os.path.basename( os.path.realpath( resultfilename ) )
-resultfilename = re.sub( r'(_bigfile)?\.xml', r'', resultfilename )
-resultfilename = 'style-check-%s.xml' % resultfilename
-resultpath = os.path.dirname( os.path.realpath( args.inputfile ) )
-resultfile = os.path.join( resultpath, resultfilename )
+if args.outputfile:
+  resultfilename = args.outputfile
+  resultpath = os.path.dirname( os.path.realpath( args.outputfile ) )
+else:
+  resultfilename = args.inputfile
+  resultfilename = os.path.basename( os.path.realpath( resultfilename ) )
+  resultfilename = re.sub( r'(_bigfile)?\.xml', r'', resultfilename )
+  resultfilename = '%s-stylecheck.xml' % resultfilename
+  resultpath = os.path.dirname( os.path.realpath( args.inputfile ) )
 
+resultfile = os.path.join( resultpath, resultfilename )
 
 
 output = etree.XML('<?xml-stylesheet type="text/css" href="%s"?><results></results>'
