@@ -43,7 +43,7 @@ def printcolor( message, type = None ):
         else:
             print( "\033[0;32m" + message + "\033[0m" )
     else:
-        print( resultfile )
+        print( message )
 
 
 def main():
