@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+
+
+  <xsl:template match="*" mode="part-title">User Interface Elements</xsl:template>
+
+  <xsl:template match="guimenu">
+    <xsl:variable name="end-of-text">
+      <xsl:value-of select="substring(text(), string-length(text()))"/>
+      <!-- This nets us just the last letter, use "string-length(text() - 1"
+           to get two letters. -->
+    </xsl:variable>
+
+    <xsl:if test="contains($end-of-text, '…') or
+                  contains($end-of-text, '.') or contains($end-of-text, ':') or
+                  contains($end-of-text, ',') or contains($end-of-text, ';') or
+                  contains($end-of-text, '?') or contains($end-of-text, '!')">
+      <result>
+        <error>User interface element <xsl:call-template name="createid"/>
+          has punctation at its end.
+        </error>
+        <suggestion>Remove punctuation from the end of user interface elements.
+        </suggestion>
+        <suggestion>If this is end-of-sentence/end-of-clause punctuation,
+          place it outside of the <tag>guimenu</tag> element.
+        </suggestion>
+      </result>
+    </xsl:if>
+  </xsl:template>
+
+</xsl:stylesheet>
