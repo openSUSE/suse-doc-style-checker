@@ -16,88 +16,96 @@ __description__ = "checks a given DocBook XML file for stylistic errors"
 # least important options (--help, --version) are listed last. Also, I really
 # liked being able to use sentences in the parameter descriptions.
 def parseargs():
-  parser = argparse.ArgumentParser(
-    usage= __file__ + " [options] inputfile [outputfile]",
-    description=__description__ )
-  parser.add_argument('-v', '--version',
-    action = 'version',
-    version = __programname__ + ' ' + __version__,
-    help = "show version number and exit")
-  parser.add_argument( '-s', '--show',
-    action = 'store_true',
-    default = False,
-    help = """show final report in $BROWSER, or default browser if unset; not
-        all browsers open report files correctly and for some users, a text
-        editor will open; in such cases, set the BROWSER variable with:
-        export BROWSER=/MY/FAVORITE/BROWSER ; Chromium or Firefox will both
-        do the right thing""" )
-  parser.add_argument( 'inputfile' )
-  parser.add_argument( 'outputfile', nargs="?" )
+    parser = argparse.ArgumentParser(
+        usage= __file__ + " [options] inputfile [outputfile]",
+        description=__description__ )
+    parser.add_argument('-v', '--version',
+        action = 'version',
+        version = __programname__ + " " + __version__,
+        help = "show version number and exit")
+    parser.add_argument( '-s', '--show',
+        action = 'store_true',
+        default = False,
+        help = """show final report in $BROWSER, or default browser if unset; not
+            all browsers open report files correctly and for some users, a text
+            editor will open; in such cases, set the BROWSER variable with:
+            export BROWSER=/MY/FAVORITE/BROWSER ; Chromium or Firefox will both
+            do the right thing""" )
+    parser.add_argument( 'inputfile' )
+    parser.add_argument( 'outputfile', nargs="?" )
 
-  return parser.parse_args()
+    return parser.parse_args()
 
 def printcolor( message, type = None ):
-  if sys.stdout.isatty():
-    if type == 'error':
-      print( "\033[0;31m" + message + "\033[0m" )
+    if sys.stdout.isatty():
+        if type == 'error':
+            print( "\033[0;31m" + message + "\033[0m" )
+        else:
+            print( "\033[0;32m" + message + "\033[0m" )
     else:
-      print( "\033[0;32m" + message + "\033[0m" )
-  else:
-    print( resultfile )
+        print( resultfile )
 
 
 def main():
-  location = os.path.dirname( os.path.realpath( __file__ ) )
+    location = os.path.dirname( os.path.realpath( __file__ ) )
 
-  args = parseargs()
+    args = parseargs()
 
-  if args.outputfile:
-    resultfilename = args.outputfile
-    resultpath = os.path.dirname( os.path.realpath( args.outputfile ) )
-  else:
-    resultfilename = args.inputfile
-    resultfilename = os.path.basename( os.path.realpath( resultfilename ) )
-    resultfilename = re.sub( r'(_bigfile)?\.xml', r'', resultfilename )
-    resultfilename = '%s-stylecheck.xml' % resultfilename
-    resultpath = os.path.dirname( os.path.realpath( args.inputfile ) )
+    if args.outputfile:
+        resultfilename = args.outputfile
+        resultpath = os.path.dirname( os.path.realpath( args.outputfile ) )
+    else:
+        resultfilename = args.inputfile
+        resultfilename = os.path.basename( os.path.realpath( resultfilename ) )
+        resultfilename = re.sub( r'(_bigfile)?\.xml', r'', resultfilename )
+        resultfilename = '%s-stylecheck.xml' % resultfilename
+        resultpath = os.path.dirname( os.path.realpath( args.inputfile ) )
 
-  resultfile = os.path.join( resultpath, resultfilename )
+    resultfile = os.path.join( resultpath, resultfilename )
 
-  output = etree.XML('<?xml-stylesheet type="text/css" href="%s"?><results></results>'
+    output = etree.XML(  """<?xml-stylesheet type="text/css" href="%s"?>
+                            <results></results>"""
                       % os.path.join( location, 'check.css' ) )
-  rootelement = output.xpath( '/results' )
+    rootelement = output.xpath( '/results' )
 
-  rootelement[0].append( etree.XML( '<results-title>Style Checker Results</results-title>' ) )
-
-
-  # Checking via XSLT
-
-  parser = etree.XMLParser( ns_clean=True,
-                            remove_pis=False,
-                            dtd_validation=False )
-  inputfile = etree.parse( args.inputfile, parser )
-
-  for checkfile in glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) ):
-    transform = etree.XSLT( etree.parse( checkfile, parser ) )
-    result = transform( inputfile ).getroot()
-
-    if not ( len( result.xpath( '/part/result' ) ) ) == 0 :
-      rootelement[0].append(result)
-
-  if ( len( output.xpath( '/results/part' ) ) ) == 0:
-    rootelement[0].append( etree.XML( '<result><info>No problems detected.</info><suggestion>Celebrate!</suggestion></result>' ) )
+    rootelement[0].append( etree.XML(
+            "<results-title>Style Checker Results</results-title>" ) )
 
 
-  output.getroottree().write( resultfile,
-                              xml_declaration=True,
-                              encoding="UTF-8",
-                              pretty_print=True)
+    # Checking via XSLT
 
-  if args.show == True:
-    webbrowser.open( resultfile, new=0 , autoraise=True )
+    parser = etree.XMLParser(   ns_clean=True,
+                                remove_pis=False,
+                                dtd_validation=False )
+    inputfile = etree.parse( args.inputfile, parser )
 
-  printcolor( resultfile )
+    for checkfile in glob.glob( os.path.join(   location,
+                                                'xsl-checks',
+                                                '*.xslc' ) ):
+        transform = etree.XSLT( etree.parse( checkfile, parser ) )
+        result = transform( inputfile ).getroot()
+
+        if not ( len( result.xpath( '/part/result' ) ) ) == 0 :
+            rootelement[0].append(result)
+
+    if ( len( output.xpath( '/results/part' ) ) ) == 0:
+        rootelement[0].append( etree.XML(
+             """<result>
+                    <info>No problems detected.</info>
+                    <suggestion>Celebrate!</suggestion>
+                </result>""" ) )
+
+
+    output.getroottree().write( resultfile,
+                                xml_declaration=True,
+                                encoding="UTF-8",
+                                pretty_print=True)
+
+    if args.show == True:
+        webbrowser.open( resultfile, new=0 , autoraise=True )
+
+    printcolor( resultfile )
 
 
 if __name__ == "__main__":
-   main()
+    main()
