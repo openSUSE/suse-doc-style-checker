@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+
+
+  <xsl:template match="*" mode="part-title">File Names</xsl:template>
+
+  <xsl:template match="imagedata[@fileref]">
+    <xsl:variable name="fileref" select="normalize-space(@fileref)"/>
+    <xsl:variable name="fileref-safe">
+      <xsl:call-template name="safecharacters">
+        <xsl:with-param name="input" select="$fileref"/>
+      </xsl:call-template>
+    </xsl:variable>
+
+
+    <xsl:if test="not(string-length($fileref) = string-length(normalize-space($fileref-safe)))">
+      <result>
+        <error>Image file name
+          <xsl:call-template name="createid">
+            <xsl:with-param name="use-fileref-attribute" select="1"/>
+          </xsl:call-template>
+          contains capital letters or special characters.
+        </error>
+        <suggestion>Use lowercase letters in image file names.
+        </suggestion>
+        <suggestion>Use only the following special characters in image file
+          names: ._-+
+        </suggestion>
+      </result>
+    </xsl:if>
+  </xsl:template>
+
+
+</xsl:stylesheet>
