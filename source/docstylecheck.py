@@ -31,6 +31,11 @@ def parseargs():
             editor will open; in such cases, set the BROWSER variable with:
             export BROWSER=/MY/FAVORITE/BROWSER ; Chromium or Firefox will both
             do the right thing""" )
+    parser.add_argument( '-e', '--errors',
+        action = 'store_true',
+        default = False,
+        help = """output error messages, but do not output warning or
+            information messages""" )
     parser.add_argument( 'inputfile' )
     parser.add_argument( 'outputfile', nargs="?" )
 
@@ -83,7 +88,14 @@ def main():
                                                 'xsl-checks',
                                                 '*.xslc' ) ):
         transform = etree.XSLT( etree.parse( checkfile, parser ) )
-        result = transform( inputfile ).getroot()
+        result = transform( inputfile )
+
+        if args.errors == True:
+            stylesheeterrors = os.path.join( location, 'errorsonly.xsl' )
+            transformerrors = etree.XSLT( etree.parse( stylesheeterrors, parser ) )
+            result = transformerrors( result )
+
+        result = result.getroot()
 
         if not ( len( result.xpath( '/part/result' ) ) ) == 0 :
             rootelement[0].append(result)
