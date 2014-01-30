@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+
+
+  <xsl:template match="*" mode="part-title">Identifiers</xsl:template>
+
+  <xsl:template match="*[@id]">
+    <xsl:variable name="id" select="normalize-space(@id)"/>
+    <xsl:variable name="id-safe">
+      <xsl:call-template name="safecharacters">
+        <xsl:with-param name="input" select="$id"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="correct-prefix">
+      <xsl:choose>
+        <xsl:when test="self::appendix">app.</xsl:when>
+        <xsl:when test="self::book">book.</xsl:when>
+        <xsl:when test="self::co">co.</xsl:when>
+        <xsl:when test="self::chapter">cha.</xsl:when>
+        <xsl:when test="self::example">ex.</xsl:when>
+        <xsl:when test="self::figure">fig.</xsl:when>
+        <xsl:when test="self::glossary or self::glossterm">gl.</xsl:when>
+        <xsl:when test="self::itemizedlist">il.</xsl:when>
+        <xsl:when test="self::listitem">li.</xsl:when>
+        <xsl:when test="self::indexterm">idx.</xsl:when>
+        <xsl:when test="self::orderedlist">ol.</xsl:when>
+        <xsl:when test="self::part">part.</xsl:when>
+        <xsl:when test="self::procedure">pro.</xsl:when>
+        <xsl:when test="self::qandaset or self::qandadiv or
+                        self::qandaentry">qa.</xsl:when>
+        <xsl:when test="self::sect1 or self::sect2 or self::sect3 or
+                        self::sect4 or self::sect5 or self::sect6 or
+                        self::section">sec.</xsl:when>
+        <xsl:when test="self::set">set.</xsl:when>
+        <xsl:when test="self::step">st.</xsl:when>
+        <xsl:when test="self::table">tab.</xsl:when>
+        <xsl:when test="self::variablelist">vl.</xsl:when>
+        <xsl:when test="self::varlistentry">vle.</xsl:when>
+        <xsl:otherwise>?</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+
+    <xsl:if test="not(starts-with($id, $correct-prefix)) and
+                  not($correct-prefix = '?')">
+      <result>
+        <warning>Identifier of
+          <xsl:call-template name="createid"/>
+          has an unusual prefix.
+        </warning>
+        <suggestion>Use the prefix
+          <em><xsl:value-of select="$correct-prefix"/></em> instead.
+        </suggestion>
+      </result>
+    </xsl:if>
+
+    <xsl:if test="not(string-length($id) = string-length(normalize-space($id-safe)))">
+      <result>
+        <warning>Identifier
+          <xsl:call-template name="createid"/>
+          contains capital letters or special characters.
+        </warning>
+        <suggestion>Use lowercase letters in identifiers.
+        </suggestion>
+        <suggestion>Use only the following special characters in identifiers
+          names: ._-
+        </suggestion>
+      </result>
+    </xsl:if>
+    <xsl:apply-templates/>
+  </xsl:template>
+
+
+</xsl:stylesheet>
