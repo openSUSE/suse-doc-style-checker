@@ -142,7 +142,8 @@
           </xsl:call-template>
           contains a very long URL.
         </warning>
-        <suggestion>Try to shorten this URL by leaving away some parts of it.
+        <suggestion>Try to shorten this URL by leaving away any unimportant
+          parts of it.
         </suggestion>
         <suggestion>Some pages
           <xsl:if test="contains($url, '.h-online.com')">such as The H</xsl:if>

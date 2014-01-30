@@ -12,8 +12,8 @@
     <xsl:if test="not(bookinfo/productname or articleinfo/productname or
                       setinfo/productname)">
       <result>
-        <error>Deliverable <xsl:call-template name="createid"/> contains no
-          productname.</error>
+        <error>Deliverable <xsl:call-template name="createid"/> does not contain
+          a productname.</error>
         <suggestion>Add a <tag>productname</tag> element.</suggestion>
       </result>
     </xsl:if>
@@ -21,8 +21,8 @@
     <xsl:if test="not(bookinfo/productnumber or articleinfo/productnumber or
                       setinfo/productnumber)">
       <result>
-        <error>Deliverable <xsl:call-template name="createid"/> contains no
-          productnumber.</error>
+        <error>Deliverable <xsl:call-template name="createid"/> does not contain
+          a productnumber.</error>
         <suggestion>Add a <tag>productnumber</tag> element.</suggestion>
       </result>
     </xsl:if>
