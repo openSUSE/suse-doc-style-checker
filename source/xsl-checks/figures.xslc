@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+
+  <xsl:template match="*" mode="part-title">Figures</xsl:template>
+
+  <xsl:template match="mediaobject|inlinemediaobject">
+
+    <xsl:if test="not(textobject/phrase)">
+      <result>
+        <warning>Media object
+          <xsl:call-template name="createid">
+            <xsl:with-param name="node" select="imageobject[1]/imagedata[1]"/>
+            <xsl:with-param name="use-fileref-attribute" select="1"/>
+          </xsl:call-template>
+          does not contain a <tag>textobject</tag> element with a
+          <tag>phrase</tag> inside.
+        </warning>
+        <suggestion>Add a <tag>textobject</tag> element with a
+          <tag>phrase</tag> inside it, then add descriptive text for the image
+          to it.
+        </suggestion>
+      </result>
+    </xsl:if>
+  </xsl:template>
+
+
+</xsl:stylesheet>
