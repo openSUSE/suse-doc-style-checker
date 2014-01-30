@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+
+  <xsl:template match="*" mode="part-title">Admonitions</xsl:template>
+
+  <xsl:template match="caution">
+
+  </xsl:template>
+
+
+  <xsl:template match="caution|warning|important|note|tip">
+
+    <xsl:if test="not(title)">
+      <result>
+        <error>Admonition
+         <xsl:call-template name="createid"/>
+          does not contain a <tag>title</tag> element.
+        </error>
+        <suggestion>Add a <tag>title</tag> element.
+        </suggestion>
+      </result>
+    </xsl:if>
+  </xsl:template>
+
+
+</xsl:stylesheet>
