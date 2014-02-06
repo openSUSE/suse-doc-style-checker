@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:py="http://www.example.org/">
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
   <xsl:template match="*">
@@ -12,7 +13,7 @@
 
   <xsl:template match="/">
     <part>
-      <part-title><xsl:apply-templates mode="part-title" /></part-title>
+      <part-title><xsl:apply-templates mode="part-title"/></part-title>
       <xsl:apply-templates/>
     </part>
   </xsl:template>
@@ -25,12 +26,15 @@
 
     <xsl:choose>
       <xsl:when test="$node/@id">
-        <em><xsl:value-of select="$node/@id"/></em>
+        <id><xsl:value-of select="$node/@id"/></id>
+        <place>
+          <line><xsl:value-of select="py:linenumber($node)"/></line>
+        </place>
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
           <xsl:when test="$node/title">
-            <quote><xsl:value-of select="normalize-space($node/title)"/></quote>
+            <name><xsl:value-of select="normalize-space($node/title)"/></name>
           </xsl:when>
           <xsl:when test="$use-url-attribute = 1">
             <xsl:variable name="shortened">
@@ -43,7 +47,7 @@
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:variable>
-            <quote><xsl:value-of select="$shortened"/></quote>
+            <name><xsl:value-of select="$shortened"/></name>
           </xsl:when>
           <xsl:when test="$use-function-attribute = 1">
             <xsl:variable name="shortened">
@@ -56,7 +60,7 @@
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:variable>
-            <quote><xsl:value-of select="$shortened"/></quote>
+            <name><xsl:value-of select="$shortened"/></name>
           </xsl:when>
           <xsl:when test="$use-fileref-attribute = 1">
             <xsl:variable name="shortened">
@@ -69,7 +73,7 @@
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:variable>
-            <quote><xsl:value-of select="$shortened"/></quote>
+            <name><xsl:value-of select="$shortened"/></name>
           </xsl:when>
           <xsl:otherwise>
             <xsl:variable name="shortened">
@@ -82,12 +86,15 @@
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:variable>
-            <quote><xsl:value-of select="$shortened"/></quote>
+            <name><xsl:value-of select="$shortened"/></name>
           </xsl:otherwise>
         </xsl:choose>
-        <xsl:if test="$node/ancestor::*[@id]">
-          (in <em><xsl:value-of select="$node/ancestor::*[@id][1]/@id"/></em>)
-        </xsl:if>
+        <place>
+          <xsl:if test="$node/ancestor::*[@id]">
+            <withinid><xsl:value-of select="$node/ancestor::*[@id][1]/@id"/></withinid>
+          </xsl:if>
+          <line><xsl:value-of select="py:linenumber($node)"/></line>
+        </place>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>

@@ -114,15 +114,37 @@ suggestion:first-of-type:last-of-type:before {
   content: '';
 }
 
-em {
+id, withinid, em {
   font-style: italic;
 }
 
-quote:before {
+withinid:before {
+  content: 'in ';
+  font-style: normal;
+}
+
+line:before {
+  content: 'on line ';
+  font-style: normal;
+}
+
+line:nth-child(2):before {
+  content: ' on line ';
+  font-style: normal;
+}
+place:before {
+  content: ' (';
+}
+
+place:after {
+  content: ') ';
+}
+
+name:before, quote:before {
   content: '“';
 }
 
-quote:after {
+name:after, quote:after {
   content: '”';
 }
 

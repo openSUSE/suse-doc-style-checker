@@ -50,8 +50,15 @@ def printcolor( message, type = None ):
     else:
         print( message )
 
+def linenumber(context, element):
+    return element[0].sourceline
 
 def main():
+
+    ns = etree.FunctionNamespace('http://www.example.org/')
+    ns.prefix = 'py'
+    ns['linenumber'] = linenumber
+
     location = os.path.dirname( os.path.realpath( __file__ ) )
 
     args = parseargs()
@@ -91,9 +98,12 @@ def main():
         result = transform( inputfile )
 
         if args.errors == True:
-            stylesheeterrors = os.path.join( location, 'errorsonly.xsl' )
-            transformerrors = etree.XSLT( etree.parse( stylesheeterrors, parser ) )
-            result = transformerrors( result )
+            # FIXME: The following could presumably also be done without adding
+            # a separate stylesheet. Not sure if that would be any more
+            # performant.
+            errorstylesheet = os.path.join( location, 'errorsonly.xsl' )
+            errortransform = etree.XSLT( etree.parse( errorstylesheet, parser ) )
+            result = errortransform( result )
 
         result = result.getroot()
 
