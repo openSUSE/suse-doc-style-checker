@@ -39,7 +39,7 @@
           <xsl:when test="$use-url-attribute = 1">
             <xsl:variable name="shortened">
               <xsl:choose>
-                <xsl:when test="string-length(normalize-space($node/@url)) &gt; 50">
+                <xsl:when test="string-length(normalize-space($node/@url)) &gt; 53">
                   <xsl:value-of select="substring(normalize-space($node/@url), 1, 50)"/>…
                 </xsl:when>
                 <xsl:otherwise>
@@ -52,7 +52,7 @@
           <xsl:when test="$use-function-attribute = 1">
             <xsl:variable name="shortened">
               <xsl:choose>
-                <xsl:when test="string-length(normalize-space($node/@function)) &gt; 50">
+                <xsl:when test="string-length(normalize-space($node/@function)) &gt; 53">
                   <xsl:value-of select="substring(normalize-space($node/@function), 1, 50)"/>…
                 </xsl:when>
                 <xsl:otherwise>
@@ -65,7 +65,7 @@
           <xsl:when test="$use-fileref-attribute = 1">
             <xsl:variable name="shortened">
               <xsl:choose>
-                <xsl:when test="string-length(normalize-space($node/@fileref)) &gt; 50">
+                <xsl:when test="string-length(normalize-space($node/@fileref)) &gt; 53">
                   <xsl:value-of select="substring(normalize-space($node/@fileref), 1, 50)"/>…
                 </xsl:when>
                 <xsl:otherwise>
@@ -78,7 +78,7 @@
           <xsl:otherwise>
             <xsl:variable name="shortened">
               <xsl:choose>
-                <xsl:when test="string-length(normalize-space($node)) &gt; 50">
+                <xsl:when test="string-length(normalize-space($node)) &gt; 53">
                   <xsl:value-of select="substring(normalize-space($node), 1, 50)"/>…
                 </xsl:when>
                 <xsl:otherwise>
