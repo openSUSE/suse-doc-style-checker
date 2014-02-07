@@ -7,9 +7,7 @@
     <xsl:apply-templates/>
   </xsl:template>
 
-  <xsl:template match="text()">
-    <xsl:apply-templates/>
-  </xsl:template>
+  <xsl:template match="text()"/>
 
   <xsl:template match="/">
     <part>
