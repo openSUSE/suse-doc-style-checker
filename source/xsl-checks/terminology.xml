@@ -26,33 +26,36 @@
     </matchgroup>
   </term> -->
   <term>
-    <accept>[Aa]dd-on</accept>
+    <accept>[Aa]dd-ons?</accept>
     <matchgroup>
-      <match>add_-?on</match>
+      <match>add[-_]?ons?</match>
     </matchgroup>
     <matchgroup>
-      <match>addon</match><!-- Should not be necessary -->
-    </matchgroup>
-    <matchgroup>
-      <match>add$</match>
-      <around type="next">on$</around>
+      <match>add</match>
+      <around type="next">ons?</around>
     </matchgroup>
   </term>
   <term>
-    <accept>[Aa]ddress book</accept>
+    <accept>[Aa]ddress books?</accept>
     <matchgroup>
-      <match>addressbook</match>
+      <match>addressbooks?</match>
     </matchgroup>
   </term>
   <term>
-    <accept>[Aa]dvice</accept>
+    <accept>[Aa]dvice$</accept>
     <matchgroup>
       <match>advise</match>
       <around type="previous">(an|the)</around>
     </matchgroup>
   </term>
   <term>
-    <accept type="verb">advise</accept>
+    <accept>[Aa]dvisor(y|ies)</accept>
+    <matchgroup>
+      <match>advicor(y|ies)</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>advis(e[sd]|ing)</accept>
     <matchgroup>
       <match>advic(e[sd]|ing)</match>
     </matchgroup>
@@ -131,7 +134,7 @@
     </matchgroup>
     <matchgroup>
       <match>back</match>
-      <around type="next">up[s]?</around>
+      <around type="next">ups?</around>
       <around type="previous">(the|a|local|remote|system|full|partial|automatic|manual)</around>
     </matchgroup>
   </term>
