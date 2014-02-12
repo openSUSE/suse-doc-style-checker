@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:py="https://www.gitorious.org/style-checker/style-checker"
-  exclude-result-prefixes="py">
+  xmlns:py="http://www.example.org/">
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
   <xsl:template match="*">
@@ -27,7 +26,7 @@
       <xsl:when test="$node/@id">
         <id><xsl:value-of select="$node/@id"/></id>
         <place>
-          <line><xsl:value-of select="py:linenumber()"/></line>
+          <line><xsl:value-of select="py:linenumber($node)"/></line>
         </place>
       </xsl:when>
       <xsl:otherwise>
@@ -92,26 +91,10 @@
           <xsl:if test="$node/ancestor::*[@id]">
             <withinid><xsl:value-of select="$node/ancestor::*[@id][1]/@id"/></withinid>
           </xsl:if>
-          <line><xsl:value-of select="py:linenumber()"/></line>
+          <line><xsl:value-of select="py:linenumber($node)"/></line>
         </place>
       </xsl:otherwise>
     </xsl:choose>
-  </xsl:template>
-
-  <xsl:template name="safecharacters-AZ">
-    <!-- The (unfulfilled) aim being to only allow [a-z][0-9]\.-_+ -->
-    <xsl:param name="input" select="no_input"/>
-
-    <xsl:value-of select="translate($input, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '')"/>
-  </xsl:template>
-
-  <xsl:template name="safecharacters-special">
-    <!-- The (unfulfilled) aim being to only allow [a-z][0-9]\.-_+ -->
-    <xsl:param name="input" select="no_input"/>
-
-    <xsl:value-of select="translate($input,
-      '?:;,!@#$%^§&amp;&lt;&gt;äàâãáåæÄÀÂÃÁÆÅçÇðÐèêéëËÉÈÊìîïíÍÏÌÎñÑòôõóöøœŒØÖÓÒÔÕùûüúÚÜÙÛýÿÝß©¢®þÞµ°[]“”{}|()= ',
-      '')"/>
   </xsl:template>
 
   <xsl:template name="safecharacters">
