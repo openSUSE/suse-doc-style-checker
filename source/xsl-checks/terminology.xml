@@ -1,0 +1,150 @@
+<terminology>
+<!-- before/after: within sentence, previous/next: immediate -->
+  <term>
+    <accept>32-bit</accept>
+    <matchgroup>
+      <match>32[\.\- _]?bit</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>3D</accept>
+    <matchgroup>
+      <match>(three|3)[\.\-_]?[ ]?d[\.]?</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>64-bit</accept>
+    <matchgroup>
+      <match>64[\.\- _]?bit</match>
+    </matchgroup>
+  </term>
+<!--   <term>
+    <accept type="verb">activate</accept>
+    <matchgroup>
+      <match>((block|check|highlight|tick)(ing|ed|s)|ch[o]?os(e[s]?|ing|n))</match>
+      <around type="after">((check|tick|option|box)[e]?[s]?|##@ui##)</around>
+    </matchgroup>
+  </term> -->
+  <term>
+    <accept>[Aa]dd-on</accept>
+    <matchgroup>
+      <match>add_-?on</match>
+    </matchgroup>
+    <matchgroup>
+      <match>addon</match><!-- Should not be necessary -->
+    </matchgroup>
+    <matchgroup>
+      <match>add$</match>
+      <around type="next">on$</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>[Aa]ddress book</accept>
+    <matchgroup>
+      <match>addressbook</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>[Aa]dvice</accept>
+    <matchgroup>
+      <match>advise</match>
+      <around type="previous">(an|the)</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept type="verb">advise</accept>
+    <matchgroup>
+      <match>advic(e[sd]|ing)</match>
+    </matchgroup>
+    <matchgroup>
+      <match>advice</match>
+      <around type="previous">(we|suse|novell|attachmate|[\-a-z]*?ly)</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>[Aa]fter</accept>
+    <matchgroup>
+      <match>once</match>
+      <around type="next">(the|a|an|it|they)</around>
+    </matchgroup>
+  </term>
+<!--   <row>
+    <entry>although</entry>
+    <entry>while</entry>
+    <entry>conjunction; only use <emphasis>while</emphasis> in the
+      meaning of <quote>during the time that</quote>
+    </entry>
+  </row> -->
+<!--   <row>
+    <entry>and</entry>
+    <entry>while</entry>
+    <entry>conjunction; only use <emphasis>while</emphasis> in the
+      meaning of <quote>during the time that</quote>
+    </entry>
+  </row> -->
+  <term>
+    <accept>[Aa]ppendixes</accept>
+    <matchgroup>
+      <match>appendices</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>[Aa]udio CD</accept>
+    <matchgroup>
+      <match>audio[\-_]?cd</match>
+    </matchgroup>
+    <matchgroup>
+      <match>cd[\-_]?audio</match>
+    </matchgroup>
+    <matchgroup>
+      <match>cd[\-_]?audio</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>[Bb]ack-end</accept>
+    <matchgroup>
+      <match>backend</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept type="verb">[Bb]ack(ed|s|ing)? up</accept>
+    <matchgroup>
+      <match>back(ed|s|ing)-?up</match>
+    </matchgroup>
+    <matchgroup>
+      <match>back-?upp?(ed|s|ing)</match>
+    </matchgroup>
+    <matchgroup>
+      <match>back-?up</match>
+      <around type="previous">(when|to)</around>
+    </matchgroup>
+    <matchgroup>
+      <match>back-?up</match>
+      <around type="next">(them|these|this|it|the|a|an)</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>backup</accept>
+    <matchgroup>
+      <match>back-ups?</match>
+      <around type="previous">(the|a|local|remote|system|full|partial|automatic|manual)</around>
+    </matchgroup>
+    <matchgroup>
+      <match>back</match>
+      <around type="next">up[s]?</around>
+      <around type="previous">(the|a|local|remote|system|full|partial|automatic|manual)</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>Bash</accept>
+    <matchgroup>
+      <match>bash</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept/>
+    <matchgroup>
+      <match>basically</match>
+    </matchgroup>
+  </term>
+</terminology>

@@ -53,11 +53,38 @@ def printcolor( message, type = None ):
 def linenumber( context ):
     return context.context_node.sourceline
 
+def termcheck( context, terms, content ):
+    messages = []
+
+    if content:
+        words = content[0].split()
+        for word in words:
+            for term in terms:
+                if term.xpath("accept[1]")[0].text:
+                    accept = term.xpath("accept[1]")[0].text
+                else:
+                    accept = None
+                matchgroups = term.xpath("matchgroup[1]")
+
+                for matchgroup in matchgroups:
+                    match = matchgroup.xpath("match[1]")[0].text
+
+                    wordmatch = re.match( match, word, flags=re.I )
+                    if wordmatch != None:
+                        if accept != None:
+                            messages.append( etree.XML( "<result><error>Use %s instead of %s</error></result>" % ( accept, word ) ) )
+                        else:
+                            messages.append( etree.XML( "<result><error>Do not use %s</error></result>" % word ) )
+
+
+    return messages
+
 def main():
 
     ns = etree.FunctionNamespace('https://www.gitorious.org/style-checker/style-checker')
     ns.prefix = 'py'
     ns['linenumber'] = linenumber
+    ns['termcheck'] = termcheck
 
     location = os.path.dirname( os.path.realpath( __file__ ) )
 

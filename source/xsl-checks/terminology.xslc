@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:py="https://www.gitorious.org/style-checker/style-checker"
+  xmlns:exslt="http://exslt.org/common" exclude-result-prefixes="py exslt">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+  <xsl:param name="terminologyfile" select="'terminology.xml'"/>
+  <xsl:variable name="terminologynode" select="document($terminologyfile)/*/term"/>
+
+  <xsl:template match="/">
+    <xsl:if test="exslt:node-set($terminologynode)">
+      <part>
+        <part-title><xsl:apply-templates mode="part-title"/></part-title>
+        <xsl:apply-templates/>
+      </part>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="*" mode="part-title">Terminology</xsl:template>
+
+  <!-- The following template should probably match more elements. -->
+  <xsl:template match="para|title">
+    <xsl:variable name="node" select="."/>
+    <xsl:variable name="content">
+      <xsl:apply-templates mode="terminology"/>
+    </xsl:variable>
+
+    <xsl:copy-of select="py:termcheck($terminologynode,$content)"/>
+  </xsl:template>
+
+
+  <xsl:template match="text()" mode="terminology">
+    <xsl:value-of select="normalize-space(.)"/>
+  </xsl:template>
+
+  <xsl:template match="classname|code|command|computeroutput|constant|envar|
+                       exceptionname|filename|function|interfacename|literal|
+                       methodname|option|package|parameter|prompt|replaceable|
+                       sgmltag|structfield|systemitem|tag|userinput|varname"
+    mode="terminology">
+    ##@mono##
+  </xsl:template>
+
+  <xsl:template match="keycombo|keycap" mode="terminology">
+    ##@key##
+  </xsl:template>
+
+  <xsl:template match="menuchoice|guimenu" mode="terminology">
+    ##@ui##
+  </xsl:template>
+
+  <xsl:template match="email|filename|ulink|uri|xref" mode="terminology">
+    ##@ref##
+  </xsl:template>
+
+  <xsl:template match="*" mode="terminology">
+    <xsl:apply-templates mode="terminology"/>
+  </xsl:template>
+
+</xsl:stylesheet>
