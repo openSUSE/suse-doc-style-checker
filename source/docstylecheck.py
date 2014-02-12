@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
-import sys, os.path, subprocess, webbrowser, glob, re, argparse
+import sys, os.path, subprocess, webbrowser, glob, re, argparse, time
 from lxml import etree
 
 __programname__ = "Documentation Style Checker"
@@ -54,30 +54,62 @@ def linenumber( context ):
     return context.context_node.sourceline
 
 def termcheck( context, terms, content ):
+    # modes: para, title??
+
+    # s.split() (or better, but s.split should suffice for the moment [it's
+    # actually quite important to get sentence boundaries])
+    #   the tokenizer of nltk is overzealous (split e-mail adresses, contractions)
+    #       => no want
     messages = []
 
     if content:
         words = content[0].split()
         for word in words:
+            # I was unsure how to use continue to do this. Essentially,
+            # depending on a wordmatch appearing, I need to skip up two
+            # loops. :/
+            print("he sack: " + word)
+            trynextterm = True
             for term in terms:
-                if term.xpath("accept[1]")[0].text:
-                    accept = term.xpath("accept[1]")[0].text
-                else:
+                if trynextterm == True:
                     accept = None
-                matchgroups = term.xpath("matchgroup[1]")
+                    if term.xpath( "accept[1]" )[0].text:
+                        accept = term.xpath( "accept[1]" )[0].text
+                    matchgroups = term.xpath( "matchgroup[1]" )
 
-                for matchgroup in matchgroups:
-                    match = matchgroup.xpath("match[1]")[0].text
+                    for matchgroup in matchgroups:
+                        match = matchgroup.xpath( "match[1]" )[0].text
+                        wordmatch = re.match( match, word, flags=re.I )
 
-                    wordmatch = re.match( match, word, flags=re.I )
-                    if wordmatch != None:
-                        if accept != None:
-                            messages.append( etree.XML( "<result><error>Use %s instead of %s</error></result>" % ( accept, word ) ) )
-                        else:
-                            messages.append( etree.XML( "<result><error>Do not use %s</error></result>" % word ) )
+                        # arounds = []
+                        # if matchgroup.xpath( "around[1]" ):
+                        #     arounds = matchgroup.xpath( "around" )
+                        #     aroundmatches = []
+                        #     for around in arounds:
+                        #         around = matchgroup.xpath( "around[1]" )[0].text
+                        #         aroundtype = matchgroup.xpath( "around[1]/@type" )[0]
+                        #         aroundmatch = re.match( match, word, flags=re.I )
+
+                        if wordmatch != None: #and ( len( arounds ) == len( aroundmatches )):
+                            if accept != None:
+                                messages.append( etree.XML( "<result><error>Use %s instead of %s</error></result>" % ( accept, word ) ) )
+                            else:
+                                messages.append( etree.XML( "<result><error>Do not use %s</error></result>" % word ) )
+                            trynextterm = False
 
 
     return messages
+    #print(terms)
+    # read in terminology.xml, match all patterns over everything? a simple
+    # optimisation should be to first get the first letter of the word, then
+    # just apply stuff that starts with that letter.
+
+    # to correctly interpret previous/next, we need to ignore
+
+    # create terminology warnings here (probably should get the line number
+    # here, too) => send all warnings to xslt which gives it back to main(),
+    # yay, done!
+    # return 0
 
 def main():
 
