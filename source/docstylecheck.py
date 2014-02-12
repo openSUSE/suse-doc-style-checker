@@ -53,23 +53,31 @@ def printcolor( message, type = None ):
 def linenumber( context ):
     return context.context_node.sourceline
 
-def termcheck( context, terms, content ):
-    # modes: para, title??
 
-    # s.split() (or better, but s.split should suffice for the moment [it's
-    # actually quite important to get sentence boundaries])
-    #   the tokenizer of nltk is overzealous (split e-mail adresses, contractions)
-    #       => no want
-    messages = []
+# So slow. Like Dogecoin mine. Need much improve.
+def termcheck( context, terms, content ):
+    # modes: para, title?
+
+    messages = [] # Do I actually need this? Probably, I want to return it.
 
     if content:
+        # .split() (or better, but s.split will suffice for the moment.
+        # However, it is actually quite important to get sentence boundaries
+        # in the future. Some existing tokenisers are overzealous, such as
+        # the default one from NLTK.
         words = content[0].split()
+        wordposition = 0
+        totalwords = len(words)
+
         for word in words:
             # I was unsure how to use continue to do this. Essentially,
             # depending on a wordmatch appearing, I need to skip up two
             # loops. :/
-            print("he sack: " + word)
             trynextterm = True
+
+            # Read in terminology.xml, match all patterns over everything. A
+            # simple optimisation should be to first get the first letter o
+            # the word, then apply everything that starts with that letter.
             for term in terms:
                 if trynextterm == True:
                     accept = None
@@ -80,29 +88,46 @@ def termcheck( context, terms, content ):
                     for matchgroup in matchgroups:
                         match = matchgroup.xpath( "match[1]" )[0].text
                         wordmatch = re.match( match, word, flags=re.I )
+                        acceptmatch = None
+                        if accept != None:
+                            acceptmatch = re.match( accept, word )
 
-                        # arounds = []
-                        # if matchgroup.xpath( "around[1]" ):
-                        #     arounds = matchgroup.xpath( "around" )
-                        #     aroundmatches = []
-                        #     for around in arounds:
-                        #         around = matchgroup.xpath( "around[1]" )[0].text
-                        #         aroundtype = matchgroup.xpath( "around[1]/@type" )[0]
-                        #         aroundmatch = re.match( match, word, flags=re.I )
+                        # Is this either a negative or false positive? Then save some effort.
+                        if wordmatch != None and (acceptmatch == None or accept == None):
+                            arounds = [] # Do I actually need this?
+                            aroundmatches = []
+                            if matchgroup.xpath( "around[1]" ):
+                                arounds = matchgroup.xpath( "around" )
+                                for around in arounds:
+                                    around = matchgroup.xpath( "around[1]" )[0].text
+                                    aroundtype = matchgroup.xpath( "around[1]/@type" )[0]
+                                    aroundposition = wordposition
+                                    # FIXME: after & before need to be handled separately
+                                    if aroundtype == "next" or aroundtype == "after":
+                                        aroundposition += 1
+                                    elif aroundtype == "previous" or aroundtype == "before":
+                                        aroundposition -= 1
+                                    # elif aroundtype == "after":
+                                    #     current+1 to [-1]
+                                    # elif aroundtype == "before":
+                                    #     [0] to current-1
+                                    if not( aroundposition < 0 and aroundposition > ( totalwords - 1 ) ):
+                                        aroundmatch = re.match( around, words[aroundposition], flags=re.I )
+                                        if aroundmatch != None:
+                                            aroundmatches.append( aroundmatch )
 
-                        if wordmatch != None: #and ( len( arounds ) == len( aroundmatches )):
-                            if accept != None:
-                                messages.append( etree.XML( "<result><error>Use %s instead of %s</error></result>" % ( accept, word ) ) )
-                            else:
-                                messages.append( etree.XML( "<result><error>Do not use %s</error></result>" % word ) )
-                            trynextterm = False
+                            if ( len( arounds ) == len( aroundmatches )):
+                                line = linenumber ( context )
+                                # FIXME: shorten content string
+                                if accept != None:
+                                    messages.append( etree.XML( "<result><error>Use %s instead of %s <place><line>%s</line></place>: <quote>%s</quote></error></result>" % ( accept, word, line, content[0] ) ) )
+                                else:
+                                    messages.append( etree.XML( "<result><error>Do not use %s <place><line>%s</line></place>: <quote>%s</quote></error></result>" % ( word, line, content[0] ) ) )
+                                trynextterm = False
+            wordposition += 1
 
 
     return messages
-    #print(terms)
-    # read in terminology.xml, match all patterns over everything? a simple
-    # optimisation should be to first get the first letter of the word, then
-    # just apply stuff that starts with that letter.
 
     # to correctly interpret previous/next, we need to ignore
 
