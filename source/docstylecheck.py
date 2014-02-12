@@ -55,7 +55,7 @@ def linenumber( context ):
 
 def main():
 
-    ns = etree.FunctionNamespace('http://www.example.org/')
+    ns = etree.FunctionNamespace('https://www.gitorious.org/style-checker/style-checker')
     ns.prefix = 'py'
     ns['linenumber'] = linenumber
 

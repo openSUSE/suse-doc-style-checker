@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:py="http://www.example.org/">
+  xmlns:py="https://www.gitorious.org/style-checker/style-checker"
+  exclude-result-prefixes="py">
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
   <xsl:template match="*">
@@ -26,7 +27,7 @@
       <xsl:when test="$node/@id">
         <id><xsl:value-of select="$node/@id"/></id>
         <place>
-          <line><xsl:value-of select="py:linenumber($node)"/></line>
+          <line><xsl:value-of select="py:linenumber()"/></line>
         </place>
       </xsl:when>
       <xsl:otherwise>
@@ -91,7 +92,7 @@
           <xsl:if test="$node/ancestor::*[@id]">
             <withinid><xsl:value-of select="$node/ancestor::*[@id][1]/@id"/></withinid>
           </xsl:if>
-          <line><xsl:value-of select="py:linenumber($node)"/></line>
+          <line><xsl:value-of select="py:linenumber()"/></line>
         </place>
       </xsl:otherwise>
     </xsl:choose>
