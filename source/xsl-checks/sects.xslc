@@ -52,16 +52,6 @@
       </result>
     </xsl:if>
 
-    <xsl:if test="not(@id) and not(ancestor-or-self::preface
-                                   or ancestor-or-self::*/@role = 'legal')">
-      <result>
-        <warning>Section <xsl:call-template name="createid"/> has no ID.
-        </warning>
-        <suggestion>Add an <em>id</em> attribute.
-        </suggestion>
-      </result>
-    </xsl:if>
-
     <xsl:if test="$lone = 1">
       <result>
         <warning>Section <xsl:call-template name="createid"/> contains a lone

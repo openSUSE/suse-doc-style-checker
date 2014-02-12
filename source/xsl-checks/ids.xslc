@@ -7,6 +7,18 @@
 
   <xsl:template match="*" mode="part-title">Identifiers</xsl:template>
 
+  <xsl:template match="article[not(@id)]|chapter[not(@id)]|reference[not(@id)]|refentry[not(@id)]|appendix[not(@id)]|colophon[not(@id)]|
+                         section[not(@id)]|sect1[not(@id)]|sect2[not(@id)]|sect3[not(@id)]|sect4[not(@id)]|sect5[not(@id)]">
+    <xsl:if test="not(ancestor::preface or ancestor-or-self::*/@role = 'legal')">
+      <result>
+        <error>Section <xsl:call-template name="createid"/> has no identifier.
+        </error>
+        <suggestion>Add an <em>id</em> attribute.
+        </suggestion>
+      </result>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template match="*[@id]">
     <xsl:variable name="id" select="normalize-space(@id)"/>
     <xsl:variable name="id-safe">
