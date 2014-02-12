@@ -17,7 +17,7 @@ __description__ = "checks a given DocBook XML file for stylistic errors"
 # liked being able to use sentences in the parameter descriptions.
 def parseargs():
     parser = argparse.ArgumentParser(
-        usage= __file__ + " [options] inputfile [outputfile]",
+        usage = __file__ + " [options] inputfile [outputfile]",
         description=__description__ )
     parser.add_argument('-v', '--version',
         action = 'version',
@@ -108,7 +108,7 @@ def main():
         result = result.getroot()
 
         if not ( len( result.xpath( '/part/result' ) ) ) == 0 :
-            rootelement[0].append(result)
+            rootelement[0].append( result )
 
     if ( len( output.xpath( '/results/part' ) ) ) == 0:
         rootelement[0].append( etree.XML(
@@ -121,7 +121,7 @@ def main():
     output.getroottree().write( resultfile,
                                 xml_declaration=True,
                                 encoding="UTF-8",
-                                pretty_print=True)
+                                pretty_print=True )
 
     if args.show == True:
         webbrowser.open( resultfile, new=0 , autoraise=True )
