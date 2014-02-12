@@ -50,8 +50,8 @@ def printcolor( message, type = None ):
     else:
         print( message )
 
-def linenumber(context, element):
-    return element[0].sourceline
+def linenumber( context ):
+    return context.context_node.sourceline
 
 def main():
 
