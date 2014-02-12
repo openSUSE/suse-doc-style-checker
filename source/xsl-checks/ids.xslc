@@ -58,16 +58,45 @@
     </xsl:if>
 
     <xsl:if test="not(string-length($id) = string-length(normalize-space($id-safe)))">
+      <xsl:variable name="id-safe-AZ">
+        <xsl:call-template name="safecharacters-AZ">
+          <xsl:with-param name="input" select="$id"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="id-safe-special">
+        <xsl:call-template name="safecharacters-special">
+          <xsl:with-param name="input" select="$id"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="id-safe-AZ-state"
+        select="string-length($id) = string-length(normalize-space($id-safe-AZ))"/>
+      <xsl:variable name="id-safe-special-state"
+        select="string-length($id) = string-length(normalize-space($id-safe-special))"/>
       <result>
         <warning>Identifier
           <xsl:call-template name="createid"/>
-          contains capital letters or special characters.
+          contains
+          <xsl:if test="$id-safe-AZ-state = false">
+            capital letters
+          </xsl:if>
+          <xsl:if test="($id-safe-AZ-state = false) and
+                        ($id-safe-special-state = false)">
+            and
+          </xsl:if>
+          <xsl:if test="$id-safe-AZ-state = false">
+            special characters
+          </xsl:if>
+          <xsl:text>.</xsl:text>
         </warning>
-        <suggestion>Use lowercase letters in identifiers.
-        </suggestion>
-        <suggestion>Use only the following special characters in identifiers
-          names: ._-
-        </suggestion>
+        <xsl:if test="$id-safe-AZ-state = false">
+          <suggestion>Use only lowercase letters in identifiers.
+          </suggestion>
+        </xsl:if>
+        <xsl:if test="$id-safe-special-state = false">
+          <suggestion>Use only the following special characters in
+            identifiers: ._-
+          </suggestion>
+        </xsl:if>
       </result>
     </xsl:if>
     <xsl:apply-templates/>

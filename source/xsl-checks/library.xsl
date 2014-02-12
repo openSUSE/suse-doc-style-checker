@@ -106,4 +106,20 @@
       '')"/>
   </xsl:template>
 
+  <xsl:template name="safecharacters-AZ">
+    <!-- The (unfulfilled) aim being to only allow [a-z][0-9]\.-_+ -->
+    <xsl:param name="input" select="no_input"/>
+
+    <xsl:value-of select="translate($input, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '')"/>
+  </xsl:template>
+
+  <xsl:template name="safecharacters-special">
+    <!-- The (unfulfilled) aim being to only allow [a-z][0-9]\.-_+ -->
+    <xsl:param name="input" select="no_input"/>
+
+    <xsl:value-of select="translate($input,
+      '?:;,!@#$%^§&amp;&lt;&gt;äàâãáåæÄÀÂÃÁÆÅçÇðÐèêéëËÉÈÊìîïíÍÏÌÎñÑòôõóöøœŒØÖÓÒÔÕùûüúÚÜÙÛýÿÝß©¢®þÞµ°[]“”{}|()= ',
+      '')"/>
+  </xsl:template>
+
 </xsl:stylesheet>
