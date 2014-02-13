@@ -129,13 +129,6 @@ def termcheck( context, terms, content ):
 
     return messages
 
-    # to correctly interpret previous/next, we need to ignore
-
-    # create terminology warnings here (probably should get the line number
-    # here, too) => send all warnings to xslt which gives it back to main(),
-    # yay, done!
-    # return 0
-
 def main():
 
     ns = etree.FunctionNamespace('https://www.gitorious.org/style-checker/style-checker')
