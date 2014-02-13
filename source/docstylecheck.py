@@ -2,7 +2,10 @@
 # -*- coding: UTF-8 -*-
 
 import sys, os.path, subprocess, webbrowser, glob, re, argparse, time
-from lxml import etree
+try:
+    from lxml import etree
+except ImportError:
+    sys.exit("Could not import from LXML. Is LXML installed?")
 
 __programname__ = "Documentation Style Checker"
 __version__ = "0.1.0pre"
