@@ -54,6 +54,8 @@
     ##@ref##
   </xsl:template>
 
+  <xsl:template match="remark" mode="terminology"/>
+
   <xsl:template match="*" mode="terminology">
     <xsl:apply-templates mode="terminology"/>
   </xsl:template>
