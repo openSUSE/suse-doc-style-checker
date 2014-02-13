@@ -31,7 +31,7 @@
 
 
   <xsl:template match="text()" mode="terminology">
-    <xsl:value-of select="normalize-space(.)"/>
+    <xsl:value-of select="."/>
   </xsl:template>
 
   <xsl:template match="classname|code|command|computeroutput|constant|envar|
