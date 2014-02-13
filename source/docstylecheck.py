@@ -21,7 +21,7 @@ __description__ = "checks a given DocBook XML file for stylistic errors"
 def parseargs():
     parser = argparse.ArgumentParser(
         usage = __file__ + " [options] inputfile [outputfile]",
-        description=__description__ )
+        description = __description__ )
     parser.add_argument('-v', '--version',
         action = 'version',
         version = __programname__ + " " + __version__,
@@ -40,7 +40,7 @@ def parseargs():
         help = """output error messages, but do not output warning or
             information messages""" )
     parser.add_argument( 'inputfile' )
-    parser.add_argument( 'outputfile', nargs="?" )
+    parser.add_argument( 'outputfile', nargs = "?" )
 
     return parser.parse_args()
 
@@ -70,7 +70,7 @@ def termcheck( context, terms, content ):
         # the default one from NLTK.
         words = content[0].split()
         wordposition = 0
-        totalwords = len(words)
+        totalwords = len( words )
 
         for word in words:
             # I was unsure how to use continue to do this. Essentially,
@@ -90,7 +90,7 @@ def termcheck( context, terms, content ):
 
                     for matchgroup in matchgroups:
                         match = matchgroup.xpath( "match[1]" )[0].text
-                        wordmatch = re.match( match, word, flags=re.I )
+                        wordmatch = re.match( match, word, flags = re.I )
                         acceptmatch = None
                         if accept != None:
                             acceptmatch = re.match( accept, word )
@@ -115,7 +115,7 @@ def termcheck( context, terms, content ):
                                     # elif aroundtype == "before":
                                     #     [0] to current-1
                                     if not( aroundposition < 0 and aroundposition > ( totalwords - 1 ) ):
-                                        aroundmatch = re.match( around, words[aroundposition], flags=re.I )
+                                        aroundmatch = re.match( around, words[aroundposition], flags = re.I )
                                         if aroundmatch != None:
                                             aroundmatches.append( aroundmatch )
 
@@ -166,9 +166,9 @@ def main():
 
     # Checking via XSLT
 
-    parser = etree.XMLParser(   ns_clean=True,
-                                remove_pis=False,
-                                dtd_validation=False )
+    parser = etree.XMLParser(   ns_clean = True,
+                                remove_pis = False,
+                                dtd_validation = False )
     inputfile = etree.parse( args.inputfile, parser )
 
     for checkfile in glob.glob( os.path.join(   location,
@@ -199,12 +199,12 @@ def main():
 
 
     output.getroottree().write( resultfile,
-                                xml_declaration=True,
-                                encoding="UTF-8",
-                                pretty_print=True )
+                                xml_declaration = True,
+                                encoding = "UTF-8",
+                                pretty_print = True )
 
     if args.show == True:
-        webbrowser.open( resultfile, new=0 , autoraise=True )
+        webbrowser.open( resultfile, new = 0 , autoraise = True )
 
     printcolor( resultfile )
 
