@@ -1,0 +1,26 @@
+<!-- DTD to validate the the documentation style checker's terminology
+     check's terminology file.
+-->
+<!--  To validate, do
+        $ xmllint ––dtdvalid [PATH TO THIS DTD] [PATH TO TERMINOLOGY FILE]
+      (do not copy the command from here: for technical reasons, in it,
+      hyphens needed to be replaced with dashes.)
+-->
+
+<!ELEMENT terminology (term+)>
+<!ATTLIST terminology type      (previous|next|before|after)    #REQUIRED >
+
+<!ELEMENT term        (advice?, accept, matchgroup+) >
+  <!-- In the future, make sure there always is an advice. Format of
+       advice still needs to be defined. Allow inline elements from
+       results?
+  -->
+
+<!ELEMENT accept      (#PCDATA) >
+
+<!ELEMENT matchgroup  (match, around*) >
+
+<!ELEMENT match       (#PCDATA) >
+
+<!ELEMENT around      (#PCDATA) >
+<!ATTLIST around      id        #CDATA                          #REQUIRED >

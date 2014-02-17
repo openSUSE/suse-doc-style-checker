@@ -1,0 +1,41 @@
+<!--  DTD to validate the documentation style checker's result file. -->
+<!--  To validate, do
+        $ xmllint ––dtdvalid [PATH TO THIS DTD] [PATH TO RESULT FILE]
+      (do not copy the command from here: for technical reasons, in it,
+      hyphens needed to be replaced with dashes.)
+-->
+
+<!ENTITY % generalinlines "em | tag | quote" >
+<!ENTITY % messageinlines "id | name | place | %generalinlines;" >
+  <!--  FIXME: We actually never want more than a single name, id, or place
+        inside any error, warning, or info element.
+  -->
+
+<!ELEMENT results       (results-title, (result? | part*))>
+
+
+<!ELEMENT results-title (#PCDATA) >
+<!ELEMENT part          (part-title, result+) >
+
+
+<!ELEMENT part-title    (#PCDATA) >
+<!ELEMENT result        ((error | warning | info), suggestion*) >
+
+<!ELEMENT error         (#PCDATA | %messageinlines;)* >
+<!ELEMENT warning       (#PCDATA | %messageinlines;)* >
+<!ELEMENT info          (#PCDATA | %messageinlines;)* >
+
+<!ELEMENT suggestion    (#PCDATA | %generalinlines;)* >
+  <!--  FIXME: The asterisks after error, warning, info, and suggestion should
+        actually be plus signs. That makes the DTD invalid, though.
+  -->
+
+<!ELEMENT name          (#PCDATA) >
+<!ELEMENT id            (#PCDATA) >
+<!ELEMENT tag           (#PCDATA) >
+<!ELEMENT em            (#PCDATA) >
+<!ELEMENT quote         (#PCDATA) >
+<!ELEMENT withinid      (#PCDATA) >
+<!ELEMENT line          (#PCDATA) >
+
+<!ELEMENT place       (withinid?, line?) >
