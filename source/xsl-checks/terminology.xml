@@ -24,7 +24,7 @@
     <accept type="verb">activate</accept>
     <matchgroup>
       <match>((block|check|highlight|tick)(ing|ed|s)|ch[o]?os(e[s]?|ing|n))</match>
-      <around type="after">((check|tick|option|box)[e]?[s]?|##@ui##)</around>
+      <context type="after">((check|tick|option|box)[e]?[s]?|##@ui##)</context>
     </matchgroup>
   </term> -->
   <term>
@@ -34,7 +34,7 @@
     </matchgroup>
     <matchgroup>
       <match>add</match>
-      <around type="next">ons?</around>
+      <context type="next">ons?</context>
     </matchgroup>
   </term>
   <term>
@@ -47,7 +47,7 @@
     <accept>[Aa]dvice$</accept>
     <matchgroup>
       <match>advise</match>
-      <around type="previous">(an|the)</around>
+      <context type="previous">(an|the)</context>
     </matchgroup>
   </term>
   <term>
@@ -63,14 +63,14 @@
     </matchgroup>
     <matchgroup>
       <match>advice</match>
-      <around type="previous">(we|suse|novell|attachmate|[\-a-z]*?ly)</around>
+      <context type="previous">(we|suse|novell|attachmate|[\-a-z]*?ly)</context>
     </matchgroup>
   </term>
   <term>
     <accept>[Aa]fter</accept>
     <matchgroup>
       <match>once</match>
-      <around type="next">(the|a|an|it|they)</around>
+      <context type="next">(the|a|an|it|they)</context>
     </matchgroup>
   </term>
   <!-- <row>
@@ -121,23 +121,23 @@
     </matchgroup>
     <matchgroup>
       <match>back-?up</match>
-      <around type="previous">(when|to)</around>
+      <context type="previous">(when|to)</context>
     </matchgroup>
     <matchgroup>
       <match>back-?up</match>
-      <around type="next">(them|these|this|it|the|a|an)</around>
+      <context type="next">(them|these|this|it|the|a|an)</context>
     </matchgroup>
   </term>
   <term>
     <accept>backup</accept>
     <matchgroup>
       <match>back-ups?</match>
-      <around type="previous">(the|a|local|remote|system|full|partial|automatic|manual)</around>
+      <context type="previous">(the|a|local|remote|system|full|partial|automatic|manual)</context>
     </matchgroup>
     <matchgroup>
       <match>back</match>
-      <around type="next">ups?</around>
-      <around type="previous">(the|a|local|remote|system|full|partial|automatic|manual)</around>
+      <context type="next">ups?</context>
+      <context type="previous">(the|a|local|remote|system|full|partial|automatic|manual)</context>
     </matchgroup>
   </term>
   <term>
@@ -156,7 +156,7 @@
     <accept>because of</accept>
     <matchgroup>
       <match>(due|owing)$</match>
-      <around type="next">to$</around>
+      <context type="next">to$</context>
     </matchgroup>
   </term>
   <term>
@@ -175,12 +175,12 @@
     <accept>boot (using|via) PXE</accept>
     <matchgroup>
       <match>PXE</match>
-      <around type="next">boot(ing|ed)</around>
+      <context type="next">boot(ing|ed)</context>
     </matchgroup>
     <matchgroup>
       <match>PXE</match>
-      <around type="next">boot</around>
-      <around type="previous">(to|not)</around>
+      <context type="next">boot</context>
+      <context type="previous">(to|not)</context>
     </matchgroup>
   </term>
   <term>
@@ -190,7 +190,7 @@
     </matchgroup>
     <matchgroup>
       <match>b[eu]tter</match>
-      <around type="next">fs</around> <!-- Check for written-out file system, too? -->
+      <context type="next">fs</context> <!-- Check for written-out file system, too? -->
     </matchgroup>
     <matchgroup>
       <match>b\.?t\.?r\.?f\.?s\.?</match>
@@ -201,7 +201,7 @@
     <accept>but</accept>
     <matchgroup>
       <match>while</match>
-      <around type="next">(the|a|##@ui##|##@mono##|##@key##)</around>
+      <context type="next">(the|a|##@ui##|##@mono##|##@key##)</context>
     </matchgroup>
   </term> -->
   <!-- <term>
@@ -211,7 +211,7 @@
     </matchgroup>
     <matchgroup>
       <match>can</match>
-      <around type="next">not</around>
+      <context type="next">not</context>
     </matchgroup>
   </term> -->
   <term>
@@ -246,7 +246,7 @@
     </matchgroup>
     <matchgroup>
       <match>case</match>
-      <around type="next">sensitive</around>
+      <context type="next">sensitive</context>
     </matchgroup>
   </term>
     <term>
@@ -256,7 +256,7 @@
     </matchgroup>
     <matchgroup>
       <match>case</match>
-      <around type="next">insensitive</around>
+      <context type="next">insensitive</context>
     </matchgroup>
   </term>
   <!-- Not sure how to match for this the right way: only permission-related -->
@@ -270,7 +270,7 @@
     <accept>certificate authorit(y|ies)</accept>
     <matchgroup>
       <match>certific(at(ion|ing)|ied)</match>
-      <around type="next">authorit(y|ies)</around>
+      <context type="next">authorit(y|ies)</context>
     </matchgroup>
   </term>
   <term>
@@ -280,7 +280,7 @@
     </matchgroup>
     <matchgroup>
       <match>tick</match>
-      <around type="next">box(es)?</around>
+      <context type="next">box(es)?</context>
     </matchgroup>
   </term>
   <term>
@@ -290,7 +290,7 @@
     </matchgroup>
     <matchgroup>
       <match>(check|tick)</match>
-      <around type="next">lists?</around>
+      <context type="next">lists?</context>
     </matchgroup>
   </term>
   <term>
@@ -300,7 +300,7 @@
     </matchgroup>
     <matchgroup>
       <match>tick</match>
-      <around type="next">marks?</around>
+      <context type="next">marks?</context>
     </matchgroup>
   </term>
   <term>
@@ -310,14 +310,14 @@
     </matchgroup>
     <matchgroup>
       <match>chip</match>
-      <around type="next">sets?</around>
+      <context type="next">sets?</context>
     </matchgroup>
   </term>
   <term>
     <accept>click(ed|ing|s)</accept>
     <matchgroup>
       <match>click(ed|ing|s)</match>
-      <around type="next">on(to)?</around>
+      <context type="next">on(to)?</context>
     </matchgroup>
   </term>
   <term>
@@ -327,7 +327,7 @@
     </matchgroup>
     <matchgroup>
       <match>client</match>
-      <around type="next">server</around>
+      <context type="next">server</context>
     </matchgroup>
   </term>
   <!-- This might be too generic. -->
@@ -371,7 +371,7 @@
     </matchgroup>
     <matchgroup>
       <match>control</match>
-      <around type="next">centers?</around>
+      <context type="next">centers?</context>
     </matchgroup>
   </term>
   <!-- <term>

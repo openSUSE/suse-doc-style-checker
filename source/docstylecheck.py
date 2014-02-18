@@ -27,7 +27,7 @@ args = None
 termdataid = None
 acceptpatterns = []
 matchpatterns = []      # per acceptpattern, add list of matchpatterns
-aroundpatterns = []     # per matchpattern, add list of aroundpatterns
+contextpatterns = []     # per matchpattern, add list of contextpatterns
 
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
@@ -85,7 +85,7 @@ def termcheck( context, termfileid, terms, content ):
         global termdataid
         global acceptpatterns
         global matchpatterns
-        global aroundpatterns
+        global contextpatterns
 
         # FIXME: Get something better than s.split. It is actually quite
         # important to get (most) sentence boundaries in the future. Some
@@ -128,39 +128,39 @@ def termcheck( context, termfileid, terms, content ):
                     for matchgrouppattern in matchgroupstoacceptpattern:
                         matchword = matchgrouppattern.match( word )
 
-                        aroundwords = []
-                        aroundstomatchgroup = aroundpatterns[ matchgroupposition ]
+                        contextwords = []
+                        contextstomatchgroup = contextpatterns[ matchgroupposition ]
                         if matchword:
-                            if acceptpattern and not aroundstomatchgroup[0]:
+                            if acceptpattern and not contextstomatchgroup[0]:
                                 acceptword = acceptpattern.match( word )
                                 if acceptword:
                                     # matches accept pattern and there are no
-                                    # around conditions => false positive
+                                    # context conditions => false positive
                                     continue
-                            if not aroundstomatchgroup[0]:
+                            if not contextstomatchgroup[0]:
                                 trynextterm = False
                                 # easy positive
                                 line = linenumber ( context )
                                 messages.append( termcheckmessage( acceptpattern, word, line, content[0] ) )
                             else:
-                                for aroundpattern in aroundstomatchgroup:
-                                    if aroundpattern[0]:
-                                        aroundtype = aroundpattern[1]
-                                        aroundposition = wordposition
+                                for contextpattern in contextstomatchgroup:
+                                    if contextpattern[0]:
+                                        contexttype = contextpattern[1]
+                                        contextposition = wordposition
 
                                         # FIXME: after & before need to be handled
-                                        if aroundtype == "previous":
-                                            aroundposition -= 1
-                                        elif aroundtype == "next":
-                                            aroundposition += 1
+                                        if contexttype == "previous":
+                                            contextposition -= 1
+                                        elif contexttype == "next":
+                                            contextposition += 1
 
-                                        if ( aroundposition < 0 or aroundposition > ( totalwords - 1 ) ):
+                                        if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
                                             continue
                                         else:
-                                            aroundword = aroundpattern[0].match( words[ aroundposition ] )
-                                            if aroundword != None:
-                                                aroundwords.append( aroundword )
-                                        if ( len( aroundstomatchgroup ) == len( aroundwords )):
+                                            contextword = contextpattern[0].match( words[ contextposition ] )
+                                            if contextword != None:
+                                                contextwords.append( contextword )
+                                        if ( len( contextstomatchgroup ) == len( contextwords )):
                                             line = linenumber ( context )
                                             message = termcheckmessage( acceptpattern, word, line, content[0] )
                                             messages.append( message )
@@ -189,7 +189,7 @@ def buildtermdata( termfileid, terms ):
     global termdataid
     global acceptpatterns
     global matchpatterns
-    global aroundpatterns
+    global contextpatterns
 
     termdataid = termfileid
 
@@ -210,18 +210,18 @@ def buildtermdata( termfileid, terms ):
                 matchgroupxpath.xpath( "match[1]" )[0].text, flags = re.I )
             matchpatternsofterm.append( matchpattern )
 
-            aroundpatternsofmatchgroup = []
-            aroundxpaths = matchgroupxpath.xpath( "around" )
-            if aroundxpaths:
-                for aroundxpath in aroundxpaths:
-                    aroundpattern = re.compile(
-                        aroundxpath.text, flags = re.I )
-                    aroundtype = aroundxpath.xpath( "@type" )[0]
-                    aroundpatternsofmatchgroup.append(
-                        [ aroundpattern, aroundtype ] )
+            contextpatternsofmatchgroup = []
+            contextxpaths = matchgroupxpath.xpath( "context" )
+            if contextxpaths:
+                for contextxpath in contextxpaths:
+                    contextpattern = re.compile(
+                        contextxpath.text, flags = re.I )
+                    contexttype = contextxpath.xpath( "@type" )[0]
+                    contextpatternsofmatchgroup.append(
+                        [ contextpattern, contexttype ] )
             else:
-                aroundpatternsofmatchgroup.append( [ None ] )
-            aroundpatterns.append( aroundpatternsofmatchgroup )
+                contextpatternsofmatchgroup.append( [ None ] )
+            contextpatterns.append( contextpatternsofmatchgroup )
 
         matchpatterns.append( matchpatternsofterm )
 

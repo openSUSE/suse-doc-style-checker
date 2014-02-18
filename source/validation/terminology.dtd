@@ -18,9 +18,9 @@
 
 <!ELEMENT accept      (#PCDATA) >
 
-<!ELEMENT matchgroup  (match, around*) >
+<!ELEMENT matchgroup  (match, context*) >
 
 <!ELEMENT match       (#PCDATA) >
 
-<!ELEMENT around      (#PCDATA) >
-<!ATTLIST around      id        #CDATA                          #REQUIRED >
+<!ELEMENT context      (#PCDATA) >
+<!ATTLIST context      id        #CDATA                          #REQUIRED >
