@@ -13,7 +13,7 @@ import webbrowser
 try:
     from lxml import etree
 except ImportError:
-    sys.exit("Could not import from LXML. Is LXML installed?")
+    sys.exit("Could not import from LXML. Is LXML for Python 3 installed?")
 
 __programname__ = "Documentation Style Checker"
 __version__ = "0.1.0pre"
