@@ -57,80 +57,137 @@ def linenumber( context ):
     return context.context_node.sourceline
 
 
-# So slow. Like Dogecoin mine. Need much improve.
-def termcheck( context, terms, content ):
-    # modes: para, title?
-
-    messages = [] # Do I actually need this? Probably, I want to return it.
+# FIXME: So slow. Like Dogecoin mine. Need much improve.
+def termcheck( context, fileid, terms, content ):
+    # FIXME: Modes: para, title?
+    # FIXME: Use fileid to skip creation of data structures
+    messages = []
 
     if content:
-        # .split() (or better, but s.split will suffice for the moment.
-        # However, it is actually quite important to get sentence boundaries
-        # in the future. Some existing tokenisers are overzealous, such as
-        # the default one from NLTK.
+        # FIXME: Get something better than s.split. It is actually quite
+        # important to get (most) sentence boundaries in the future. Some
+        # existing tokenisers are overzealous, such as the default one from
+        # NLTK.
         words = content[0].split()
         wordposition = 0
         totalwords = len( words )
 
+        # build data structures
+        acceptpatterns = []
+        matchpatterns = []      # per acceptpattern, add list of matchpatterns
+        aroundpatterns = []     # per matchpattern, add list of aroundpatterns
+
+        for term in terms:
+
+            acceptxpath = term.xpath( "accept[1]" )
+            if acceptxpath[0].text:
+                acceptpattern = re.compile( acceptxpath[0].text )
+                acceptpatterns.append( acceptpattern )
+            else:
+                acceptpatterns.append( None )
+
+            matchpatternsofterm = []
+            matchgroupxpaths = term.xpath( "matchgroup" )
+            for matchgroupxpath in matchgroupxpaths:
+                # FIXME: what to do if the match element does not contain text?
+                # do a sys.exit(1)?
+                matchpattern = re.compile(
+                    matchgroupxpath.xpath( "match[1]" )[0].text, flags = re.I )
+                matchpatternsofterm.append( matchpattern )
+
+                aroundpatternsofmatchgroup = []
+                aroundxpaths = matchgroupxpath.xpath( "around" )
+                if aroundxpaths:
+                    for aroundxpath in aroundxpaths:
+                        aroundpattern = re.compile(
+                            aroundxpath.text, flags = re.I )
+                        aroundtype = aroundxpath.xpath( "@type" )[0]
+                        aroundpatternsofmatchgroup.append(
+                            [ aroundpattern, aroundtype ] )
+                else:
+                    aroundpatternsofmatchgroup.append( [ None ] )
+                aroundpatterns.append( aroundpatternsofmatchgroup )
+
+            matchpatterns.append( matchpatternsofterm )
+
         for word in words:
-            # I was unsure how to use continue to do this. Essentially,
+            # When a pattern already matches on a word, don't try to find more
+            # problems with it. (Is that a sane approach? Maybe there are other
+            # problems...)
+            # FIXME: I was unsure how to use continue to do this. Essentially,
             # depending on a wordmatch appearing, I need to skip up two
             # loops. :/
             trynextterm = True
 
-            # Read in terminology.xml, match all patterns over everything. A
-            # simple optimisation should be to first get the first letter o
-            # the word, then apply everything that starts with that letter.
-            for term in terms:
+            # Use the *patterns variables defined above to match all patterns
+            # over everything.
+            # FIXME: An optimisation should be to first get the first letter of
+            # the word, then apply all patterns that starts with that letter.
+            # However, the the information which letter any pattern belongs to
+            # must probably be built by hand.
+            acceptposition = 0
+            matchgroupposition = 0
+            for acceptpattern in acceptpatterns:
                 if trynextterm == True:
-                    accept = None
-                    if term.xpath( "accept[1]" )[0].text:
-                        accept = term.xpath( "accept[1]" )[0].text
-                    matchgroups = term.xpath( "matchgroup[1]" )
 
-                    for matchgroup in matchgroups:
-                        match = matchgroup.xpath( "match[1]" )[0].text
-                        wordmatch = re.match( match, word, flags = re.I )
-                        acceptmatch = None
-                        if accept != None:
-                            acceptmatch = re.match( accept, word )
+                    matchgroupstoacceptpattern = matchpatterns[ acceptposition ]
+                    for matchgrouppattern in matchgroupstoacceptpattern:
+                        matchword = matchgrouppattern.match( word )
 
-                        # Is this either a negative or false positive? Then save some effort.
-                        if wordmatch != None and (acceptmatch == None or accept == None):
-                            arounds = [] # Do I actually need this?
-                            aroundmatches = []
-                            if matchgroup.xpath( "around[1]" ):
-                                arounds = matchgroup.xpath( "around" )
-                                for around in arounds:
-                                    around = matchgroup.xpath( "around[1]" )[0].text
-                                    aroundtype = matchgroup.xpath( "around[1]/@type" )[0]
-                                    aroundposition = wordposition
-                                    # FIXME: after & before need to be handled separately
-                                    if aroundtype == "next" or aroundtype == "after":
-                                        aroundposition += 1
-                                    elif aroundtype == "previous" or aroundtype == "before":
-                                        aroundposition -= 1
-                                    # elif aroundtype == "after":
-                                    #     current+1 to [-1]
-                                    # elif aroundtype == "before":
-                                    #     [0] to current-1
-                                    if not( aroundposition < 0 and aroundposition > ( totalwords - 1 ) ):
-                                        aroundmatch = re.match( around, words[aroundposition], flags = re.I )
-                                        if aroundmatch != None:
-                                            aroundmatches.append( aroundmatch )
-
-                            if ( len( arounds ) == len( aroundmatches )):
-                                line = linenumber ( context )
-                                # FIXME: shorten content string
-                                if accept != None:
-                                    messages.append( etree.XML( "<result><error>Use %s instead of %s <place><line>%s</line></place>: <quote>%s</quote></error></result>" % ( accept, word, line, content[0] ) ) )
-                                else:
-                                    messages.append( etree.XML( "<result><error>Do not use %s <place><line>%s</line></place>: <quote>%s</quote></error></result>" % ( word, line, content[0] ) ) )
+                        aroundwords = []
+                        aroundstomatchgroup = aroundpatterns[ matchgroupposition ]
+                        if matchword:
+                            if acceptpattern and not aroundstomatchgroup[0]:
+                                acceptword = acceptpattern.match( word )
+                                if acceptword:
+                                    # matches accept pattern and there are no
+                                    # around conditions => false positive
+                                    continue
+                            if not aroundstomatchgroup[0]:
                                 trynextterm = False
+                                # easy positive
+                                line = linenumber ( context )
+                                messages.append( termcheckmessage( acceptpattern, word, line, content[0] ) )
+                            else:
+                                for aroundpattern in aroundstomatchgroup:
+                                    if aroundpattern[0]:
+                                        aroundtype = aroundpattern[1]
+                                        aroundposition = wordposition
+
+                                        # FIXME: after & before need to be handled
+                                        if aroundtype == "previous":
+                                            aroundposition -= 1
+                                        elif aroundtype == "next":
+                                            aroundposition += 1
+
+                                        if ( aroundposition < 0 or aroundposition > ( totalwords - 1 ) ):
+                                            continue
+                                        else:
+                                            aroundword = aroundpattern[0].match( words[ aroundposition ] )
+                                            if aroundword != None:
+                                                aroundwords.append( aroundword )
+                                        if ( len( aroundstomatchgroup ) == len( aroundwords )):
+                                            line = linenumber ( context )
+                                            message = termcheckmessage( acceptpattern, word, line, content[0] )
+                                            messages.append( message )
+                                        trynextterm = False
+
+                        matchgroupposition += 1
+                acceptposition += 1
+
             wordposition += 1
 
-
     return messages
+
+def termcheckmessage( acceptpattern, word, line, content ):
+    # FIXME: shorten content string
+    message = None
+    if acceptpattern:
+        message = etree.XML( "<result><error>Use %s instead of %s <place><line>%s</line></place>: <quote>%s</quote></error></result>" % ( acceptpattern.pattern, word, line, content ) )
+    else:
+        message = etree.XML( "<result><error>Do not use %s <place><line>%s</line></place>: <quote>%s</quote></error></result>" % ( word, line, content ) )
+    return message
+
 
 def main():
 
