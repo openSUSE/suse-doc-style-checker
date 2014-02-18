@@ -1,4 +1,6 @@
-<terminology>
+<?xml version="1.0" encoding="UTF-8"?>
+<terminology id="terms1">
+<!-- Make sure to change the id when creating a new terminology file. -->
 <!-- before/after: within sentence, previous/next: immediate -->
   <term>
     <accept>32-bit</accept>
@@ -18,7 +20,7 @@
       <match>64[\.\- _]?bit</match>
     </matchgroup>
   </term>
-<!--   <term>
+  <!-- <term>
     <accept type="verb">activate</accept>
     <matchgroup>
       <match>((block|check|highlight|tick)(ing|ed|s)|ch[o]?os(e[s]?|ing|n))</match>
@@ -71,14 +73,14 @@
       <around type="next">(the|a|an|it|they)</around>
     </matchgroup>
   </term>
-<!--   <row>
+  <!-- <row>
     <entry>although</entry>
     <entry>while</entry>
     <entry>conjunction; only use <emphasis>while</emphasis> in the
       meaning of <quote>during the time that</quote>
     </entry>
   </row> -->
-<!--   <row>
+  <!-- <row>
     <entry>and</entry>
     <entry>while</entry>
     <entry>conjunction; only use <emphasis>while</emphasis> in the
@@ -86,9 +88,9 @@
     </entry>
   </row> -->
   <term>
-    <accept>[Aa]ppendixes</accept>
+    <accept>[Aa]ppendixes$</accept>
     <matchgroup>
-      <match>appendices</match>
+      <match>appendices$</match>
     </matchgroup>
   </term>
   <term>
@@ -104,13 +106,13 @@
     </matchgroup>
   </term>
   <term>
-    <accept>[Bb]ack-end</accept>
+    <accept>[Bb]ack-ends?$</accept>
     <matchgroup>
-      <match>backend</match>
+      <match>backends?$</match>
     </matchgroup>
   </term>
   <term>
-    <accept type="verb">[Bb]ack(ed|s|ing)? up</accept>
+    <accept>[Bb]ack(ed|s|ing)? up</accept>
     <matchgroup>
       <match>back(ed|s|ing)-?up</match>
     </matchgroup>
@@ -139,15 +141,245 @@
     </matchgroup>
   </term>
   <term>
-    <accept>Bash</accept>
+    <accept>Bash$</accept>
     <matchgroup>
-      <match>bash</match>
+      <match>bash$</match>
     </matchgroup>
   </term>
   <term>
     <accept/>
     <matchgroup>
-      <match>basically</match>
+      <match>basically$</match>
     </matchgroup>
   </term>
+  <term>
+    <accept>because of</accept>
+    <matchgroup>
+      <match>(due|owing)$</match>
+      <around type="next">to$</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>boot disks?</accept>
+    <matchgroup>
+      <match>boot-?disks?</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>boot loader</accept>
+    <matchgroup>
+      <match>boot-?loaders?</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>boot (using|via) PXE</accept>
+    <matchgroup>
+      <match>PXE</match>
+      <around type="next">boot(ing|ed)</around>
+    </matchgroup>
+    <matchgroup>
+      <match>PXE</match>
+      <around type="next">boot</around>
+      <around type="previous">(to|not)</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>Btrfs</accept>
+    <matchgroup>
+      <match>b[eu]tterfs</match>
+    </matchgroup>
+    <matchgroup>
+      <match>b[eu]tter</match>
+      <around type="next">fs</around> <!-- Check for written-out file system, too? -->
+    </matchgroup>
+    <matchgroup>
+      <match>b\.?t\.?r\.?f\.?s\.?</match>
+    </matchgroup>
+  </term>
+  <!-- Not sure how to check for this the right way. -->
+  <!-- <term>
+    <accept>but</accept>
+    <matchgroup>
+      <match>while</match>
+      <around type="next">(the|a|##@ui##|##@mono##|##@key##)</around>
+    </matchgroup>
+  </term> -->
+  <!-- <term>
+    <accept>cannot</accept>
+    <matchgroup>
+      <match>can['ʼ]t</match>
+    </matchgroup>
+    <matchgroup>
+      <match>can</match>
+      <around type="next">not</around>
+    </matchgroup>
+  </term> -->
+  <term>
+    <accept>CA</accept>
+    <matchgroup>
+      <match>c\.?a\.?</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>CD</accept>
+    <matchgroup>
+      <match>c\.?d\.?</match>
+    </matchgroup>
+  </term>
+  <!-- Should probably be ordered before CD... -->
+  <term>
+    <accept>CD-ROM</accept>
+    <matchgroup>
+      <match>c\.?d\.?-?r\.?o\.?m\.?</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>CUPS</accept>
+    <matchgroup>
+      <match>c\.?u\.?p\.?s\.?</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>case-sensitive</accept>
+    <matchgroup>
+      <match>casesensitive</match>
+    </matchgroup>
+    <matchgroup>
+      <match>case</match>
+      <around type="next">sensitive</around>
+    </matchgroup>
+  </term>
+    <term>
+    <accept>case-insensitive</accept>
+    <matchgroup>
+      <match>caseinsensitive</match>
+    </matchgroup>
+    <matchgroup>
+      <match>case</match>
+      <around type="next">insensitive</around>
+    </matchgroup>
+  </term>
+  <!-- Not sure how to match for this the right way: only permission-related -->
+  <!-- <term>
+    <accept>can</accept>
+    <matchgroup>
+      <match>may</match>
+    </matchgroup>
+  </term> -->
+  <term>
+    <accept>certificate authorit(y|ies)</accept>
+    <matchgroup>
+      <match>certific(at(ion|ing)|ied)</match>
+      <around type="next">authorit(y|ies)</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>check box(es)</accept>
+    <matchgroup>
+      <match>(check|tick)-?box(es)?</match>
+    </matchgroup>
+    <matchgroup>
+      <match>tick</match>
+      <around type="next">box(es)?</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>checklists?</accept>
+    <matchgroup>
+      <match>(check|tick)-?lists?</match>
+    </matchgroup>
+    <matchgroup>
+      <match>(check|tick)</match>
+      <around type="next">lists?</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>check marks?</accept>
+    <matchgroup>
+      <match>(check|tick)-?marks?</match>
+    </matchgroup>
+    <matchgroup>
+      <match>tick</match>
+      <around type="next">marks?</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>chipsets?</accept>
+    <matchgroup>
+      <match>chip-sets?</match>
+    </matchgroup>
+    <matchgroup>
+      <match>chip</match>
+      <around type="next">sets?</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>click(ed|ing|s)</accept>
+    <matchgroup>
+      <match>click(ed|ing|s)</match>
+      <around type="next">on(to)?</around>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>client/server</accept>
+    <matchgroup>
+      <match>client[-–+]?server</match>
+    </matchgroup>
+    <matchgroup>
+      <match>client</match>
+      <around type="next">server</around>
+    </matchgroup>
+  </term>
+  <!-- This might be too generic. -->
+  <term>
+    <accept>clos(ed|es|ing)?</accept>
+    <matchgroup>
+      <match>((abort|exit)(ed|ing|s)?|terminat(ed?|es|ing))</match>
+    </matchgroup>
+  </term>
+  <!-- Can't check with current tools. -->
+  <!-- <term>
+    <accept>Common Unix Printing System</accept>
+    <entry>Common UNIX Printing System, common Unix printing system
+    </entry>
+    <entry>noun; spelling as per project standard; acronym is
+      <emphasis>CUPS</emphasis>
+    </entry>
+  </term> -->
+  <term>
+    <accept>command lines?</accept>
+    <matchgroup>
+      <match>command-?lines?</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>computers?</accept>
+    <matchgroup>
+      <match>(machine|system)s?</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>[Cc]onfigur(e?d|ing|s|ation)</accept>
+    <matchgroup>
+      <match>config(ed|ing|s)?</match>
+    </matchgroup>
+  </term>
+  <term>
+    <accept>[Cc]ontrol centers?</accept>
+    <matchgroup>
+      <match>control-?centers?</match>
+    </matchgroup>
+    <matchgroup>
+      <match>control</match>
+      <around type="next">centers?</around>
+    </matchgroup>
+  </term>
+  <!-- <term>
+    <accept>could</accept>
+    <entry>may</entry>
+    <entry>verb; use <emphasis>could</emphasis> to express a
+      possibility, only use <emphasis>may</emphasis> to express
+      permissions sought/given
+    </entry>
+  </term> -->
 </terminology>
