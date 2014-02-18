@@ -8,6 +8,7 @@ import re
 import subprocess
 import sys
 import time
+import argparse
 import webbrowser
 try:
     from lxml import etree
@@ -20,6 +21,7 @@ __author__ = "Stefan Knorr"
 __license__ = "MIT"
 __description__ = "checks a given DocBook XML file for stylistic errors"
 
+args = None
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
 # (self-explanatory anyway). Get rid of "optional arguments" header. Make sure
@@ -46,6 +48,10 @@ def parseargs():
         default = False,
         help = """output error messages, but do not output warning or
             information messages""" )
+    parser.add_argument( '--performance',
+        action = 'store_true',
+        default = False,
+        help = """write some performance measurements to stdout""" )
     parser.add_argument( 'inputfile' )
     parser.add_argument( 'outputfile', nargs = "?" )
 
@@ -78,6 +84,9 @@ def termcheck( context, fileid, terms, content ):
         words = content[0].split()
         wordposition = 0
         totalwords = len( words )
+
+        if args.performance:
+            timestartbuild = time.time()
 
         # build data structures
         acceptpatterns = []
@@ -116,6 +125,9 @@ def termcheck( context, fileid, terms, content ):
                 aroundpatterns.append( aroundpatternsofmatchgroup )
 
             matchpatterns.append( matchpatternsofterm )
+
+        if args.performance:
+            timestartmatch = time.time()
 
         for word in words:
             # When a pattern already matches on a word, don't try to find more
@@ -184,6 +196,17 @@ def termcheck( context, fileid, terms, content ):
 
             wordposition += 1
 
+        if args.performance:
+            timeend = time.time()
+            timediffbuild = timestartmatch - timestartbuild
+            timediffmatch = timeend - timestartmatch
+            timedifftotal = timeend - timestartbuild
+            print( "words: %s\ntime (total): %s\nto build: %s (%s %%)\nper word: %s"
+                % ( str( totalwords ), str( timedifftotal ),
+                    str( timediffbuild ),
+                    str( timediffbuild / timedifftotal * 100 ),
+                    str( timediffmatch / (totalwords + .01 ) ) ) )
+
     return messages
 
 def termcheckmessage( acceptpattern, word, line, content ):
@@ -205,6 +228,7 @@ def main():
 
     location = os.path.dirname( os.path.realpath( __file__ ) )
 
+    global args
     args = parseargs()
 
     if args.outputfile:
