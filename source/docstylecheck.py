@@ -1,7 +1,14 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
-import sys, os.path, subprocess, webbrowser, glob, re, argparse, time
+import argparse
+import glob
+import os.path
+import re
+import subprocess
+import sys
+import time
+import webbrowser
 try:
     from lxml import etree
 except ImportError:
