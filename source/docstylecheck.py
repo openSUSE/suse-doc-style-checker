@@ -21,7 +21,14 @@ __author__ = "Stefan Knorr"
 __license__ = "MIT"
 __description__ = "checks a given DocBook XML file for stylistic errors"
 
+# global variables
 args = None
+# terminology data structures
+termdataid = None
+acceptpatterns = []
+matchpatterns = []      # per acceptpattern, add list of matchpatterns
+aroundpatterns = []     # per matchpattern, add list of aroundpatterns
+
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
 # (self-explanatory anyway). Get rid of "optional arguments" header. Make sure
@@ -69,14 +76,17 @@ def printcolor( message, type = None ):
 def linenumber( context ):
     return context.context_node.sourceline
 
-
-# FIXME: So slow. Like Dogecoin mine. Need much improve.
-def termcheck( context, fileid, terms, content ):
+def termcheck( context, termfileid, terms, content ):
     # FIXME: Modes: para, title?
     # FIXME: Use fileid to skip creation of data structures
     messages = []
 
     if content:
+        global termdataid
+        global acceptpatterns
+        global matchpatterns
+        global aroundpatterns
+
         # FIXME: Get something better than s.split. It is actually quite
         # important to get (most) sentence boundaries in the future. Some
         # existing tokenisers are overzealous, such as the default one from
@@ -88,43 +98,8 @@ def termcheck( context, fileid, terms, content ):
         if args.performance:
             timestartbuild = time.time()
 
-        # build data structures
-        acceptpatterns = []
-        matchpatterns = []      # per acceptpattern, add list of matchpatterns
-        aroundpatterns = []     # per matchpattern, add list of aroundpatterns
-
-        for term in terms:
-
-            acceptxpath = term.xpath( "accept[1]" )
-            if acceptxpath[0].text:
-                acceptpattern = re.compile( acceptxpath[0].text )
-                acceptpatterns.append( acceptpattern )
-            else:
-                acceptpatterns.append( None )
-
-            matchpatternsofterm = []
-            matchgroupxpaths = term.xpath( "matchgroup" )
-            for matchgroupxpath in matchgroupxpaths:
-                # FIXME: what to do if the match element does not contain text?
-                # do a sys.exit(1)?
-                matchpattern = re.compile(
-                    matchgroupxpath.xpath( "match[1]" )[0].text, flags = re.I )
-                matchpatternsofterm.append( matchpattern )
-
-                aroundpatternsofmatchgroup = []
-                aroundxpaths = matchgroupxpath.xpath( "around" )
-                if aroundxpaths:
-                    for aroundxpath in aroundxpaths:
-                        aroundpattern = re.compile(
-                            aroundxpath.text, flags = re.I )
-                        aroundtype = aroundxpath.xpath( "@type" )[0]
-                        aroundpatternsofmatchgroup.append(
-                            [ aroundpattern, aroundtype ] )
-                else:
-                    aroundpatternsofmatchgroup.append( [ None ] )
-                aroundpatterns.append( aroundpatternsofmatchgroup )
-
-            matchpatterns.append( matchpatternsofterm )
+        if not termfileid == termdataid:
+            buildtermdata( termfileid, terms )
 
         if args.performance:
             timestartmatch = time.time()
@@ -208,6 +183,47 @@ def termcheck( context, fileid, terms, content ):
                     str( timediffmatch / (totalwords + .01 ) ) ) )
 
     return messages
+
+def buildtermdata( termfileid, terms ):
+
+    global termdataid
+    global acceptpatterns
+    global matchpatterns
+    global aroundpatterns
+
+    termdataid = termfileid
+
+    for term in terms:
+        acceptxpath = term.xpath( "accept[1]" )
+        if acceptxpath[0].text:
+            acceptpattern = re.compile( acceptxpath[0].text )
+            acceptpatterns.append( acceptpattern )
+        else:
+            acceptpatterns.append( None )
+
+        matchpatternsofterm = []
+        matchgroupxpaths = term.xpath( "matchgroup" )
+        for matchgroupxpath in matchgroupxpaths:
+            # FIXME: what to do if the match element does not contain text?
+            # do a sys.exit(1)?
+            matchpattern = re.compile(
+                matchgroupxpath.xpath( "match[1]" )[0].text, flags = re.I )
+            matchpatternsofterm.append( matchpattern )
+
+            aroundpatternsofmatchgroup = []
+            aroundxpaths = matchgroupxpath.xpath( "around" )
+            if aroundxpaths:
+                for aroundxpath in aroundxpaths:
+                    aroundpattern = re.compile(
+                        aroundxpath.text, flags = re.I )
+                    aroundtype = aroundxpath.xpath( "@type" )[0]
+                    aroundpatternsofmatchgroup.append(
+                        [ aroundpattern, aroundtype ] )
+            else:
+                aroundpatternsofmatchgroup.append( [ None ] )
+            aroundpatterns.append( aroundpatternsofmatchgroup )
+
+        matchpatterns.append( matchpatternsofterm )
 
 def termcheckmessage( acceptpattern, word, line, content ):
     # FIXME: shorten content string
