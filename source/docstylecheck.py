@@ -28,6 +28,7 @@ termdataid = None
 acceptpatterns = []
 matchpatterns = []      # per acceptpattern, add list of matchpatterns
 contextpatterns = []    # per matchpattern, add list of contextpatterns
+onepattern = ""         # one long pattern is cheaper than many short ones
 
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
@@ -86,6 +87,7 @@ def termcheck( context, termfileid, terms, content ):
         global acceptpatterns
         global matchpatterns
         global contextpatterns
+        global onepattern
 
         # FIXME: Get something better than s.split. It is actually quite
         # important to get (most) sentence boundaries in the future. Some
@@ -94,9 +96,6 @@ def termcheck( context, termfileid, terms, content ):
         words = content[0].split()
         wordposition = 0
         totalwords = len( words )
-
-        if args.performance:
-            timestartbuild = time.time()
 
         if not termfileid == termdataid:
             buildtermdata( termfileid, terms )
@@ -113,6 +112,8 @@ def termcheck( context, termfileid, terms, content ):
             # loops. :/
             trynextterm = True
 
+            if not onepattern.match( word ):
+                trynextterm = False
             # Use the *patterns variables defined above to match all patterns
             # over everything.
             # FIXME: An optimisation should be to first get the first letter of
@@ -175,18 +176,13 @@ def termcheck( context, termfileid, terms, content ):
             wordposition += 1
 
         if args.performance:
-            timeend = time.time()
-            timediffbuild = timestartmatch - timestartbuild
-            timediffmatch = timeend - timestartmatch
-            timedifftotal = timeend - timestartbuild
+            timeendmatch = time.time()
+            timediffmatch = timeendmatch - timestartmatch
             print( """words: %s
-time (total): %s
-to build: %s (%s %%)
-per word: %s"""
-                % ( str( totalwords ), str( timedifftotal ),
-                    str( timediffbuild ),
-                    str( timediffbuild / timedifftotal * 100 ),
-                    str( timediffmatch / (totalwords + .01 ) ) ) )
+time for para: %s
+average time per word: %s\n"""
+                % ( str( totalwords ), str( timediffmatch ),
+                    str( timediffmatch / (totalwords + .001 ) ) ) )
 
     return messages
 
@@ -196,9 +192,14 @@ def buildtermdata( termfileid, terms ):
     global acceptpatterns
     global matchpatterns
     global contextpatterns
+    global onepattern
+
+    if args.performance:
+        timestartbuild = time.time()
 
     termdataid = termfileid
 
+    firstmatchgroup = True
     for term in terms:
         acceptxpath = term.xpath( 'accept[1]' )
         acceptxpathcontent = acceptxpath[0].text
@@ -216,6 +217,9 @@ def buildtermdata( termfileid, terms ):
                 emptypatternmessage( 'match' )
             matchpattern = re.compile( matchxpathcontent, flags = re.I )
             matchpatternsofterm.append( matchpattern )
+            if firstmatchgroup:
+                onepattern += '|'
+            onepattern += '(%s)' % matchxpathcontent
 
             contextpatternsofmatchgroup = []
             contextxpaths = matchgroupxpath.xpath( 'context' )
@@ -234,6 +238,11 @@ def buildtermdata( termfileid, terms ):
             contextpatterns.append( contextpatternsofmatchgroup )
 
         matchpatterns.append( matchpatternsofterm )
+    onepattern = re.compile( onepattern, flags = re.I )
+
+    if args.performance:
+        timeendbuild = time.time()
+        print( "time to build: %s" % str( timeendbuild - timestartbuild ) )
     return None
 
 def emptypatternmessage( element ):
@@ -260,6 +269,8 @@ def termcheckmessage( acceptpattern, word, line, content ):
 
 
 def main():
+
+    timestart = time.time()
 
     ns = etree.FunctionNamespace(
         'https://www.gitorious.org/style-checker/style-checker' )
@@ -336,6 +347,7 @@ def main():
         webbrowser.open( resultfile, new = 0 , autoraise = True )
 
     printcolor( resultfile )
+    print( "Total: " +  str( time.time() - timestart ) )
 
 
 if __name__ == "__main__":
