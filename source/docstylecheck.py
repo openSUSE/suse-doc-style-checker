@@ -141,7 +141,8 @@ def termcheck( context, termfileid, terms, content ):
                                 trynextterm = False
                                 # easy positive
                                 line = linenumber ( context )
-                                messages.append( termcheckmessage( acceptpattern, word, line, content[0] ) )
+                                messages.append( termcheckmessage(
+                                    acceptpattern, word, line, content[0] ) )
                             else:
                                 for contextpattern in contextstomatchgroup:
                                     if contextpattern[0]:
@@ -162,7 +163,9 @@ def termcheck( context, termfileid, terms, content ):
                                                 contextwords.append( contextword )
                                         if ( len( contextstomatchgroup ) == len( contextwords )):
                                             line = linenumber ( context )
-                                            message = termcheckmessage( acceptpattern, word, line, content[0] )
+                                            message = termcheckmessage(
+                                                acceptpattern, word, line,
+                                                content[0] )
                                             messages.append( message )
                                         trynextterm = False
 
@@ -176,7 +179,10 @@ def termcheck( context, termfileid, terms, content ):
             timediffbuild = timestartmatch - timestartbuild
             timediffmatch = timeend - timestartmatch
             timedifftotal = timeend - timestartbuild
-            print( "words: %s\ntime (total): %s\nto build: %s (%s %%)\nper word: %s"
+            print( """words: %s
+time (total): %s
+to build: %s (%s %%)
+per word: %s"""
                 % ( str( totalwords ), str( timedifftotal ),
                     str( timediffbuild ),
                     str( timediffbuild / timedifftotal * 100 ),
@@ -239,15 +245,24 @@ def termcheckmessage( acceptpattern, word, line, content ):
     # FIXME: shorten content string
     message = None
     if acceptpattern:
-        message = etree.XML( "<result><error>Use %s instead of %s <place><line>%s</line></place>: <quote>%s</quote></error></result>" % ( acceptpattern.pattern, word, line, content ) )
+        message = etree.XML( """<result>
+                <error>Use %s instead of %s <place><line>%s</line></place>:
+                    <quote>%s</quote>
+                </error>
+            </result>""" % ( acceptpattern.pattern, word, line, content ) )
     else:
-        message = etree.XML( "<result><error>Do not use %s <place><line>%s</line></place>: <quote>%s</quote></error></result>" % ( word, line, content ) )
+        message = etree.XML( """<result>
+                <error>Do not use %s <place><line>%s</line></place>:
+                    <quote>%s</quote>
+                </error>
+            </result>""" % ( word, line, content ) )
     return message
 
 
 def main():
 
-    ns = etree.FunctionNamespace('https://www.gitorious.org/style-checker/style-checker')
+    ns = etree.FunctionNamespace(
+        'https://www.gitorious.org/style-checker/style-checker' )
     ns.prefix = 'py'
     ns['linenumber'] = linenumber
     ns['termcheck'] = termcheck
