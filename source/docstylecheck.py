@@ -27,7 +27,7 @@ args = None
 termdataid = None
 acceptpatterns = []
 matchpatterns = []      # per acceptpattern, add list of matchpatterns
-contextpatterns = []     # per matchpattern, add list of contextpatterns
+contextpatterns = []    # per matchpattern, add list of contextpatterns
 
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
@@ -195,8 +195,9 @@ def buildtermdata( termfileid, terms ):
 
     for term in terms:
         acceptxpath = term.xpath( "accept[1]" )
-        if acceptxpath[0].text:
-            acceptpattern = re.compile( acceptxpath[0].text )
+        acceptxpathcontent = acceptxpath[0].text
+        if acceptxpathcontent:
+            acceptpattern = re.compile( acceptxpathcontent )
             acceptpatterns.append( acceptpattern )
         else:
             acceptpatterns.append( None )
@@ -204,18 +205,21 @@ def buildtermdata( termfileid, terms ):
         matchpatternsofterm = []
         matchgroupxpaths = term.xpath( "matchgroup" )
         for matchgroupxpath in matchgroupxpaths:
-            # FIXME: what to do if the match element does not contain text?
-            # do a sys.exit(1)?
-            matchpattern = re.compile(
-                matchgroupxpath.xpath( "match[1]" )[0].text, flags = re.I )
+            matchxpathcontent = matchgroupxpath.xpath( "match[1]" )[0].text
+            if not matchxpathcontent:
+                emptypatternmessage( 'match' )
+            matchpattern = re.compile( matchxpathcontent, flags = re.I )
             matchpatternsofterm.append( matchpattern )
 
             contextpatternsofmatchgroup = []
             contextxpaths = matchgroupxpath.xpath( "context" )
             if contextxpaths:
                 for contextxpath in contextxpaths:
+                    contextxpathcontent = contextxpath.text
+                    if not contextxpathcontent:
+                        emptypatternmessage( 'context' )
                     contextpattern = re.compile(
-                        contextxpath.text, flags = re.I )
+                        contextxpathcontent, flags = re.I )
                     contexttype = contextxpath.xpath( "@type" )[0]
                     contextpatternsofmatchgroup.append(
                         [ contextpattern, contexttype ] )
@@ -224,6 +228,12 @@ def buildtermdata( termfileid, terms ):
             contextpatterns.append( contextpatternsofmatchgroup )
 
         matchpatterns.append( matchpatternsofterm )
+    return None
+
+def emptypatternmessage( element ):
+    sys.exit( """Terminology: There is an empty %s element.
+Make sure each %s element in the terminology file(s) contains a pattern."""
+        % (element, element) )
 
 def termcheckmessage( acceptpattern, word, line, content ):
     # FIXME: shorten content string
