@@ -58,7 +58,7 @@ def parseargs():
     parser.add_argument( '--performance',
         action = 'store_true',
         default = False,
-        help = """write some performance measurements to stdout""" )
+        help = "write some performance measurements to stdout" )
     parser.add_argument( 'inputfile' )
     parser.add_argument( 'outputfile', nargs = "?" )
 
@@ -67,9 +67,9 @@ def parseargs():
 def printcolor( message, type = None ):
     if sys.stdout.isatty():
         if type == 'error':
-            print( "\033[0;31m" + message + "\033[0m" )
+            print( '\033[0;31m' + message + '\033[0m' )
         else:
-            print( "\033[0;32m" + message + "\033[0m" )
+            print( '\033[0;32m' + message + '\033[0m' )
     else:
         print( message )
 
@@ -150,9 +150,9 @@ def termcheck( context, termfileid, terms, content ):
                                         contextposition = wordposition
 
                                         # FIXME: after & before need to be handled
-                                        if contexttype == "previous":
+                                        if contexttype == 'previous':
                                             contextposition -= 1
-                                        elif contexttype == "next":
+                                        elif contexttype == 'next':
                                             contextposition += 1
 
                                         if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
@@ -200,7 +200,7 @@ def buildtermdata( termfileid, terms ):
     termdataid = termfileid
 
     for term in terms:
-        acceptxpath = term.xpath( "accept[1]" )
+        acceptxpath = term.xpath( 'accept[1]' )
         acceptxpathcontent = acceptxpath[0].text
         if acceptxpathcontent:
             acceptpattern = re.compile( acceptxpathcontent )
@@ -209,16 +209,16 @@ def buildtermdata( termfileid, terms ):
             acceptpatterns.append( None )
 
         matchpatternsofterm = []
-        matchgroupxpaths = term.xpath( "matchgroup" )
+        matchgroupxpaths = term.xpath( 'matchgroup' )
         for matchgroupxpath in matchgroupxpaths:
-            matchxpathcontent = matchgroupxpath.xpath( "match[1]" )[0].text
+            matchxpathcontent = matchgroupxpath.xpath( 'match[1]' )[0].text
             if not matchxpathcontent:
                 emptypatternmessage( 'match' )
             matchpattern = re.compile( matchxpathcontent, flags = re.I )
             matchpatternsofterm.append( matchpattern )
 
             contextpatternsofmatchgroup = []
-            contextxpaths = matchgroupxpath.xpath( "context" )
+            contextxpaths = matchgroupxpath.xpath( 'context' )
             if contextxpaths:
                 for contextxpath in contextxpaths:
                     contextxpathcontent = contextxpath.text
@@ -226,7 +226,7 @@ def buildtermdata( termfileid, terms ):
                         emptypatternmessage( 'context' )
                     contextpattern = re.compile(
                         contextxpathcontent, flags = re.I )
-                    contexttype = contextxpath.xpath( "@type" )[0]
+                    contexttype = contextxpath.xpath( '@type' )[0]
                     contextpatternsofmatchgroup.append(
                         [ contextpattern, contexttype ] )
             else:
@@ -264,8 +264,8 @@ def main():
     ns = etree.FunctionNamespace(
         'https://www.gitorious.org/style-checker/style-checker' )
     ns.prefix = 'py'
-    ns['linenumber'] = linenumber
-    ns['termcheck'] = termcheck
+    ns[ 'linenumber' ] = linenumber
+    ns[ 'termcheck' ] = termcheck
 
     location = os.path.dirname( os.path.realpath( __file__ ) )
 
@@ -329,7 +329,7 @@ def main():
 
     output.getroottree().write( resultfile,
                                 xml_declaration = True,
-                                encoding = "UTF-8",
+                                encoding = 'UTF-8',
                                 pretty_print = True )
 
     if args.show == True:
