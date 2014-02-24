@@ -2,25 +2,62 @@
      check's terminology file.
 -->
 <!--  To validate, do
-        $ xmllint ––dtdvalid [PATH TO THIS DTD] [PATH TO TERMINOLOGY FILE]
-      (do not copy the command from here: for technical reasons, in it,
-      hyphens needed to be replaced with dashes.)
+        $ xmllint -dtdvalid [PATH TO THIS DTD] [PATH TO TERMINOLOGY FILE]
 -->
 
-<!ELEMENT terminology (term+)>
-<!ATTLIST terminology type      (previous|next|before|after)    #REQUIRED >
+<!ELEMENT terminology     (term+)>
 
-<!ELEMENT term        (advice?, accept, matchgroup+) >
-  <!-- In the future, make sure there always is an advice. Format of
-       advice still needs to be defined. Allow inline elements from
-       results?
-  -->
+<!ELEMENT term            (accept, patterngroup+) >
 
-<!ELEMENT accept      (#PCDATA) >
+<!ELEMENT accept          (word?, context?) >
 
-<!ELEMENT matchgroup  (match, context*) >
+<!ELEMENT patterngroup    (pattern1, pattern2?, pattern3?, pattern4?, pattern5?,
+                          contextpattern*) >
 
-<!ELEMENT match       (#PCDATA) >
+<!ELEMENT pattern1        (#PCDATA) >
 
-<!ELEMENT context      (#PCDATA) >
-<!ATTLIST context      id        #CDATA                          #REQUIRED >
+<!ELEMENT pattern2        (#PCDATA) >
+
+<!ELEMENT pattern3        (#PCDATA) >
+
+<!ELEMENT pattern4        (#PCDATA) >
+
+<!ELEMENT pattern5        (#PCDATA) >
+
+<!ELEMENT contextpattern  (#PCDATA) >
+
+<!ELEMENT word            (#PCDATA) >
+
+<!ELEMENT context         (#PCDATA) >
+
+
+<!ATTLIST terminology
+                          id        CDATA                           #REQUIRED >
+
+<!--  Default value is 1, ignore. -->
+<!ATTLIST patterngroup
+                          reason    (general|terminology|filler|projectspelling|
+                                    contraction|abbreviation|tautology|
+                                    languagevariant)
+                                                                    #IMPLIED >
+
+<!ATTLIST pattern1
+                          case      (ignore|keep)                   #IMPLIED >
+<!ATTLIST pattern2
+                          case      (ignore|keep)                   #IMPLIED >
+<!ATTLIST pattern3
+                          case      (ignore|keep)                   #IMPLIED >
+<!ATTLIST pattern4
+                          case      (ignore|keep)                   #IMPLIED >
+<!ATTLIST pattern5
+                          case      (ignore|keep)                   #IMPLIED >
+
+<!--  Default values are after, exact, 1, positive, ignore.
+      type=fuzzy and place=4 or place=5 is allowed by the DTD, but the checker
+      will exit on seeing this. -->
+<!ATTLIST contextpattern
+                          look      (before|after)                  #IMPLIED
+                          mode      (fuzzy|exact)                   #IMPLIED
+                          where     (1|2|3|4|5)                     #IMPLIED
+                          match     (positive|negative)             #IMPLIED
+                          case      (ignore|keep)                   #IMPLIED >
