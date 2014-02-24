@@ -1,78 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <terminology id="terms1">
 <!-- Make sure to change the id when creating a new terminology file. -->
-<!-- before/after: within sentence, previous/next: immediate -->
+
   <term>
-    <accept>32-bit</accept>
-    <matchgroup>
-      <match>32[\.\- _]?bit</match>
-    </matchgroup>
+    <accept>
+      <word>32-bit</word>
+    </accept>
+    <patterngroup>
+      <pattern1>32[-\.]?bit</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>32</pattern1>
+      <pattern2>bit</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>3D</accept>
-    <matchgroup>
-      <match>(three|3)[\.\-_]?[ ]?d[\.]?</match>
-    </matchgroup>
+    <accept>
+      <word>3D</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">3d</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(three|3)[-\.]*d\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(three|3)\.?</pattern1>
+      <pattern2>d\.?</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>64-bit</accept>
-    <matchgroup>
-      <match>64[\.\- _]?bit</match>
-    </matchgroup>
+    <accept>
+      <word>32-bit</word>
+    </accept>
+    <patterngroup>
+      <pattern1>32[-\.]?bit</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>32</pattern1>
+      <pattern2>bit</pattern2>
+    </patterngroup>
   </term>
-  <!-- <term>
-    <accept type="verb">activate</accept>
-    <matchgroup>
-      <match>((block|check|highlight|tick)(ing|ed|s)|ch[o]?os(e[s]?|ing|n))</match>
-      <context type="after">((check|tick|option|box)[e]?[s]?|##@ui##)</context>
-    </matchgroup>
-  </term> -->
+
   <term>
-    <accept>[Aa]dd-ons?</accept>
-    <matchgroup>
-      <match>add[-_]?ons?</match>
-    </matchgroup>
-    <matchgroup>
-      <match>add</match>
-      <context type="next">ons?</context>
-    </matchgroup>
+    <accept>
+      <word>activate</word>
+      <context>check box</context>
+    </accept>
+    <patterngroup>
+      <pattern1>((block|check|highlight|tick)(ing|ed|s)|ch[o]?os(e[s]?|ing|n))</pattern1>
+      <contextpattern mode="fuzzy" where="2">((check|tick|option|box)[e]?[s]?|##@ui##)</contextpattern>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>[Aa]ddress books?</accept>
-    <matchgroup>
-      <match>addressbooks?</match>
-    </matchgroup>
+    <accept>
+      <word>add-on</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Aa]dd-Ons?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">ADD-ON[Ss]?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>add[-_]?ons?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>add</pattern1>
+      <pattern2>ons?</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>[Aa]dvice$</accept>
-    <matchgroup>
-      <match>advise</match>
-      <context type="previous">(an|the)</context>
-    </matchgroup>
+    <accept>
+      <word>address book</word>
+    </accept>
+    <patterngroup>
+      <pattern1>addressbooks?</pattern1>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>[Aa]dvisor(y|ies)</accept>
-    <matchgroup>
-      <match>advicor(y|ies)</match>
-    </matchgroup>
+    <accept>
+      <word>advice</word>
+    </accept>
+    <patterngroup>
+      <pattern1>advise</pattern1>
+      <contextpattern look="before">(an|the)</contextpattern>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>advis(e[sd]|ing)</accept>
-    <matchgroup>
-      <match>advic(e[sd]|ing)</match>
-    </matchgroup>
-    <matchgroup>
-      <match>advice</match>
-      <context type="previous">(we|suse|novell|attachmate|[\-a-z]*?ly)</context>
-    </matchgroup>
+    <accept>
+      <word>advisory</word>
+    </accept>
+    <patterngroup>
+      <pattern1>advicor(y|ies)</pattern1>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>[Aa]fter</accept>
-    <matchgroup>
-      <match>once</match>
-      <context type="next">(the|a|an|it|they)</context>
-    </matchgroup>
+    <accept>
+      <word>advise</word>
+    </accept>
+    <patterngroup>
+      <pattern1>advic(e[sd]|ing)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>advice</pattern1>
+      <contextpattern look="before">(we|suse|novell|attachmate|[\-a-z]*?ly)</contextpattern>
+    </patterngroup>
   </term>
+
+  <term>
+    <accept>
+      <word>after</word>
+    </accept>
+    <patterngroup>
+      <pattern1>once</pattern1>
+      <contextpattern>(the|a|an|it|they)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <!-- Not sure how to best get these in. -->
   <!-- <row>
     <entry>although</entry>
     <entry>while</entry>
@@ -87,299 +140,1230 @@
       meaning of <quote>during the time that</quote>
     </entry>
   </row> -->
+
   <term>
-    <accept>[Aa]ppendixes$</accept>
-    <matchgroup>
-      <match>appendices$</match>
-    </matchgroup>
+    <accept>
+      <word>appendixes</word>
+    </accept>
+    <patterngroup>
+      <pattern1>appendices</pattern1>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>[Aa]udio CD</accept>
-    <matchgroup>
-      <match>audio[\-_]?cd</match>
-    </matchgroup>
-    <matchgroup>
-      <match>cd[\-_]?audio</match>
-    </matchgroup>
-    <matchgroup>
-      <match>cd[\-_]?audio</match>
-    </matchgroup>
+    <accept>
+      <word>Audio CD</word>
+    </accept>
+    <patterngroup>
+      <pattern1>audio-?cds?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>cd-?audios?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">audio</pattern1>
+      <pattern2>cds?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>cd</pattern1>
+      <pattern2>audios?</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>[Bb]ack-ends?$</accept>
-    <matchgroup>
-      <match>backends?$</match>
-    </matchgroup>
+    <accept>
+      <word>back-end</word>
+    </accept>
+    <patterngroup>
+      <pattern1>backends?</pattern1>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>[Bb]ack(ed|s|ing)? up</accept>
-    <matchgroup>
-      <match>back(ed|s|ing)-?up</match>
-    </matchgroup>
-    <matchgroup>
-      <match>back-?upp?(ed|s|ing)</match>
-    </matchgroup>
-    <matchgroup>
-      <match>back-?up</match>
-      <context type="previous">(when|to)</context>
-    </matchgroup>
-    <matchgroup>
-      <match>back-?up</match>
-      <context type="next">(them|these|this|it|the|a|an)</context>
-    </matchgroup>
+    <accept>
+      <word>back up</word>
+    </accept>
+    <patterngroup>
+      <pattern1>back(ed|s|ing)-?up</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>back-?upp?(ed|ing)</pattern1>
+        <!--  Adding s to the list of endings erroneously also matches the
+          plural noun.
+        -->
+    </patterngroup>
+    <patterngroup>
+      <pattern1>back-?up</pattern1>
+      <contextpattern look="before">(when|to)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>back-?up</pattern1>
+      <contextpattern>(them|these|this|it|the|a|an)</contextpattern>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>backup</accept>
-    <matchgroup>
-      <match>back-ups?</match>
-      <context type="previous">(the|a|local|remote|system|full|partial|automatic|manual)</context>
-    </matchgroup>
-    <matchgroup>
-      <match>back</match>
-      <context type="next">ups?</context>
-      <context type="previous">(the|a|local|remote|system|full|partial|automatic|manual)</context>
-    </matchgroup>
+    <accept>
+      <word>backup</word>
+    </accept>
+    <patterngroup>
+      <pattern1>back-ups?</pattern1>
+      <contextpattern look="before">(the|a|local|remote|system|full|partial|automatic|manual)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>back</pattern1>
+      <pattern2>ups?</pattern2>
+      <contextpattern look="before">(the|a|local|remote|system|full|partial|automatic|manual)</contextpattern>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>Bash$</accept>
-    <matchgroup>
-      <match>bash$</match>
-    </matchgroup>
+    <accept>
+      <word>Bash</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">bash</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">BASH</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>b\.a\.s\.h\.?</pattern1>
+    </patterngroup>
   </term>
+
   <term>
     <accept/>
-    <matchgroup>
-      <match>basically$</match>
-    </matchgroup>
+    <patterngroup>
+      <pattern1>basically</pattern1>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>because of</accept>
-    <matchgroup>
-      <match>(due|owing)$</match>
-      <context type="next">to$</context>
-    </matchgroup>
+    <accept>
+      <word>because of</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(due|owing)</pattern1>
+      <pattern2>to</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>boot disks?</accept>
-    <matchgroup>
-      <match>boot-?disks?</match>
-    </matchgroup>
+    <accept>
+      <word>boot disk</word>
+    </accept>
+    <patterngroup>
+      <pattern1>boot-?disks?</pattern1>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>boot loader</accept>
-    <matchgroup>
-      <match>boot-?loaders?</match>
-    </matchgroup>
+    <accept>
+      <word>boot loader</word>
+    </accept>
+    <patterngroup>
+      <pattern1>boot-?loaders?</pattern1>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>boot (using|via) PXE</accept>
-    <matchgroup>
-      <match>PXE</match>
-      <context type="next">boot(ing|ed)</context>
-    </matchgroup>
-    <matchgroup>
-      <match>PXE</match>
-      <context type="next">boot</context>
-      <context type="previous">(to|not)</context>
-    </matchgroup>
+    <accept>
+      <word>boot using PXE</word>
+    </accept>
+    <patterngroup>
+      <pattern1>PXE</pattern1>
+      <pattern2>boot(ing|ed)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>PXE</pattern1>
+      <pattern2>boots?</pattern2>
+      <contextpattern look="before">(to|not)</contextpattern>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>Btrfs</accept>
-    <matchgroup>
-      <match>b[eu]tterfs</match>
-    </matchgroup>
-    <matchgroup>
-      <match>b[eu]tter</match>
-      <context type="next">fs</context> <!-- Check for written-out file system, too? -->
-    </matchgroup>
-    <matchgroup>
-      <match>b\.?t\.?r\.?f\.?s\.?</match>
-    </matchgroup>
+    <accept>
+      <word>Btrfs</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">btrfs</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">BTRFS</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>b\.t\.r\.f\.s\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>b[eu]tterfs</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>b[eu]tter</pattern1>
+      <pattern2>(fs|filesystem)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>b[eu]tter</pattern1>
+      <pattern2>file</pattern2>
+      <pattern3>system</pattern3>
+    </patterngroup>
   </term>
+
   <!-- Not sure how to check for this the right way. -->
   <!-- <term>
-    <accept>but</accept>
-    <matchgroup>
-      <match>while</match>
-      <context type="next">(the|a|##@ui##|##@mono##|##@key##)</context>
-    </matchgroup>
+    <accept>
+      <word>but</word>
+    </accept>
+    <patterngroup>
+      <pattern1>while</pattern1>
+      <contextpattern>(the|a|##@ui##|##@mono##|##@key##)</contextpattern>
+    </patterngroup>
   </term> -->
+
+  <!-- Trouble with single quotes. -->
   <!-- <term>
-    <accept>cannot</accept>
-    <matchgroup>
-      <match>can['ʼ]t</match>
-    </matchgroup>
-    <matchgroup>
-      <match>can</match>
-      <context type="next">not</context>
-    </matchgroup>
+    <accept>
+      <word>cannot</word>
+    </accept>
+    <patterngroup>
+      <pattern1>can['ʼ]t</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>can</pattern1>
+      <pattern2>not</pattern2>
+    </patterngroup>
   </term> -->
+
   <term>
-    <accept>CA</accept>
-    <matchgroup>
-      <match>c\.?a\.?</match>
-    </matchgroup>
+    <accept>
+      <word>CA</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">Ca(?!\.)s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">cas?(?!\.)s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>c\.a\.?s?</pattern1>
+    </patterngroup>
   </term>
+
+  <!-- Add entry for ca. = circa? -->
+
   <term>
-    <accept>CD</accept>
-    <matchgroup>
-      <match>c\.?d\.?</match>
-    </matchgroup>
+    <accept>
+      <word>CD</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Cc]ds?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>c\.d\.?s?</pattern1>
+    </patterngroup>
   </term>
+
   <!-- Should probably be ordered before CD... -->
   <term>
-    <accept>CD-ROM</accept>
-    <matchgroup>
-      <match>c\.?d\.?-?r\.?o\.?m\.?</match>
-    </matchgroup>
+    <accept>
+      <word>CD-ROM</word>
+    </accept>
+    <patterngroup>
+      <pattern1>c\.d\.-?r\.o\.m\.?s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>c\.?d\.?r\.?o\.?m\.?s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>c\.?d\.?</pattern1>
+      <pattern2>r\.?o\.?m\.?s?</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>CUPS</accept>
-    <matchgroup>
-      <match>c\.?u\.?p\.?s\.?</match>
-    </matchgroup>
+    <accept>
+      <word>case-sensitive</word>
+    </accept>
+    <patterngroup>
+      <pattern1>casesensitive</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>case</pattern1>
+      <pattern2>sensitive</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>case-sensitive</accept>
-    <matchgroup>
-      <match>casesensitive</match>
-    </matchgroup>
-    <matchgroup>
-      <match>case</match>
-      <context type="next">sensitive</context>
-    </matchgroup>
+    <accept>
+      <word>case-insensitive</word>
+    </accept>
+    <patterngroup>
+      <pattern1>caseinsensitive</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>case</pattern1>
+      <pattern2>insensitive</pattern2>
+    </patterngroup>
   </term>
-    <term>
-    <accept>case-insensitive</accept>
-    <matchgroup>
-      <match>caseinsensitive</match>
-    </matchgroup>
-    <matchgroup>
-      <match>case</match>
-      <context type="next">insensitive</context>
-    </matchgroup>
-  </term>
+
   <!-- Not sure how to match for this the right way: only permission-related -->
   <!-- <term>
-    <accept>can</accept>
-    <matchgroup>
-      <match>may</match>
-    </matchgroup>
+    <accept>
+      <word>can</word>
+    </accept>
+    <patterngroup>
+      <pattern1>may</pattern1>
+    </patterngroup>
   </term> -->
+
   <term>
-    <accept>certificate authorit(y|ies)</accept>
-    <matchgroup>
-      <match>certific(at(ion|ing)|ied)</match>
-      <context type="next">authorit(y|ies)</context>
-    </matchgroup>
+    <accept>
+      <word>certificate authority</word>
+    </accept>
+    <patterngroup>
+      <pattern1>certific(at(ion|ing)|ied)</pattern1>
+      <pattern2>authorit(y|ies)</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>check box(es)</accept>
-    <matchgroup>
-      <match>(check|tick)-?box(es)?</match>
-    </matchgroup>
-    <matchgroup>
-      <match>tick</match>
-      <context type="next">box(es)?</context>
-    </matchgroup>
+    <accept>
+      <word>check box</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(check|tick)-?box(es)?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>tick</pattern1>
+      <pattern2>box(es)?</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>checklists?</accept>
-    <matchgroup>
-      <match>(check|tick)-?lists?</match>
-    </matchgroup>
-    <matchgroup>
-      <match>(check|tick)</match>
-      <context type="next">lists?</context>
-    </matchgroup>
+    <accept>
+      <word>checklist</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(check|tick)-lists?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(check|tick)</pattern1>
+      <pattern2>lists?</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>check marks?</accept>
-    <matchgroup>
-      <match>(check|tick)-?marks?</match>
-    </matchgroup>
-    <matchgroup>
-      <match>tick</match>
-      <context type="next">marks?</context>
-    </matchgroup>
+    <accept>
+      <word>check mark</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(check|tick)-marks?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>tick</pattern1>
+      <pattern2>marks?</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>chipsets?</accept>
-    <matchgroup>
-      <match>chip-sets?</match>
-    </matchgroup>
-    <matchgroup>
-      <match>chip</match>
-      <context type="next">sets?</context>
-    </matchgroup>
+    <accept>
+      <word>chipset</word>
+    </accept>
+    <patterngroup>
+      <pattern1>chip-sets?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>chip</pattern1>
+      <pattern2>sets?</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>click(ed|ing|s)</accept>
-    <matchgroup>
-      <match>click(ed|ing|s)</match>
-      <context type="next">on(to)?</context>
-    </matchgroup>
+    <accept>
+      <word>click</word>
+    </accept>
+    <patterngroup>
+      <pattern1>click(ed|ing|s)</pattern1>
+      <pattern2>on(to)?</pattern2>
+    </patterngroup>
   </term>
+
   <term>
-    <accept>client/server</accept>
-    <matchgroup>
-      <match>client[-–+]?server</match>
-    </matchgroup>
-    <matchgroup>
-      <match>client</match>
-      <context type="next">server</context>
-    </matchgroup>
+    <accept>
+      <word>client/server</word>
+    </accept>
+    <patterngroup>
+      <pattern1>client[-–+]?server</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>client</pattern1>
+      <pattern2>server</pattern2>
+    </patterngroup>
   </term>
+
   <!-- This might be too generic. -->
   <term>
-    <accept>clos(ed|es|ing)?</accept>
-    <matchgroup>
-      <match>((abort|exit)(ed|ing|s)?|terminat(ed?|es|ing))</match>
-    </matchgroup>
+    <accept>
+      <word>close</word>
+      <context>application</context>
+    </accept>
+    <patterngroup>
+      <pattern1>((abort|exit)(ed|ing|s)?|terminat(ed?|es|ing))</pattern1>
+      <contextpattern mode="fuzzy" where="3">(window|dialog(ue)|app(lication)?|software|program(me))s?</contextpattern>
+    </patterngroup>
   </term>
-  <!-- Can't check with current tools. -->
+
+  <term>
+    <accept>
+      <word>Common Unix Printing System</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">Common</pattern1>
+      <pattern2 case="keep">UNIX</pattern2>
+      <pattern3 case="keep">Printing</pattern3>
+      <pattern4 case="keep">System</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">common</pattern1>
+      <pattern2>unix</pattern2>
+      <pattern3 case="keep">printing</pattern3>
+      <pattern4 case="keep">system</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>command line</word>
+    </accept>
+    <patterngroup>
+      <pattern1>command-?lines?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>computers?</word>
+    </accept>
+    <patterngroup>
+      <pattern1>machines?</pattern1>
+      <contextpattern match="negative">virtual</contextpattern>
+    </patterngroup>
+  </term>
+
+  <!-- FIXME: add a rule to find the noun too -->
+  <term>
+    <accept>
+      <word>configure</word>
+    </accept>
+    <patterngroup>
+      <pattern1>conf(ig)?(ed|ing|s)?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>control center</word>
+    </accept>
+    <patterngroup>
+      <pattern1>control-?centers?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">Control</pattern1>
+      <pattern2 case="keep">Centers?</pattern2>
+    </patterngroup>
+  </term>
+
   <!-- <term>
-    <accept>Common Unix Printing System</accept>
-    <entry>Common UNIX Printing System, common Unix printing system
-    </entry>
-    <entry>noun; spelling as per project standard; acronym is
-      <emphasis>CUPS</emphasis>
-    </entry>
-  </term> -->
-  <term>
-    <accept>command lines?</accept>
-    <matchgroup>
-      <match>command-?lines?</match>
-    </matchgroup>
-  </term>
-  <term>
-    <accept>computers?</accept>
-    <matchgroup>
-      <match>(machine|system)s?</match>
-    </matchgroup>
-  </term>
-  <term>
-    <accept>[Cc]onfigur(e?d|ing|s|ation)</accept>
-    <matchgroup>
-      <match>config(ed|ing|s)?</match>
-    </matchgroup>
-  </term>
-  <term>
-    <accept>[Cc]ontrol centers?</accept>
-    <matchgroup>
-      <match>control-?centers?</match>
-    </matchgroup>
-    <matchgroup>
-      <match>control</match>
-      <context type="next">centers?</context>
-    </matchgroup>
-  </term>
-  <!-- <term>
-    <accept>could</accept>
+    <accept>
+      <word>could</word>
+    </accept>
     <entry>may</entry>
     <entry>verb; use <emphasis>could</emphasis> to express a
       possibility, only use <emphasis>may</emphasis> to express
       permissions sought/given
     </entry>
   </term> -->
+
+  <term>
+    <accept>
+      <word>CUPS</word>
+    </accept>
+    <patterngroup>
+      <pattern1>c\.?u\.?p\.?s\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>c\.?u\.?p\.?s\.?</pattern1>
+      <pattern2>print(ing)?</pattern2>
+      <pattern3>system</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>deactivate</word>
+      <context>check box</context>
+    </accept>
+    <patterngroup>
+      <pattern1>(un|de)-?((block|check|highlight|tick)(ing|ed|s)|ch[o]?os(e[s]?|ing|n))</pattern1>
+      <contextpattern mode="fuzzy" where="2">((check|tick|option|box)[e]?[s]?|##@ui##)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>deselect</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(de-|un-?)select</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>remov(e[ds]?|ing)</pattern1>
+      <pattern2>selections?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>remov(e[ds]?|ing)</pattern1>
+      <pattern2>(a|the)</pattern2>
+      <pattern3>selections?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>DHCP</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">dhcp</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">Dhcp</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>d\.h\.c\.p\.?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>dial-up</word>
+    </accept>
+    <patterngroup>
+      <pattern1>dialup</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>dial</pattern1>
+      <pattern2>up</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>dialog</word>
+    </accept>
+    <patterngroup>
+      <pattern1>dialogues?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>dialog(box|window)s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>dialog(ue)?</pattern1>
+      <pattern2>(box|window)s?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>directory</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(dir|folder)s?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>DNS</word>
+    </accept>
+    <patterngroup>
+      <pattern1>d\.?n\.?s\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>DNS</pattern1>
+      <pattern2>name</pattern2>
+      <pattern3>servers?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>double-click</word>
+    </accept>
+    <patterngroup>
+      <pattern1>doubleclick(ed|ing|s)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>double</pattern1>
+      <pattern2>click(ed|ing|s)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>double-?click(ed|ing|s)</pattern1>
+      <pattern2>on(to)?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>double</pattern1>
+      <pattern2>click(ed|ing|s)</pattern2>
+      <pattern3>on(to)?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>DVD</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Dd]vd</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>d\.v\.d\.?s?</pattern1>
+    </patterngroup>
+  </term>
+  <term>
+    <accept>
+      <word>dynamic name server</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">Dynamic</pattern1>
+      <pattern2 case="keep">Name</pattern2>
+      <pattern3 case="keep">Servers?</pattern3>
+    </patterngroup>
+  </term>
+  <term>
+    <accept>
+      <word>Ethernet</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">ethernet</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>e-book</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">EBOOK[Ss]?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ebooks?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>electronic</pattern1>
+      <pattern2>books?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>EPUB</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Ee]pub</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">ePub</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">ePUB</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>e-pub</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>e-mail</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">EMAIL[Ss]?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>emails?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>electronic</pattern1>
+      <pattern2>mails?</pattern2>
+    </patterngroup>
+  </term>
+
+  <!-- Might overreach. -->
+  <!-- <term>
+    <accept/>
+    <pattern1>easy [filler], easily</pattern1>
+  </term> -->
+
+  <term>
+    <accept>
+      <word>end user</word>
+    </accept>
+    <patterngroup>
+      <pattern1>end-users?</pattern1>
+    </patterngroup>
+  </term>
+
+  <!-- Not sure how to best test. -->
+  <!-- <term>
+    <accept>
+      <word>etc.</word>
+    </accept>
+    <match/>
+  </term> -->
+
+  <!-- Spelled out "two," "three," "four" also relevant? -->
+  <term>
+    <accept>
+      <word>Ext2</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">EXT2</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">ext2</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ext-2</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ext</pattern1>
+      <pattern2>2</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Ext3</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">EXT3</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">ext3</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ext-3</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ext</pattern1>
+      <pattern2>3</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Ext4</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">EXT4</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">ext4</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ext-4</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ext</pattern1>
+      <pattern2>4</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern1>facilitat(e[sd]?|ing)</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>file name</word>
+    </accept>
+    <patterngroup>
+      <pattern1>file-?names?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>file server</word>
+    </accept>
+    <patterngroup>
+      <pattern1>file-?servers?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>file system</word>
+    </accept>
+    <patterngroup>
+      <pattern1>file-?systems?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>flavor</word>
+    </accept>
+    <patterngroup>
+      <pattern1>flavours?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>flash disk</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(flash|usb)</pattern1>
+      <pattern2>(disk|drive|stick)s?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(flash|usb)-?(disk|drive|stick)s?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>framebuffer</word>
+    </accept>
+    <patterngroup>
+      <pattern1>frame-buffers?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>frame</pattern1>
+      <pattern2>buffers?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>front-end</word>
+    </accept>
+    <patterngroup>
+      <pattern1>frontends?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>front</pattern1>
+      <pattern2>ends?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>The GIMP</word>
+    </accept>
+    <patterngroup>
+      <pattern1>g\.?i\.?m\.?p\.?</pattern1>
+      <contextpattern look="before" match="negative">the</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">the</pattern1>
+      <pattern2>g\.?i\.?m\.?p\.?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>the</pattern1>
+      <pattern2>g\.i\.m\.p\.?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>the</pattern1>
+      <pattern2 case="keep">[Gg]imp</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>GNOME</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Gg]nome</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>g\.n\.o\.m\.e\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>GNU</pattern1>
+      <pattern2>Networked</pattern2>
+      <pattern3>Object</pattern3>
+      <pattern4>Model</pattern4>
+      <pattern5>Environment</pattern5>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>GRUB</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Gg]rub</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>g\.r\.u\.b\.?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>graphical user interface</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">Graphical</pattern1>
+      <pattern2 case="keep">Users?</pattern2>
+      <pattern3 case="keep">Interfaces?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>GUI</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Gg]uis?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>g\.u\.i\.?s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>gui</pattern1>
+      <pattern2>interfaces?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>gui</pattern1>
+      <pattern2>users?</pattern2>
+      <pattern3>interfaces?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>hard disk</word>
+    </accept>
+    <patterngroup>
+      <pattern1>hdd?s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hardd?(isk|ive)s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hard</pattern1>
+      <pattern2>drives?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hard</pattern1>
+      <pattern2>disk</pattern2>
+      <pattern3>drives?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>hard link</word>
+    </accept>
+    <patterngroup>
+      <pattern1>hard-?links?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>home page</word>
+    </accept>
+    <patterngroup>
+      <pattern1>home-?pages?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>host names?</word>
+    </accept>
+    <patterngroup>
+      <pattern1>host-?names?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>hotplug</word>
+    </accept>
+    <patterngroup>
+      <pattern1>hot-plugg?(ing|ed|s)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hot</pattern1>
+      <pattern2>plugg?(ing|ed|s)</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>hotplugging</word>
+    </accept>
+    <patterngroup>
+      <pattern1>hot-plugging</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hot</pattern1>
+      <pattern2>plugging</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>hotpluggable</word>
+    </accept>
+    <patterngroup>
+      <pattern1>hot-pluggable</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hot</pattern1>
+      <pattern2>pluggable</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>HTTP</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Hh]ttp</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>h\.t\.t\.p\.?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>hypervisor</word>
+    </accept>
+    <patterngroup>
+      <pattern1>hyper-vi[sz]ors?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hyper-?vizors?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hyper</pattern1>
+      <pattern2>vi[sz]ors?</pattern2>
+    </patterngroup>
+  </term>
+
+  <!-- Not sure what to check -->
+  <!-- <term>
+    <accept>
+    <word>if</word>
+  </accept>
+  </term> -->
+
+  <term>
+    <accept>
+      <word>indexes</word>
+    </accept>
+    <patterngroup>
+      <pattern1>indices</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>infrared</word>
+    </accept>
+    <patterngroup>
+      <pattern1>infra-red</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>infra</pattern1>
+      <pattern2>red</pattern2>
+    </patterngroup>
+  </term>
+
+  <!-- FIXME: add a rule to find the noun too -->
+  <term>
+    <accept>
+      <word>initialize</word>
+    </accept>
+    <patterngroup>
+      <pattern1>init(ed|s|ing)?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>initiali[sz](e?[ds]?|ing)?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>installation source</word>
+    </accept>
+    <patterngroup>
+      <pattern1>installation</pattern1>
+      <pattern2>data</pattern2>
+      <pattern3>sources?</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>installation</pattern1>
+      <pattern2>medi(a|um)s?</pattern2>
+        <!--  Yes, the s? is completely incorrect. Doesn't hurt to match simple
+              typos, though. -->
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Internet</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">internets?</pattern1>
+    </patterngroup>
+  </term>
+
+  <!-- Sentence beginnings..? -->
+  <!-- <term>
+    <accept>
+    <word>intranet</word>
+  </accept>
+    <patterngroup>
+      <pattern1>Intranet</pattern1>
+    </patterngroup>
+  </term> -->
+
+  <term>
+    <accept>
+      <word>I/O port</word>
+    </accept>
+    <patterngroup>
+      <pattern1>i[-\.]?o\.?</pattern1>
+      <pattern2>ports?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>IPsec</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">IPSEC</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">[Ii]psec</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">i\.p\.s\.e\.c\.?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>IPv4</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Ii]pv4</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>i\.p\.v\.?4</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>i\.?p\.?</pattern1>
+      <pattern2>v\.?4</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>i\.?p\.?</pattern1>
+      <pattern2>v\.?</pattern2>
+      <pattern3>4</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>IPv6</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Ii]pv6</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>i\.p\.v\.?6</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>i\.?p\.?</pattern1>
+      <pattern2>v\.?6</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>i\.?p\.?</pattern1>
+      <pattern2>v\.?</pattern2>
+      <pattern3>6</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>journal</word>
+    </accept>
+    <patterngroup>
+      <pattern1>journall(ed|ing)</pattern1>
+    </patterngroup>
+  </term>
+
+  <!-- Could be a bit broad for now. -->
+  <!-- <term>
+    <accept/>
+    <patterngroup>
+      <pattern1>just</pattern1>
+    </patterngroup>
+  </term> -->
+
+  <term>
+    <accept>
+      <word>Kdump</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">KDUMP</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">kdump</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Kernel</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">kernel</pattern1>
+      <contextpattern look="before" match="negative">(linux|windows|mac|x|.*?bsd)</contextpattern>
+      <contextpattern look="before">the</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Kprobes</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">KPROBES</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">kprobes</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>key combination</word>
+    </accept>
+    <patterngroup>
+      <pattern1>key(board)?</pattern1>
+      <pattern2>(accelerator|combo|shortcut)s?</pattern2>
+    </patterngroup>
+  </term>
+
 </terminology>
