@@ -1,8 +1,6 @@
 <!--  DTD to validate the documentation style checker's result file. -->
 <!--  To validate, do
-        $ xmllint ––dtdvalid [PATH TO THIS DTD] [PATH TO RESULT FILE]
-      (do not copy the command from here: for technical reasons, in it,
-      hyphens needed to be replaced with dashes.)
+        $ xmllint -dtdvalid [PATH TO THIS DTD] [PATH TO RESULT FILE]
 -->
 
 <!ENTITY % generalinlines "em | tag | quote" >
