@@ -25,10 +25,10 @@ __description__ = "checks a given DocBook XML file for stylistic errors"
 args = None
 # terminology data structures
 termdataid = None
-acceptpatterns = []
-matchpatterns = []      # per acceptpattern, add list of matchpatterns
-contextpatterns = []    # per matchpattern, add list of contextpatterns
-onepattern = ""         # one long pattern is cheaper than many short ones
+accepts = []
+patterns = []           # per acceptpattern, add list of list of patterns
+contextpatterns = []    # per pattern list, add list of contextpatterns
+# onepattern = ""         # one long pattern is cheaper than many short ones
 
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
@@ -84,10 +84,10 @@ def termcheck( context, termfileid, terms, content ):
 
     if content:
         global termdataid
-        global acceptpatterns
-        global matchpatterns
+        global accepts
+        global patterns
         global contextpatterns
-        global onepattern
+        # global onepattern
 
         # FIXME: Get something better than s.split. It is actually quite
         # important to get (most) sentence boundaries in the future. Some
@@ -112,8 +112,9 @@ def termcheck( context, termfileid, terms, content ):
             # loops. :/
             trynextterm = True
 
-            if not onepattern.match( word ):
-                trynextterm = False
+            # if not onepattern.match( word ):  # 100 named groups
+            #     trynextterm = False
+
             # Use the *patterns variables defined above to match all patterns
             # over everything.
             # FIXME: An optimisation should be to first get the first letter of
@@ -121,56 +122,57 @@ def termcheck( context, termfileid, terms, content ):
             # However, the the information which letter any pattern belongs to
             # must probably be built by hand.
             acceptposition = 0
-            matchgroupposition = 0
-            for acceptpattern in acceptpatterns:
-                if trynextterm == True:
+            patterngroupposition = 0
+            for accept in accepts:
+                acceptword = accept[0]
+                acceptcontext = accept[1]
 
-                    matchgroupstoacceptpattern = matchpatterns[ acceptposition ]
-                    for matchgrouppattern in matchgroupstoacceptpattern:
-                        matchword = matchgrouppattern.match( word )
+                if trynextterm:
+
+                    # FIXME: variable names are a bit of a mouthful
+                    patterngroupstoaccept = patterns[ acceptposition ]
+                    for patterngrouppatterns in patterngroupstoaccept:
+                        trycontextpatterns = True
+                        for patterngrouppattern in patterngrouppatterns:
+                            matchword = patterngrouppattern.match( word )
+                            if not matchword:
+                                trycontextpatterns = False
+                                break
 
                         contextwords = []
-                        contextstomatchgroup = contextpatterns[ matchgroupposition ]
-                        if matchword:
-                            if acceptpattern and not contextstomatchgroup[0]:
-                                acceptword = acceptpattern.match( word )
-                                if acceptword:
-                                    # matches accept pattern and there are no
-                                    # context conditions => false positive
-                                    continue
-                            if not contextstomatchgroup[0]:
+                        contextpatternstopatterngroup = contextpatterns[ patterngroupposition ]
+                        if trycontextpatterns:
+                            if not contextpatternstopatterngroup[0]:
                                 trynextterm = False
                                 # easy positive
                                 line = linenumber ( context )
                                 messages.append( termcheckmessage(
-                                    acceptpattern, word, line, content[0] ) )
+                                    acceptword, acceptcontext, word, line,
+                                    content[0] ) )
                             else:
-                                for contextpattern in contextstomatchgroup:
+                                for contextpattern in contextpatternstopatterngroup:
                                     if contextpattern[0]:
-                                        contexttype = contextpattern[1]
-                                        contextposition = wordposition
+                                        contextwheres = contextpattern[1]
 
-                                        # FIXME: after & before need to be handled
-                                        if contexttype == 'previous':
-                                            contextposition -= 1
-                                        elif contexttype == 'next':
-                                            contextposition += 1
+                                        for contextwhere in contextwheres:
+                                            contextposition = wordposition + contextwhere
+                                            if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
+                                                continue
+                                            else:
+                                                contextword = contextpattern[0].match( words[ contextposition ] )
+                                                if contextword:
+                                                    contextwords.append( contextword )
+                                                else:
+                                                    break
+                            if ( len( contextpatternstopatterngroup ) == len( contextwords )):
+                                line = linenumber ( context )
+                                message = termcheckmessage(
+                                    acceptword, acceptcontext, word, line,
+                                    content[0] )
+                                messages.append( message )
+                            trynextterm = False
 
-                                        if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
-                                            continue
-                                        else:
-                                            contextword = contextpattern[0].match( words[ contextposition ] )
-                                            if contextword != None:
-                                                contextwords.append( contextword )
-                                        if ( len( contextstomatchgroup ) == len( contextwords )):
-                                            line = linenumber ( context )
-                                            message = termcheckmessage(
-                                                acceptpattern, word, line,
-                                                content[0] )
-                                            messages.append( message )
-                                        trynextterm = False
-
-                        matchgroupposition += 1
+                        patterngroupposition += 1
                 acceptposition += 1
 
             wordposition += 1
@@ -189,76 +191,158 @@ average time per word: %s\n"""
 def buildtermdata( termfileid, terms ):
 
     global termdataid
-    global acceptpatterns
-    global matchpatterns
+    global accepts
+    global patterns
     global contextpatterns
-    global onepattern
+    # global onepattern
 
     if args.performance:
         timestartbuild = time.time()
 
     termdataid = termfileid
 
-    firstmatchgroup = True
+    firstpatterngroup = True
     for term in terms:
-        acceptxpath = term.xpath( 'accept[1]' )
-        acceptxpathcontent = acceptxpath[0].text
-        if acceptxpathcontent:
-            acceptpattern = re.compile( acceptxpathcontent )
-            acceptpatterns.append( acceptpattern )
-        else:
-            acceptpatterns.append( None )
-
-        matchpatternsofterm = []
-        matchgroupxpaths = term.xpath( 'matchgroup' )
-        for matchgroupxpath in matchgroupxpaths:
-            matchxpathcontent = matchgroupxpath.xpath( 'match[1]' )[0].text
-            if not matchxpathcontent:
-                emptypatternmessage( 'match' )
-            matchpattern = re.compile( matchxpathcontent, flags = re.I )
-            matchpatternsofterm.append( matchpattern )
-            if firstmatchgroup:
-                onepattern += '|'
-            onepattern += '(%s)' % matchxpathcontent
-
-            contextpatternsofmatchgroup = []
-            contextxpaths = matchgroupxpath.xpath( 'context' )
-            if contextxpaths:
-                for contextxpath in contextxpaths:
-                    contextxpathcontent = contextxpath.text
-                    if not contextxpathcontent:
-                        emptypatternmessage( 'context' )
-                    contextpattern = re.compile(
-                        contextxpathcontent, flags = re.I )
-                    contexttype = contextxpath.xpath( '@type' )[0]
-                    contextpatternsofmatchgroup.append(
-                        [ contextpattern, contexttype ] )
+        acceptwordxpath = term.xpath( 'accept[1]/word[1]' )
+        acceptwordxpathcontent = None
+        if acceptwordxpath:
+            acceptwordxpathcontent = acceptwordxpath[0].text
+        # If there is no accepted word, we don't care about its context either
+        if acceptwordxpathcontent:
+            acceptlist = [ acceptwordxpathcontent ]
+            acceptcontextxpath = term.xpath( 'accept[1]/context[1]' )
+            if acceptcontextxpath:
+                acceptcontextxpathcontent = acceptcontextxpath[0].text
+                acceptlist.append( acceptcontextxpathcontent )
             else:
-                contextpatternsofmatchgroup.append( [ None ] )
-            contextpatterns.append( contextpatternsofmatchgroup )
+                acceptlist.append( None )
 
-        matchpatterns.append( matchpatternsofterm )
-    onepattern = re.compile( onepattern, flags = re.I )
+            accepts.append( acceptlist )
+        else:
+            accepts.append( [ None, None ] )
+
+        patternsofterm = []
+        patterngroupxpaths = term.xpath( 'patterngroup' )
+        for patterngroupxpath in patterngroupxpaths:
+            patternsofpatterngroup = []
+            for i in range(1,6):
+                patternxpath = patterngroupxpath.xpath( 'pattern%s[1]' % i )
+                patternxpathcontent = None
+                if patternxpath:
+                    patternxpathcontent = patternxpath[0].text
+                if not patternxpathcontent:
+                    if i == 1:
+                        emptypatternmessage( 'pattern1' )
+                    else:
+                        break
+
+                pattern = None
+                casexpath = getattribute( patternxpath[0], 'case' )
+                if casexpath == 'keep':
+                    pattern = re.compile( patternxpathcontent )
+                else:
+                    pattern = re.compile( patternxpathcontent, flags = re.I )
+                # if i == 1:
+                #     if not firstpatterngroup:
+                #         onepattern += '|'
+                #     else:
+                #         firstpatterngroup = False
+                #     onepattern += '(%s)' % patternxpathcontent
+                patternsofpatterngroup.append( pattern )
+
+            patternsofterm.append( patternsofpatterngroup )
+
+            contextpatternsofpatterngroup = []
+            contextpatternxpaths = patterngroupxpath.xpath( 'contextpattern' )
+            if contextpatternxpaths:
+                for contextpatternxpath in contextpatternxpaths:
+                    contextpatternxpathcontent = contextpatternxpath.text
+                    if not contextpatternxpathcontent:
+                        emptypatternmessage( 'contextpattern' )
+
+                    casexpath = getattribute( contextpatternxpath, 'case' )
+                    lookxpath = getattribute( contextpatternxpath, 'look' )
+                    modexpath = getattribute( contextpatternxpath, 'mode' )
+                    matchxpath = getattribute( contextpatternxpath, 'match' )
+                    wherexpath = getattribute( contextpatternxpath, 'where' )
+
+                    if casexpath == 'keep':
+                        contextpattern = re.compile(
+                            contextpatternxpathcontent )
+                    else:
+                        contextpattern = re.compile(
+                            contextpatternxpathcontent, flags = re.I )
+
+                    factor = 1
+                    where = []
+                    fuzzymode = False
+                    negativematch = False
+
+                    if lookxpath == 'before':
+                        factor = -1
+
+                    if modexpath == 'fuzzy':
+                        fuzzymode = True
+
+                    if matchxpath == 'negative':
+                        negativematch = True
+
+                    if wherexpath:
+                        if fuzzymode:
+                            if int( wherexpath ) > 3:
+                                sys.exit("""Terminology: contextpattern in \
+fuzzy mode has where value over 3.
+Make sure to always use fuzzy mode with where values of 3 or below.""")
+                            whererange = range( 1, ( int( wherexpath ) + 1 ) )
+                            for i in whererange:
+                                where.append( i * factor )
+                        else:
+                            where = [ ( int( wherexpath ) * factor ) ]
+                    else:
+                        where = [ ( 1 * factor ) ]
+
+                    contextpatternsofpatterngroup.append(
+                        [ contextpattern, where, negativematch ] )
+            else:
+                contextpatternsofpatterngroup.append( [ None ] )
+            contextpatterns.append( contextpatternsofpatterngroup )
+
+        patterns.append( patternsofterm )
+    # onepattern = re.compile( onepattern, flags = re.I )
 
     if args.performance:
         timeendbuild = time.time()
         print( "time to build: %s" % str( timeendbuild - timestartbuild ) )
     return None
 
+def getattribute( oldresult, attribute ):
+    xpath = oldresult.xpath( '@' + attribute )
+    if xpath:
+        return xpath[0]
+    else:
+        return None
+
 def emptypatternmessage( element ):
     sys.exit( """Terminology: There is an empty %s element.
 Make sure each %s element in the terminology file(s) contains a pattern."""
         % (element, element) )
 
-def termcheckmessage( acceptpattern, word, line, content ):
+def termcheckmessage( acceptword, acceptcontext, word, line, content ):
     # FIXME: shorten content string
     message = None
-    if acceptpattern:
+    if acceptword != None and acceptcontext != None:
+        message = etree.XML( """<result>
+                <error>In the context of %s, use %s instead of %s
+                    <place><line>%s</line></place>:
+                    <quote>%s</quote>
+                </error>
+            </result>""" % ( acceptcontext, acceptword, word, line, content ) )
+    elif acceptword != None:
         message = etree.XML( """<result>
                 <error>Use %s instead of %s <place><line>%s</line></place>:
                     <quote>%s</quote>
                 </error>
-            </result>""" % ( acceptpattern.pattern, word, line, content ) )
+            </result>""" % ( acceptword, word, line, content ) )
     else:
         message = etree.XML( """<result>
                 <error>Do not use %s <place><line>%s</line></place>:
