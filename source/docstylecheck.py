@@ -154,16 +154,33 @@ def termcheck( context, termfileid, terms, content ):
                                     if contextpattern[0]:
                                         contextwheres = contextpattern[1]
 
-                                        for contextwhere in contextwheres:
-                                            contextposition = wordposition + contextwhere
-                                            if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
-                                                continue
-                                            else:
-                                                contextword = contextpattern[0].match( words[ contextposition ] )
-                                                if contextword:
-                                                    contextwords.append( contextword )
+
+                                        # positive matching
+                                        if not contextpattern[2]:
+                                            for contextwhere in contextwheres:
+                                                contextposition = wordposition + contextwhere
+                                                if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
+                                                    continue
                                                 else:
-                                                    break
+                                                    contextword = contextpattern[0].match( words[ contextposition ] )
+                                                    if contextword:
+                                                        contextwords.append( contextword )
+                                                    else:
+                                                        break
+                                        # negative matching
+                                        else:
+                                            contextwordmatch = False
+                                            for contextwhere in contextwheres:
+                                                contextposition = wordposition + contextwhere
+                                                if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
+                                                    continue
+                                                else:
+                                                    contextword = contextpattern[0].match( words[ contextposition ] )
+                                                    if contextword:
+                                                        contextwordmatch = True
+                                            if not contextwordmatch:
+                                                contextwords.append( True )
+
                             if ( len( contextpatternstopatterngroup ) == len( contextwords )):
                                 line = linenumber ( context )
                                 message = termcheckmessage(
