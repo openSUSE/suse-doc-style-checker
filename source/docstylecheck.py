@@ -142,7 +142,7 @@ def termcheck( context, termfileid, terms, content ):
                         contextwords = []
                         contextpatternstopatterngroup = contextpatterns[ patterngroupposition ]
                         if trycontextpatterns:
-                            if not contextpatternstopatterngroup[0]:
+                            if contextpatternstopatterngroup[0][0] == None:
                                 trynextterm = False
                                 # easy positive
                                 line = linenumber ( context )
