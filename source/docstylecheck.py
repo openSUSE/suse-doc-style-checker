@@ -418,7 +418,7 @@ def main():
         transform = etree.XSLT( etree.parse( checkfile, parser ) )
         result = transform( inputfile )
 
-        if args.errors == True:
+        if args.errors:
             # FIXME: The following could presumably also be done without adding
             # a separate stylesheet. Not sure if that would be any more
             # performant.
@@ -444,7 +444,7 @@ def main():
                                 encoding = 'UTF-8',
                                 pretty_print = True )
 
-    if args.show == True:
+    if args.show:
         webbrowser.open( resultfile, new = 0 , autoraise = True )
 
     printcolor( resultfile )
