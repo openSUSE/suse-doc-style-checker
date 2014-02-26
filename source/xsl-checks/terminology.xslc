@@ -6,12 +6,17 @@
 
   <xsl:include href="library.xsl"/>
   <xsl:param name="terminologyfile" select="'terminology.xml'"/>
-  <xsl:variable name="terminologynode" select="document($terminologyfile)/*/term"/>
-  <!-- The following leads to segfaults: -->
-  <!-- <xsl:variable name="terminologyfileid" select="document($terminologyfile)/*/@id"/> -->
+  <xsl:variable name="terminology" select="document($terminologyfile)/terminology"/>
+  <xsl:variable name="termnodes" select="$terminology/term"/>
+  <xsl:variable name="terminologyfileid">
+    <!--  Selecting directly, instead of from value-of leads to segmentation
+          faults.
+    -->
+    <xsl:value-of select="$terminology/@id"/>
+  </xsl:variable>
 
   <xsl:template match="/">
-    <xsl:if test="exslt:node-set($terminologynode)">
+    <xsl:if test="exslt:node-set($termnodes)">
       <part>
         <part-title><xsl:apply-templates mode="part-title"/></part-title>
         <xsl:apply-templates/>
@@ -32,7 +37,7 @@
                 also leads to errors.
     -->
 
-    <xsl:copy-of select="py:termcheck('terms1', $terminologynode,
+    <xsl:copy-of select="py:termcheck($terminologyfileid, $termnodes,
                                       $content)"/>
   </xsl:template>
 
