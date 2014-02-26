@@ -30,8 +30,8 @@
     <xsl:if test="not(bookinfo/date or articleinfo/date or
                       setinfo/date)">
       <result>
-        <error>Deliverable <xsl:call-template name="createid"/> does not contain
-          a date.</error>
+        <warning>Deliverable <xsl:call-template name="createid"/> does not
+          contain a date.</warning>
         <suggestion>Add a <tag>date</tag> element, use &lt;?dbtimestamp?&gt; inside.</suggestion>
       </result>
     </xsl:if>
