@@ -542,11 +542,11 @@
 
   <term>
     <accept>
-      <word>computers?</word>
+      <word>computer</word>
     </accept>
     <patterngroup>
       <pattern1>machines?</pattern1>
-      <contextpattern match="negative">virtual</contextpattern>
+      <contextpattern look="before" match="negative">virtual</contextpattern>
     </patterngroup>
   </term>
 
@@ -1340,7 +1340,6 @@
     <patterngroup>
       <pattern1 case="keep">kernel</pattern1>
       <contextpattern look="before" match="negative">(linux|windows|mac|x|.*?bsd)</contextpattern>
-      <contextpattern look="before">the</contextpattern>
     </patterngroup>
   </term>
 
