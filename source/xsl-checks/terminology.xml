@@ -7,7 +7,7 @@
       <word>32-bit</word>
     </accept>
     <patterngroup>
-      <pattern1>32[-\.]?bit</pattern1>
+      <pattern1>32bit</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>32</pattern1>
@@ -20,10 +20,13 @@
       <word>3D</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">3d</pattern1>
+      <pattern1 case="keep">3d\.?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>(three|3)[-\.]*d\.?</pattern1>
+      <pattern1>3[-\.]d\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>three[-\.]*d\.?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>(three|3)\.?</pattern1>
@@ -33,13 +36,13 @@
 
   <term>
     <accept>
-      <word>32-bit</word>
+      <word>64-bit</word>
     </accept>
     <patterngroup>
-      <pattern1>32[-\.]?bit</pattern1>
+      <pattern1>64bit</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>32</pattern1>
+      <pattern1>64</pattern1>
       <pattern2>bit</pattern2>
     </patterngroup>
   </term>
@@ -47,11 +50,19 @@
   <term>
     <accept>
       <word>activate</word>
-      <context>check box</context>
+      <context>check boxes</context>
     </accept>
     <patterngroup>
-      <pattern1>((block|check|highlight|tick)(ing|ed|s)|ch[o]?os(e[s]?|ing|n))</pattern1>
-      <contextpattern mode="fuzzy" where="2">((check|tick|option|box)[e]?[s]?|##@ui##)</contextpattern>
+      <pattern1>(block|check|tick)(ing|ed|s)</pattern1>
+      <contextpattern mode="fuzzy" where="2">((check|tick|option|box)e?s?|##@ui##)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>((block|check|tick)(ing|ed|s)|cho?os(es?|ing|n))</pattern1>
+      <contextpattern mode="fuzzy" where="2">(check|tick)s?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>((block|check|tick)(ing|ed|s)|cho?os(es?|ing|n))</pattern1>
+      <contextpattern look="before" mode="fuzzy" where="2">(check|tick|option|box)e?s?</contextpattern>
     </patterngroup>
   </term>
 
@@ -66,7 +77,7 @@
       <pattern1 case="keep">ADD-ON[Ss]?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>add[-_]?ons?</pattern1>
+      <pattern1>addons?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>add</pattern1>
@@ -118,6 +129,7 @@
   <term>
     <accept>
       <word>after</word>
+      <context>time</context>
     </accept>
     <patterngroup>
       <pattern1>once</pattern1>
@@ -188,7 +200,7 @@
     </patterngroup>
     <patterngroup>
       <pattern1>back-?upp?(ed|ing)</pattern1>
-        <!--  Adding s to the list of endings erroneously also matches the
+        <!--  Adding s to the list of endings would erroneously also match the
           plural noun.
         -->
     </patterngroup>
@@ -208,12 +220,12 @@
     </accept>
     <patterngroup>
       <pattern1>back-ups?</pattern1>
-      <contextpattern look="before">(the|a|local|remote|system|full|partial|automatic|manual)</contextpattern>
+      <contextpattern look="before">(the|a|local|remote|system|full|partial|automatic|manual|daily|hourly|monthly|yearly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>back</pattern1>
       <pattern2>ups?</pattern2>
-      <contextpattern look="before">(the|a|local|remote|system|full|partial|automatic|manual)</contextpattern>
+      <contextpattern look="before">(the|a|local|remote|system|full|partial|automatic|manual|daily|hourly|monthly|yearly)</contextpattern>
     </patterngroup>
   </term>
 
@@ -222,13 +234,13 @@
       <word>Bash</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">bash</pattern1>
+      <pattern1 case="keep">bash(?!.)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1 case="keep">BASH</pattern1>
+      <pattern1 case="keep">BASH(?!.)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>b\.a\.s\.h\.?</pattern1>
+      <pattern1>b\.a\.s\.h\.?(?!.)</pattern1>
     </patterngroup>
   </term>
 
@@ -264,6 +276,8 @@
     </accept>
     <patterngroup>
       <pattern1>boot-?loaders?</pattern1>
+      <!-- avoid matching the expansion of GRUB here -->
+      <contextpattern look="before" match="negative">unified</contextpattern>
     </patterngroup>
   </term>
 
@@ -349,8 +363,6 @@
     </patterngroup>
   </term>
 
-  <!-- Add entry for ca. = circa? -->
-
   <term>
     <accept>
       <word>CD</word>
@@ -431,11 +443,15 @@
       <word>check box</word>
     </accept>
     <patterngroup>
-      <pattern1>(check|tick)-?box(es)?</pattern1>
+      <pattern1>(check|tick)(ing)?-?(box(es)?|options?)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>tick</pattern1>
+      <pattern1>(tick(ing)?|checking)</pattern1>
       <pattern2>box(es)?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(check|tick)(ing)?</pattern1>
+      <pattern2>options?</pattern2>
     </patterngroup>
   </term>
 
@@ -488,12 +504,15 @@
     </patterngroup>
   </term>
 
+  <!--  Seems to lead to crashes - maybe because of the &ndash; and some entity
+        encoding issue?
+  -->
   <term>
     <accept>
       <word>client/server</word>
     </accept>
     <patterngroup>
-      <pattern1>client[-–+]?server</pattern1>
+      <pattern1>client[-+]?server</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>client</pattern1>
@@ -540,7 +559,9 @@
     </patterngroup>
   </term>
 
-  <term>
+  <!--  Not sure doing this does any good. It's also producing false positives.
+  -->
+  <!-- <term>
     <accept>
       <word>computer</word>
     </accept>
@@ -548,17 +569,17 @@
       <pattern1>machines?</pattern1>
       <contextpattern look="before" match="negative">virtual</contextpattern>
     </patterngroup>
-  </term>
+  </term> -->
 
   <!-- FIXME: add a rule to find the noun too -->
-  <term>
+  <!-- <term>
     <accept>
       <word>configure</word>
     </accept>
     <patterngroup>
       <pattern1>conf(ig)?(ed|ing|s)?</pattern1>
     </patterngroup>
-  </term>
+  </term> -->
 
   <term>
     <accept>
@@ -573,6 +594,7 @@
     </patterngroup>
   </term>
 
+  <!-- Note sure how to test best -->
   <!-- <term>
     <accept>
       <word>could</word>
@@ -589,32 +611,46 @@
       <word>CUPS</word>
     </accept>
     <patterngroup>
-      <pattern1>c\.?u\.?p\.?s\.?</pattern1>
+      <pattern1 case="keep">Cups</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">cups</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>c\.?u\.?p\.?s\.?</pattern1>
       <pattern2>print(ing)?</pattern2>
       <pattern3>system</pattern3>
     </patterngroup>
+    <patterngroup>
+      <pattern1>c\.u\.p\.s\.?</pattern1>
+    </patterngroup>
   </term>
 
   <term>
     <accept>
       <word>deactivate</word>
-      <context>check box</context>
+      <context>check boxes</context>
     </accept>
     <patterngroup>
-      <pattern1>(un|de)-?((block|check|highlight|tick)(ing|ed|s)|ch[o]?os(e[s]?|ing|n))</pattern1>
-      <contextpattern mode="fuzzy" where="2">((check|tick|option|box)[e]?[s]?|##@ui##)</contextpattern>
+      <pattern1>(un|de)-?(block|check|tick)(ing|ed|s)</pattern1>
+      <contextpattern mode="fuzzy" where="2">((check|tick|option|box)e?s?|##@ui##)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(un|de)-?((block|check|tick|deselect)(ing|ed|s)|ch[o]?os(e[s]?|ing|n))</pattern1>
+      <contextpattern mode="fuzzy" where="2">(check|tick|option|box)e?s?</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
       <word>deselect</word>
+      <context>text or list entries</context>
     </accept>
     <patterngroup>
-      <pattern1>(de-|un-?)select</pattern1>
+      <pattern1>(de|un)-select</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>unselect</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>remov(e[ds]?|ing)</pattern1>
@@ -685,7 +721,7 @@
       <word>DNS</word>
     </accept>
     <patterngroup>
-      <pattern1>d\.?n\.?s\.?</pattern1>
+      <pattern1>d\.n\.s\.?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>DNS</pattern1>
@@ -767,10 +803,7 @@
       <word>EPUB</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">[Ee]pub</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1 case="keep">ePub</pattern1>
+      <pattern1 case="keep">[Ee][Pp]ub</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1 case="keep">ePUB</pattern1>
@@ -929,7 +962,12 @@
       <pattern2>(disk|drive|stick)s?</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>(flash|usb)-?(disk|drive|stick)s?</pattern1>
+      <pattern1>usb</pattern1>
+      <pattern2>flash</pattern2>
+      <pattern3>(disk|drive|stick)s?</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(flash|usb)-?(flash)?-?(disk|drive|stick)s?</pattern1>
     </patterngroup>
   </term>
 
@@ -964,20 +1002,20 @@
       <word>The GIMP</word>
     </accept>
     <patterngroup>
-      <pattern1>g\.?i\.?m\.?p\.?</pattern1>
+      <pattern1>g\.?i\.?m\.?p\.?(?!.)</pattern1>
       <contextpattern look="before" match="negative">the</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1 case="keep">the</pattern1>
-      <pattern2>g\.?i\.?m\.?p\.?</pattern2>
+      <pattern2>g\.?i\.?m\.?p\.?(?!.)</pattern2>
     </patterngroup>
     <patterngroup>
       <pattern1>the</pattern1>
-      <pattern2>g\.i\.m\.p\.?</pattern2>
+      <pattern2>g\.i\.m\.p\.?(?!.)</pattern2>
     </patterngroup>
     <patterngroup>
       <pattern1>the</pattern1>
-      <pattern2 case="keep">[Gg]imp</pattern2>
+      <pattern2 case="keep">[Gg]imp(?!.)</pattern2>
     </patterngroup>
   </term>
 
@@ -986,10 +1024,10 @@
       <word>GNOME</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">[Gg]nome</pattern1>
+      <pattern1 case="keep">[Gg]nome(?!.)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>g\.n\.o\.m\.e\.?</pattern1>
+      <pattern1>g\.n\.o\.m\.e\.?(?!.)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>GNU</pattern1>
@@ -1049,10 +1087,10 @@
       <word>hard disk</word>
     </accept>
     <patterngroup>
-      <pattern1>hdd?s?</pattern1>
+      <pattern1 case="keep">[Hh][Dd][Dd]?s?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>hardd?(isk|ive)s?</pattern1>
+      <pattern1>hardd?(isk|rive)s?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>hard</pattern1>
@@ -1085,10 +1123,13 @@
 
   <term>
     <accept>
-      <word>host names?</word>
+      <word>host name</word>
     </accept>
     <patterngroup>
-      <pattern1>host-?names?</pattern1>
+      <pattern1>hostnames?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>host-names?</pattern1>
     </patterngroup>
   </term>
 
@@ -1189,7 +1230,7 @@
   </term>
 
   <!-- FIXME: add a rule to find the noun too -->
-  <term>
+  <!-- <term>
     <accept>
       <word>initialize</word>
     </accept>
@@ -1197,9 +1238,9 @@
       <pattern1>init(ed|s|ing)?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>initiali[sz](e?[ds]?|ing)?</pattern1>
+      <pattern1>initialis(e?[ds]?|ing)?</pattern1>
     </patterngroup>
-  </term>
+  </term> -->
 
   <term>
     <accept>
@@ -1333,7 +1374,8 @@
     </patterngroup>
   </term>
 
-  <term>
+  <!-- Not sure doing this is doing any good -->
+  <!-- <term>
     <accept>
       <word>Kernel</word>
     </accept>
@@ -1341,7 +1383,7 @@
       <pattern1 case="keep">kernel</pattern1>
       <contextpattern look="before" match="negative">(linux|windows|mac|x|.*?bsd)</contextpattern>
     </patterngroup>
-  </term>
+  </term> -->
 
   <term>
     <accept>
