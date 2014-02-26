@@ -246,7 +246,7 @@ def buildtermdata( termfileid, terms ):
                 patternxpath = patterngroupxpath.xpath( 'pattern%s[1]' % i )
                 patternxpathcontent = None
                 if patternxpath:
-                    patternxpathcontent = patternxpath[0].text
+                    patternxpathcontent = manglepattern( patternxpath[0].text )
                 if not patternxpathcontent:
                     if i == 1:
                         emptypatternmessage( 'pattern1' )
@@ -273,7 +273,8 @@ def buildtermdata( termfileid, terms ):
             contextpatternxpaths = patterngroupxpath.xpath( 'contextpattern' )
             if contextpatternxpaths:
                 for contextpatternxpath in contextpatternxpaths:
-                    contextpatternxpathcontent = contextpatternxpath.text
+                    contextpatternxpathcontent = manglepattern(
+                        contextpatternxpath.text )
                     if not contextpatternxpathcontent:
                         emptypatternmessage( 'contextpattern' )
 
@@ -331,6 +332,11 @@ Make sure to always use fuzzy mode with where values of 3 or below.""")
         timeendbuild = time.time()
         print( "time to build: %s" % str( timeendbuild - timestartbuild ) )
     return None
+
+def manglepattern( pattern ):
+    # FIXME: This should do more.
+    newpattern = r'\b' + pattern + r'\b'
+    return newpattern
 
 def getattribute( oldresult, attribute ):
     xpath = oldresult.xpath( '@' + attribute )
