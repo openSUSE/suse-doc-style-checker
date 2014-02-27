@@ -124,20 +124,31 @@ def termcheck( context, termfileid, terms, content ):
             acceptposition = 0
             patterngroupposition = 0
             for accept in accepts:
-                acceptword = accept[0]
-                acceptcontext = accept[1]
-
                 if trynextterm:
+                    acceptword = accept[0]
+                    acceptcontext = accept[1]
 
                     # FIXME: variable names are a bit of a mouthful
                     patterngroupstoaccept = patterns[ acceptposition ]
                     for patterngrouppatterns in patterngroupstoaccept:
                         trycontextpatterns = True
+                        matchwords = ""
+                        patterngrouppatternposition = 0
                         for patterngrouppattern in patterngrouppatterns:
-                            matchword = patterngrouppattern.match( word )
-                            if not matchword:
+                            patternposition = wordposition + patterngrouppatternposition
+                            if ( patternposition < 0 or patternposition > ( totalwords - 1 ) ):
                                 trycontextpatterns = False
                                 break
+                            matchword = patterngrouppattern.match( words[ patternposition ] )
+                            patterngrouppatternposition += 1
+                            if matchword:
+                                if not patterngrouppatternposition == 0:
+                                    matchwords += " "
+                                matchwords += matchword.group(0)
+                            else:
+                                trycontextpatterns = False
+                                break
+
 
                         contextwords = []
                         contextpatternstopatterngroup = contextpatterns[ patterngroupposition ]
@@ -147,7 +158,7 @@ def termcheck( context, termfileid, terms, content ):
                                 # easy positive
                                 line = linenumber ( context )
                                 messages.append( termcheckmessage(
-                                    acceptword, acceptcontext, word, line,
+                                    acceptword, acceptcontext, matchwords, line,
                                     content[0] ) )
                             else:
                                 for contextpattern in contextpatternstopatterngroup:
@@ -184,7 +195,7 @@ def termcheck( context, termfileid, terms, content ):
                             if ( len( contextpatternstopatterngroup ) == len( contextwords )):
                                 line = linenumber ( context )
                                 message = termcheckmessage(
-                                    acceptword, acceptcontext, word, line,
+                                    acceptword, acceptcontext, matchwords, line,
                                     content[0] )
                                 messages.append( message )
                             trynextterm = False
@@ -198,7 +209,7 @@ def termcheck( context, termfileid, terms, content ):
             timeendmatch = time.time()
             timediffmatch = timeendmatch - timestartmatch
             print( """words: %s
-time for para: %s
+time for this para: %s
 average time per word: %s\n"""
                 % ( str( totalwords ), str( timediffmatch ),
                     str( timediffmatch / (totalwords + .001 ) ) ) )
