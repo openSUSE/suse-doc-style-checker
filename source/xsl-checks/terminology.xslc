@@ -29,13 +29,11 @@
   <!-- The following template should probably match more elements. -->
   <xsl:template match="para|title">
     <xsl:variable name="node" select="."/>
-    <xsl:variable name="content">
+    <xsl:variable name="content-candidate">
       <xsl:apply-templates mode="terminology"/>
     </xsl:variable>
-    <!-- <xsl:variable name="content" select="substring-before(substring-after($content-candidate, ' '), ' ')"/> -->
-    <!-- FIXME: Find out why normalize-space() does not work above. The above
-                also leads to errors.
-    -->
+    <xsl:variable name="content"><xsl:value-of
+      select="normalize-space($content-candidate)"/></xsl:variable>
 
     <xsl:copy-of select="py:termcheck($terminologyfileid, $termnodes,
                                       $content)"/>
