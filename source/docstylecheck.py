@@ -465,7 +465,8 @@ def main():
         webbrowser.open( resultfile, new = 0 , autoraise = True )
 
     printcolor( resultfile )
-    print( "Total: " +  str( time.time() - timestart ) )
+    if args.performance:
+        print( "Total: " +  str( time.time() - timestart ) )
 
 
 if __name__ == "__main__":
