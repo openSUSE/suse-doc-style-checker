@@ -28,15 +28,17 @@
 
   <!-- The following template should probably match more elements. -->
   <xsl:template match="para|title">
-    <xsl:variable name="node" select="."/>
-    <xsl:variable name="content-candidate">
-      <xsl:apply-templates mode="terminology"/>
-    </xsl:variable>
-    <xsl:variable name="content"><xsl:value-of
-      select="normalize-space($content-candidate)"/></xsl:variable>
+    <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
+      <xsl:variable name="node" select="."/>
+      <xsl:variable name="content-candidate">
+        <xsl:apply-templates mode="terminology"/>
+      </xsl:variable>
+      <xsl:variable name="content"><xsl:value-of
+        select="normalize-space($content-candidate)"/></xsl:variable>
 
-    <xsl:copy-of select="py:termcheck($terminologyfileid, $termnodes,
-                                      $content)"/>
+      <xsl:copy-of select="py:termcheck($terminologyfileid, $termnodes,
+                                        $content)"/>
+    </xsl:if>
   </xsl:template>
 
 
