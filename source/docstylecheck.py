@@ -366,20 +366,23 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content ):
     message = None
     if acceptword != None and acceptcontext != None:
         message = etree.XML( """<result>
-                <error>In the context of %s, use %s instead of %s
+                <error>In the context of %s, use
+                    <quote>%s</quote> instead of <quote>%s</quote>
                     <place><line>%s</line></place>:
                     <quote>%s</quote>
                 </error>
             </result>""" % ( acceptcontext, acceptword, word, line, content ) )
     elif acceptword != None:
         message = etree.XML( """<result>
-                <error>Use %s instead of %s <place><line>%s</line></place>:
+                <error>Use <quote>%s</quote> instead of <quote>%s</quote>
+                    <place><line>%s</line></place>:
                     <quote>%s</quote>
                 </error>
             </result>""" % ( acceptword, word, line, content ) )
     else:
         message = etree.XML( """<result>
-                <error>Do not use %s <place><line>%s</line></place>:
+                <error>Do not use <quote>%s</quote>
+                    <place><line>%s</line></place>:
                     <quote>%s</quote>
                 </error>
             </result>""" % ( word, line, content ) )
