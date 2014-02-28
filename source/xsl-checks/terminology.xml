@@ -195,8 +195,9 @@
     <accept>
       <word>back up</word>
     </accept>
+    <!-- Backed-up can be used as an adjective. -->
     <patterngroup>
-      <pattern1>back(ed|s|ing)-?up</pattern1>
+      <pattern1>back(s|ing)-?up</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>back-?upp?(ed|ing)</pattern1>
@@ -205,11 +206,11 @@
         -->
     </patterngroup>
     <patterngroup>
-      <pattern1>back-?up</pattern1>
-      <contextpattern look="before">(when|to)</contextpattern>
+      <pattern1>back-?ups?</pattern1>
+      <contextpattern look="before">to</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>back-?up</pattern1>
+      <pattern1>back-?ups?</pattern1>
       <contextpattern>(them|these|this|it|the|a|an)</contextpattern>
     </patterngroup>
   </term>
@@ -220,7 +221,6 @@
     </accept>
     <patterngroup>
       <pattern1>back-ups?</pattern1>
-      <contextpattern look="before">(the|a|local|remote|system|full|partial|automatic|manual|daily|hourly|monthly|yearly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>back</pattern1>
@@ -1404,6 +1404,229 @@
     <patterngroup>
       <pattern1>key(board)?</pattern1>
       <pattern2>(accelerator|combo|shortcut)s?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>left-click</word>
+    </accept>
+    <patterngroup>
+      <pattern1>leftclick(ed|ing|s)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>left</pattern1>
+      <pattern2>click(ed|ing|s)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>left-?click(ed|ing|s)</pattern1>
+      <pattern2>on(to)?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>left</pattern1>
+      <pattern2>click(ed|ing|s)</pattern2>
+      <pattern3>on(to)?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>licence</word>
+    </accept>
+    <patterngroup>
+      <pattern1>licens(e[ds]?|ing)</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>local host</word>
+    </accept>
+    <patterngroup>
+      <pattern1>local-?hosts?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>log file</word>
+    </accept>
+    <patterngroup>
+      <pattern1>log-?files?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>login</word>
+    </accept>
+    <patterngroup>
+      <pattern1 look="before" match="negative" where="2" mode="fuzzy">log-[io]ns?</pattern1>
+      <contextpattern>(to|not)</contextpattern>
+      <contextpattern match="negative">(the|a|an)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>sign-[io]ns?</pattern1>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not)</contextpattern>
+      <contextpattern match="negative">(the|a|an)</contextpattern>
+    </patterngroup>
+    <!--  These overreach quite a bit and are not very useful right now. Maybe
+          use positive contextpatterns instead. -->
+    <!-- <patterngroup>
+      <pattern1>log</pattern1>
+      <pattern2>[io]ns?</pattern2>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|try|avoid)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>sign</pattern1>
+      <pattern2>[io]ns?</pattern2>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|try|avoid)</contextpattern>
+      <contextpattern match="negative" >(the|a|an|to|at)</contextpattern>
+    </patterngroup> -->
+  </term>
+
+
+  <term>
+    <accept>
+      <word>log in</word>
+    </accept>
+    <!--  These overreach quite a bit and are not very useful right now. Maybe
+          use positive contextpatterns instead. -->
+    <!-- <patterngroup>
+      <pattern1>(logg?|sign)(ed|ing|s)?-?[io]n</pattern1>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
+    </patterngroup> -->
+    <!-- don't match sentences like: Note the > sign in the boot entry. -->
+    <!-- <patterngroup>
+      <pattern1>(sign|log)-?[io]n(ed|ing|s)?</pattern1>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
+      <contextpattern match="negative">(the|a|an)</contextpattern>
+    </patterngroup> -->
+    <patterngroup>
+      <pattern1>sign(ed|ing|s)?</pattern1>
+      <pattern2>[io]n</pattern2>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
+      <contextpattern match="negative">(the|a|an)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>logg?(ed|ing|s)?</pattern1>
+      <pattern2>on</pattern2>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
+      <contextpattern match="negative">(the|a|an)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>log in to</word>
+    </accept>
+    <patterngroup>
+      <pattern1>logg?(ed|ing|s)?</pattern1>
+      <pattern2>into</pattern2>
+    </patterngroup>
+    <!-- "log in at the console" is ~correct -->
+    <patterngroup>
+      <pattern1>logg?(ed|ing|s)?</pattern1>
+      <pattern2>in</pattern2>
+      <pattern3>at</pattern3>
+      <contextpattern where="3" mode="fuzzy" match="negative">console</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>logout</word>
+    </accept>
+    <patterngroup>
+      <pattern1 look="before" match="negative" where="2" mode="fuzzy">log-o(ut|ff)s?</pattern1>
+      <contextpattern>(to|not)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>sign-o(ut|ff)s?</pattern1>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not)</contextpattern>
+      <contextpattern match="negative">(the|a|an)</contextpattern>
+    </patterngroup>
+    <!--  These overreach quite a bit and are not very useful right now. Maybe
+          use positive contextpatterns instead. -->
+    <!-- <patterngroup>
+      <pattern1>log</pattern1>
+      <pattern2>o(ut|ff)s?</pattern2>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|try|avoid)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>sign</pattern1>
+      <pattern2>o(ut|ff)s?</pattern2>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|try|avoid)</contextpattern>
+      <contextpattern match="negative">(the|a|an|off|from)</contextpattern>
+    </patterngroup> -->
+  </term>
+
+  <term>
+    <accept>
+      <word>log out</word>
+    </accept>
+    <!--  These overreach quite a bit and are not very useful right now. Maybe
+          use positive contextpatterns instead. -->
+    <!-- <patterngroup>
+      <pattern1>(logg?|sign)(ed|ing|s)?-?o(ut|ff)</pattern1>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(sign|log)-?o(ut|ff)(ed|ing|s)?</pattern1>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
+    </patterngroup> -->
+    <patterngroup>
+      <pattern1>sign(ed|ing|s)?</pattern1>
+      <pattern2>o(ff|ut)</pattern2>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>logg?(ed|ing|s)?</pattern1>
+      <pattern2>off</pattern2>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>log out of</word>
+    </accept>
+    <!-- "log in from" is always correct, so this pattern's MMV. -->
+    <patterngroup>
+      <pattern1>logg?(ed|ing|s)?</pattern1>
+      <pattern2>o(ff|ut)</pattern2>
+      <pattern3>from</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>loopback device</word>
+    </accept>
+    <patterngroup>
+      <pattern1>loop-?back-?devices?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>loop-back</pattern1>
+      <pattern2>devices?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>loop</pattern1>
+      <pattern2>back</pattern2>
+      <pattern3>devices?</pattern3>
+    </patterngroup>
+  </term>
+
+    <term>
+    <accept>
+      <word>lowercase</word>
+    </accept>
+    <patterngroup>
+      <pattern1>lower-case(d|s|ing)?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>lower</pattern1>
+      <pattern2>case(d|s|ing)?</pattern2>
     </patterngroup>
   </term>
 
