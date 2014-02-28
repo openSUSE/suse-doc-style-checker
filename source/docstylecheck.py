@@ -169,7 +169,11 @@ def termcheck( context, termfileid, terms, content ):
                                         # positive matching
                                         if not contextpattern[2]:
                                             for contextwhere in contextwheres:
-                                                contextposition = wordposition + contextwhere
+                                                contextposition = None
+                                                if contextwhere < 0:
+                                                    contextposition = wordposition + contextwhere
+                                                else:
+                                                    contextposition = wordposition + patterngrouppatternposition + contextwhere
                                                 if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
                                                     continue
                                                 else:
@@ -182,7 +186,11 @@ def termcheck( context, termfileid, terms, content ):
                                         else:
                                             contextwordmatch = False
                                             for contextwhere in contextwheres:
-                                                contextposition = wordposition + contextwhere
+                                                contextposition = None
+                                                if contextwhere < 0:
+                                                    contextposition = wordposition + contextwhere
+                                                else:
+                                                    contextposition = wordposition + patterngrouppatternposition + contextwhere
                                                 if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
                                                     continue
                                                 else:
