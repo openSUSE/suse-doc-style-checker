@@ -14,6 +14,13 @@
     -->
     <xsl:value-of select="$terminology/@id"/>
   </xsl:variable>
+  <xsl:variable name="ignoredwords">
+    <!--  Selecting directly, instead of from value-of leads to segmentation
+          faults.
+    -->
+    <xsl:value-of select="$terminology/@ignoredwords"/>
+  </xsl:variable>
+
 
   <xsl:template match="/">
     <xsl:if test="exslt:node-set($termnodes)">
@@ -37,7 +44,7 @@
         select="normalize-space($content-candidate)"/></xsl:variable>
 
       <xsl:copy-of select="py:termcheck($terminologyfileid, $termnodes,
-                                        $content)"/>
+                                        $ignoredwords, $content)"/>
     </xsl:if>
   </xsl:template>
 

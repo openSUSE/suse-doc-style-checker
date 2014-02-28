@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<terminology id="terms1">
+<terminology id="terms1" ignoredwords="(the|a|an|this|there|that|these|those|one|by|on|over|under|about|to|at|in|from)">
 <!-- Make sure to change the id when creating a new terminology file. -->
 
   <term>
@@ -1008,14 +1008,13 @@
     <patterngroup>
       <pattern1 case="keep">the</pattern1>
       <pattern2>g\.?i\.?m\.?p\.?(?!.)</pattern2>
+      <contextpattern case="keep" look="before">the</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>the</pattern1>
-      <pattern2>g\.i\.m\.p\.?(?!.)</pattern2>
+      <pattern1>g\.i\.m\.p\.?(?!.)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>the</pattern1>
-      <pattern2 case="keep">[Gg]imp(?!.)</pattern2>
+      <pattern1 case="keep">[Gg]imp(?!.)</pattern1>
     </patterngroup>
   </term>
 

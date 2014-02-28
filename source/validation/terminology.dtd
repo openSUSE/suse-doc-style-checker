@@ -32,7 +32,8 @@
 
 
 <!ATTLIST terminology
-                          id        CDATA                           #REQUIRED >
+                          id        CDATA                           #REQUIRED
+                          ignoredwords CDATA                           #IMPLIED >
 
 <!--  Default value is 1, ignore. -->
 <!ATTLIST patterngroup

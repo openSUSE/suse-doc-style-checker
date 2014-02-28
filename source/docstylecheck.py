@@ -25,6 +25,7 @@ __description__ = "checks a given DocBook XML file for stylistic errors"
 args = None
 # terminology data structures
 termdataid = None
+ignoredpattern = None
 accepts = []
 patterns = []           # per acceptpattern, add list of list of patterns
 contextpatterns = []    # per pattern list, add list of contextpatterns
@@ -77,13 +78,14 @@ def printcolor( message, type = None ):
 def linenumber( context ):
     return context.context_node.sourceline
 
-def termcheck( context, termfileid, terms, content ):
+def termcheck( context, termfileid, terms, ignoredwords, content ):
     # FIXME: Modes: para, title?
     # FIXME: Use fileid to skip creation of data structures
     messages = []
 
     if content:
         global termdataid
+        global ignoredpattern
         global accepts
         global patterns
         global contextpatterns
@@ -98,7 +100,7 @@ def termcheck( context, termfileid, terms, content ):
         totalwords = len( words )
 
         if not termfileid == termdataid:
-            buildtermdata( termfileid, terms )
+            buildtermdata( termfileid, terms, ignoredwords )
 
         if args.performance:
             timestartmatch = time.time()
@@ -110,6 +112,11 @@ def termcheck( context, termfileid, terms, content ):
             # FIXME: I was unsure how to use continue to do this. Essentially,
             # depending on a wordmatch appearing, I need to skip up two
             # loops. :/
+            if ignoredpattern:
+                if ignoredpattern.match( word ):
+                    wordposition += 1
+                    continue
+
             trynextterm = True
 
             # if not onepattern.match( word ):  # 100 named groups
@@ -149,7 +156,6 @@ def termcheck( context, termfileid, terms, content ):
                                 trycontextpatterns = False
                                 break
 
-
                         contextwords = []
                         contextpatternstopatterngroup = contextpatterns[ patterngroupposition ]
                         if trycontextpatterns:
@@ -164,8 +170,6 @@ def termcheck( context, termfileid, terms, content ):
                                 for contextpattern in contextpatternstopatterngroup:
                                     if contextpattern[0]:
                                         contextwheres = contextpattern[1]
-
-
                                         # positive matching
                                         if not contextpattern[2]:
                                             for contextwhere in contextwheres:
@@ -173,7 +177,7 @@ def termcheck( context, termfileid, terms, content ):
                                                 if contextwhere < 0:
                                                     contextposition = wordposition + contextwhere
                                                 else:
-                                                    contextposition = wordposition + patterngrouppatternposition + contextwhere
+                                                    contextposition = wordposition + (patterngrouppatternposition - 1) + contextwhere
                                                 if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
                                                     continue
                                                 else:
@@ -190,7 +194,7 @@ def termcheck( context, termfileid, terms, content ):
                                                 if contextwhere < 0:
                                                     contextposition = wordposition + contextwhere
                                                 else:
-                                                    contextposition = wordposition + patterngrouppatternposition + contextwhere
+                                                    contextposition = wordposition + (patterngrouppatternposition - 1) + contextwhere
                                                 if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
                                                     continue
                                                 else:
@@ -224,9 +228,10 @@ average time per word: %s\n"""
 
     return messages
 
-def buildtermdata( termfileid, terms ):
+def buildtermdata( termfileid, terms, ignoredwords ):
 
     global termdataid
+    global ignoredpattern
     global accepts
     global patterns
     global contextpatterns
@@ -236,6 +241,10 @@ def buildtermdata( termfileid, terms ):
         timestartbuild = time.time()
 
     termdataid = termfileid
+
+    if ignoredwords:
+        ignoredpattern = re.compile( manglepattern( ignoredwords[0] ),
+            flags = re.I )
 
     firstpatterngroup = True
     for term in terms:
