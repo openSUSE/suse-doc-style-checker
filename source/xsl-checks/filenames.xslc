@@ -43,7 +43,7 @@
                         ($fileref-safe-special-state = false)">
             and
           </xsl:if>
-          <xsl:if test="$fileref-safe-AZ-state = false">
+          <xsl:if test="$fileref-safe-special-state = false">
             special characters
           </xsl:if>
           <xsl:text>.</xsl:text>
