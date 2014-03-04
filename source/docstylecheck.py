@@ -174,10 +174,9 @@ def termcheck( context, termfileid, terms, ignoredwords, content ):
                                         if not contextpattern[2]:
                                             for contextwhere in contextwheres:
                                                 contextposition = None
-                                                if contextwhere < 0:
-                                                    contextposition = wordposition + contextwhere
-                                                else:
-                                                    contextposition = wordposition + (patterngrouppatternposition - 1) + contextwhere
+                                                contextposition = wordposition + contextwhere
+                                                if contextwhere > 0:
+                                                    contextposition += patterngrouppatternposition
                                                 if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
                                                     continue
                                                 else:
@@ -191,10 +190,9 @@ def termcheck( context, termfileid, terms, ignoredwords, content ):
                                             contextwordmatch = False
                                             for contextwhere in contextwheres:
                                                 contextposition = None
-                                                if contextwhere < 0:
-                                                    contextposition = wordposition + contextwhere
-                                                else:
-                                                    contextposition = wordposition + (patterngrouppatternposition - 1) + contextwhere
+                                                contextposition = wordposition + contextwhere
+                                                if contextwhere > 0:
+                                                    contextposition += patterngrouppatternposition
                                                 if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
                                                     continue
                                                 else:
