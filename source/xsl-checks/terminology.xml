@@ -1185,6 +1185,18 @@
 
   <term>
     <accept>
+      <word>HTTPS</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Hh]ttps</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>h\.t\.t\.p\.s\.?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>hypervisor</word>
     </accept>
     <patterngroup>
@@ -1430,10 +1442,10 @@
 
   <term>
     <accept>
-      <word>licence</word>
+      <word>license</word>
     </accept>
     <patterngroup>
-      <pattern1>licens(e[ds]?|ing)</pattern1>
+      <pattern1>licenc(e[ds]?|ing)</pattern1>
     </patterngroup>
   </term>
 
@@ -1443,6 +1455,20 @@
     </accept>
     <patterngroup>
       <pattern1>local-?hosts?</pattern1>
+      <contextpattern look="before">a</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>localhost</word>
+    </accept>
+    <patterngroup>
+      <pattern1>local-hosts?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>local</pattern1>
+      <pattern2>hosts?</pattern2>
     </patterngroup>
   </term>
 
@@ -1726,7 +1752,6 @@
     </patterngroup>
   </term>
 
-
   <!-- <row>
     <entry>might</entry>
     <entry>may</entry>
@@ -1736,7 +1761,7 @@
     </entry>
   </row> -->
 
-  <!-- <term>
+  <term>
     <accept>
       <word>mount point</word>
     </accept>
@@ -1759,7 +1784,7 @@
       <pattern1>mouse</pattern1>
       <pattern2>(button|key)s?</pattern2>
     </patterngroup>
-  </term> -->
+  </term>
 
   <!-- Exclude -ing form since that is almost exclusively meant as a noun -->
   <term>
