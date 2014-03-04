@@ -124,10 +124,6 @@ def termcheck( context, termfileid, terms, ignoredwords, content ):
 
             # Use the *patterns variables defined above to match all patterns
             # over everything.
-            # FIXME: An optimisation should be to first get the first letter of
-            # the word, then apply all patterns that starts with that letter.
-            # However, the the information which letter any pattern belongs to
-            # must probably be built by hand.
             acceptposition = 0
             patterngroupposition = 0
             for accept in accepts:
