@@ -147,7 +147,6 @@ def termcheck( context, termfileid, terms, ignoredwords, content ):
                                 trycontextpatterns = False
                                 break
                             matchword = patterngrouppattern.match( words[ patternposition ] )
-                            patterngrouppatternposition += 1
                             if matchword:
                                 if not patterngrouppatternposition == 0:
                                     matchwords += " "
@@ -155,6 +154,7 @@ def termcheck( context, termfileid, terms, ignoredwords, content ):
                             else:
                                 trycontextpatterns = False
                                 break
+                            patterngrouppatternposition += 1
 
                         contextwords = []
                         contextpatternstopatterngroup = contextpatterns[ patterngroupposition ]
