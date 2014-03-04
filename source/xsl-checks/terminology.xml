@@ -205,14 +205,14 @@
           plural noun.
         -->
     </patterngroup>
-    <patterngroup>
+    <!-- <patterngroup>
       <pattern1>back-?ups?</pattern1>
       <contextpattern look="before">to</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>back-?ups?</pattern1>
       <contextpattern>(them|these|this|it|the|a|an)</contextpattern>
-    </patterngroup>
+    </patterngroup> -->
   </term>
 
   <term>
@@ -1460,7 +1460,7 @@
       <word>login</word>
     </accept>
     <patterngroup>
-      <pattern1 look="before" match="negative" where="2" mode="fuzzy">log-[io]ns?</pattern1>
+      <pattern1>log-[io]ns?</pattern1>
       <contextpattern>(to|not)</contextpattern>
       <contextpattern match="negative">(the|a|an)</contextpattern>
     </patterngroup>
@@ -1537,7 +1537,7 @@
       <word>logout</word>
     </accept>
     <patterngroup>
-      <pattern1 look="before" match="negative" where="2" mode="fuzzy">log-o(ut|ff)s?</pattern1>
+      <pattern1>log-o(ut|ff)s?</pattern1>
       <contextpattern>(to|not)</contextpattern>
     </patterngroup>
     <patterngroup>
@@ -1616,7 +1616,7 @@
     </patterngroup>
   </term>
 
-    <term>
+  <term>
     <accept>
       <word>lowercase</word>
     </accept>
@@ -1626,6 +1626,248 @@
     <patterngroup>
       <pattern1>lower</pattern1>
       <pattern2>case(d|s|ing)?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>mail server</word>
+    </accept>
+    <patterngroup>
+      <pattern1>mail-servers?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>mail</pattern1>
+      <pattern2>servers?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Maildir</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">maildir</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>mail-dir</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>mail</pattern1>
+      <pattern2>dir</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>mainboard</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">motherboards?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>m(ain|other)-boards?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>m(ain|other)</pattern1>
+      <pattern2>boards?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>man page</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">Man</pattern1>
+      <pattern2>pages?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>man-?pages?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>meta data</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">meta</pattern1>
+      <pattern2>datas</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">meta</pattern1>
+      <pattern2>dates?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>meta-?dat[ae]s?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>middle-click</word>
+    </accept>
+    <patterngroup>
+      <pattern1>middleclick(ed|ing|s)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>middle</pattern1>
+      <pattern2>click(ed|ing|s)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>middle-?click(ed|ing|s)</pattern1>
+      <pattern2>on(to)?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>middle</pattern1>
+      <pattern2>click(ed|ing|s)</pattern2>
+      <pattern3>on(to)?</pattern3>
+    </patterngroup>
+  </term>
+
+
+  <!-- <row>
+    <entry>might</entry>
+    <entry>may</entry>
+    <entry>verb; use <emphasis>might</emphasis> to express a
+      possibility, only use <emphasis>may</emphasis> to express
+      permissions sought/given
+    </entry>
+  </row> -->
+
+  <!-- <term>
+    <accept>
+      <word>mount point</word>
+    </accept>
+    <patterngroup>
+      <pattern1>mount-?points?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>mouse button</word>
+    </accept>
+    <patterngroup>
+      <pattern1>mouse-?keys?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>mouse-buttons?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>mouse</pattern1>
+      <pattern2>(button|key)s?</pattern2>
+    </patterngroup>
+  </term> -->
+
+  <!-- Exclude -ing form since that is almost exclusively meant as a noun -->
+  <term>
+    <accept>
+      <word>multitask</word>
+    </accept>
+    <patterngroup>
+      <pattern1>multi-task(e[ds])?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>multi</pattern1>
+      <pattern2>task(e[ds])?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>multitasking</word>
+    </accept>
+    <!--  Multitaskings is so delightfully incorrect... not sure what to best
+          do with it. -->
+    <patterngroup>
+      <pattern1>multi-taskings?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>multi</pattern1>
+      <pattern2>taskings?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>multiuser</word>
+    </accept>
+    <patterngroup>
+      <pattern1>multi-user</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>mouse</pattern1>
+      <pattern2>user</pattern2>
+    </patterngroup>
+  </term>
+
+  <!-- Exclude this and recommend need to instead. -->
+  <!-- <row>
+    <entry>must</entry>
+    <entry>have to</entry>
+    <entry>verb; see also <emphasis>need to</emphasis></entry>
+  </row> -->
+
+  <term>
+    <accept>
+      <word>name server</word>
+    </accept>
+    <patterngroup>
+      <pattern1>name-?servers?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>need to</word>
+    </accept>
+    <patterngroup>
+      <pattern1>ha(ve|d|s)</pattern1>
+      <pattern2>to</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>NFS</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">N\.?f\.?s\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>n\.f\.s\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>nfs</pattern1>
+      <pattern2>file</pattern2>
+      <pattern3>systems?</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>nfs</pattern1>
+      <pattern2>file-?systems?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>NIS</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">N\.?i\.?s\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>n\.i\.s\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>nis</pattern1>
+      <pattern2>information</pattern2>
+      <pattern3>services?</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>nfs</pattern1>
+      <pattern2>information-?services?</pattern2>
     </patterngroup>
   </term>
 
