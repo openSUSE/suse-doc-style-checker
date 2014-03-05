@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<terminology id="terms1" ignoredwords="(the|a|an|this|there|that|these|those|one|by|on|over|under|about|to|at|in|from)">
+<terminology ignoredwords="(the|a|an|this|there|that|these|those|one|by|on|over|under|about|to|at|in|from)">
 <!-- Make sure to change the id when creating a new terminology file. -->
 
   <term>

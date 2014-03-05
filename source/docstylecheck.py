@@ -9,6 +9,7 @@ import subprocess
 import sys
 import time
 import argparse
+import random
 import webbrowser
 try:
     from lxml import etree
@@ -78,7 +79,7 @@ def printcolor( message, type = None ):
 def linenumber( context ):
     return context.context_node.sourceline
 
-def termcheck( context, termfileid, terms, ignoredwords, content ):
+def termcheck( context, termfileid, content ):
     # FIXME: Modes: para, title?
     # FIXME: Use fileid to skip creation of data structures
     messages = []
@@ -98,9 +99,6 @@ def termcheck( context, termfileid, terms, ignoredwords, content ):
         words = content[0].split()
         wordposition = 0
         totalwords = len( words )
-
-        if not termfileid == termdataid:
-            buildtermdata( termfileid, terms, ignoredwords )
 
         if args.performance:
             timestartmatch = time.time()
@@ -222,7 +220,7 @@ average time per word: %s\n"""
 
     return messages
 
-def buildtermdata( termfileid, terms, ignoredwords ):
+def buildtermdata( context, terms, ignoredwords ):
 
     global termdataid
     global ignoredpattern
@@ -234,7 +232,7 @@ def buildtermdata( termfileid, terms, ignoredwords ):
     if args.performance:
         timestartbuild = time.time()
 
-    termdataid = termfileid
+    termdataid = random.randint(0, 999999999)
 
     if ignoredwords:
         ignoredpattern = re.compile( manglepattern( ignoredwords[0] ),
@@ -353,7 +351,7 @@ Make sure to always use fuzzy mode with where values of 3 or below.""")
     if args.performance:
         timeendbuild = time.time()
         print( "time to build: %s" % str( timeendbuild - timestartbuild ) )
-    return None
+    return termdataid
 
 def manglepattern( pattern ):
     # FIXME: This should do more.
@@ -409,6 +407,7 @@ def main():
     ns.prefix = 'py'
     ns[ 'linenumber' ] = linenumber
     ns[ 'termcheck' ] = termcheck
+    ns[ 'buildtermdata' ] = buildtermdata
 
     location = os.path.dirname( os.path.realpath( __file__ ) )
 

@@ -8,11 +8,8 @@
   <xsl:param name="terminologyfile" select="'terminology.xml'"/>
   <xsl:variable name="terminology" select="document($terminologyfile)/terminology"/>
   <xsl:variable name="termnodes" select="$terminology/term"/>
-  <xsl:variable name="terminologyfileid">
-    <!--  Selecting directly, instead of from value-of leads to segmentation
-          faults.
-    -->
-    <xsl:value-of select="$terminology/@id"/>
+  <xsl:variable name="termdataid">
+    <xsl:value-of select="py:buildtermdata($termnodes, $ignoredwords)"/>
   </xsl:variable>
   <xsl:variable name="ignoredwords">
     <!--  Selecting directly, instead of from value-of leads to segmentation
@@ -43,8 +40,7 @@
       <xsl:variable name="content"><xsl:value-of
         select="normalize-space($content-candidate)"/></xsl:variable>
 
-      <xsl:copy-of select="py:termcheck($terminologyfileid, $termnodes,
-                                        $ignoredwords, $content)"/>
+      <xsl:copy-of select="py:termcheck($termdataid, $content)"/>
     </xsl:if>
   </xsl:template>
 
