@@ -79,7 +79,7 @@ def printcolor( message, type = None ):
 def linenumber( context ):
     return context.context_node.sourceline
 
-def termcheck( context, termfileid, content ):
+def termcheck( context, termfileid, content, contentpretty ):
     # FIXME: Modes: para, title?
     # FIXME: Use fileid to skip creation of data structures
     messages = []
@@ -96,6 +96,14 @@ def termcheck( context, termfileid, content ):
         # For whatever reason, this made is crash happily/semi-randomly when
         # creating messages.
         content = str( content[0] )
+
+        # This if/else block should not be necessary (if there is content,
+        # there should always also be pretty content, but that depends on the
+        # XSLT used for checking). It hopefully won't hurt either.
+        if contentpretty:
+            contentpretty = str( contentpretty[0] )
+        else:
+            contentpretty = content
 
         # FIXME: Get something better than s.split. It is actually quite
         # important to get (most) sentence boundaries in the future. Some
@@ -164,7 +172,7 @@ def termcheck( context, termfileid, content ):
                                 line = linenumber ( context )
                                 messages.append( termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
-                                    content ) )
+                                    contentpretty ) )
                             else:
                                 for contextpattern in contextpatternstopatterngroup:
                                     if contextpattern[0]:
@@ -205,7 +213,7 @@ def termcheck( context, termfileid, content ):
                                 line = linenumber ( context )
                                 message = termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
-                                    content )
+                                    contentpretty )
                                 messages.append( message )
                             trynextterm = False
 

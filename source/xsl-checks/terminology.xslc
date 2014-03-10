@@ -39,8 +39,11 @@
       </xsl:variable>
       <xsl:variable name="content"><xsl:value-of
         select="normalize-space($content-candidate)"/></xsl:variable>
+      <xsl:variable name="content-pretty"><xsl:value-of
+        select="normalize-space(self::*)"/></xsl:variable>
 
-      <xsl:copy-of select="py:termcheck($termdataid, $content)"/>
+      <xsl:copy-of
+        select="py:termcheck($termdataid, $content, $content-pretty)"/>
     </xsl:if>
   </xsl:template>
 
