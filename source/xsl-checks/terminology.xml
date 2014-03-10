@@ -1925,4 +1925,266 @@
     </patterngroup>
   </term>
 
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern1>obvious</pattern1>
+      <contextpattern look="before" where="2">is</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>obvious</pattern1>
+      <contextpattern>(due|owing|because|since|reasons?)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>obviously</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>OOo</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">OOo</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">O[Oo]\.?oo</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">oo\.?o?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>open</word>
+    </accept>
+    <patterngroup>
+      <pattern1>open(ed|s|ing)</pattern1>
+      <pattern2>up</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>OpenOffice.org</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">Openoffice\.?org</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>openoffice</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>open</pattern1>
+      <pattern2>office</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>open</pattern1>
+      <pattern2>office</pattern2>
+      <pattern3>org</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>openSUSE</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">Open[Ss][Uu][Ss][Ee]</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>open-suse</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>open</pattern1>
+      <pattern2>suse</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>open source</word>
+    </accept>
+    <patterngroup>
+      <pattern1>open-?source</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>open</pattern1>
+      <pattern2 case="keep">Source</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>paravirtualized</word>
+    </accept>
+    <patterngroup>
+      <pattern1>para-?virtualised</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>para-virtualized</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>para</pattern1>
+      <pattern2>virtuali[sz]ed</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>path name</word>
+    </accept>
+    <patterngroup>
+      <pattern1>path-?names?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>plug in</word>
+    </accept>
+    <patterngroup>
+      <pattern1>plugg?(ed|s|ing)-?in</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>plug-?inn?(ed|ing)</pattern1>
+    </patterngroup>
+    <!-- FIXME: need to check for context here, too -->
+  </term>
+
+  <term>
+    <accept>
+      <word>pop-up</word>
+    </accept>
+    <patterngroup>
+      <pattern1>pop</pattern1>
+      <pattern2>up</pattern2>
+      <contextpattern look="before">(the|a)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>popup</pattern1>
+      <contextpattern look="before">(the|a)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>on port</word>
+    </accept>
+    <patterngroup>
+      <pattern1>at</pattern1>
+      <pattern2>ports?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(at|on)</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>ports?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>PostScript</word>
+    </accept>
+    <patterngroup>
+      <pattern1>post</pattern1>
+      <pattern2>script</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">POSTSCRIPT</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">[Pp]ostscript</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>preconfigure</word>
+    </accept>
+    <patterngroup>
+      <pattern1>pre</pattern1>
+      <pattern2>configure(s|d|ing)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>pre-configure(s|d|ing)</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>print</word>
+    </accept>
+    <patterngroup>
+      <pattern1>print(s|ed|ing)</pattern1>
+      <pattern2>out</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>print(s|ed|ing)</pattern1>
+      <contextpattern mode="fuzzy" where="3">out</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>print queue</word>
+    </accept>
+    <patterngroup>
+      <pattern1>print(er|ing)</pattern1>
+      <pattern2>queues?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>print(er|ing)?-queues?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>print queue</word>
+    </accept>
+    <patterngroup>
+      <pattern1>print(er|ing)</pattern1>
+      <pattern2>spoolers?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>print(er|ing)?-spoolers?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>press</word>
+      <context>keys or mouse buttons</context>
+    </accept>
+    <patterngroup>
+      <pattern1>hit|punch(ed|s|ing)?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>PXE</word>
+    </accept>
+    <patterngroup>
+      <pattern1>p\.x\.e\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>pixie</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">[Pp]xe</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>PXE boot</word>
+    </accept>
+    <patterngroup>
+      <pattern1>pxe</pattern1>
+      <pattern2 case="keep">Boot</pattern2>
+    </patterngroup>
+  </term>
+
 </terminology>
