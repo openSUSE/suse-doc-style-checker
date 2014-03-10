@@ -92,11 +92,16 @@ def termcheck( context, termfileid, content ):
         global contextpatterns
         # global onepattern
 
+        # I get this as a lxml.etree._ElementUnicodeResult, not as a string.
+        # For whatever reason, this made is crash happily/semi-randomly when
+        # creating messages.
+        content = str( content[0] )
+
         # FIXME: Get something better than s.split. It is actually quite
         # important to get (most) sentence boundaries in the future. Some
         # existing tokenisers are overzealous, such as the default one from
         # NLTK.
-        words = content[0].split()
+        words = content.split()
         wordposition = 0
         totalwords = len( words )
 
@@ -107,14 +112,14 @@ def termcheck( context, termfileid, content ):
             # When a pattern already matches on a word, don't try to find more
             # problems with it. (Is that a sane approach? Maybe there are other
             # problems...)
-            # FIXME: I was unsure how to use continue to do this. Essentially,
-            # depending on a wordmatch appearing, I need to skip up two
-            # loops. :/
             if ignoredpattern:
                 if ignoredpattern.match( word ):
                     wordposition += 1
                     continue
 
+            # FIXME: I was unsure how to use continue to do this. Essentially,
+            # depending on a wordmatch appearing, I need to skip up two
+            # loops. :/
             trynextterm = True
 
             # if not onepattern.match( word ):  # 100 named groups
@@ -159,7 +164,7 @@ def termcheck( context, termfileid, content ):
                                 line = linenumber ( context )
                                 messages.append( termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
-                                    content[0] ) )
+                                    content ) )
                             else:
                                 for contextpattern in contextpatternstopatterngroup:
                                     if contextpattern[0]:
@@ -200,7 +205,7 @@ def termcheck( context, termfileid, content ):
                                 line = linenumber ( context )
                                 message = termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
-                                    content[0] )
+                                    content )
                                 messages.append( message )
                             trynextterm = False
 
@@ -354,7 +359,7 @@ Make sure to always use fuzzy mode with where values of 3 or below.""")
     return termdataid
 
 def manglepattern( pattern ):
-    # FIXME: This should do more.
+    # FIXME: This should do more. What about brackets/parentheses?
     newpattern = r'\b' + pattern + r'\b'
     return newpattern
 
