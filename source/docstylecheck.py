@@ -383,9 +383,20 @@ def emptypatternmessage( element ):
 Make sure each %s element in the terminology file(s) contains a pattern."""
         % (element, element) )
 
+def xmlescape( text ):
+    escapetable = {
+        "&": "&amp;",
+        '"': "&quot;",
+        "'": "&apos;",
+        ">": "&gt;",
+        "<": "&lt;",
+        }
+    return "".join(escapetable.get(c,c) for c in text)
+
 def termcheckmessage( acceptword, acceptcontext, word, line, content ):
-    # FIXME: shorten content string
+    # FIXME: shorten content string (in the right place)
     message = None
+    content = xmlescape( content )
     if acceptword != None and acceptcontext != None:
         message = etree.XML( """<result>
                 <error>In the context of %s, use
@@ -393,21 +404,21 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content ):
                     <place><line>%s</line></place>:
                     <quote>%s</quote>
                 </error>
-            </result>""" % ( acceptcontext, acceptword, word, line, content ) )
+            </result>""" % ( acceptcontext, acceptword, word, str(line), content ) )
     elif acceptword != None:
         message = etree.XML( """<result>
                 <error>Use <quote>%s</quote> instead of <quote>%s</quote>
                     <place><line>%s</line></place>:
                     <quote>%s</quote>
                 </error>
-            </result>""" % ( acceptword, word, line, content ) )
+            </result>""" % ( acceptword, word, str(line), content ) )
     else:
         message = etree.XML( """<result>
                 <error>Do not use <quote>%s</quote>
                     <place><line>%s</line></place>:
                     <quote>%s</quote>
                 </error>
-            </result>""" % ( word, line, content ) )
+            </result>""" % ( word, str(line), content ) )
     return message
 
 
