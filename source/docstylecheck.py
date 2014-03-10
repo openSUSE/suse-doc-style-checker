@@ -62,7 +62,7 @@ def parseargs():
         action = 'store_true',
         default = False,
         help = "write some performance measurements to stdout" )
-    parser.add_argument( 'inputfile' )
+    parser.add_argument( 'inputfile', type=argparse.FileType('r') )
     parser.add_argument( 'outputfile', nargs = "?" )
 
     return parser.parse_args()
@@ -431,11 +431,11 @@ def main():
         resultfilename = args.outputfile
         resultpath = os.path.dirname( os.path.realpath( args.outputfile ) )
     else:
-        resultfilename = args.inputfile
+        resultfilename = args.inputfile.name
         resultfilename = os.path.basename( os.path.realpath( resultfilename ) )
         resultfilename = re.sub( r'(_bigfile)?\.xml', r'', resultfilename )
         resultfilename = '%s-stylecheck.xml' % resultfilename
-        resultpath = os.path.dirname( os.path.realpath( args.inputfile ) )
+        resultpath = os.path.dirname( os.path.realpath( args.inputfile.name ) )
 
     resultfile = os.path.join( resultpath, resultfilename )
 
