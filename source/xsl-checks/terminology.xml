@@ -525,11 +525,11 @@
   <term>
     <accept>
       <word>close</word>
-      <context>application</context>
+      <context>windows</context>
     </accept>
     <patterngroup>
-      <pattern1>((abort|exit)(ed|ing|s)?|terminat(ed?|es|ing))</pattern1>
-      <contextpattern mode="fuzzy" where="3">(window|dialog(ue)|app(lication)?|software|program(me))s?</contextpattern>
+      <pattern1>(quit(s|t?ing)?|(abort|exit)(ed|ing|s)?|terminat(ed?|es|ing))</pattern1>
+      <contextpattern mode="fuzzy" where="3">(window|dialog(ue))s?</contextpattern>
     </patterngroup>
   </term>
 
@@ -563,10 +563,19 @@
 
   <term>
     <accept>
+      <word>configuration</word>
+    </accept>
+    <patterngroup>
+      <pattern1>conf(ig)?s?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>configure</word>
     </accept>
     <patterngroup>
-      <pattern1>conf(ig)?(ed|ing|s)?</pattern1>
+      <pattern1>conf(ig)?(ed|ing)</pattern1>
     </patterngroup>
   </term>
 
@@ -906,7 +915,7 @@
       <word>simplify</word>
     </accept>
     <patterngroup>
-      <pattern1>facilitat(e[sd]?|ing)</pattern1>
+      <pattern1>(facilitat|eas)(e[sd]?|ing)</pattern1>
     </patterngroup>
   </term>
 
@@ -1240,10 +1249,22 @@
 
   <term>
     <accept>
+      <word>initialization</word>
+    </accept>
+    <patterngroup>
+      <pattern1>inits?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>initialisations?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>initialize</word>
     </accept>
     <patterngroup>
-      <pattern1>init(ed|s|ing)?</pattern1>
+      <pattern1>init(ed|ing)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>initialis(e?[ds]?|ing)?</pattern1>
@@ -1516,17 +1537,9 @@
     <accept>
       <word>log in</word>
     </accept>
-    <!--  These overreach quite a bit and are not very useful right now. Maybe
-          use positive contextpatterns instead. -->
-    <!-- <patterngroup>
-      <pattern1>(logg?|sign)(ed|ing|s)?-?[io]n</pattern1>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
-    </patterngroup> -->
     <!-- don't match sentences like: "Note the > sign in the boot entry." -->
     <patterngroup>
-      <pattern1>(sign|log)-?[io]n(ed|ing|s)?</pattern1>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
-      <contextpattern match="negative">(the|a|an)</contextpattern>
+      <pattern1>(sign|log)-?[io]n(ed|ing)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>sign(ed|ing|s)?</pattern1>
@@ -1593,14 +1606,14 @@
     </accept>
     <!--  These overreach quite a bit and are not very useful right now. Maybe
           use positive contextpatterns instead. -->
-    <!-- <patterngroup>
-      <pattern1>(logg?|sign)(ed|ing|s)?-?o(ut|ff)</pattern1>
+    <patterngroup>
+      <pattern1>(logg?|sign)(ed|ing)-?o(ut|ff)</pattern1>
       <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>(sign|log)-?o(ut|ff)(ed|ing|s)?</pattern1>
+      <pattern1>(sign|log)-?o(ut|ff)(ed|ing)</pattern1>
       <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
-    </patterngroup> -->
+    </patterngroup>
     <patterngroup>
       <pattern1>sign(ed|ing|s)?</pattern1>
       <pattern2>o(ff|ut)</pattern2>
@@ -2102,10 +2115,10 @@
     </accept>
     <patterngroup>
       <pattern1>pre</pattern1>
-      <pattern2>configure(s|ing)</pattern2>
+      <pattern2>configure(es?|ing)</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>pre-configure(s|ing)</pattern1>
+      <pattern1>pre-configure(es?|ing)</pattern1>
     </patterngroup>
   </term>
 
@@ -2201,6 +2214,190 @@
     <patterngroup>
       <pattern1>pxe</pattern1>
       <pattern2 case="keep">Boot</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>quit</word>
+      <context>applications</context>
+    </accept>
+    <patterngroup>
+      <pattern1>(clos(e[ds]?|ing)|(abort|exit)(ed|ing|s)?)</pattern1>
+      <contextpattern mode="fuzzy" where="3">(program(me)?|software|application)s?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>RAM</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Rr]am</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>r\.a\.m\.?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>RAM disk</word>
+    </accept>
+    <patterngroup>
+      <pattern1>ram</pattern1>
+      <pattern2 case="keep">drives?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ram-?d(rive|isk)s?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>README</word>
+    </accept>
+    <patterngroup>
+      <pattern1>read</pattern1>
+      <pattern2>mes?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">[Rr]ead-?[Mm]es?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>read-only</word>
+    </accept>
+    <patterngroup>
+      <pattern1>read</pattern1>
+      <pattern2>only</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>r(ead|\.)?o(nly|\.)?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>reconfigure</word>
+    </accept>
+    <patterngroup>
+      <pattern1>re</pattern1>
+      <pattern2>configur(e[sd]?|ing)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>re-configur(e[sd]?|ing)</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>re-create</word>
+    </accept>
+    <patterngroup>
+      <pattern1>re</pattern1>
+      <pattern2>creat(e[sd]?|ing)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>recreat(e[sd]?|ing)</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>register</word>
+    </accept>
+    <patterngroup>
+      <pattern1>sign(ed|s|ing)?</pattern1>
+      <pattern2>up</pattern2>
+    </patterngroup>
+    <!-- check for sign-up/signup, too? -->
+  </term>
+
+  <!-- punted -->
+  <!-- <row>
+    <entry>(to) register at sth.</entry>
+    <entry/>
+    <entry>verb; register at a system</entry>
+  </row>
+  <row>
+    <entry>(to) register for sth.</entry>
+    <entry/>
+    <entry>verb; register for a service</entry>
+  </row> -->
+
+  <term>
+    <accept>
+      <word>right-click</word>
+    </accept>
+    <patterngroup>
+      <pattern1>rightclick(ed|ing|s)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>right</pattern1>
+      <pattern2>click(ed|ing|s)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>right-?click(ed|ing|s)</pattern1>
+      <pattern2>on(to)?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>right</pattern1>
+      <pattern2>click(ed|ing|s)</pattern2>
+      <pattern3>on(to)?</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>click(ed|ing|s)</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>right</pattern3>
+      <pattern4>mouse</pattern4>
+      <pattern5>button</pattern5>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>click(ed|ing|s)</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>right</pattern3>
+      <pattern4>mouse</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>RPM</word>
+    </accept>
+    <patterngroup>
+      <pattern1>r\.p\.m\.?s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">[Rr]pms?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>runlevel</word>
+    </accept>
+    <patterngroup>
+      <pattern1>run-levels?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>run</pattern1>
+      <pattern2>levels?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>runtime</word>
+    </accept>
+    <patterngroup>
+      <pattern1>run-times?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>run</pattern1>
+      <pattern2>times?</pattern2>
     </patterngroup>
   </term>
 
