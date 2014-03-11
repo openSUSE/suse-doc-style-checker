@@ -116,18 +116,23 @@ def termcheck( context, termfileid, content, contentpretty ):
         if args.performance:
             timestartmatch = time.time()
 
+        skipcount = 0
         for word in words:
-            # When a pattern already matches on a word, don't try to find more
-            # problems with it. (Is that a sane approach? Maybe there are other
-            # problems...)
+            # Idea here: if we previously matched a multi-word pattern, we can
+            # simply skip the next few words since they were matched already.
+            if skipcount > 0:
+                skipcount -= 1
+                continue
+
             if ignoredpattern:
                 if ignoredpattern.match( word ):
                     wordposition += 1
                     continue
 
-            # FIXME: I was unsure how to use continue to do this. Essentially,
-            # depending on a wordmatch appearing, I need to skip up two
-            # loops. :/
+
+            # When a pattern already matches on a word, don't try to find more
+            # problems with it. (Is that a sane approach? Maybe there are other
+            # problems...)
             trynextterm = True
 
             # if not onepattern.match( word ):  # 100 named groups
@@ -148,6 +153,7 @@ def termcheck( context, termfileid, content, contentpretty ):
                         trycontextpatterns = True
                         matchwords = ""
                         patterngrouppatternposition = 0
+                        skipcounttemporary = 0
                         for patterngrouppattern in patterngrouppatterns:
                             patternposition = wordposition + patterngrouppatternposition
                             if ( patternposition < 0 or patternposition > ( totalwords - 1 ) ):
@@ -156,6 +162,9 @@ def termcheck( context, termfileid, content, contentpretty ):
                             matchword = patterngrouppattern.match( words[ patternposition ] )
                             if matchword:
                                 if not patterngrouppatternposition == 0:
+                                    # The first matched should not make us skip
+                                    # a word ahead.
+                                    skipcounttemporary += 1
                                     matchwords += " "
                                 matchwords += matchword.group(0)
                             else:
@@ -167,8 +176,9 @@ def termcheck( context, termfileid, content, contentpretty ):
                         contextpatternstopatterngroup = contextpatterns[ patterngroupposition ]
                         if trycontextpatterns:
                             if contextpatternstopatterngroup[0][0] == None:
-                                trynextterm = False
                                 # easy positive
+                                skipcount = skipcounttemporary
+                                trynextterm = False
                                 line = linenumber ( context )
                                 messages.append( termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
@@ -210,13 +220,12 @@ def termcheck( context, termfileid, content, contentpretty ):
                                                 contextwords.append( True )
 
                             if ( len( contextpatternstopatterngroup ) == len( contextwords )):
+                                skipcount = skipcounttemporary
+                                trynextterm = False
                                 line = linenumber ( context )
-                                message = termcheckmessage(
+                                messages.append( termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
-                                    contentpretty )
-                                messages.append( message )
-                            trynextterm = False
-
+                                    contentpretty ) )
                         patterngroupposition += 1
                 acceptposition += 1
 
