@@ -133,7 +133,9 @@
     </accept>
     <patterngroup>
       <pattern1>once</pattern1>
-      <contextpattern>(the|a|an|it|they)</contextpattern>
+      <!-- *.ed is for constructs with verbs in past tense: "Once typed, ..."-->
+      <contextpattern>(the|a|an|it|they|.*?ed)</contextpattern>
+      <contextpattern match="negative" where="2">(second|minute|hour|day|week|year|half|quarter)</contextpattern>
     </patterngroup>
   </term>
 
@@ -205,14 +207,14 @@
           plural noun.
         -->
     </patterngroup>
-    <!-- <patterngroup>
+    <patterngroup>
       <pattern1>back-?ups?</pattern1>
       <contextpattern look="before">to</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>back-?ups?</pattern1>
       <contextpattern>(them|these|this|it|the|a|an)</contextpattern>
-    </patterngroup> -->
+    </patterngroup>
   </term>
 
   <term>
@@ -334,8 +336,7 @@
     </patterngroup>
   </term> -->
 
-  <!-- Trouble with single quotes. -->
-  <!-- <term>
+  <term>
     <accept>
       <word>cannot</word>
     </accept>
@@ -346,7 +347,7 @@
       <pattern1>can</pattern1>
       <pattern2>not</pattern2>
     </patterngroup>
-  </term> -->
+  </term>
 
   <term>
     <accept>
@@ -556,30 +557,18 @@
     </accept>
     <patterngroup>
       <pattern1>command-?lines?</pattern1>
+      <contextpattern match="negative">(tool|program(me)?|software|option|parameter)</contextpattern>
     </patterngroup>
   </term>
 
-  <!--  Not sure doing this does any good. It's also producing false positives.
-  -->
-  <!-- <term>
-    <accept>
-      <word>computer</word>
-    </accept>
-    <patterngroup>
-      <pattern1>machines?</pattern1>
-      <contextpattern look="before" match="negative">virtual</contextpattern>
-    </patterngroup>
-  </term> -->
-
-  <!-- FIXME: add a rule to find the noun too -->
-  <!-- <term>
+  <term>
     <accept>
       <word>configure</word>
     </accept>
     <patterngroup>
       <pattern1>conf(ig)?(ed|ing|s)?</pattern1>
     </patterngroup>
-  </term> -->
+  </term>
 
   <term>
     <accept>
@@ -832,7 +821,9 @@
   <!-- Might overreach. -->
   <!-- <term>
     <accept/>
-    <pattern1>easy [filler], easily</pattern1>
+    <patterngroup>
+      <pattern1>eas(il)?y</pattern1>
+    </patterngroup>
   </term> -->
 
   <term>
@@ -911,7 +902,9 @@
   </term>
 
   <term>
-    <accept/>
+    <accept>
+      <word>simplify</word>
+    </accept>
     <patterngroup>
       <pattern1>facilitat(e[sd]?|ing)</pattern1>
     </patterngroup>
@@ -999,20 +992,24 @@
 
   <term>
     <accept>
+      <word>FTP</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Ff]tp(?!:)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>f\.t\.p\.?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>The GIMP</word>
     </accept>
     <patterngroup>
-      <pattern1>g\.?i\.?m\.?p\.?(?!.)</pattern1>
-      <contextpattern look="before" match="negative">the</contextpattern>
+      <pattern1>g\.i\.m\.p\.?</pattern1>
     </patterngroup>
-    <patterngroup>
-      <pattern1 case="keep">the</pattern1>
-      <pattern2>g\.?i\.?m\.?p\.?(?!.)</pattern2>
-      <contextpattern case="keep" look="before">the</contextpattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>g\.i\.m\.p\.?(?!.)</pattern1>
-    </patterngroup>
+    <!-- Avoid matching executable names like gimp-print etc. -->
     <patterngroup>
       <pattern1 case="keep">[Gg]imp(?!.)</pattern1>
     </patterngroup>
@@ -1022,11 +1019,12 @@
     <accept>
       <word>GNOME</word>
     </accept>
+    <!-- Avoid matching executable names like gnome-terminal etc. -->
     <patterngroup>
       <pattern1 case="keep">[Gg]nome(?!.)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>g\.n\.o\.m\.e\.?(?!.)</pattern1>
+      <pattern1>g\.n\.o\.m\.e\.?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>GNU</pattern1>
@@ -1176,7 +1174,7 @@
       <word>HTTP</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">[Hh]ttp</pattern1>
+      <pattern1 case="keep">[Hh]ttp(?!:)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>h\.t\.t\.p\.?</pattern1>
@@ -1188,7 +1186,7 @@
       <word>HTTPS</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">[Hh]ttps</pattern1>
+      <pattern1 case="keep">[Hh]ttps(?!:)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>h\.t\.t\.p\.s\.?</pattern1>
@@ -1240,8 +1238,7 @@
     </patterngroup>
   </term>
 
-  <!-- FIXME: add a rule to find the noun too -->
-  <!-- <term>
+  <term>
     <accept>
       <word>initialize</word>
     </accept>
@@ -1251,7 +1248,7 @@
     <patterngroup>
       <pattern1>initialis(e?[ds]?|ing)?</pattern1>
     </patterngroup>
-  </term> -->
+  </term>
 
   <term>
     <accept>
@@ -1385,17 +1382,6 @@
     </patterngroup>
   </term>
 
-  <!-- Not sure doing this is doing any good -->
-  <!-- <term>
-    <accept>
-      <word>Kernel</word>
-    </accept>
-    <patterngroup>
-      <pattern1 case="keep">kernel</pattern1>
-      <contextpattern look="before" match="negative">(linux|windows|mac|x|.*?bsd)</contextpattern>
-    </patterngroup>
-  </term> -->
-
   <term>
     <accept>
       <word>Kprobes</word>
@@ -1468,7 +1454,7 @@
     </accept>
     <patterngroup>
       <pattern1>local-?hosts?</pattern1>
-      <contextpattern look="before">a</contextpattern>
+      <contextpattern look="before">(a|the)</contextpattern>
     </patterngroup>
   </term>
 
@@ -1478,10 +1464,12 @@
     </accept>
     <patterngroup>
       <pattern1>local-hosts?</pattern1>
+      <contextpattern look="before" match="negative">(a|the)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>local</pattern1>
       <pattern2>hosts?</pattern2>
+      <contextpattern look="before" match="negative">(a|the)</contextpattern>
     </patterngroup>
   </term>
 
@@ -1534,12 +1522,12 @@
       <pattern1>(logg?|sign)(ed|ing|s)?-?[io]n</pattern1>
       <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
     </patterngroup> -->
-    <!-- don't match sentences like: Note the > sign in the boot entry. -->
-    <!-- <patterngroup>
+    <!-- don't match sentences like: "Note the > sign in the boot entry." -->
+    <patterngroup>
       <pattern1>(sign|log)-?[io]n(ed|ing|s)?</pattern1>
       <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
       <contextpattern match="negative">(the|a|an)</contextpattern>
-    </patterngroup> -->
+    </patterngroup>
     <patterngroup>
       <pattern1>sign(ed|ing|s)?</pattern1>
       <pattern2>[io]n</pattern2>
@@ -1595,7 +1583,7 @@
       <pattern1>sign</pattern1>
       <pattern2>o(ut|ff)s?</pattern2>
       <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|try|avoid)</contextpattern>
-      <contextpattern match="negative">(the|a|an|off|from)</contextpattern>
+      <contextpattern match="negative">(the|a|an|of|from)</contextpattern>
     </patterngroup> -->
   </term>
 
@@ -1660,11 +1648,26 @@
       <word>lowercase</word>
     </accept>
     <patterngroup>
-      <pattern1>lower-case(d|s|ing)?</pattern1>
+      <pattern1>lower-case(s|ing)?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>lower</pattern1>
-      <pattern2>case(d|s|ing)?</pattern2>
+      <pattern2>case(s|ing)?</pattern2>
+    </patterngroup>
+  </term>
+
+  <!--  lowercase_d_ is almost always an adjective => avoid confusing writers.
+  -->
+  <term>
+    <accept>
+      <word>lowercased</word>
+    </accept>
+    <patterngroup>
+      <pattern1>lower-cased</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>lower</pattern1>
+      <pattern2>cased</pattern2>
     </patterngroup>
   </term>
 
@@ -1673,11 +1676,7 @@
       <word>mail server</word>
     </accept>
     <patterngroup>
-      <pattern1>mail-servers?</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>mail</pattern1>
-      <pattern2>servers?</pattern2>
+      <pattern1>mail-?servers?</pattern1>
     </patterngroup>
   </term>
 
@@ -1804,14 +1803,11 @@
       <word>mouse button</word>
     </accept>
     <patterngroup>
-      <pattern1>mouse-?keys?</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>mouse-buttons?</pattern1>
+      <pattern1>mouse-?(button|key)s?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>mouse</pattern1>
-      <pattern2>(button|key)s?</pattern2>
+      <pattern2>keys?</pattern2>
     </patterngroup>
   </term>
 
@@ -1965,7 +1961,8 @@
     </patterngroup>
   </term>
 
-  <term>
+  <!-- Not sure this helps much, since this name is outdated anyway -->
+  <!-- <term>
     <accept>
       <word>OpenOffice.org</word>
     </accept>
@@ -1976,15 +1973,15 @@
       <pattern1>openoffice</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>open</pattern1>
+      <pattern1>open(?!-)</pattern1>
       <pattern2>office</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>open</pattern1>
+      <pattern1>open(?!-)</pattern1>
       <pattern2>office</pattern2>
       <pattern3>org</pattern3>
     </patterngroup>
-  </term>
+  </term> -->
 
   <term>
     <accept>
@@ -1997,7 +1994,7 @@
       <pattern1>open-suse</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>open</pattern1>
+      <pattern1>open(?!-)</pattern1>
       <pattern2>suse</pattern2>
     </patterngroup>
   </term>
@@ -2105,10 +2102,25 @@
     </accept>
     <patterngroup>
       <pattern1>pre</pattern1>
-      <pattern2>configure(s|d|ing)</pattern2>
+      <pattern2>configure(s|ing)</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>pre-configure(s|d|ing)</pattern1>
+      <pattern1>pre-configure(s|ing)</pattern1>
+    </patterngroup>
+  </term>
+
+  <!--  preconfigure_d_ is almost always an adjective, thus avoid confusing
+        writers. -->
+  <term>
+    <accept>
+      <word>preconfigured</word>
+    </accept>
+    <patterngroup>
+      <pattern1>pre</pattern1>
+      <pattern2>configured</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>pre-configured</pattern1>
     </patterngroup>
   </term>
 
@@ -2158,7 +2170,12 @@
       <context>keys or mouse buttons</context>
     </accept>
     <patterngroup>
-      <pattern1>hit|punch(ed|s|ing)?</pattern1>
+      <pattern1>(hitt?|punch)(ed|s|ing)?</pattern1>
+      <contextpattern mode="fuzzy" where="3">(##@key##|key)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(hitt?|punch)(ed|s|ing)?</pattern1>
+      <contextpattern mode="fuzzy" where="3" look="before">(##@key##|key)</contextpattern>
     </patterngroup>
   </term>
 
