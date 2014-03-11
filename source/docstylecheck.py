@@ -150,6 +150,8 @@ def termcheck( context, termfileid, content, contentpretty ):
                     # FIXME: variable names are a bit of a mouthful
                     patterngroupstoaccept = patterns[ acceptposition ]
                     for patterngrouppatterns in patterngroupstoaccept:
+                        if not trynextterm:
+                            break
                         trycontextpatterns = True
                         matchwords = ""
                         patterngrouppatternposition = 0
@@ -162,8 +164,8 @@ def termcheck( context, termfileid, content, contentpretty ):
                             matchword = patterngrouppattern.match( words[ patternposition ] )
                             if matchword:
                                 if not patterngrouppatternposition == 0:
-                                    # The first matched should not make us skip
-                                    # a word ahead.
+                                    # The first matched pattern should not make
+                                    # us skip a word ahead.
                                     skipcounttemporary += 1
                                     matchwords += " "
                                 matchwords += matchword.group(0)
@@ -193,14 +195,15 @@ def termcheck( context, termfileid, content, contentpretty ):
                                                 contextposition = None
                                                 contextposition = wordposition + contextwhere
                                                 if contextwhere > 0:
-                                                    contextposition += patterngrouppatternposition
+                                                    # patterngrouppatternposition is at 1,
+                                                    # even if there was just one pattern
+                                                    contextposition += patterngrouppatternposition - 1
                                                 if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
                                                     continue
                                                 else:
                                                     contextword = contextpattern[0].match( words[ contextposition ] )
                                                     if contextword:
-                                                        contextwords.append( contextword )
-                                                    else:
+                                                        contextwords.append( True )
                                                         break
                                         # negative matching
                                         else:
@@ -209,13 +212,17 @@ def termcheck( context, termfileid, content, contentpretty ):
                                                 contextposition = None
                                                 contextposition = wordposition + contextwhere
                                                 if contextwhere > 0:
-                                                    contextposition += patterngrouppatternposition
+                                                    # patterngrouppatternposition is at 1,
+                                                    # even if there was just one pattern
+                                                    contextposition += patterngrouppatternposition - 1
                                                 if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
                                                     continue
                                                 else:
                                                     contextword = contextpattern[0].match( words[ contextposition ] )
+
                                                     if contextword:
                                                         contextwordmatch = True
+                                                        break
                                             if not contextwordmatch:
                                                 contextwords.append( True )
 
