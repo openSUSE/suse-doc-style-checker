@@ -30,7 +30,12 @@ ignoredpattern = None
 accepts = []
 patterns = []           # per acceptpattern, add list of list of patterns
 contextpatterns = []    # per pattern list, add list of contextpatterns
-# onepattern = ""         # one long pattern is cheaper than many short ones
+onepattern = ""         # one long pattern is cheaper than many short ones
+
+# In manglepattern(), only catch patterns that are not literal and are not
+# followed by an indicator of a lookahead/lookbehind (?) or are already
+# non-capturing groups
+parentheses = re.compile( r'(?<!\\)\((?![\?|\:])' )
 
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
@@ -90,12 +95,27 @@ def termcheck( context, termfileid, content, contentpretty ):
         global accepts
         global patterns
         global contextpatterns
-        # global onepattern
+        global onepattern
 
         # I get this as a lxml.etree._ElementUnicodeResult, not as a string.
         # For whatever reason, this made is crash happily/semi-randomly when
         # creating messages.
         content = str( content[0] )
+
+        costforonep = time.time()
+
+        # a calculation:
+        #   + the overhead for onepattern is (currently) akin to adding 1 word
+        #     to every paragraph
+        #   + 30-40 % of paragraphs are skipped because of onepattern
+        #   + the paragraphs skipped because of onepattern average at
+        #     5-10 words
+        #   = worst case: similar time, best case: slight win,
+        #     more compliant documentation will tip the scale in our favour
+        if not onepattern.search( content ):
+            if args.performance:
+                print("skipped entire paragraph\n")
+            return messages
 
         # This if/else block should not be necessary (if there is content,
         # there should always also be pretty content, but that depends on the
@@ -134,9 +154,6 @@ def termcheck( context, termfileid, content, contentpretty ):
             # problems with it. (Is that a sane approach? Maybe there are other
             # problems...)
             trynextterm = True
-
-            # if not onepattern.match( word ):  # 100 named groups
-            #     trynextterm = False
 
             # Use the *patterns variables defined above to match all patterns
             # over everything.
@@ -256,7 +273,7 @@ def buildtermdata( context, terms, ignoredwords ):
     global accepts
     global patterns
     global contextpatterns
-    # global onepattern
+    global onepattern
 
     if args.performance:
         timestartbuild = time.time()
@@ -308,12 +325,14 @@ def buildtermdata( context, terms, ignoredwords ):
                     pattern = re.compile( patternxpathcontent )
                 else:
                     pattern = re.compile( patternxpathcontent, flags = re.I )
-                # if i == 1:
-                #     if not firstpatterngroup:
-                #         onepattern += '|'
-                #     else:
-                #         firstpatterngroup = False
-                #     onepattern += '(%s)' % patternxpathcontent
+                if i == 1:
+                    if not firstpatterngroup:
+                        onepattern += '|'
+                    else:
+                        firstpatterngroup = False
+                    # (?: is for non-capturing group since Python only
+                    # supports up to 100 named groups.
+                    onepattern += '(?:%s)' % patternxpathcontent
                 patternsofpatterngroup.append( pattern )
 
             patternsofterm.append( patternsofpatterngroup )
@@ -375,7 +394,7 @@ Make sure to always use fuzzy mode with where values of 3 or below.""")
             contextpatterns.append( contextpatternsofpatterngroup )
 
         patterns.append( patternsofterm )
-    # onepattern = re.compile( onepattern, flags = re.I )
+    onepattern = re.compile( onepattern, flags = re.I )
 
     if args.performance:
         timeendbuild = time.time()
@@ -383,9 +402,12 @@ Make sure to always use fuzzy mode with where values of 3 or below.""")
     return termdataid
 
 def manglepattern( pattern ):
-    # FIXME: This should do more. What about brackets/parentheses?
-    newpattern = r'\b' + pattern + r'\b'
-    return newpattern
+    global parentheses
+
+    # Use non-capturing groups since Python only allows for 100 named patterns.
+    pattern = parentheses.sub('(?:', pattern)
+    pattern = r'\b' + pattern + r'\b'
+    return pattern
 
 def getattribute( oldresult, attribute ):
     xpath = oldresult.xpath( '@' + attribute )
