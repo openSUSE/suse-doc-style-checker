@@ -645,10 +645,17 @@
       <context>text or list entries</context>
     </accept>
     <patterngroup>
-      <pattern1>(de|un)-select</pattern1>
+      <pattern1>(de|un)-select(ed|ing|s)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>unselect</pattern1>
+      <pattern1>(de|un)-?highlight(ed|ing|s)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(un|de)-?(block|choose?)(s|ing)?</pattern1>
+      <contextpattern mode="fuzzy" where="2">(selection|text|entr(y|ie))s?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>unselect(ed|ing|s)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>remov(e[ds]?|ing)</pattern1>
@@ -2394,6 +2401,513 @@
     <patterngroup>
       <pattern1>run</pattern1>
       <pattern2>times?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>save</word>
+    </accept>
+    <patterngroup>
+      <pattern1>stor(e[sd]?|ing)</pattern1>
+    </patterngroup>
+  </term>
+
+
+<!-- Avoid this complexity for now -->
+<!-- <row>
+    <entry>(to) save sth. as sth.</entry>
+    <entry/>
+    <entry>verb; when either saving a file with a specific name
+    </entry>
+  </row>
+  <row>
+    <entry>(to) save sth. in sth.</entry>
+    <entry/>
+    <entry>verb; when either saving a file on a specific device or file
+      system
+    </entry>
+  </row>
+  <row>
+    <entry>(to) save sth. on sth.</entry>
+    <entry/>
+    <entry>verb; when either saving a file on a specific device or file
+      system
+    </entry>
+  </row>
+  <row>
+    <entry>(to) save sth. to sth.</entry>
+    <entry/>
+    <entry>verb; when either saving a file to a specific folder
+    </entry>
+  </row>
+  <row>
+    <entry>saved in sth.</entry>
+    <entry/>
+    <entry>verb; when retrieving a file from a specific place
+    </entry>
+  </row> -->
+
+  <term>
+    <accept>
+      <word>SCSI</word>
+    </accept>
+    <patterngroup>
+      <pattern1>S\.C\.S\.I\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">[Ss]csi</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>screenshot</word>
+    </accept>
+    <patterngroup>
+      <pattern1>screen-shots?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>screen</pattern1>
+      <pattern2>shots?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>screen saver</word>
+    </accept>
+    <patterngroup>
+      <pattern1>screen-?savers?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>scrollbar</word>
+    </accept>
+    <patterngroup>
+      <pattern1>scroll-bars?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>scroll-?boxe?s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>scrollers?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>slide-(bar|boxe?)s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(scroll|slide)</pattern1>
+      <pattern2>(boxe?|bar)s?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>select</word>
+      <context>text or list entries</context>
+    </accept>
+    <patterngroup>
+      <pattern1>highlight(es|ing)?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(block|choose?)(s|ing)?</pattern1>
+      <contextpattern mode="fuzzy" where="2">(selection|text|entr(y|ie))s?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>add(e[ds]?|ing)</pattern1>
+      <pattern2>selections?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>add(e[ds]?|ing)</pattern1>
+      <pattern2>(a|the)</pattern2>
+      <pattern3>selections?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>selected</word>
+      <context>text or list entries</context>
+    </accept>
+    <patterngroup>
+      <pattern1>highlighted</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(blocked|chosen)</pattern1>
+      <contextpattern mode="fuzzy" where="2">(selection|text|entr(y|ie))s?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern1>self-?evident(ly)?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>set up</word>
+    </accept>
+    <patterngroup>
+      <pattern1>set-?upp?(ed|ing)?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>setup</word>
+    </accept>
+    <patterngroup>
+      <pattern1>set-ups?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>set</pattern1>
+      <pattern2>ups?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>shut down</word>
+    </accept>
+    <patterngroup>
+      <pattern1>shut-?down(ed|ing)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>shutt?(e[ds]|ing)?-?down</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>shutdown</word>
+    </accept>
+    <patterngroup>
+      <pattern1>shut-?downs?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>shut</pattern1>
+      <pattern2>downs</pattern2>
+    </patterngroup>
+  </term>
+
+  <!-- Might be too much for now -->
+  <!-- <row>
+    <entry/>
+    <entry>simple [filler], simply</entry>
+    <entry>adjective, adverb; avoid</entry>
+  </row> -->
+
+  <term>
+    <accept>
+      <word>SLE</word>
+    </accept>
+    <patterngroup>
+      <pattern1>s\.l\.e\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">[Ss]le</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>s\.?l\.?e\.?</pattern1>
+      <pattern2>(ent(er|re)prise|linux)</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>SLED</word>
+    </accept>
+    <patterngroup>
+      <pattern1>s\.l\.e\.d\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">[Ss]led</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>s\.?l\.?e\.d\.?</pattern1>
+      <pattern2>(ent(er|re)prise|linux|desktop)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>s\.?l\.?e\.?</pattern1>
+      <pattern2>desktop</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>s\.?l\.?e\.?</pattern1>
+      <pattern2>desktop</pattern2>
+      <pattern3>linux</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>SLES</word>
+    </accept>
+    <patterngroup>
+      <pattern1>s\.l\.e\.s\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">[Ss]les</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>s\.?l\.?e\.s\.?</pattern1>
+      <pattern2>(ent(er|re)prise|linux|server)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>s\.?l\.?e\.?</pattern1>
+      <pattern2>server</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>s\.?l\.?e\.?</pattern1>
+      <pattern2>server</pattern2>
+      <pattern3>linux</pattern3>
+    </patterngroup>
+  </term>
+
+
+  <!-- Not sure what to check for here -->
+  <!-- <row>
+    <entry>slider</entry>
+    <entry/>
+    <entry>noun; GUI element that is used manipulate values that have
+      an upper and a lower bound
+      <remark>sknorr, 2013-09-17: A little complicated</remark>
+    </entry>
+  </row> -->
+
+  <term>
+    <accept>
+      <word>spec file</word>
+    </accept>
+    <patterngroup>
+      <pattern1>spec-?files?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>stand-alone</word>
+    </accept>
+    <patterngroup>
+      <pattern1>standalone</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>stand</pattern1>
+      <pattern2>alone</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>start up</word>
+    </accept>
+    <patterngroup>
+      <pattern1>start-?upp?(ed|ing)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>start(e[ds]|ing)?-?up</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>startup</word>
+    </accept>
+    <patterngroup>
+      <pattern1>start-?ups?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>start</pattern1>
+      <pattern2>ups</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>statusbar</word>
+    </accept>
+    <patterngroup>
+      <pattern1>stat(us|e)-bars?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>stat(us|e)</pattern1>
+      <pattern2>bars?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern1>stuffs?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>SSH</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Ss]sh</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>s\.s\.h\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ssh</pattern1>
+      <pattern2>shells?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>SSH</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Ss]sh</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>[Ss]u[Ss][Ee]</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>s\.u\.s\.e\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>software-?</pattern1>
+      <pattern2>und</pattern2>
+      <pattern3>system-?entwicklung</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>software-?</pattern1>
+      <pattern2>und</pattern2>
+      <pattern3>system</pattern3>
+      <pattern4>entwicklung</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>SUSE Cloud</word>
+    </accept>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2>(linux|ent(er|re)prise)</pattern2>
+      <pattern3>cloud</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>SUSE Linux Enterprise</word>
+    </accept>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2>(linux|ent(er|re)prise)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2>ent(er|re)prise</pattern2>
+      <pattern3>linux</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2>ent(er|re)prise</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2>linux</pattern2>
+      <contextpattern match="negative">ent(er|re)prise</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2 case="keep">ent(er|re)prise</pattern2>
+      <pattern3 case="keep">linux</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>SUSE Linux Enterprise Desktop</word>
+    </accept>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2>enterprise</pattern2>
+      <pattern3>linux</pattern3>
+      <pattern4 case="keep">desktop</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2>enterprise</pattern2>
+      <pattern3>linux</pattern3>
+      <pattern4 case="keep">DESKTOP</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>SUSE Linux Enterprise Server</word>
+    </accept>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2>enterprise</pattern2>
+      <pattern3>linux</pattern3>
+      <pattern4 case="keep">server</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2>enterprise</pattern2>
+      <pattern3>linux</pattern3>
+      <pattern4 case="keep">SERVER</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>SUSE Manager</word>
+    </accept>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2 case="keep">manager</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2 case="keep">MANAGER</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>suse-?manager</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>SUSE Studio</word>
+    </accept>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2 case="keep">studio</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>suse</pattern1>
+      <pattern2 case="keep">STUDIO</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>suse-?studio</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>submenu</word>
+    </accept>
+    <patterngroup>
+      <pattern1>sub</pattern1>
+      <pattern2>menus?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>sub-menus?</pattern1>
     </patterngroup>
   </term>
 
