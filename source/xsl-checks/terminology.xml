@@ -834,7 +834,11 @@
       <word>drop-down box</word>
     </accept>
     <patterngroup>
-      <pattern1>drop-?downs?</pattern1>
+      <pattern1>drop-down</pattern1>
+      <pattern2>(list|menu)s?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>drop-?down</pattern1>
       <contextpattern match="negative">box(es)?</contextpattern>
     </patterngroup>
     <patterngroup>
@@ -842,8 +846,8 @@
     </patterngroup>
     <patterngroup>
       <pattern1>drop</pattern1>
-      <pattern2>downs?</pattern2>
-      <pattern3>box(es)?</pattern3>
+      <pattern2>down</pattern2>
+      <pattern3>(boxe?|list|menu)s?</pattern3>
     </patterngroup>
     <patterngroup>
       <pattern1>drop</pattern1>
@@ -852,10 +856,6 @@
     <patterngroup>
       <pattern1>comb(ination|o)</pattern1>
       <pattern2>box(es)?</pattern2>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>drop-down</pattern1>
-      <pattern2>menus?</pattern2>
     </patterngroup>
     <patterngroup>
       <pattern1>drop-down</pattern1>
@@ -1693,6 +1693,7 @@
     </patterngroup>
     <patterngroup>
       <pattern1 case="keep">LINUX</pattern1>
+      <contextpattern look="before" match="negative">suse</contextpattern>
     </patterngroup>
   </term>
 
@@ -1983,7 +1984,7 @@
       <pattern2>dates?</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>meta-?dat[ae]s?</pattern1>
+      <pattern1>meta-dat[ae]s?</pattern1>
     </patterngroup>
   </term>
 
@@ -2642,14 +2643,15 @@
     </patterngroup>
   </term>
 
-  <term>
+  <!-- This makes some questionable recommendations, disable for now. -->
+  <!-- <term>
     <accept>
       <word>save</word>
     </accept>
     <patterngroup>
       <pattern1>stor(e[sd]?|ing)</pattern1>
     </patterngroup>
-  </term>
+  </term> -->
 
 
 <!-- Avoid this complexity for now -->
@@ -2791,7 +2793,11 @@
       <word>set up</word>
     </accept>
     <patterngroup>
-      <pattern1>set-?upp?(ed|ing)?</pattern1>
+      <pattern1>set-?upp?(ed|ing)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>set-?ups?</pattern1>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
     </patterngroup>
   </term>
 
@@ -2805,6 +2811,8 @@
     <patterngroup>
       <pattern1>set</pattern1>
       <pattern2>ups?</pattern2>
+      <contextpattern look="before" match="negative">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="after" match="negative" >(the|an?|in|for)</contextpattern>
     </patterngroup>
   </term>
 
@@ -3011,13 +3019,10 @@
 
   <term>
     <accept>
-      <word>SSH</word>
+      <word>SUSE</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">[Ss]sh</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>[Ss]u[Ss][Ee]</pattern1>
+      <pattern1 case="keep">[Ss]u[Ss][Ee]</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>s\.u\.s\.e\.?</pattern1>
@@ -3050,10 +3055,6 @@
     <accept>
       <word>SUSE Linux Enterprise</word>
     </accept>
-    <patterngroup>
-      <pattern1>suse</pattern1>
-      <pattern2>(linux|ent(er|re)prise)</pattern2>
-    </patterngroup>
     <patterngroup>
       <pattern1>suse</pattern1>
       <pattern2>ent(er|re)prise</pattern2>
