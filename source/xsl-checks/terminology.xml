@@ -166,17 +166,13 @@
 
   <term>
     <accept>
-      <word>Audio CD</word>
+      <word>audio CD</word>
     </accept>
     <patterngroup>
       <pattern1>audio-?cds?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>cd-?audios?</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1 case="keep">audio</pattern1>
-      <pattern2>cds?</pattern2>
     </patterngroup>
     <patterngroup>
       <pattern1>cd</pattern1>
@@ -1429,6 +1425,18 @@
     <patterngroup>
       <pattern1>key(board)?</pattern1>
       <pattern2>(accelerator|combo|shortcut)s?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>LAN</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Ll]an</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>l\.a\.n\.?</pattern1>
     </patterngroup>
   </term>
 
@@ -2908,6 +2916,511 @@
     </patterngroup>
     <patterngroup>
       <pattern1>sub-menus?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>TAR archive</word>
+    </accept>
+    <patterngroup>
+      <pattern1>tar</pattern1>
+      <pattern2>balls?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">[Tt]ar</pattern1>
+      <pattern2>archives?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>tar-?(archive|ball)s?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>taskbar</word>
+    </accept>
+    <patterngroup>
+      <pattern1>task</pattern1>
+      <pattern2>bars?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>task-bars?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>text box</word>
+    </accept>
+    <patterngroup>
+      <pattern1>text</pattern1>
+      <pattern2>(area|field)s?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(input|entry)</pattern1>
+      <pattern2>(boxe?|area|field)s?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>text</pattern1>
+      <pattern2>(entry|input)</pattern2>
+      <pattern3>(boxe?|area|field)s?</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(text|entry|input)-(boxe?|area|field)s?</pattern1>
+    </patterngroup>
+  </term>
+
+  <!-- Good idea?-->
+  <term>
+    <accept>
+      <word>terminate</word>
+    </accept>
+    <patterngroup>
+      <pattern1>kill(ed|s|ing)</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>TFTP</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Tt]ftp(?!:)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>t\.f\.t\.p\.?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>time stamp</word>
+    </accept>
+    <patterngroup>
+      <pattern1>time-?stamps?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>titlebar</word>
+    </accept>
+    <patterngroup>
+      <pattern1>title</pattern1>
+      <pattern2>bars?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>title-bars?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>toolbar</word>
+    </accept>
+    <patterngroup>
+      <pattern1>tool</pattern1>
+      <pattern2>bars?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>tool-bars?</pattern1>
+    </patterngroup>
+  </term>
+
+  <!-- This one should have more rejects. -->
+  <term>
+    <accept>
+      <word>tooltip</word>
+    </accept>
+    <patterngroup>
+      <pattern1>tool</pattern1>
+      <pattern2>tips?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>tool-tips?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Unix</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">UNIX</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>u\.n\.i\.x\.?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>uninstall</word>
+    </accept>
+    <patterngroup>
+      <pattern1>de-?install(ed|s|ing)?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>un-install(ed|s|ing)?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>unselected</word>
+      <context>text or list entries</context>
+    </accept>
+    <patterngroup>
+      <pattern1>deselected</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(de|un)-highlighted</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(un|de)-(blocked|chosen)</pattern1>
+      <contextpattern mode="fuzzy" where="2">(selection|text|entr(y|ie))s?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>usage</word>
+    </accept>
+    <patterngroup>
+      <pattern1>utili[sz]ations?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>use</word>
+    </accept>
+    <patterngroup>
+      <pattern1>utili[sz](e[ds]?|ing)</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>uppercase</word>
+    </accept>
+    <patterngroup>
+      <pattern1>upper-case(s|ing)?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>upper</pattern1>
+      <pattern2>case(s|ing)?</pattern2>
+    </patterngroup>
+  </term>
+
+  <!--  uppercase_d_ is almost always an adjective => avoid confusing writers.
+  -->
+  <term>
+    <accept>
+      <word>uppercased</word>
+    </accept>
+    <patterngroup>
+      <pattern1>upper-cased</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>upper</pattern1>
+      <pattern2>cased</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>user name</word>
+    </accept>
+    <patterngroup>
+      <pattern1>usernames?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>user-names?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>video CD</word>
+    </accept>
+    <patterngroup>
+      <pattern1>video-?cds?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>cd-?videos?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>cd</pattern1>
+      <pattern2>videos?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>virtualize</word>
+    </accept>
+    <patterngroup>
+      <pattern1>virtualis(e[ds]?|ing)</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>virtualization</word>
+    </accept>
+    <patterngroup>
+      <pattern1>virtualisation</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>VLAN</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Vv]lan</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>v\.l\.a\.n\.?</pattern1>
+    </patterngroup>
+  </term>
+
+  <!-- Don't check for WWW and World Wide Web, there legitimate uses. -->
+  <term>
+    <accept>
+      <word>Web</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">web</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">WEB</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Web page</word>
+    </accept>
+    <patterngroup>
+      <pattern1>html</pattern1>
+      <pattern2>web</pattern2>
+      <pattern3>pages?</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>web-?pages?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Web server</word>
+    </accept>
+    <patterngroup>
+      <pattern1>web-?servers?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Web site</word>
+    </accept>
+    <patterngroup>
+      <pattern1>web-?sites?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Webmaster</word>
+    </accept>
+    <patterngroup>
+      <pattern1>web-masters?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>web</pattern1>
+      <pattern2>masters?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>want</word>
+    </accept>
+    <patterngroup>
+      <pattern1>wish(ed|ing)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>wish(ed|ing|s)?</pattern1>
+      <pattern2>for</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>would</pattern1>
+      <pattern2>like</pattern2>
+    </patterngroup>
+  </term>
+
+  <!-- We already recommend after in that situation. -->
+  <!-- <row>
+    <entry>when</entry>
+    <entry>once</entry>
+    <entry>adverb; use <emphasis>once</emphasis> only in the meaning
+      <quote>one time only</quote>
+    </entry>
+  </row> -->
+
+  <!-- Not sure how to check. -->
+  <!-- <row>
+    <entry>when</entry>
+    <entry/>
+    <entry>pronoun; use if an event is inevitable; also see
+      <emphasis>if</emphasis>
+    </entry>
+  </row> -->
+
+  <!-- Not sure how to check for the finer points here. -->
+  <term>
+    <accept>
+      <word>whether</word>
+    </accept>
+    <patterngroup>
+      <pattern1>whether</pattern1>
+      <pattern2>or</pattern2>
+      <pattern3>not</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Wi-fi</word>
+    </accept>
+    <patterngroup>
+      <pattern1>w\.?l\.?a\.?n\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>wifi</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">wi-[Ff]i</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">Wi-Fi</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>wi</pattern1>
+      <pattern2>fi</pattern2>
+    </patterngroup>
+  </term>
+
+  <!--  This term is more generic, so don't recommed Wi-fi card, hoping for
+        some common sense.
+  -->
+  <term>
+    <accept>
+      <word>Wi-fi/Bluetooth card</word>
+    </accept>
+    <patterngroup>
+      <pattern1>wireless</pattern1>
+      <pattern2>cards?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>wild card</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(wild-?card|joker)s?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>wild card</word>
+    </accept>
+    <patterngroup>
+      <pattern1>pipe(s|d|ing)?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>X Window System</word>
+    </accept>
+    <patterngroup>
+      <pattern1>x</pattern1>
+      <pattern2 case="keep">Window</pattern2>
+      <pattern3>system</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>x</pattern1>
+      <pattern2>window</pattern2>
+      <pattern3 case="keep">System</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>x</pattern1>
+      <pattern2>windows?</pattern2>
+      <pattern3>system</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>X</pattern1>
+      <pattern2>Windows</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>pipe(s|d|ing)?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Xen</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">xen</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">XEN</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Xend</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">xend</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">XEND</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>YaST</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">YAST</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">[Yy]ast</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>yast2</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>Zypper</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">ZYPPER</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">zypper</pattern1>
     </patterngroup>
   </term>
 
