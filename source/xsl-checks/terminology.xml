@@ -1740,14 +1740,10 @@
 
   <term>
     <accept>
-      <word>meta data</word>
+      <word>metadata</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">meta</pattern1>
-      <pattern2>datas</pattern2>
-    </patterngroup>
-    <patterngroup>
-      <pattern1 case="keep">meta</pattern1>
+      <pattern1>meta</pattern1>
       <pattern2>dates?</pattern2>
     </patterngroup>
     <patterngroup>
