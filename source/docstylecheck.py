@@ -156,9 +156,10 @@ def termcheck( context, termfileid, content, contentpretty ):
 
             # Use the *patterns variables defined above to match all patterns
             # over everything that is left.
-            acceptposition = 0
+            # Don't use enumerate with patterngroupposition, its value
+            # depends on being defined in this scope.
             patterngroupposition = 0
-            for accept in accepts:
+            for acceptposition, accept in enumerate( accepts ):
                 if trynextterm:
                     acceptword = accept[0]
                     acceptcontext = accept[1]
@@ -170,6 +171,8 @@ def termcheck( context, termfileid, content, contentpretty ):
                             break
                         trycontextpatterns = True
                         matchwords = ""
+                        # Don't use enumerate patterngrouppatternposition, its
+                        # value depends on breaks.
                         patterngrouppatternposition = 0
                         skipcounttemporary = 0
                         for patterngrouppattern in patterngrouppatterns:
@@ -250,7 +253,6 @@ def termcheck( context, termfileid, content, contentpretty ):
                                     acceptword, acceptcontext, matchwords, line,
                                     contentpretty ) )
                         patterngroupposition += 1
-                acceptposition += 1
 
         if args.performance:
             timeendmatch = time.time()
