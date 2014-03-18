@@ -1077,15 +1077,15 @@
     </accept>
     <patterngroup>
       <pattern1>(flash|usb)</pattern1>
-      <pattern2>(disk|drive|stick)s?</pattern2>
+      <pattern2>(disk|drive|stick|key)s?</pattern2>
     </patterngroup>
     <patterngroup>
       <pattern1>usb</pattern1>
       <pattern2>flash</pattern2>
-      <pattern3>(disk|drive|stick)s?</pattern3>
+      <pattern3>(disk|drive|stick|key)s?</pattern3>
     </patterngroup>
     <patterngroup>
-      <pattern1>(flash|usb)-?(flash)?-?(disk|drive|stick)s?</pattern1>
+      <pattern1>(flash|usb)-?(flash)?-?(disk|drive|stick|key)s?</pattern1>
     </patterngroup>
   </term>
 
