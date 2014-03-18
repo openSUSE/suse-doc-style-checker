@@ -423,9 +423,8 @@ def getattribute( oldresult, attribute ):
         return None
 
 def emptypatternmessage( element ):
-    sys.exit( """Terminology: There is an empty %s element.
-Make sure each %s element in the terminology file(s) contains a pattern."""
-        % (element, element) )
+    sys.exit( """Terminology: There is an empty {0} element.
+Make sure each {0} element in the terminology file(s) contains a pattern.""".format(element) )
 
 def xmlescape( text ):
     escapetable = {
