@@ -130,14 +130,13 @@ def termcheck( context, termfileid, content, contentpretty ):
         # existing tokenisers are overzealous, such as the default one from
         # NLTK.
         words = content.split()
-        wordposition = 0
         totalwords = len( words )
 
         if args.performance:
             timestartmatch = time.time()
 
         skipcount = 0
-        for word in words:
+        for wordposition, word in enumerate(words):
             # Idea here: if we previously matched a multi-word pattern, we can
             # simply skip the next few words since they were matched already.
             if skipcount > 0:
@@ -195,7 +194,7 @@ def termcheck( context, termfileid, content, contentpretty ):
                         contextwords = []
                         contextpatternstopatterngroup = contextpatterns[ patterngroupposition ]
                         if trycontextpatterns:
-                            if contextpatternstopatterngroup[0][0] == None:
+                            if contextpatternstopatterngroup[0][0] is None:
                                 # easy positive
                                 skipcount = skipcounttemporary
                                 trynextterm = False
