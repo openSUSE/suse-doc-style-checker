@@ -147,7 +147,6 @@ def termcheck( context, termfileid, content, contentpretty ):
             # (configurable from within terminology file)
             if ignoredpattern:
                 if ignoredpattern.match( word ):
-                    wordposition += 1
                     continue
 
 
@@ -252,8 +251,6 @@ def termcheck( context, termfileid, content, contentpretty ):
                                     contentpretty ) )
                         patterngroupposition += 1
                 acceptposition += 1
-
-            wordposition += 1
 
         if args.performance:
             timeendmatch = time.time()
