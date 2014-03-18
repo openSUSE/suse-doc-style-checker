@@ -494,16 +494,16 @@ def main():
     resultfile = os.path.join( resultpath, resultfilename )
 
     output = etree.XML(  """<?xml-stylesheet type="text/css" href="%s"?>
-                            <results></results>"""
+                            <results/>"""
                       % os.path.join( location, 'check.css' ) )
+
     rootelement = output.xpath( '/results' )
 
-    rootelement[0].append( etree.XML(
-            "<results-title>Style Checker Results</results-title>" ) )
-
+    resultstitle = etree.Element( 'results-title' )
+    resultstitle.text = "Style Checker Results"
+    output.append( resultstitle )
 
     # Checking via XSLT
-
     parser = etree.XMLParser(   ns_clean = True,
                                 remove_pis = False,
                                 dtd_validation = False )
@@ -525,11 +525,11 @@ def main():
 
         result = result.getroot()
 
-        if not ( len( result.xpath( '/part/result' ) ) ) == 0 :
-            rootelement[0].append( result )
+        if result.xpath( '/part/result' ):
+            output.append( result )
 
-    if ( len( output.xpath( '/results/part' ) ) ) == 0:
-        rootelement[0].append( etree.XML(
+    if not output.xpath( '/results/part' ):
+        output.append( etree.XML(
              """<result>
                     <info>No problems detected.</info>
                     <suggestion>Celebrate!</suggestion>
