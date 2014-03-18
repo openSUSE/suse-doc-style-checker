@@ -442,7 +442,7 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content ):
     # more focused results
     message = None
     content = xmlescape( content )
-    if acceptword != None and acceptcontext != None:
+    if acceptword is not None and acceptcontext is not None:
         message = etree.XML( """<result>
                 <error>In the context of %s, use
                     <quote>%s</quote> instead of <quote>%s</quote>
@@ -450,7 +450,7 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content ):
                     <quote>%s</quote>
                 </error>
             </result>""" % ( acceptcontext, acceptword, word, str(line), content ) )
-    elif acceptword != None:
+    elif acceptword is not None:
         message = etree.XML( """<result>
                 <error>Use <quote>%s</quote> instead of <quote>%s</quote>
                     <place><line>%s</line></place>:
