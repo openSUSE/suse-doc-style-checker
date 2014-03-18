@@ -44,7 +44,7 @@ parentheses = re.compile( r'(?<!\\)\((?![\?|\:])' )
 # liked being able to use sentences in the parameter descriptions.
 def parseargs():
     parser = argparse.ArgumentParser(
-        usage = __file__ + " [options] inputfile [outputfile]",
+        usage = "%(prog)s [options] inputfile [outputfile]",
         description = __description__ )
     parser.add_argument('-v', '--version',
         action = 'version',
