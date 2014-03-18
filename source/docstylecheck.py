@@ -86,7 +86,6 @@ def linenumber( context ):
 
 def termcheck( context, termfileid, content, contentpretty ):
     # FIXME: Modes: para, title?
-    # FIXME: Use fileid to skip creation of data structures
     messages = []
 
     if content:
@@ -97,12 +96,15 @@ def termcheck( context, termfileid, content, contentpretty ):
         global contextpatterns
         global onepattern
 
-        # I get this as a lxml.etree._ElementUnicodeResult, not as a string.
-        # For whatever reason, this made is crash happily/semi-randomly when
-        # creating messages.
+        # I get this as a list with one lxml.etree._ElementUnicodeResult, not
+        # as a list with a string.
+        # For whatever reason, this made termcheckmessage() crash
+        # happily and semi-randomly.
         content = str( content[0] )
 
-        # a calculation:
+        # onepattern is a concatenated list of all patterns of the terminology
+        # file which are within a pattern1 element
+        # how useful is onepattern?
         #   + the overhead for onepattern is (currently) akin to adding 1 word
         #     to every paragraph
         #   + 30-40 % of paragraphs are skipped because of onepattern
@@ -142,6 +144,8 @@ def termcheck( context, termfileid, content, contentpretty ):
                 skipcount -= 1
                 continue
 
+            # don't burn time on checking small words like "the," "a," "of" etc.
+            # (configurable from within terminology file)
             if ignoredpattern:
                 if ignoredpattern.match( word ):
                     wordposition += 1
@@ -149,12 +153,11 @@ def termcheck( context, termfileid, content, contentpretty ):
 
 
             # When a pattern already matches on a word, don't try to find more
-            # problems with it. (Is that a sane approach? Maybe there are other
-            # problems...)
+            # problems with it.
             trynextterm = True
 
             # Use the *patterns variables defined above to match all patterns
-            # over everything.
+            # over everything that is left.
             acceptposition = 0
             patterngroupposition = 0
             for accept in accepts:
@@ -227,7 +230,7 @@ def termcheck( context, termfileid, content, contentpretty ):
                                                 contextposition = None
                                                 contextposition = wordposition + contextwhere
                                                 if contextwhere > 0:
-                                                    # patterngrouppatternposition is at 1,
+                                                    # patterngrouppatternposition is already == 1,
                                                     # even if there was just one pattern
                                                     contextposition += patterngrouppatternposition - 1
                                                 if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
@@ -306,6 +309,9 @@ def buildtermdata( context, terms, ignoredwords ):
         patterngroupxpaths = term.xpath( 'patterngroup' )
         for patterngroupxpath in patterngroupxpaths:
             patternsofpatterngroup = []
+            # FIXME: the implementation assumes that the e.g. the second pattern
+            # in the pattern list is from the pattern2 element -- what about
+            # skipped pattern{x} elements, then?
             for i in range(1,6):
                 patternxpath = patterngroupxpath.xpath( 'pattern%s[1]' % i )
                 patternxpathcontent = None
@@ -328,8 +334,9 @@ def buildtermdata( context, terms, ignoredwords ):
                         onepattern += '|'
                     else:
                         firstpatterngroup = False
-                    # (?: is for non-capturing group since Python only
-                    # supports up to 100 named groups.
+                    # use (?: to create non-capturing groups: the re module's
+                    # implementation only supports up to 100 named groups per
+                    # expression
                     onepattern += '(?:%s)' % patternxpathcontent
                 patternsofpatterngroup.append( pattern )
 
@@ -402,7 +409,9 @@ Make sure to always use fuzzy mode with where values of 3 or below.""")
 def manglepattern( pattern ):
     global parentheses
 
-    # Use non-capturing groups since Python only allows for 100 named patterns.
+    # use (?: to create non-capturing groups: the re module's
+    # implementation only supports up to 100 named groups per
+    # expression
     pattern = parentheses.sub('(?:', pattern)
     pattern = r'\b' + pattern + r'\b'
     return pattern
@@ -430,7 +439,8 @@ def xmlescape( text ):
     return "".join(escapetable.get(c,c) for c in text)
 
 def termcheckmessage( acceptword, acceptcontext, word, line, content ):
-    # FIXME: shorten content string (in the right place)
+    # FIXME: shorten content string (in the right place), to get closer toward
+    # more focused results
     message = None
     content = xmlescape( content )
     if acceptword != None and acceptcontext != None:
