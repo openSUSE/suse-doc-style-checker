@@ -102,8 +102,6 @@ def termcheck( context, termfileid, content, contentpretty ):
         # creating messages.
         content = str( content[0] )
 
-        costforonep = time.time()
-
         # a calculation:
         #   + the overhead for onepattern is (currently) akin to adding 1 word
         #     to every paragraph
