@@ -473,9 +473,8 @@ def main():
     ns = etree.FunctionNamespace(
         'https://www.gitorious.org/style-checker/style-checker' )
     ns.prefix = 'py'
-    ns[ 'linenumber' ] = linenumber
-    ns[ 'termcheck' ] = termcheck
-    ns[ 'buildtermdata' ] = buildtermdata
+    ns.update(dict(linenumber=linenumber, termcheck=termcheck,
+        buildtermdata=buildtermdata))
 
     location = os.path.dirname( os.path.realpath( __file__ ) )
 
