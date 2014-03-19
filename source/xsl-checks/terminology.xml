@@ -318,7 +318,7 @@
     </patterngroup>
   </term>
 
-  <!--  Wi-fi/Bluetooth card is more generic than Bluetooth card, so recommend
+  <!--  Wi-Fi/Bluetooth card is more generic than Bluetooth card, so recommend
         that instead and hope for some common sense.
   -->
 
@@ -3554,7 +3554,7 @@
     </patterngroup>
   </term>
 
-  <!--  This term is more generic, so don't recommed Wi-fi card, hoping for
+  <!--  This term is more generic, so don't recommed Wi-Fi card, hoping for
         some common sense.
   -->
   <term>
