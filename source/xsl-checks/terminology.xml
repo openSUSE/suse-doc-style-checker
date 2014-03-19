@@ -3534,7 +3534,7 @@
 
   <term>
     <accept>
-      <word>Wi-fi</word>
+      <word>Wi-Fi</word>
     </accept>
     <patterngroup>
       <pattern1>w\.?l\.?a\.?n\.?</pattern1>
@@ -3546,7 +3546,7 @@
       <pattern1 case="keep">wi-[Ff]i</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1 case="keep">Wi-Fi</pattern1>
+      <pattern1 case="keep">Wi-fi</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>wi</pattern1>
