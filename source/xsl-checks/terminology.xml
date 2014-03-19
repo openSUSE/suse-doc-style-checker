@@ -3559,7 +3559,7 @@
   -->
   <term>
     <accept>
-      <word>Wi-fi/Bluetooth card</word>
+      <word>Wi-Fi/Bluetooth card</word>
     </accept>
     <patterngroup>
       <pattern1>wireless</pattern1>
