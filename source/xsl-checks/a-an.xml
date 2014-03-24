@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<terminology ignoredwords="([b-z0-9].*)">
+<terminology ignoredwords="([b-z0-9].*)" useonepattern="no">
 
 <!-- Try not to do too much with u... since it is spoken "yu" in many
      words, it is a little confusing. -->
@@ -10,7 +10,7 @@
     </accept>
     <patterngroup>
       <pattern1>an</pattern1>
-      <contextpattern case="keep">([0-79]|[bcdfghjklmnpqrstvwxyz][aeuio]|[bcdfgkpt]r|st[aeiuo]|us).*</contextpattern>
+      <contextpattern>([0-79]|[bcdfghj-np-tv-z][aeuio]|[bcdfgkpt]r|st[aeiuo]|us|uni).*</contextpattern>
     </patterngroup>
   </term>
 
@@ -21,9 +21,9 @@
     <patterngroup>
       <pattern1>a(?!\-\.)</pattern1>
       <!-- Keeping the words "one"/"once" out like this is not very clever. -->
-      <contextpattern case="keep">(8|[aei]|o[a-mo-z]|on[abdf-z]|u[bfgh]).*</contextpattern>
-      <contextpattern case="keep" look="before" match="negative" where="2">q.?</contextpattern>
-      <contextpattern case="keep" match="negative" mode="fuzzy" where="2">[BC].?</contextpattern>
+      <contextpattern>(8|[aei]|o[a-mo-z]|on[abdf-z]|u[bfgh]|un[a-hj-z]|[fhlmnrsx][bcdfghjklmnpqrvwxyz]).*</contextpattern>
+      <contextpattern look="before" match="negative" where="2">q.?</contextpattern>
+      <contextpattern match="negative" mode="fuzzy" where="2">[bc].?</contextpattern>
     </patterngroup>
   </term>
 

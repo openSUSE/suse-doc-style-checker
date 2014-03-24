@@ -2,6 +2,7 @@
 <terminology ignoredwords="(this|there|that|these|those|one|by|on|under|about|at|from)">
 <!-- What about: [any number of = all]? [well = /dev/null]? -->
 
+  <!-- Stolen from Novell's Style Guide. -->
   <term>
     <accept>
       <word>many</word>
@@ -897,6 +898,19 @@
     <patterngroup>
       <pattern1>work(s|ed|ing)</pattern1>
       <pattern2>together</pattern2>
+    </patterngroup>
+  </term>
+
+  <!-- Stolen from LanguageTool. -->
+  <term>
+    <accept>
+      <word>some</word>
+    </accept>
+    <patterngroup>
+      <pattern1>some</pattern1>
+      <pattern2>of</pattern2>
+      <pattern3>the</pattern3>
+      <contextpattern match="negative">.*?[oe]st</contextpattern>
     </patterngroup>
   </term>
 
