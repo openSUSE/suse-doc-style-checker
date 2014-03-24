@@ -274,6 +274,13 @@ def buildtermdata( context, terms, ignoredwords ):
     global contextpatterns
     global onepattern
 
+    termdataid = None
+    ignoredpattern = None
+    accepts = []
+    patterns = []
+    contextpatterns = []
+    onepattern = ""
+
     if args.performance:
         timestartbuild = time.time()
 
