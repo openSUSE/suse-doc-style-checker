@@ -3288,6 +3288,7 @@
     </accept>
     <patterngroup>
       <pattern1 case="keep">UNIX</pattern1>
+      <contextpattern look="before" match="negative">sco</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>u\.n\.i\.x\.?</pattern1>
