@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminology ignoredwords="(this|there|that|these|those|one|by|on|under|about|at|from)">
+<!-- What about: [any number of = all]? [well = /dev/null]? -->
+
+  <term>
+    <accept>
+      <word>many</word>
+    </accept>
+    <patterngroup>
+      <pattern1>a</pattern1>
+      <pattern2>large</pattern2>
+      <pattern3>numbers?</pattern3>
+      <pattern4>of</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>several</word>
+    </accept>
+    <patterngroup>
+      <pattern1>a</pattern1>
+      <pattern2>numbers?</pattern2>
+      <pattern3>of</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>time</word>
+    </accept>
+    <patterngroup>
+      <pattern1>periods?</pattern1>
+      <pattern2>of</pattern2>
+      <pattern3>time</pattern3>
+      <contextpattern look="before">a</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>question</word>
+    </accept>
+    <patterngroup>
+      <pattern1>questions?</pattern1>
+      <pattern2>to</pattern2>
+      <pattern3>ask</pattern3>
+    </patterngroup>
+  </term>
+
+  <!-- Proposal sounds colloquial. -->
+  <!-- <term>
+    <accept>
+      <word>a few</word>
+    </accept>
+    <patterngroup>
+      <pattern1>small</pattern1>
+      <pattern2>numbers?</pattern2>
+      <pattern3>of</pattern3>
+    </patterngroup>
+  </term> -->
+
+  <term>
+    <accept>
+      <word>adequate</word>
+    </accept>
+    <patterngroup>
+      <pattern1>adequate</pattern1>
+      <pattern2>enough</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>adequately</word>
+    </accept>
+    <patterngroup>
+      <pattern1>adequately</pattern1>
+      <pattern2>enough</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>warning</word>
+    </accept>
+    <patterngroup>
+      <pattern1>advance</pattern1>
+      <pattern2>warnings?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>after</word>
+    </accept>
+    <patterngroup>
+      <pattern1>after</pattern1>
+      <pattern2>a</pattern2>
+      <pattern3>periods?</pattern3>
+      <pattern4>of</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>after</pattern1>
+      <pattern2>periods?</pattern2>
+      <pattern3>of</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>alternative</word>
+    </accept>
+    <patterngroup>
+      <pattern1>alternative</pattern1>
+      <pattern2>choices?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>and</word>
+    </accept>
+    <patterngroup>
+      <pattern1>and</pattern1>
+      <pattern2>also</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>any</word>
+    </accept>
+    <patterngroup>
+      <pattern1>any</pattern1>
+      <pattern2>given</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>is in</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(is|are|were|was|be|been)</pattern1>
+      <pattern2>present</pattern2>
+      <pattern3>in</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>decide</word>
+    </accept>
+    <patterngroup>
+      <pattern1>arriv(e[ds]|ing)</pattern1>
+      <pattern2>at</pattern2>
+      <pattern3>(a|the)</pattern3>
+      <pattern4>decisions?</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>arriv(e[ds]|ing)</pattern1>
+      <pattern2>at</pattern2>
+      <pattern3>decisions?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>to</word>
+    </accept>
+    <patterngroup>
+      <pattern1>as</pattern1>
+      <pattern2>a</pattern2>
+      <pattern3>means</pattern3>
+      <pattern4>of</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>for</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>purposes?</pattern3>
+      <pattern4>of</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>for</pattern1>
+      <pattern2>purposes?</pattern2>
+      <pattern3>of</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>because</word>
+    </accept>
+    <patterngroup>
+      <pattern1>as</pattern1>
+      <pattern2>a</pattern2>
+      <pattern3>result</pattern3>
+      <pattern4>of</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>for</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>reasons?</pattern3>
+      <pattern4>that</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern1>as</pattern1>
+      <pattern2>to</pattern2>
+      <contextpattern>(where|whether|when|why|how|who)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>and</word>
+    </accept>
+    <patterngroup>
+      <pattern1>as</pattern1>
+      <pattern2>well</pattern2>
+      <pattern3>as</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>later</word>
+    </accept>
+    <patterngroup>
+      <pattern1>at</pattern1>
+      <pattern2>a</pattern2>
+      <pattern3>later</pattern3>
+      <pattern4>date</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>now</word>
+    </accept>
+    <patterngroup>
+      <pattern1>at</pattern1>
+      <pattern2>this</pattern2>
+      <pattern3>point</pattern3>
+      <pattern4>in</pattern4>
+      <pattern5>time</pattern5>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>at</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>present</pattern3>
+      <pattern4>time</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>at</pattern1>
+      <pattern2>(present|this)</pattern2>
+      <pattern3>time</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>presently</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>by</word>
+    </accept>
+    <patterngroup>
+      <pattern1>by</pattern1>
+      <pattern2>(means|use)</pattern2>
+      <pattern3>of</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern1>occ?urr?(ing|ed)</pattern1>
+      <contextpattern>in</contextpattern>
+      <contextpattern look="before">changes?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern1>(completely|fully|entirely)</pattern1>
+      <contextpattern>(done|ready|finished)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>component</word>
+    </accept>
+    <patterngroup>
+      <pattern1>component</pattern1>
+      <pattern2>parts?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>connect</word>
+    </accept>
+    <patterngroup>
+      <pattern1>connect(ed|s|ing)?</pattern1>
+      <pattern2>together</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern1>at</pattern1>
+      <pattern2>all</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>during</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(during|over|in)</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>course</pattern3>
+      <pattern4>of</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>every</word>
+    </accept>
+    <patterngroup>
+      <pattern1>each</pattern1>
+      <pattern2>and</pattern2>
+      <pattern3>every</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>each</word>
+    </accept>
+    <patterngroup>
+      <pattern1>each</pattern1>
+      <pattern2>individual</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>eliminate</word>
+    </accept>
+    <patterngroup>
+      <pattern1>eliminat(e[sd]?|ing)</pattern1>
+      <pattern2>individual</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>indentical</word>
+    </accept>
+    <patterngroup>
+      <pattern1>exactly</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>same</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>tend</word>
+    </accept>
+    <patterngroup>
+      <pattern1>exhibit(s|ed|ing)?</pattern1>
+      <pattern2>a</pattern2>
+      <pattern3>tendenc(y|ies)</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>exhibit(s|ed|ing)?</pattern1>
+      <pattern2>tendenc(y|ies)</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>for a time</word>
+    </accept>
+    <patterngroup>
+      <pattern1>for</pattern1>
+      <pattern2>a</pattern2>
+      <pattern3>length</pattern3>
+      <pattern4>of</pattern4>
+      <pattern5>time</pattern5>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>consider</word>
+    </accept>
+    <patterngroup>
+      <pattern1>giv(e[sd]|ing)</pattern1>
+      <pattern2>considerations?</pattern2>
+      <pattern3>to</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <!-- Without the (to), it would not be very clear. -->
+      <word>(to) answer</word>
+    </accept>
+    <patterngroup>
+      <pattern1>giv(e[sd]|ing)</pattern1>
+      <pattern2>answers?</pattern2>
+      <pattern3>to</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>has</word>
+    </accept>
+    <patterngroup>
+      <pattern1>ha(s|d|ve|ving)</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>ability</pattern3>
+      <pattern4>to</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ha(s|d|ve|ving)</pattern1>
+      <pattern2>abilit(y|ies)</pattern2>
+      <pattern3>to</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>need</word>
+    </accept>
+    <patterngroup>
+      <pattern1>ha(s|d|ve|ving)</pattern1>
+      <pattern2>a</pattern2>
+      <pattern3>need</pattern3>
+      <pattern4>(for|to)</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ha(s|d|ve|ving)</pattern1>
+      <pattern2>needs?</pattern2>
+      <pattern3>(for|to)</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>about</word>
+    </accept>
+    <patterngroup>
+      <pattern1>ha(s|d|ve|ving)</pattern1>
+      <pattern2>to</pattern2>
+      <pattern3>do</pattern3>
+      <pattern4>with</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>behind</word>
+    </accept>
+    <patterngroup>
+      <pattern1>in</pattern1>
+      <pattern2>back</pattern2>
+      <pattern3>of</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>with</word>
+    </accept>
+    <patterngroup>
+      <pattern1>in</pattern1>
+      <pattern2>conjunctions?</pattern2>
+      <pattern3>with</pattern3>
+    </patterngroup>
+  </term>
+
+  <!-- This does not seem like a great entry. -->
+  <!-- <term>
+    <accept>
+      <word>long</word>
+    </accept>
+    <patterngroup>
+      <pattern1>in</pattern1>
+      <pattern2>lengths?</pattern2>
+    </patterngroup>
+  </term> -->
+
+  <term>
+    <accept>
+      <word>often</word>
+    </accept>
+    <patterngroup>
+      <pattern1>in</pattern1>
+      <pattern2>many</pattern2>
+      <pattern3>cases?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>generally</word>
+    </accept>
+    <patterngroup>
+      <pattern1>in</pattern1>
+      <pattern2>most</pattern2>
+      <pattern3>cases?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>when</word>
+    </accept>
+    <patterngroup>
+      <pattern1>in</pattern1>
+      <pattern2>situations?</pattern2>
+      <pattern3>when</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>in</pattern1>
+      <pattern2>a</pattern2>
+      <pattern3>situations?</pattern3>
+      <pattern4>when</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>in</word>
+    </accept>
+    <patterngroup>
+      <pattern1>in</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>area</pattern3>
+      <pattern4>of</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>if</word>
+    </accept>
+    <patterngroup>
+      <pattern1>in</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>event</pattern3>
+      <pattern4>(of|that)</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>can</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(is|are|were|was|be|been)</pattern1>
+      <pattern2>able</pattern2>
+      <pattern3>to</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>cannot</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(is|are|were|was|be|been)</pattern1>
+      <pattern2>able</pattern2>
+      <pattern3>to</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern1>at</pattern1>
+      <pattern2>present</pattern2>
+      <contextpattern look="before">(is|are|were|was|be|been)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>depend on</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(is|are|were|was|be|been)</pattern1>
+      <pattern2>dependant</pattern2>
+      <pattern3>(on|of)</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>depend on</word>
+    </accept>
+    <patterngroup>
+      <pattern1>is</pattern1>
+      <pattern2>dependant</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>in</word>
+    </accept>
+    <patterngroup>
+      <pattern1>present</pattern1>
+      <pattern2>in</pattern2>
+      <contextpattern look="before">(is|are|were|was|be|been)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>show</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(design(e[ds]?|ing)|us(e[ds]?|ing))</pattern1>
+      <pattern2>to</pattern2>
+      <pattern3>show</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>because of this</word>
+    </accept>
+    <patterngroup>
+      <pattern1>it</pattern1>
+      <pattern2>is</pattern2>
+      <pattern3>because</pattern3>
+      <pattern4>of</pattern4>
+      <pattern5>this</pattern5>
+      <!-- pattern6 element would need to be created. Hm... -->
+      <!-- <pattern6>that</pattern6> -->
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>join</word>
+    </accept>
+    <patterngroup>
+      <pattern1>join(ed|s|ing)?</pattern1>
+      <pattern2>together</pattern2>
+    </patterngroup>
+  </term>
+
+  <!-- Almost never actually used as a verb. -->
+  <term>
+    <accept>
+      <word>located in</word>
+    </accept>
+    <patterngroup>
+      <pattern1>located</pattern1>
+      <pattern2>within</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>longer time</word>
+    </accept>
+    <patterngroup>
+      <pattern1>longer</pattern1>
+      <pattern2>period</pattern2>
+      <pattern3>of</pattern3>
+      <pattern4>time</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>use</word>
+    </accept>
+    <patterngroup>
+      <pattern1>ma[kd]es?</pattern1>
+      <pattern2>use</pattern2>
+      <pattern3>of</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>way that</word>
+    </accept>
+    <patterngroup>
+      <pattern1>means</pattern1>
+      <pattern2>thr(ough|u)</pattern2>
+      <pattern3>which</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>on</word>
+    </accept>
+    <patterngroup>
+      <pattern1>on</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>subjects?</pattern3>
+      <pattern4>of</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>once</word>
+    </accept>
+    <patterngroup>
+      <pattern1>once</pattern1>
+      <pattern2>and</pattern2>
+      <pattern3>only</pattern3>
+      <pattern4>once</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>reason</word>
+    </accept>
+    <patterngroup>
+      <pattern1>reasons?</pattern1>
+      <pattern2>why</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>called</word>
+    </accept>
+    <patterngroup>
+      <pattern1>reff?err?ed</pattern1>
+      <pattern2>to</pattern2>
+      <pattern3>as</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>return</word>
+    </accept>
+    <patterngroup>
+      <pattern1>return(ed|ing|s)?</pattern1>
+      <pattern2>back</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <!-- Without the (to), it would not be very clear. -->
+      <word>(to) list</word>
+    </accept>
+    <patterngroup>
+      <pattern1>show(ed|ing|s)?</pattern1>
+      <pattern2>a</pattern2>
+      <pattern3>list</pattern3>
+      <pattern4>of</pattern4>
+    </patterngroup>
+  </term>
+
+  <!-- Not too sure about this. -->
+  <!-- <term>
+    <accept>
+      <word>act</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(tak(en?|ing)|took)</pattern1>
+      <pattern2>an?</pattern2>
+      <pattern3>action</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(tak(en?|ing)|took)</pattern1>
+      <pattern2>action</pattern2>
+    </patterngroup>
+  </term> -->
+
+  <term>
+    <accept>
+      <word>consider</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(tak(en?|ing)|took)</pattern1>
+      <pattern2>into</pattern2>
+      <pattern3>consideration</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>how much</word>
+    </accept>
+    <patterngroup>
+      <pattern1>the</pattern1>
+      <pattern2>extent</pattern2>
+      <pattern3>to</pattern3>
+      <pattern4>which</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>that</word>
+    </accept>
+    <patterngroup>
+      <pattern1>the</pattern1>
+      <pattern2>fact</pattern2>
+      <pattern3>that</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>through</word>
+    </accept>
+    <patterngroup>
+      <pattern1>through</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>use</pattern3>
+      <pattern4>of</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>largely</word>
+    </accept>
+    <patterngroup>
+      <pattern1>to</pattern1>
+      <pattern2>a</pattern2>
+      <pattern3>large</pattern3>
+      <pattern4>extent</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>until</word>
+    </accept>
+    <patterngroup>
+      <pattern1>until</pattern1>
+      <pattern2>such</pattern2>
+      <pattern3>time</pattern3>
+      <pattern4>as</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>except for</word>
+    </accept>
+    <patterngroup>
+      <pattern1>with</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>exception</pattern3>
+      <pattern4>of</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>with</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>exception</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>with</pattern1>
+      <pattern2>the</pattern2>
+      <pattern3>notable</pattern3>
+      <pattern4>exception</pattern4>
+      <pattern5>of</pattern5>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>work</word>
+    </accept>
+    <patterngroup>
+      <pattern1>work(s|ed|ing)</pattern1>
+      <pattern2>together</pattern2>
+    </patterngroup>
+  </term>
+
+</terminology>

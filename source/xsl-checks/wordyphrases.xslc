@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:py="https://www.gitorious.org/style-checker/style-checker"
+  xmlns:exslt="http://exslt.org/common" exclude-result-prefixes="py exslt">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+  <xsl:param name="terminologyfile" select="'wordyphrases.xml'"/>
+  <xsl:variable name="terminology" select="document($terminologyfile)/terminology"/>
+  <xsl:variable name="termnodes" select="$terminology/term"/>
+  <xsl:variable name="termdataid">
+    <xsl:value-of select="py:buildtermdata($termnodes, $ignoredwords)"/>
+  </xsl:variable>
+  <xsl:variable name="ignoredwords">
+    <!--  Selecting directly, instead of from value-of leads to segmentation
+          faults.
+    -->
+    <xsl:value-of select="$terminology/@ignoredwords"/>
+  </xsl:variable>
+
+
+  <xsl:template match="/">
+    <xsl:if test="exslt:node-set($termnodes)">
+      <part>
+        <part-title><xsl:apply-templates mode="part-title"/></part-title>
+        <xsl:apply-templates/>
+      </part>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="*" mode="part-title">Wordy Phrases</xsl:template>
+
+  <!-- The following template should probably match more elements. -->
+  <xsl:template match="para|title">
+    <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
+      <xsl:variable name="node" select="."/>
+      <xsl:variable name="content-candidate">
+        <xsl:apply-templates mode="terminology"/>
+      </xsl:variable>
+      <xsl:variable name="content"><xsl:value-of
+        select="normalize-space($content-candidate)"/></xsl:variable>
+      <xsl:variable name="content-pretty"><xsl:value-of
+        select="normalize-space(self::*)"/></xsl:variable>
+
+      <xsl:copy-of
+        select="py:termcheck($termdataid, $content, $content-pretty)"/>
+    </xsl:if>
+  </xsl:template>
+
+
+  <xsl:template match="text()" mode="terminology">
+    <xsl:value-of select="."/>
+  </xsl:template>
+
+  <xsl:template match="classname|code|command|computeroutput|constant|envar|
+                       exceptionname|filename|function|interfacename|literal|
+                       methodname|option|package|parameter|prompt|replaceable|
+                       sgmltag|structfield|systemitem|tag|userinput|varname"
+    mode="terminology">
+    ##@mono##
+  </xsl:template>
+
+  <xsl:template match="keycombo|keycap" mode="terminology">
+    ##@key##
+  </xsl:template>
+
+  <xsl:template match="menuchoice|guimenu" mode="terminology">
+    ##@ui##
+  </xsl:template>
+
+  <xsl:template match="email|filename|ulink|uri|xref" mode="terminology">
+    ##@ref##
+  </xsl:template>
+
+  <xsl:template match="remark|indexterm" mode="terminology"/>
+
+  <xsl:template match="*" mode="terminology">
+    <xsl:apply-templates mode="terminology"/>
+  </xsl:template>
+
+</xsl:stylesheet>
