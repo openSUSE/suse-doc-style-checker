@@ -30,17 +30,19 @@
 
 <!ELEMENT context         (#PCDATA) >
 
-
+<!--  Default values are [nothing], yes. -->
 <!ATTLIST terminology
-                          ignoredwords CDATA                        #IMPLIED >
+                          ignoredwords CDATA                        #IMPLIED
+                          useonepattern (yes|no)                    #IMPLIED >
 
-<!--  Default value is 1, ignore. -->
+<!--  Default value is general. -->
 <!ATTLIST patterngroup
                           reason    (general|terminology|filler|projectspelling|
                                     contraction|abbreviation|tautology|
                                     languagevariant)
                                                                     #IMPLIED >
 
+<!--  Default value is 1, ignore. -->
 <!ATTLIST pattern1
                           case      (ignore|keep)                   #IMPLIED >
 <!ATTLIST pattern2

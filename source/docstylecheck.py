@@ -112,10 +112,11 @@ def termcheck( context, termfileid, content, contentpretty ):
         #     5-10 words
         #   = worst case: similar time, best case: slight win,
         #     more compliant documentation will tip the scale in our favour
-        if not onepattern.search( content ):
-            if args.performance:
-                print("skipped entire paragraph\n")
-            return messages
+        if onepattern:
+            if not onepattern.search( content ):
+                if args.performance:
+                    print("skipped entire paragraph\n")
+                return messages
 
         # This if/else block should not be necessary (if there is content,
         # there should always also be pretty content, but that depends on the
@@ -265,7 +266,7 @@ average time per word: %s\n"""
 
     return messages
 
-def buildtermdata( context, terms, ignoredwords ):
+def buildtermdata( context, terms, ignoredwords, useonepattern ):
 
     global termdataid
     global ignoredpattern
@@ -404,7 +405,11 @@ Make sure to always use fuzzy mode with where values of 3 or below.""")
             contextpatterns.append( contextpatternsofpatterngroup )
 
         patterns.append( patternsofterm )
-    onepattern = re.compile( onepattern, flags = re.I )
+
+    if useonepattern == "yes":
+        onepattern = re.compile( onepattern, flags = re.I )
+    else:
+        onepattern = None
 
     if args.performance:
         timeendbuild = time.time()
@@ -477,8 +482,6 @@ def dupecheck( context, content, contentpretty ):
     if content:
         # I get this as a list with one lxml.etree._ElementUnicodeResult, not
         # as a list with a string.
-        # For whatever reason, this made termcheckmessage() crash
-        # happily and semi-randomly.
         content = str( content[0] )
 
         # This if/else block should not be necessary (if there is content,
@@ -488,6 +491,12 @@ def dupecheck( context, content, contentpretty ):
             contentpretty = str( contentpretty[0] )
         else:
             contentpretty = content
+
+        content = content.lower()
+
+        # FIXME: Find a clever way to be able to check for variants of the same
+        # word, such as: a/an, singular/plural, verb tenses. It should ideally
+        # not be hardcoded here.
 
         # FIXME: Get something better than s.split. It is actually quite
         # important to get (most) sentence boundaries in the future. Some
