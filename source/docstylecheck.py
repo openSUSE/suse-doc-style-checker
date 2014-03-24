@@ -464,6 +464,61 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content ):
             </result>""" % ( word, str(line), content ) )
     return message
 
+def dupecheck( context, content, contentpretty ):
+    messages = []
+
+    if content:
+        # I get this as a list with one lxml.etree._ElementUnicodeResult, not
+        # as a list with a string.
+        # For whatever reason, this made termcheckmessage() crash
+        # happily and semi-randomly.
+        content = str( content[0] )
+
+        # This if/else block should not be necessary (if there is content,
+        # there should always also be pretty content, but that depends on the
+        # XSLT used for checking). It hopefully won't hurt either.
+        if contentpretty:
+            contentpretty = str( contentpretty[0] )
+        else:
+            contentpretty = content
+
+        # FIXME: Get something better than s.split. It is actually quite
+        # important to get (most) sentence boundaries in the future. Some
+        # existing tokenisers are overzealous, such as the default one from
+        # NLTK.
+        words = content.split()
+        totalwords = len( words )
+
+        if args.performance:
+            timestartmatch = time.time()
+
+        for wordposition, word in enumerate(words):
+            if wordposition == 0:
+                continue
+
+            if word == "##@ignore##":
+                continue
+
+            if word == words[wordposition - 1]:
+                line = linenumber ( context )
+                messages.append( etree.XML( """<result>
+                            <error><quote>%s</quote> is duplicated
+                            <place><line>%s</line></place>:
+                            <quote>%s</quote>
+                        </error>
+                    </result>""" % (word, str(line), contentpretty ) ) )
+
+        if args.performance:
+            timeendmatch = time.time()
+            timediffmatch = timeendmatch - timestartmatch
+            print( """words: %s
+time for this para: %s
+average time per word: %s\n"""
+                % ( str( totalwords ), str( timediffmatch ),
+                    str( timediffmatch / (totalwords + .001 ) ) ) )
+
+    return messages
+
 
 def main():
 
@@ -472,8 +527,8 @@ def main():
     ns = etree.FunctionNamespace(
         'https://www.gitorious.org/style-checker/style-checker' )
     ns.prefix = 'py'
-    ns.update(dict(linenumber=linenumber, termcheck=termcheck,
-        buildtermdata=buildtermdata))
+    ns.update( dict( linenumber = linenumber, termcheck = termcheck,
+        buildtermdata = buildtermdata, dupecheck = dupecheck ) )
 
     location = os.path.dirname( os.path.realpath( __file__ ) )
 
