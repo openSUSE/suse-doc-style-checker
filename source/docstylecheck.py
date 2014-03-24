@@ -493,20 +493,30 @@ def dupecheck( context, content, contentpretty ):
             timestartmatch = time.time()
 
         for wordposition, word in enumerate(words):
-            if wordposition == 0:
+            if wordposition < 1:
                 continue
 
             if word == "##@ignore##":
                 continue
 
             if word == words[wordposition - 1]:
-                line = linenumber ( context )
-                messages.append( etree.XML( """<result>
-                            <error><quote>%s</quote> is duplicated
-                            <place><line>%s</line></place>:
-                            <quote>%s</quote>
-                        </error>
-                    </result>""" % (word, str(line), contentpretty ) ) )
+                line = linenumber( context )
+                messages.append( dupecheckmessage( word, line, contentpretty ) )
+
+            elif wordposition >= 3:
+                if word == words[wordposition - 2]:
+                    if words[wordposition - 1] == words[wordposition - 3] and words[wordposition - 1] != "##@ignore##":
+                        line = linenumber( context )
+                        resultwords = words[wordposition - 1] + " " + word
+                        messages.append( dupecheckmessage( resultwords, line, contentpretty ) )
+
+            elif wordposition >= 5:
+                if word == words[wordposition - 3]:
+                    if words[wordposition - 1] == words[wordposition - 4] and words[wordposition - 1] != "##@ignore##":
+                        if words[wordposition - 3] == words[wordposition - 5] and words[wordposition - 3] != "##@ignore##":
+                            line = linenumber( context )
+                            resultwords = words[wordposition - 2] + " " + words[wordposition - 1] + " " + word
+                            dupecheckmessage( resultwords, line, contentpretty )
 
         if args.performance:
             timeendmatch = time.time()
@@ -519,6 +529,14 @@ average time per word: %s\n"""
 
     return messages
 
+def dupecheckmessage( word, line, content ):
+    content = xmlescape( content )
+    return etree.XML( """<result>
+                    <error><quote>%s</quote> is duplicated
+                    <place><line>%s</line></place>:
+                    <quote>%s</quote>
+                </error>
+            </result>""" % (word, str(line), content ) )
 
 def main():
 
