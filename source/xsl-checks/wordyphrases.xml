@@ -914,7 +914,7 @@
       <pattern1>some</pattern1>
       <pattern2>of</pattern2>
       <pattern3>the</pattern3>
-      <contextpattern match="negative">(.*?([oe]st|er)|more)</contextpattern>
+      <contextpattern match="negative">(.*?([oe]st|er|ing|ed)|main|key|more)</contextpattern>
     </patterngroup>
   </term>
 
