@@ -27,10 +27,13 @@
       <xsl:variable name="content-candidate">
         <xsl:apply-templates mode="dupes"/>
       </xsl:variable>
+      <xsl:variable name="content-pretty-candidate">
+        <xsl:apply-templates mode="content-pretty"/>
+      </xsl:variable>
       <xsl:variable name="content"><xsl:value-of
         select="normalize-space($content-candidate)"/></xsl:variable>
       <xsl:variable name="content-pretty"><xsl:value-of
-        select="normalize-space(self::*)"/></xsl:variable>
+        select="normalize-space($content-pretty-candidate)"/></xsl:variable>
 
       <xsl:copy-of
         select="py:dupecheck($content, $content-pretty, $parentid)"/>
