@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminology ignoredwords="([abe-hjkln-z0-9].*)">
+
+  <term>
+    <accept>
+      <word>criteria</word>
+    </accept>
+    <patterngroup>
+      <pattern1>criterias</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>criteria's</pattern1>
+      <contextpattern match="negative" look="before">(the|a)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>data</word>
+    </accept>
+    <patterngroup>
+      <pattern1>datas</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>data's</pattern1>
+      <contextpattern match="negative" look="before">(the|a)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>information</word>
+    </accept>
+    <patterngroup>
+      <pattern1>info(rmation)?s</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>info(rmation)?'s</pattern1>
+      <contextpattern match="negative" look="before">(the|a)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>media</word>
+    </accept>
+    <patterngroup>
+      <pattern1>medias</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>media's</pattern1>
+      <contextpattern match="negative" look="before">(the|a)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>metadata</word>
+    </accept>
+    <patterngroup>
+      <pattern1>metadatas</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>metadata's</pattern1>
+      <contextpattern match="negative" look="before">(the|a)</contextpattern>
+    </patterngroup>
+  </term>
+
+</terminology>

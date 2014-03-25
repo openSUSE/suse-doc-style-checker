@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:py="https://www.gitorious.org/style-checker/style-checker"
+  xmlns:exslt="http://exslt.org/common" exclude-result-prefixes="py exslt">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+  <xsl:param name="terminologyfile" select="'wrongplurals.xml'"/>
+  <xsl:variable name="terminology" select="document($terminologyfile)/terminology"/>
+  <xsl:variable name="termnodes" select="$terminology/term"/>
+  <xsl:variable name="ignoredwords">
+    <!--  Selecting directly, instead of from value-of leads to segmentation
+          faults.
+    -->
+    <xsl:value-of select="$terminology/@ignoredwords"/>
+  </xsl:variable>
+  <xsl:variable name="useonepattern">
+    <xsl:value-of select="$terminology/@useonepattern"/>
+  </xsl:variable>
+  <xsl:variable name="termdataid">
+    <xsl:value-of
+      select="py:buildtermdata($termnodes, $ignoredwords, $useonepattern)"/>
+  </xsl:variable>
+
+  <xsl:template match="/">
+    <xsl:if test="exslt:node-set($termnodes)">
+      <part>
+        <part-title><xsl:apply-templates mode="part-title"/></part-title>
+        <xsl:apply-templates mode="terminology"/>
+      </part>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="*" mode="part-title">Wrong Plurals</xsl:template>
+
+</xsl:stylesheet>
