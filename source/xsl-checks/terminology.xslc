@@ -22,64 +22,15 @@
       select="py:buildtermdata($termnodes, $ignoredwords, $useonepattern)"/>
   </xsl:variable>
 
-
   <xsl:template match="/">
     <xsl:if test="exslt:node-set($termnodes)">
       <part>
         <part-title><xsl:apply-templates mode="part-title"/></part-title>
-        <xsl:apply-templates/>
+        <xsl:apply-templates mode="terminology"/>
       </part>
     </xsl:if>
   </xsl:template>
 
   <xsl:template match="*" mode="part-title">Terminology</xsl:template>
-
-  <!-- The following template should probably match more elements. -->
-  <xsl:template match="para|title">
-    <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
-      <xsl:variable name="node" select="."/>
-      <xsl:variable name="content-candidate">
-        <xsl:apply-templates mode="terminology"/>
-      </xsl:variable>
-      <xsl:variable name="content"><xsl:value-of
-        select="normalize-space($content-candidate)"/></xsl:variable>
-      <xsl:variable name="content-pretty"><xsl:value-of
-        select="normalize-space(self::*)"/></xsl:variable>
-
-      <xsl:copy-of
-        select="py:termcheck($termdataid, $content, $content-pretty)"/>
-    </xsl:if>
-  </xsl:template>
-
-
-  <xsl:template match="text()" mode="terminology">
-    <xsl:value-of select="."/>
-  </xsl:template>
-
-  <xsl:template match="classname|code|command|computeroutput|constant|envar|
-                       exceptionname|filename|function|interfacename|literal|
-                       methodname|option|package|parameter|prompt|replaceable|
-                       sgmltag|structfield|systemitem|tag|userinput|varname"
-    mode="terminology">
-    ##@mono##
-  </xsl:template>
-
-  <xsl:template match="keycombo|keycap" mode="terminology">
-    ##@key##
-  </xsl:template>
-
-  <xsl:template match="menuchoice|guimenu" mode="terminology">
-    ##@ui##
-  </xsl:template>
-
-  <xsl:template match="email|filename|ulink|uri|xref" mode="terminology">
-    ##@ref##
-  </xsl:template>
-
-  <xsl:template match="remark|indexterm" mode="terminology"/>
-
-  <xsl:template match="*" mode="terminology">
-    <xsl:apply-templates mode="terminology"/>
-  </xsl:template>
 
 </xsl:stylesheet>

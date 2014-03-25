@@ -123,4 +123,142 @@
       '')"/>
   </xsl:template>
 
+
+  <!-- Template that starts terminology check. -->
+  <xsl:template match="para|title" mode="terminology">
+    <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
+      <xsl:variable name="node" select="."/>
+      <xsl:variable name="parentid">
+        <xsl:if test="$node/ancestor::*[@id]">
+          <xsl:value-of select="$node/ancestor::*[@id][1]/@id"/>
+        </xsl:if>
+      </xsl:variable>
+      <xsl:variable name="content-candidate">
+        <xsl:apply-templates mode="terminology-content"/>
+      </xsl:variable>
+      <xsl:variable name="content-pretty-candidate">
+        <xsl:apply-templates mode="content-pretty"/>
+      </xsl:variable>
+      <xsl:variable name="content"><xsl:value-of
+        select="normalize-space($content-candidate)"/></xsl:variable>
+      <xsl:variable name="content-pretty"><xsl:value-of
+        select="normalize-space($content-pretty-candidate)"/></xsl:variable>
+
+      <xsl:copy-of
+        select="py:termcheck($termdataid, $content, $content-pretty, $parentid)"/>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="*" mode="terminology">
+    <xsl:apply-templates mode="terminology"/>
+  </xsl:template>
+
+  <xsl:template match="text()" mode="terminology"/>
+
+
+  <!-- Replace some elements for terminology checking itself. -->
+  <xsl:template match="text()" mode="terminology-content">
+    <xsl:value-of select="."/>
+  </xsl:template>
+
+  <xsl:template match="classname|code|command|computeroutput|constant|envar|
+                       exceptionname|filename|function|interfacename|literal|
+                       methodname|option|package|parameter|prompt|replaceable|
+                       sgmltag|structfield|systemitem|tag|userinput|varname"
+    mode="terminology-content">
+    ##@mono##
+  </xsl:template>
+
+  <xsl:template match="keycombo|keycap" mode="terminology-content">
+    ##@key##
+  </xsl:template>
+
+  <xsl:template match="menuchoice|guimenu" mode="terminology-content">
+    ##@ui##
+  </xsl:template>
+
+  <xsl:template match="email|filename|ulink|uri|xref" mode="terminology-content">
+    ##@ref##
+  </xsl:template>
+
+  <xsl:template match="remark|indexterm" mode="terminology-content"/>
+
+  <xsl:template match="*" mode="terminology-content">
+    <xsl:apply-templates mode="terminology-content"/>
+  </xsl:template>
+
+
+  <!-- Semi-format some elements for terminology check output. -->
+  <xsl:template match="*" mode="content-pretty">
+    <xsl:apply-templates mode="content-pretty"/>
+  </xsl:template>
+
+  <xsl:template match="text()" mode="content-pretty">
+    <xsl:value-of select="."/>
+  </xsl:template>
+
+  <xsl:template match="keycap" mode="content-pretty">
+    <xsl:choose>
+      <xsl:when test="@function">
+        <xsl:choose>
+          <xsl:when test="@function = 'alt'">Alt</xsl:when>
+          <xsl:when test="@function = 'backspace'">&lt;&#x2014;</xsl:when>
+          <xsl:when test="@function = 'command'">&#x2318;</xsl:when>
+          <xsl:when test="@function = 'control'">Ctrl</xsl:when>
+          <xsl:when test="@function = 'delete'">Del</xsl:when>
+          <xsl:when test="@function = 'down'">&#x02193;</xsl:when>
+          <xsl:when test="@function = 'end'">End</xsl:when>
+          <xsl:when test="@function = 'enter'">Enter</xsl:when>
+          <xsl:when test="@function = 'escape'">Esc</xsl:when>
+          <xsl:when test="@function = 'home'">Home</xsl:when>
+          <xsl:when test="@function = 'insert'">Ins</xsl:when>
+          <xsl:when test="@function = 'left'">&#x02190;</xsl:when>
+          <xsl:when test="@function = 'meta'">Meta</xsl:when>
+          <xsl:when test="@function = 'pagedown'">Page &#x02193;</xsl:when>
+          <xsl:when test="@function = 'pageup'">Page &#x02191;</xsl:when>
+          <xsl:when test="@function = 'right'">&#x02192;</xsl:when>
+          <xsl:when test="@function = 'shift'">Shift</xsl:when>
+          <xsl:when test="@function = 'space'">Space</xsl:when>
+          <xsl:when test="@function = 'tab'">&#x02192;|</xsl:when>
+          <xsl:when test="@function = 'up'">&#x02191;</xsl:when>
+          <xsl:otherwise>???</xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates mode="content-pretty"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="keycombo" mode="content-pretty">
+    <xsl:for-each select="*">
+      <xsl:if test="position()&gt;1">–</xsl:if>
+      <xsl:apply-templates select="."/>
+    </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template match="menuchoice" mode="content-pretty">
+    <xsl:for-each select="*">
+      <xsl:if test="position()&gt;1"> &lt; </xsl:if>
+      <xsl:apply-templates select="."/>
+    </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template match="xref" mode="content-pretty">
+      <xsl:value-of select="@linkend"/>
+  </xsl:template>
+
+  <xsl:template match="ulink" mode="content-pretty">
+    <xsl:choose>
+      <xsl:when test="text()">
+        <xsl:value-of select="."/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="@url"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="remark|indexterm" mode="content-pretty"/>
+
 </xsl:stylesheet>
