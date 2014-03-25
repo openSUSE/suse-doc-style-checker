@@ -50,7 +50,6 @@ result:hover done, result:focus done {
 }
 
 result:hover, result:focus {
-  background-color: #EEE;
   border: 1px solid #CCC;
   padding: 10px;
 }
@@ -93,9 +92,10 @@ info, warning, error {
 }
 
 suggestion {
-  font-size: 16px;
+  font-size: 17px;
   display: block;
   padding-left: 40px;
+  padding-right: 5px;
   position: relative;
 }
 
@@ -104,6 +104,19 @@ suggestion:before {
   position: absolute;
   left: 25px;
   display: inline-block;
+}
+
+result:hover suggestion {
+  background-color: rgba(254,233,0,0.25);
+}
+
+suggestion:first-of-type {
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+suggestion:last-of-type {
+  padding-bottom: 5px;
 }
 
 suggestion:first-of-type:last-of-type {
