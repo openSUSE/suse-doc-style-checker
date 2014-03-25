@@ -10,7 +10,7 @@
     </accept>
     <patterngroup>
       <pattern1>an</pattern1>
-      <contextpattern>([0-79]|[bcdfghj-np-tv-z][aeuio]|[bcdfgkpt]r|st[aeiuo]|us|uni).*</contextpattern>
+      <contextpattern>([0-79]|[bcdfghj-np-tv-z][aeuio]|[bcdfgkpt]r|st[aeiuo]|us|uni[ovt]).*</contextpattern>
     </patterngroup>
   </term>
 
@@ -21,9 +21,10 @@
     <patterngroup>
       <pattern1>a(?!\-\.)</pattern1>
       <!-- Keeping the words "one"/"once" out like this is not very clever. -->
-      <contextpattern>(8|[aei]|o[a-mo-z]|on[abdf-z]|u[bfgh]|un[a-hj-z]|[hlmnrx][bcdfghjklmnpqrtvwxz]|f[bcdfgjkmnpqtvwxz]|s[bdfgjrxz]).*</contextpattern>
+      <contextpattern>(8|[aei]|o[a-mo-z]|on[abdf-z]|u[bfgh]|un[a-hj-z]|[hlmnrx][bcdfghjklmnpqrtvwxz]|f[bcdfgjkmnpqtvwxz]|s[bdfgjrxz]|unin).*</contextpattern>
       <contextpattern look="before" match="negative" where="2">q.?</contextpattern>
       <contextpattern match="negative" mode="fuzzy" where="2">[bc].?</contextpattern>
+      <contextpattern match="negative">(and|or|with|but)</contextpattern>
     </patterngroup>
   </term>
 
