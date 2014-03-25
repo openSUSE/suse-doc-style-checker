@@ -483,6 +483,9 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content, contextid 
     return message
 
 def dupecheck( context, content, contentpretty, contextid ):
+    global punctuationstart
+    global punctuationend
+
     messages = []
 
     if content:
@@ -503,8 +506,6 @@ def dupecheck( context, content, contentpretty, contextid ):
         else:
             contentpretty = content
 
-        content = content.lower()
-
         # FIXME: Find a clever way to be able to check for variants of the same
         # word, such as: a/an, singular/plural, verb tenses. It should ideally
         # not be hardcoded here.
@@ -523,27 +524,39 @@ def dupecheck( context, content, contentpretty, contextid ):
             if wordposition < 1:
                 continue
 
-            if word == "##@ignore##":
+            # FIXME: 000 is for when there is a large number separated by
+            # spaces. Of course, putting it here is a hack, since separation
+            # with spaces is somewhat language-specific.
+            if word == "##@ignore##" or word == "000":
                 continue
 
-            if word == words[wordposition - 1]:
-                line = linenumber( context )
-                messages.append( dupecheckmessage( word, line, contentpretty, contextid ) )
+            wordstripped = replacepunctuation( word, 'end' )
 
-            elif wordposition >= 3:
-                if word == words[wordposition - 2]:
-                    if words[wordposition - 1] == words[wordposition - 3] and words[wordposition - 1] != "##@ignore##":
-                        line = linenumber( context )
-                        resultwords = words[wordposition - 1] + " " + word
-                        messages.append( dupecheckmessage( resultwords, line, contentpretty, contextid ) )
+            if wordposition >= 5:
+                if wordstripped == words[wordposition - 3]:
+                    if ( words[wordposition - 1] != "##@ignore##" ) and ( words[wordposition - 2] != "##@ignore##" ):
+                        if words[wordposition - 1] == words[wordposition - 4]:
+                            firstwordstripped = replacepunctuation( words[wordposition - 5], 'start' )
+                            if words[wordposition - 2] == firstwordstripped:
+                                line = linenumber( context )
+                                resultwords = words[wordposition - 2] + " " + words[wordposition - 1] + " " + wordstripped
+                                messages.append( dupecheckmessage( resultwords, line, contentpretty, contextid ) )
+                                continue
 
-            elif wordposition >= 5:
-                if word == words[wordposition - 3]:
-                    if words[wordposition - 1] == words[wordposition - 4] and words[wordposition - 1] != "##@ignore##":
-                        if words[wordposition - 3] == words[wordposition - 5] and words[wordposition - 3] != "##@ignore##":
+            if wordposition >= 3:
+                if wordstripped == words[wordposition - 2]:
+                    if words[wordposition - 1] != "##@ignore##":
+                        firstwordstripped = replacepunctuation( words[wordposition - 3], 'start' )
+                        if words[wordposition - 1] == firstwordstripped:
                             line = linenumber( context )
-                            resultwords = words[wordposition - 2] + " " + words[wordposition - 1] + " " + word
-                            dupecheckmessage( resultwords, line, contentpretty, contextid )
+                            resultwords = words[wordposition - 1] + " " + wordstripped
+                            messages.append( dupecheckmessage( resultwords, line, contentpretty, contextid ) )
+                            continue
+
+            firstwordstripped = replacepunctuation( words[wordposition - 1], 'start' )
+            if word == firstwordstripped:
+                line = linenumber( context )
+                messages.append( dupecheckmessage( wordstripped, line, contentpretty, contextid ) )
 
         if args.performance:
             timeendmatch = time.time()
@@ -555,6 +568,24 @@ average time per word: %s\n"""
                     str( timediffmatch / (totalwords + .001 ) ) ) )
 
     return messages
+
+
+def replacepunctuation( word, position ):
+    # FIXME: Check if this really fares any better than a regular expression?
+    punctuationstarts = [ "(","[","{" ]
+    punctuationends = [ ")","]","}","/","\\",",",":",";","!","." ]
+
+    if position == 'end':
+        for punctuationend in punctuationends:
+            if word.endswith( punctuationend ):
+                word = word[:-1]
+                break
+    else:
+        for punctuationstart in punctuationstarts:
+            if word.startswith( punctuationstart ):
+                word = word[1:]
+                break
+    return word
 
 def dupecheckmessage( word, line, content, contextid ):
     content = xmlescape( content )
