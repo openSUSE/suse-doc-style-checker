@@ -21,7 +21,7 @@
     <patterngroup>
       <pattern1>a(?!\-\.)</pattern1>
       <!-- Keeping the words "one"/"once" out like this is not very clever. -->
-      <contextpattern>(8|[aei]|o[a-mo-z]|on[abdf-z]|u[bfgh]|un[a-hj-z]|[fhlmnrsx][bcdfghjklmnpqrvwxyz]).*</contextpattern>
+      <contextpattern>(8|[aei]|o[a-mo-z]|on[abdf-z]|u[bfgh]|un[a-hj-z]|[hlmnrx][bcdfghjklmnpqrtvwxz]|f[bcdfgjkmnpqtvwxz]|s[bdfgjrxz]).*</contextpattern>
       <contextpattern look="before" match="negative" where="2">q.?</contextpattern>
       <contextpattern match="negative" mode="fuzzy" where="2">[bc].?</contextpattern>
     </patterngroup>
