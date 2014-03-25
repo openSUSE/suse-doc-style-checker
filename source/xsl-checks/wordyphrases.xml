@@ -367,12 +367,16 @@
 
   <term>
     <accept>
-      <word>indentical</word>
+      <word>identical</word>
     </accept>
     <patterngroup>
-      <pattern1>exactly</pattern1>
+      <pattern1>exact(ly)?</pattern1>
       <pattern2>the</pattern2>
       <pattern3>same</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>exact(ly)?</pattern1>
+      <pattern2>(same|identic(al)?)</pattern2>
     </patterngroup>
   </term>
 
