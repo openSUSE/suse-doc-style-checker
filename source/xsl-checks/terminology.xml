@@ -2810,7 +2810,8 @@
     <patterngroup>
       <pattern1>set</pattern1>
       <pattern2>ups?</pattern2>
-      <contextpattern look="before" match="negative">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before" match="negative">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" where="3">to</contextpattern>
       <contextpattern look="after" match="negative" >(the|an?|in|for)</contextpattern>
     </patterngroup>
   </term>
@@ -2823,7 +2824,7 @@
       <pattern1>shut-?down(ed|ing)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>shutt?(e[ds]|ing)?-?down</pattern1>
+      <pattern1>shutt?(s|ed|ing)-?down</pattern1>
     </patterngroup>
   </term>
 
@@ -2963,7 +2964,7 @@
       <pattern1>start-?upp?(ed|ing)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>start(e[ds]|ing)?-?up</pattern1>
+      <pattern1>start(ed|s|ing)-?up</pattern1>
     </patterngroup>
   </term>
 
