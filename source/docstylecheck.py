@@ -482,13 +482,18 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content, contextid 
 
     return message
 
-def dupecheck( context, content, contentpretty ):
+def dupecheck( context, content, contentpretty, contextid ):
     messages = []
 
     if content:
         # I get this as a list with one lxml.etree._ElementUnicodeResult, not
         # as a list with a string.
         content = str( content[0] )
+
+        if contextid:
+            contextid = contextid[0]
+        else:
+            contextid = None
 
         # This if/else block should not be necessary (if there is content,
         # there should always also be pretty content, but that depends on the
@@ -523,14 +528,14 @@ def dupecheck( context, content, contentpretty ):
 
             if word == words[wordposition - 1]:
                 line = linenumber( context )
-                messages.append( dupecheckmessage( word, line, contentpretty ) )
+                messages.append( dupecheckmessage( word, line, contentpretty, contextid ) )
 
             elif wordposition >= 3:
                 if word == words[wordposition - 2]:
                     if words[wordposition - 1] == words[wordposition - 3] and words[wordposition - 1] != "##@ignore##":
                         line = linenumber( context )
                         resultwords = words[wordposition - 1] + " " + word
-                        messages.append( dupecheckmessage( resultwords, line, contentpretty ) )
+                        messages.append( dupecheckmessage( resultwords, line, contentpretty, contextid ) )
 
             elif wordposition >= 5:
                 if word == words[wordposition - 3]:
@@ -538,7 +543,7 @@ def dupecheck( context, content, contentpretty ):
                         if words[wordposition - 3] == words[wordposition - 5] and words[wordposition - 3] != "##@ignore##":
                             line = linenumber( context )
                             resultwords = words[wordposition - 2] + " " + words[wordposition - 1] + " " + word
-                            dupecheckmessage( resultwords, line, contentpretty )
+                            dupecheckmessage( resultwords, line, contentpretty, contextid )
 
         if args.performance:
             timeendmatch = time.time()
@@ -551,15 +556,20 @@ average time per word: %s\n"""
 
     return messages
 
-def dupecheckmessage( word, line, content ):
+def dupecheckmessage( word, line, content, contextid ):
     content = xmlescape( content )
+
+    withinid = ""
+    if contextid:
+        withinid = "<withinid>%s</withinid>" % str(contextid)
+
     return etree.XML( """<result>
                     <error><quote>%s</quote> is duplicated
-                    <place><line>%s</line></place>:
+                    <place>%s<line>%s</line></place>:
                     <quote>%s</quote>
                 </error>
                 <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
-            </result>""" % (word, str(line), content, word ) )
+            </result>""" % (word, withinid, str(line), content, word ) )
 
 def main():
 

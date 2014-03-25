@@ -19,6 +19,11 @@
   <xsl:template match="para|title">
     <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
       <xsl:variable name="node" select="."/>
+      <xsl:variable name="parentid">
+        <xsl:if test="$node/ancestor::*[@id]">
+          <xsl:value-of select="$node/ancestor::*[@id][1]/@id"/>
+        </xsl:if>
+      </xsl:variable>
       <xsl:variable name="content-candidate">
         <xsl:apply-templates mode="dupes"/>
       </xsl:variable>
@@ -28,7 +33,7 @@
         select="normalize-space(self::*)"/></xsl:variable>
 
       <xsl:copy-of
-        select="py:dupecheck($content, $content-pretty)"/>
+        select="py:dupecheck($content, $content-pretty, $parentid)"/>
     </xsl:if>
   </xsl:template>
 
