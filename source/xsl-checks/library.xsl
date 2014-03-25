@@ -233,14 +233,14 @@
   <xsl:template match="keycombo" mode="content-pretty">
     <xsl:for-each select="*">
       <xsl:if test="position()&gt;1">–</xsl:if>
-      <xsl:apply-templates select="."/>
+      <xsl:apply-templates mode="content-pretty" select="."/>
     </xsl:for-each>
   </xsl:template>
 
   <xsl:template match="menuchoice" mode="content-pretty">
     <xsl:for-each select="*">
-      <xsl:if test="position()&gt;1"> &lt; </xsl:if>
-      <xsl:apply-templates select="."/>
+      <xsl:if test="position()&gt;1"> &gt; </xsl:if>
+      <xsl:apply-templates mode="content-pretty" select="."/>
     </xsl:for-each>
   </xsl:template>
 
