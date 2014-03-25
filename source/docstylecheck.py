@@ -84,7 +84,7 @@ def printcolor( message, type = None ):
 def linenumber( context ):
     return context.context_node.sourceline
 
-def termcheck( context, termfileid, content, contentpretty ):
+def termcheck( context, termfileid, content, contentpretty, contextid ):
     # FIXME: Modes: para, title?
     messages = []
 
@@ -101,6 +101,11 @@ def termcheck( context, termfileid, content, contentpretty ):
         # For whatever reason, this made termcheckmessage() crash
         # happily and semi-randomly.
         content = str( content[0] )
+
+        if contextid:
+            contextid = contextid[0]
+        else:
+            contextid = None
 
         # onepattern is a concatenated list of all patterns of the terminology
         # file which are within a pattern1 element
@@ -204,7 +209,7 @@ def termcheck( context, termfileid, content, contentpretty ):
                                 line = linenumber ( context )
                                 messages.append( termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
-                                    contentpretty ) )
+                                    contentpretty, contextid ) )
                             else:
                                 for contextpattern in contextpatternstopatterngroup:
                                     if contextpattern[0]:
@@ -252,7 +257,7 @@ def termcheck( context, termfileid, content, contentpretty ):
                                 line = linenumber ( context )
                                 messages.append( termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
-                                    contentpretty ) )
+                                    contentpretty, contextid ) )
                         patterngroupposition += 1
 
         if args.performance:
@@ -447,33 +452,34 @@ def xmlescape( text ):
         }
     return "".join(escapetable.get(c,c) for c in text)
 
-def termcheckmessage( acceptword, acceptcontext, word, line, content ):
+def termcheckmessage( acceptword, acceptcontext, word, line, content, contextid ):
     # FIXME: shorten content string (in the right place), to get closer toward
     # more focused results
     message = None
     content = xmlescape( content )
-    if acceptword is not None and acceptcontext is not None:
-        message = etree.XML( """<result>
-                <error>In the context of %s, use
-                    <quote>%s</quote> instead of <quote>%s</quote>
-                    <place><line>%s</line></place>:
-                    <quote>%s</quote>
-                </error>
-            </result>""" % ( acceptcontext, acceptword, word, str(line), content ) )
-    elif acceptword is not None:
-        message = etree.XML( """<result>
-                <error>Use <quote>%s</quote> instead of <quote>%s</quote>
-                    <place><line>%s</line></place>:
-                    <quote>%s</quote>
-                </error>
-            </result>""" % ( acceptword, word, str(line), content ) )
+
+    message = etree.XML(  """<result/>""" )
+
+    withinid = ""
+    if contextid:
+        withinid = "<withinid>%s</withinid>" % str(contextid)
+
+    if acceptcontext:
+        message.append( etree.XML( """<error>In the context of %s,
+            do not use <quote>%s</quote> <place>%s<line>%s</line></place>:
+            <quote>%s</quote></error>""" % ( acceptcontext, word, withinid, str(line), content ) ) )
     else:
-        message = etree.XML( """<result>
-                <error>Do not use <quote>%s</quote>
-                    <place><line>%s</line></place>:
-                    <quote>%s</quote>
-                </error>
-            </result>""" % ( word, str(line), content ) )
+        message.append( etree.XML( """<error>Do not use
+            <quote>%s</quote> <place>%s<line>%s</line></place>:
+            <quote>%s</quote></error>""" % ( word, withinid, str(line), content ) ) )
+
+    if acceptword:
+        message.append( etree.XML( """<suggestion>Use <quote>%s</quote>
+            instead.</suggestion>""" % acceptword ) )
+    else:
+        message.append( etree.XML( """<suggestion>Remove the word
+            <quote>%s</quote>.</suggestion>""" % word ) )
+
     return message
 
 def dupecheck( context, content, contentpretty ):
@@ -552,7 +558,8 @@ def dupecheckmessage( word, line, content ):
                     <place><line>%s</line></place>:
                     <quote>%s</quote>
                 </error>
-            </result>""" % (word, str(line), content ) )
+                <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
+            </result>""" % (word, str(line), content, word ) )
 
 def main():
 
