@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminology ignoredwords="[bdghjkm-qsu-xz].*">
+
+<!--
+(Novl Styleguide)
+Latin Abbreviations
++ Do not use any Latin abbreviations.
++ Use the English equivalents listed in the following table in place of Latin abbreviations:
+Latin           English Equivalent
+e.g.            for example, such as, as in
+et al.          and the rest, and others
+etc., et cetera including, and so forth
+ibid            already referenced, in the same place
+i.e.            that is
+N.B.            note
+q.v.            see
+re              concerning, about, in reference to
+viz.            namely
+vs.             against, compared to, compared with, versus
+
+tekom
+min., max.
+
+ -->
+
+
+  <term>
+    <accept>
+      <word>around</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Cc]a(?!\.[a-z])</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>compared to</word>
+    </accept>
+    <patterngroup>
+      <pattern1>v(/|s)</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>for example</word>
+    </accept>
+    <patterngroup>
+      <pattern1>e.g</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>e</pattern1>
+      <pattern2>g</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>note</word>
+    </accept>
+    <patterngroup>
+      <pattern1>n\.b</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>n</pattern1>
+      <pattern2>b</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>see</word>
+    </accept>
+    <patterngroup>
+      <pattern1>q\.v</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>q</pattern1>
+      <pattern2>v</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>that is</word>
+    </accept>
+    <patterngroup>
+      <pattern1>i.e</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>i</pattern1>
+      <pattern2>e</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>respectively</word>
+    </accept>
+    <patterngroup>
+      <pattern1>resp</pattern1>
+    </patterngroup>
+  </term>
+
+  <!-- I don't really think the following is very useful... -->
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern1>(asap|imho|afaic[ts]|ftfy|lol|rofl|idk|yolo|ymmv|tia)</pattern1>
+    </patterngroup>
+  </term>
+
+</terminology>
