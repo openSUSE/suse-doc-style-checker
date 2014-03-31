@@ -87,14 +87,14 @@ error:before {
 info, warning, error {
   font-size: 20px;
   display: block;
-  padding-left: 25px;
+  padding-left: 30px;
   position: relative;
 }
 
 suggestion {
   font-size: 17px;
   display: block;
-  padding-left: 40px;
+  padding-left: 45px;
   padding-right: 5px;
   position: relative;
 }
@@ -102,7 +102,7 @@ suggestion {
 suggestion:before {
   content: '–';
   position: absolute;
-  left: 25px;
+  left: 30px;
   display: inline-block;
 }
 
@@ -120,7 +120,7 @@ suggestion:last-of-type {
 }
 
 suggestion:first-of-type:last-of-type {
-  padding-left: 25px;
+  padding-left: 30px;
 }
 
 suggestion:first-of-type:last-of-type:before {
@@ -131,27 +131,58 @@ id, withinid, em {
   font-style: italic;
 }
 
-withinid:before {
-  content: 'in ';
-  font-style: normal;
-}
-
-line:before {
-  content: 'on line ';
-  font-style: normal;
-}
-
-line:nth-child(2):before {
-  content: ' on line ';
-  font-style: normal;
-}
-place:before {
-  content: ' (';
+place {
+  font-size: 15px;
+  display: block;
+  margin-bottom: 2px;
+  padding: 0px 5px 0px 30px;
+  color: #666;
 }
 
 place:after {
-  content: ') ';
+  content: ':';
 }
+
+result:hover place {
+  color: #333;
+}
+
+file {
+  font-weight: bold;
+}
+
+file:before {
+  content: 'In file ';
+  font-weight: normal;
+}
+
+withinid:before {
+  content: 'Within ID ';
+  font-style: normal;
+}
+
+withinid:nth-child(2):before,
+withinid:nth-child(3):before {
+  content: ' within ID ';
+  font-style: normal;
+}
+
+/* Lines are currently not helpful at all, so hide them for now, in shame.
+   (The lines refer to the line number in the bigfile.) */
+line {
+  display: none;
+}
+
+/*line:before {
+  content: 'On line ';
+  font-style: normal;
+}
+
+line:nth-child(2):before,
+line:nth-child(3):before {
+  content: ' on line ';
+  font-style: normal;
+}*/
 
 name:before, quote:before {
   content: '“';

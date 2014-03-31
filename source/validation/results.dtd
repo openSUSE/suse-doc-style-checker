@@ -17,7 +17,8 @@
 
 
 <!ELEMENT part-title    (#PCDATA) >
-<!ELEMENT result        ((error | warning | info), suggestion*) >
+<!ELEMENT result        (place?, (error | warning | info), suggestion*) >
+<!ELEMENT place         (file?, withinid?, line?) >
 
 <!ELEMENT error         (#PCDATA | %messageinlines;)* >
 <!ELEMENT warning       (#PCDATA | %messageinlines;)* >
@@ -34,6 +35,6 @@
 <!ELEMENT em            (#PCDATA) >
 <!ELEMENT quote         (#PCDATA) >
 <!ELEMENT withinid      (#PCDATA) >
+<!ELEMENT file          (#PCDATA) >
 <!ELEMENT line          (#PCDATA) >
 
-<!ELEMENT place       (withinid?, line?) >
