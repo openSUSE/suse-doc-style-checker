@@ -12,6 +12,7 @@
     <xsl:if test="not(bookinfo/productname or articleinfo/productname or
                       setinfo/productname)">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <error>Deliverable <xsl:call-template name="createid"/> does not contain
           a productname.</error>
         <suggestion>Add a <tag>productname</tag> element.</suggestion>
@@ -21,6 +22,7 @@
     <xsl:if test="not(bookinfo/productnumber or articleinfo/productnumber or
                       setinfo/productnumber)">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <error>Deliverable <xsl:call-template name="createid"/> does not contain
           a productnumber.</error>
         <suggestion>Add a <tag>productnumber</tag> element.</suggestion>
@@ -30,6 +32,7 @@
     <xsl:if test="not(bookinfo/date or articleinfo/date or
                       setinfo/date)">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <warning>Deliverable <xsl:call-template name="createid"/> does not
           contain a date.</warning>
         <suggestion>Add a <tag>date</tag> element, use &lt;?dbtimestamp?&gt; inside.</suggestion>
@@ -80,6 +83,7 @@
                        tocback/productname|tocentry/productname|
                        tocfront/productname|ulink/productname">
     <result>
+      <xsl:call-template name="sourcehint"/>
       <error>Section <xsl:call-template name="createid"/> contains a
         productname.
       </error>
@@ -131,6 +135,7 @@
                        tocback/productnumber|tocentry/productnumber|
                        tocfront/productnumber|ulink/productnumber">
     <result>
+      <xsl:call-template name="sourcehint"/>
       <error>Section <xsl:call-template name="createid"/> contains a
         productnumber.
       </error>

@@ -17,6 +17,47 @@
     </part>
   </xsl:template>
 
+  <xsl:template name="sourcehint">
+    <xsl:param name="node" select="."/>
+    <place>
+      <xsl:call-template name="file"/>
+      <xsl:call-template name="withinid"/>
+      <line><xsl:value-of select="py:linenumber()"/></line>
+    </place>
+  </xsl:template>
+
+  <xsl:template name="file">
+    <xsl:param name="node" select="."/>
+    <xsl:if test="$node/ancestor::*[@xml:base]">
+      <file>
+        <xsl:value-of select="$node/ancestor::*[@xml:base][1]/@xml:base"/>
+      </file>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="withinid">
+    <xsl:param name="node" select="."/>
+    <xsl:if test="$node/ancestor::*[@id]">
+      <withinid>
+        <xsl:value-of select="$node/ancestor::*[@id][1]/@id"/>
+      </withinid>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="file-nomarkup">
+    <xsl:param name="node" select="."/>
+    <xsl:if test="$node/ancestor::*[@xml:base]">
+        <xsl:value-of select="$node/ancestor::*[@xml:base][1]/@xml:base"/>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="withinid-nomarkup">
+    <xsl:param name="node" select="."/>
+    <xsl:if test="$node/ancestor::*[@id]">
+        <xsl:value-of select="$node/ancestor::*[@id][1]/@id"/>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template name="createid">
     <xsl:param name="use-url-attribute" select="0"/>
     <xsl:param name="use-function-attribute" select="0"/>
@@ -88,12 +129,6 @@
             <name><xsl:value-of select="$shortened"/></name>
           </xsl:otherwise>
         </xsl:choose>
-        <place>
-          <xsl:if test="$node/ancestor::*[@id]">
-            <withinid><xsl:value-of select="$node/ancestor::*[@id][1]/@id"/></withinid>
-          </xsl:if>
-          <line><xsl:value-of select="py:linenumber()"/></line>
-        </place>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -128,10 +163,11 @@
   <xsl:template match="para|title" mode="terminology">
     <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
       <xsl:variable name="node" select="."/>
-      <xsl:variable name="parentid">
-        <xsl:if test="$node/ancestor::*[@id]">
-          <xsl:value-of select="$node/ancestor::*[@id][1]/@id"/>
-        </xsl:if>
+      <xsl:variable name="withinid">
+        <xsl:call-template name="withinid-nomarkup"/>
+      </xsl:variable>
+      <xsl:variable name="file">
+        <xsl:call-template name="file-nomarkup"/>
       </xsl:variable>
       <xsl:variable name="content-candidate">
         <xsl:apply-templates mode="terminology-content"/>
@@ -145,7 +181,8 @@
         select="normalize-space($content-pretty-candidate)"/></xsl:variable>
 
       <xsl:copy-of
-        select="py:termcheck($termdataid, $content, $content-pretty, $parentid)"/>
+        select="py:termcheck($termdataid, $content, $content-pretty, $withinid,
+                             $file)"/>
     </xsl:if>
   </xsl:template>
 

@@ -23,6 +23,7 @@
         </xsl:call-template>
       </xsl:variable>
       <result>
+        <xsl:call-template name="sourcehint"/>
         <warning>Function keycap
           <xsl:call-template name="createid"/>
           contains text.
@@ -76,6 +77,7 @@
       </xsl:variable>
 
       <result>
+        <xsl:call-template name="sourcehint"/>
         <error>Function keycap
          <xsl:call-template name="createid"/>
           does not use <quote>function</quote> attribute.

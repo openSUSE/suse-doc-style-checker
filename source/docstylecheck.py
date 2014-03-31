@@ -84,7 +84,7 @@ def printcolor( message, type = None ):
 def linenumber( context ):
     return context.context_node.sourceline
 
-def termcheck( context, termfileid, content, contentpretty, contextid ):
+def termcheck( context, termfileid, content, contentpretty, contextid, basefile ):
     # FIXME: Modes: para, title?
     messages = []
 
@@ -104,6 +104,11 @@ def termcheck( context, termfileid, content, contentpretty, contextid ):
 
         if not ( content ):
             return messages
+
+        if basefile:
+            basefile = basefile[0]
+        else:
+            basefile = None
 
         if contextid:
             contextid = contextid[0]
@@ -226,7 +231,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid ):
                                     line = linenumber ( context )
                                     messages.append( termcheckmessage(
                                         acceptword, acceptcontext, matchwords, line,
-                                        contentpretty, contextid ) )
+                                        contentpretty, contextid, basefile ) )
                                 else:
                                     for contextpattern in contextpatternstopatterngroup:
                                         if contextpattern[0]:
@@ -274,7 +279,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid ):
                                     line = linenumber ( context )
                                     messages.append( termcheckmessage(
                                         acceptword, acceptcontext, matchwords, line,
-                                        contentpretty, contextid ) )
+                                        contentpretty, contextid, basefile ) )
                             patterngroupposition += 1
 
         if args.performance:
@@ -478,26 +483,34 @@ def xmlescape( text ):
         }
     return "".join(escapetable.get(c,c) for c in text)
 
-def termcheckmessage( acceptword, acceptcontext, word, line, content, contextid ):
+def termcheckmessage( acceptword, acceptcontext, word, line, content, contextid, basefile ):
     # FIXME: shorten content string (in the right place), to get closer toward
     # more focused results
     message = None
     content = xmlescape( content )
 
-    message = etree.XML(  """<result/>""" )
+    filename = ""
+    if basefile:
+        filename = "<file>%s</file>" % str( basefile )
 
     withinid = ""
+    # Python warns me: Use specific 'len(elem)' or 'elem is not None' test
+    # instead.
     if contextid:
-        withinid = "<withinid>%s</withinid>" % str(contextid)
+        withinid = "<withinid>%s</withinid>" % str( contextid )
+
+    message = etree.XML(  """<result>
+            <place>%s%s<line>%s</line></place>
+        </result>""" % ( filename, withinid, str( line ) ) )
 
     if acceptcontext:
         message.append( etree.XML( """<error>In the context of %s,
-            do not use <quote>%s</quote> <place>%s<line>%s</line></place>:
-            <quote>%s</quote></error>""" % ( acceptcontext, word, withinid, str(line), content ) ) )
+            do not use <quote>%s</quote>:
+            <quote>%s</quote></error>""" % ( acceptcontext, word, content ) ) )
     else:
         message.append( etree.XML( """<error>Do not use
-            <quote>%s</quote> <place>%s<line>%s</line></place>:
-            <quote>%s</quote></error>""" % ( word, withinid, str(line), content ) ) )
+            <quote>%s</quote>:
+            <quote>%s</quote></error>""" % ( word, content ) ) )
 
     if acceptword:
         message.append( etree.XML( """<suggestion>Use <quote>%s</quote>
@@ -508,13 +521,18 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content, contextid 
 
     return message
 
-def sentencelengthcheck( context, content, contentpretty, contextid ):
+def sentencelengthcheck( context, content, contentpretty, contextid, basefile ):
     messages = []
 
     if content:
         # I get this as a list with one lxml.etree._ElementUnicodeResult, not
         # as a list with a string.
         content = str( content[0] )
+
+        if basefile:
+            basefile = basefile[0]
+        else:
+            basefile = None
 
         if contextid:
             contextid = contextid[0]
@@ -535,9 +553,14 @@ def sentencelengthcheck( context, content, contentpretty, contextid ):
             words = sentence.split()
             wordcount = len( words )
             if wordcount >= 26:
+
+                filename = ""
+                if basefile:
+                    filename = "<file>%s</file>" % str( basefile )
+
                 withinid = ""
                 if contextid:
-                    withinid = "<withinid>%s</withinid>" % str(contextid)
+                    withinid = "<withinid>%s</withinid>" % str( contextid )
 
                 messagetype = 'warning'
                 if wordcount >= 33:
@@ -546,15 +569,14 @@ def sentencelengthcheck( context, content, contentpretty, contextid ):
                 contentpretty = xmlescape( contentpretty )
                 line = linenumber( context )
                 messages.append( etree.XML( """<result>
-                                <%s>Sentence with %s words
-                                <place>%s<line>%s</line></place>:
+                                <place>%s%s<line>%s</line></place>
+                                <%s>Sentence with %s words:
                                 <quote>%s</quote>
                             </%s>
                             <suggestion>Remove unnecessary words.</suggestion>
                             <suggestion>Split the sentence.</suggestion>
-                        </result>""" % ( messagetype, str( wordcount ),
-                    withinid, str( line ), contentpretty,
-                    messagetype ) ) )
+                        </result>""" % ( filename, withinid, str( line ),
+                    messagetype, str( wordcount ), contentpretty, messagetype ) ) )
 
     return messages
 
@@ -564,7 +586,7 @@ def sentencetokenizer( text ):
     sentences = re.split( r'(?<![Ee]\.g|etc|[Ii]\.e| ca|n\.b|[Ii]nc)\.?\.?\.\s|!\s|\.?\.?\?\s', text )
     return sentences
 
-def dupecheck( context, content, contentpretty, contextid ):
+def dupecheck( context, content, contentpretty, contextid, basefile ):
     global punctuationstart
     global punctuationend
 
@@ -574,6 +596,11 @@ def dupecheck( context, content, contentpretty, contextid ):
         # I get this as a list with one lxml.etree._ElementUnicodeResult, not
         # as a list with a string.
         content = str( content[0] )
+
+        if basefile:
+            basefile = basefile[0]
+        else:
+            basefile = None
 
         if contextid:
             contextid = contextid[0]
@@ -622,7 +649,8 @@ def dupecheck( context, content, contentpretty, contextid ):
                             if words[wordposition - 2] == firstwordstripped:
                                 line = linenumber( context )
                                 resultwords = words[wordposition - 2] + " " + words[wordposition - 1] + " " + wordstripped
-                                messages.append( dupecheckmessage( resultwords, line, contentpretty, contextid ) )
+                                messages.append( dupecheckmessage( resultwords,
+                                    line, contentpretty, contextid, basefile ) )
                                 continue
 
             if wordposition >= 3:
@@ -632,13 +660,15 @@ def dupecheck( context, content, contentpretty, contextid ):
                         if words[wordposition - 1] == firstwordstripped:
                             line = linenumber( context )
                             resultwords = words[wordposition - 1] + " " + wordstripped
-                            messages.append( dupecheckmessage( resultwords, line, contentpretty, contextid ) )
+                            messages.append( dupecheckmessage( resultwords,
+                                line, contentpretty, contextid, basefile ) )
                             continue
 
             firstwordstripped = replacepunctuation( words[wordposition - 1], 'start' )
             if word == firstwordstripped:
                 line = linenumber( context )
-                messages.append( dupecheckmessage( wordstripped, line, contentpretty, contextid ) )
+                messages.append( dupecheckmessage( wordstripped,
+                    line, contentpretty, contextid, basefile ) )
 
         if args.performance:
             timeendmatch = time.time()
@@ -669,20 +699,26 @@ def replacepunctuation( word, position ):
                 break
     return word
 
-def dupecheckmessage( word, line, content, contextid ):
+def dupecheckmessage( word, line, content, contextid, basefile ):
     content = xmlescape( content )
 
+    filename = ""
+    if basefile:
+        filename = "<file>%s</file>" % str( basefile )
+
     withinid = ""
+    # Python warns me: Use specific 'len(elem)' or 'elem is not None' test
+    # instead.
     if contextid:
-        withinid = "<withinid>%s</withinid>" % str(contextid)
+        withinid = "<withinid>%s</withinid>" % str( contextid )
 
     return etree.XML( """<result>
-                    <error><quote>%s</quote> is duplicated
-                    <place>%s<line>%s</line></place>:
-                    <quote>%s</quote>
-                </error>
-                <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
-            </result>""" % (word, withinid, str(line), content, word ) )
+            <place>%s%s<line>%s</line></place>
+            <error><quote>%s</quote> is duplicated:
+                <quote>%s</quote>
+            </error>
+            <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
+        </result>""" % ( filename, withinid, str(line), word, content, word ) )
 
 def main():
 

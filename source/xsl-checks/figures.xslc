@@ -10,6 +10,7 @@
 
     <xsl:if test="not(textobject/phrase)">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <warning>Media object
           <xsl:call-template name="createid">
             <xsl:with-param name="node" select="imageobject[1]/imagedata[1]"/>

@@ -19,6 +19,7 @@
                   contains($end-of-text, ',') or contains($end-of-text, ';') or
                   contains($end-of-text, '?') or contains($end-of-text, '!')">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <error>User interface element <xsl:call-template name="createid"/>
           has punctation at its end.
         </error>

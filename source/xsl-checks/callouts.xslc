@@ -12,6 +12,7 @@
 
     <xsl:if test="$callouts &gt; 10">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <error>Calloutlist
           <xsl:call-template name="createid"/> contains
           <xsl:value-of select="$callouts"/> callouts.

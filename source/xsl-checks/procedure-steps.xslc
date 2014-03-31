@@ -12,6 +12,7 @@
     <xsl:choose>
       <xsl:when test="$steps &gt; 10">
         <result>
+          <xsl:call-template name="sourcehint"/>
           <warning>Procedure <xsl:call-template name="createid"/> contains
             <xsl:value-of select="$steps"/> steps.
           </warning>
@@ -20,6 +21,7 @@
       </xsl:when>
       <xsl:when test="$steps &lt; 2">
         <result>
+          <xsl:call-template name="sourcehint"/>
           <error>Procedure <xsl:call-template name="createid"/> contains
             <xsl:value-of select="$steps"/> step.
           </error>

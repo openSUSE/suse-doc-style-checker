@@ -16,6 +16,7 @@
 
     <xsl:if test="$items &lt; 2">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <error>List <xsl:call-template name="createid"/> contains <xsl:value-of select="$items"/> item.</error>
         <suggestion>Lists should contain at least 2 items.</suggestion>
       </result>
@@ -23,6 +24,7 @@
 
     <xsl:if test="$nesting-level &gt; 1">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <warning>List <xsl:call-template name="createid"/> is nested inside
           <xsl:value-of select="$nesting-level"/> other lists.
         </warning>

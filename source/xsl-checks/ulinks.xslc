@@ -25,6 +25,7 @@
                         starts-with($url, 'git:') or
                         starts-with($url, 'bzr:')">
           <result>
+            <xsl:call-template name="sourcehint"/>
             <error>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
@@ -38,6 +39,7 @@
         </xsl:when>
         <xsl:when test="starts-with($url, 'info:')">
           <result>
+            <xsl:call-template name="sourcehint"/>
             <error>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
@@ -51,6 +53,7 @@
         </xsl:when>
         <xsl:when test="starts-with($url, 'man:')">
           <result>
+            <xsl:call-template name="sourcehint"/>
             <error>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
@@ -65,6 +68,7 @@
         <xsl:when test="starts-with($url, 'file:') or
                         starts-with($url, 'smb:')">
           <result>
+            <xsl:call-template name="sourcehint"/>
             <error>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
@@ -78,6 +82,7 @@
         </xsl:when>
         <xsl:when test="starts-with($url, 'mailto:') or contains($url, '@')">
           <result>
+            <xsl:call-template name="sourcehint"/>
             <error>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
@@ -97,6 +102,7 @@
                         contains($url, '.ru') or contains($url, '.br') or
                         contains($url, '.cn') or contains($url, '.in')">
           <result>
+            <xsl:call-template name="sourcehint"/>
             <error>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
@@ -110,6 +116,7 @@
         </xsl:when>
         <xsl:otherwise>
           <result>
+            <xsl:call-template name="sourcehint"/>
             <error>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
@@ -136,6 +143,7 @@
                       contains($url, '.suse.com/releasenotes') or
                       contains($url, 'en.opensuse.org'))">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <warning>Ulink
           <xsl:call-template name="createid">
             <xsl:with-param name="use-url-attribute" select="1"/>

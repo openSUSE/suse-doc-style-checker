@@ -10,6 +10,7 @@
   <xsl:template match="caution|warning|important|note|tip">
     <xsl:if test="self::caution">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <error>Admonition <xsl:call-template name="createid"/>
           is a <tag>caution</tag> element.
         </error>
@@ -28,6 +29,7 @@
       </xsl:variable>
 
       <result>
+        <xsl:call-template name="sourcehint"/>
         <xsl:element name="{$output-tag-type}">
           <tag><xsl:value-of select="local-name(.)"/></tag> element
           <xsl:call-template name="createid"/>

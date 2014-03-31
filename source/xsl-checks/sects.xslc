@@ -29,6 +29,7 @@
 
     <xsl:if test="not(para|abstract) and not(ancestor-or-self::*/@role = 'legal')">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <error>Section <xsl:call-template name="createid"/> lacks an
           introductory paragraph or abstract.</error>
         <suggestion>Add a <tag>para</tag> or <tag>abstract</tag>.</suggestion>
@@ -45,6 +46,7 @@
 
     <xsl:if test="local-name(.) = 'sect4' or local-name(.) = 'sect5'">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <warning>Section <xsl:call-template name="createid"/> is nested deeply.
         </warning>
         <suggestion>Avoid using <tag>sect4</tag> and <tag>sect5</tag> elements.
@@ -54,6 +56,7 @@
 
     <xsl:if test="$lone = 1">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <warning>Section <xsl:call-template name="createid"/> contains a lone
           subsection.
         </warning>

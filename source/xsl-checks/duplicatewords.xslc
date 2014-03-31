@@ -19,10 +19,11 @@
   <xsl:template match="para|title">
     <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
       <xsl:variable name="node" select="."/>
-      <xsl:variable name="parentid">
-        <xsl:if test="$node/ancestor::*[@id]">
-          <xsl:value-of select="$node/ancestor::*[@id][1]/@id"/>
-        </xsl:if>
+      <xsl:variable name="withinid">
+        <xsl:call-template name="withinid-nomarkup"/>
+      </xsl:variable>
+      <xsl:variable name="file">
+        <xsl:call-template name="file-nomarkup"/>
       </xsl:variable>
       <xsl:variable name="content-candidate">
         <xsl:apply-templates mode="dupes"/>
@@ -36,7 +37,7 @@
         select="normalize-space($content-pretty-candidate)"/></xsl:variable>
 
       <xsl:copy-of
-        select="py:dupecheck($content, $content-pretty, $parentid)"/>
+        select="py:dupecheck($content, $content-pretty, $withinid, $file)"/>
     </xsl:if>
   </xsl:template>
 

@@ -11,6 +11,7 @@
                          section[not(@id)]|sect1[not(@id)]|sect2[not(@id)]|sect3[not(@id)]|sect4[not(@id)]|sect5[not(@id)]">
     <xsl:if test="not(ancestor::preface or ancestor-or-self::*/@role = 'legal')">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <error>Section <xsl:call-template name="createid"/> has no identifier.
         </error>
         <suggestion>Add an <em>id</em> attribute.
@@ -59,6 +60,7 @@
     <xsl:if test="not(starts-with($id, $correct-prefix)) and
                   not($correct-prefix = '?')">
       <result>
+        <xsl:call-template name="sourcehint"/>
         <warning>Identifier of
           <xsl:call-template name="createid"/>
           has an unusual prefix.
@@ -85,6 +87,7 @@
       <xsl:variable name="id-safe-special-state"
         select="string-length($id) = string-length(normalize-space($id-safe-special))"/>
       <result>
+        <xsl:call-template name="sourcehint"/>
         <warning>Identifier
           <xsl:call-template name="createid"/>
           contains
