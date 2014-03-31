@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <terminology ignoredwords="(this|there|that|these|those|one|by|on|under|about|at|from)">
-<!-- What about: [any number of = all]? [well = /dev/null]? -->
+<!-- What about: [any number of = all]? [well, = /dev/null]? -->
 
   <!-- Stolen from Novell's Style Guide. -->
   <term>
@@ -10,8 +10,13 @@
     <patterngroup>
       <pattern1>a</pattern1>
       <pattern2>large</pattern2>
-      <pattern3>numbers?</pattern3>
+      <pattern3>number</pattern3>
       <pattern4>of</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>large</pattern1>
+      <pattern2>numbers</pattern2>
+      <pattern3>of</pattern3>
     </patterngroup>
   </term>
 
@@ -21,7 +26,7 @@
     </accept>
     <patterngroup>
       <pattern1>a</pattern1>
-      <pattern2>numbers?</pattern2>
+      <pattern2>number</pattern2>
       <pattern3>of</pattern3>
     </patterngroup>
   </term>
