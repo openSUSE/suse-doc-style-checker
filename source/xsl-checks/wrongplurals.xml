@@ -6,10 +6,10 @@
       <word>criteria</word>
     </accept>
     <patterngroup>
-      <pattern1>criterias</pattern1>
+      <pattern1>criteri(a|on)s</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>criteria's</pattern1>
+      <pattern1>criteri(a|on)'s</pattern1>
       <contextpattern match="negative" look="before">(the|a)</contextpattern>
     </patterngroup>
   </term>
@@ -45,10 +45,10 @@
       <word>media</word>
     </accept>
     <patterngroup>
-      <pattern1>medias</pattern1>
+      <pattern1>medi(a|um)s</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>media's</pattern1>
+      <pattern1>medi(a|on)'s</pattern1>
       <contextpattern match="negative" look="before">(the|a)</contextpattern>
     </patterngroup>
   </term>
