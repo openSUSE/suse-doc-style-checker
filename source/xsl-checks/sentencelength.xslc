@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:py="https://www.gitorious.org/style-checker/style-checker"
+  xmlns:exslt="http://exslt.org/common" exclude-result-prefixes="py exslt">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+
+  <xsl:template match="/">
+    <part>
+      <part-title><xsl:apply-templates mode="part-title"/></part-title>
+      <xsl:apply-templates/>
+    </part>
+  </xsl:template>
+
+  <xsl:template match="*" mode="part-title">Sentence Length</xsl:template>
+
+  <!-- The following template should probably match more elements. -->
+  <xsl:template match="para|title">
+    <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
+      <xsl:variable name="node" select="."/>
+      <xsl:variable name="parentid">
+        <xsl:if test="$node/ancestor::*[@id]">
+          <xsl:value-of select="$node/ancestor::*[@id][1]/@id"/>
+        </xsl:if>
+      </xsl:variable>
+      <xsl:variable name="content-candidate">
+        <xsl:apply-templates mode="dupes"/>
+      </xsl:variable>
+      <xsl:variable name="content-pretty-candidate">
+        <xsl:apply-templates mode="content-pretty"/>
+      </xsl:variable>
+      <xsl:variable name="content"><xsl:value-of
+        select="normalize-space($content-candidate)"/></xsl:variable>
+      <xsl:variable name="content-pretty"><xsl:value-of
+        select="normalize-space($content-pretty-candidate)"/></xsl:variable>
+
+      <xsl:copy-of
+        select="py:sentencelengthcheck($content, $content-pretty, $parentid)"/>
+    </xsl:if>
+  </xsl:template>
+
+
+  <xsl:template match="text()" mode="dupes">
+    <xsl:value-of select="."/>
+  </xsl:template>
+
+  <xsl:template match="classname|code|command|computeroutput|constant|envar|
+                       exceptionname|filename|function|interfacename|literal|
+                       methodname|option|package|parameter|prompt|replaceable|
+                       sgmltag|structfield|systemitem|tag|userinput|varname|
+                       keycombo|keycap|menuchoice|guimenu|email|filename|ulink|
+                       uri|xref"
+    mode="dupes">
+    ##@ignore##
+  </xsl:template>
+
+  <xsl:template match="remark|indexterm" mode="dupes"/>
+
+  <xsl:template match="*" mode="dupes">
+    <xsl:apply-templates mode="dupes"/>
+  </xsl:template>
+
+</xsl:stylesheet>

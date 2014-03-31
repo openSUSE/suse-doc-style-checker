@@ -508,6 +508,54 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content, contextid 
 
     return message
 
+def sentencelengthcheck( context, content, contentpretty, contextid ):
+    messages = []
+
+    if content:
+        # I get this as a list with one lxml.etree._ElementUnicodeResult, not
+        # as a list with a string.
+        content = str( content[0] )
+
+        if contextid:
+            contextid = contextid[0]
+        else:
+            contextid = None
+
+        # This if/else block should not be necessary (if there is content,
+        # there should always also be pretty content, but that depends on the
+        # XSLT used for checking). It hopefully won't hurt either.
+        if contentpretty:
+            contentpretty = str( contentpretty[0] )
+        else:
+            contentpretty = content
+
+        sentences = sentencetokenizer( content )
+
+        for sentence in sentences:
+            words = sentence.split()
+            wordcount = len( words )
+            if wordcount >= 25:
+                withinid = ""
+                if contextid:
+                    withinid = "<withinid>%s</withinid>" % str(contextid)
+
+                messagetype = 'warning'
+                if wordcount >= 35:
+                    messagetype = 'error'
+
+                messages.append( etree.XML( """<result>
+                                <%s>Sentence with %s words
+                                <place>%s<line>%s</line></place>:
+                                <quote>%s</quote>
+                            </%s>
+                            <suggestion>Remove unnecessary words.</suggestion>
+                            <suggestion>Split the sentence.</suggestion>
+                        </result>""" % ( messagetype, str( wordcount ),
+                    withinid, str( linenumber( context ) ), contentpretty,
+                    messagetype ) ) )
+
+    return messages
+
 def sentencetokenizer( text ):
     # FIXME: English hardcoded
     # Lookbehinds need to have a fixed length... thus _ca
