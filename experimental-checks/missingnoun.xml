@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminology ignoredwords="[b-su-z0-9].*" useonepattern="no">
+
+  <!-- Not sure this is very useful. -->
+
+  <term>
+    <accept>
+      <word>Ignore the rest of this message and add a noun!</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">(an?|An|[Tt]he)(?!.+)</pattern1>
+      <pattern2 case="keep">(and|or|with|by|to|through|thru|over|under|from|off?|because|where|when|that|which|on|out)(?!-)</pattern2>
+      <contextpattern match="negative" where="2">[a-z0-9](?!.+)</contextpattern>
+      <contextpattern match="negative" look="before">(with|from|at)</contextpattern>
+    </patterngroup>
+  </term>
+
+</terminology>

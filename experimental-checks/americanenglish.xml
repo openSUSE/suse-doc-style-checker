@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminology>
+
+<term>
+  <accept>
+    <word>-ization</word>
+  </accept>
+  <patterngroup>
+    <pattern1>.*?[iy]sations?</pattern1>
+  </patterngroup>
+</term>
+
+<term>
+  <accept>
+    <word>-ize</word>
+  </accept>
+  <patterngroup>
+    <!-- Avoid flagging Enterprise -->
+    <pattern1>.*?[^enterpr][iy]s(e[ds]?|ing)</pattern1>
+  </patterngroup>
+</term>
+
+<term>
+  <accept>
+    <word>through</word>
+  </accept>
+  <patterngroup>
+    <pattern1>to</pattern1>
+    <contextpattern look="before" mode="fuzzy" where="3">from</contextpattern>
+  </patterngroup>
+</term>
+
+</terminology>

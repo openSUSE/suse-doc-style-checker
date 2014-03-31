@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:include href="library.xsl"/>
+
+
+  <xsl:template match="*" mode="part-title">Statistics</xsl:template>
+
+  <xsl:template match="/">
+    <part>
+      <part-title><xsl:apply-templates mode="part-title" /></part-title>
+      <xsl:apply-templates mode="statistics" select="/"/>
+    </part>
+  </xsl:template>
+
+  <xsl:template match="*" mode="statistics">
+    <xsl:variable name="titles">
+      <xsl:value-of select="count(descendant::title) + count(descendant::refnametitle)"/>
+    </xsl:variable>
+    <xsl:variable name="paras">
+      <xsl:value-of
+        select="count(descendant::para[not(parent::step or
+                                           parent::substep or
+                                           parent::listitem or
+                                           parent::table or
+                                           parent::calloutlist)])"/>
+    </xsl:variable>
+    <xsl:variable name="figures">
+      <xsl:value-of select="count(descendant::figure) +
+                            count(descendant::informalfigure)"/>
+    </xsl:variable>
+    <xsl:variable name="mediaobjects">
+      <xsl:value-of select="count(descendant::mediaobject)"/>
+    </xsl:variable>
+    <xsl:variable name="examples">
+      <xsl:value-of select="count(descendant::example)"/>
+    </xsl:variable>
+    <xsl:variable name="tables">
+      <xsl:value-of select="count(descendant::table) +
+                            count(descendant::informaltable)"/>
+    </xsl:variable>
+    <xsl:variable name="procedures">
+      <xsl:value-of select="count(descendant::procedure)"/>
+    </xsl:variable>
+    <xsl:variable name="steps">
+      <xsl:value-of select="count(descendant::step) +
+                            count(descendant::substep)"/>
+    </xsl:variable>
+    <xsl:variable name="lists">
+      <xsl:value-of select="count(descendant::orderedlist) +
+                            count(descendant::itemizedlist)"/>
+    </xsl:variable>
+    <xsl:variable name="listitems">
+      <xsl:value-of select="count(descendant::listitem)"/>
+    </xsl:variable>
+    <xsl:variable name="ulinks">
+      <xsl:value-of select="count(descendant::ulink)"/>
+    </xsl:variable>
+<!--     <xsl:variable name="ulinks-for-more-info">
+ -->      <!-- I suppose the following is a fantasy XPath… -->
+     <!--  <xsl:value-of select="count(descendant::sect1/title/text()[contains("For More Information")]/ancestor::sect1/descendant::ulink) or
+                            count(descendant::sect2/title/text()[contains("For More Information")]/ancestor::sect2/descendant::ulink) or
+                            count(descendant::sect3/title/text()[contains("For More Information")]/ancestor::sect3/descendant::ulink) or
+                            count(descendant::sect4/title/text()[contains("For More Information")]/ancestor::sect4/descendant::ulink) or
+                            count(descendant::sect5/title/text()[contains("For More Information")]/ancestor::sect5/descendant::ulink)"/>
+    </xsl:variable> -->
+
+    <result>
+      <info>It is a document!</info>
+      <suggestion>It contains <xsl:value-of select="$titles"/> titles.</suggestion>
+      <suggestion>It contains <xsl:value-of select="$paras"/> paragraphs.</suggestion>
+      <suggestion>It contains <xsl:value-of select="$mediaobjects"/> mediaobjects.</suggestion>
+      <suggestion>It contains <xsl:value-of select="$examples"/> examples.</suggestion>
+      <suggestion>It contains <xsl:value-of select="$tables"/> tables.</suggestion>
+      <suggestion>It contains <xsl:value-of select="$procedures"/> procedures,
+        each containing an average of <xsl:value-of select="round($steps div $procedures)"/> steps.
+      </suggestion>
+      <suggestion>It contains <xsl:value-of select="$lists"/> numbered and
+        bulleted lists, each containing an average of
+        <xsl:value-of select="round($listitems div $lists)"/> elements.
+      </suggestion><!--
+      <suggestion>It contains <xsl:value-of select="$ulinks"/> numbered and
+        <xsl:value-of select="$ulinks-for-more-info"/> of them are inside
+        sections name <quote>For More Information</quote>.
+      </suggestion> -->
+    </result>
+  </xsl:template>
+
+
+
+</xsl:stylesheet>
