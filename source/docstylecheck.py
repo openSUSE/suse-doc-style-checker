@@ -534,15 +534,17 @@ def sentencelengthcheck( context, content, contentpretty, contextid ):
         for sentence in sentences:
             words = sentence.split()
             wordcount = len( words )
-            if wordcount >= 25:
+            if wordcount >= 26:
                 withinid = ""
                 if contextid:
                     withinid = "<withinid>%s</withinid>" % str(contextid)
 
                 messagetype = 'warning'
-                if wordcount >= 35:
+                if wordcount >= 33:
                     messagetype = 'error'
 
+                contentpretty = xmlescape( contentpretty )
+                line = linenumber( context )
                 messages.append( etree.XML( """<result>
                                 <%s>Sentence with %s words
                                 <place>%s<line>%s</line></place>:
@@ -551,7 +553,7 @@ def sentencelengthcheck( context, content, contentpretty, contextid ):
                             <suggestion>Remove unnecessary words.</suggestion>
                             <suggestion>Split the sentence.</suggestion>
                         </result>""" % ( messagetype, str( wordcount ),
-                    withinid, str( linenumber( context ) ), contentpretty,
+                    withinid, str( line ), contentpretty,
                     messagetype ) ) )
 
     return messages
