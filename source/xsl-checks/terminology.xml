@@ -727,17 +727,8 @@
       <context>text or list entries</context>
     </accept>
     <patterngroup>
-      <pattern1>(de|un)-select(ed|ing|s)</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>(de|un)-?highlight(ed|ing|s)</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>(un|de)-?(block|choose?)(s|ing)?</pattern1>
-      <contextpattern mode="fuzzy" where="2">(selection|text|entr(y|ie))s?</contextpattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>unselect(ed|ing|s)</pattern1>
+      <pattern1>((de-|un-?)select|(de|un)-?(block|choose?|highlight))(ing|s)?</pattern1>
+      <contextpattern mode="fuzzy" where="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>remov(e[ds]?|ing)</pattern1>
@@ -2767,11 +2758,8 @@
       <context>text or list entries</context>
     </accept>
     <patterngroup>
-      <pattern1>highlight(es|ing)?</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>(block|choose?)(s|ing)?</pattern1>
-      <contextpattern mode="fuzzy" where="2">(selection|text|entr(y|ie))s?</contextpattern>
+      <pattern1>(block|choose?|highlight)(s|ing)?</pattern1>
+      <contextpattern mode="fuzzy" where="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>add(e[ds]?|ing)</pattern1>
@@ -2794,14 +2782,14 @@
     </patterngroup>
     <patterngroup>
       <pattern1>(blocked|chosen)</pattern1>
-      <contextpattern mode="fuzzy" where="2">(selection|text|entr(y|ie))s?</contextpattern>
+      <contextpattern mode="fuzzy" where="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept/>
     <patterngroup>
-      <pattern1>self-?evident(ly)?</pattern1>
+      <pattern1>self-?e(vident|xplanator[iy])(ly)?</pattern1>
     </patterngroup>
   </term>
 
@@ -3331,14 +3319,11 @@
       <context>text or list entries</context>
     </accept>
     <patterngroup>
-      <pattern1>deselected</pattern1>
-    </patterngroup>
-    <patterngroup>
       <pattern1>(de|un)-highlighted</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>(un|de)-(blocked|chosen)</pattern1>
-      <contextpattern mode="fuzzy" where="2">(selection|text|entr(y|ie))s?</contextpattern>
+      <pattern1>(un-|de-?)selected|(un|de)-(blocked|chosen)</pattern1>
+      <contextpattern mode="fuzzy" where="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
     </patterngroup>
   </term>
 
