@@ -377,6 +377,7 @@
     <patterngroup>
       <pattern1>exact(ly)?</pattern1>
       <pattern2>(same|identic(al)?)</pattern2>
+      <contextpattern look="before" match="negative">(an?|the)</contextpattern>
     </patterngroup>
   </term>
 
@@ -581,6 +582,8 @@
       <pattern1>(is|are|were|was|be|been)</pattern1>
       <pattern2>able</pattern2>
       <pattern3>to</pattern3>
+      <contextpattern match="negative" look="before">(must|should|could|would|will|not)</contextpattern>
+      <contextpattern match="negative" look="before" where="2" mode="fuzzy">to</contextpattern>
     </patterngroup>
   </term>
 
@@ -590,8 +593,16 @@
     </accept>
     <patterngroup>
       <pattern1>(is|are|were|was|be|been)</pattern1>
-      <pattern2>able</pattern2>
+      <pattern2>unable</pattern2>
       <pattern3>to</pattern3>
+      <contextpattern match="negative" look="before" where="2">to</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>not</pattern1>
+      <pattern2>(is|are|were|was|be|been)</pattern2>
+      <pattern3>able</pattern3>
+      <pattern4>to</pattern4>
+      <contextpattern match="negative" look="before" where="2">to</contextpattern>
     </patterngroup>
   </term>
 
