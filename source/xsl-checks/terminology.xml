@@ -326,7 +326,11 @@
       <word>boot disk</word>
     </accept>
     <patterngroup>
-      <pattern1>boot-?disks?</pattern1>
+      <pattern1>boot-?dis[ck]s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>boot</pattern1>
+      <pattern2>discs?</pattern2>
     </patterngroup>
   </term>
 
@@ -346,8 +350,15 @@
       <word>boot using PXE</word>
     </accept>
     <patterngroup>
+      <pattern1>PXE-?boot(ing|ed)</pattern1>
+    </patterngroup>
+    <patterngroup>
       <pattern1>PXE</pattern1>
       <pattern2>boot(ing|ed)</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>PXE-?boots?</pattern1>
+      <contextpattern look="before">(to|not)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>PXE</pattern1>
@@ -1076,15 +1087,19 @@
     </accept>
     <patterngroup>
       <pattern1>(flash|usb)</pattern1>
-      <pattern2>(disk|drive|stick|key)s?</pattern2>
+      <pattern2>(drive|stick|key|disc)s?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>usb</pattern1>
+      <pattern2>disks?</pattern2>
     </patterngroup>
     <patterngroup>
       <pattern1>usb</pattern1>
       <pattern2>flash</pattern2>
-      <pattern3>(disk|drive|stick|key)s?</pattern3>
+      <pattern3>(dis[ck]|drive|stick|key)s?</pattern3>
     </patterngroup>
     <patterngroup>
-      <pattern1>(flash|usb)-?(flash)?-?(disk|drive|stick|key)s?</pattern1>
+      <pattern1>(flash|usb)-?(flash)?-?(dis[ck]|drive|stick|key)s?</pattern1>
     </patterngroup>
   </term>
 
@@ -1211,15 +1226,15 @@
       <pattern1 case="keep">[Hh][Dd][Dd]?s?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>hardd?(isk|rive)s?</pattern1>
+      <pattern1>hardd?(is[ck]|rive)s?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>hard</pattern1>
-      <pattern2>drives?</pattern2>
+      <pattern2>(drive|disc)s?</pattern2>
     </patterngroup>
     <patterngroup>
       <pattern1>hard</pattern1>
-      <pattern2>disk</pattern2>
+      <pattern2>dis[ck]</pattern2>
       <pattern3>drives?</pattern3>
     </patterngroup>
   </term>
@@ -2454,7 +2469,10 @@
     </accept>
     <patterngroup>
       <pattern1>pxe</pattern1>
-      <pattern2 case="keep">Boot</pattern2>
+      <pattern2 case="keep">Boots?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>pxe-?boots?</pattern1>
     </patterngroup>
   </term>
 
@@ -2487,10 +2505,10 @@
     </accept>
     <patterngroup>
       <pattern1>ram</pattern1>
-      <pattern2 case="keep">drives?</pattern2>
+      <pattern2 case="keep">(drive|disc)s?</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>ram-?d(rive|isk)s?</pattern1>
+      <pattern1>ram-?d(rive|is[ck])s?</pattern1>
     </patterngroup>
   </term>
 
@@ -3082,14 +3100,14 @@
     </accept>
     <patterngroup>
       <pattern1>suse</pattern1>
-      <pattern2>enterprise</pattern2>
-      <pattern3>linux</pattern3>
+      <pattern2>linux</pattern2>
+      <pattern3>enterprise</pattern3>
       <pattern4 case="keep">desktop</pattern4>
     </patterngroup>
     <patterngroup>
       <pattern1>suse</pattern1>
-      <pattern2>enterprise</pattern2>
-      <pattern3>linux</pattern3>
+      <pattern2>linux</pattern2>
+      <pattern3>enterprise</pattern3>
       <pattern4 case="keep">DESKTOP</pattern4>
     </patterngroup>
   </term>
@@ -3100,14 +3118,14 @@
     </accept>
     <patterngroup>
       <pattern1>suse</pattern1>
-      <pattern2>enterprise</pattern2>
-      <pattern3>linux</pattern3>
+      <pattern2>linux</pattern2>
+      <pattern3>enterprise</pattern3>
       <pattern4 case="keep">server</pattern4>
     </patterngroup>
     <patterngroup>
       <pattern1>suse</pattern1>
-      <pattern2>enterprise</pattern2>
-      <pattern3>linux</pattern3>
+      <pattern2>linux</pattern2>
+      <pattern3>enterprise</pattern3>
       <pattern4 case="keep">SERVER</pattern4>
     </patterngroup>
   </term>
