@@ -145,7 +145,7 @@
 
   <term>
     <accept>
-      <word>is in</word>
+      <word>be in</word>
     </accept>
     <patterngroup>
       <pattern1>(is|are|were|was|be|been)</pattern1>
