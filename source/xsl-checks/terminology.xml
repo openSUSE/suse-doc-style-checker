@@ -1538,7 +1538,7 @@
     <accept/>
     <patterngroup>
       <pattern1>just(?!-)</pattern1>
-      <contextpattern match="negative">(one|two|three|four|five|six|seven|eight|nine|ten|[0-9]*|after|before|next|as)</contextpattern>
+      <contextpattern match="negative">(one|two|three|four|five|six|seven|eight|nine|ten|[0-9]*|after|before|next|as|to)</contextpattern>
     </patterngroup>
   </term>
 
