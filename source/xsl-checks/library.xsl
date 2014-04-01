@@ -67,9 +67,6 @@
     <xsl:choose>
       <xsl:when test="$node/@id">
         <id><xsl:value-of select="$node/@id"/></id>
-        <place>
-          <line><xsl:value-of select="py:linenumber()"/></line>
-        </place>
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
