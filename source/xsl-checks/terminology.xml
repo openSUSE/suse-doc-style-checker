@@ -248,6 +248,7 @@
     <patterngroup>
       <pattern1>back-?ups?</pattern1>
       <contextpattern look="before">to</contextpattern>
+      <contextpattern match="negative">(and|or)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>back-?ups?</pattern1>
@@ -2803,6 +2804,7 @@
     <patterngroup>
       <pattern1>set-?ups?</pattern1>
       <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern match="negative">(and|or)</contextpattern>
     </patterngroup>
   </term>
 
@@ -2818,7 +2820,7 @@
       <pattern2>ups?</pattern2>
       <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
       <contextpattern look="before" match="negative" mode="fuzzy" where="3">to</contextpattern>
-      <contextpattern match="negative">(the|an?|in|for|on|at)</contextpattern>
+      <contextpattern match="negative">(the|an?|in|for|on|at|your)</contextpattern>
     </patterngroup>
   </term>
 
@@ -2836,6 +2838,7 @@
     <patterngroup>
       <pattern1>shut-?downs?</pattern1>
       <contextpattern look="before">(be|is|are|were|would|will|not|to|could|ha(s|d|ve)|should)</contextpattern>
+      <contextpattern match="negative">(and|or)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>shutt?(s|ed|ing)-?down</pattern1>
