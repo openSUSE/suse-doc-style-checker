@@ -1538,8 +1538,10 @@
   <term>
     <accept/>
     <patterngroup>
-      <pattern1>just(?!-)</pattern1>
-      <contextpattern match="negative">(one|two|three|four|five|six|seven|eight|nine|ten|[0-9]*|after|before|next|as|to)</contextpattern>
+      <pattern1>just(?!.)</pattern1>
+      <contextpattern match="negative" look="before">not</contextpattern>
+      <contextpattern match="negative">(after|before|next|as|to)</contextpattern>
+      <contextpattern match="negative" mode="fuzzy" where="3">(one|two|three|four|five|six|seven|eight|nine|ten|[0-9].*)</contextpattern>
     </patterngroup>
   </term>
 
