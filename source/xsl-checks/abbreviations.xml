@@ -47,7 +47,7 @@ min., max.
       <word>for example</word>
     </accept>
     <patterngroup>
-      <pattern1>e.g</pattern1>
+      <pattern1>e\.g</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>e</pattern1>
@@ -86,7 +86,7 @@ min., max.
       <word>that is</word>
     </accept>
     <patterngroup>
-      <pattern1>i.e</pattern1>
+      <pattern1>i\.e</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>i</pattern1>
