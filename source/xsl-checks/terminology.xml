@@ -1534,13 +1534,13 @@
     </patterngroup>
   </term>
 
-  <!-- Could be a bit broad for now. -->
-  <!-- <term>
+  <term>
     <accept/>
     <patterngroup>
-      <pattern1>just</pattern1>
+      <pattern1>just(?!-)</pattern1>
+      <contextpattern match="negative">(one|two|three|four|five|six|seven|eight|nine|ten|[0-9]*|after|before|next|as)</contextpattern>
     </patterngroup>
-  </term> -->
+  </term>
 
   <term>
     <accept>
@@ -2816,9 +2816,9 @@
     <patterngroup>
       <pattern1>set</pattern1>
       <pattern2>ups?</pattern2>
-      <contextpattern look="before" match="negative">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
       <contextpattern look="before" match="negative" mode="fuzzy" where="3">to</contextpattern>
-      <contextpattern look="after" match="negative" >(the|an?|in|for)</contextpattern>
+      <contextpattern match="negative">(the|an?|in|for|on|at)</contextpattern>
     </patterngroup>
   </term>
 
@@ -2830,6 +2830,14 @@
       <pattern1>shut-?down(ed|ing)</pattern1>
     </patterngroup>
     <patterngroup>
+      <pattern1>shut-?downs?</pattern1>
+      <contextpattern>(the|an?)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>shut-?downs?</pattern1>
+      <contextpattern look="before">(be|is|are|were|would|will|not|to|could|ha(s|d|ve)|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
       <pattern1>shutt?(s|ed|ing)-?down</pattern1>
     </patterngroup>
   </term>
@@ -2839,11 +2847,14 @@
       <word>shutdown</word>
     </accept>
     <patterngroup>
-      <pattern1>shut-?downs?</pattern1>
+      <pattern1>shut-downs?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>shut</pattern1>
       <pattern2>downs</pattern2>
+      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" where="3">to</contextpattern>
+      <contextpattern match="negative">(the|an?|in|for|on|at)</contextpattern>
     </patterngroup>
   </term>
 
