@@ -1,0 +1,2 @@
++ This check matches far too many things, such as otherw_ise_ etc.
++ This check produces 100 % false positives in SLE-all
