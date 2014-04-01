@@ -450,7 +450,7 @@ def manglepattern( pattern, onepatternmode ):
         # use (?: to create non-capturing groups: the re module's
         # implementation only supports up to 100 named groups per
         # expression
-        pattern = parentheses.sub('(?:', pattern)\
+        pattern = parentheses.sub('(?:', pattern)
 
     # \b is messy: inside a character class, it is interpreted as a
     # backspace character. Outside, it marks word boundaries. However, we
