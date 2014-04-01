@@ -236,41 +236,35 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile 
                                     for contextpattern in contextpatternstopatterngroup:
                                         if contextpattern[0]:
                                             contextwheres = contextpattern[1]
+
+                                            contextstring = ""
+                                            for contextwhere in contextwheres:
+                                                contextposition = None
+                                                contextposition = wordposition + contextwhere
+                                                if contextwhere > 0:
+                                                    # patterngrouppatternposition is at 1,
+                                                    # even if there was just one pattern
+                                                    contextposition += patterngrouppatternposition - 1
+                                                if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
+                                                    continue
+                                                else:
+                                                    contextstring += str( words[ contextposition ] ) + " "
+
+                                            # We could check for an empty context
+                                            # here and then not run any check,
+                                            # but that would lead to wrong
+                                            # results when doing negative
+                                            # matching.
+
                                             # positive matching
                                             if not contextpattern[2]:
-                                                for contextwhere in contextwheres:
-                                                    contextposition = None
-                                                    contextposition = wordposition + contextwhere
-                                                    if contextwhere > 0:
-                                                        # patterngrouppatternposition is at 1,
-                                                        # even if there was just one pattern
-                                                        contextposition += patterngrouppatternposition - 1
-                                                    if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
-                                                        continue
-                                                    else:
-                                                        contextword = contextpattern[0].match( words[ contextposition ] )
-                                                        if contextword:
-                                                            contextwords.append( True )
-                                                            break
+                                                contextword = contextpattern[0].search( contextstring )
+                                                if contextword:
+                                                    contextwords.append( True )
                                             # negative matching
                                             else:
-                                                contextwordmatch = False
-                                                for contextwhere in contextwheres:
-                                                    contextposition = None
-                                                    contextposition = wordposition + contextwhere
-                                                    if contextwhere > 0:
-                                                        # patterngrouppatternposition is already == 1,
-                                                        # even if there was just one pattern
-                                                        contextposition += patterngrouppatternposition - 1
-                                                    if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
-                                                        continue
-                                                    else:
-                                                        contextword = contextpattern[0].match( words[ contextposition ] )
-
-                                                        if contextword:
-                                                            contextwordmatch = True
-                                                            break
-                                                if not contextwordmatch:
+                                                contextword = contextpattern[0].search( contextstring )
+                                                if not contextword:
                                                     contextwords.append( True )
 
                                 if ( len( contextpatternstopatterngroup ) == len( contextwords )):
@@ -380,10 +374,14 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
             contextpatternxpaths = patterngroupxpath.xpath( 'contextpattern' )
             if contextpatternxpaths:
                 for contextpatternxpath in contextpatternxpaths:
-                    contextpatternxpathcontent = manglepattern(
-                        contextpatternxpath.text, 0 )
+                    contextpatternxpathcontent =  contextpatternxpath.text
                     if not contextpatternxpathcontent:
                         emptypatternmessage( 'contextpattern' )
+
+                    # Since this is searched for instead of matched on, avoid
+                    # searching for e.g. "mail" in "e-mail".
+                    contextpatternxpathcontent = r'(?<![-#@;\/\\\+\=\:\.\$\*])' + manglepattern(
+                            contextpatternxpathcontent, 0 ) + r'(?![-#@\+\=\$\*])'
 
                     casexpath = getattribute( contextpatternxpath, 'case' )
                     lookxpath = getattribute( contextpatternxpath, 'look' )
