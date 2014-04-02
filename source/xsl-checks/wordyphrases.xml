@@ -838,6 +838,23 @@
       <pattern2>purposes?</pattern2>
       <pattern3>of</pattern3>
     </patterngroup>
+    <patterngroup>
+      <pattern1>in</pattern1>
+      <pattern2>order</pattern2>
+      <pattern3>to</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern1>too</pattern1>
+      <contextpattern mode="fuzzy" where="5">also</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>too</pattern1>
+      <contextpattern look="before" mode="fuzzy" where="5">also</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
@@ -857,7 +874,7 @@
       <word>use</word>
     </accept>
     <patterngroup>
-      <pattern1>ma[kd]es?</pattern1>
+      <pattern1>ma(kes?|de|king)</pattern1>
       <pattern2>use</pattern2>
       <pattern3>of</pattern3>
     </patterngroup>
