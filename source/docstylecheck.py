@@ -412,10 +412,6 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
 
                     if wherexpath:
                         if fuzzymode:
-                            if int( wherexpath ) > 3:
-                                sys.exit("""Terminology: contextpattern in \
-fuzzy mode has where value over 3.
-Make sure to always use fuzzy mode with where values of 3 or below.""")
                             whererange = range( 1, ( int( wherexpath ) + 1 ) )
                             for i in whererange:
                                 where.append( i * factor )

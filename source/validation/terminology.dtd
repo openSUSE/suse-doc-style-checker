@@ -54,9 +54,7 @@
 <!ATTLIST pattern5
                           case      (ignore|keep)                   #IMPLIED >
 
-<!--  Default values are after, exact, 1, positive, ignore.
-      type=fuzzy and place=4 or place=5 is allowed by the DTD, but the checker
-      will exit on seeing this. -->
+<!--  Default values are after, exact, 1, positive, ignore. -->
 <!ATTLIST contextpattern
                           look      (before|after)                  #IMPLIED
                           mode      (fuzzy|exact)                   #IMPLIED
