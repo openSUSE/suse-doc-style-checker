@@ -57,6 +57,15 @@
 
   <term>
     <accept>
+      <word>it would</word>
+    </accept>
+    <patterngroup>
+      <pattern1>it'd</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>is not</word>
     </accept>
     <patterngroup>
