@@ -189,10 +189,13 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile 
                         for patterngrouppatterns in patterngroupstoaccept:
                             if not trynextterm:
                                 break
+                            if ( wordposition + len( patterngrouppatterns ) ) > totalwords:
+                                patterngroupposition += 1
+                                continue
                             trycontextpatterns = True
                             matchwords = ""
-                            # Don't use enumerate patterngrouppatternposition, its
-                            # value depends on breaks.
+                            # Don't use enumerate for patterngrouppatternposition,
+                            # its value depends on breaks.
                             patterngrouppatternposition = 0
                             skipcounttemporary = 0
                             for patterngrouppattern in patterngrouppatterns:
