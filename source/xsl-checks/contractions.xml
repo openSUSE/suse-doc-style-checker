@@ -111,6 +111,15 @@
 
   <term>
     <accept>
+      <word>that is</word>
+    </accept>
+    <patterngroup>
+      <pattern1>that's</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>they are</word>
     </accept>
     <patterngroup>
