@@ -200,7 +200,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile 
                             skipcounttemporary = 0
                             for patterngrouppattern in patterngrouppatterns:
                                 patternposition = wordposition + patterngrouppatternposition
-                                if ( patternposition < 0 or patternposition > ( totalwords - 1 ) ):
+                                if patternposition > ( totalwords - 1 ):
                                     trycontextpatterns = False
                                     break
                                 matchword = None
