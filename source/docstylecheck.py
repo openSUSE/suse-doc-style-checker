@@ -261,14 +261,18 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile 
 
                                             # positive matching
                                             if not contextpattern[2]:
-                                                contextword = contextpattern[0].search( contextstring )
-                                                if contextword:
-                                                    contextwords.append( True )
+                                                if contextstring:
+                                                    contextword = contextpattern[0].search( contextstring )
+                                                    if contextword:
+                                                        contextwords.append( True )
                                             # negative matching
                                             else:
-                                                contextword = contextpattern[0].search( contextstring )
-                                                if not contextword:
+                                                if not contextstring:
                                                     contextwords.append( True )
+                                                else:
+                                                    contextword = contextpattern[0].search( contextstring )
+                                                    if not contextword:
+                                                        contextwords.append( True )
 
                                 if ( len( contextpatternstopatterngroup ) == len( contextwords )):
                                     skipcount = skipcounttemporary
