@@ -308,7 +308,17 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
     accepts = []
     patterns = []
     contextpatterns = []
-    onepattern = ""
+
+    # Not much use, but ... let's make this a real boolean.
+    if useonepattern == 'yes':
+        useonepattern = True
+    else:
+        useonepattern = False
+
+    if useonepattern:
+        onepattern = ""
+    else:
+        onepattern = None
 
     if args.performance:
         timestartbuild = time.time()
@@ -342,40 +352,18 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
         patternsofterm = []
         patterngroupxpaths = term.xpath( 'patterngroup' )
         for patterngroupxpath in patterngroupxpaths:
-            patternsofpatterngroup = []
-            # FIXME: the implementation assumes that the e.g. the second pattern
-            # in the pattern list is from the pattern2 element -- what about
-            # skipped pattern{x} elements, then?
-            for i in range(1,6):
-                patternxpath = patterngroupxpath.xpath( 'pattern%s[1]' % i )
-                patternxpathcontent = None
-                if patternxpath:
-                    patternxpathcontent = manglepattern( patternxpath[0].text, 0 )
-                    patternxpathcontentonepattern = manglepattern( patternxpath[0].text, 1 )
-                if not patternxpathcontent:
-                    if i == 1:
-                        emptypatternmessage( 'pattern1' )
-                    else:
-                        break
+            preparedpatterns = preparepatterns( patterngroupxpath, useonepattern )
+            if useonepattern:
+                onepatternseparator = '|'
+                if firstpatterngroup:
+                    onepatternseparator = ''
+                    firstpatterngroup = False
+                # use (?: to create non-capturing groups: the re module's
+                # implementation only supports up to 100 named groups per
+                # expression
+                onepattern += '%s(?:%s)' % ( onepatternseparator, preparedpatterns[1] )
 
-                pattern = None
-                casexpath = getattribute( patternxpath[0], 'case' )
-                if casexpath == 'keep':
-                    pattern = re.compile( patternxpathcontent )
-                else:
-                    pattern = re.compile( patternxpathcontent, flags = re.I )
-                if i == 1:
-                    if not firstpatterngroup:
-                        onepattern += '|'
-                    else:
-                        firstpatterngroup = False
-                    # use (?: to create non-capturing groups: the re module's
-                    # implementation only supports up to 100 named groups per
-                    # expression
-                    onepattern += '(?:%s)' % patternxpathcontentonepattern
-                patternsofpatterngroup.append( pattern )
-
-            patternsofterm.append( patternsofpatterngroup )
+            patternsofterm.append( preparedpatterns[0] )
 
             contextpatternsofpatterngroup = []
             contextpatternxpaths = patterngroupxpath.xpath( 'contextpattern' )
@@ -389,10 +377,8 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
 
         patterns.append( patternsofterm )
 
-    if useonepattern == "yes":
+    if useonepattern:
         onepattern = re.compile( onepattern, flags = re.I )
-    else:
-        onepattern = None
 
     if args.performance:
         timeendbuild = time.time()
@@ -416,6 +402,38 @@ def manglepattern( pattern, onepatternmode ):
     pattern = r'\b' + pattern + r'\b'
 
     return pattern
+
+def preparepatterns( patterngroupxpath, useonepattern ):
+    patternsofpatterngroup = []
+    patternforonepattern = None
+
+    for i in range(1,6):
+        patternxpath = patterngroupxpath.xpath( 'pattern%s[1]' % i )
+        patternxpathcontent = None
+        if patternxpath:
+            patternxpathcontent = patternxpath[0].text
+
+        if not patternxpathcontent:
+            if i == 1:
+                emptypatternmessage( 'pattern1' )
+            else:
+                # FIXME: the implementation assumes that the e.g. the second
+                # pattern can only come from the pattern2 element --
+                # what about skipped pattern{x} elements?
+                break
+        else:
+            patternxpathcontent = manglepattern( patternxpath[0].text, 0 )
+            if i == 1 and useonepattern:
+                patternforonepattern = manglepattern( patternxpath[0].text, 1 )
+
+        pattern = None
+        if getattribute( patternxpath[0], 'case' ) == 'keep':
+            pattern = re.compile( patternxpathcontent )
+        else:
+            pattern = re.compile( patternxpathcontent, flags = re.I )
+        patternsofpatterngroup.append( pattern )
+
+    return [ patternsofpatterngroup, patternforonepattern ]
 
 def preparecontextpatterns( contextpatternxpath ):
     contextpatternxpathcontent = contextpatternxpath.text
