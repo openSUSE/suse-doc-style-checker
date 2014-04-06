@@ -88,211 +88,224 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile 
     # FIXME: Modes: para, title?
     messages = []
 
-    if content:
-        global termdataid
-        global ignoredpattern
-        global accepts
-        global patterns
-        global contextpatterns
-        global onepattern
+    global termdataid
+    global ignoredpattern
+    global accepts
+    global patterns
+    global contextpatterns
+    global onepattern
 
+    if content:
         # I get this as a list with one lxml.etree._ElementUnicodeResult, not
         # as a list with a string.
         # For whatever reason, this made termcheckmessage() crash
         # happily and semi-randomly.
         content = str( content[0] )
 
-        if not ( content ):
+    if not content:
+        return messages
+
+    if basefile:
+        basefile = basefile[0]
+    else:
+        basefile = None
+
+    if contextid:
+        contextid = contextid[0]
+    else:
+        contextid = None
+
+    # onepattern is a concatenated list of all patterns of the terminology
+    # file which are within a pattern1 element
+    # how useful is onepattern?
+    #   + the overhead for onepattern is (currently) akin to adding 1 word
+    #     to every paragraph
+    #   + 30-40 % of paragraphs are skipped because of onepattern
+    #   + the paragraphs skipped because of onepattern average at
+    #     5-10 words
+    #   = worst case: similar time, best case: slight win,
+    #     more compliant documentation will tip the scale in our favour
+    if onepattern:
+        if not onepattern.search( content ):
+            if args.performance:
+                print("skipped entire paragraph\n")
             return messages
 
-        if basefile:
-            basefile = basefile[0]
-        else:
-            basefile = None
-
-        if contextid:
-            contextid = contextid[0]
-        else:
-            contextid = None
-
-        # onepattern is a concatenated list of all patterns of the terminology
-        # file which are within a pattern1 element
-        # how useful is onepattern?
-        #   + the overhead for onepattern is (currently) akin to adding 1 word
-        #     to every paragraph
-        #   + 30-40 % of paragraphs are skipped because of onepattern
-        #   + the paragraphs skipped because of onepattern average at
-        #     5-10 words
-        #   = worst case: similar time, best case: slight win,
-        #     more compliant documentation will tip the scale in our favour
-        if onepattern:
-            if not onepattern.search( content ):
-                if args.performance:
-                    print("skipped entire paragraph\n")
-                return messages
-
-        # This if/else block should not be necessary (if there is content,
-        # there should always also be pretty content, but that depends on the
-        # XSLT used for checking). It hopefully won't hurt either.
-        if contentpretty:
-            contentpretty = str( contentpretty[0] )
-        else:
-            contentpretty = content
+    # This if/else block should not be necessary (if there is content,
+    # there should always also be pretty content, but that depends on the
+    # XSLT used for checking). It hopefully won't hurt either.
+    if contentpretty:
+        contentpretty = str( contentpretty[0] )
+    else:
+        contentpretty = content
 
 
-        # This should get us far enough for now
-        sentences = sentencetokenizer( content )
+    # This should get us far enough for now
+    sentences = sentencetokenizer( content )
 
-        for sentence in sentences:
-            # FIXME: Get something better than s.split. Some
-            # existing tokenisers are overzealous, such as the default one from
-            # NLTK.
-            words = sentence.split()
-            totalwords = len( words )
-
-            if args.performance:
-                timestartmatch = time.time()
-
-            skipcount = 0
-            for wordposition, word in enumerate(words):
-                # Idea here: if we previously matched a multi-word pattern, we can
-                # simply skip the next few words since they were matched already.
-                if skipcount > 0:
-                    skipcount -= 1
-                    continue
-
-                word = replacepunctuation( word, "start" )
-
-                # don't burn time on checking small words like "the," "a," "of" etc.
-                # (configurable from within terminology file)
-                if ignoredpattern:
-                    if ignoredpattern.match( word ):
-                        continue
-
-
-                # When a pattern already matches on a word, don't try to find more
-                # problems with it.
-                trynextterm = True
-
-                # Use the *patterns variables defined above to match all patterns
-                # over everything that is left.
-                # Don't use enumerate with patterngroupposition, its value
-                # depends on being defined in this scope.
-                patterngroupposition = 0
-                for acceptposition, accept in enumerate( accepts ):
-                    if trynextterm:
-                        acceptword = accept[0]
-                        acceptcontext = accept[1]
-
-                        # FIXME: variable names are a bit of a mouthful
-                        patterngroupstoaccept = patterns[ acceptposition ]
-                        for patterngrouppatterns in patterngroupstoaccept:
-                            if not trynextterm:
-                                break
-                            if ( wordposition + len( patterngrouppatterns ) ) > totalwords:
-                                patterngroupposition += 1
-                                continue
-                            trycontextpatterns = True
-                            matchwords = ""
-                            # Don't use enumerate for patterngrouppatternposition,
-                            # its value depends on breaks.
-                            patterngrouppatternposition = 0
-                            skipcounttemporary = 0
-                            for patterngrouppattern in patterngrouppatterns:
-                                patternposition = wordposition + patterngrouppatternposition
-                                if patternposition > ( totalwords - 1 ):
-                                    trycontextpatterns = False
-                                    break
-                                matchword = None
-
-                                # This if/else is a bit dumb, but we already did
-                                # replacepunctuation() on word, so it is not
-                                # the same as words[ patternposition ] any more.
-                                if patterngrouppatternposition == 0:
-                                    matchword = patterngrouppattern.match( word )
-                                else:
-                                    matchword = patterngrouppattern.match( words[ patternposition ] )
-                                if matchword:
-                                    if not patterngrouppatternposition == 0:
-                                        # The first matched pattern should not make
-                                        # us skip a word ahead.
-                                        skipcounttemporary += 1
-                                        matchwords += " "
-                                    matchwords += matchword.group(0)
-                                else:
-                                    trycontextpatterns = False
-                                    break
-                                patterngrouppatternposition += 1
-
-                            contextwords = []
-                            contextpatternstopatterngroup = contextpatterns[ patterngroupposition ]
-                            if trycontextpatterns:
-                                if contextpatternstopatterngroup[0][0] is None:
-                                    # easy positive
-                                    skipcount = skipcounttemporary
-                                    trynextterm = False
-                                    line = linenumber ( context )
-                                    messages.append( termcheckmessage(
-                                        acceptword, acceptcontext, matchwords, line,
-                                        contentpretty, contextid, basefile ) )
-                                else:
-                                    for contextpattern in contextpatternstopatterngroup:
-                                        if contextpattern[0]:
-                                            contextwheres = contextpattern[1]
-
-                                            contextstring = ""
-                                            for contextwhere in contextwheres:
-                                                contextposition = None
-                                                contextposition = wordposition + contextwhere
-                                                if contextwhere > 0:
-                                                    # patterngrouppatternposition is at 1,
-                                                    # even if there was just one pattern
-                                                    contextposition += patterngrouppatternposition - 1
-                                                if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
-                                                    continue
-                                                else:
-                                                    contextstring += str( words[ contextposition ] ) + " "
-
-                                            # We could check for an empty context
-                                            # here and then not run any check,
-                                            # but that would lead to wrong
-                                            # results when doing negative
-                                            # matching.
-
-                                            # positive matching
-                                            if contextpattern[2]:
-                                                if contextstring:
-                                                    contextword = contextpattern[0].search( contextstring )
-                                                    if contextword:
-                                                        contextwords.append( True )
-                                            # negative matching
-                                            else:
-                                                if not contextstring:
-                                                    contextwords.append( True )
-                                                else:
-                                                    contextword = contextpattern[0].search( contextstring )
-                                                    if not contextword:
-                                                        contextwords.append( True )
-
-                                if ( len( contextpatternstopatterngroup ) == len( contextwords )):
-                                    skipcount = skipcounttemporary
-                                    trynextterm = False
-                                    line = linenumber ( context )
-                                    messages.append( termcheckmessage(
-                                        acceptword, acceptcontext, matchwords, line,
-                                        contentpretty, contextid, basefile ) )
-                            patterngroupposition += 1
+    for sentence in sentences:
+        # FIXME: Get something better than s.split. Some
+        # existing tokenisers are overzealous, such as the default one from
+        # NLTK.
+        words = sentence.split()
+        totalwords = len( words )
 
         if args.performance:
-            timeendmatch = time.time()
-            timediffmatch = timeendmatch - timestartmatch
-            print( """words: %s
+            timestartmatch = time.time()
+
+        skipcount = 0
+        for wordposition, word in enumerate(words):
+            # Idea here: if we previously matched a multi-word pattern, we can
+            # simply skip the next few words since they were matched already.
+            if skipcount > 0:
+                skipcount -= 1
+                continue
+
+            word = replacepunctuation( word, "start" )
+
+            # don't burn time on checking small words like "the," "a," "of" etc.
+            # (configurable from within terminology file)
+            if ignoredpattern:
+                if ignoredpattern.match( word ):
+                    continue
+
+
+            # When a pattern already matches on a word, don't try to find more
+            # problems with it.
+            trynextterm = True
+
+            # Use the *patterns variables defined above to match all patterns
+            # over everything that is left.
+            # Don't use enumerate with patterngroupposition, its value
+            # depends on being defined in this scope.
+            patterngroupposition = 0
+            for acceptposition, accept in enumerate( accepts ):
+                if trynextterm:
+                    acceptword = accept[0]
+                    acceptcontext = accept[1]
+
+                    # FIXME: variable names are a bit of a mouthful
+                    patterngroupstoaccept = patterns[ acceptposition ]
+                    for patterngrouppatterns in patterngroupstoaccept:
+                        if not trynextterm:
+                            break
+                        if ( wordposition + len( patterngrouppatterns ) ) > totalwords:
+                            patterngroupposition += 1
+                            continue
+                        trycontextpatterns = True
+                        matchwords = ""
+                        # Don't use enumerate for patterngrouppatternposition,
+                        # its value depends on breaks.
+                        patterngrouppatternposition = 0
+                        skipcounttemporary = 0
+                        for patterngrouppattern in patterngrouppatterns:
+                            patternposition = wordposition + patterngrouppatternposition
+                            if patternposition > ( totalwords - 1 ):
+                                trycontextpatterns = False
+                                break
+                            matchword = None
+
+                            # This if/else is a bit dumb, but we already did
+                            # replacepunctuation() on word, so it is not
+                            # the same as words[ patternposition ] any more.
+                            if patterngrouppatternposition == 0:
+                                matchword = patterngrouppattern.match( word )
+                            else:
+                                matchword = patterngrouppattern.match( words[ patternposition ] )
+                            if matchword:
+                                if not patterngrouppatternposition == 0:
+                                    # The first matched pattern should not make
+                                    # us skip a word ahead.
+                                    skipcounttemporary += 1
+                                    matchwords += " "
+                                matchwords += matchword.group(0)
+                            else:
+                                trycontextpatterns = False
+                                break
+                            patterngrouppatternposition += 1
+
+                        contextmatches = 0
+                        contextpatternstopatterngroup = contextpatterns[ patterngroupposition ]
+                        if trycontextpatterns:
+                            if contextpatternstopatterngroup[0][0] is None:
+                                # easy positive
+                                skipcount = skipcounttemporary
+                                trynextterm = False
+                                line = linenumber ( context )
+                                messages.append( termcheckmessage(
+                                    acceptword, acceptcontext, matchwords, line,
+                                    contentpretty, contextid, basefile ) )
+                            else:
+                                for contextpattern in contextpatternstopatterngroup:
+                                    if contextpattern[0]:
+                                        contextmatches += matchcontextpattern( words,
+                                                            wordposition, totalwords,
+                                                            patterngrouppatternposition,
+                                                            contextpattern )
+
+                            if ( len( contextpatternstopatterngroup ) == contextmatches ):
+                                skipcount = skipcounttemporary
+                                trynextterm = False
+                                line = linenumber ( context )
+                                messages.append( termcheckmessage(
+                                    acceptword, acceptcontext, matchwords, line,
+                                    contentpretty, contextid, basefile ) )
+                            elif ( len( contextpatternstopatterngroup ) < contextmatches ):
+                                print("hui!", len( contextpatternstopatterngroup ), contextmatches )
+                        patterngroupposition += 1
+
+    if args.performance:
+        timeendmatch = time.time()
+        timediffmatch = timeendmatch - timestartmatch
+        print( """words: %s
 time for this para: %s
 average time per word: %s\n"""
-                % ( str( totalwords ), str( timediffmatch ),
-                    str( timediffmatch / (totalwords + .001 ) ) ) )
+            % ( str( totalwords ), str( timediffmatch ),
+                str( timediffmatch / (totalwords + .001 ) ) ) )
 
     return messages
+
+def matchcontextpattern( words, wordposition, totalwords,
+                         patterngrouppatternposition, contextpattern ):
+
+    contextwheres = contextpattern[1]
+    contextmatches = 0
+
+    contextstring = ""
+    for contextwhere in contextwheres:
+        contextposition = None
+        contextposition = wordposition + contextwhere
+        if contextwhere > 0:
+            # patterngrouppatternposition is at 1,
+            # even if there was just one pattern
+            contextposition += patterngrouppatternposition - 1
+        if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
+            continue
+        else:
+            contextstring += str( words[ contextposition ] ) + " "
+
+    # We could check for an empty context
+    # here and then not run any check,
+    # but that would lead to wrong
+    # results when doing negative
+    # matching.
+
+    # positive matching
+    if contextpattern[2]:
+        if contextstring:
+            contextword = contextpattern[0].search( contextstring )
+            if contextword:
+                contextmatches += 1
+    # negative matching
+    else:
+        if not contextstring:
+            contextmatches += 1
+        else:
+            contextword = contextpattern[0].search( contextstring )
+            if not contextword:
+                contextmatches += 1
+
+    return contextmatches
 
 def buildtermdata( context, terms, ignoredwords, useonepattern ):
 
