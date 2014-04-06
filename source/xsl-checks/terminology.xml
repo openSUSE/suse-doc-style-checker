@@ -51,16 +51,17 @@
       <word>activate</word>
       <context>check boxes</context>
     </accept>
+    <!-- Someone has been using the word checking option instead of check box. -->
     <patterngroup>
-      <pattern1>(block|check|tick)(ing|ed|s)</pattern1>
+      <pattern1>((block|tick)(ing|ed|s)|check(ed|s))</pattern1>
       <contextpattern mode="fuzzy" where="2">((check|tick|option|box)e?s?|##@ui##)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>((block|check|tick)(ing|ed|s)|cho?os(es?|ing|n))</pattern1>
-      <contextpattern mode="fuzzy" where="2">(check|tick)s?</contextpattern>
+      <pattern1>cho?os(es?|ing|n)</pattern1>
+      <contextpattern mode="fuzzy" where="2">(check|tick|option|box)e?s?</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>((block|check|tick)(ing|ed|s)|cho?os(es?|ing|n))</pattern1>
+      <pattern1>cho?os(es?|ing|n)</pattern1>
       <contextpattern look="before" mode="fuzzy" where="2">(check|tick|option|box)e?s?</contextpattern>
     </patterngroup>
   </term>
