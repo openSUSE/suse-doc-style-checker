@@ -260,7 +260,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile 
                                             # matching.
 
                                             # positive matching
-                                            if not contextpattern[2]:
+                                            if contextpattern[2]:
                                                 if contextstring:
                                                     contextword = contextpattern[0].search( contextstring )
                                                     if contextword:
@@ -381,54 +381,8 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
             contextpatternxpaths = patterngroupxpath.xpath( 'contextpattern' )
             if contextpatternxpaths:
                 for contextpatternxpath in contextpatternxpaths:
-                    contextpatternxpathcontent =  contextpatternxpath.text
-                    if not contextpatternxpathcontent:
-                        emptypatternmessage( 'contextpattern' )
-
-                    # Since this is searched for instead of matched on, avoid
-                    # searching for e.g. "mail" in "e-mail".
-                    contextpatternxpathcontent = r'(?<![-#@;\/\\\+\=\:\.\$\*])' + manglepattern(
-                            contextpatternxpathcontent, 0 ) + r'(?![-#@\+\=\$\*])'
-
-                    casexpath = getattribute( contextpatternxpath, 'case' )
-                    lookxpath = getattribute( contextpatternxpath, 'look' )
-                    modexpath = getattribute( contextpatternxpath, 'mode' )
-                    matchxpath = getattribute( contextpatternxpath, 'match' )
-                    wherexpath = getattribute( contextpatternxpath, 'where' )
-
-                    if casexpath == 'keep':
-                        contextpattern = re.compile(
-                            contextpatternxpathcontent )
-                    else:
-                        contextpattern = re.compile(
-                            contextpatternxpathcontent, flags = re.I )
-
-                    factor = 1
-                    where = []
-                    fuzzymode = False
-                    negativematch = False
-
-                    if lookxpath == 'before':
-                        factor = -1
-
-                    if modexpath == 'fuzzy':
-                        fuzzymode = True
-
-                    if matchxpath == 'negative':
-                        negativematch = True
-
-                    if wherexpath:
-                        if fuzzymode:
-                            whererange = range( 1, ( int( wherexpath ) + 1 ) )
-                            for i in whererange:
-                                where.append( i * factor )
-                        else:
-                            where = [ ( int( wherexpath ) * factor ) ]
-                    else:
-                        where = [ ( 1 * factor ) ]
-
                     contextpatternsofpatterngroup.append(
-                        [ contextpattern, where, negativematch ] )
+                        preparecontextpatterns( contextpatternxpath ) )
             else:
                 contextpatternsofpatterngroup.append( [ None ] )
             contextpatterns.append( contextpatternsofpatterngroup )
@@ -463,8 +417,50 @@ def manglepattern( pattern, onepatternmode ):
 
     return pattern
 
-def getattribute( oldresult, attribute ):
-    xpath = oldresult.xpath( '@' + attribute )
+def preparecontextpatterns( contextpatternxpath ):
+    contextpatternxpathcontent = contextpatternxpath.text
+    if not contextpatternxpathcontent:
+        emptypatternmessage( 'contextpattern' )
+
+    factor = 1
+    where = []
+    fuzzymode = False
+    positivematch = True
+
+    # Since this is now searched for instead of matched on, we need to avoid
+    # searching for e.g. "mail" in "e-mail".
+    contextpatternxpathcontent = r'(?<![-#@;\/\\\+\=\:\.\$\*])' + manglepattern(
+        contextpatternxpathcontent, 0 ) + r'(?![-#@\+\=\$\*])'
+
+    if getattribute( contextpatternxpath, 'case' ) == 'keep':
+        contextpattern = re.compile( contextpatternxpathcontent )
+    else:
+        contextpattern = re.compile( contextpatternxpathcontent, flags = re.I )
+
+    if getattribute( contextpatternxpath, 'look' ) == 'before':
+        factor = -1
+
+    if getattribute( contextpatternxpath, 'mode' ) == 'fuzzy':
+        fuzzymode = True
+
+    if getattribute( contextpatternxpath, 'match' ) == 'negative':
+        positivematch = False
+
+    wherexpath = getattribute( contextpatternxpath, 'where' )
+    if wherexpath:
+        if fuzzymode:
+            whererange = range( 1, ( int( wherexpath ) + 1 ) )
+            for i in whererange:
+                where.append( i * factor )
+        else:
+            where = [ ( int( wherexpath ) * factor ) ]
+    else:
+        where = [ ( 1 * factor ) ]
+
+    return [ contextpattern, where, positivematch ]
+
+def getattribute( element, attribute ):
+    xpath = element.xpath( '@' + attribute )
     if xpath:
         return xpath[0]
     else:
