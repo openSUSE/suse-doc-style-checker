@@ -323,10 +323,11 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
     contextpatterns = []
 
     # Not much use, but ... let's make this a real boolean.
-    if useonepattern == 'yes':
-        useonepattern = True
-    else:
-        useonepattern = False
+    useonepatterntemp = True
+    if useonepattern:
+        if useonepattern[0] == 'no':
+            useonepatterntemp = False
+    useonepattern = useonepatterntemp
 
     if useonepattern:
         onepattern = ""
