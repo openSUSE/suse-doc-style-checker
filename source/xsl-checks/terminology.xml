@@ -275,13 +275,13 @@
       <word>Bash</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">bash(?!.)</pattern1>
+      <pattern1 case="keep">bash(?!-)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1 case="keep">BASH(?!.)</pattern1>
+      <pattern1 case="keep">BASH</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>b\.a\.s\.h\.?(?!.)</pattern1>
+      <pattern1>b\.a\.s\.h\.?</pattern1>
     </patterngroup>
   </term>
 
@@ -1142,7 +1142,7 @@
     </patterngroup>
     <!-- Avoid matching executable names like gimp-print etc. -->
     <patterngroup>
-      <pattern1 case="keep">[Gg]imp(?!.)</pattern1>
+      <pattern1 case="keep">[Gg]imp(?!-)</pattern1>
     </patterngroup>
   </term>
 
@@ -1152,7 +1152,7 @@
     </accept>
     <!-- Avoid matching executable names like gnome-terminal etc. -->
     <patterngroup>
-      <pattern1 case="keep">[Gg]nome(?!.)</pattern1>
+      <pattern1 case="keep">[Gg]nome(?!-)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>g\.n\.o\.m\.e\.?</pattern1>
@@ -1538,7 +1538,7 @@
   <term>
     <accept/>
     <patterngroup>
-      <pattern1>just(?!.)</pattern1>
+      <pattern1>just(?!-)</pattern1>
       <contextpattern match="negative" look="before">not</contextpattern>
       <contextpattern match="negative">(after|before|next|as|to)</contextpattern>
       <contextpattern match="negative" mode="fuzzy" where="3">(one|two|three|four|five|six|seven|eight|nine|ten|[0-9].*)</contextpattern>
