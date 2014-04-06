@@ -331,23 +331,7 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
 
     firstpatterngroup = True
     for term in terms:
-        acceptwordxpath = term.xpath( 'accept[1]/word[1]' )
-        acceptwordxpathcontent = None
-        if acceptwordxpath:
-            acceptwordxpathcontent = acceptwordxpath[0].text
-        # If there is no accepted word, we don't care about its context either
-        if acceptwordxpathcontent:
-            acceptlist = [ acceptwordxpathcontent ]
-            acceptcontextxpath = term.xpath( 'accept[1]/context[1]' )
-            if acceptcontextxpath:
-                acceptcontextxpathcontent = acceptcontextxpath[0].text
-                acceptlist.append( acceptcontextxpathcontent )
-            else:
-                acceptlist.append( None )
-
-            accepts.append( acceptlist )
-        else:
-            accepts.append( [ None, None ] )
+        accepts.append( prepareaccept( term ) )
 
         patternsofterm = []
         patterngroupxpaths = term.xpath( 'patterngroup' )
@@ -402,6 +386,24 @@ def manglepattern( pattern, onepatternmode ):
     pattern = r'\b' + pattern + r'\b'
 
     return pattern
+
+def prepareaccept( term ):
+    acceptwordxpath = term.xpath( 'accept[1]/word[1]' )
+    acceptwordxpathcontent = None
+    if acceptwordxpath:
+        acceptwordxpathcontent = acceptwordxpath[0].text
+    # If there is no accepted word, we don't care about the context
+    if acceptwordxpathcontent:
+        acceptlist = [ acceptwordxpathcontent ]
+        acceptcontextxpath = term.xpath( 'accept[1]/context[1]' )
+        if acceptcontextxpath:
+            acceptlist.append( acceptcontextxpath[0].text )
+        else:
+            acceptlist.append( None )
+
+        return acceptlist
+    else:
+        return [ None, None ]
 
 def preparepatterns( patterngroupxpath, useonepattern ):
     patternsofpatterngroup = []
