@@ -50,6 +50,11 @@ def parseargs():
         action = 'version',
         version = __programname__ + " " + __version__,
         help = "show version number and exit")
+    parser.add_argument( '-b', '--bookmarklet',
+        action = 'store_true',
+        default = False,
+        help = """open page that lets you install a bookmarklet to manage style
+            checker results""" )
     parser.add_argument( '-s', '--show',
         action = 'store_true',
         default = False,
@@ -766,6 +771,13 @@ def main():
 
     global args
     args = parseargs()
+
+    if args.bookmarklet:
+        webbrowser.open(
+            os.path.join( location, '..', 'bookmarklet',
+                'result-flagging-bookmarklet.html' ),
+            new = 0 , autoraise = True )
+        sys.exit()
 
     if args.outputfile:
         resultfilename = args.outputfile
