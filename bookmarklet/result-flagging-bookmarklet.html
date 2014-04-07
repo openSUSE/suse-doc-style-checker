@@ -2,11 +2,31 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Result Flagging Bookmarklet</title>
+    <title>Bookmarklet to Manage Style Checker Results</title>
   </head>
-  <body>
-    <p style="text-align: center;">
-      Add a bookmark allowing you to flag checker result items to your browser by dragging <a style="display: inline-block; color: #333; padding: 3px; background-color: #EEE; border: 1px solid #CCC; text-decoration: none;" href="javascript:(function(){e=document.getElementsByTagName('result');for(i=0;i<e.length;++i%20){e[i].addEventListener('click',function(){d=document.createElement('done');this.appendChild(d);},false)};})()">⚑ Flag</a> to your bookmarks bar.<br>
+  <body style="padding: 10px; max-width: 800px; margin: 0 auto;">
+    <h1>Bookmarklet to Manage Style Checker Results</h1>
+    <p>
+      The bookmarklet below helps you work with the result files of the
+      documentation style checker.
     </p>
+    <h2>Installation</h2>
+    <p>
+      To install, drag the <a style="display: inline-block; color: #333; padding: 3px; background-color: #EEE; border: 1px solid #CCC; text-decoration: none;" href="javascript:(function(){rs=document.getElementsByTagName('results')[0];rs.insertBefore(document.createElement('js'),rs.children[0]);r=document.getElementsByTagName('result');d='done';for(i=0;i<r.length;++i){r[i].addEventListener('click',function(){if(this.lastChild.nodeName==d){this.removeChild(this.lastChild);}else{this.appendChild(document.createElement(d));}},false)};p=document.getElementsByTagName('part-title');c='collapsed';for(i=0;i<p.length;++i){p[i].parentElement.insertBefore(document.createElement(c),p[i].parentElement.children[0]);p[i].addEventListener('click',function(){if(this.parentElement.children[0].nodeName!=c){this.parentElement.insertBefore(document.createElement(c),this.parentElement.children[0]);}else{this.parentElement.removeChild(this.parentElement.children[0]);}},false)};})()">☑ Check</a> to the bookmarks bar of your browser.<br>
+    </p>
+    <h2>Usage</h2>
+    <ul>
+      <li><strong>Start the bookmarklet:</strong> Open a result file. Then
+        click <em>☑ Check</em> in your bookmark bar.
+      </li>
+    </ul>
+    <ul>
+      <li>Mark a result message as done by clicking it. Unmark a result message
+        by clicking it again.
+      </li>
+      <li>Collapse a section of results by clicking its title. Re-open a
+        section of results by clicking its title again.
+      </li>
+    </ul>
   </body>
 </html>

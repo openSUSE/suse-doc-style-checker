@@ -6,6 +6,7 @@ results {
   color: #333;
   line-height: 1.25em;
   display: block;
+  padding: 0 30px;
 }
 
 results-title {
@@ -14,39 +15,32 @@ results-title {
   display: block;
 }
 
-result {
-  border: none;
-  margin: 10px 0;
-  padding: 11px;
-  background-color: #FFF;
+part {
   display: block;
+  border-bottom: 1px solid #EEE;
+}
+
+part:last-child {
+  display: block;
+  border-bottom: none;
+}
+
+part-title {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 15px 10px 10px;
   position: relative;
 }
 
-done {
-  background-color: #590;
+result {
+  border: 1px solid transparent;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #FFF;
   display: block;
-  height: 22px;
-  width: 22px;
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  border-radius: 11px;
-}
-
-done:after {
-  content: '⚑';
-  display: inline-block;
-  color: #FFF;
-  position: absolute;
-  left: 4px;
-  top: 3px;
-
-}
-
-result:hover done, result:focus done {
-  left: 9px;
-  top: 9px;
+  position: relative;
+  z-index: 0;
 }
 
 result:hover, result:focus {
@@ -199,18 +193,61 @@ tag:before {
 tag:after {
   content: '/>';
 }
-part {
-  display: block;
-  border-bottom: 1px solid #EEE;
+
+/* Bookmarklet-enabled stuff.*/
+
+js ~ part > collapsed ~ result {
+  display: none;
+}
+js ~ part > part-title {
+  cursor: pointer;
 }
 
-part:last-child {
+js ~ part > part-title:before {
+  content: '–';
+  position: absolute;
   display: block;
-  border-bottom: none;
+  top: 18px;
+  left: -26px;
+  background-color: #333;
+  width: 18px;
+  height: 18px;
+  color: #FFF;
+  text-align: center;
+  line-height: 16px;
+  font-size: 16px;
+  border-radius: 9px;
 }
-part-title {
+
+js ~ part > collapsed + part-title:before {
+  content: '+';
+}
+
+done {
+  border: 1px solid rgba(115, 186, 37, 0.2);
+  background-color: rgba(115, 186, 37, 0.05);
   display: block;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 15px 10px 10px;
+  position: absolute;
+  height: -moz-calc(100% - 1px);
+  width: -moz-calc(100% - 1px);
+  padding: 0;
+  margin: -9px 0 0 -9px;
+  left: 9px;
+  top: 9px;
+  z-index: -1;
+}
+
+done:before {
+  content: '☑';
+  font-size: 23px;
+  position: absolute;
+  display: block;
+  top: 0px;
+  left: -30px;
+  color: #590;
+}
+
+result:hover done, result:focus done {
+  left: 9px;
+  top: 9px;
 }
