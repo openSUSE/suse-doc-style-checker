@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<terminology ignoredwords="([b-z0-9].*)" useonepattern="no">
+<terminology useonepattern="no">
 
   <term>
     <accept>
@@ -17,6 +17,44 @@
 
   <term>
     <accept>
+      <word>any</word>
+    </accept>
+    <patterngroup>
+      <pattern1>ant</pattern1>
+      <contextpattern look="before" mode="fuzzy" where="5">(buil[dt](s|ing)?|java)</contextpattern>
+      <contextpattern mode="fuzzy" where="5">(buil[dt](s|ing)?|java)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>depth</word>
+    </accept>
+    <patterngroup>
+      <pattern1>dephts?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>height</word>
+    </accept>
+    <patterngroup>
+      <pattern1>h(eig?th|ieg?(th|ht))s?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>length</word>
+    </accept>
+    <patterngroup>
+      <pattern1>lenghts?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>interest</word>
     </accept>
     <patterngroup>
@@ -26,7 +64,7 @@
 
   <term>
     <accept>
-      <word>interest</word>
+      <word>interested</word>
     </accept>
     <patterngroup>
       <pattern1>inte(ress|rres|rress)ted</pattern1>
@@ -146,7 +184,7 @@
       <word>weight</word>
     </accept>
     <patterngroup>
-      <pattern1>weigths?</pattern1>
+      <pattern1>w(eig?th|ieg?(th|ht))s?</pattern1>
     </patterngroup>
   </term>
 
