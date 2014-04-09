@@ -1430,12 +1430,6 @@
       <pattern2>data</pattern2>
       <pattern3>sources?</pattern3>
     </patterngroup>
-    <patterngroup>
-      <pattern1>installation</pattern1>
-      <pattern2>medi(a|um)s?</pattern2>
-        <!--  Yes, the s? is completely incorrect. Doesn't hurt to match simple
-              typos, though. -->
-    </patterngroup>
   </term>
 
   <term>
