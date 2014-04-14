@@ -779,13 +779,13 @@ def main():
             new = 0 , autoraise = True )
         sys.exit()
 
+    inputfilename = os.path.basename( args.inputfile.name )
+
     if args.outputfile:
         resultfilename = args.outputfile
         resultpath = os.path.dirname( os.path.realpath( args.outputfile ) )
     else:
-        resultfilename = args.inputfile.name
-        resultfilename = os.path.basename( os.path.realpath( resultfilename ) )
-        resultfilename = re.sub( r'(_bigfile)?\.xml', r'', resultfilename )
+        resultfilename = re.sub( r'(_bigfile)?\.xml', r'', inputfilename )
         resultfilename = '%s-stylecheck.xml' % resultfilename
         resultpath = os.path.dirname( os.path.realpath( args.inputfile.name ) )
 
@@ -798,7 +798,7 @@ def main():
     rootelement = output.xpath( '/results' )
 
     resultstitle = etree.Element( 'results-title' )
-    resultstitle.text = "Style Checker Results for %s" % os.path.basename( args.inputfile.name )
+    resultstitle.text = "Style Checker Results for %s" % inputfilename
     output.append( resultstitle )
 
     # Checking via XSLT
