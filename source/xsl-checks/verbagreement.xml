@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminology ignoredwords="(the|a|an|this|there|that|these|those|one|by|on|over|under|about|to|at|in|from|if|when|as|while|where|who|why|what)">
+
+  <term>
+    <accept>
+      <word>can be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>can</pattern1>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>cannot be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>cannot</pattern1>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>can</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>could be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>could</pattern1>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>could not be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>could</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>may be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>may</pattern1>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>may not be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>may</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>must be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>must</pattern1>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>must not be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>must</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>might be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>might</pattern1>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>might not be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>might</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>shall be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>shall</pattern1>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>shall not be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>shall</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>should be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>shall</pattern1>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>should not be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>should</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>ought be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>ought</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>ought not be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>ought</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>will be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>will</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>will not be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>will</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>would be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>would</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>would not be</word>
+    </accept>
+    <patterngroup>
+      <pattern1>would</pattern1>
+      <pattern2>not</pattern2>
+      <contextpattern>\w+?ing</contextpattern>
+    </patterngroup>
+  </term>
+
+</terminology>
