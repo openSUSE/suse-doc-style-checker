@@ -798,7 +798,7 @@ def main():
     rootelement = output.xpath( '/results' )
 
     resultstitle = etree.Element( 'results-title' )
-    resultstitle.text = "Style Checker Results"
+    resultstitle.text = "Style Checker Results for %s" % os.path.basename( args.inputfile.name )
     output.append( resultstitle )
 
     # Checking via XSLT
