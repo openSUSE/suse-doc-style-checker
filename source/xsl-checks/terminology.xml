@@ -3593,15 +3593,6 @@
 
   <term>
     <accept>
-      <word>wild card</word>
-    </accept>
-    <patterngroup>
-      <pattern1>pipe(s|d|ing)?</pattern1>
-    </patterngroup>
-  </term>
-
-  <term>
-    <accept>
       <word>write</word>
     </accept>
     <patterngroup>
