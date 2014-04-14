@@ -166,6 +166,15 @@
 
   <term>
     <accept>
+      <word>architecture</word>
+    </accept>
+    <patterngroup>
+      <pattern1>archs?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>audio CD</word>
     </accept>
     <patterngroup>
@@ -673,6 +682,25 @@
       possibility, only use <emphasis>may</emphasis> to express
       permissions sought/given
     </entry>
+  </term> -->
+
+  <!-- Tricky. -->
+  <!-- <term>
+    <accept>
+      <word>create a hard link</word>
+    </accept>
+    <patterngroup>
+      <pattern1>hard-?links?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>create a symbolic link</word>
+    </accept>
+    <patterngroup>
+      <pattern1>sym-?links?</pattern1>
+    </patterngroup>
   </term> -->
 
   <term>
@@ -1267,11 +1295,11 @@
       <word>hotplug</word>
     </accept>
     <patterngroup>
-      <pattern1>hot-plugg?(ing|ed|s)</pattern1>
+      <pattern1>(hot-plugg?(ed|s)?|hot-?(add|swapp?)(ed|s)?)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>hot</pattern1>
-      <pattern2>plugg?(ing|ed|s)</pattern2>
+      <pattern2>(plugg?|add|swapp?)(ed|s)?</pattern2>
     </patterngroup>
   </term>
 
@@ -1280,11 +1308,11 @@
       <word>hotplugging</word>
     </accept>
     <patterngroup>
-      <pattern1>hot-plugging</pattern1>
+      <pattern1>(hot-plugging|hot-?(add|swapp?)(ing))</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>hot</pattern1>
-      <pattern2>plugging</pattern2>
+      <pattern2>(plugg?|add|swapp?)ing</pattern2>
     </patterngroup>
   </term>
 
@@ -1293,11 +1321,11 @@
       <word>hotpluggable</word>
     </accept>
     <patterngroup>
-      <pattern1>hot-pluggable</pattern1>
+      <pattern1>(hot-plugg?[ai]ble|hotplugg?ible|hot-?(add|swapp?)[ai]ble)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>hot</pattern1>
-      <pattern2>pluggable</pattern2>
+      <pattern2>(plugg?|add|swapp?)[ai]ble</pattern2>
     </patterngroup>
   </term>
 
@@ -1399,10 +1427,24 @@
 
   <term>
     <accept>
+      <word>init script</word>
+    </accept>
+    <patterngroup>
+      <pattern1>initiali[sz]ations?</pattern1>
+      <pattern2>scripts?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>init-?scripts?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>initialization</word>
     </accept>
     <patterngroup>
       <pattern1>inits?</pattern1>
+      <contextpattern match="negative">scripts?</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>initialisations?</pattern1>
@@ -1429,6 +1471,17 @@
       <pattern1>installation</pattern1>
       <pattern2>data</pattern2>
       <pattern3>sources?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>installation medium</word>
+    </accept>
+    <patterngroup>
+      <pattern1>installation</pattern1>
+      <pattern2>data</pattern2>
+      <pattern3>medi(um|a)s?</pattern3>
     </patterngroup>
   </term>
 
@@ -2438,11 +2491,11 @@
       <context>keys or mouse buttons</context>
     </accept>
     <patterngroup>
-      <pattern1>(hitt?|punch)(ed|s|ing)?</pattern1>
+      <pattern1>(hitt?|punch|depress|strike)(ed|s|ing)?</pattern1>
       <contextpattern mode="fuzzy" where="3">(##@key##|key)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>(hitt?|punch)(ed|s|ing)?</pattern1>
+      <pattern1>(hitt?|punch|depress|strike)(ed|s|ing)?</pattern1>
       <contextpattern mode="fuzzy" where="3" look="before">(##@key##|key)</contextpattern>
     </patterngroup>
   </term>
@@ -2585,6 +2638,32 @@
     <entry/>
     <entry>verb; register for a service</entry>
   </row> -->
+
+  <term>
+    <accept>
+      <word>remove at runtime</word>
+    </accept>
+    <patterngroup>
+      <pattern1>hot-remov(e[ds]?|ing)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hot</pattern1>
+      <pattern2>remov(e[ds]?|ing)</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>removable at runtime</word>
+    </accept>
+    <patterngroup>
+      <pattern1>hot-remove?[ai]ble</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hot</pattern1>
+      <pattern2>remove?[ai]ble</pattern2>
+    </patterngroup>
+  </term>
 
   <term>
     <accept>
@@ -2752,11 +2831,15 @@
       <pattern1>scrollers?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>slide-(bar|boxe?)s?</pattern1>
+      <pattern1>slide-boxe?s?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>(scroll|slide)</pattern1>
+      <pattern1>scroll</pattern1>
       <pattern2>(boxe?|bar)s?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>slide</pattern1>
+      <pattern2>boxe?s?</pattern2>
     </patterngroup>
   </term>
 
@@ -2951,15 +3034,18 @@
   </term>
 
 
-  <!-- Not sure what to check for here -->
-  <!-- <row>
-    <entry>slider</entry>
-    <entry/>
-    <entry>noun; GUI element that is used manipulate values that have
-      an upper and a lower bound
-      <remark>sknorr, 2013-09-17: A little complicated</remark>
-    </entry>
-  </row> -->
+  <term>
+    <accept>
+      <word>slider</word>
+    </accept>
+    <patterngroup>
+      <pattern1>slidebars?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>slide</pattern1>
+      <pattern2>bars?</pattern2>
+    </patterngroup>
+  </term>
 
   <term>
     <accept>
@@ -2967,6 +3053,56 @@
     </accept>
     <patterngroup>
       <pattern1>spec-?files?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>solid-state drive</word>
+    </accept>
+    <patterngroup>
+      <pattern1>solid-?state-?d(rive|isk)s?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>solidstate</pattern1>
+      <pattern2>drives?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>solid-?state</pattern1>
+      <pattern2>disks?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>solid</pattern1>
+      <pattern2>state</pattern2>
+      <pattern3>d(rive|isk)s?</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>SSD</word>
+    </accept>
+    <patterngroup>
+      <pattern1>s\.s\.s(\.?s)?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1 case="keep">ssd</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>SSH</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Ss]sh</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>s\.s\.h\.?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ssh</pattern1>
+      <pattern2>shells?</pattern2>
     </patterngroup>
   </term>
 
@@ -3025,22 +3161,6 @@
     <accept/>
     <patterngroup>
       <pattern1>stuffs?</pattern1>
-    </patterngroup>
-  </term>
-
-  <term>
-    <accept>
-      <word>SSH</word>
-    </accept>
-    <patterngroup>
-      <pattern1 case="keep">[Ss]sh</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>s\.s\.h\.?</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>ssh</pattern1>
-      <pattern2>shells?</pattern2>
     </patterngroup>
   </term>
 
@@ -3183,6 +3303,37 @@
     </patterngroup>
     <patterngroup>
       <pattern1>sub-menus?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>symbolic link</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(sym|soft)</pattern1>
+      <pattern2>links?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(soft|sym(bolic)?)-?links?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>synchronize</word>
+    </accept>
+    <patterngroup>
+      <pattern1>synch?(ronis)?(ed|ing)</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>synchronization</word>
+    </accept>
+    <patterngroup>
+      <pattern1>synch?(ronis)?(ation)s?</pattern1>
     </patterngroup>
   </term>
 
@@ -3574,8 +3725,8 @@
       <pattern1 case="keep">Wi-fi</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>wi</pattern1>
-      <pattern2>fi</pattern2>
+      <pattern1>wi(reless)?</pattern1>
+      <pattern2>fi(delity)?</pattern2>
     </patterngroup>
   </term>
 
@@ -3591,6 +3742,16 @@
       <pattern2>cards?</pattern2>
     </patterngroup>
   </term>
+
+  <!-- We should barely need this -->
+  <!-- <term>
+    <accept>
+      <word>WLAN</word>
+    </accept>
+    <patterngroup>
+      <pattern1 case="keep">[Ww]lan</pattern1>
+    </patterngroup>
+  </term> -->
 
   <term>
     <accept>
