@@ -13,7 +13,7 @@
     </part>
   </xsl:template>
 
-  <xsl:template match="*" mode="part-title">Duplicated Words</xsl:template>
+  <xsl:template match="*" mode="part-title">Duplicated Words and Phrases</xsl:template>
 
   <!-- The following template should probably match more elements. -->
   <xsl:template match="para|title">
