@@ -2207,7 +2207,7 @@
       <word>need to</word>
     </accept>
     <patterngroup>
-      <pattern1>ha(ve|d|s)</pattern1>
+      <pattern1>(ha(ve|d|s)|must)</pattern1>
       <pattern2>to</pattern2>
     </patterngroup>
   </term>
