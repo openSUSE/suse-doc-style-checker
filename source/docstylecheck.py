@@ -543,7 +543,7 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content, contextid,
             <quote>%s</quote></error>""" % ( acceptcontext, word, content ) ) )
     else:
         message.append( etree.XML( """<error>Do not use
-            <quote>%s</quote>:
+            <quote>%s</quote> here:
             <quote>%s</quote></error>""" % ( word, content ) ) )
 
     if acceptword:
