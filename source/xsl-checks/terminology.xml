@@ -361,18 +361,18 @@
       <word>boot using PXE</word>
     </accept>
     <patterngroup>
-      <pattern1>PXE-?boot(ing|ed)</pattern1>
+      <pattern1>pxe-?boot(ing|ed)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>PXE</pattern1>
+      <pattern1>pxe</pattern1>
       <pattern2>boot(ing|ed)</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>PXE-?boots?</pattern1>
+      <pattern1>pxe-?boots?</pattern1>
       <contextpattern look="before">(to|not)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>PXE</pattern1>
+      <pattern1>pxe</pattern1>
       <pattern2>boots?</pattern2>
       <contextpattern look="before">(to|not)</contextpattern>
     </patterngroup>
@@ -1588,7 +1588,7 @@
     <patterngroup>
       <pattern1>just(?!-)</pattern1>
       <contextpattern match="negative" look="before">(not|must|should|ought)</contextpattern>
-      <contextpattern match="negative">(after|before|next|as|to)</contextpattern>
+      <contextpattern match="negative">(after|before|next|as|to|need)</contextpattern>
       <contextpattern match="negative" mode="fuzzy" where="3">(one|two|three|four|five|six|seven|eight|nine|ten|[0-9].*)</contextpattern>
     </patterngroup>
   </term>
@@ -1600,6 +1600,16 @@
     <patterngroup>
       <pattern1>just(?!-)</pattern1>
       <contextpattern look="before">(must|should|ought)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>only</word>
+    </accept>
+    <patterngroup>
+      <pattern1>just(?!-)</pattern1>
+      <contextpattern>need</contextpattern>
     </patterngroup>
   </term>
 
@@ -2519,10 +2529,11 @@
     <accept>
       <word>PXE boot</word>
     </accept>
-    <patterngroup>
+    <!-- This does not help within titles. -->
+    <!-- <patterngroup>
       <pattern1>pxe</pattern1>
       <pattern2 case="keep">Boots?</pattern2>
-    </patterngroup>
+    </patterngroup> -->
     <patterngroup>
       <pattern1>pxe-?boots?</pattern1>
     </patterngroup>
