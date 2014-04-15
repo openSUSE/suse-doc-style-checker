@@ -530,8 +530,6 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content, contextid,
         filename = "<file>%s</file>" % str( basefile )
 
     withinid = ""
-    # Python warns me: Use specific 'len(elem)' or 'elem is not None' test
-    # instead.
     if contextid:
         withinid = "<withinid>%s</withinid>" % str( contextid )
 
@@ -655,10 +653,8 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
         # word, such as: a/an, singular/plural, verb tenses. It should ideally
         # not be hardcoded here.
 
-        # FIXME: Get something better than s.split. It is actually quite
-        # important to get (most) sentence boundaries in the future. Some
-        # existing tokenisers are overzealous, such as the default one from
-        # NLTK.
+        # FIXME: Get something better than s.split. Some existing tokenisers
+        # are overzealous, such as the default one from NLTK.
         words = content.split()
         totalwords = len( words )
 
@@ -677,6 +673,8 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
 
             wordstripped = replacepunctuation( word, 'end' )
 
+            # FIXME: This implementation is a WTF and not especially extensible.
+            # To its credit: it kinda works.
             if wordposition >= 5:
                 if wordstripped == words[wordposition - 3]:
                     if ( words[wordposition - 1] != "##@ignore##" ) and ( words[wordposition - 2] != "##@ignore##" ):
