@@ -16,7 +16,7 @@
   <xsl:template match="*" mode="part-title">Sentence Length</xsl:template>
 
   <!-- The following template should probably match more elements. -->
-  <xsl:template match="para|title">
+  <xsl:template match="para|title|entry">
     <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
       <xsl:variable name="node" select="."/>
       <xsl:variable name="withinid">
