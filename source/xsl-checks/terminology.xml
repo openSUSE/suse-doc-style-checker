@@ -54,15 +54,24 @@
     <!-- Someone has been using the word checking option instead of check box. -->
     <patterngroup>
       <pattern1>((block|tick)(ing|ed|s)|check(ed|s))</pattern1>
-      <contextpattern mode="fuzzy" where="2">((check|tick|option|box)e?s?|##@ui##)</contextpattern>
+      <contextpattern mode="fuzzy" where="2">((check|tick)(ing|s)?|(option|boxe?)s?|##@ui##)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>cho?os(es?|ing|n)</pattern1>
-      <contextpattern mode="fuzzy" where="2">(check|tick|option|box)e?s?</contextpattern>
+      <contextpattern mode="fuzzy" where="2">((check|tick)(ing|s)?|box(es)?)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>cho?os(es?|ing|n)</pattern1>
-      <contextpattern look="before" mode="fuzzy" where="2">(check|tick|option|box)e?s?</contextpattern>
+      <contextpattern look="before" mode="fuzzy" where="2">((check|tick)(ing|s)?|box(es)?)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>adapter</word>
+    </accept>
+    <patterngroup>
+      <pattern1>adaptors?</pattern1>
     </patterngroup>
   </term>
 
@@ -730,11 +739,11 @@
     </accept>
     <patterngroup>
       <pattern1>(un|de)-?(block|check|tick)(ing|ed|s)</pattern1>
-      <contextpattern mode="fuzzy" where="2">((check|tick|option|box)e?s?|##@ui##)</contextpattern>
+      <contextpattern mode="fuzzy" where="2">((check|tick)(ing|s)?|(option|boxe?)s?|##@ui##)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>(un|de)-?((block|check|tick|deselect)(ing|ed|s)|ch[o]?os(e[s]?|ing|n))</pattern1>
-      <contextpattern mode="fuzzy" where="2">(check|tick|option|box)e?s?</contextpattern>
+      <contextpattern mode="fuzzy" where="2">((check|tick)(ing|s)?|box(es)?)</contextpattern>
     </patterngroup>
   </term>
 
