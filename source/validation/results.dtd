@@ -4,10 +4,7 @@
 -->
 
 <!ENTITY % generalinlines "em | tag | quote" >
-<!ENTITY % messageinlines "id | name | place | %generalinlines;" >
-  <!--  FIXME: We actually never want more than a single name, id, or place
-        inside any error, warning, or info element.
-  -->
+<!ENTITY % messageinlines "id | name | %generalinlines;" >
 
 <!ELEMENT results       (results-title, (result? | part*))>
 
@@ -17,12 +14,11 @@
 
 
 <!ELEMENT part-title    (#PCDATA) >
-<!ELEMENT result        (place?, (error | warning | info), suggestion*) >
+<!ELEMENT result        (place?, message, suggestion*) >
+<!ATTLIST result        type (info|warning|error) #REQUIRED >
 <!ELEMENT place         (file?, withinid?, line?) >
 
-<!ELEMENT error         (#PCDATA | %messageinlines;)* >
-<!ELEMENT warning       (#PCDATA | %messageinlines;)* >
-<!ELEMENT info          (#PCDATA | %messageinlines;)* >
+<!ELEMENT message       (#PCDATA | %messageinlines;)* >
 
 <!ELEMENT suggestion    (#PCDATA | %generalinlines;)* >
   <!--  FIXME: The asterisks after error, warning, info, and suggestion should

@@ -11,20 +11,20 @@
     <xsl:variable name="steps" select="count(step)"/>
     <xsl:choose>
       <xsl:when test="$steps &gt; 10">
-        <result>
+        <result type="warning">
           <xsl:call-template name="sourcehint"/>
-          <warning>Procedure <xsl:call-template name="createid"/> contains
+          <message>Procedure <xsl:call-template name="createid"/> contains
             <xsl:value-of select="$steps"/> steps.
-          </warning>
+          </message>
           <suggestion>Procedures may contain up to 10 steps.</suggestion>
         </result>
       </xsl:when>
       <xsl:when test="$steps &lt; 2">
-        <result>
+        <result type="error">
           <xsl:call-template name="sourcehint"/>
-          <error>Procedure <xsl:call-template name="createid"/> contains
+          <message>Procedure <xsl:call-template name="createid"/> contains
             <xsl:value-of select="$steps"/> step.
-          </error>
+          </message>
           <suggestion>Procedures should contain at least 2 steps.</suggestion>
         </result>
       </xsl:when>

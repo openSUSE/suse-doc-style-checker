@@ -22,12 +22,12 @@
           <xsl:with-param name="raw" select="$text"/>
         </xsl:call-template>
       </xsl:variable>
-      <result>
+      <result type="warning">
         <xsl:call-template name="sourcehint"/>
-        <warning>Function keycap
+        <message>Function keycap
           <xsl:call-template name="createid"/>
           contains text.
-        </warning>
+        </message>
         <suggestion>Use a self-closing <tag>keycap</tag> element<xsl:if
           test="$correct-attribute = 'meta'">, unless you are introducing this
           key for the first time in this chapter</xsl:if>.
@@ -66,7 +66,6 @@
                   $text = 'right' or $text = '→' or
                   $text = 'shift' or $text = 'space' or $text = ' ' or
                   $text = 'spacebar' or $text = 'space bar' or
-
                   $text = 'tab' or $text = '→|' or
                   $text = 'up' or $text = '↑'">
       <xsl:variable name="correct-attribute">
@@ -76,12 +75,12 @@
         </xsl:call-template>
       </xsl:variable>
 
-      <result>
+      <result type="error">
         <xsl:call-template name="sourcehint"/>
-        <error>Function keycap
+        <message>Function keycap
          <xsl:call-template name="createid"/>
           does not use <quote>function</quote> attribute.
-        </error>
+        </message>
         <suggestion>Use <tag>keycap function="<xsl:value-of
           select="$correct-attribute"/>"</tag> instead<xsl:if
           test="$correct-attribute = 'meta'">, unless you are introducing the

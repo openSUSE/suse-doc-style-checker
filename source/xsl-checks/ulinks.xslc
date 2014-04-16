@@ -24,42 +24,42 @@
                         starts-with($url, 'ssh+svn:') or
                         starts-with($url, 'git:') or
                         starts-with($url, 'bzr:')">
-          <result>
+          <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <error>Ulink
+            <message>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
               links to URL that most browsers cannot open.
-            </error>
+            </message>
             <suggestion>To reference URLs browser cannot open, use the
               <tag>filename</tag> element.
             </suggestion>
           </result>
         </xsl:when>
         <xsl:when test="starts-with($url, 'info:')">
-          <result>
+          <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <error>Ulink
+            <message>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
               links to an info page.
-            </error>
+            </message>
             <suggestion>To reference info pages, use the phrase
               <quote>see the info page of <em>command</em></quote>.
             </suggestion>
           </result>
         </xsl:when>
         <xsl:when test="starts-with($url, 'man:')">
-          <result>
+          <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <error>Ulink
+            <message>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
               links to a man page.
-            </error>
+            </message>
             <suggestion>To reference man pages, use the phrase
               <quote>see the man page of <em>command</em></quote>.
             </suggestion>
@@ -67,28 +67,28 @@
         </xsl:when>
         <xsl:when test="starts-with($url, 'file:') or
                         starts-with($url, 'smb:')">
-          <result>
+          <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <error>Ulink
+            <message>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
               links to a local file, directory or network.
-            </error>
+            </message>
             <suggestion>To reference local files, directories, or networks,
               use the <tag>filename</tag> element.
             </suggestion>
           </result>
         </xsl:when>
         <xsl:when test="starts-with($url, 'mailto:') or contains($url, '@')">
-          <result>
+          <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <error>Ulink
+            <message>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
               links to an e-mail address.
-            </error>
+            </message>
             <suggestion>To reference e-mail addresses, use the
               <tag>email</tag> element.
             </suggestion>
@@ -101,28 +101,28 @@
                         contains($url, '.fr') or contains($url, '.es') or
                         contains($url, '.ru') or contains($url, '.br') or
                         contains($url, '.cn') or contains($url, '.in')">
-          <result>
+          <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <error>Ulink
+            <message>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
               appears to contain no a protocol identifier.
-            </error>
+            </message>
             <suggestion>If you have forgotten an <quote>http://</quote>
               or similar prefix, add it.
             </suggestion>
           </result>
         </xsl:when>
         <xsl:otherwise>
-          <result>
+          <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <error>Ulink
+            <message>Ulink
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
               appears to contain no a protocol identifier.
-            </error>
+            </message>
             <suggestion>If you have forgotten an <quote>http://</quote>
               or similar prefix, add it.
             </suggestion>
@@ -142,14 +142,14 @@
                   not(contains($url, '.suse.com/documentation') or
                       contains($url, '.suse.com/releasenotes') or
                       contains($url, 'en.opensuse.org'))">
-      <result>
+      <result type="warning">
         <xsl:call-template name="sourcehint"/>
-        <warning>Ulink
+        <message>Ulink
           <xsl:call-template name="createid">
             <xsl:with-param name="use-url-attribute" select="1"/>
           </xsl:call-template>
           contains a very long URL.
-        </warning>
+        </message>
         <suggestion>Try to shorten this URL by leaving away any unimportant
           parts of it.
         </suggestion>

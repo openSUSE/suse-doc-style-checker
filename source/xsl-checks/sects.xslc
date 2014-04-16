@@ -28,10 +28,10 @@
 
 
     <xsl:if test="not(para|abstract) and not(ancestor-or-self::*/@role = 'legal')">
-      <result>
+      <result type="error">
         <xsl:call-template name="sourcehint"/>
-        <error>Section <xsl:call-template name="createid"/> lacks an
-          introductory paragraph or abstract.</error>
+        <message>Section <xsl:call-template name="createid"/> lacks an
+          introductory paragraph or abstract.</message>
         <suggestion>Add a <tag>para</tag> or <tag>abstract</tag>.</suggestion>
         <xsl:if test="local-name(.) = 'chapter' or local-name(.) = 'preface' or
                       local-name(.) = 'appendix' or local-name(.) = 'colophon' or
@@ -45,21 +45,21 @@
     </xsl:if>
 
     <xsl:if test="local-name(.) = 'sect4' or local-name(.) = 'sect5'">
-      <result>
+      <result type="warning">
         <xsl:call-template name="sourcehint"/>
-        <warning>Section <xsl:call-template name="createid"/> is nested deeply.
-        </warning>
+        <message>Section <xsl:call-template name="createid"/> is nested deeply.
+        </message>
         <suggestion>Avoid using <tag>sect4</tag> and <tag>sect5</tag> elements.
         </suggestion>
       </result>
     </xsl:if>
 
     <xsl:if test="$lone = 1">
-      <result>
+      <result type="warning">
         <xsl:call-template name="sourcehint"/>
-        <warning>Section <xsl:call-template name="createid"/> contains a lone
+        <message>Section <xsl:call-template name="createid"/> contains a lone
           subsection.
-        </warning>
+        </message>
         <suggestion>Flatten the subsection structure.</suggestion>
       </result>
     </xsl:if>

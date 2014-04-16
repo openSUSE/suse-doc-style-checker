@@ -9,17 +9,17 @@
 
   <xsl:template match="command|replaceable|option|literal|filename">
     <xsl:variable name="length" select="string-length(normalize-space(text()))"/>
-    
+
     <xsl:if test="(self::command/parent::para or self::command/parent::title) and
                   normalize-space(following-sibling::node()[1]) = '' and
                   (local-name(following-sibling::node()[2]) = 'option' or
                    local-name(following-sibling::node()[2]) = 'replaceable')">
       <xsl:variable name="sibling" select="local-name(following-sibling::node()[2])"/>
-      <result>
+      <result type="warning">
         <xsl:call-template name="sourcehint"/>
-        <warning>Command <xsl:call-template name="createid"/>
+        <message>Command <xsl:call-template name="createid"/>
           is directly followed by <tag><xsl:value-of select="$sibling"/></tag> element.
-        </warning>
+        </message>
         <suggestion>Move the <tag><xsl:value-of select="$sibling"/></tag> element within the command.
         </suggestion>
       </result>
@@ -28,13 +28,13 @@
     <!-- Deliberately higher than the styleguide asks for. Try to avoid annoying
          people. -->
     <xsl:if test="$length &gt; 50">
-      <result>
+      <result type="warning">
         <xsl:call-template name="sourcehint"/>
-        <warning>
+        <message>
           <tag><xsl:value-of select="local-name(.)"/></tag> element
           <xsl:call-template name="createid"/>
           contains <xsl:value-of select="$length"/> characters.
-        </warning>
+        </message>
         <suggestion>Use a <tag>screen</tag> element.
         </suggestion>
       </result>

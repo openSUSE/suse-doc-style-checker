@@ -15,19 +15,21 @@
     <xsl:variable name="nesting-level" select="string-length(normalize-space($nesting-level-candidate))"/>
 
     <xsl:if test="$items &lt; 2">
-      <result>
+      <result type="error">
         <xsl:call-template name="sourcehint"/>
-        <error>List <xsl:call-template name="createid"/> contains <xsl:value-of select="$items"/> item.</error>
+        <message>List <xsl:call-template name="createid"/> contains <xsl:value-of select="$items"/>
+          item.
+        </message>
         <suggestion>Lists should contain at least 2 items.</suggestion>
       </result>
     </xsl:if>
 
     <xsl:if test="$nesting-level &gt; 1">
-      <result>
+      <result type="warning">
         <xsl:call-template name="sourcehint"/>
-        <warning>List <xsl:call-template name="createid"/> is nested inside
+        <message>List <xsl:call-template name="createid"/> is nested inside
           <xsl:value-of select="$nesting-level"/> other lists.
-        </warning>
+        </message>
         <suggestion>Avoid nesting lists so deeply.</suggestion>
       </result>
     </xsl:if>

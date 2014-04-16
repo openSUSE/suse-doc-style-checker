@@ -63,11 +63,6 @@ def parseargs():
             editor will open; in such cases, set the BROWSER variable with:
             export BROWSER=/MY/FAVORITE/BROWSER ; Chromium or Firefox will both
             do the right thing""" )
-    parser.add_argument( '-e', '--errors',
-        action = 'store_true',
-        default = False,
-        help = """output error messages, but do not output warning or
-            information messages""" )
     parser.add_argument( '--performance',
         action = 'store_true',
         default = False,
@@ -533,18 +528,18 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content, contextid,
     if contextid:
         withinid = "<withinid>%s</withinid>" % str( contextid )
 
-    message = etree.XML(  """<result>
+    message = etree.XML(  """<result type="error">
             <place>%s%s<line>%s</line></place>
         </result>""" % ( filename, withinid, str( line ) ) )
 
     if acceptcontext:
-        message.append( etree.XML( """<error>In the context of %s,
+        message.append( etree.XML( """<message>In the context of %s,
             do not use <quote>%s</quote>:
-            <quote>%s</quote></error>""" % ( acceptcontext, word, content ) ) )
+            <quote>%s</quote></message>""" % ( acceptcontext, word, content ) ) )
     else:
-        message.append( etree.XML( """<error>Do not use
+        message.append( etree.XML( """<message>Do not use
             <quote>%s</quote> here:
-            <quote>%s</quote></error>""" % ( word, content ) ) )
+            <quote>%s</quote></message>""" % ( word, content ) ) )
 
     if acceptword:
         message.append( etree.XML( """<suggestion>Use <quote>%s</quote>
@@ -602,15 +597,15 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile ):
 
                 contentpretty = xmlescape( contentpretty )
                 line = linenumber( context )
-                messages.append( etree.XML( """<result>
+                messages.append( etree.XML( """<result type="%s">
                                 <place>%s%s<line>%s</line></place>
-                                <%s>Sentence with %s words:
+                                <message>Sentence with %s words:
                                 <quote>%s</quote>
-                            </%s>
+                            </message>
                             <suggestion>Remove unnecessary words.</suggestion>
                             <suggestion>Split the sentence.</suggestion>
-                        </result>""" % ( filename, withinid, str( line ),
-                    messagetype, str( wordcount ), contentpretty, messagetype ) ) )
+                        </result>""" % ( messagetype, filename, withinid,
+                    str( line ), str( wordcount ), contentpretty ) ) )
 
     return messages
 
@@ -746,11 +741,11 @@ def dupecheckmessage( word, line, content, contextid, basefile ):
     if contextid:
         withinid = "<withinid>%s</withinid>" % str( contextid )
 
-    return etree.XML( """<result>
+    return etree.XML( """<result type="error">
             <place>%s%s<line>%s</line></place>
-            <error><quote>%s</quote> is duplicated:
+            <message><quote>%s</quote> is duplicated:
                 <quote>%s</quote>
-            </error>
+            </message>
             <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
         </result>""" % ( filename, withinid, str(line), word, content, word ) )
 
@@ -811,14 +806,6 @@ def main():
         transform = etree.XSLT( etree.parse( checkfile, parser ) )
         result = transform( inputfile )
 
-        if args.errors:
-            # FIXME: The following could presumably also be done without adding
-            # a separate stylesheet. Not sure if that would be any more
-            # performant.
-            errorstylesheet = os.path.join( location, 'errorsonly.xsl' )
-            errortransform = etree.XSLT( etree.parse( errorstylesheet, parser ) )
-            result = errortransform( result )
-
         result = result.getroot()
 
         if result.xpath( '/part/result' ):
@@ -826,8 +813,8 @@ def main():
 
     if not output.xpath( '/results/part' ):
         output.append( etree.XML(
-             """<result>
-                    <info>No problems detected.</info>
+             """<result typ="info>
+                    <message>No problems detected.</message>
                     <suggestion>Celebrate!</suggestion>
                 </result>""" ) )
 

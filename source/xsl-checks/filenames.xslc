@@ -30,9 +30,9 @@
         select="string-length($fileref) = string-length(normalize-space($fileref-safe-AZ))"/>
       <xsl:variable name="fileref-safe-special-state"
         select="string-length($fileref) = string-length(normalize-space($fileref-safe-special))"/>
-      <result>
+      <result type="error">
         <xsl:call-template name="sourcehint"/>
-        <error>Image file name
+        <message>Image file name
           <xsl:call-template name="createid">
             <xsl:with-param name="use-fileref-attribute" select="1"/>
           </xsl:call-template>
@@ -48,7 +48,7 @@
             special characters
           </xsl:if>
           <xsl:text>.</xsl:text>
-        </error>
+        </message>
         <xsl:if test="$fileref-safe-AZ-state = false">
           <suggestion>Use lowercase letters in image file names.
           </suggestion>

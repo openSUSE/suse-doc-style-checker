@@ -9,16 +9,16 @@
   <xsl:template match="mediaobject|inlinemediaobject">
 
     <xsl:if test="not(textobject/phrase)">
-      <result>
+      <result type="warning">
         <xsl:call-template name="sourcehint"/>
-        <warning>Media object
+        <message>Media object
           <xsl:call-template name="createid">
             <xsl:with-param name="node" select="imageobject[1]/imagedata[1]"/>
             <xsl:with-param name="use-fileref-attribute" select="1"/>
           </xsl:call-template>
           does not contain a <tag>textobject</tag> element with a
           <tag>phrase</tag> inside.
-        </warning>
+        </message>
         <suggestion>Add a <tag>textobject</tag> element with a
           <tag>phrase</tag> inside it, then add descriptive text for the image
           to it.

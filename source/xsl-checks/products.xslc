@@ -11,30 +11,33 @@
 
     <xsl:if test="not(bookinfo/productname or articleinfo/productname or
                       setinfo/productname)">
-      <result>
+      <result type="error">
         <xsl:call-template name="sourcehint"/>
-        <error>Deliverable <xsl:call-template name="createid"/> does not contain
-          a productname.</error>
+        <message>Deliverable <xsl:call-template name="createid"/> does not contain
+          a productname.
+        </message>
         <suggestion>Add a <tag>productname</tag> element.</suggestion>
       </result>
     </xsl:if>
 
     <xsl:if test="not(bookinfo/productnumber or articleinfo/productnumber or
                       setinfo/productnumber)">
-      <result>
+      <result type="error">
         <xsl:call-template name="sourcehint"/>
-        <error>Deliverable <xsl:call-template name="createid"/> does not contain
-          a productnumber.</error>
+        <message>Deliverable <xsl:call-template name="createid"/> does not contain
+          a productnumber.
+        </message>
         <suggestion>Add a <tag>productnumber</tag> element.</suggestion>
       </result>
     </xsl:if>
 
     <xsl:if test="not(bookinfo/date or articleinfo/date or
                       setinfo/date)">
-      <result>
+      <result type="warning">
         <xsl:call-template name="sourcehint"/>
-        <warning>Deliverable <xsl:call-template name="createid"/> does not
-          contain a date.</warning>
+        <message>Deliverable <xsl:call-template name="createid"/> does not
+          contain a date.
+        </message>
         <suggestion>Add a <tag>date</tag> element, use &lt;?dbtimestamp?&gt; inside.</suggestion>
       </result>
     </xsl:if>
@@ -82,11 +85,11 @@
                        th/productname|title/productname|titleabbrev/productname|
                        tocback/productname|tocentry/productname|
                        tocfront/productname|ulink/productname">
-    <result>
+    <result type="error">
       <xsl:call-template name="sourcehint"/>
-      <error>Section <xsl:call-template name="createid"/> contains a
+      <message>Section <xsl:call-template name="createid"/> contains a
         productname.
-      </error>
+      </message>
       <suggestion>Remove the <tag>productname</tag> element</suggestion>
       <suggestion>Use <tag>productname</tag> only in sets, books, and articles.
       </suggestion>
@@ -134,13 +137,14 @@
                        th/productnumber|title/productnumber|titleabbrev/productnumber|
                        tocback/productnumber|tocentry/productnumber|
                        tocfront/productnumber|ulink/productnumber">
-    <result>
+    <result type="error">
       <xsl:call-template name="sourcehint"/>
-      <error>Section <xsl:call-template name="createid"/> contains a
+      <message>Section <xsl:call-template name="createid"/> contains a
         productnumber.
-      </error>
+      </message>
       <suggestion>Remove the <tag>productnumber</tag> element</suggestion>
-      <suggestion>Use <tag>productnumber</tag> only in sets, books, and articles.
+      <suggestion>Use <tag>productnumber</tag> only in sets, books, and
+        articles.
       </suggestion>
     </result>
     <xsl:apply-templates/>

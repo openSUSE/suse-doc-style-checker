@@ -18,11 +18,11 @@
                   contains($end-of-text, '.') or contains($end-of-text, ':') or
                   contains($end-of-text, ',') or contains($end-of-text, ';') or
                   contains($end-of-text, '?') or contains($end-of-text, '!')">
-      <result>
+      <result type="error">
         <xsl:call-template name="sourcehint"/>
-        <error>User interface element <xsl:call-template name="createid"/>
+        <message>User interface element <xsl:call-template name="createid"/>
           has punctation at its end.
-        </error>
+        </message>
         <suggestion>Remove punctuation from the end of user interface elements.
         </suggestion>
         <suggestion>If this is end-of-sentence/end-of-clause punctuation,

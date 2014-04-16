@@ -9,18 +9,18 @@
 
   <xsl:template match="caution|warning|important|note|tip">
     <xsl:if test="self::caution">
-      <result>
+      <result type="error">
         <xsl:call-template name="sourcehint"/>
-        <error>Admonition <xsl:call-template name="createid"/>
+        <message>Admonition <xsl:call-template name="createid"/>
           is a <tag>caution</tag> element.
-        </error>
+        </message>
         <suggestion>Use the <tag>warning</tag> element instead.
         </suggestion>
       </result>
     </xsl:if>
 
     <xsl:if test="not(title)">
-      <xsl:variable name="output-tag-type">
+      <xsl:variable name="output-type">
         <xsl:choose>
           <xsl:when
             test="self::caution|self::warning|self::important">error</xsl:when>
@@ -28,13 +28,13 @@
         </xsl:choose>
       </xsl:variable>
 
-      <result>
+      <result type="{$output-type}">
         <xsl:call-template name="sourcehint"/>
-        <xsl:element name="{$output-tag-type}">
+        <message>
           <tag><xsl:value-of select="local-name(.)"/></tag> element
           <xsl:call-template name="createid"/>
           does not contain a <tag>title</tag> element.
-        </xsl:element>
+        </message>
         <suggestion>Add a <tag>title</tag> element.
         </suggestion>
       </result>

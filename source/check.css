@@ -48,7 +48,7 @@ result:hover, result:focus {
   padding: 10px;
 }
 
-info:before, warning:before, error:before {
+message:before {
   font-size: 14px;
   font-weight: bold;
   display: inline-block;
@@ -61,24 +61,24 @@ info:before, warning:before, error:before {
   border: 1px solid transparent;
 }
 
-info:before {
+result[type="info"] > message:before {
   content: 'i';
   color: #FFF;
   background-color: #248;
 }
 
-warning:before {
+result[type="warning"] > message:before {
   content: '?';
   background-color: #ED0;
 }
 
-error:before {
+result[type="error"] > message:before {
   content: '!';
   color: #FFF;
   background-color: #C00;
 }
 
-info, warning, error {
+message {
   font-size: 20px;
   display: block;
   padding-left: 30px;
@@ -260,7 +260,7 @@ done {
   left: 9px;
   top: 9px;
   z-index: -1;
-  transition: all 0.2s ease-in-out 0.1s;
+  transition: all 0.25s ease-in-out 0.25s;
 }
 
 done:before {
