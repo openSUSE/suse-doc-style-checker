@@ -158,6 +158,9 @@
 
   <!-- Template that starts terminology check. -->
   <xsl:template match="para|title|entry" mode="terminology">
+    <xsl:if test="self::entry/para">
+      <xsl:apply-templates mode="terminology"/>
+    </xsl:if>
     <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
       <xsl:variable name="node" select="."/>
       <xsl:variable name="withinid">

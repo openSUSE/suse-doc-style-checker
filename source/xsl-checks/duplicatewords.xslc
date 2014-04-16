@@ -13,10 +13,13 @@
     </part>
   </xsl:template>
 
-  <xsl:template match="*" mode="part-title">Duplicated Words and Phrases</xsl:template>
+  <xsl:template match="*" mode="part-title">Duplicated Words &amp; Phrases</xsl:template>
 
   <!-- The following template should probably match more elements. -->
   <xsl:template match="para|title">
+    <xsl:if test="self::entry/para">
+      <xsl:apply-templates/>
+    </xsl:if>
     <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
       <xsl:variable name="node" select="."/>
       <xsl:variable name="withinid">
