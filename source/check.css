@@ -234,7 +234,17 @@ js ~ part > collapsed + part-title:before {
   }
 }
 
+@-webkit-keyframes grow {
+  from {
+    -webkit-transform: scale(0.98);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
 result[animate] {
+    -webkit-animation: grow 0.1s;
     animation: grow 0.1s;
 }
 
