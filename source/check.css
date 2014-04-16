@@ -1,7 +1,7 @@
 results {
   margin: 10px auto;
   max-width: 800px;
-  font-family: sans-serif;
+  font-family: 'Clear Sans', 'Open Sans', sans-serif;
   background-color: #FFF;
   color: #333;
   line-height: 1.25em;
@@ -201,6 +201,8 @@ js ~ part > collapsed ~ result {
 }
 js ~ part > part-title {
   cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
 js ~ part > part-title:before {
@@ -223,28 +225,62 @@ js ~ part > collapsed + part-title:before {
   content: '+';
 }
 
+@keyframes grow {
+  from {
+    transform: scale(0.98);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+result[animate] {
+    animation: grow 0.1s;
+}
+
 done {
   border: 1px solid rgba(115, 186, 37, 0.2);
   background-color: rgba(115, 186, 37, 0.05);
   display: block;
   position: absolute;
-  height: -moz-calc(100% - 1px);
-  width: -moz-calc(100% - 1px);
+  height: calc(100% - 2px);
+  width: calc(100% - 2px);
   padding: 0;
   margin: -9px 0 0 -9px;
   left: 9px;
   top: 9px;
   z-index: -1;
+  transition: all 0.2s ease-in-out 0.1s;
 }
 
 done:before {
-  content: '☑';
-  font-size: 23px;
-  position: absolute;
+  content: '';
   display: block;
-  top: 0px;
-  left: -30px;
-  color: #590;
+  position: absolute;
+  top: -24px;
+  right: -6px;
+  z-index: 4;
+  width: 0;
+  height: 0;
+	border-top: 35px solid transparent;
+	border-bottom: 35px solid transparent;
+	border-left: 35px solid #590;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+}
+
+done:after {
+  content: 'L';
+  display: block;
+  position: absolute;
+  top: 1px;
+  right: 7px;
+  z-index: 5;
+  color: #FFF;
+  font-size: 24px;
+  font-weight: bold;
+  -moz-transform: scale(-1, 1) rotate(-45deg);
+  -webkit-transform: scale(-1, 1) rotate(-45deg);
 }
 
 result:hover done, result:focus done {

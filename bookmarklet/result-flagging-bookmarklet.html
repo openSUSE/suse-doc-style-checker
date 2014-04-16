@@ -11,8 +11,19 @@
       documentation style checker.
     </p>
     <h2>Installation</h2>
+    <!--
+    Some notes:
+    + writing bookmarklets is horrible
+    + this one works in Firefox (tested in 28) and Chromium (tested in 33)
+    + it does not work in Gnome Web 3.10 (for unknown reasons)
+    + other browser have not been tested
+
+    + .button==0 is the primary/left button of a mouse, according to the W3C;
+      Microsoft disagrees (in IE, it is apparently .button==1)
+    + text nodes can mess up the results of .firstChild
+     -->
     <p>
-      To install, drag the <a style="display: inline-block; color: #333; padding: 3px; background-color: #EEE; border: 1px solid #CCC; text-decoration: none;" href="javascript:(function(){rs=document.getElementsByTagName('results')[0];rs.insertBefore(document.createElement('js'),rs.children[0]);r=document.getElementsByTagName('result');d='done';for(i=0;i<r.length;++i){r[i].addEventListener('click',function(){if(this.lastChild.nodeName==d){this.removeChild(this.lastChild);}else{this.appendChild(document.createElement(d));}},false)};p=document.getElementsByTagName('part-title');c='collapsed';for(i=0;i<p.length;++i){p[i].parentElement.insertBefore(document.createElement(c),p[i].parentElement.children[0]);p[i].addEventListener('click',function(){if(this.parentElement.children[0].nodeName!=c){this.parentElement.insertBefore(document.createElement(c),this.parentElement.children[0]);}else{this.parentElement.removeChild(this.parentElement.children[0]);}},false)};})()">☑ Check</a> to the bookmarks bar of your browser.<br>
+      To install, drag the <a style="display: inline-block; color: #333; padding: 3px; background-color: #EEE; border: 1px solid #CCC; text-decoration: none;" href="javascript:(function(){rs=document.getElementsByTagName('results')[0];rs.insertBefore(document.createElement('js'),rs.children[0]);r=document.getElementsByTagName('result');d='done';function%20s(){setTimeout(function(){a();},100)};function%20a(){ra=document.getElementsByTagName('result');for(i=0;i<ra.length;++i){ra[i].removeAttribute('animate')};};for(i=0;i<r.length;++i){x=-1;y=-1;r[i].addEventListener('mousedown',function(e){x=e.clientX;y=e.clientY;},false);r[i].addEventListener('mouseup',function(e){if(x>-1&amp;&amp;e.clientX==x&amp;&amp;e.clientY==y&amp;&amp;e.button==0){this.setAttribute('animate','now');if(this.lastChild.nodeName==d){this.removeChild(this.lastChild);}else{this.appendChild(document.createElement(d));}s();}},false)};p=document.getElementsByTagName('part-title');c='collapsed';for(i=0;i<p.length;++i){p[i].parentElement.insertBefore(document.createElement(c),p[i].parentElement.children[0]);p[i].addEventListener('click',function(){if(this.parentElement.children[0].nodeName!=c){this.parentElement.insertBefore(document.createElement(c),this.parentElement.children[0]);}else{this.parentElement.removeChild(this.parentElement.children[0]);}},false)};})()">☑ Check</a> to the bookmarks bar of your browser.<br>
     </p>
     <h2>Usage</h2>
     <ul>
