@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminology useonepattern="no">
+
+  <term>
+    <accept>
+      <word>adapt</word>
+    </accept>
+    <patterngroup>
+      <pattern1>adoptations?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ad[eo]pt(ed|s|ing)?</pattern1>
+      <contextpattern look="before">(always|(automatical|easi|usual|general)ly)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ad[eo]pt(ed|s|ing)?</pattern1>
+      <contextpattern mode="fuzzy" where="4">(your|their)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ad[eo]pt(ed|s|ing)?</pattern1>
+      <contextpattern mode="fuzzy" where="2">(to|(template|system|procedure)s?)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>adept</word>
+    </accept>
+    <patterngroup>
+      <pattern1>adapt</pattern1>
+      <contextpattern look="before">(be|is|are|were|was)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>adopt</word>
+    </accept>
+    <patterngroup>
+      <pattern1>adaption</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>adapt(ed|s|ing)?</pattern1>
+      <contextpattern look="before">widely</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>and</word>
+    </accept>
+    <!-- "an more" could also be "any more"/"anymore"... -->
+    <patterngroup>
+      <pattern1>an</pattern1>
+      <contextpattern>(more|most|some|many|few)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>ad(?!-)</pattern1>
+      <contextpattern look="before" mode="negative">(an?|the|my|your|his|her|their|our)</contextpattern>
+      <contextpattern mode="negative">hoc</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>an[sf]</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>any</word>
+    </accept>
+    <patterngroup>
+      <pattern1>ant</pattern1>
+      <contextpattern look="before" mode="fuzzy" where="5">(buil[dt](s|ing)?|java)</contextpattern>
+      <contextpattern mode="fuzzy" where="5">(buil[dt](s|ing)?|java)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>lose</word>
+    </accept>
+    <patterngroup>
+      <pattern1>loose(e[ds]|ing)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>loose</pattern1>
+      <contextpattern look="before">(you|i|we|suse|attachmate|novell|to|not)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>maybe</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(ma?yby|mybe)</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>note</word>
+    </accept>
+    <patterngroup>
+      <pattern1>not</pattern1>
+      <contextpattern look="before">please</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>than</word>
+    </accept>
+    <patterngroup>
+      <pattern1>then</pattern1>
+      <contextpattern look="before">(o|ra)ther</contextpattern>
+    </patterngroup>
+  </term>
+
+</terminology>
