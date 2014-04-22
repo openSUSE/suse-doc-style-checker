@@ -226,6 +226,24 @@ js ~ part > collapsed + part-title:before {
   content: '+';
 }
 
+@keyframes shrink {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.98);
+  }
+}
+
+@-webkit-keyframes shrink {
+  from {
+    -webkit-transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(0.98);
+  }
+}
+
 @keyframes grow {
   from {
     transform: scale(0.98);
@@ -245,8 +263,8 @@ js ~ part > collapsed + part-title:before {
 }
 
 result[animate] {
-    -webkit-animation: grow 0.1s;
-    animation: grow 0.1s;
+    -webkit-animation: shrink 0.05s, grow 0.1s;
+    animation: shrink 0.05s, grow 0.1s;
 }
 
 done {
@@ -273,9 +291,9 @@ done:before {
   z-index: 4;
   width: 0;
   height: 0;
-	border-top: 35px solid transparent;
-	border-bottom: 35px solid transparent;
-	border-left: 35px solid #590;
+  border-top: 35px solid transparent;
+  border-bottom: 35px solid transparent;
+  border-left: 35px solid #590;
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
 }
