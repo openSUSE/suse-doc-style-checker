@@ -6,9 +6,6 @@
       <word>adapt</word>
     </accept>
     <patterngroup>
-      <pattern1>adoptations?</pattern1>
-    </patterngroup>
-    <patterngroup>
       <pattern1>ad[eo]pt(ed|s|ing)?</pattern1>
       <contextpattern look="before">(always|(automatical|easi|usual|general)ly)</contextpattern>
     </patterngroup>
@@ -18,7 +15,16 @@
     </patterngroup>
     <patterngroup>
       <pattern1>ad[eo]pt(ed|s|ing)?</pattern1>
-      <contextpattern mode="fuzzy" where="2">(to|(template|system|procedure)s?)</contextpattern>
+      <contextpattern mode="fuzzy" where="2">to</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>adaptation</word>
+    </accept>
+    <patterngroup>
+      <pattern1>adoptations?</pattern1>
     </patterngroup>
   </term>
 
@@ -37,11 +43,17 @@
       <word>adopt</word>
     </accept>
     <patterngroup>
-      <pattern1>adaption</pattern1>
-    </patterngroup>
-    <patterngroup>
       <pattern1>adapt(ed|s|ing)?</pattern1>
       <contextpattern look="before">widely</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>adoption</word>
+    </accept>
+    <patterngroup>
+      <pattern1>adaption</pattern1>
     </patterngroup>
   </term>
 
@@ -112,8 +124,13 @@
       <word>than</word>
     </accept>
     <patterngroup>
-      <pattern1>then</pattern1>
-      <contextpattern look="before">(o|ra)ther</contextpattern>
+      <pattern1>(then|as)</pattern1>
+      <contextpattern look="before">(less|more|better|worse|larger|smaller|(o|ra)ther)</contextpattern>
+      <!-- Needs check that this is not the end of the sentence. -->
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(then|as)</pattern1>
+      <contextpattern look="before" where="2">(less|more)</contextpattern>
     </patterngroup>
   </term>
 
