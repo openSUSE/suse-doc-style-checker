@@ -736,8 +736,6 @@ def dupecheckmessage( word, line, content, contextid, basefile ):
         filename = "<file>%s</file>" % str( basefile )
 
     withinid = ""
-    # Python warns me: Use specific 'len(elem)' or 'elem is not None' test
-    # instead.
     if contextid:
         withinid = "<withinid>%s</withinid>" % str( contextid )
 
@@ -769,7 +767,7 @@ def main():
         webbrowser.open(
             os.path.join( location, '..', 'bookmarklet',
                 'result-flagging-bookmarklet.html' ),
-            new = 0 , autoraise = True )
+            new = 0, autoraise = True )
         sys.exit()
 
     inputfilename = os.path.basename( args.inputfile.name )
