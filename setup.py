@@ -5,19 +5,17 @@ import sys
 import os
 import re
 
-#sys.path.append("source")
-# import sdsc
-__version__="0.0.99"
-__description__=""
-__author__=""
-__license__="MIT"
-
+# FIXME: this information should come from the script itself...
+__programname__ = "SUSE Documentation Style Checker"
+__version__ = "0.1.0pre"
+__author__ = "Stefan Knorr"
+__license__ = "MIT"
+__description__ = "checks a given DocBook XML file for stylistic errors"
 
 try:
     from distutils.core import setup
 except ImportError:
     print("No distutils module found.", file=sys.stderr)
-    #from setuptools import setup
     sys.exit(10)
 
 
@@ -45,18 +43,11 @@ setup(name='suse-doc-style-checker',
       url='git@gitorious.org:style-checker/style-checker.git',
       download_url='git@gitorious.org:style-checker/style-checker.git',
       license=__license__,
-      # keywords = '',
-      # classifiers=[],
-      # install_requires=["lxml"],
-      # scripts=["source/sdsc"],
       data_files=[('.',                  ['LICENSE', ]),
                   ('source/',            listdir('source/')),
-                  #('source/',            listdir('source/', ('validation', 'xsl-checks'))),
-                  #('source/xsl-checks/', listdir('source/xsl-checks/')),
                   ('bookmarklet/',       listdir('bookmarklet')),
                   ('man/',               listdir('man')),
                  ],
-      # package_data={ 'specs': ['specs']},
       )
 
 # EOF
