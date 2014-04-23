@@ -2,9 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Bookmarklet to Manage Style Checker Results</title>
+    <title>Bookmarklet to Manage SUSE Docuemntation Style Checker Results</title>
   </head>
-  <body style="padding: 10px; max-width: 800px; margin: 0 auto;">
+  <body style="padding: 10px; max-width: 800px; margin: 0 auto;
+    font-family: 'Clear Sans', sans-serif;">
     <h1>Bookmarklet to Manage Style Checker Results</h1>
     <p>
       The bookmarklet below helps you work with the result files of the
@@ -26,11 +27,11 @@
       To install, drag the <a style="display: inline-block; color: #333; padding: 3px; background-color: #EEE; border: 1px solid #CCC; text-decoration: none;" href="javascript:(function(){rs=document.getElementsByTagName('results')[0];rs.insertBefore(document.createElement('js'),rs.children[0]);rs.insertBefore(document.createElement('showinfo'),rs.children[0]);rs.insertBefore(document.createElement('showwarning'),rs.children[0]);rs.insertBefore(document.createElement('showerror'),rs.children[0]);document.getElementsByTagName('showinfo')[0].addEventListener('click',function(){if(this.hasAttribute('show')){this.removeAttribute('show');}else{this.setAttribute('show','false');}},false);document.getElementsByTagName('showerror')[0].addEventListener('click',function(){if(this.hasAttribute('show')){this.removeAttribute('show');}else{this.setAttribute('show','false');}},false);document.getElementsByTagName('showwarning')[0].addEventListener('click',function(){if(this.hasAttribute('show')){this.removeAttribute('show');}else{this.setAttribute('show','false');}},false);r=document.getElementsByTagName('result');d='done';function%20s(){setTimeout(function(){a();},250)};function%20a(){ra=document.getElementsByTagName('result');for(i=0;i<ra.length;++i){ra[i].removeAttribute('animate')};};for(i=0;i<r.length;++i){x=-1;y=-1;r[i].addEventListener('mousedown',function(e){x=e.clientX;y=e.clientY;},false);r[i].addEventListener('mouseup',function(e){if(x>-1&amp;&amp;e.clientX==x&amp;&amp;e.clientY==y&amp;&amp;e.button==0){this.setAttribute('animate','now');if(this.lastChild.nodeName==d){this.removeChild(this.lastChild);}else{this.appendChild(document.createElement(d));}s();}},false)};p=document.getElementsByTagName('part-title');c='collapsed';for(i=0;i<p.length;++i){p[i].parentElement.insertBefore(document.createElement(c),p[i].parentElement.children[0]);p[i].addEventListener('click',function(){if(this.parentElement.children[0].nodeName!=c){this.parentElement.insertBefore(document.createElement(c),this.parentElement.children[0]);}else{this.parentElement.removeChild(this.parentElement.children[0]);}},false)};})()">☑ Check</a> to the bookmarks bar of your browser.<br>
     </p>
     <h2>Usage</h2>
-    <ul>
-      <li><strong>To start the bookmarklet:</strong> Open a result file.
-        Click <em>☑ Check</em> in the bookmarks bar.
-      </li>
-    </ul>
+    <p><strong>To start the bookmarklet:</strong></p>
+    <ol>
+      <li>Open a result file.</li>
+      <li>Click <em>☑ Check</em> in the bookmarks bar.</li>
+    </ol>
     <ul>
       <li>Mark a result message as done by clicking it. Unmark a result message
         by clicking it again.
@@ -38,6 +39,30 @@
       <li>Collapse a section of results by clicking its title. Re-open a
         section of results by clicking its title again.
       </li>
+      <li>You can show or hide different types of messages using the check boxes
+        on the top right.
+      </li>
     </ul>
+    <h2>Questions and Answers</h2>
+    <h3>What Is a Bookmarklet?</h3>
+    <p>
+      A bookmarklet is a small script that can be used like a normal
+      browser bookmark. However, instead of opening a new Web page, it
+      executes a bit of code on the Web page that is currently opened.
+      Also see the <a href="https://en.wikipedia.org/wiki/Bookmarklet">Wikipedia
+      entry <em>Bookmarklet</em></a>.
+    </p>
+    <h3>Do I Need this Bookmarklet?</h3>
+    <p>
+      No. It makes working with the results files from the SUSE
+      Documentation Style Checker easier, though.
+    </p>
+    <h3>Why does the results file not simply contain the Javascript itself?
+      Then the same functionality could be provided without a bookmarklet.</h3>
+    <p>
+      The result file is an XML document, thus it is not possible to add
+      Javascript to it directly. There may be other ways to work around this
+      problem, but a bookmarklet seemed the simplest.
+    </p>
   </body>
 </html>
