@@ -321,9 +321,9 @@ js {
   border: 1px solid #CCC;
   background-color: rgba(255,255,255,0.7);
   display: block;
-  height: 115px;
+  height: 110px;
   width: 210px;
-  position: absolute;
+  position: fixed;
   right: 20px;
   top: 20px;
 }
@@ -331,17 +331,19 @@ js {
 js:before {
   content: 'Show';
   font-weight: bold;
-  position: absolute;
-  left: 5px;
-  top: 5px;
+  position: fixed;
+  padding: 3px 5px;
+  width: 190px;
+  right: 26px;
+  top: 23px;
 }
 
 showinfo, showwarning, showerror {
   display: block;
   padding: 3px 5px;
   width: 190px;
-  position: absolute;
-  right: 25px;
+  position: fixed;
+  right: 26px;
   z-index: 10;
   cursor: pointer;
   -moz-user-select: none;
