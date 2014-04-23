@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+                         "http://docbook.org/xml/4.5/docbookx.dtd"
+[
+  <!ENTITY command "suse-doc-style-checker">
+  <!ENTITY alias   "sdsc">
+  <!ENTITY version "@VERSION@">
+]>
+<refentry id="sdsc" lang="en">
+  <refentryinfo>
+    <productname>&command;</productname>
+    <author>
+      <contrib>Developer</contrib>
+      <firstname>Stefan</firstname>
+      <surname>Knorr</surname>
+    </author>
+  </refentryinfo>
+  <refmeta>
+    <refentrytitle>&command;</refentrytitle>
+    <manvolnum>1</manvolnum>
+    <refmiscinfo class="date"><?dbtimestamp format="Y B d"?></refmiscinfo>
+    <refmiscinfo class="version">&version;</refmiscinfo>
+    <refmiscinfo class="manual">&alias;</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>&command;</refname>
+    <refpurpose>Style Checker for SUSE Documentation</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv id="sdsc.synopsis">
+    <title>Synopsis</title>
+    <cmdsynopsis><command>&command;</command></cmdsynopsis>
+  </refsynopsisdiv>
+
+  <refsection>
+    <title>TBD</title>
+    <para>TBD</para>
+  </refsection>
+</refentry>
