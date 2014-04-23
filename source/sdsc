@@ -46,11 +46,12 @@ def parseargs():
     parser = argparse.ArgumentParser(
         usage = "%(prog)s [options] inputfile [outputfile]",
         description = __description__ )
+    fileorbookmark = parser.add_mutually_exclusive_group(required=True)
     parser.add_argument('-v', '--version',
         action = 'version',
         version = __programname__ + " " + __version__,
         help = "show version number and exit")
-    parser.add_argument( '-b', '--bookmarklet',
+    fileorbookmark.parser.add_argument( '-b', '--bookmarklet',
         action = 'store_true',
         default = False,
         help = """open page that lets you install a bookmarklet to manage style
@@ -67,7 +68,7 @@ def parseargs():
         action = 'store_true',
         default = False,
         help = "write some performance measurements to stdout" )
-    parser.add_argument( 'inputfile', type=argparse.FileType('r') )
+    fileorbookmark.parser.add_argument( 'inputfile', type=argparse.FileType('r') )
     parser.add_argument( 'outputfile', nargs = "?" )
 
     return parser.parse_args()
