@@ -319,28 +319,42 @@ result:hover done, result:focus done {
 
 js {
   border: 1px solid #CCC;
-  background-color: rgba(255,255,255,0.7);
+  background-color: rgba(255,255,255,0.8);
   display: block;
-  height: 110px;
+  height: 122px;
   width: 210px;
   position: fixed;
   right: 20px;
   top: 20px;
+  z-index: 9;
 }
 
 js:before {
   content: 'Show';
   font-weight: bold;
   position: fixed;
-  padding: 3px 5px;
+  padding: 3px 5px 5px;
   width: 190px;
   right: 26px;
   top: 23px;
 }
 
+showinfo[show="false"] ~ js:after,
+showwarning[show="false"] ~ js:after,
+showerror[show="false"] ~ js:after {
+  content: 'Some messages may be hidden.';
+  border: 1px solid #CCC;
+  background-color: rgba(238,221,0,0.8);
+  position: fixed;
+  padding: 3px 10px 5px;
+  width: 190px;
+  right: 20px;
+  top: 141px;
+}
+
 showinfo, showwarning, showerror {
   display: block;
-  padding: 3px 5px;
+  padding: 3px 5px 5px;
   width: 190px;
   position: fixed;
   right: 26px;
@@ -356,11 +370,11 @@ showinfo {
 }
 
 showwarning {
-  top: 75px;
+  top: 80px;
 }
 
 showerror {
-  top: 100px;
+  top: 110px;
 }
 
 showinfo:hover {
