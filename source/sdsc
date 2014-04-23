@@ -16,7 +16,7 @@ try:
 except ImportError:
     sys.exit("Could not import from LXML. Is LXML for Python 3 installed?")
 
-__programname__ = "Documentation Style Checker"
+__programname__ = "SUSE Documentation Style Checker"
 __version__ = "0.1.0pre"
 __author__ = "Stefan Knorr"
 __license__ = "MIT"
@@ -51,7 +51,7 @@ def parseargs():
         action = 'version',
         version = __programname__ + " " + __version__,
         help = "show version number and exit")
-    fileorbookmark.parser.add_argument( '-b', '--bookmarklet',
+    fileorbookmark.add_argument( '-b', '--bookmarklet',
         action = 'store_true',
         default = False,
         help = """open page that lets you install a bookmarklet to manage style
@@ -68,7 +68,8 @@ def parseargs():
         action = 'store_true',
         default = False,
         help = "write some performance measurements to stdout" )
-    fileorbookmark.parser.add_argument( 'inputfile', type=argparse.FileType('r') )
+    fileorbookmark.add_argument( 'inputfile', type=argparse.FileType('r'),
+        nargs = "?" )
     parser.add_argument( 'outputfile', nargs = "?" )
 
     return parser.parse_args()
