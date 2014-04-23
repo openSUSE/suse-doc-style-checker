@@ -203,6 +203,7 @@ js ~ part > part-title {
   cursor: pointer;
   -moz-user-select: none;
   -webkit-user-select: none;
+  user-select: none;
 }
 
 js ~ part > part-title:before {
@@ -296,4 +297,102 @@ done:after {
 result:hover done, result:focus done {
   left: 9px;
   top: 9px;
+}
+
+js {
+  border: 1px solid #CCC;
+  background-color: rgba(255,255,255,0.7);
+  display: block;
+  height: 115px;
+  width: 210px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+js:before {
+  content: 'Show';
+  font-weight: bold;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
+showinfo, showwarning, showerror {
+  display: block;
+  padding: 3px 5px;
+  width: 190px;
+  position: absolute;
+  right: 25px;
+  z-index: 10;
+  cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+showinfo {
+  top: 50px;
+}
+
+showwarning {
+  top: 75px;
+}
+
+showerror {
+  top: 100px;
+}
+
+showinfo:hover {
+  background-color: #EEE;
+}
+
+showwarning:hover {
+  background-color: #EEE;
+}
+
+showerror:hover {
+  background-color: #EEE;
+}
+
+showinfo:before {
+  content: '☑ ';
+}
+
+showwarning:before {
+  content: '☑ ';
+}
+
+showerror:before {
+  content: '☑ ';
+}
+
+showinfo[show="false"]:before {
+  content: '☐ ';
+}
+
+showwarning[show="false"]:before {
+  content: '☐ ';
+}
+
+showerror[show="false"]:before {
+  content: '☐ ';
+}
+
+showinfo:after {
+  content: 'Information messages';
+}
+
+showwarning:after {
+  content: 'Warning messages';
+}
+
+showerror:after {
+  content: 'Error messages';
+}
+
+showinfo[show="false"] ~ part result[type="info"],
+showwarning[show="false"] ~ part result[type="warning"],
+showerror[show="false"] ~ part result[type="error"] {
+  display: none;
 }
