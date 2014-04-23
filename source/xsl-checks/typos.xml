@@ -89,6 +89,16 @@
 
   <term>
     <accept>
+      <word>know</word>
+    </accept>
+    <patterngroup>
+      <pattern1>now</pattern1>
+      <contextpattern look="before">(to|not)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>lose</word>
     </accept>
     <patterngroup>
@@ -116,6 +126,30 @@
     <patterngroup>
       <pattern1>not</pattern1>
       <contextpattern look="before">please</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>now</word>
+    </accept>
+    <patterngroup>
+      <pattern1>know</pattern1>
+      <contextpattern look="before">(right|by|of|for|(un)?till?|it|this|has|will|would|can|could|shall|should|might|must|is|are)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>know</pattern1>
+      <contextpattern>(they|you|attachmate|suse|novell|k?nows)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>know</pattern1>
+      <contextpattern look="before">from</contextpattern>
+      <contextpattern>on</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>know</pattern1>
+      <contextpattern look="before">(and|but|by|even|from|so)</contextpattern>
+      <contextpattern look="before" where="2" match="negative">not</contextpattern>
     </patterngroup>
   </term>
 
