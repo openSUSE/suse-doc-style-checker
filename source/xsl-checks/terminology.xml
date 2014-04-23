@@ -2912,7 +2912,7 @@
       <pattern1>set-?upp?(ed|ing)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>set-?ups?</pattern1>
+      <pattern1>set-?up</pattern1>
       <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
       <contextpattern match="negative">(and|or)</contextpattern>
     </patterngroup>
@@ -2928,9 +2928,13 @@
     <patterngroup>
       <pattern1>set</pattern1>
       <pattern2>ups?</pattern2>
-      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <!-- 'And' and 'or' are ambiguous. -->
+      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|and|or)</contextpattern>
       <contextpattern look="before" match="negative" mode="fuzzy" where="3">to</contextpattern>
-      <contextpattern match="negative">(the|an?|in|for|on|at|your)</contextpattern>
+      <!-- I should negative-check for any attributes/adverbs following, the
+           following is a far cry from being complete but makes the checker
+           shut up in one situation... -->
+      <contextpattern match="negative">(the|an?|in|for|on|at|your|new|old|large|small|better|worse|more|less|most|least)</contextpattern>
     </patterngroup>
   </term>
 
@@ -3149,6 +3153,11 @@
     <patterngroup>
       <pattern1>start(ed|s|ing)-?up</pattern1>
     </patterngroup>
+    <patterngroup>
+      <pattern1>start-?up</pattern1>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern match="negative">(and|or)</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
@@ -3156,11 +3165,19 @@
       <word>startup</word>
     </accept>
     <patterngroup>
-      <pattern1>start-?ups?</pattern1>
+      <pattern1>start-ups?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>start</pattern1>
-      <pattern2>ups</pattern2>
+      <pattern2>ups?</pattern2>
+      <!-- 'And' and 'or' are ambiguous. -->
+      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|and|or)</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" where="3">to</contextpattern>
+      <!-- I should negative-check for any attributes/adverbs following, the
+           following is a far cry from being complete but makes the checker
+           shut up in one situation... -->
+      <contextpattern match="negative">(the|an?|in|for|on|at|your|new|old|large|small|better|worse|more|less|most|least)</contextpattern>
+    </patterngroup>
     </patterngroup>
   </term>
 
