@@ -5,9 +5,13 @@ import sys
 import os
 import re
 
-sys.path.append("source")
+#sys.path.append("source")
+# import sdsc
+__version__="0.0.99"
+__description__=""
+__author__=""
+__license__="MIT"
 
-import docstylecheck
 
 try:
     from distutils.core import setup
@@ -32,22 +36,26 @@ def listdir(path, ignore=None):
 
 print("All files: %s" % listdir("specs"))
 
-setup(name='docstylecheck',
-      version=docstylecheck.__version__,
-      description=docstylecheck.__description__,
-      long_description="",
-      author=docstylecheck.__author__,
+setup(name='suse-doc-style-checker',
+      version=__version__,
+      description=__description__,
+      long_description="suse-doc-style-checker ",
+      author=__author__,
       author_email='sknorr@suse.de',
       url='git@gitorious.org:style-checker/style-checker.git',
       download_url='git@gitorious.org:style-checker/style-checker.git',
-      license=docstylecheck.__license__,
+      license=__license__,
       # keywords = '',
       # classifiers=[],
       # install_requires=["lxml"],
-      scripts=["source/docstylecheck.py"],
-      data_files=[('.',     ['LICENSE', 'README.md']),
-                  ('source/xsl-checks/', listdir('source/xsl-checks/')),
-                  ('specs', listdir("specs", (".tmp", ".profiled"))), ],
+      # scripts=["source/sdsc"],
+      data_files=[('.',                  ['LICENSE', ]),
+                  ('source/',            listdir('source/')),
+                  #('source/',            listdir('source/', ('validation', 'xsl-checks'))),
+                  #('source/xsl-checks/', listdir('source/xsl-checks/')),
+                  ('bookmarklet/',       listdir('bookmarklet')),
+                  ('man/',               listdir('man')),
+                 ],
       # package_data={ 'specs': ['specs']},
       )
 
