@@ -68,6 +68,10 @@ def parseargs():
         action = 'store_true',
         default = False,
         help = "write some performance measurements to stdout" )
+    parser.add_argument( '--checkpatterns',
+        action = 'store_true',
+        default = False,
+        help = "check if regular expression patterns are formally valid" )
     fileorbookmark.add_argument( 'inputfile', type=argparse.FileType('r'),
         nargs = "?" )
     parser.add_argument( 'outputfile', nargs = "?" )
@@ -342,6 +346,7 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
     termdataid = random.randint(0, 999999999)
 
     if ignoredwords:
+        trypattern( ignoredwords[0] )
         ignoredpattern = re.compile( manglepattern( ignoredwords[0], 0 ),
             flags = re.I )
 
@@ -384,6 +389,26 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
         timeendbuild = time.time()
         print( "time to build: %s" % str( timeendbuild - timestartbuild ) )
     return termdataid
+
+def trypattern( pattern ):
+    global args
+
+    if not args.checkpatterns:
+        return True
+
+    try:
+        tryresult = re.search( pattern, "", flags = re.I )
+        if tryresult:
+            sys.exit("Expression matches empty string: " + pattern )
+
+        tryresult = re.search( pattern, " ", flags = re.I )
+        if tryresult:
+            sys.exit("Expression matches string with a single space: " + pattern )
+    except:
+        sys.exit("Broken regular expression: " + pattern)
+
+    return True
+
 
 def manglepattern( pattern, onepatternmode ):
     # FIXME: This is messy and not really doing what I want it to.
@@ -440,9 +465,10 @@ def preparepatterns( patterngroupxpath, useonepattern ):
                 # what about skipped pattern{x} elements?
                 break
         else:
-            patternxpathcontent = manglepattern( patternxpath[0].text, 0 )
+            trypattern( patternxpathcontent )
+            patternxpathcontent = manglepattern( patternxpathcontent, 0 )
             if i == 1 and useonepattern:
-                patternforonepattern = manglepattern( patternxpath[0].text, 1 )
+                patternforonepattern = manglepattern( patternxpathcontent, 1 )
 
         pattern = None
         if getattribute( patternxpath[0], 'case' ) == 'keep':
@@ -457,6 +483,8 @@ def preparecontextpatterns( contextpatternxpath ):
     contextpatternxpathcontent = contextpatternxpath.text
     if not contextpatternxpathcontent:
         emptypatternmessage( 'contextpattern' )
+
+    trypattern( contextpatternxpathcontent )
 
     factor = 1
     where = []
