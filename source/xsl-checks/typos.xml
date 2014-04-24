@@ -135,7 +135,7 @@
     </accept>
     <patterngroup>
       <pattern1>know</pattern1>
-      <contextpattern look="before">(right|by|of|for|(un)?till?|it|this|has|will|would|can|could|shall|should|might|must|is|are)</contextpattern>
+      <contextpattern look="before">(right|by|of|for|(un)?till?|it|this|has|have|can|is|are)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>know</pattern1>
