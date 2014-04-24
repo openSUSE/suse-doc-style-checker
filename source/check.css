@@ -339,19 +339,6 @@ js:before {
   top: 23px;
 }
 
-showinfo[show="false"] ~ js:after,
-showwarning[show="false"] ~ js:after,
-showerror[show="false"] ~ js:after {
-  content: 'Some messages may be hidden.';
-  border: 1px solid #CCC;
-  background-color: rgba(238,221,0,0.8);
-  position: fixed;
-  padding: 3px 10px 5px;
-  width: 190px;
-  right: 20px;
-  top: 141px;
-}
-
 showinfo, showwarning, showerror {
   display: block;
   padding: 3px 5px 5px;
@@ -428,5 +415,23 @@ showerror:after {
 showinfo[show="false"] ~ part result[type="info"],
 showwarning[show="false"] ~ part result[type="warning"],
 showerror[show="false"] ~ part result[type="error"] {
-  display: none;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  overflow: hidden;
+}
+
+showinfo[show="false"] ~ part result[type="info"]:first-of-type:before,
+showwarning[show="false"] ~ part result[type="warning"]:first-of-type:before,
+showerror[show="false"] ~ part result[type="error"]:first-of-type:before {
+  content: 'Some messages from an opened category are hidden.';
+  display: block;
+  border: 1px solid #CCC;
+  background-color: #ED0;
+  position: fixed;
+  padding: 3px 10px 5px;
+  width: 190px;
+  right: 20px;
+  top: 141px;
 }
