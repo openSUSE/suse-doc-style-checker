@@ -3178,7 +3178,6 @@
            shut up in one situation... -->
       <contextpattern match="negative">(the|an?|in|for|on|at|your|new|old|large|small|better|worse|more|less|most|least)</contextpattern>
     </patterngroup>
-    </patterngroup>
   </term>
 
   <term>
