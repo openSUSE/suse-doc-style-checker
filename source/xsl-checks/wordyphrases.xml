@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<terminology ignoredwords="(this|there|that|these|those|one|by|on|under|about|from|suse|linux|kernels?|)">
+<terminology ignoredwords="(this|there|that|these|those|one|by|on|under|about|from|suse|linux|kernels?)">
 
   <term>
     <accept>
@@ -813,7 +813,7 @@
       <pattern1>some</pattern1>
       <pattern2>of</pattern2>
       <pattern3>the</pattern3>
-      <contextpattern match="negative">(.*?([oe]st|er|ing|ed)|main|key|more)</contextpattern>
+      <contextpattern match="negative">(.*?([oea]st|er|ing|ed)|main|key|more|less)</contextpattern>
     </patterngroup>
   </term>
 
