@@ -266,8 +266,11 @@
     </patterngroup>
     <patterngroup>
       <pattern1>back-?ups?</pattern1>
-      <contextpattern look="before">to</contextpattern>
-      <contextpattern match="negative">(and|or)</contextpattern>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>back-?ups?</pattern1>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>back-?ups?</pattern1>
@@ -378,12 +381,21 @@
     </patterngroup>
     <patterngroup>
       <pattern1>pxe-?boots?</pattern1>
-      <contextpattern look="before">(to|not)</contextpattern>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>pxe-?boots?</pattern1>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>pxe</pattern1>
       <pattern2>boots?</pattern2>
-      <contextpattern look="before">(to|not)</contextpattern>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>pxe</pattern1>
+      <pattern2>boots?</pattern2>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
   </term>
 
@@ -589,8 +601,18 @@
       <word>click</word>
     </accept>
     <patterngroup>
-      <pattern1>click(ed|ing|s)</pattern1>
+      <pattern1>click(ed|ing)</pattern1>
       <pattern2>on(to)?</pattern2>
+    </patterngroup>
+     <patterngroup>
+      <pattern1>clicks?</pattern1>
+      <pattern2>on(to)?</pattern2>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>clicks?</pattern1>
+      <pattern2>on(to)?</pattern2>
+      <contextpattern look="before">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
   </term>
 
@@ -666,6 +688,23 @@
     <patterngroup>
       <pattern1>conf(ig)?(ed|ing)</pattern1>
     </patterngroup>
+    <patterngroup>
+      <pattern1>conf(ig)?s?</pattern1>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>conf(ig)?s?</pattern1>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>configuration</word>
+    </accept>
+    <patterngroup>
+      <pattern1>conf(ig)?s?</pattern1>
+    </patterngroup>
   </term>
 
   <term>
@@ -711,6 +750,35 @@
       <pattern1>sym-?links?</pattern1>
     </patterngroup>
   </term> -->
+
+  <!-- FIXME: Cover "hardlinked," too. -->
+  <term>
+    <accept>
+      <word>create a hard link</word>
+    </accept>
+    <patterngroup>
+      <!-- handle hardlinked -->
+      <pattern1>hard-?linking</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hard-?links?</pattern1>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hard</pattern1>
+      <pattern2>links?</pattern2>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hard-?links?</pattern1>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>hard</pattern1>
+      <pattern2>links?</pattern2>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+  </term>
 
   <term>
     <accept>
@@ -852,20 +920,42 @@
       <word>double-click</word>
     </accept>
     <patterngroup>
-      <pattern1>doubleclick(ed|ing|s)</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>double</pattern1>
-      <pattern2>click(ed|ing|s)</pattern2>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>double-?click(ed|ing|s)</pattern1>
+      <pattern1>double-?click(ed|ing)</pattern1>
       <pattern2>on(to)?</pattern2>
     </patterngroup>
     <patterngroup>
       <pattern1>double</pattern1>
-      <pattern2>click(ed|ing|s)</pattern2>
+      <pattern2>click(ed|ing)</pattern2>
       <pattern3>on(to)?</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>double-?clicks?</pattern1>
+      <pattern2>on(to)?</pattern2>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>double</pattern1>
+      <pattern2>clicks?</pattern2>
+      <pattern3>on(to)?</pattern3>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>double-?clicks?</pattern1>
+      <pattern2>on(to)?</pattern2>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>double</pattern1>
+      <pattern2>clicks?</pattern2>
+      <pattern3>on(to)?</pattern3>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>doubleclick(ed|ing|s)?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>double</pattern1>
+      <pattern2>click(ed|ing|s)?</pattern2>
     </patterngroup>
   </term>
 
@@ -1449,6 +1539,28 @@
 
   <term>
     <accept>
+      <word>initialize</word>
+    </accept>
+    <patterngroup>
+      <pattern1>init(ed|ing)</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>inits?</pattern1>
+      <contextpattern match="negative">scripts?</contextpattern>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>inits?</pattern1>
+      <contextpattern match="negative">scripts?</contextpattern>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>initialis(e?[ds]?|ing)?</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>initialization</word>
     </accept>
     <patterngroup>
@@ -1457,18 +1569,6 @@
     </patterngroup>
     <patterngroup>
       <pattern1>initialisations?</pattern1>
-    </patterngroup>
-  </term>
-
-  <term>
-    <accept>
-      <word>initialize</word>
-    </accept>
-    <patterngroup>
-      <pattern1>init(ed|ing)</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>initialis(e?[ds]?|ing)?</pattern1>
     </patterngroup>
   </term>
 
@@ -1714,30 +1814,52 @@
       <word>left-click</word>
     </accept>
     <patterngroup>
-      <pattern1>leftclick(ed|ing|s)</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>left</pattern1>
-      <pattern2>click(ed|ing|s)</pattern2>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>left-?click(ed|ing|s)</pattern1>
+      <pattern1>left-?click(ed|ing)</pattern1>
       <pattern2>on(to)?</pattern2>
     </patterngroup>
     <patterngroup>
       <pattern1>left</pattern1>
-      <pattern2>click(ed|ing|s)</pattern2>
+      <pattern2>click(ed|ing)</pattern2>
       <pattern3>on(to)?</pattern3>
     </patterngroup>
     <patterngroup>
-      <pattern1>click(ed|ing|s)</pattern1>
+      <pattern1>left-?clicks?</pattern1>
+      <pattern2>on(to)?</pattern2>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>left</pattern1>
+      <pattern2>clicks?</pattern2>
+      <pattern3>on(to)?</pattern3>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>left-?clicks?</pattern1>
+      <pattern2>on(to)?</pattern2>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>left</pattern1>
+      <pattern2>clicks?</pattern2>
+      <pattern3>on(to)?</pattern3>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>leftclick(ed|ing|s)?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>left</pattern1>
+      <pattern2>click(ed|ing|s)?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>click(ed|ing|s)?</pattern1>
       <pattern2>the</pattern2>
       <pattern3>left</pattern3>
       <pattern4>mouse</pattern4>
       <pattern5>button</pattern5>
     </patterngroup>
     <patterngroup>
-      <pattern1>click(ed|ing|s)</pattern1>
+      <pattern1>click(ed|ing|s)?</pattern1>
       <pattern2>the</pattern2>
       <pattern3>left</pattern3>
       <pattern4>mouse</pattern4>
@@ -1822,6 +1944,13 @@
       <word>log file</word>
     </accept>
     <patterngroup>
+      <pattern1>logs?</pattern1>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before" where="4" mode="fuzzy">(the|an?)</contextpattern>
+      <contextpattern match="negative">files?</contextpattern>
+      <contextpattern match="negative" where="2">to</contextpattern>
+    </patterngroup>
+    <patterngroup>
       <pattern1>log-?files?</pattern1>
     </patterngroup>
   </term>
@@ -1831,49 +1960,53 @@
       <word>login</word>
     </accept>
     <patterngroup>
-      <pattern1>log-[io]ns?</pattern1>
-      <contextpattern>(to|not)</contextpattern>
-      <contextpattern match="negative">(the|a|an)</contextpattern>
+      <pattern1>(log-in|log-?on|sign-?[io]n)s?</pattern1>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>sign-[io]ns?</pattern1>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not)</contextpattern>
-      <contextpattern match="negative">(the|a|an)</contextpattern>
-    </patterngroup>
-    <!--  These overreach quite a bit and are not very useful right now. Maybe
-          use positive contextpatterns instead. -->
-    <!-- <patterngroup>
-      <pattern1>log</pattern1>
+      <!-- Avoid matching "the log [file] on the server/in the directory" etc. -->
+      <pattern1>(log|sign)</pattern1>
       <pattern2>[io]ns?</pattern2>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|try|avoid)</contextpattern>
+      <contextpattern look="before" mode="fuzzy" where="2">(the|an?)</contextpattern>
+      <contextpattern>(the|an?)</contextpattern>
     </patterngroup>
-    <patterngroup>
-      <pattern1>sign</pattern1>
-      <pattern2>[io]ns?</pattern2>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|try|avoid)</contextpattern>
-      <contextpattern match="negative" >(the|a|an|to|at)</contextpattern>
-    </patterngroup> -->
   </term>
 
   <term>
     <accept>
       <word>log in</word>
     </accept>
-    <!-- don't match sentences like: "Note the > sign in the boot entry." -->
     <patterngroup>
-      <pattern1>(sign|log)-?[io]n(ed|ing)</pattern1>
+      <pattern1>((logg?|sign)(ed|ing)-?[io]n|(sign|log)-?[io]n(ed|ing))</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>sign(ed|ing|s)?</pattern1>
+      <pattern1>sign(ed|ing|s)</pattern1>
       <pattern2>[io]n</pattern2>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
-      <contextpattern match="negative">(the|a|an)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>logg?(ed|ing|s)?</pattern1>
+      <pattern1>sign</pattern1>
+      <pattern2>[io]n</pattern2>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>sign</pattern1>
+      <pattern2>[io]n</pattern2>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>logg?(ed|ing|s)</pattern1>
       <pattern2>on</pattern2>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
-      <contextpattern match="negative">(the|a|an)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>log</pattern1>
+      <pattern2>on</pattern2>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>log</pattern1>
+      <pattern2>on</pattern2>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
   </term>
 
@@ -1899,52 +2032,51 @@
       <word>logout</word>
     </accept>
     <patterngroup>
-      <pattern1>log-o(ut|ff)s?</pattern1>
-      <contextpattern>(to|not)</contextpattern>
+      <pattern1>(log-out|log-?off|sign-?o(ut|ff))s?</pattern1>
+      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>sign-o(ut|ff)s?</pattern1>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not)</contextpattern>
-      <contextpattern match="negative">(the|a|an)</contextpattern>
-    </patterngroup>
-    <!--  These overreach quite a bit and are not very useful right now. Maybe
-          use positive contextpatterns instead. -->
-    <!-- <patterngroup>
-      <pattern1>log</pattern1>
+      <pattern1>(log|sign)</pattern1>
       <pattern2>o(ut|ff)s?</pattern2>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|try|avoid)</contextpattern>
+      <contextpattern look="before" mode="fuzzy" where="2">(the|an?)</contextpattern>
     </patterngroup>
-    <patterngroup>
-      <pattern1>sign</pattern1>
-      <pattern2>o(ut|ff)s?</pattern2>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|try|avoid)</contextpattern>
-      <contextpattern match="negative">(the|a|an|of|from)</contextpattern>
-    </patterngroup> -->
   </term>
 
   <term>
     <accept>
       <word>log out</word>
     </accept>
-    <!--  These overreach quite a bit and are not very useful right now. Maybe
-          use positive contextpatterns instead. -->
     <patterngroup>
-      <pattern1>(logg?|sign)(ed|ing)-?o(ut|ff)</pattern1>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
+      <pattern1>((logg?|sign)(ed|ing)-?o(ut|ff)|(sign|log)-?o(ut|ff)(ed|ing))</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>(sign|log)-?o(ut|ff)(ed|ing)</pattern1>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>sign(ed|ing|s)?</pattern1>
+      <pattern1>sign(ed|ing|s)</pattern1>
       <pattern2>o(ff|ut)</pattern2>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>logg?(ed|ing|s)?</pattern1>
+      <pattern1>sign</pattern1>
+      <pattern2>o(ff|ut)</pattern2>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>sign</pattern1>
+      <pattern2>o(ff|ut)</pattern2>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>logg?(ed|ing|s)</pattern1>
       <pattern2>off</pattern2>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(the|a)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>log</pattern1>
+      <pattern2>off</pattern2>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>log</pattern1>
+      <pattern2>off</pattern2>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
   </term>
 
@@ -2080,33 +2212,52 @@
       <word>middle-click</word>
     </accept>
     <patterngroup>
-      <pattern1>mid-click(ed|ing|s)</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>mid(dle)?click(ed|ing|s)</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>mid(dle)?</pattern1>
-      <pattern2>click(ed|ing|s)</pattern2>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>mid(dle)?-?click(ed|ing|s)</pattern1>
+      <pattern1>mid(dle)?-?click(ed|ing)</pattern1>
       <pattern2>on(to)?</pattern2>
     </patterngroup>
     <patterngroup>
       <pattern1>mid(dle)?</pattern1>
-      <pattern2>click(ed|ing|s)</pattern2>
+      <pattern2>click(ed|ing)</pattern2>
       <pattern3>on(to)?</pattern3>
     </patterngroup>
     <patterngroup>
-      <pattern1>click(ed|ing|s)</pattern1>
+      <pattern1>mid(dle)?-?clicks?</pattern1>
+      <pattern2>on(to)?</pattern2>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>mid(dle)?</pattern1>
+      <pattern2>clicks?</pattern2>
+      <pattern3>on(to)?</pattern3>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>mid(dle)?-?clicks?</pattern1>
+      <pattern2>on(to)?</pattern2>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>mid(dle)?</pattern1>
+      <pattern2>clicks?</pattern2>
+      <pattern3>on(to)?</pattern3>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(mid(dle)?click|mid-click)(ed|ing|s)?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>mid(dle)?</pattern1>
+      <pattern2>click(ed|ing|s)?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>click(ed|ing|s)?</pattern1>
       <pattern2>the</pattern2>
       <pattern3>mid(dle)?</pattern3>
       <pattern4>mouse</pattern4>
       <pattern5>button</pattern5>
     </patterngroup>
     <patterngroup>
-      <pattern1>click(ed|ing|s)</pattern1>
+      <pattern1>click(ed|ing|s)?</pattern1>
       <pattern2>the</pattern2>
       <pattern3>mid(dle)?</pattern3>
       <pattern4>mouse</pattern4>
@@ -2150,11 +2301,11 @@
       <word>multitask</word>
     </accept>
     <patterngroup>
-      <pattern1>multi-task(e[ds])?</pattern1>
+      <pattern1>multi-task(ed|s)?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>multi</pattern1>
-      <pattern2>task(e[ds])?</pattern2>
+      <pattern2>task(ed|s)?</pattern2>
     </patterngroup>
   </term>
 
@@ -2289,7 +2440,7 @@
       <word>open</word>
     </accept>
     <patterngroup>
-      <pattern1>open(ed|s|ing)</pattern1>
+      <pattern1>open(s|ed|ing)?</pattern1>
       <pattern2>up</pattern2>
     </patterngroup>
   </term>
@@ -2387,7 +2538,14 @@
     <patterngroup>
       <pattern1>plug-?inn?(ed|ing)</pattern1>
     </patterngroup>
-    <!-- FIXME: need to check for context here, too -->
+    <patterngroup>
+      <pattern1>plug-?ins?</pattern1>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>plug-?ins?</pattern1>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
@@ -2466,6 +2624,21 @@
 
   <term>
     <accept>
+      <word>press</word>
+      <context>keys or mouse buttons</context>
+    </accept>
+    <patterngroup>
+      <pattern1>(hitt?(ing|ed|s)?|(punch|depress)(e[ds]|ing)?|strike([ds]|ing)?|struck)</pattern1>
+      <contextpattern mode="fuzzy" where="3">(##@key##|key)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(hitt?(ing|ed|s)?|(punch|depress)(e[ds]|ing)?|strike([ds]|ing)?|struck)</pattern1>
+      <contextpattern mode="fuzzy" where="3" look="before">(##@key##|key)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>print</word>
     </accept>
     <patterngroup>
@@ -2501,21 +2674,6 @@
     </patterngroup>
     <patterngroup>
       <pattern1>print(er|ing)?-spoolers?</pattern1>
-    </patterngroup>
-  </term>
-
-  <term>
-    <accept>
-      <word>press</word>
-      <context>keys or mouse buttons</context>
-    </accept>
-    <patterngroup>
-      <pattern1>(hitt?|punch|depress|strike)(ed|s|ing)?</pattern1>
-      <contextpattern mode="fuzzy" where="3">(##@key##|key)</contextpattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>(hitt?|punch|depress|strike)(ed|s|ing)?</pattern1>
-      <contextpattern mode="fuzzy" where="3" look="before">(##@key##|key)</contextpattern>
     </patterngroup>
   </term>
 
@@ -2690,30 +2848,52 @@
       <word>right-click</word>
     </accept>
     <patterngroup>
-      <pattern1>rightclick(ed|ing|s)</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>right</pattern1>
-      <pattern2>click(ed|ing|s)</pattern2>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>right-?click(ed|ing|s)</pattern1>
+      <pattern1>right-?click(ed|ing)</pattern1>
       <pattern2>on(to)?</pattern2>
     </patterngroup>
     <patterngroup>
       <pattern1>right</pattern1>
-      <pattern2>click(ed|ing|s)</pattern2>
+      <pattern2>click(ed|ing)</pattern2>
       <pattern3>on(to)?</pattern3>
     </patterngroup>
     <patterngroup>
-      <pattern1>click(ed|ing|s)</pattern1>
+      <pattern1>right-?clicks?</pattern1>
+      <pattern2>on(to)?</pattern2>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>right</pattern1>
+      <pattern2>clicks?</pattern2>
+      <pattern3>on(to)?</pattern3>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>right-?clicks?</pattern1>
+      <pattern2>on(to)?</pattern2>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>right</pattern1>
+      <pattern2>clicks?</pattern2>
+      <pattern3>on(to)?</pattern3>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>rightclick(ed|ing|s)?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>right</pattern1>
+      <pattern2>click(ed|ing|s)?</pattern2>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>click(ed|ing|s)?</pattern1>
       <pattern2>the</pattern2>
       <pattern3>right</pattern3>
       <pattern4>mouse</pattern4>
       <pattern5>button</pattern5>
     </patterngroup>
     <patterngroup>
-      <pattern1>click(ed|ing|s)</pattern1>
+      <pattern1>click(ed|ing|s)?</pattern1>
       <pattern2>the</pattern2>
       <pattern3>right</pattern3>
       <pattern4>mouse</pattern4>
@@ -2873,11 +3053,11 @@
       <contextpattern mode="fuzzy" where="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>add(e[ds]?|ing)</pattern1>
+      <pattern1>add(ed|s|ing)?</pattern1>
       <pattern2>selections?</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>add(e[ds]?|ing)</pattern1>
+      <pattern1>add(ed|s|ing)?</pattern1>
       <pattern2>(a|the)</pattern2>
       <pattern3>selections?</pattern3>
     </patterngroup>
@@ -2912,9 +3092,15 @@
       <pattern1>set-?upp?(ed|ing)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>set-?up</pattern1>
+      <pattern1>sett?(ing|ed)-?up</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>sets?-?ups?</pattern1>
       <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
-      <contextpattern match="negative">(and|or)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>sets?-?ups?</pattern1>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
   </term>
 
@@ -2928,8 +3114,8 @@
     <patterngroup>
       <pattern1>set</pattern1>
       <pattern2>ups?</pattern2>
-      <!-- 'And' and 'or' are ambiguous. -->
-      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|and|or)</contextpattern>
+      <!-- 'and' and 'or' are ambiguous. -->
+      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|and|or|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
       <contextpattern look="before" match="negative" mode="fuzzy" where="3">to</contextpattern>
       <!-- I should negative-check for any attributes/adverbs following, the
            following is a far cry from being complete but makes the checker
@@ -2951,8 +3137,11 @@
     </patterngroup>
     <patterngroup>
       <pattern1>shut-?downs?</pattern1>
-      <contextpattern look="before">(be|is|are|were|would|will|not|to|could|ha(s|d|ve)|should)</contextpattern>
-      <contextpattern match="negative">(and|or)</contextpattern>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>shut-?downs?</pattern1>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>shutt?(s|ed|ing)-?down</pattern1>
@@ -2969,7 +3158,7 @@
     <patterngroup>
       <pattern1>shut</pattern1>
       <pattern2>downs</pattern2>
-      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
       <contextpattern look="before" match="negative" mode="fuzzy" where="3">to</contextpattern>
       <contextpattern match="negative">(the|an?|in|for|on|at)</contextpattern>
     </patterngroup>
@@ -3154,9 +3343,12 @@
       <pattern1>start(ed|s|ing)-?up</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>start-?up</pattern1>
+      <pattern1>starts?-?ups?</pattern1>
       <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
-      <contextpattern match="negative">(and|or)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>starts?-?ups?</pattern1>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
   </term>
 
@@ -3171,7 +3363,7 @@
       <pattern1>start</pattern1>
       <pattern2>ups?</pattern2>
       <!-- 'And' and 'or' are ambiguous. -->
-      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|and|or)</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|and|or|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
       <contextpattern look="before" match="negative" mode="fuzzy" where="3">to</contextpattern>
       <!-- I should negative-check for any attributes/adverbs following, the
            following is a far cry from being complete but makes the checker
@@ -3705,6 +3897,14 @@
       <pattern1>wish(ed|ing)</pattern1>
     </patterngroup>
     <patterngroup>
+      <pattern1>wish(es)?</pattern1>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>wish(es)?</pattern1>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
       <pattern1>wish(ed|ing|s)?</pattern1>
       <pattern2>for</pattern2>
     </patterngroup>
@@ -3749,7 +3949,7 @@
       <word>Wi-Fi</word>
     </accept>
     <patterngroup>
-      <pattern1>w\.?l\.?a\.?n\.?</pattern1>
+      <pattern1>w\.?l\.?a\.?n</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>wifi</pattern1>
@@ -3803,7 +4003,15 @@
       <word>write</word>
     </accept>
     <patterngroup>
-      <pattern1>pipe(s|d|ing)?</pattern1>
+      <pattern1>pipe(d|ing)?</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>pipes?</pattern1>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>pipes?</pattern1>
+      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
   </term>
 
