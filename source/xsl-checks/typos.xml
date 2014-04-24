@@ -168,4 +168,19 @@
     </patterngroup>
   </term>
 
+  <term>
+    <accept>
+      <word>to</word>
+    </accept>
+    <patterngroup>
+      <pattern1>do</pattern1>
+      <contextpattern look="before">(easy|simple|hard|difficult|best|worst|[a-z]+?[ia]ble|[a-z]+?ful)(?![,])</contextpattern>
+      <!-- Needs check that this is not the end of the sentence. -->
+    </patterngroup>
+    <patterngroup>
+      <pattern1>(then|as)</pattern1>
+      <contextpattern look="before" where="2">(less|more)</contextpattern>
+    </patterngroup>
+  </term>
+
 </terminology>
