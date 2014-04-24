@@ -179,8 +179,7 @@
       <pattern3>because</pattern3>
       <pattern4>of</pattern4>
       <pattern5>this</pattern5>
-      <!-- pattern6 element would need to be created. Hm... -->
-      <!-- <pattern6>that</pattern6> -->
+      <pattern6>that</pattern6>
     </patterngroup>
   </term>
 
@@ -248,6 +247,13 @@
       <pattern3>to</pattern3>
       <contextpattern match="negative" look="before" where="2" mode="fuzzy">(must|should|could|would|will|not)</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <pattern1>are</pattern1>
+      <pattern2>given</pattern2>
+      <pattern3>(the|an?)</pattern3>
+      <pattern4>opportunity</pattern4>
+      <pattern5>to</pattern5>
+    </patterngroup>
   </term>
 
   <term>
@@ -290,6 +296,20 @@
       <pattern3>abilit(y|ies)</pattern3>
       <pattern4>to</pattern4>
       <contextpattern match="negative" look="before" where="2" mode="fuzzy">(must|should|could|would|will)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>can then</word>
+    </accept>
+    <patterngroup>
+      <pattern1>will</pattern1>
+      <pattern2>be</pattern2>
+      <pattern3>given</pattern3>
+      <pattern4>(the|an?)</pattern4>
+      <pattern5>opportunity</pattern5>
+      <pattern6>to</pattern6>
     </patterngroup>
   </term>
 
@@ -781,6 +801,7 @@
       <pattern1>(might|may)</pattern1>
       <pattern2>(want|like)</pattern2>
       <pattern3>to</pattern3>
+      <contextpattern match="negative">know</contextpattern>
     </patterngroup>
   </term>
 
