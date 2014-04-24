@@ -12,6 +12,7 @@
 <!ELEMENT accept          (word?, context?) >
 
 <!ELEMENT patterngroup    (pattern1, pattern2?, pattern3?, pattern4?, pattern5?,
+                          pattern6?, pattern7?, pattern8?, pattern9?
                           contextpattern*) >
 
 <!ELEMENT pattern1        (#PCDATA) >
@@ -52,6 +53,14 @@
 <!ATTLIST pattern4
                           case      (ignore|keep)                   #IMPLIED >
 <!ATTLIST pattern5
+                          case      (ignore|keep)                   #IMPLIED >
+<!ATTLIST pattern6
+                          case      (ignore|keep)                   #IMPLIED >
+<!ATTLIST pattern7
+                          case      (ignore|keep)                   #IMPLIED >
+<!ATTLIST pattern8
+                          case      (ignore|keep)                   #IMPLIED >
+<!ATTLIST pattern9
                           case      (ignore|keep)                   #IMPLIED >
 
 <!--  Default values are after, exact, 1, positive, ignore. -->

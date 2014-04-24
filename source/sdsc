@@ -425,7 +425,7 @@ def preparepatterns( patterngroupxpath, useonepattern ):
     patternsofpatterngroup = []
     patternforonepattern = None
 
-    for i in range(1,6):
+    for i in range(1,10):
         patternxpath = patterngroupxpath.xpath( 'pattern%s[1]' % i )
         patternxpathcontent = None
         if patternxpath:
