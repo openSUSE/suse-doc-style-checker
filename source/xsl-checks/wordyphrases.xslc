@@ -2,9 +2,10 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:py="https://www.gitorious.org/style-checker/style-checker"
   xmlns:exslt="http://exslt.org/common" exclude-result-prefixes="py exslt">
+  <xsl:import href="library.xsl"/>
+  
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
-  <xsl:include href="library.xsl"/>
   <xsl:param name="terminologyfile" select="'wordyphrases.xml'"/>
   <xsl:variable name="terminology" select="document($terminologyfile)/terminology"/>
   <xsl:variable name="termnodes" select="$terminology/term"/>
@@ -30,6 +31,8 @@
       </part>
     </xsl:if>
   </xsl:template>
+
+  <xsl:template name="messagetype">warning</xsl:template>
 
   <xsl:template match="*" mode="part-title">Wordy Phrases</xsl:template>
 

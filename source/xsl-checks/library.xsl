@@ -163,6 +163,9 @@
     </xsl:if>
     <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
       <xsl:variable name="node" select="."/>
+      <xsl:variable name="messagetype">
+        <xsl:call-template name="messagetype"/>
+      </xsl:variable>
       <xsl:variable name="withinid">
         <xsl:call-template name="withinid-nomarkup"/>
       </xsl:variable>
@@ -182,13 +185,15 @@
 
       <xsl:copy-of
         select="py:termcheck($termdataid, $content, $content-pretty, $withinid,
-                             $file)"/>
+                             $file, normalize-space($messagetype))"/>
     </xsl:if>
   </xsl:template>
 
   <xsl:template match="*" mode="terminology">
     <xsl:apply-templates mode="terminology"/>
   </xsl:template>
+
+  <xsl:template name="messagetype">error</xsl:template>
 
   <xsl:template match="text()" mode="terminology"/>
 

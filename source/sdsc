@@ -90,7 +90,8 @@ def printcolor( message, type = None ):
 def linenumber( context ):
     return context.context_node.sourceline
 
-def termcheck( context, termfileid, content, contentpretty, contextid, basefile ):
+def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
+        messagetype ):
     # FIXME: Modes: para, title?
     messages = []
 
@@ -120,6 +121,10 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile 
         contextid = contextid[0]
     else:
         contextid = None
+
+    # sanitize this...
+    if not messagetype == 'warning' or messagetype == 'info':
+        messagetype = 'error'
 
     # onepattern is a concatenated list of all patterns of the terminology
     # file which are within a pattern1 element
@@ -240,7 +245,8 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile 
                                 line = linenumber ( context )
                                 messages.append( termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
-                                    contentpretty, contextid, basefile ) )
+                                    contentpretty, contextid, basefile,
+                                    messagetype ) )
                             else:
                                 for contextpattern in contextpatternstopatterngroup:
                                     if contextpattern[0]:
@@ -255,7 +261,8 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile 
                                 line = linenumber ( context )
                                 messages.append( termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
-                                    contentpretty, contextid, basefile ) )
+                                    contentpretty, contextid, basefile,
+                                    messagetype ) )
                             elif ( len( contextpatternstopatterngroup ) < contextmatches ):
                                 print("hui!", len( contextpatternstopatterngroup ), contextmatches )
                         patterngroupposition += 1
@@ -544,7 +551,8 @@ def xmlescape( text ):
         }
     return "".join(escapetable.get(c,c) for c in text)
 
-def termcheckmessage( acceptword, acceptcontext, word, line, content, contextid, basefile ):
+def termcheckmessage(   acceptword, acceptcontext, word, line, content,
+                        contextid, basefile, messagetype ):
     # FIXME: shorten content string (in the right place), to get closer toward
     # more focused results
     message = None
@@ -558,9 +566,9 @@ def termcheckmessage( acceptword, acceptcontext, word, line, content, contextid,
     if contextid:
         withinid = "<withinid>%s</withinid>" % str( contextid )
 
-    message = etree.XML(  """<result type="error">
+    message = etree.XML(  """<result type="%s">
             <place>%s%s<line>%s</line></place>
-        </result>""" % ( filename, withinid, str( line ) ) )
+        </result>""" % ( messagetype, filename, withinid, str( line ) ) )
 
     if acceptcontext:
         message.append( etree.XML( """<message>In the context of %s,
@@ -831,7 +839,11 @@ def main():
     for checkfile in glob.glob( os.path.join(   location,
                                                 'xsl-checks',
                                                 '*.xslc' ) ):
-        transform = etree.XSLT( etree.parse( checkfile, parser ) )
+        try:
+            transform = etree.XSLT( etree.parse( checkfile, parser ) )
+        except:
+            sys.exit("Broken check file: " + checkfile)
+
         result = transform( inputfile )
 
         result = result.getroot()
