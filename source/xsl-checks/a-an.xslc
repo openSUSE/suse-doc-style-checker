@@ -2,9 +2,9 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:py="https://www.gitorious.org/style-checker/style-checker"
   xmlns:exslt="http://exslt.org/common" exclude-result-prefixes="py exslt">
-  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+  <xsl:import href="library.xsl"/>
 
-  <xsl:include href="library.xsl"/>
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
   <xsl:param name="terminologyfile" select="'a-an.xml'"/>
   <xsl:variable name="terminology" select="document($terminologyfile)/terminology"/>
   <xsl:variable name="termnodes" select="$terminology/term"/>
