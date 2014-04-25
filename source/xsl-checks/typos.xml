@@ -11,6 +11,7 @@
     </patterngroup>
     <patterngroup>
       <pattern1>ad[eo]pt(ed|s|ing)?</pattern1>
+      <contextpattern match="negative">by</contextpattern>
       <contextpattern mode="fuzzy" where="4">(your|their)</contextpattern>
     </patterngroup>
     <patterngroup>
@@ -45,15 +46,6 @@
     <patterngroup>
       <pattern1>adapt(ed|s|ing)?</pattern1>
       <contextpattern look="before">widely</contextpattern>
-    </patterngroup>
-  </term>
-
-  <term>
-    <accept>
-      <word>adoption</word>
-    </accept>
-    <patterngroup>
-      <pattern1>adaption</pattern1>
     </patterngroup>
   </term>
 
