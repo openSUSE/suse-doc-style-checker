@@ -71,7 +71,8 @@ def parseargs():
     parser.add_argument( '--checkpatterns',
         action = 'store_true',
         default = False,
-        help = "check formally valid of built-in regular expression patterns" )
+        help = """check formal validity of built-in regular expression
+            patterns""" )
     fileorbookmark.add_argument( 'inputfile', type=argparse.FileType('r'),
         nargs = "?" )
     parser.add_argument( 'outputfile', nargs = "?" )

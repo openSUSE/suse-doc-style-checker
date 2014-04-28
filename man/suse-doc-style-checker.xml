@@ -129,7 +129,7 @@
         <term><option>--checkpatterns</option></term>
         <listitem>
           <para>Check formal validity of the built-in regular expression
-            patterns. Check if any built-in regular expression patterns matches
+            patterns. Check if any built-in regular expression pattern matches
             an empty string or a single space character.
           </para>
         </listitem>
