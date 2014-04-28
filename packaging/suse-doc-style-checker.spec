@@ -18,14 +18,13 @@
 %define aliasname sdsc
 
 Name:           suse-doc-style-checker
-Version:        2014~02.2.rc1
+Version:        2014~02.2.rc2
 Release:        0
 Url:            http://www.gitorious.org/style-checker/style-checker
 Summary:        Style Checker for SUSE Documentation
 License:        MIT
 Group:          Productivity/Publishing/XML
-Source0:        http://pypi.python.org/packages/source/d/doit/%{name}-%{version}.tar.gz
-#Source1:        %%{name}.xml
+Source:         %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -39,9 +38,9 @@ Recommends:     intel-clear-sans-fonts
 
 
 %description
-A command that checks SUSE documentation for compliance with the SUSE
-styleguide. Among other things, it checks for terminology, duplicated
-words, and lone subsections.
+A command that checks documentation for compliance with the SUSE
+Style Guide. Among other things, it checks for terminology, duplicated
+words, long sentences, and lone subsections.
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -55,7 +54,7 @@ xsltproc $DB/manpages/docbook.xsl suse-doc-style-checker.xml
 )
 
 %install
-python3 setup.py install --prefix=%{_prefix} --root=%{buildroot} --install-data=%_datadir/%{name}
+./setup.py install --prefix=%{_prefix} --root=%{buildroot} --install-data=%_datadir/%{name}
 # Install man pages:
 mkdir -p %{buildroot}%{_mandir}/man1 %{buildroot}%_bindir
 install -m644 man/%{name}.1  %{buildroot}%{_mandir}/man1
