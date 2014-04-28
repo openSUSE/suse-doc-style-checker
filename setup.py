@@ -22,17 +22,19 @@ except ImportError:
 def listdir(path, ignore=None):
     """Lists all files recursively, starting from a given directory
     """
-    all = []
+    result = []
     for root, sub, files in os.walk(path):
         for f in files:
-            all.append(os.path.join(root, f))
+            result.append(os.path.join(root, f))
+    if ignore is not None:
+        delete=[]
+        for i in result:
+           for j in ignore:
+              if re.search(j, i) and (i not in delete):
+                  delete.append(i)
+        result=set(result) - set(delete)
+    return result
 
-    if ignore:
-        all = [i for i in all for j in ignore if not re.search(j, i)]
-
-    return all
-
-print("All files: %s" % listdir("specs"))
 
 setup(name = 'suse-doc-style-checker',
       version = __version__,
@@ -44,7 +46,10 @@ setup(name = 'suse-doc-style-checker',
       download_url = 'https://www.gitorious.org/style-checker/style-checker',
       license = __license__,
       data_files =  [('.',                  ['LICENSE', ]),
-                    ('source/',            listdir('source')),
+                    # Ignore any XML files under source because sknorr keeps temporary files there
+                    ('source/',            listdir('source', ignore=['xsl-checks', '.+\.xml'] )),
+                    ('source/xsl-checks',  listdir('source/xsl-checks') ),
+                    ('validation',         listdir('validation') ),
                     ('bookmarklet/',       listdir('bookmarklet')),
                     ('man/',               listdir('man')),
                     ],
