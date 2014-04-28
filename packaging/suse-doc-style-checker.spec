@@ -22,7 +22,7 @@ Version:        2014~02.2.rc2
 Release:        0
 Url:            http://www.gitorious.org/style-checker/style-checker
 Summary:        Style Checker for SUSE Documentation
-License:        MIT
+License:        LGPL-2.1+
 Group:          Productivity/Publishing/XML
 Source:         %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -57,14 +57,14 @@ xsltproc $DB/manpages/docbook.xsl suse-doc-style-checker.xml
 ./setup.py install --prefix=%{_prefix} --root=%{buildroot} --install-data=%_datadir/%{name}
 # Install man pages:
 mkdir -p %{buildroot}%{_mandir}/man1 %{buildroot}%_bindir
-install -m644 man/%{name}.1  %{buildroot}%{_mandir}/man1
+install -m644 man/%{aliasname}.1  %{buildroot}%{_mandir}/man1
 
 (cd %{buildroot}%_datadir/%{name}/source/;
 ln -sr %{aliasname} %{buildroot}%_bindir/%{aliasname};
 ln -sr %{aliasname} %{buildroot}%_bindir/%{name}
 )
 (cd  %{buildroot}%{_mandir}/man1;
-ln -sr %{name}.1 %{aliasname}.1
+ln -sr %{aliasname}.1 %{name}.1
 )
 
 %files
