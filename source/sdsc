@@ -54,8 +54,8 @@ def parseargs():
     fileorbookmark.add_argument( '-b', '--bookmarklet',
         action = 'store_true',
         default = False,
-        help = """open page that lets you install a bookmarklet to manage style
-            checker results""" )
+        help = """open Web page that lets you install a bookmarklet to manage
+            style checker results""" )
     parser.add_argument( '-s', '--show',
         action = 'store_true',
         default = False,
@@ -67,11 +67,11 @@ def parseargs():
     parser.add_argument( '--performance',
         action = 'store_true',
         default = False,
-        help = "write some performance measurements to stdout" )
+        help = "write performance measurements to stdout" )
     parser.add_argument( '--checkpatterns',
         action = 'store_true',
         default = False,
-        help = "check if regular expression patterns are formally valid" )
+        help = "check formally valid of built-in regular expression patterns" )
     fileorbookmark.add_argument( 'inputfile', type=argparse.FileType('r'),
         nargs = "?" )
     parser.add_argument( 'outputfile', nargs = "?" )
@@ -263,8 +263,6 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                                     acceptword, acceptcontext, matchwords, line,
                                     contentpretty, contextid, basefile,
                                     messagetype ) )
-                            elif ( len( contextpatternstopatterngroup ) < contextmatches ):
-                                print("hui!", len( contextpatternstopatterngroup ), contextmatches )
                         patterngroupposition += 1
 
     if args.performance:
