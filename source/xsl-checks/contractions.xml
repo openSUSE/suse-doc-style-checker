@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<terminology ignoredwords="([bd-gjklnpqruvxyz0-9].*)">
+<terminology ignoredwords="[^cdhimostwy].+">
 
   <term>
     <accept>
       <word>cannot</word>
     </accept>
     <patterngroup>
-      <pattern1>can't</pattern1>
+      <pattern1>can[’՚'ʼ＇｀̀́`´ʻʹʽ]t</pattern1>
     </patterngroup>
   </term>
 
@@ -15,7 +15,16 @@
       <word>could not</word>
     </accept>
     <patterngroup>
-      <pattern1>couldn't</pattern1>
+      <pattern1>couldn[’՚'ʼ＇｀̀́`´ʻʹʽ]t</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>does not</word>
+    </accept>
+    <patterngroup>
+      <pattern1>doesn[’՚'ʼ＇｀̀́`´ʻʹʽ]t</pattern1>
     </patterngroup>
   </term>
 
@@ -24,7 +33,7 @@
       <word>has not</word>
     </accept>
     <patterngroup>
-      <pattern1>hasn't</pattern1>
+      <pattern1>hasn[’՚'ʼ＇｀̀́`´ʻʹʽ]t</pattern1>
     </patterngroup>
   </term>
 
@@ -33,7 +42,25 @@
       <word>he is</word>
     </accept>
     <patterngroup>
-      <pattern1>he's</pattern1>
+      <pattern1>he[’՚'ʼ＇｀̀́`´ʻʹʽ]s</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>he will</word>
+    </accept>
+    <patterngroup>
+      <pattern1>he[’՚'ʼ＇｀̀́`´ʻʹʽ]ll</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>he would</word>
+    </accept>
+    <patterngroup>
+      <pattern1>he[’՚'ʼ＇｀̀́`´ʻʹʽ]d</pattern1>
     </patterngroup>
   </term>
 
@@ -42,7 +69,7 @@
       <word>I am</word>
     </accept>
     <patterngroup>
-      <pattern1>i'm</pattern1>
+      <pattern1>i[’՚'ʼ＇｀̀́`´ʻʹʽ]m</pattern1>
     </patterngroup>
   </term>
 
@@ -51,7 +78,16 @@
       <word>it is</word>
     </accept>
     <patterngroup>
-      <pattern1>it's</pattern1>
+      <pattern1>it[’՚'ʼ＇｀̀́`´ʻʹʽ]s</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>it will</word>
+    </accept>
+    <patterngroup>
+      <pattern1>it[’՚'ʼ＇｀̀́`´ʻʹʽ]ll</pattern1>
     </patterngroup>
   </term>
 
@@ -60,7 +96,7 @@
       <word>it would</word>
     </accept>
     <patterngroup>
-      <pattern1>it'd</pattern1>
+      <pattern1>it[’՚'ʼ＇｀̀́`´ʻʹʽ]d</pattern1>
     </patterngroup>
   </term>
 
@@ -69,7 +105,7 @@
       <word>is not</word>
     </accept>
     <patterngroup>
-      <pattern1>(ai|is)n't</pattern1>
+      <pattern1>(ai|is)n[’՚'ʼ＇｀̀́`´ʻʹʽ]t</pattern1>
     </patterngroup>
   </term>
 
@@ -78,7 +114,7 @@
       <word>must not</word>
     </accept>
     <patterngroup>
-      <pattern1>mustn't</pattern1>
+      <pattern1>mustn[’՚'ʼ＇｀̀́`´ʻʹʽ]t</pattern1>
     </patterngroup>
   </term>
 
@@ -87,7 +123,7 @@
       <word>ought not</word>
     </accept>
     <patterngroup>
-      <pattern1>oughtn't</pattern1>
+      <pattern1>oughtn[’՚'ʼ＇｀̀́`´ʻʹʽ]t</pattern1>
     </patterngroup>
   </term>
 
@@ -96,7 +132,7 @@
       <word>shall not</word>
     </accept>
     <patterngroup>
-      <pattern1>shan't</pattern1>
+      <pattern1>shan[’՚'ʼ＇｀̀́`´ʻʹʽ]t</pattern1>
     </patterngroup>
   </term>
 
@@ -105,7 +141,25 @@
       <word>she is</word>
     </accept>
     <patterngroup>
-      <pattern1>she's</pattern1>
+      <pattern1>she[’՚'ʼ＇｀̀́`´ʻʹʽ]s</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>she will</word>
+    </accept>
+    <patterngroup>
+      <pattern1>she[’՚'ʼ＇｀̀́`´ʻʹʽ]ll</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>she would</word>
+    </accept>
+    <patterngroup>
+      <pattern1>she[’՚'ʼ＇｀̀́`´ʻʹʽ]d</pattern1>
     </patterngroup>
   </term>
 
@@ -114,7 +168,16 @@
       <word>that is</word>
     </accept>
     <patterngroup>
-      <pattern1>that's</pattern1>
+      <pattern1>that[’՚'ʼ＇｀̀́`´ʻʹʽ]s</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>that will</word>
+    </accept>
+    <patterngroup>
+      <pattern1>that[’՚'ʼ＇｀̀́`´ʻʹʽ]ll</pattern1>
     </patterngroup>
   </term>
 
@@ -123,7 +186,7 @@
       <word>they are</word>
     </accept>
     <patterngroup>
-      <pattern1>they're</pattern1>
+      <pattern1>they[’՚'ʼ＇｀̀́`´ʻʹʽ]re</pattern1>
     </patterngroup>
   </term>
 
@@ -132,7 +195,7 @@
       <word>they have</word>
     </accept>
     <patterngroup>
-      <pattern1>they've</pattern1>
+      <pattern1>they[’՚'ʼ＇｀̀́`´ʻʹʽ]ve</pattern1>
     </patterngroup>
   </term>
 
@@ -141,7 +204,16 @@
       <word>they will</word>
     </accept>
     <patterngroup>
-      <pattern1>they'll</pattern1>
+      <pattern1>they[’՚'ʼ＇｀̀́`´ʻʹʽ]ll</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>they would</word>
+    </accept>
+    <patterngroup>
+      <pattern1>they[’՚'ʼ＇｀̀́`´ʻʹʽ]d</pattern1>
     </patterngroup>
   </term>
 
@@ -150,7 +222,7 @@
       <word>will not</word>
     </accept>
     <patterngroup>
-      <pattern1>won't</pattern1>
+      <pattern1>won[’՚'ʼ＇｀̀́`´ʻʹʽ]t</pattern1>
     </patterngroup>
   </term>
 
@@ -159,7 +231,43 @@
       <word>would not</word>
     </accept>
     <patterngroup>
-      <pattern1>wouldn't</pattern1>
+      <pattern1>wouldn[’՚'ʼ＇｀̀́`´ʻʹʽ]t</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>you are</word>
+    </accept>
+    <patterngroup>
+      <pattern1>you[’՚'ʼ＇｀̀́`´ʻʹʽ]re</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>you have</word>
+    </accept>
+    <patterngroup>
+      <pattern1>you[’՚'ʼ＇｀̀́`´ʻʹʽ]ve</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>you will</word>
+    </accept>
+    <patterngroup>
+      <pattern1>you[’՚'ʼ＇｀̀́`´ʻʹʽ]ll</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>you would</word>
+    </accept>
+    <patterngroup>
+      <pattern1>you[’՚'ʼ＇｀̀́`´ʻʹʽ]d</pattern1>
     </patterngroup>
   </term>
 
