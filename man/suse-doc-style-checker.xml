@@ -16,11 +16,6 @@
         <firstname>Stefan</firstname>
         <surname>Knorr</surname>
       </author>
-      <author>
-        <contrib>Developer</contrib>
-        <firstname>Thomas</firstname>
-        <surname>Schraitle</surname>
-      </author>
     </authorgroup>
   </refentryinfo>
   <refmeta>
@@ -36,10 +31,16 @@
   </refnamediv>
   <refsynopsisdiv id="sdsc.synopsis">
     <title>Synopsis</title>
-    <cmdsynopsis><command>&command;</command>&nbsp;<option>[--show]</option>&nbsp;<option>[--performance]</option>&nbsp;<option>[--checkpatterns]</option>&nbsp;<replaceable>input_file</replaceable>&nbsp;<replaceable>[output_file]</replaceable></cmdsynopsis>
-    <cmdsynopsis><command>&command;</command>&nbsp;<option>--bookmarklet</option></cmdsynopsis>
-    <cmdsynopsis><command>&command;</command>&nbsp;<option>--help</option></cmdsynopsis>
-    <cmdsynopsis><command>&command;</command>&nbsp;<option>--version</option></cmdsynopsis>
+    <cmdsynopsis><command>&command;</command>
+      <arg choice="opt">--show</arg>
+      <arg choice="opt">--performance</arg>
+      <arg choice="opt">--checkpatterns</arg>
+      <arg choice="req"><replaceable>INPUTFILE</replaceable></arg>
+      <arg choice="opt"><replaceable>OUTPUTFILE</replaceable></arg>
+    </cmdsynopsis>
+    <cmdsynopsis><command>&command;</command> <arg choice="plain">--bookmarklet</arg></cmdsynopsis>
+    <cmdsynopsis><command>&command;</command> <arg choice="plain">--help</arg></cmdsynopsis>
+    <cmdsynopsis><command>&command;</command> <arg choice="plain">--version</arg></cmdsynopsis>
   </refsynopsisdiv>
 
   <refsect1>
