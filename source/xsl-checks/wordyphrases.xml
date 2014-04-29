@@ -211,7 +211,7 @@
     </accept>
     <patterngroup>
       <pattern1>reff?err?ed</pattern1>
-      <pattern2>to</pattern2>
+      <pattern2>t[ow]?o</pattern2>
       <pattern3>as</pattern3>
     </patterngroup>
   </term>
