@@ -8,6 +8,7 @@
     <patterngroup>
       <pattern1>can</pattern1>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -18,11 +19,13 @@
     <patterngroup>
       <pattern1>cannot</pattern1>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>can</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -33,6 +36,7 @@
     <patterngroup>
       <pattern1>could</pattern1>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -44,6 +48,7 @@
       <pattern1>could</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -54,6 +59,7 @@
     <patterngroup>
       <pattern1>may</pattern1>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -65,6 +71,7 @@
       <pattern1>may</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -75,6 +82,7 @@
     <patterngroup>
       <pattern1>must</pattern1>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -86,6 +94,7 @@
       <pattern1>must</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -96,6 +105,7 @@
     <patterngroup>
       <pattern1>might</pattern1>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -107,6 +117,7 @@
       <pattern1>might</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -117,6 +128,7 @@
     <patterngroup>
       <pattern1>shall</pattern1>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -128,6 +140,7 @@
       <pattern1>shall</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -138,6 +151,7 @@
     <patterngroup>
       <pattern1>shall</pattern1>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -149,6 +163,7 @@
       <pattern1>should</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -160,6 +175,7 @@
       <pattern1>ought</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -171,6 +187,7 @@
       <pattern1>ought</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -182,6 +199,7 @@
       <pattern1>will</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -193,6 +211,7 @@
       <pattern1>will</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -204,6 +223,7 @@
       <pattern1>would</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
@@ -215,6 +235,7 @@
       <pattern1>would</pattern1>
       <pattern2>not</pattern2>
       <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>
   </term>
 
