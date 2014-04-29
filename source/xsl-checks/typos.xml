@@ -56,7 +56,7 @@
     <!-- "an more" could also be "any more"/"anymore"... -->
     <patterngroup>
       <pattern1>an</pattern1>
-      <contextpattern>(more|most|some|many|few)</contextpattern>
+      <contextpattern>(more|most|some|many|few|th(en|is|at|[eo]se|ere))</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>ad(?!-)</pattern1>
@@ -81,6 +81,27 @@
 
   <term>
     <accept>
+      <word>anymore</word>
+    </accept>
+    <patterngroup>
+      <pattern1>any</pattern1>
+      <pattern2>more</pattern2>
+      <contextpattern match="negative">(of|than)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>any more</word>
+    </accept>
+    <patterngroup>
+      <pattern1>anymore</pattern1>
+      <contextpattern>(of|than)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>know</word>
     </accept>
     <patterngroup>
@@ -98,6 +119,11 @@
       <contextpattern>(issue|problem|bug)s?</contextpattern>
       <contextpattern look="before" where="2" mode="fuzzy" match="negative">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <pattern1>know</pattern1>
+      <contextpattern look="before">also</contextpattern>
+      <contextpattern match="negative">(as|by|for)</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
@@ -113,14 +139,16 @@
     </patterngroup>
   </term>
 
-  <term>
+  <!-- Needs to be reworked to avoid false positives. -->
+  <!-- <term>
     <accept>
-      <word>maybe</word>
+      <word>may be</word>
     </accept>
     <patterngroup>
-      <pattern1>(ma?yby|mybe)</pattern1>
+      <pattern1>maybe</pattern1>
+      <contextpattern look="before">it</contextpattern>
     </patterngroup>
-  </term>
+  </term> -->
 
   <term>
     <accept>
@@ -194,6 +222,23 @@
   </term>
 
   <term>
+    <accept>to the</accept>
+    <patterngroup>
+      <pattern1>tot</pattern1>
+      <pattern2>he</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>to this</accept>
+    <patterngroup>
+      <pattern1>tot</pattern1>
+      <pattern2>his</pattern2>
+    </patterngroup>
+  </term>
+
+
+  <term>
     <accept>
       <word>too</word>
     </accept>
@@ -222,6 +267,16 @@
     <patterngroup>
       <pattern1>too?</pattern1>
       <contextpattern look="before">the(?![,])</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>way</word>
+    </accept>
+    <patterngroup>
+      <pattern1>was</pattern1>
+      <contextpattern look="before">an?</contextpattern>
     </patterngroup>
   </term>
 
