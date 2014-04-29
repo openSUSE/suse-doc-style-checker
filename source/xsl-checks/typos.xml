@@ -91,6 +91,17 @@
 
   <term>
     <accept>
+      <word>known</word>
+    </accept>
+    <patterngroup>
+      <pattern1>know</pattern1>
+      <contextpattern>(issue|problem|bug)s?</contextpattern>
+      <contextpattern look="before" where="2" mode="fuzzy" match="negative">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>lose</word>
     </accept>
     <patterngroup>
@@ -98,7 +109,7 @@
     </patterngroup>
     <patterngroup>
       <pattern1>loose</pattern1>
-      <contextpattern look="before">(you|i|we|suse|attachmate|novell|to|not)</contextpattern>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|i|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
   </term>
 
@@ -116,8 +127,13 @@
       <word>note</word>
     </accept>
     <patterngroup>
-      <pattern1>not</pattern1>
+      <pattern1>not(ice)?</pattern1>
       <contextpattern look="before">please</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>notice</pattern1>
+      <contextpattern>that</contextpattern>
+      <contextpattern look="before" where="2" mode="fuzzy" match="negative">(will|\w+[’՚'ʼ＇｀̀́`´ʻʹʽ]ll|can|could|may|might|shall|should)</contextpattern>
     </patterngroup>
   </term>
 
@@ -127,7 +143,8 @@
     </accept>
     <patterngroup>
       <pattern1>know</pattern1>
-      <contextpattern look="before">(right|by|of|for|(un)?till?|it|this|has|have|can|is|are)</contextpattern>
+      <contextpattern look="before">(right|by|of|for|(un)?till?|it|this|has|have|is|are)</contextpattern>
+      <contextpattern match="negative">(issue|problem|bug)s?</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern1>know</pattern1>
@@ -150,13 +167,13 @@
       <word>than</word>
     </accept>
     <patterngroup>
-      <pattern1>(then|as)</pattern1>
-      <contextpattern look="before">(less|more|better|worse|larger|smaller|(o|ra)ther)</contextpattern>
+      <pattern1>then</pattern1>
+      <contextpattern look="before">(less|more|better|worse|larger|smaller|(o|ra)ther)(?![,\)\]])</contextpattern>
       <!-- Needs check that this is not the end of the sentence. -->
     </patterngroup>
     <patterngroup>
-      <pattern1>(then|as)</pattern1>
-      <contextpattern look="before" where="2">(less|more)</contextpattern>
+      <pattern1>then</pattern1>
+      <contextpattern look="before" where="2">(less|more)(?![,\)\]])</contextpattern>
     </patterngroup>
   </term>
 
@@ -166,12 +183,57 @@
     </accept>
     <patterngroup>
       <pattern1>do</pattern1>
-      <contextpattern look="before">(easy|simple|hard|difficult|best|worst|[a-z]+?[ia]ble|[a-z]+?ful)(?![,])</contextpattern>
-      <!-- Needs check that this is not the end of the sentence. -->
+      <contextpattern look="before">(easy|simple|hard|difficult|low|high|best|worst|[-\w]+?[ia]ble|[-\w]+?ful|[-\w]+?like)(?![,\)\]])</contextpattern>
+      <contextpattern look="before" where="3" mode="fuzzy" match="negative">(if|when|how|whom?|when|where|why)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>(then|as)</pattern1>
-      <contextpattern look="before" where="2">(less|more)</contextpattern>
+      <pattern1>t[ow]o(?![,\)\]])</pattern1>
+      <contextpattern>(do|make|take|use|configure|add|remove|change|switch|install|uninstall|you|my|your|my|our|their)</contextpattern>
+      <contextpattern look="before" match="negative">to</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>too</word>
+    </accept>
+    <patterngroup>
+      <pattern1>two</pattern1>
+      <contextpattern>(much|many|few|little)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>to(?=\.)</pattern1>
+      <contextpattern look="before">[-\w]+?(?=,)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>two</word>
+    </accept>
+    <patterngroup>
+      <pattern1>too</pattern1>
+      <contextpattern look="before">(only|just)(?![,])</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>too</pattern1>
+      <contextpattern>(different|alternatives?|ways|kinds|modes|standards|cases)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>too?</pattern1>
+      <contextpattern look="before">the(?![,])</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>yet</word>
+    </accept>
+    <patterngroup>
+      <!-- May need some fleshing out to avoid too many false positives.
+      -->
+      <pattern1>jet</pattern1>
+      <contextpattern look="before" match="negative">ink</contextpattern>
     </patterngroup>
   </term>
 
