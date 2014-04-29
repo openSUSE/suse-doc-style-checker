@@ -442,9 +442,6 @@
       <word>cannot</word>
     </accept>
     <patterngroup>
-      <pattern1>can['ʼ]t</pattern1>
-    </patterngroup>
-    <patterngroup>
       <pattern1>can</pattern1>
       <pattern2>not</pattern2>
     </patterngroup>
@@ -1733,10 +1730,19 @@
 
   <term>
     <accept>
-      <word>journal</word>
+      <word>journaled</word>
     </accept>
     <patterngroup>
-      <pattern1>journall(ed|ing)</pattern1>
+      <pattern1>journalled</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>journaling</word>
+    </accept>
+    <patterngroup>
+      <pattern1>journalling</pattern1>
     </patterngroup>
   </term>
 
@@ -1745,7 +1751,7 @@
     <patterngroup>
       <pattern1>just(?!-)</pattern1>
       <contextpattern match="negative" look="before">(not|must|should|ought)</contextpattern>
-      <contextpattern match="negative">(after|before|next|as|to|need)</contextpattern>
+      <contextpattern match="negative">(after|before|next|as|to|need|enough)</contextpattern>
       <contextpattern match="negative" mode="fuzzy" where="3">(one|two|three|four|five|six|seven|eight|nine|ten|[0-9].*)</contextpattern>
     </patterngroup>
   </term>
@@ -3187,11 +3193,7 @@
     </patterngroup>
     <patterngroup>
       <pattern1>sets?-?ups?</pattern1>
-      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>sets?-?ups?</pattern1>
-      <contextpattern look="before" mode="fuzzy">(you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
   </term>
 
