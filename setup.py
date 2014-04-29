@@ -7,7 +7,7 @@ import re
 
 # FIXME: this information should come from the script itself...
 __programname__ = "SUSE Documentation Style Checker"
-__version__ = "2014~02.2.rc2"
+__version__ = "2014~02.2.rc3"
 __author__ = "Stefan Knorr, Thomas Schraitle"
 __license__ = "LGPL-2.1+"
 __description__ = "checks a given DocBook XML file for stylistic errors"
