@@ -31,11 +31,14 @@
   </refnamediv>
   <refsynopsisdiv id="sdsc.synopsis">
     <title>Synopsis</title>
+    <!-- arg choice="req" adds {around everything}. That only clutters
+         the screen, imo. Using option here is somehow buggy... thus the
+         &nbsp;.
+    -->
     <cmdsynopsis><command>&command;</command>
       <arg choice="opt">--show</arg>
       <arg choice="opt">--performance</arg>
-      <arg choice="opt">--checkpatterns</arg>
-      <arg choice="req"><replaceable>INPUTFILE</replaceable></arg>
+      <arg choice="opt">--checkpatterns</arg>&nbsp;<option><replaceable>INPUTFILE</replaceable></option>
       <arg choice="opt"><replaceable>OUTPUTFILE</replaceable></arg>
     </cmdsynopsis>
     <cmdsynopsis><command>&command;</command> <arg choice="plain">--bookmarklet</arg></cmdsynopsis>
@@ -47,30 +50,31 @@
     <title>Description</title>
 
     <para>&longname; checks documentation for compliance with the SUSE
-      Style Guide. Among other things, it checks for terminology, duplicated
-      words, long sentences, and lone subsections. &longname; is not
-      interactive.
+      Documentation Style Guide. Among other things, it checks for terminology,
+      duplicated words, long sentences, and lone subsections. &longname; creates
+      a report file as its output and is not interactive.
     </para>
   </refsect1>
 
   <refsect1>
     <title>Input</title>
 
-    <para>The input must be a single XML file without custom entities
-      or XIncludes. The checker is meant to be used with DocBook 4 or Novdoc
+    <para>The input must be a single XML file without XIncludes or
+      custom entities. The checker is meant to be used with DocBook 4 or Novdoc
       files as input. Ideally, create the input file using DAPS:
     </para>
-    <screen><command>daps <option>-d <replaceable>DC-file</replaceable></option> <option>bigfile</option></command></screen>
-
+    <screen><command>daps <option>-d <replaceable>DC-FILE</replaceable></option> <option>bigfile</option></command></screen>
+    <para>All language checks assume that the input is written in American
+      English.
+    </para>
   </refsect1>
 
   <refsect1>
     <title>Output</title>
 
-    <para>The output of the checker is an XML file containing messages
+    <para>The output of the checker is an XML report file containing messages
       indicating all recognized problems with the input file.
     </para>
-
   </refsect1>
 
   <refsect1>
@@ -96,7 +100,7 @@
       <varlistentry>
         <term><option>--show</option>, <option>-s</option></term>
         <listitem>
-          <para>Show the final report in the default browser.</para>
+          <para>Show the XML report file in the default browser.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
@@ -110,13 +114,12 @@
     <note>
       <title>Default Browsers</title>
       <para>Both <option>--bookmarklet</option> and <option>--show</option> use
-        the <literal>BROWSER</literal> variable, or the default browser
-        if <literal>BROWSER</literal> is unset. Not all browsers open report
-        files correctly and for some users, a text
-        editor or similar will open. In such cases,
-        set the <literal>BROWSER</literal> variable manually:
+        the default browser, or the <literal>BROWSER</literal> environment
+        variable if it is set. Not all browsers open XML report files correctly.
+        For some users, a text editor or similar will open instead of a browser.
+        In such cases, set the <literal>BROWSER</literal> variable manually:
       </para>
-      <screen><command>export BROWSER=<replaceable>/MY/FAVORITE/BROWSER</replaceable></command></screen>
+      <screen><command>export <option>BROWSER=<replaceable>/MY/BROWSER</replaceable></option></command></screen>
       <para>Ideally, use Chrome, Chromium or Firefox.
       </para>
     </note>

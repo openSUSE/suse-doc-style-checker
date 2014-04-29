@@ -38,9 +38,9 @@ Recommends:     intel-clear-sans-fonts
 
 
 %description
-A command that checks documentation for compliance with the SUSE
-Style Guide. Among other things, it checks for terminology, duplicated
-words, long sentences, and lone subsections.
+SUSE Documentation Style Checker checks documentation for compliance
+with the SUSE Documentation Style Guide. Among other things, it checks
+for terminology, duplicated words, long sentences, and lone subsections.
 
 %prep
 %setup -q -n %{name}-%{version}

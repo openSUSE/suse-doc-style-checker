@@ -62,7 +62,7 @@ def parseargs():
         help = """show final report in $BROWSER, or default browser if unset; not
             all browsers open report files correctly and for some users, a text
             editor will open; in such cases, set the BROWSER variable with:
-            export BROWSER=/MY/FAVORITE/BROWSER ; Chromium or Firefox will both
+            export BROWSER=/MY/BROWSER ; Chromium or Firefox will both
             do the right thing""" )
     parser.add_argument( '--performance',
         action = 'store_true',
