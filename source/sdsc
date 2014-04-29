@@ -582,7 +582,7 @@ def termcheckmessage(   acceptword, acceptcontext, word, line, content,
         message.append( etree.XML( """<suggestion>Use <quote>%s</quote>
             instead.</suggestion>""" % acceptword ) )
     else:
-        message.append( etree.XML( """<suggestion>Remove the word
+        message.append( etree.XML( """<suggestion>Remove
             <quote>%s</quote>.</suggestion>""" % word ) )
 
     return message
