@@ -92,16 +92,15 @@
           <xsl:call-template name="createid"/>
           contains
           <xsl:if test="$id-safe-AZ-state = false">
-            capital letters
-          </xsl:if>
-          <xsl:if test="($id-safe-AZ-state = false) and
-                        ($id-safe-special-state = false)">
-            and
+            capital letters<xsl:choose><xsl:when test="$id-safe-special-state != false">.</xsl:when>
+              <xsl:otherwise>
+                and
+              </xsl:otherwise>
+            </xsl:choose>
           </xsl:if>
           <xsl:if test="$id-safe-special-state = false">
-            special characters
+            special characters.
           </xsl:if>
-          <xsl:text>.</xsl:text>
         </message>
         <xsl:if test="$id-safe-AZ-state = false">
           <suggestion>Use only lowercase letters in identifiers.
