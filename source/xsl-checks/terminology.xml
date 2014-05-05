@@ -19,17 +19,17 @@
       <word>3D</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">3d\.?</pattern1>
+      <pattern1 case="keep">3d</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>3[-\.]d\.?</pattern1>
+      <pattern1>3[-\.]d</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>three[-\.]*d\.?</pattern1>
+      <pattern1>three[-\.]*d</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>(three|3)\.?</pattern1>
-      <pattern2>d\.?</pattern2>
+      <pattern1>(three|3)</pattern1>
+      <pattern2>d</pattern2>
     </patterngroup>
   </term>
 
@@ -299,7 +299,7 @@
       <pattern1 case="keep">BASH</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>b\.a\.s\.h\.?</pattern1>
+      <pattern1>b\.a\.s\.h</pattern1>
     </patterngroup>
   </term>
 
@@ -397,7 +397,7 @@
       <pattern1 case="keep">BTRFS</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>b\.t\.r\.f\.s\.?</pattern1>
+      <pattern1>b\.t\.r\.f\.s</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>b[eu]tterfs</pattern1>
@@ -445,7 +445,7 @@
       <pattern1 case="keep">cas?(?!\.)s?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>c\.a\.?s?</pattern1>
+      <pattern1>c\.a(\.?'?s)?</pattern1>
     </patterngroup>
   </term>
 
@@ -457,7 +457,7 @@
       <pattern1 case="keep">[Cc]ds?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>c\.d\.?s?</pattern1>
+      <pattern1>c\.d(\.?'?s)?</pattern1>
     </patterngroup>
   </term>
 
@@ -467,14 +467,14 @@
       <word>CD-ROM</word>
     </accept>
     <patterngroup>
-      <pattern1>c\.d\.-?r\.o\.m\.?s?</pattern1>
+      <pattern1>c\.d\.-?r\.o\.m(\.?'?s)?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>c\.?d\.?r\.?o\.?m\.?s?</pattern1>
+      <pattern1>c\.?d\.?r\.?o\.?m(\.?'?s)?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>c\.?d\.?</pattern1>
-      <pattern2>r\.?o\.?m\.?s?</pattern2>
+      <pattern1>c\.?d</pattern1>
+      <pattern2>r\.?o\.?m(\.?'s?)</pattern2>
     </patterngroup>
   </term>
 
@@ -762,7 +762,7 @@
       <word>connect via SSH</word>
     </accept>
     <patterngroup>
-      <pattern1>ssh['ʼ]?(ing|ed|s)</pattern1>
+      <pattern1>ssh[’՚'ʼ＇｀̀́`´ʻʹʽ]?(ing|ed|s)</pattern1>
       <pattern2>in(to)?</pattern2>
     </patterngroup>
     <patterngroup>
@@ -775,10 +775,10 @@
       <pattern2>into</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>ssh['ʼ]?(ing|ed|s)</pattern1>
+      <pattern1>ssh[’՚'ʼ＇｀̀́`´ʻʹʽ]?(ing|ed|s)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>ssh['ʼ]?(ing|ed|s)</pattern1>
+      <pattern1>ssh[’՚'ʼ＇｀̀́`´ʻʹʽ]?(ing|ed|s)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>ssh</pattern1>
@@ -796,18 +796,15 @@
       <word>CUPS</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">Cups</pattern1>
+      <pattern1 case="keep">[Cc]ups</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1 case="keep">cups</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1>c\.?u\.?p\.?s\.?</pattern1>
+      <pattern1>c\.?u\.?p\.?s</pattern1>
       <pattern2>print(ing)?</pattern2>
       <pattern3>system</pattern3>
     </patterngroup>
     <patterngroup>
-      <pattern1>c\.u\.p\.s\.?</pattern1>
+      <pattern1>c\.u\.p\.s</pattern1>
     </patterngroup>
   </term>
 
@@ -835,7 +832,7 @@
     </patterngroup>
     <patterngroup>
       <pattern1>delta</pattern1>
-      <pattern2 case="keep">[Rr]pms</pattern2>
+      <pattern2 case="keep">[Rr]pms?</pattern2>
     </patterngroup>
   </term>
 
@@ -870,7 +867,7 @@
       <pattern1 case="keep">Dhcp</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>d\.h\.c\.p\.?</pattern1>
+      <pattern1>d\.h\.c\.p</pattern1>
     </patterngroup>
   </term>
 
@@ -917,7 +914,7 @@
       <word>DNS</word>
     </accept>
     <patterngroup>
-      <pattern1>d\.n\.s\.?</pattern1>
+      <pattern1>d\.n\.s</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>DNS</pattern1>
@@ -1257,7 +1254,7 @@
       <pattern1 case="keep">[Ff]tp(?!:)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>f\.t\.p\.?</pattern1>
+      <pattern1>f\.t\.p</pattern1>
     </patterngroup>
   </term>
 
@@ -1266,7 +1263,7 @@
       <word>The GIMP</word>
     </accept>
     <patterngroup>
-      <pattern1>g\.i\.m\.p\.?</pattern1>
+      <pattern1>g\.i\.m\.p</pattern1>
     </patterngroup>
     <!-- Avoid matching executable names like gimp-print etc. -->
     <patterngroup>
@@ -1283,7 +1280,7 @@
       <pattern1 case="keep">[Gg]nome(?!-)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>g\.n\.o\.m\.e\.?</pattern1>
+      <pattern1>g\.n\.o\.m\.e</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>GNU</pattern1>
@@ -1302,7 +1299,7 @@
       <pattern1 case="keep">[Gg]rub</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>g\.r\.u\.b\.?</pattern1>
+      <pattern1>g\.r\.u\.b</pattern1>
     </patterngroup>
   </term>
 
@@ -1436,7 +1433,7 @@
       <pattern1 case="keep">[Hh]tml</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>h\.t\.m\.l\.?</pattern1>
+      <pattern1>h\.t\.m\.l</pattern1>
     </patterngroup>
   </term>
 
@@ -1463,7 +1460,7 @@
       <pattern1 case="keep">[Hh]ttp(?!:)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>h\.t\.t\.p\.?</pattern1>
+      <pattern1>h\.t\.t\.p</pattern1>
     </patterngroup>
   </term>
 
@@ -1475,7 +1472,7 @@
       <pattern1 case="keep">[Hh]ttps(?!:)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>h\.t\.t\.p\.s\.?</pattern1>
+      <pattern1>h\.t\.t\.p\.s</pattern1>
     </patterngroup>
   </term>
 
@@ -1614,7 +1611,7 @@
       <word>I/O port</word>
     </accept>
     <patterngroup>
-      <pattern1>i[-\.]?o\.?</pattern1>
+      <pattern1>i[-\.]?o</pattern1>
       <pattern2>ports?</pattern2>
     </patterngroup>
   </term>
@@ -1633,7 +1630,7 @@
       <pattern1 case="keep">IPSec</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1 case="keep">i\.p\.s\.e\.c\.?</pattern1>
+      <pattern1 case="keep">i\.p\.s\.e\.c</pattern1>
     </patterngroup>
   </term>
 
@@ -1648,12 +1645,12 @@
       <pattern1>i\.p\.v\.?4</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>i\.?p\.?</pattern1>
+      <pattern1>i\.?p</pattern1>
       <pattern2>v\.?4</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>i\.?p\.?</pattern1>
-      <pattern2>v\.?</pattern2>
+      <pattern1>i\.?p</pattern1>
+      <pattern2>v</pattern2>
       <pattern3>4</pattern3>
     </patterngroup>
   </term>
@@ -1669,12 +1666,12 @@
       <pattern1>i\.p\.v\.?6</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>i\.?p\.?</pattern1>
+      <pattern1>i\.?p</pattern1>
       <pattern2>v\.?6</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>i\.?p\.?</pattern1>
-      <pattern2>v\.?</pattern2>
+      <pattern1>i\.?p</pattern1>
+      <pattern2>v</pattern2>
       <pattern3>6</pattern3>
     </patterngroup>
   </term>
@@ -1761,7 +1758,7 @@
       <pattern3>environment</pattern3>
     </patterngroup>
     <patterngroup>
-      <pattern1>k\.d\.e\.?</pattern1>
+      <pattern1>k\.d\.e</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1 case="keep">[Kk]de</pattern1>
@@ -1773,10 +1770,7 @@
       <word>Kdump</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">KDUMP</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1 case="keep">kdump</pattern1>
+      <pattern1 case="keep">(KDUMP|kdump)</pattern1>
     </patterngroup>
   </term>
 
@@ -1785,10 +1779,7 @@
       <word>Kprobes</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">KPROBES</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1 case="keep">kprobes</pattern1>
+      <pattern1 case="keep">(KPROBES|kprobes)</pattern1>
     </patterngroup>
   </term>
 
@@ -1810,7 +1801,7 @@
       <pattern1 case="keep">[Ll]an</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>l\.a\.n\.?</pattern1>
+      <pattern1>l\.a\.n</pattern1>
     </patterngroup>
   </term>
 
@@ -1896,7 +1887,7 @@
       <pattern1 case="keep">[Ll]ibreoffice</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>L(ib)?O</pattern1>
+      <pattern1>l(ib)?o</pattern1>
     </patterngroup>
   </term>
 
@@ -2387,10 +2378,10 @@
       <word>NFS</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">N\.?f\.?s\.?</pattern1>
+      <pattern1 case="keep">N\.?f\.?s</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>n\.f\.s\.?</pattern1>
+      <pattern1>n\.f\.s</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>nfs</pattern1>
@@ -2408,10 +2399,10 @@
       <word>NIS</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">N\.?i\.?s\.?</pattern1>
+      <pattern1 case="keep">N\.?i\.?s</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>n\.i\.s\.?</pattern1>
+      <pattern1>n\.i\.s</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>nis</pattern1>
@@ -2569,11 +2560,11 @@
     </accept>
     <patterngroup>
       <pattern1>pop</pattern1>
-      <pattern2>up</pattern2>
+      <pattern2>ups?</pattern2>
       <contextpattern look="before">(the|a)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>popup</pattern1>
+      <pattern1>popups?</pattern1>
       <contextpattern look="before">(the|a)</contextpattern>
     </patterngroup>
   </term>
@@ -2697,7 +2688,7 @@
       <word>PXE</word>
     </accept>
     <patterngroup>
-      <pattern1>p\.x\.e\.?</pattern1>
+      <pattern1>p\.x\.e</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>pixie</pattern1>
@@ -2736,7 +2727,7 @@
       <pattern1 case="keep">[Rr]am</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>r\.a\.m\.?</pattern1>
+      <pattern1>r\.a\.m</pattern1>
     </patterngroup>
   </term>
 
@@ -3012,7 +3003,7 @@
       <word>SCSI</word>
     </accept>
     <patterngroup>
-      <pattern1>S\.C\.S\.I\.?</pattern1>
+      <pattern1>S\.C\.S\.I</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1 case="keep">[Ss]csi</pattern1>
@@ -3201,13 +3192,13 @@
       <word>SLE</word>
     </accept>
     <patterngroup>
-      <pattern1>s\.l\.e\.?</pattern1>
+      <pattern1>s\.l\.e</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1 case="keep">[Ss]le</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>s\.?l\.?e\.?</pattern1>
+      <pattern1>s\.?l\.?e</pattern1>
       <pattern2>(ent(er|re)prise|linux)</pattern2>
     </patterngroup>
   </term>
@@ -3217,21 +3208,21 @@
       <word>SLED</word>
     </accept>
     <patterngroup>
-      <pattern1>s\.l\.e\.d\.?</pattern1>
+      <pattern1>s\.l\.e\.d</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1 case="keep">[Ss]led</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>s\.?l\.?e\.d\.?</pattern1>
+      <pattern1>s\.?l\.?e\.?d</pattern1>
       <pattern2>(ent(er|re)prise|linux|desktop)</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>s\.?l\.?e\.?</pattern1>
+      <pattern1>s\.?l\.?e</pattern1>
       <pattern2>desktop</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>s\.?l\.?e\.?</pattern1>
+      <pattern1>s\.?l\.?e</pattern1>
       <pattern2>desktop</pattern2>
       <pattern3>linux</pattern3>
     </patterngroup>
@@ -3242,21 +3233,21 @@
       <word>SLES</word>
     </accept>
     <patterngroup>
-      <pattern1>s\.l\.e\.s\.?</pattern1>
+      <pattern1>s\.l\.e\.s</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1 case="keep">[Ss]les</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>s\.?l\.?e\.s\.?</pattern1>
+      <pattern1>s\.?l\.?e\.?s</pattern1>
       <pattern2>(ent(er|re)prise|linux|server)</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>s\.?l\.?e\.?</pattern1>
+      <pattern1>s\.?l\.?e</pattern1>
       <pattern2>server</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>s\.?l\.?e\.?</pattern1>
+      <pattern1>s\.?l\.?e</pattern1>
       <pattern2>server</pattern2>
       <pattern3>linux</pattern3>
     </patterngroup>
@@ -3312,7 +3303,7 @@
       <word>SSD</word>
     </accept>
     <patterngroup>
-      <pattern1>s\.s\.s(\.?s)?</pattern1>
+      <pattern1>s\.s\.d(\.?s)?</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1 case="keep">ssd</pattern1>
@@ -3327,7 +3318,7 @@
       <pattern1 case="keep">[Ss]sh</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>s\.s\.h\.?</pattern1>
+      <pattern1>s\.s\.h</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>ssh</pattern1>
@@ -3412,7 +3403,7 @@
       <pattern1 case="keep">[Ss]u[Ss][Ee]</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>s\.u\.s\.e\.?</pattern1>
+      <pattern1>s\.u\.s\.e</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>software-?</pattern1>
@@ -3647,7 +3638,7 @@
       <pattern1 case="keep">[Tt]ftp(?!:)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>t\.f\.t\.p\.?</pattern1>
+      <pattern1>t\.f\.t\.p</pattern1>
     </patterngroup>
   </term>
 
@@ -3742,7 +3733,7 @@
       <contextpattern look="before" match="negative">sco</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>u\.n\.i\.x\.?</pattern1>
+      <pattern1>u\.n\.i\.x</pattern1>
     </patterngroup>
   </term>
 
@@ -3768,7 +3759,7 @@
     </patterngroup>
     <patterngroup>
       <pattern1>(un-|de-?)selected|(un|de)-(blocked|chosen)</pattern1>
-      <contextpattern mode="fuzzy" where="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
+      <contextpattern mode="fuzzy" where="3">((selection|text|entr(y|ie)|word)s?|##@mono##)</contextpattern>
     </patterngroup>
   </term>
 
@@ -3872,20 +3863,20 @@
       <pattern1 case="keep">[Vv]lan</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>v\.l\.a\.n\.?</pattern1>
+      <pattern1>v\.l\.a\.n</pattern1>
     </patterngroup>
   </term>
 
-  <!-- Don't check for WWW and World Wide Web, there legitimate uses. -->
+  <!-- Don't check for WWW and World Wide Web, there could be legitimate uses. -->
   <term>
     <accept>
       <word>Web</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">web</pattern1>
+      <pattern1 case="keep">(WEB|web)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1 case="keep">WEB</pattern1>
+      <pattern1>interwebs?</pattern1>
     </patterngroup>
   </term>
 
@@ -3996,10 +3987,7 @@
       <pattern1>wifi</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1 case="keep">wi-[Ff]i</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1 case="keep">Wi-fi</pattern1>
+      <pattern1 case="keep">(WI-FI|wi-[Ff]i|Wi-fi)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>wi(reless)?</pattern1>
@@ -4064,7 +4052,7 @@
       <word>write</word>
     </accept>
     <patterngroup>
-      <pattern1>pipe(d|ing)</pattern1>
+      <pattern1>pip(ed|ing)</pattern1>
       <contextpattern match="negative">in</contextpattern>
     </patterngroup>
     <patterngroup>
@@ -4104,10 +4092,7 @@
       <word>Xen</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">xen</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1 case="keep">XEN</pattern1>
+      <pattern1 case="keep">(XEN|xen)</pattern1>
     </patterngroup>
   </term>
 
@@ -4116,10 +4101,7 @@
       <word>Xend</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">xend</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1 case="keep">XEND</pattern1>
+      <pattern1 case="keep">(XEND|xend)</pattern1>
     </patterngroup>
   </term>
 
@@ -4128,10 +4110,7 @@
       <word>YaST</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">YAST</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1 case="keep">[Yy]ast</pattern1>
+      <pattern1 case="keep">(YAST|[Yy]ast)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>yast2</pattern1>
@@ -4143,10 +4122,7 @@
       <word>Zypper</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">ZYPPER</pattern1>
-    </patterngroup>
-    <patterngroup>
-      <pattern1 case="keep">zypper</pattern1>
+      <pattern1 case="keep">(ZYPPER|zypper)</pattern1>
     </patterngroup>
   </term>
 
