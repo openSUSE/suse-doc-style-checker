@@ -482,17 +482,6 @@
 
   <term>
     <accept>
-      <word>usually</word>
-    </accept>
-    <patterngroup>
-      <pattern1>in</pattern1>
-      <pattern2>most</pattern2>
-      <pattern3>cases?</pattern3>
-    </patterngroup>
-  </term>
-
-  <term>
-    <accept>
       <word>how much</word>
     </accept>
     <patterngroup>
@@ -567,6 +556,23 @@
       <pattern2>a</pattern2>
       <pattern3>large</pattern3>
       <pattern4>extent</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>lastly</word>
+    </accept>
+    <patterngroup>
+      <pattern1>le?ast(ly)?</pattern1>
+      <pattern2>(not|but)</pattern2>
+      <pattern3>le?ast(ly)?</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>le?ast(ly)?</pattern1>
+      <pattern2>but</pattern2>
+      <pattern3>not</pattern3>
+      <pattern4>le?ast(ly)?</pattern4>
     </patterngroup>
   </term>
 
@@ -927,6 +933,17 @@
       <pattern1>ma(kes?|de|king)</pattern1>
       <pattern2>use?</pattern2>
       <pattern3>of</pattern3>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>usually</word>
+    </accept>
+    <patterngroup>
+      <pattern1>in</pattern1>
+      <pattern2>most</pattern2>
+      <pattern3>cases?</pattern3>
     </patterngroup>
   </term>
 
