@@ -751,20 +751,13 @@ average time per word: %s\n"""
 
 
 def replacepunctuation( word, position ):
-    # FIXME: Check if this really fares any better than a regular expression.
-    punctuationstarts = [ "(","[","{" ]
-    punctuationends = [ ")","]","}","/","\\",",",":",";","!","." ]
+    startpunctuation = '([{'
+    endpunctuation = ')]}/\\,:;!.'
 
     if position == 'end':
-        for punctuationend in punctuationends:
-            if word.endswith( punctuationend ):
-                word = word[:-1]
-                break
+        word.rstrip( endpunctuation )
     else:
-        for punctuationstart in punctuationstarts:
-            if word.startswith( punctuationstart ):
-                word = word[1:]
-                break
+        word.lstrip( startpunctuation )
     return word
 
 def dupecheckmessage( word, line, content, contextid, basefile ):
