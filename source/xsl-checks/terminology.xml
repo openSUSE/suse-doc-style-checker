@@ -762,7 +762,7 @@
       <word>connect via SSH</word>
     </accept>
     <patterngroup>
-      <pattern1>ssh[’՚'ʼ＇｀̀́`´ʻʹʽ]?(ing|ed|s)</pattern1>
+      <pattern1>ssh'?(ing|ed|s)</pattern1>
       <pattern2>in(to)?</pattern2>
     </patterngroup>
     <patterngroup>
@@ -775,10 +775,10 @@
       <pattern2>into</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>ssh[’՚'ʼ＇｀̀́`´ʻʹʽ]?(ing|ed|s)</pattern1>
+      <pattern1>ssh'?(ing|ed|s)</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>ssh[’՚'ʼ＇｀̀́`´ʻʹʽ]?(ing|ed|s)</pattern1>
+      <pattern1>ssh'?(ing|ed|s)</pattern1>
     </patterngroup>
     <patterngroup>
       <pattern1>ssh</pattern1>

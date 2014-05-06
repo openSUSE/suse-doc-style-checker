@@ -36,6 +36,7 @@ onepattern = ""         # one long pattern is cheaper than many short ones
 # followed by an indicator of a lookahead/lookbehind (?) or are already
 # non-capturing groups
 parentheses = re.compile( r'(?<!\\)\((?![\?|\:])' )
+apostrophe = re.compile( r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]' )
 
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
@@ -104,11 +105,12 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
     global onepattern
 
     if content:
-        # I get this as a list with one lxml.etree._ElementUnicodeResult, not
-        # as a list with a string.
+        # I get this as a list with one lxml.etree._ElementUnicodeResult.
+        # I need a single string.
         # For whatever reason, this made termcheckmessage() crash
         # happily and semi-randomly.
-        content = str( content[0] )
+        # Also make sure that we always get the same kind of apostrophe.
+        content = apostrophe.sub( '\'', str( content[0] ) )
 
     if not content:
         return messages

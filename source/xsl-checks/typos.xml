@@ -282,7 +282,7 @@
     </accept>
     <patterngroup>
       <pattern1>go</pattern1>
-      <contextpattern look="before">(\w+?[’՚'ʼ＇｀̀́`´ʻʹʽ]|ha)(ve|d)</contextpattern>
+      <contextpattern look="before">(\w+?'|ha)(ve|d)</contextpattern>
       <contextpattern>to</contextpattern>
       <contextpattern where="2">go</contextpattern>
     </patterngroup>
@@ -385,7 +385,7 @@
     <patterngroup>
       <pattern1>notice</pattern1>
       <contextpattern>that</contextpattern>
-      <contextpattern look="before" where="2" mode="fuzzy" match="negative">(will|\w+[’՚'ʼ＇｀̀́`´ʻʹʽ]ll|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before" where="2" mode="fuzzy" match="negative">(will|\w+'ll|can|could|may|might|shall|should)</contextpattern>
     </patterngroup>
   </term>
 
