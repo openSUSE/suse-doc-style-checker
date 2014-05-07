@@ -719,7 +719,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
         # To its credit: it kinda works.
         if wordposition >= 5:
             if wordstripped == words[wordposition - 3]:
-                if not ( dupeignore.match( words[wordposition - 1] ) and dupeignore.match( words[wordposition - 2] ) ):
+                if not ( dupeignore.match( words[wordposition - 1] ) or dupeignore.match( words[wordposition - 2] ) ):
                     if words[wordposition - 1] == words[wordposition - 4]:
                         firstwordstripped = replacepunctuation( words[wordposition - 5], 'start' )
                         if words[wordposition - 2] == firstwordstripped:
@@ -731,7 +731,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
 
         if wordposition >= 3:
             if wordstripped == words[wordposition - 2]:
-                if dupeignore.match( words[wordposition - 1] ):
+                if not dupeignore.match( words[wordposition - 1] ):
                     firstwordstripped = replacepunctuation( words[wordposition - 3], 'start' )
                     if words[wordposition - 1] == firstwordstripped:
                         line = linenumber( context )
