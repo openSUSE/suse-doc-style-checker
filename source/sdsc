@@ -39,6 +39,12 @@ parentheses = re.compile( r'(?<!\\)\((?![\?|\:])' )
 apostrophe = re.compile( r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]' )
 
 
+# FIXME: English hardcoded
+# Lookbehinds need to have a fixed length... thus .ca
+# Do not use capture groups here -- re.split does odd things where those are.
+sentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)\.?\.?\.\s(?=[\(\[\{A-Z0-9])|\.?\.?[!\?]\s(?=[\(\[\{A-Z0-9])|[:;]\s' )
+
+
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
 # (self-explanatory anyway). Get rid of "optional arguments" header. Make sure
 # least important options (--help, --version) are listed last. Also, I really
@@ -649,10 +655,7 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile ):
     return messages
 
 def sentencetokenizer( text ):
-    # FIXME: English hardcoded
-    # Lookbehinds need to have a fixed length... thus _ca
-    sentences = re.split( r'(?<![Ee]\.g|etc|[Ii]\.e| ca|n\.b|[Ii]nc)\.?\.?\.\s|!\s|\.?\.?\?\s', text )
-    return sentences
+    return sentenceends.split( text )
 
 def dupecheck( context, content, contentpretty, contextid, basefile ):
     global punctuationstart
