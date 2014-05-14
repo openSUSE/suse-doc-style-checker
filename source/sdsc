@@ -35,10 +35,11 @@ apostrophe = re.compile( r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]' )
 # Lookbehinds need to have a fixed length... thus .ca
 # Do not use capture groups here -- re.split does odd things where those are.
 sentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)\.?\.?\.\s(?=[\(\[\{A-Z0-9])|\.?\.?[!\?]\s(?=[\(\[\{A-Z0-9])|[:;]\s' )
+lastsentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)\.?\.?[\.!\?]\s*|[:;]\s*$' )
 
 
 # FIXME: Number separation with spaces is a language-specific hack.
-dupeignore = re.compile( r'([0-9]{1,3}|##@ignore##)(\b|[^-\w]|$)' , re.I )
+dupeignore = re.compile( r'([0-9]{1,3}|##@ignore##)([\W\S](?=\s)|\s|$)' , re.I )
 
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
@@ -408,7 +409,7 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
         patterns.append( patternsofterm )
 
     if useonepattern:
-        onepattern = re.compile( onepattern, flags = re.I )
+        onepattern = re.compile( manglepattern( onepattern, 'one' ), flags = re.I )
 
     if args.performance:
         timeendbuild = time.time()
@@ -434,20 +435,31 @@ def trypattern( pattern ):
     return True
 
 
-def manglepattern( pattern, onepatternmode ):
-    # FIXME: This is messy and not really doing what I want it to.
-
-    if onepatternmode:
-        # use (?: to create non-capturing groups: the re module's
-        # implementation only supports up to 100 named groups per
-        # expression
+def manglepattern( pattern, mode ):
+    # Use (?: to create non-capturing groups: the re module's
+    # implementation only supports up to 100 named groups per
+    # expression. onepattern often contains more than 100 groups.
+    if mode == 'one':
         pattern = parentheses.sub('(?:', pattern)
 
-    # \b is messy: inside a character class, it is interpreted as a
-    # backspace character. Outside, it marks word boundaries. However, we
-    # want to be able to check words that start/end with punctuation (such
-    # as abbreviations), too.
-    pattern = r'\b' + pattern + r'\b'
+    # Both contextpattern and onepattern are realised with re.search(),
+    # thus need some more information about where a token should really
+    # start.
+    if mode == 'context' or mode == 'one':
+        # Lookbehinds need to have a fixed length, thus we use two (which makes
+        # this more contrived than need be). There is no such requirement
+        # for lookaheads.
+        # Fwiw, below, we try to find places that are either at the beginning
+        # of the string, have a space before them and optionally can also
+        # have a non-word character directly before them, e.g. (.
+        # The character class [\s^] does not work, thus we use (?:\s|^).
+        pattern = r'((?<=^)(?:{0})|(?<=\s|^\W)(?:{0})|(?<=\s\W)(?:{0}))'.format(pattern)
+
+    # And finally, let's see if there is any punctuation at the end. Looking
+    # for the end of the string or a space makes sure we don't match e.g.
+    # "just" in "just-installed".
+    # This is enough for all words that are re.match()ed.
+    pattern = pattern + r'(?=\W{0,5}(?:\s|$))'
 
     return pattern
 
@@ -490,8 +502,8 @@ def preparepatterns( patterngroupxpath, useonepattern ):
         else:
             trypattern( patternxpathcontent )
             if i == 1 and useonepattern:
-                patternforonepattern = manglepattern( patternxpathcontent, 1 )
-            patternxpathcontent = manglepattern( patternxpathcontent, 0 )
+                patternforonepattern = patternxpathcontent #manglepattern( patternxpathcontent, 'one' )
+            patternxpathcontent = manglepattern( patternxpathcontent, 'default' )
 
         pattern = None
         if getattribute( patternxpath[0], 'case' ) == 'keep':
@@ -516,8 +528,7 @@ def preparecontextpatterns( contextpatternxpath ):
 
     # Since this is now searched for instead of matched on, we need to avoid
     # searching for e.g. "mail" in "e-mail".
-    contextpatternxpathcontent = r'(?<![-#@;\/\\\+\=\:\.\$\*])' + manglepattern(
-        contextpatternxpathcontent, 0 ) + r'(?![-#@\+\=\$\*])'
+    contextpatternxpathcontent = manglepattern( contextpatternxpathcontent, 'context' )
 
     if getattribute( contextpatternxpath, 'case' ) == 'keep':
         contextpattern = re.compile( contextpatternxpathcontent )
@@ -664,7 +675,11 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile ):
     return messages
 
 def sentencetokenizer( text ):
-    return sentenceends.split( text )
+    sentences = sentenceends.split( text )
+    sentences[-1] = lastsentenceends.sub( '', sentences[-1] )
+    for sentence in sentences:
+        print(sentence +'\n')
+    return sentences
 
 def dupecheck( context, content, contentpretty, contextid, basefile ):
     messages = []
