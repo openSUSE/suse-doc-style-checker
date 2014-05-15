@@ -176,6 +176,10 @@
       <contextpattern>the</contextpattern>
       <contextpattern where="2">way</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <pattern1>per</pattern1>
+      <contextpattern>default</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
@@ -290,6 +294,17 @@
 
   <term>
     <accept>
+      <word>hardware</word>
+    </accept>
+    <patterngroup>
+      <pattern1>hard</pattern1>
+      <contextpattern look="before">(and|or)</contextpattern>
+      <contextpattern look="before" where="2">software</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>hour</word>
     </accept>
     <patterngroup>
@@ -301,6 +316,16 @@
       <pattern1>our</pattern1>
       <contextpattern look="before">an?</contextpattern>
       <contextpattern look="before" where="2">half</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>if</word>
+    </accept>
+    <patterngroup>
+      <pattern1>i(?![-,])</pattern1>
+      <contextpattern>you</contextpattern>
     </patterngroup>
   </term>
 
@@ -373,6 +398,21 @@
       <contextpattern look="before">it</contextpattern>
     </patterngroup>
   </term> -->
+
+  <term>
+    <accept>
+      <word>by</word>
+    </accept>
+    <patterngroup>
+      <pattern1>with</pattern1>
+      <contextpattern look="before">multipl(y(ing)?|ie[ds])</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>notice</pattern1>
+      <contextpattern>that</contextpattern>
+      <contextpattern look="before" where="2" mode="fuzzy" match="negative">(will|\w+'ll|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup>
+  </term>
 
   <term>
     <accept>
@@ -453,6 +493,17 @@
 
   <term>
     <accept>
+      <word>remember</word>
+    </accept>
+    <patterngroup>
+      <pattern1>remind</pattern1>
+      <contextpattern look="before">to</contextpattern>
+      <contextpattern look="before" where="2">eas(y|ier|iest)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>same</word>
     </accept>
     <patterngroup>
@@ -468,6 +519,17 @@
     <patterngroup>
       <pattern1>say</pattern1>
       <contextpattern look="before">per</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>software</word>
+    </accept>
+    <patterngroup>
+      <pattern1>soft</pattern1>
+      <contextpattern>(and|or)</contextpattern>
+      <contextpattern where="2">hardware</contextpattern>
     </patterngroup>
   </term>
 
@@ -573,6 +635,17 @@
     <patterngroup>
       <pattern1>too?</pattern1>
       <contextpattern look="before">the(?![,])</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>use</word>
+    </accept>
+    <patterngroup>
+      <pattern1>use(?!,)</pattern1>
+      <contextpattern look="before">to</contextpattern>
+      <contextpattern look="before">(the|an?)</contextpattern>
     </patterngroup>
   </term>
 
