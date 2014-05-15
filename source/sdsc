@@ -489,9 +489,9 @@ def preparepatterns( patterngroupxpath, useonepattern ):
                 break
         else:
             trypattern( patternxpathcontent )
-            patternxpathcontent = manglepattern( patternxpathcontent, 0 )
             if i == 1 and useonepattern:
                 patternforonepattern = manglepattern( patternxpathcontent, 1 )
+            patternxpathcontent = manglepattern( patternxpathcontent, 0 )
 
         pattern = None
         if getattribute( patternxpath[0], 'case' ) == 'keep':
