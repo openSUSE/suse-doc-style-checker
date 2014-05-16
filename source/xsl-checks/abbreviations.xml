@@ -29,7 +29,7 @@ min., max.
       <word>around</word>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">[Cc]a(?!\.[a-z])</pattern1>
+      <pattern1 case="keep">[Cc]a\.</pattern1>
     </patterngroup>
   </term>
 
@@ -38,7 +38,26 @@ min., max.
       <word>compared to</word>
     </accept>
     <patterngroup>
-      <pattern1>v(/|s)</pattern1>
+      <pattern1>v(/|s\.?)</pattern1>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>and others</word>
+    </accept>
+    <patterngroup>
+      <pattern1>et</pattern1>
+      <pattern2>al\.?</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>in the same place</word>
+    </accept>
+    <patterngroup>
+      <pattern1>ibid\.?</pattern1>
     </patterngroup>
   </term>
 
@@ -47,11 +66,11 @@ min., max.
       <word>for example</word>
     </accept>
     <patterngroup>
-      <pattern1>e\.g</pattern1>
+      <pattern1>e\.g\.?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>e</pattern1>
-      <pattern2>g</pattern2>
+      <pattern1>e\.</pattern1>
+      <pattern2>g\.</pattern2>
     </patterngroup>
   </term>
 
@@ -60,11 +79,14 @@ min., max.
       <word>note</word>
     </accept>
     <patterngroup>
-      <pattern1>n\.b</pattern1>
+      <pattern1>n\.b\.?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>n</pattern1>
-      <pattern2>b</pattern2>
+      <pattern1 case="keep">NB</pattern1>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>n\.</pattern1>
+      <pattern2>b\.</pattern2>
     </patterngroup>
   </term>
 
@@ -73,11 +95,11 @@ min., max.
       <word>see</word>
     </accept>
     <patterngroup>
-      <pattern1>q\.v</pattern1>
+      <pattern1>q\.v\.?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>q</pattern1>
-      <pattern2>v</pattern2>
+      <pattern1>q\.</pattern1>
+      <pattern2>v\.</pattern2>
     </patterngroup>
   </term>
 
@@ -86,11 +108,20 @@ min., max.
       <word>that is</word>
     </accept>
     <patterngroup>
-      <pattern1>i\.e</pattern1>
+      <pattern1>i\.e\.?</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>i</pattern1>
-      <pattern2>e</pattern2>
+      <pattern1>i\.</pattern1>
+      <pattern2>e\.</pattern2>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>concerning</word>
+    </accept>
+    <patterngroup>
+      <pattern1>re[\.:]?</pattern1>
     </patterngroup>
   </term>
 
@@ -99,11 +130,12 @@ min., max.
       <word>respectively</word>
     </accept>
     <patterngroup>
-      <pattern1>resp</pattern1>
+      <pattern1>resp\.?</pattern1>
     </patterngroup>
   </term>
 
-  <!-- I don't really think the following is very useful... -->
+  <!-- At first: "I don't really think the following is very useful..." -->
+  <!-- But then: "Well, someone really used ASAP in documentation!" -->
   <term>
     <accept/>
     <patterngroup>
