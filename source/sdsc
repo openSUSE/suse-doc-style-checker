@@ -776,9 +776,9 @@ def replacepunctuation( word, position ):
     endpunctuation = ')]}/\\,:;!.'
 
     if position == 'end':
-        word.rstrip( endpunctuation )
+        word = word.rstrip( endpunctuation )
     else:
-        word.lstrip( startpunctuation )
+        word = word.lstrip( startpunctuation )
     return word
 
 def dupecheckmessage( word, line, content, contextid, basefile ):
