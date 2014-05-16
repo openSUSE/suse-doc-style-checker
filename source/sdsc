@@ -151,7 +151,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
 
 
     # This should get us far enough for now
-    sentences = sentencetokenizer( content )
+    sentences = sentencesegmenter( content )
 
     for sentence in sentences:
         # FIXME: Get something better than s.split. Some
@@ -641,7 +641,7 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile ):
         else:
             contentpretty = content
 
-        sentences = sentencetokenizer( content )
+        sentences = sentencesegmenter( content )
 
         for sentence in sentences:
             words = sentence.split()
@@ -674,11 +674,9 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile ):
 
     return messages
 
-def sentencetokenizer( text ):
+def sentencesegmenter( text ):
     sentences = sentenceends.split( text )
     sentences[-1] = lastsentenceends.sub( '', sentences[-1] )
-    for sentence in sentences:
-        print(sentence +'\n')
     return sentences
 
 def dupecheck( context, content, contentpretty, contextid, basefile ):
