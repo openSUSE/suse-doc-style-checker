@@ -26,111 +26,111 @@ min., max.
 
   <term>
     <accept>
-      <word>around</word>
+      <proposal>around</proposal>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">[Cc]a\.</pattern1>
+      <pattern case="keep">[Cc]a\.</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>compared to</word>
+      <proposal>compared to</proposal>
     </accept>
     <patterngroup>
-      <pattern1>v(/|s\.?)</pattern1>
+      <pattern>v(/|s\.?)</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>and others</word>
+      <proposal>and others</proposal>
     </accept>
     <patterngroup>
-      <pattern1>et</pattern1>
-      <pattern2>al\.?</pattern2>
+      <pattern>et</pattern>
+      <pattern>al\.?</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>in the same place</word>
+      <proposal>in the same place</proposal>
     </accept>
     <patterngroup>
-      <pattern1>ibid\.?</pattern1>
+      <pattern>ibid\.?</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>for example</word>
+      <proposal>for example</proposal>
     </accept>
     <patterngroup>
-      <pattern1>e\.g\.?</pattern1>
+      <pattern>e\.g\.?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>e\.</pattern1>
-      <pattern2>g\.</pattern2>
+      <pattern>e\.</pattern>
+      <pattern>g\.</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>note</word>
+      <proposal>note</proposal>
     </accept>
     <patterngroup>
-      <pattern1>n\.b\.?</pattern1>
+      <pattern>n\.b\.?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1 case="keep">NB</pattern1>
+      <pattern case="keep">NB</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>n\.</pattern1>
-      <pattern2>b\.</pattern2>
+      <pattern>n\.</pattern>
+      <pattern>b\.</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>see</word>
+      <proposal>see</proposal>
     </accept>
     <patterngroup>
-      <pattern1>q\.v\.?</pattern1>
+      <pattern>q\.v\.?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>q\.</pattern1>
-      <pattern2>v\.</pattern2>
+      <pattern>q\.</pattern>
+      <pattern>v\.</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>that is</word>
+      <proposal>that is</proposal>
     </accept>
     <patterngroup>
-      <pattern1>i\.e\.?</pattern1>
+      <pattern>i\.e\.?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>i\.</pattern1>
-      <pattern2>e\.</pattern2>
-    </patterngroup>
-  </term>
-
-  <term>
-    <accept>
-      <word>concerning</word>
-    </accept>
-    <patterngroup>
-      <pattern1>re[\.:]?</pattern1>
+      <pattern>i\.</pattern>
+      <pattern>e\.</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>respectively</word>
+      <proposal>concerning</proposal>
     </accept>
     <patterngroup>
-      <pattern1>resp\.?</pattern1>
+      <pattern>re[\.:]?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>respectively</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>resp\.?</pattern>
     </patterngroup>
   </term>
 
@@ -139,7 +139,7 @@ min., max.
   <term>
     <accept/>
     <patterngroup>
-      <pattern1>(asap|imho|afaic[ts]|ftfy|lol|rofl|idk|yolo|ymmv|tia)</pattern1>
+      <pattern>(asap|imho|afaic[ts]|ftfy|lol|rofl|idk|yolo|ymmv|tia)</pattern>
     </patterngroup>
   </term>
 

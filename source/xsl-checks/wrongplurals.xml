@@ -3,65 +3,65 @@
 
   <term>
     <accept>
-      <word>criteria</word>
+      <proposal>criteria</proposal>
     </accept>
     <patterngroup>
-      <pattern1>criteri(a|on)s</pattern1>
+      <pattern>criteri(a|on)s</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>criteri(a|on)'s</pattern1>
+      <pattern>criteri(a|on)'s</pattern>
       <contextpattern match="negative" look="before">(the|a)</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>data</word>
+      <proposal>data</proposal>
     </accept>
     <patterngroup>
-      <pattern1>datas</pattern1>
+      <pattern>datas</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>data's</pattern1>
+      <pattern>data's</pattern>
       <contextpattern match="negative" look="before">(the|a)</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>information</word>
+      <proposal>information</proposal>
     </accept>
     <patterngroup>
-      <pattern1>info(rmation)?s</pattern1>
+      <pattern>info(rmation)?s</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>info(rmation)?'s</pattern1>
+      <pattern>info(rmation)?'s</pattern>
       <contextpattern match="negative" look="before">(the|a)</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>media</word>
+      <proposal>media</proposal>
     </accept>
     <patterngroup>
-      <pattern1>medi(a|um)s</pattern1>
+      <pattern>medi(a|um)s</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>medi(a|on)'s</pattern1>
+      <pattern>medi(a|on)'s</pattern>
       <contextpattern match="negative" look="before">(the|a)</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>metadata</word>
+      <proposal>metadata</proposal>
     </accept>
     <patterngroup>
-      <pattern1>metadatas</pattern1>
+      <pattern>metadatas</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>metadata's</pattern1>
+      <pattern>metadata's</pattern>
       <contextpattern match="negative" look="before">(the|a)</contextpattern>
     </patterngroup>
   </term>

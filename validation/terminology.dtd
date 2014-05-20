@@ -9,33 +9,15 @@
 
 <!ELEMENT term            (accept, patterngroup+) >
 
-<!ELEMENT accept          (word?, context?) >
+<!ELEMENT accept          (proposal?, context?) >
 
-<!ELEMENT patterngroup    (pattern1, pattern2?, pattern3?, pattern4?, pattern5?,
-                          pattern6?, pattern7?, pattern8?, pattern9?,
-                          contextpattern*) >
+<!ELEMENT patterngroup    (pattern+, contextpattern*) >
 
-<!ELEMENT pattern1        (#PCDATA) >
-
-<!ELEMENT pattern2        (#PCDATA) >
-
-<!ELEMENT pattern3        (#PCDATA) >
-
-<!ELEMENT pattern4        (#PCDATA) >
-
-<!ELEMENT pattern5        (#PCDATA) >
-
-<!ELEMENT pattern6        (#PCDATA) >
-
-<!ELEMENT pattern7        (#PCDATA) >
-
-<!ELEMENT pattern8        (#PCDATA) >
-
-<!ELEMENT pattern9        (#PCDATA) >
+<!ELEMENT pattern         (#PCDATA) >
 
 <!ELEMENT contextpattern  (#PCDATA) >
 
-<!ELEMENT word            (#PCDATA) >
+<!ELEMENT proposal        (#PCDATA) >
 
 <!ELEMENT context         (#PCDATA) >
 
@@ -52,29 +34,13 @@
                                                                     #IMPLIED >
 
 <!--  Default value is 1, ignore. -->
-<!ATTLIST pattern1
-                          case      (ignore|keep)                   #IMPLIED >
-<!ATTLIST pattern2
-                          case      (ignore|keep)                   #IMPLIED >
-<!ATTLIST pattern3
-                          case      (ignore|keep)                   #IMPLIED >
-<!ATTLIST pattern4
-                          case      (ignore|keep)                   #IMPLIED >
-<!ATTLIST pattern5
-                          case      (ignore|keep)                   #IMPLIED >
-<!ATTLIST pattern6
-                          case      (ignore|keep)                   #IMPLIED >
-<!ATTLIST pattern7
-                          case      (ignore|keep)                   #IMPLIED >
-<!ATTLIST pattern8
-                          case      (ignore|keep)                   #IMPLIED >
-<!ATTLIST pattern9
+<!ATTLIST pattern
                           case      (ignore|keep)                   #IMPLIED >
 
 <!--  Default values are after, exact, 1, positive, ignore. -->
 <!ATTLIST contextpattern
                           look      (before|after)                  #IMPLIED
                           mode      (fuzzy|exact)                   #IMPLIED
-                          where     (1|2|3|4|5)                     #IMPLIED
+                          location  (1|2|3|4|5)                     #IMPLIED
                           match     (positive|negative)             #IMPLIED
                           case      (ignore|keep)                   #IMPLIED >

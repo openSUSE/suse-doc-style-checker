@@ -3,271 +3,271 @@
 
   <term>
     <accept>
-      <word>cannot</word>
+      <proposal>cannot</proposal>
     </accept>
     <patterngroup>
-      <pattern1>can't</pattern1>
+      <pattern>can't</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>could not</word>
+      <proposal>could not</proposal>
     </accept>
     <patterngroup>
-      <pattern1>couldn't</pattern1>
+      <pattern>couldn't</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>does not</word>
+      <proposal>does not</proposal>
     </accept>
     <patterngroup>
-      <pattern1>doesn't</pattern1>
+      <pattern>doesn't</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>has not</word>
+      <proposal>has not</proposal>
     </accept>
     <patterngroup>
-      <pattern1>hasn't</pattern1>
+      <pattern>hasn't</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>he is</word>
+      <proposal>he is</proposal>
     </accept>
     <patterngroup>
-      <pattern1>he's</pattern1>
+      <pattern>he's</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>he will</word>
+      <proposal>he will</proposal>
     </accept>
     <patterngroup>
-      <pattern1>he'll</pattern1>
+      <pattern>he'll</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>he would</word>
+      <proposal>he would</proposal>
     </accept>
     <patterngroup>
-      <pattern1>he'd</pattern1>
+      <pattern>he'd</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>I am</word>
+      <proposal>I am</proposal>
     </accept>
     <patterngroup>
-      <pattern1>i'm</pattern1>
+      <pattern>i'm</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>it is</word>
+      <proposal>it is</proposal>
     </accept>
     <patterngroup>
-      <pattern1>it's</pattern1>
+      <pattern>it's</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>it will</word>
+      <proposal>it will</proposal>
     </accept>
     <patterngroup>
-      <pattern1>it'll</pattern1>
+      <pattern>it'll</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>it would</word>
+      <proposal>it would</proposal>
     </accept>
     <patterngroup>
-      <pattern1>it'd</pattern1>
+      <pattern>it'd</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>is not</word>
+      <proposal>is not</proposal>
     </accept>
     <patterngroup>
-      <pattern1>(ai|is)n't</pattern1>
+      <pattern>(ai|is)n't</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>must not</word>
+      <proposal>must not</proposal>
     </accept>
     <patterngroup>
-      <pattern1>mustn't</pattern1>
+      <pattern>mustn't</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>ought not</word>
+      <proposal>ought not</proposal>
     </accept>
     <patterngroup>
-      <pattern1>oughtn't</pattern1>
+      <pattern>oughtn't</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>shall not</word>
+      <proposal>shall not</proposal>
     </accept>
     <patterngroup>
-      <pattern1>shan't</pattern1>
+      <pattern>shan't</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>she is</word>
+      <proposal>she is</proposal>
     </accept>
     <patterngroup>
-      <pattern1>she's</pattern1>
+      <pattern>she's</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>she will</word>
+      <proposal>she will</proposal>
     </accept>
     <patterngroup>
-      <pattern1>she'll</pattern1>
+      <pattern>she'll</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>she would</word>
+      <proposal>she would</proposal>
     </accept>
     <patterngroup>
-      <pattern1>she'd</pattern1>
+      <pattern>she'd</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>that is</word>
+      <proposal>that is</proposal>
     </accept>
     <patterngroup>
-      <pattern1>that's</pattern1>
+      <pattern>that's</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>that will</word>
+      <proposal>that will</proposal>
     </accept>
     <patterngroup>
-      <pattern1>that'll</pattern1>
+      <pattern>that'll</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>they are</word>
+      <proposal>they are</proposal>
     </accept>
     <patterngroup>
-      <pattern1>they're</pattern1>
+      <pattern>they're</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>they have</word>
+      <proposal>they have</proposal>
     </accept>
     <patterngroup>
-      <pattern1>they've</pattern1>
+      <pattern>they've</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>they will</word>
+      <proposal>they will</proposal>
     </accept>
     <patterngroup>
-      <pattern1>they'll</pattern1>
+      <pattern>they'll</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>they would</word>
+      <proposal>they would</proposal>
     </accept>
     <patterngroup>
-      <pattern1>they'd</pattern1>
+      <pattern>they'd</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>will not</word>
+      <proposal>will not</proposal>
     </accept>
     <patterngroup>
-      <pattern1>won't</pattern1>
+      <pattern>won't</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>would not</word>
+      <proposal>would not</proposal>
     </accept>
     <patterngroup>
-      <pattern1>wouldn't</pattern1>
+      <pattern>wouldn't</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>you are</word>
+      <proposal>you are</proposal>
     </accept>
     <patterngroup>
-      <pattern1>you're</pattern1>
+      <pattern>you're</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>you have</word>
+      <proposal>you have</proposal>
     </accept>
     <patterngroup>
-      <pattern1>you've</pattern1>
+      <pattern>you've</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>you will</word>
+      <proposal>you will</proposal>
     </accept>
     <patterngroup>
-      <pattern1>you'll</pattern1>
+      <pattern>you'll</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>you would</word>
+      <proposal>you would</proposal>
     </accept>
     <patterngroup>
-      <pattern1>you'd</pattern1>
+      <pattern>you'd</pattern>
     </patterngroup>
   </term>
 

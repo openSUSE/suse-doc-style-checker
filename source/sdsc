@@ -326,15 +326,15 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
     global ignoredpattern
 
     # list of accepted terms:
-    # accepts = [ [ 'word', 'context' ], [ 'accepted term without context', None ], [ None, None ], ... ]
+    # accepts = [ [ 'proposal', 'context' ], [ 'proposal without context', None ], [ None, None ], ... ]
     #             <accept/> #1,          <accept/> #2,                              <accept/> #3
     global accepts
     accepts = []
 
     # list of main search patterns, per accepted term:
-    # patterns = [ [ [ pattern1, pattern2, pattern3 ], [ pattern1, pattern2 ] ], [ [ pattern1, pattern2 ], ... ], ... ]
-    #              <accept/> #1,                                                 <accept/> #1
-    #                <patterngroup/> #1,                     <patterngroup/> #2,   <patterngroup/> #1
+    # patterns = [ [ [ pattern, pattern, pattern ], [ pattern, pattern ] ], [ [ pattern, pattern ], ... ], ... ]
+    #              <accept/> #1,                                            <accept/> #1
+    #                <patterngroup/> #1,            <patterngroup/> #2,       <patterngroup/> #1
     global patterns
     patterns = []
 
@@ -464,7 +464,7 @@ def manglepattern( pattern, mode ):
     return pattern
 
 def prepareaccept( term ):
-    acceptwordxpath = term.xpath( 'accept[1]/word[1]' )
+    acceptwordxpath = term.xpath( 'accept[1]/proposal[1]' )
     acceptwordxpathcontent = None
     if acceptwordxpath:
         acceptwordxpathcontent = acceptwordxpath[0].text
@@ -485,15 +485,16 @@ def preparepatterns( patterngroupxpath, useonepattern ):
     patternsofpatterngroup = []
     patternforonepattern = None
 
-    for i in range(1,10):
-        patternxpath = patterngroupxpath.xpath( 'pattern%s[1]' % i )
+    lengthpatterngroupxpath = len( patterngroupxpath.xpath( 'pattern') )
+    for i in range(1, lengthpatterngroupxpath + 1):
+        patternxpath = patterngroupxpath.xpath( 'pattern[%s]' % i )
         patternxpathcontent = None
         if patternxpath:
             patternxpathcontent = patternxpath[0].text
 
         if not patternxpathcontent:
             if i == 1:
-                emptypatternmessage( 'pattern1' )
+                emptypatternmessage( 'pattern' )
             else:
                 # FIXME: the implementation assumes that the e.g. the second
                 # pattern can only come from the pattern2 element --
@@ -522,7 +523,7 @@ def preparecontextpatterns( contextpatternxpath ):
     trypattern( contextpatternxpathcontent )
 
     factor = 1
-    where = []
+    location = []
     fuzzymode = False
     positivematch = True
 
@@ -544,18 +545,18 @@ def preparecontextpatterns( contextpatternxpath ):
     if getattribute( contextpatternxpath, 'match' ) == 'negative':
         positivematch = False
 
-    wherexpath = getattribute( contextpatternxpath, 'where' )
-    if wherexpath:
+    locationxpath = getattribute( contextpatternxpath, 'location' )
+    if locationxpath:
         if fuzzymode:
-            whererange = range( 1, ( int( wherexpath ) + 1 ) )
-            for i in whererange:
-                where.append( i * factor )
+            locationrange = range( 1, ( int( locationxpath ) + 1 ) )
+            for i in locationrange:
+                location.append( i * factor )
         else:
-            where = [ ( int( wherexpath ) * factor ) ]
+            location = [ ( int( locationxpath ) * factor ) ]
     else:
-        where = [ ( 1 * factor ) ]
+        location = [ ( 1 * factor ) ]
 
-    return [ contextpattern, where, positivematch ]
+    return [ contextpattern, location, positivematch ]
 
 def getattribute( element, attribute ):
     xpath = element.xpath( '@' + attribute )

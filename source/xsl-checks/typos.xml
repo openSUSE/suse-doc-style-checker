@@ -12,58 +12,58 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>adapt</word>
+      <proposal>adapt</proposal>
     </accept>
     <patterngroup>
-      <pattern1>ad[eo]pt(ed|s|ing)?</pattern1>
+      <pattern>ad[eo]pt(ed|s|ing)?</pattern>
       <contextpattern look="before">(always|(automatical|easi|usual|general)ly)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>ad[eo]pt(ed|s|ing)?</pattern1>
+      <pattern>ad[eo]pt(ed|s|ing)?</pattern>
       <contextpattern match="negative">by</contextpattern>
       <contextpattern mode="fuzzy" where="4">(your|their)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>ad[eo]pt(ed|s|ing)?</pattern1>
+      <pattern>ad[eo]pt(ed|s|ing)?</pattern>
       <contextpattern mode="fuzzy" where="2">to</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>adaptation</word>
+      <proposal>adaptation</proposal>
     </accept>
     <patterngroup>
-      <pattern1>adoptations?</pattern1>
+      <pattern>adoptations?</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>adept</word>
+      <proposal>adept</proposal>
     </accept>
     <patterngroup>
-      <pattern1>adapt</pattern1>
+      <pattern>adapt</pattern>
       <contextpattern look="before">(be|is|are|were|was)</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>adopt</word>
+      <proposal>adopt</proposal>
     </accept>
     <patterngroup>
-      <pattern1>adapt(ed|s|ing)?</pattern1>
+      <pattern>adapt(ed|s|ing)?</pattern>
       <contextpattern look="before">widely</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>a long</word>
+      <proposal>a long</proposal>
     </accept>
     <patterngroup>
-      <pattern1>along</pattern1>
+      <pattern>along</pattern>
       <contextpattern look="before">for</contextpattern>
       <contextpattern>time</contextpattern>
     </patterngroup>
@@ -71,47 +71,47 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>although</word>
+      <proposal>although</proposal>
     </accept>
     <patterngroup>
-      <pattern1>all</pattern1>
-      <pattern2>though</pattern2>
+      <pattern>all</pattern>
+      <pattern>though</pattern>
       <contextpattern look="before">(in|of|not|at)</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>although</word>
+      <proposal>although</proposal>
     </accept>
     <patterngroup>
-      <pattern1>aloud</pattern1>
-      <pattern2>to</pattern2>
+      <pattern>aloud</pattern>
+      <pattern>to</pattern>
       <contextpattern look="before">(is|are|were|was|be|been)</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>and</word>
+      <proposal>and</proposal>
     </accept>
     <!-- "an more" could also be "any more"/"anymore"... -->
     <patterngroup>
-      <pattern1>an</pattern1>
+      <pattern>an</pattern>
       <contextpattern>(more|most|some|many|few|th(en|is|at|[eo]se|ere))</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>ad(?!-)</pattern1>
+      <pattern>ad(?!-)</pattern>
       <contextpattern look="before" match="negative">(an?|the|my|your|his|her|their|our)</contextpattern>
       <contextpattern match="negative">hoc</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>in</pattern1>
+      <pattern>in</pattern>
       <contextpattern look="before">back</contextpattern>
       <contextpattern>fou?rth</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>in</pattern1>
+      <pattern>in</pattern>
       <contextpattern look="before">one</contextpattern>
       <contextpattern mode="fuzzy" where="2">same</contextpattern>
     </patterngroup>
@@ -119,10 +119,10 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>any</word>
+      <proposal>any</proposal>
     </accept>
     <patterngroup>
-      <pattern1>ant</pattern1>
+      <pattern>ant</pattern>
       <contextpattern look="before" mode="fuzzy" where="5">(buil[dt](s|ing)?|java)</contextpattern>
       <contextpattern mode="fuzzy" where="5">(buil[dt](s|ing)?|java)</contextpattern>
     </patterngroup>
@@ -130,47 +130,47 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>anymore</word>
+      <proposal>anymore</proposal>
     </accept>
     <patterngroup>
-      <pattern1>any</pattern1>
-      <pattern2>more</pattern2>
+      <pattern>any</pattern>
+      <pattern>more</pattern>
       <contextpattern match="negative">(of|than)</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>any more</word>
+      <proposal>any more</proposal>
     </accept>
     <patterngroup>
-      <pattern1>anymore</pattern1>
+      <pattern>anymore</pattern>
       <contextpattern>(of|than)</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>as opposed to</word>
+      <proposal>as opposed to</proposal>
     </accept>
     <patterngroup>
-      <pattern1>as</pattern1>
-      <pattern2>oppose</pattern2>
-      <pattern3>to</pattern3>
+      <pattern>as</pattern>
+      <pattern>oppose</pattern>
+      <pattern>to</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>as</pattern1>
-      <pattern2>opposed</pattern2>
-      <pattern3>too</pattern3>
+      <pattern>as</pattern>
+      <pattern>opposed</pattern>
+      <pattern>too</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>begin</word>
+      <proposal>begin</proposal>
     </accept>
     <patterngroup>
-      <pattern1>being</pattern1>
+      <pattern>being</pattern>
       <contextpattern case="keep" look="before">To</contextpattern>
       <contextpattern>with(?=,)</contextpattern>
     </patterngroup>
@@ -178,25 +178,25 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>by</word>
+      <proposal>by</proposal>
     </accept>
     <patterngroup>
-      <pattern1>bye</pattern1>
+      <pattern>bye</pattern>
       <contextpattern>the</contextpattern>
       <contextpattern where="2">way</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>per</pattern1>
+      <pattern>per</pattern>
       <contextpattern>default</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>date</word>
+      <proposal>date</proposal>
     </accept>
     <patterngroup>
-      <pattern1>data</pattern1>
+      <pattern>data</pattern>
       <contextpattern look="before">to</contextpattern>
       <contextpattern look="before" where="2">up</contextpattern>
     </patterngroup>
@@ -204,41 +204,41 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>from</word>
+      <proposal>from</proposal>
     </accept>
     <patterngroup>
-      <pattern1>form</pattern1>
+      <pattern>form</pattern>
       <contextpattern look="before">apart</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>exists</word>
+      <proposal>exists</proposal>
     </accept>
     <patterngroup>
-      <pattern1>exits</pattern1>
+      <pattern>exits</pattern>
       <contextpattern look="before">there</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>ensure</word>
+      <proposal>ensure</proposal>
       <context>making sure of something</context>
     </accept>
     <patterngroup>
-      <pattern1>insure</pattern1>
+      <pattern>insure</pattern>
       <contextpattern look="before">that</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>formerly</word>
+      <proposal>formerly</proposal>
     </accept>
     <patterngroup>
-      <pattern1>formally</pattern1>
+      <pattern>formally</pattern>
       <contextpattern>known</contextpattern>
       <contextpattern where="2">as</contextpattern>
     </patterngroup>
@@ -246,10 +246,10 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>forth</word>
+      <proposal>forth</proposal>
     </accept>
     <patterngroup>
-      <pattern1>fourth</pattern1>
+      <pattern>fourth</pattern>
       <contextpattern look="before">and</contextpattern>
       <contextpattern look="before" where="2">back</contextpattern>
     </patterngroup>
@@ -257,23 +257,23 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>for</word>
+      <proposal>for</proposal>
     </accept>
     <patterngroup>
-      <pattern1>fro</pattern1>
+      <pattern>fro</pattern>
       <contextpattern look="before" match="negative">(and|from)</contextpattern>
       <contextpattern look="before" where="2" match="negative">to</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1 case="keep">Fro</pattern1>
+      <pattern case="keep">Fro</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>fro</pattern1>
+      <pattern>fro</pattern>
       <contextpattern>an?</contextpattern>
       <contextpattern where="2">(while|week(end)?|month|year|hour|minute|second)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>fro</pattern1>
+      <pattern>fro</pattern>
       <contextpattern>some</contextpattern>
       <contextpattern where="2">time</contextpattern>
     </patterngroup>
@@ -281,20 +281,20 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>from</word>
+      <proposal>from</proposal>
     </accept>
     <patterngroup>
-      <pattern1>fro</pattern1>
+      <pattern>fro</pattern>
       <contextpattern look="before">away</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>got</word>
+      <proposal>got</proposal>
     </accept>
     <patterngroup>
-      <pattern1>go</pattern1>
+      <pattern>go</pattern>
       <contextpattern look="before">(\w+?'|ha)(ve|d)</contextpattern>
       <contextpattern>to</contextpattern>
       <contextpattern where="2">go</contextpattern>
@@ -303,10 +303,10 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>hardware</word>
+      <proposal>hardware</proposal>
     </accept>
     <patterngroup>
-      <pattern1>hard</pattern1>
+      <pattern>hard</pattern>
       <contextpattern look="before">(and|or)</contextpattern>
       <contextpattern look="before" where="2">software</contextpattern>
     </patterngroup>
@@ -314,15 +314,15 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>hour</word>
+      <proposal>hour</proposal>
     </accept>
     <patterngroup>
-      <pattern1>our</pattern1>
+      <pattern>our</pattern>
       <contextpattern look="before">half</contextpattern>
       <contextpattern look="before" where="2">an?</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>our</pattern1>
+      <pattern>our</pattern>
       <contextpattern look="before">an?</contextpattern>
       <contextpattern look="before" where="2">half</contextpattern>
     </patterngroup>
@@ -330,55 +330,55 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>if</word>
+      <proposal>if</proposal>
     </accept>
     <patterngroup>
-      <pattern1>i(?![-,])</pattern1>
+      <pattern>i(?![-,])</pattern>
       <contextpattern>you</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>in other</word>
+      <proposal>in other</proposal>
     </accept>
     <patterngroup>
-      <pattern1 case="keep">Another</pattern1>
+      <pattern case="keep">Another</pattern>
       <contextpattern>words(?=,)</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>itself</word>
+      <proposal>itself</proposal>
     </accept>
     <patterngroup>
-      <pattern1>it</pattern1>
-      <pattern2>self</pattern2>
+      <pattern>it</pattern>
+      <pattern>self</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>know</word>
+      <proposal>know</proposal>
     </accept>
     <patterngroup>
-      <pattern1>now</pattern1>
+      <pattern>now</pattern>
       <contextpattern look="before">(to|not)</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>known</word>
+      <proposal>known</proposal>
     </accept>
     <patterngroup>
-      <pattern1>know</pattern1>
+      <pattern>know</pattern>
       <contextpattern>(issue|problem|bug)s?</contextpattern>
       <contextpattern look="before" where="2" mode="fuzzy" match="negative">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>know</pattern1>
+      <pattern>know</pattern>
       <contextpattern look="before">also</contextpattern>
       <contextpattern match="negative">(as|by|for)</contextpattern>
     </patterngroup>
@@ -386,13 +386,13 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>lose</word>
+      <proposal>lose</proposal>
     </accept>
     <patterngroup>
-      <pattern1>loose(e[ds]|ing)</pattern1>
+      <pattern>loose(e[ds]|ing)</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>loose</pattern1>
+      <pattern>loose</pattern>
       <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|i|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
   </term>
@@ -400,24 +400,24 @@ GNU GPL.
   <!-- Needs to be reworked to avoid false positives. -->
   <!-- <term>
     <accept>
-      <word>may be</word>
+      <proposal>may be</proposal>
     </accept>
     <patterngroup>
-      <pattern1>maybe</pattern1>
+      <pattern>maybe</pattern>
       <contextpattern look="before">it</contextpattern>
     </patterngroup>
   </term> -->
 
   <term>
     <accept>
-      <word>by</word>
+      <proposal>by</proposal>
     </accept>
     <patterngroup>
-      <pattern1>with</pattern1>
+      <pattern>with</pattern>
       <contextpattern look="before">multipl(y(ing)?|ie[ds])</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>notice</pattern1>
+      <pattern>notice</pattern>
       <contextpattern>that</contextpattern>
       <contextpattern look="before" where="2" mode="fuzzy" match="negative">(will|\w+'ll|can|could|may|might|shall|should)</contextpattern>
     </patterngroup>
@@ -425,14 +425,14 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>note</word>
+      <proposal>note</proposal>
     </accept>
     <patterngroup>
-      <pattern1>not(ice)?</pattern1>
+      <pattern>not(ice)?</pattern>
       <contextpattern look="before">please</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>notice</pattern1>
+      <pattern>notice</pattern>
       <contextpattern>that</contextpattern>
       <contextpattern look="before" where="2" mode="fuzzy" match="negative">(will|\w+'ll|can|could|may|might|shall|should)</contextpattern>
     </patterngroup>
@@ -440,29 +440,29 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>now</word>
+      <proposal>now</proposal>
     </accept>
     <patterngroup>
-      <pattern1>know</pattern1>
+      <pattern>know</pattern>
       <contextpattern look="before">(right|by|of|for|(un)?till?|it|this|has|have|is|are)</contextpattern>
       <contextpattern match="negative">(issue|problem|bug)s?</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>know</pattern1>
+      <pattern>know</pattern>
       <contextpattern>(they|you|attachmate|suse|novell|k?nows)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>know</pattern1>
+      <pattern>know</pattern>
       <contextpattern look="before">from</contextpattern>
       <contextpattern>on</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>know</pattern1>
+      <pattern>know</pattern>
       <contextpattern>and</contextpattern>
       <contextpattern where="2">then</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>know</pattern1>
+      <pattern>know</pattern>
       <contextpattern look="before">(and|but|by|even|from|so)</contextpattern>
       <contextpattern look="before" where="2" match="negative">not</contextpattern>
     </patterngroup>
@@ -470,10 +470,10 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>one</word>
+      <proposal>one</proposal>
     </accept>
     <patterngroup>
-      <pattern1>on</pattern1>
+      <pattern>on</pattern>
       <contextpattern>of</contextpattern>
       <contextpattern where="2">the</contextpattern>
       <contextpattern where="3">(more|most|less|least|best|worst)</contextpattern>
@@ -482,30 +482,30 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>parentheses</word>
+      <proposal>parentheses</proposal>
     </accept>
     <patterngroup>
-      <pattern1>parenthesis</pattern1>
+      <pattern>parenthesis</pattern>
       <contextpattern look="before">in</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>peek</word>
+      <proposal>peek</proposal>
     </accept>
     <patterngroup>
-      <pattern1>peak</pattern1>
+      <pattern>peak</pattern>
       <contextpattern look="before">sneak</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>remember</word>
+      <proposal>remember</proposal>
     </accept>
     <patterngroup>
-      <pattern1>remind</pattern1>
+      <pattern>remind</pattern>
       <contextpattern look="before">to</contextpattern>
       <contextpattern look="before" where="2">eas(y|ier|iest)</contextpattern>
     </patterngroup>
@@ -513,30 +513,30 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>same</word>
+      <proposal>same</proposal>
     </accept>
     <patterngroup>
-      <pattern1>some</pattern1>
+      <pattern>some</pattern>
       <contextpattern case="keep" look="before">[Tt]he(?![,\)\]])</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>se</word>
+      <proposal>se</proposal>
     </accept>
     <patterngroup>
-      <pattern1>say</pattern1>
+      <pattern>say</pattern>
       <contextpattern look="before">per</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>software</word>
+      <proposal>software</proposal>
     </accept>
     <patterngroup>
-      <pattern1>soft</pattern1>
+      <pattern>soft</pattern>
       <contextpattern>(and|or)</contextpattern>
       <contextpattern where="2">hardware</contextpattern>
     </patterngroup>
@@ -544,20 +544,20 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>somewhat</word>
+      <proposal>somewhat</proposal>
     </accept>
     <patterngroup>
-      <pattern1>some</pattern1>
-      <pattern2>what</pattern2>
+      <pattern>some</pattern>
+      <pattern>what</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>supposed</word>
+      <proposal>supposed</proposal>
     </accept>
     <patterngroup>
-      <pattern1>suppose</pattern1>
+      <pattern>suppose</pattern>
       <contextpattern>to</contextpattern>
       <contextpattern where="2">be</contextpattern>
     </patterngroup>
@@ -565,30 +565,30 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>than</word>
+      <proposal>than</proposal>
     </accept>
     <patterngroup>
-      <pattern1>then</pattern1>
+      <pattern>then</pattern>
       <contextpattern look="before">(less|more|better|worse|larger|smaller|(o|ra)ther)(?![,\)\]])</contextpattern>
       <!-- Needs check that this is not the end of the sentence. -->
     </patterngroup>
     <patterngroup>
-      <pattern1>then</pattern1>
+      <pattern>then</pattern>
       <contextpattern look="before" where="2">(less|more)(?![,\)\]])</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>to</word>
+      <proposal>to</proposal>
     </accept>
     <patterngroup>
-      <pattern1>do</pattern1>
+      <pattern>do</pattern>
       <contextpattern look="before">(easy|simple|hard|difficult|low|high|best|worst|[-\w]+?[ia]ble|[-\w]+?ful|[-\w]+?like)(?![,\)\]])</contextpattern>
       <contextpattern look="before" where="3" mode="fuzzy" match="negative">(if|when|how|whom?|when|where|why)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>t[ow]o(?![,\)\]])</pattern1>
+      <pattern>t[ow]o(?![,\)\]])</pattern>
       <contextpattern>(do|make|take|use|configure|add|remove|change|switch|install|uninstall|you|my|your|my|our|their)</contextpattern>
       <contextpattern look="before" match="negative">to</contextpattern>
     </patterngroup>
@@ -596,39 +596,39 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>to the</word>
+      <proposal>to the</proposal>
     </accept>
     <patterngroup>
-      <pattern1>tot</pattern1>
-      <pattern2>he</pattern2>
+      <pattern>tot</pattern>
+      <pattern>he</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>to this</word>
+      <proposal>to this</proposal>
     </accept>
     <patterngroup>
-      <pattern1>tot</pattern1>
-      <pattern2>his</pattern2>
+      <pattern>tot</pattern>
+      <pattern>his</pattern>
     </patterngroup>
   </term>
 
 
   <term>
     <accept>
-      <word>too</word>
+      <proposal>too</proposal>
     </accept>
     <patterngroup>
-      <pattern1>two</pattern1>
+      <pattern>two</pattern>
       <contextpattern>(much|many|few|little)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>to(?=\.)</pattern1>
+      <pattern>to(?=\.)</pattern>
       <contextpattern look="before">[-\w]+?(?=,)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>tool</pattern1>
+      <pattern>tool</pattern>
       <contextpattern>long</contextpattern>
       <contextpattern where="2" match="negative">ago</contextpattern>
     </patterngroup>
@@ -636,28 +636,28 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>two</word>
+      <proposal>two</proposal>
     </accept>
     <patterngroup>
-      <pattern1>too</pattern1>
+      <pattern>too</pattern>
       <contextpattern look="before">(only|just)(?![,])</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>too</pattern1>
+      <pattern>too</pattern>
       <contextpattern>(different|alternatives?|ways|kinds|modes|standards|cases)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern1>too?</pattern1>
+      <pattern>too?</pattern>
       <contextpattern look="before">the(?![,])</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>use</word>
+      <proposal>use</proposal>
     </accept>
     <patterngroup>
-      <pattern1>use(?!,)</pattern1>
+      <pattern>use(?!,)</pattern>
       <contextpattern look="before">to</contextpattern>
       <contextpattern look="before">(the|an?)</contextpattern>
     </patterngroup>
@@ -665,30 +665,30 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>way</word>
+      <proposal>way</proposal>
     </accept>
     <patterngroup>
-      <pattern1>was</pattern1>
+      <pattern>was</pattern>
       <contextpattern look="before">an?</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>whether</word>
+      <proposal>whether</proposal>
     </accept>
     <patterngroup>
-      <pattern1>wea?ther</pattern1>
+      <pattern>wea?ther</pattern>
       <contextpattern look="before">(ask|question)(ed|s|ing)?</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>world</word>
+      <proposal>world</proposal>
     </accept>
     <patterngroup>
-      <pattern1>all</pattern1>
+      <pattern>all</pattern>
       <contextpattern>over</contextpattern>
       <contextpattern where="2">the</contextpattern>
       <contextpattern where="3">word</contextpattern>
@@ -697,22 +697,22 @@ GNU GPL.
 
   <term>
     <accept>
-      <word>yet</word>
+      <proposal>yet</proposal>
     </accept>
     <patterngroup>
       <!-- May need some fleshing out to avoid too many false positives.
       -->
-      <pattern1>jet</pattern1>
+      <pattern>jet</pattern>
       <contextpattern look="before" match="negative">(ink|private)</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <word>you</word>
+      <proposal>you</proposal>
     </accept>
     <patterngroup>
-      <pattern1>your</pattern1>
+      <pattern>your</pattern>
       <contextpattern>(c|sh)ould</contextpattern>
     </patterngroup>
   </term>
