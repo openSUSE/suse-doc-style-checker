@@ -503,7 +503,7 @@ def preparepatterns( patterngroupxpath, useonepattern ):
         else:
             trypattern( patternxpathcontent )
             if i == 1 and useonepattern:
-                patternforonepattern = patternxpathcontent #manglepattern( patternxpathcontent, 'one' )
+                patternforonepattern = patternxpathcontent
             patternxpathcontent = manglepattern( patternxpathcontent, 'default' )
 
         pattern = None
