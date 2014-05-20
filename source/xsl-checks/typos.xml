@@ -630,6 +630,7 @@ GNU GPL.
     <patterngroup>
       <pattern1>tool</pattern1>
       <contextpattern>long</contextpattern>
+      <contextpattern where="2" match="negative">ago</contextpattern>
     </patterngroup>
   </term>
 
