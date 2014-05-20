@@ -1979,10 +1979,16 @@
     </patterngroup>
     <patterngroup>
       <!-- Avoid matching "the log [file] on the server/in the directory" etc. -->
-      <pattern1>(log|sign)</pattern1>
+      <pattern1>log</pattern1>
       <pattern2>[io]ns?</pattern2>
       <contextpattern look="before" mode="fuzzy" where="2">(the|an?)</contextpattern>
-      <contextpattern>(the|an?)</contextpattern>
+      <contextpattern match="negative">(the|an?)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <!-- "the # sign in the menu" etc.: where="1" -->
+      <pattern1>sign</pattern1>
+      <pattern2>[io]ns?</pattern2>
+      <contextpattern look="before">(the|an?)</contextpattern>
     </patterngroup>
   </term>
 
@@ -1994,11 +2000,11 @@
       <pattern1>((logg?|sign)(ed|ing)-?[io]n|(sign|log)-?[io]n(ed|ing))</pattern1>
     </patterngroup>
     <patterngroup>
-      <pattern1>sign(ed|ing|s)</pattern1>
+      <pattern1>sign(ed|ing)</pattern1>
       <pattern2>[io]n</pattern2>
     </patterngroup>
     <patterngroup>
-      <pattern1>sign</pattern1>
+      <pattern1>signs</pattern1>
       <pattern2>[io]n</pattern2>
       <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
     </patterngroup>
