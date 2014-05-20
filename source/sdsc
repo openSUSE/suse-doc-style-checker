@@ -459,7 +459,7 @@ def manglepattern( pattern, mode ):
     # for the end of the string or a space makes sure we don't match e.g.
     # "just" in "just-installed".
     # This is enough for all words that are re.match()ed.
-    pattern = pattern + r'(?=\W{0,5}(?:\s|$))'
+    pattern = ( r'(?:%s)(?=\W{0,5}(?:\s|$))' % pattern )
 
     return pattern
 
