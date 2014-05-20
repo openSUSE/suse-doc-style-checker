@@ -34,8 +34,8 @@ apostrophe = re.compile( r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]' )
 # FIXME: English hardcoded
 # Lookbehinds need to have a fixed length... thus .ca
 # Do not use capture groups here -- re.split does odd things where those are.
-sentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)\.?\.?\.\s(?=[\(\[\{A-Z0-9])|\.?\.?[!\?]\s(?=[\(\[\{A-Z0-9])|[:;]\s' )
-lastsentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)\.?\.?[\.!\?]\s*|[:;]\s*$' )
+sentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)\.?\.?\.[\)\]\}]?\s[\(\[\{]?(?=[A-Z0-9])|\.?\.?[!\?][\)\]\}]?\s[\(\[\{]?(?=[A-Z0-9])|[:;]\s' )
+lastsentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)\.?\.?[\.!\?][\)\]\}]?\s*|[:;]\s*$' )
 
 
 # FIXME: Number separation with spaces is a language-specific hack.
@@ -676,7 +676,13 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile ):
 
 def sentencesegmenter( text ):
     sentences = sentenceends.split( text )
+    # The last sentence's final punctuation has not yet been cut off, do that
+    # now.
     sentences[-1] = lastsentenceends.sub( '', sentences[-1] )
+
+    # We also need to cut off parentheses etc. from the first word of the first
+    # sentence, as that has not been done so far either.
+    sentences[0] = replacepunctuation( sentences[0], 'start' )
     return sentences
 
 def dupecheck( context, content, contentpretty, contextid, basefile ):
