@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+Some rules converted from the English Grammar and Typo Rules for LanguageTool,
+Copyright (C) 2001-2012 Daniel Naber (http://www.danielnaber.de), licensed
+under LGPL 2.1+.
+
+Portions of rules are converted from After The Deadline grammar checker,
+available at http://open.afterthedeadline.com/, licensed under
+GNU GPL.
+-->
 <terminology useonepattern="no">
 
   <term>
@@ -476,7 +485,7 @@
       <word>parentheses</word>
     </accept>
     <patterngroup>
-      <pattern1>parentheses</pattern1>
+      <pattern1>parenthesis</pattern1>
       <contextpattern look="before">in</contextpattern>
     </patterngroup>
   </term>
@@ -617,6 +626,10 @@
     <patterngroup>
       <pattern1>to(?=\.)</pattern1>
       <contextpattern look="before">[-\w]+?(?=,)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>tool</pattern1>
+      <contextpattern>long</contextpattern>
     </patterngroup>
   </term>
 
