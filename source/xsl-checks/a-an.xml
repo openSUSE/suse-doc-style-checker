@@ -19,12 +19,12 @@
       <proposal>an</proposal>
     </accept>
     <patterngroup>
-      <pattern>a(?!.+)</pattern>
+      <pattern>a(?!.)</pattern>
       <!-- Keeping the words "one"/"once" out like this is not very clever. -->
-      <contextpattern>(8|[aei]|o[a-mo-z]|on(?![ce])|u[bfgh]|un[a-hj-z]|[hlmnrx][bcdfghjklmnpqrtvwxz]|f[bcdfgjkmnpqtvwxz0-9]|s[bdfgjrxz0-9]|x[a-dfghj-np-tvwxz0-9]|unin)[^\-]+|ha</contextpattern>
-      <contextpattern look="before" match="negative" where="2">q.?</contextpattern>
-      <contextpattern match="negative" mode="fuzzy" where="2">[bc].?</contextpattern>
-      <contextpattern match="negative">(and|or|with|but)</contextpattern>
+      <contextpattern>(8|[aei]|o[a-mo-z]|on(?![ce])|u[bfgh]|un[a-hj-z]|[hlmnrx][bcdfghjklmnpqrtvwxz]|f[bcdfgjkmnpqtvwxz0-9]|s[bdfgjrxz0-9]|x[a-dfghj-np-tvwxz0-9]|unin)[^\-\.]+|ha</contextpattern>
+      <contextpattern look="before" match="negative" location="2">q.?</contextpattern>
+      <contextpattern match="negative" mode="fuzzy" location="2">[bc].?</contextpattern>
+      <contextpattern match="negative">and|or|with|but</contextpattern>
     </patterngroup>
   </term>
 

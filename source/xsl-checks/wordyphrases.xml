@@ -231,21 +231,21 @@
       <pattern>(is|are|were|was|be|been)</pattern>
       <pattern>able</pattern>
       <pattern>to</pattern>
-      <contextpattern match="negative" look="before" where="2" mode="fuzzy">(must|should|could|would|will|not)</contextpattern>
-      <contextpattern match="negative" look="before" where="2" mode="fuzzy">to</contextpattern>
+      <contextpattern match="negative" look="before" location="2" mode="fuzzy">(must|should|could|would|will|not)</contextpattern>
+      <contextpattern match="negative" look="before" location="2" mode="fuzzy">to</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>ha(s|d|ve|ving)</pattern>
       <pattern>the</pattern>
       <pattern>ability</pattern>
       <pattern>to</pattern>
-      <contextpattern match="negative" look="before" where="2" mode="fuzzy">(must|should|could|would|will|not)</contextpattern>
+      <contextpattern match="negative" look="before" location="2" mode="fuzzy">(must|should|could|would|will|not)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>ha(s|d|ve|ving)</pattern>
       <pattern>abilit(y|ies)</pattern>
       <pattern>to</pattern>
-      <contextpattern match="negative" look="before" where="2" mode="fuzzy">(must|should|could|would|will|not)</contextpattern>
+      <contextpattern match="negative" look="before" location="2" mode="fuzzy">(must|should|could|would|will|not)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>are</pattern>
@@ -271,16 +271,16 @@
       <pattern>(is|are|were|was|be|been)</pattern>
       <pattern>unable</pattern>
       <pattern>to</pattern>
-      <contextpattern match="negative" look="before" where="2" mode="fuzzy">to</contextpattern>
-      <contextpattern match="negative" look="before" where="2" mode="fuzzy">(must|should|could|would|will)</contextpattern>
+      <contextpattern match="negative" look="before" location="2" mode="fuzzy">to</contextpattern>
+      <contextpattern match="negative" look="before" location="2" mode="fuzzy">(must|should|could|would|will)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>not</pattern>
       <pattern>(is|are|were|was|be|been)</pattern>
       <pattern>able</pattern>
       <pattern>to</pattern>
-      <contextpattern match="negative" look="before" where="2" mode="fuzzy">to</contextpattern>
-      <contextpattern match="negative" look="before" where="2" mode="fuzzy">(must|should|could|would|will)</contextpattern>
+      <contextpattern match="negative" look="before" location="2" mode="fuzzy">to</contextpattern>
+      <contextpattern match="negative" look="before" location="2" mode="fuzzy">(must|should|could|would|will)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>not</pattern>
@@ -288,14 +288,14 @@
       <pattern>the</pattern>
       <pattern>ability</pattern>
       <pattern>to</pattern>
-      <contextpattern match="negative" look="before" where="2" mode="fuzzy">(must|should|could|would|will)</contextpattern>
+      <contextpattern match="negative" look="before" location="2" mode="fuzzy">(must|should|could|would|will)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>not</pattern>
       <pattern>ha(s|d|ve|ving)</pattern>
       <pattern>abilit(y|ies)</pattern>
       <pattern>to</pattern>
-      <contextpattern match="negative" look="before" where="2" mode="fuzzy">(must|should|could|would|will)</contextpattern>
+      <contextpattern match="negative" look="before" location="2" mode="fuzzy">(must|should|could|would|will)</contextpattern>
     </patterngroup>
   </term>
 
@@ -926,11 +926,11 @@
     <accept/>
     <patterngroup>
       <pattern>too</pattern>
-      <contextpattern mode="fuzzy" where="5">also</contextpattern>
+      <contextpattern mode="fuzzy" location="5">also</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>too</pattern>
-      <contextpattern look="before" mode="fuzzy" where="5">also</contextpattern>
+      <contextpattern look="before" mode="fuzzy" location="5">also</contextpattern>
     </patterngroup>
   </term>
 

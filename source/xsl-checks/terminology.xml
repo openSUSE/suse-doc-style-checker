@@ -54,15 +54,15 @@
     <!-- Someone has been using the word checking option instead of check box. -->
     <patterngroup>
       <pattern>((block|tick)(ing|ed|s)|check(ed|s))</pattern>
-      <contextpattern mode="fuzzy" where="2">((check|tick)(ing|s)?|(option|boxe?)s?|##@ui##)</contextpattern>
+      <contextpattern mode="fuzzy" location="2">((check|tick)(ing|s)?|(option|boxe?)s?|##@ui##)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>cho?os(es?|ing|n)</pattern>
-      <contextpattern mode="fuzzy" where="2">((check|tick)(ing|s)?|box(es)?)</contextpattern>
+      <contextpattern mode="fuzzy" location="2">((check|tick)(ing|s)?|box(es)?)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>cho?os(es?|ing|n)</pattern>
-      <contextpattern look="before" mode="fuzzy" where="2">((check|tick)(ing|s)?|box(es)?)</contextpattern>
+      <contextpattern look="before" mode="fuzzy" location="2">((check|tick)(ing|s)?|box(es)?)</contextpattern>
     </patterngroup>
   </term>
 
@@ -144,7 +144,7 @@
       <pattern>once</pattern>
       <!-- *.ed is for constructs with verbs in past tense: "Once typed, ..."-->
       <contextpattern>(the|a|an|it|they|.*?ed)</contextpattern>
-      <contextpattern match="negative" where="2">(second|minute|hour|day|week|year|half|quarter)</contextpattern>
+      <contextpattern match="negative" location="2">(second|minute|hour|day|week|year|half|quarter)</contextpattern>
     </patterngroup>
   </term>
 
@@ -592,7 +592,7 @@
       <pattern>clicks?</pattern>
       <pattern>on(to)?</pattern>
       <!-- It should be very rare that "click" appears as a noun, so... -->
-      <contextpattern look="before" where="2" mode="fuzzy" match="negative">(the|an?)</contextpattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>(mak(es?|ing)|made|do(es|ing)|did)</pattern>
@@ -631,7 +631,7 @@
     </accept>
     <patterngroup>
       <pattern>(quit(s|t?ing)?|(abort|exit)(ed|ing|s)?|terminat(ed?|es|ing))</pattern>
-      <contextpattern mode="fuzzy" where="3">(window|dialog(ue))s?</contextpattern>
+      <contextpattern mode="fuzzy" location="3">(window|dialog(ue))s?</contextpattern>
     </patterngroup>
   </term>
 
@@ -781,7 +781,7 @@
       <pattern>ssh</pattern>
       <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
       <!-- Crudely avoid false positive: ... access to SSH... -->
-      <contextpattern look="before" where="2" mode="negative">access</contextpattern>
+      <contextpattern look="before" location="2" mode="negative">access</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>connect</pattern>
@@ -814,11 +814,11 @@
     </accept>
     <patterngroup>
       <pattern>(un|de)-?(block|check|tick)(ing|ed|s)</pattern>
-      <contextpattern mode="fuzzy" where="2">((check|tick)(ing|s)?|(option|boxe?)s?|##@ui##)</contextpattern>
+      <contextpattern mode="fuzzy" location="2">((check|tick)(ing|s)?|(option|boxe?)s?|##@ui##)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>(un|de)-?((block|check|tick|deselect)(ing|ed|s)|ch[o]?os(e[s]?|ing|n))</pattern>
-      <contextpattern mode="fuzzy" where="2">((check|tick)(ing|s)?|box(es)?)</contextpattern>
+      <contextpattern mode="fuzzy" location="2">((check|tick)(ing|s)?|box(es)?)</contextpattern>
     </patterngroup>
   </term>
 
@@ -842,7 +842,7 @@
     </accept>
     <patterngroup>
       <pattern>((de-|un-?)select|(de|un)-?(block|choose?|highlight))(ing|s)?</pattern>
-      <contextpattern mode="fuzzy" where="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
+      <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>remov(e[ds]?|ing)</pattern>
@@ -1699,7 +1699,7 @@
       <pattern>just(?!-)</pattern>
       <contextpattern match="negative" look="before">(not|must|should|ought)</contextpattern>
       <contextpattern match="negative">(after|before|next|as|to|need|enough)</contextpattern>
-      <contextpattern match="negative" mode="fuzzy" where="3">(one|two|three|four|five|six|seven|eight|nine|ten|[0-9].*)</contextpattern>
+      <contextpattern match="negative" mode="fuzzy" location="3">(one|two|three|four|five|six|seven|eight|nine|ten|[0-9].*)</contextpattern>
     </patterngroup>
   </term>
 
@@ -1953,15 +1953,15 @@
     </accept>
     <patterngroup>
       <pattern>logs?</pattern>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
-      <contextpattern look="before" where="4" mode="fuzzy">(the|an?)</contextpattern>
+      <contextpattern look="before" match="negative" location="2" mode="fuzzy">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before" location="4" mode="fuzzy">(the|an?)</contextpattern>
       <!-- The installation log messages are shown in tab during SLE
            installation, thus not a file. Not sure if it is a good idea to put
            that kind of detail in here...
       -->
       <contextpattern look="before" match="negative">installation</contextpattern>
       <contextpattern match="negative">(file|message)s?</contextpattern>
-      <contextpattern match="negative" where="2">to</contextpattern>
+      <contextpattern match="negative" location="2">to</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>log-?files?</pattern>
@@ -1974,18 +1974,18 @@
     </accept>
     <patterngroup>
       <pattern>(log-in|log-?on|sign-?[io]n)s?</pattern>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before" match="negative" location="2" mode="fuzzy">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
       <contextpattern look="before">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
       <!-- Avoid matching "the log [file] on the server/in the directory" etc. -->
       <pattern>log</pattern>
       <pattern>[io]ns?</pattern>
-      <contextpattern look="before" mode="fuzzy" where="2">(the|an?)</contextpattern>
+      <contextpattern look="before" mode="fuzzy" location="2">(the|an?)</contextpattern>
       <contextpattern match="negative">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <!-- "the # sign in the menu" etc.: where="1" -->
+      <!-- "the # sign in the menu" etc.: location="1" -->
       <pattern>sign</pattern>
       <pattern>[io]ns?</pattern>
       <contextpattern look="before">(the|an?)</contextpattern>
@@ -2032,7 +2032,7 @@
       <pattern>logg?(ed|ing|s)?</pattern>
       <pattern>in</pattern>
       <pattern>at</pattern>
-      <contextpattern where="3" mode="fuzzy" match="negative">console</contextpattern>
+      <contextpattern location="3" mode="fuzzy" match="negative">console</contextpattern>
     </patterngroup>
   </term>
 
@@ -2045,13 +2045,13 @@
     </accept>
     <patterngroup>
       <pattern>(log-out|log-?off|sign-?o(ut|ff))s?</pattern>
-      <contextpattern look="before" match="negative" where="2" mode="fuzzy">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before" match="negative" location="2" mode="fuzzy">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
       <contextpattern look="before">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>(log|sign)</pattern>
       <pattern>o(ut|ff)s?</pattern>
-      <contextpattern look="before" mode="fuzzy" where="2">(the|an?)</contextpattern>
+      <contextpattern look="before" mode="fuzzy" location="2">(the|an?)</contextpattern>
     </patterngroup>
   </term>
 
@@ -2424,7 +2424,7 @@
     <accept/>
     <patterngroup>
       <pattern>obvious</pattern>
-      <contextpattern look="before" where="2">is</contextpattern>
+      <contextpattern look="before" location="2">is</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>obvious</pattern>
@@ -2640,11 +2640,11 @@
     </accept>
     <patterngroup>
       <pattern>(hitt?(ing|ed|s)?|(punch|depress)(e[ds]|ing)?|strike([ds]|ing)?|struck)</pattern>
-      <contextpattern mode="fuzzy" where="3">(##@key##|key)</contextpattern>
+      <contextpattern mode="fuzzy" location="3">(##@key##|key)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>(hitt?(ing|ed|s)?|(punch|depress)(e[ds]|ing)?|strike([ds]|ing)?|struck)</pattern>
-      <contextpattern mode="fuzzy" where="3" look="before">(##@key##|key)</contextpattern>
+      <contextpattern mode="fuzzy" location="3" look="before">(##@key##|key)</contextpattern>
     </patterngroup>
   </term>
 
@@ -2658,7 +2658,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>print(s|ed|ing)</pattern>
-      <contextpattern mode="fuzzy" where="3">out</contextpattern>
+      <contextpattern mode="fuzzy" location="3">out</contextpattern>
     </patterngroup>
   </term>
 
@@ -2720,7 +2720,7 @@
     </accept>
     <patterngroup>
       <pattern>(clos(e[ds]?|ing)|(abort|exit)(ed|ing|s)?)</pattern>
-      <contextpattern mode="fuzzy" where="3">(program(me)?|software|application)s?</contextpattern>
+      <contextpattern mode="fuzzy" location="3">(program(me)?|software|application)s?</contextpattern>
     </patterngroup>
   </term>
 
@@ -3070,7 +3070,7 @@
     </accept>
     <patterngroup>
       <pattern>(block|choose?|highlight)(s|ing)?</pattern>
-      <contextpattern mode="fuzzy" where="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
+      <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>add(ed|s|ing)?</pattern>
@@ -3093,7 +3093,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>(blocked|chosen)</pattern>
-      <contextpattern mode="fuzzy" where="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
+      <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
     </patterngroup>
   </term>
 
@@ -3131,8 +3131,8 @@
       <pattern case="keep">set</pattern>
       <pattern>ups?</pattern>
       <!-- 'and' and 'or' are ambiguous. -->
-      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|and|or|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
-      <contextpattern look="before" match="negative" mode="fuzzy" where="3">to</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|and|or|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="3">to</contextpattern>
       <!-- I should negative-check for any attributes/adverbs following, the
            following is a far cry from being complete but makes the checker
            shut up in one situation... -->
@@ -3170,8 +3170,8 @@
     <patterngroup>
       <pattern>shut</pattern>
       <pattern>downs</pattern>
-      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
-      <contextpattern look="before" match="negative" mode="fuzzy" where="3">to</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="3">to</contextpattern>
       <contextpattern match="negative">(the|an?|in|for|on|at)</contextpattern>
     </patterngroup>
   </term>
@@ -3371,8 +3371,8 @@
       <pattern>start</pattern>
       <pattern>ups?</pattern>
       <!-- 'And' and 'or' are ambiguous. -->
-      <contextpattern look="before" match="negative" mode="fuzzy" where="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|and|or|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
-      <contextpattern look="before" match="negative" mode="fuzzy" where="3">to</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|and|or|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="3">to</contextpattern>
       <!-- I should negative-check for any attributes/adverbs following, the
            following is a far cry from being complete but makes the checker
            shut up in one situation... -->
@@ -3772,7 +3772,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>(un-|de-?)selected|(un|de)-(blocked|chosen)</pattern>
-      <contextpattern mode="fuzzy" where="3">((selection|text|entr(y|ie)|word)s?|##@mono##)</contextpattern>
+      <contextpattern mode="fuzzy" location="3">((selection|text|entr(y|ie)|word)s?|##@mono##)</contextpattern>
     </patterngroup>
   </term>
 

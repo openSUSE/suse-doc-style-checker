@@ -21,11 +21,11 @@ GNU GPL.
     <patterngroup>
       <pattern>ad[eo]pt(ed|s|ing)?</pattern>
       <contextpattern match="negative">by</contextpattern>
-      <contextpattern mode="fuzzy" where="4">(your|their)</contextpattern>
+      <contextpattern mode="fuzzy" location="4">(your|their)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>ad[eo]pt(ed|s|ing)?</pattern>
-      <contextpattern mode="fuzzy" where="2">to</contextpattern>
+      <contextpattern mode="fuzzy" location="2">to</contextpattern>
     </patterngroup>
   </term>
 
@@ -97,11 +97,11 @@ GNU GPL.
     </accept>
     <!-- "an more" could also be "any more"/"anymore"... -->
     <patterngroup>
-      <pattern>an</pattern>
+      <pattern case="keep">[Aa]n</pattern>
       <contextpattern>(more|most|some|many|few|th(en|is|at|[eo]se|ere))</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>ad(?!-)</pattern>
+      <pattern case="keep">[Aa]d(?!-)</pattern>
       <contextpattern look="before" match="negative">(an?|the|my|your|his|her|their|our)</contextpattern>
       <contextpattern match="negative">hoc</contextpattern>
     </patterngroup>
@@ -113,7 +113,7 @@ GNU GPL.
     <patterngroup>
       <pattern>in</pattern>
       <contextpattern look="before">one</contextpattern>
-      <contextpattern mode="fuzzy" where="2">same</contextpattern>
+      <contextpattern location="2">same</contextpattern>
     </patterngroup>
   </term>
 
@@ -123,8 +123,8 @@ GNU GPL.
     </accept>
     <patterngroup>
       <pattern>ant</pattern>
-      <contextpattern look="before" mode="fuzzy" where="5">(buil[dt](s|ing)?|java)</contextpattern>
-      <contextpattern mode="fuzzy" where="5">(buil[dt](s|ing)?|java)</contextpattern>
+      <contextpattern look="before" mode="fuzzy" location="5">(buil[dt](s|ing)?|java)</contextpattern>
+      <contextpattern mode="fuzzy" location="5">(buil[dt](s|ing)?|java)</contextpattern>
     </patterngroup>
   </term>
 
@@ -183,7 +183,7 @@ GNU GPL.
     <patterngroup>
       <pattern>bye</pattern>
       <contextpattern>the</contextpattern>
-      <contextpattern where="2">way</contextpattern>
+      <contextpattern location="2">way</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>per</pattern>
@@ -198,7 +198,7 @@ GNU GPL.
     <patterngroup>
       <pattern>data</pattern>
       <contextpattern look="before">to</contextpattern>
-      <contextpattern look="before" where="2">up</contextpattern>
+      <contextpattern look="before" location="2">up</contextpattern>
     </patterngroup>
   </term>
 
@@ -240,7 +240,7 @@ GNU GPL.
     <patterngroup>
       <pattern>formally</pattern>
       <contextpattern>known</contextpattern>
-      <contextpattern where="2">as</contextpattern>
+      <contextpattern location="2">as</contextpattern>
     </patterngroup>
   </term>
 
@@ -251,7 +251,7 @@ GNU GPL.
     <patterngroup>
       <pattern>fourth</pattern>
       <contextpattern look="before">and</contextpattern>
-      <contextpattern look="before" where="2">back</contextpattern>
+      <contextpattern look="before" location="2">back</contextpattern>
     </patterngroup>
   </term>
 
@@ -262,7 +262,7 @@ GNU GPL.
     <patterngroup>
       <pattern>fro</pattern>
       <contextpattern look="before" match="negative">(and|from)</contextpattern>
-      <contextpattern look="before" where="2" match="negative">to</contextpattern>
+      <contextpattern look="before" location="2" match="negative">to</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern case="keep">Fro</pattern>
@@ -270,12 +270,12 @@ GNU GPL.
     <patterngroup>
       <pattern>fro</pattern>
       <contextpattern>an?</contextpattern>
-      <contextpattern where="2">(while|week(end)?|month|year|hour|minute|second)</contextpattern>
+      <contextpattern location="2">(while|week(end)?|month|year|hour|minute|second)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>fro</pattern>
       <contextpattern>some</contextpattern>
-      <contextpattern where="2">time</contextpattern>
+      <contextpattern location="2">time</contextpattern>
     </patterngroup>
   </term>
 
@@ -297,7 +297,7 @@ GNU GPL.
       <pattern>go</pattern>
       <contextpattern look="before">(\w+?'|ha)(ve|d)</contextpattern>
       <contextpattern>to</contextpattern>
-      <contextpattern where="2">go</contextpattern>
+      <contextpattern location="2">go</contextpattern>
     </patterngroup>
   </term>
 
@@ -308,7 +308,7 @@ GNU GPL.
     <patterngroup>
       <pattern>hard</pattern>
       <contextpattern look="before">(and|or)</contextpattern>
-      <contextpattern look="before" where="2">software</contextpattern>
+      <contextpattern look="before" location="2">software</contextpattern>
     </patterngroup>
   </term>
 
@@ -319,12 +319,12 @@ GNU GPL.
     <patterngroup>
       <pattern>our</pattern>
       <contextpattern look="before">half</contextpattern>
-      <contextpattern look="before" where="2">an?</contextpattern>
+      <contextpattern look="before" location="2">an?</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>our</pattern>
       <contextpattern look="before">an?</contextpattern>
-      <contextpattern look="before" where="2">half</contextpattern>
+      <contextpattern look="before" location="2">half</contextpattern>
     </patterngroup>
   </term>
 
@@ -364,7 +364,8 @@ GNU GPL.
     </accept>
     <patterngroup>
       <pattern>now</pattern>
-      <contextpattern look="before">(to|not)</contextpattern>
+      <contextpattern look="before">to</contextpattern>
+      <contextpattern look="before" location="2" match="negative">up</contextpattern>
     </patterngroup>
   </term>
 
@@ -375,7 +376,7 @@ GNU GPL.
     <patterngroup>
       <pattern>know</pattern>
       <contextpattern>(issue|problem|bug)s?</contextpattern>
-      <contextpattern look="before" where="2" mode="fuzzy" match="negative">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>know</pattern>
@@ -419,7 +420,7 @@ GNU GPL.
     <patterngroup>
       <pattern>notice</pattern>
       <contextpattern>that</contextpattern>
-      <contextpattern look="before" where="2" mode="fuzzy" match="negative">(will|\w+'ll|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">(will|\w+'ll|can|could|may|might|shall|should)</contextpattern>
     </patterngroup>
   </term>
 
@@ -434,7 +435,7 @@ GNU GPL.
     <patterngroup>
       <pattern>notice</pattern>
       <contextpattern>that</contextpattern>
-      <contextpattern look="before" where="2" mode="fuzzy" match="negative">(will|\w+'ll|can|could|may|might|shall|should)</contextpattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">(will|\w+'ll|can|could|may|might|shall|should)</contextpattern>
     </patterngroup>
   </term>
 
@@ -459,12 +460,12 @@ GNU GPL.
     <patterngroup>
       <pattern>know</pattern>
       <contextpattern>and</contextpattern>
-      <contextpattern where="2">then</contextpattern>
+      <contextpattern location="2">then</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>know</pattern>
       <contextpattern look="before">(and|but|by|even|from|so)</contextpattern>
-      <contextpattern look="before" where="2" match="negative">not</contextpattern>
+      <contextpattern look="before" location="2" match="negative">not</contextpattern>
     </patterngroup>
   </term>
 
@@ -475,8 +476,8 @@ GNU GPL.
     <patterngroup>
       <pattern>on</pattern>
       <contextpattern>of</contextpattern>
-      <contextpattern where="2">the</contextpattern>
-      <contextpattern where="3">(more|most|less|least|best|worst)</contextpattern>
+      <contextpattern location="2">the</contextpattern>
+      <contextpattern location="3">(more|most|less|least|best|worst)</contextpattern>
     </patterngroup>
   </term>
 
@@ -507,7 +508,7 @@ GNU GPL.
     <patterngroup>
       <pattern>remind</pattern>
       <contextpattern look="before">to</contextpattern>
-      <contextpattern look="before" where="2">eas(y|ier|iest)</contextpattern>
+      <contextpattern look="before" location="2">eas(y|ier|iest)</contextpattern>
     </patterngroup>
   </term>
 
@@ -538,7 +539,7 @@ GNU GPL.
     <patterngroup>
       <pattern>soft</pattern>
       <contextpattern>(and|or)</contextpattern>
-      <contextpattern where="2">hardware</contextpattern>
+      <contextpattern location="2">hardware</contextpattern>
     </patterngroup>
   </term>
 
@@ -559,7 +560,7 @@ GNU GPL.
     <patterngroup>
       <pattern>suppose</pattern>
       <contextpattern>to</contextpattern>
-      <contextpattern where="2">be</contextpattern>
+      <contextpattern location="2">be</contextpattern>
     </patterngroup>
   </term>
 
@@ -574,7 +575,7 @@ GNU GPL.
     </patterngroup>
     <patterngroup>
       <pattern>then</pattern>
-      <contextpattern look="before" where="2">(less|more)(?![,\)\]])</contextpattern>
+      <contextpattern look="before" location="2">(less|more)(?![,\)\]])</contextpattern>
     </patterngroup>
   </term>
 
@@ -585,7 +586,7 @@ GNU GPL.
     <patterngroup>
       <pattern>do</pattern>
       <contextpattern look="before">(easy|simple|hard|difficult|low|high|best|worst|[-\w]+?[ia]ble|[-\w]+?ful|[-\w]+?like)(?![,\)\]])</contextpattern>
-      <contextpattern look="before" where="3" mode="fuzzy" match="negative">(if|when|how|whom?|when|where|why)</contextpattern>
+      <contextpattern look="before" location="3" mode="fuzzy" match="negative">(if|when|how|whom?|when|where|why)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>t[ow]o(?![,\)\]])</pattern>
@@ -630,7 +631,7 @@ GNU GPL.
     <patterngroup>
       <pattern>tool</pattern>
       <contextpattern>long</contextpattern>
-      <contextpattern where="2" match="negative">ago</contextpattern>
+      <contextpattern location="2" match="negative">ago</contextpattern>
     </patterngroup>
   </term>
 
@@ -690,8 +691,8 @@ GNU GPL.
     <patterngroup>
       <pattern>all</pattern>
       <contextpattern>over</contextpattern>
-      <contextpattern where="2">the</contextpattern>
-      <contextpattern where="3">word</contextpattern>
+      <contextpattern location="2">the</contextpattern>
+      <contextpattern location="3">word</contextpattern>
     </patterngroup>
   </term>
 
