@@ -601,6 +601,17 @@
     </patterngroup>
   </term>
 
+  <term>
+    <accept>
+      <word>little</word>
+    </accept>
+    <patterngroup>
+      <pattern1>(little|tiny|teens?y|tad)</pattern1>
+      <pattern2>bit</pattern2>
+    </patterngroup>
+  </term>
+
+
   <!-- Almost never actually used as a verb. -->
   <term>
     <accept>
@@ -813,6 +824,16 @@
 
   <term>
     <accept>
+      <word/>
+    </accept>
+    <patterngroup>
+      <pattern1>so</pattern1>
+      <contextpattern>therefore</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <word>some</word>
     </accept>
     <patterngroup>
@@ -993,6 +1014,71 @@
       <pattern2>a</pattern2>
       <pattern3>situations?</pattern3>
       <pattern4>when</pattern4>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <word>whether</word>
+    </accept>
+    <patterngroup>
+      <pattern1>the</pattern1>
+      <pattern2>question</pattern2>
+      <pattern3>as</pattern3>
+      <pattern4>to</pattern4>
+      <pattern5>whether</pattern5>
+      <pattern6>or</pattern6>
+      <pattern7>not</pattern7>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>the</pattern1>
+      <pattern2>question</pattern2>
+      <pattern3>as</pattern3>
+      <pattern4>to</pattern4>
+      <pattern5>whether</pattern5>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>as</pattern1>
+      <pattern2>to</pattern2>
+      <pattern3>whether</pattern3>
+      <pattern4>or</pattern4>
+      <pattern5>not</pattern5>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>as</pattern1>
+      <pattern2>to</pattern2>
+      <pattern3>whether</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>the</pattern1>
+      <pattern2>question</pattern2>
+      <pattern3>of</pattern3>
+      <pattern4>whether</pattern4>
+      <pattern5>or</pattern5>
+      <pattern6>not</pattern6>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>the</pattern1>
+      <pattern2>question</pattern2>
+      <pattern3>of</pattern3>
+      <pattern4>whether</pattern4>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>the</pattern1>
+      <pattern2>question</pattern2>
+      <pattern3>whether</pattern3>
+      <pattern4>or</pattern4>
+      <pattern5>not</pattern5>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>the</pattern1>
+      <pattern2>question</pattern2>
+      <pattern3>whether</pattern3>
+    </patterngroup>
+    <patterngroup>
+      <pattern1>whether</pattern1>
+      <pattern2>or</pattern2>
+      <pattern3>not</pattern3>
     </patterngroup>
   </term>
 
