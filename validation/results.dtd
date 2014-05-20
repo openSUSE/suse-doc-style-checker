@@ -14,9 +14,9 @@
 
 
 <!ELEMENT part-title    (#PCDATA) >
-<!ELEMENT result        (place?, message, suggestion*) >
+<!ELEMENT result        (location?, message, suggestion*) >
 <!ATTLIST result        type (info|warning|error) #REQUIRED >
-<!ELEMENT place         (file?, withinid?, line?) >
+<!ELEMENT location      (file?, withinid?, line?) >
 
 <!ELEMENT message       (#PCDATA | %messageinlines;)* >
 

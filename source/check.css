@@ -125,7 +125,7 @@ id, withinid, em {
   font-style: italic;
 }
 
-place {
+location {
   font-size: 15px;
   display: block;
   margin-bottom: 2px;
@@ -133,11 +133,11 @@ place {
   color: #666;
 }
 
-place:after {
+location:after {
   content: ':';
 }
 
-result:hover place {
+result:hover location {
   color: #333;
 }
 

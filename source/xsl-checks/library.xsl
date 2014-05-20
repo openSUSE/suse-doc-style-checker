@@ -19,11 +19,11 @@
 
   <xsl:template name="sourcehint">
     <xsl:param name="node" select="."/>
-    <place>
+    <location>
       <xsl:call-template name="file"/>
       <xsl:call-template name="withinid"/>
       <line><xsl:value-of select="py:linenumber()"/></line>
-    </place>
+    </location>
   </xsl:template>
 
   <xsl:template name="file">

@@ -594,7 +594,7 @@ def termcheckmessage(   acceptword, acceptcontext, word, line, content,
         withinid = "<withinid>%s</withinid>" % str( contextid )
 
     message = etree.XML(  """<result type="%s">
-            <place>%s%s<line>%s</line></place>
+            <location>%s%s<line>%s</line></location>
         </result>""" % ( messagetype, filename, withinid, str( line ) ) )
 
     if acceptcontext:
@@ -663,7 +663,7 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile ):
                 contentpretty = xmlescape( contentpretty )
                 line = linenumber( context )
                 messages.append( etree.XML( """<result type="%s">
-                                <place>%s%s<line>%s</line></place>
+                                <location>%s%s<line>%s</line></location>
                                 <message>Sentence with %s words:
                                 <quote>%s</quote>
                             </message>
@@ -799,7 +799,7 @@ def dupecheckmessage( word, line, content, contextid, basefile ):
         withinid = "<withinid>%s</withinid>" % str( contextid )
 
     return etree.XML( """<result type="error">
-            <place>%s%s<line>%s</line></place>
+            <location>%s%s<line>%s</line></location>
             <message><quote>%s</quote> is duplicated:
                 <quote>%s</quote>
             </message>
