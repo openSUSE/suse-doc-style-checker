@@ -151,6 +151,17 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>as</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>a(?![\.\-])</pattern>
+      <pattern>s(?![\.\-])</pattern>
+      <contextpattern>a(?![\.\-])</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>as opposed to</proposal>
     </accept>
     <patterngroup>
