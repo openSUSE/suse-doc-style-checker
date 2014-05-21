@@ -883,15 +883,26 @@ def main():
                                 dtd_validation = False )
     inputfile = etree.parse( args.inputfile, parser )
 
-    for checkfile in glob.glob( os.path.join(   location,
-                                                'xsl-checks',
-                                                '*.xslc' ) ):
+    checkfiles = glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) )
+
+
+    if not checkfiles:
+        sys.exit("No check files found in " + os.path.join( location, 'xsl-checks' ) )
+
+    for checkfile in checkfiles:
         try:
             transform = etree.XSLT( etree.parse( checkfile, parser ) )
-        except:
-            sys.exit("Broken check file: " + checkfile)
+        # FIXME: Should not use BaseException.
+        except BaseException as error:
+            print(error, file=sys.stderr)
+            sys.exit("Synactically broken check file: " + checkfile)
 
-        result = transform( inputfile )
+        try:
+            result = transform( inputfile )
+        # FIXME: Should not use BaseException.
+        except BaseException as error:
+            print(error, file=sys.stderr)
+            sys.exit("Broken check file or Python function: " + checkfile)
 
         result = result.getroot()
 
