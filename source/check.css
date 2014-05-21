@@ -17,7 +17,7 @@ results-title {
 
 part {
   display: block;
-  border-bottom: 1px solid #EEE;
+  border-bottom: 1px solid rgba(238,238,238,1);
 }
 
 part:last-child {
@@ -37,14 +37,14 @@ result {
   border: 1px solid transparent;
   margin: 10px 0;
   padding: 10px;
-  background-color: #FFF;
+  background-color: rgba(255,255,255,1);
   display: block;
   position: relative;
   z-index: 0;
 }
 
 result:hover, result:focus {
-  border: 1px solid #CCC;
+  border: 1px solid rgba(204,204,204,1);
   padding: 10px;
 }
 
@@ -64,18 +64,18 @@ message:before {
 result[type="info"] > message:before {
   content: 'i';
   color: #FFF;
-  background-color: #248;
+  background-color: rgba(34,68,136,1);
 }
 
 result[type="warning"] > message:before {
   content: '?';
-  background-color: #ED0;
+  background-color: rgba(238,221,0,1);
 }
 
 result[type="error"] > message:before {
   content: '!';
   color: #FFF;
-  background-color: #C00;
+  background-color: rgba(204,0,0,1);
 }
 
 message {
@@ -125,6 +125,13 @@ id, withinid, em {
   font-style: italic;
 }
 
+highlight {
+  display: inline-block;
+  border-bottom: 3px solid rgba(239,41,41,0.5);
+  margin-bottom: -3px;
+  padding: 0 3px;
+}
+
 location {
   font-size: 15px;
   display: block;
@@ -138,7 +145,7 @@ location:after {
 }
 
 result:hover location {
-  color: #333;
+  color: rgba(51,51,51,1);
 }
 
 file {
@@ -212,7 +219,7 @@ js ~ part > part-title:before {
   display: block;
   top: 18px;
   left: -26px;
-  background-color: #333;
+  background-color: rgba(51,51,51,1);
   width: 18px;
   height: 18px;
   color: #FFF;
@@ -318,7 +325,7 @@ result:hover done, result:focus done {
 }
 
 js {
-  border: 1px solid #CCC;
+  border: 1px solid rgba(204,204,204,1);
   background-color: rgba(255,255,255,0.8);
   display: block;
   height: 122px;
@@ -365,15 +372,15 @@ showerror {
 }
 
 showinfo:hover {
-  background-color: #EEE;
+  background-color: rgba(238,238,238,1);
 }
 
 showwarning:hover {
-  background-color: #EEE;
+  background-color: rgba(238,238,238,1);
 }
 
 showerror:hover {
-  background-color: #EEE;
+  background-color: rgba(238,238,238,1);
 }
 
 showinfo:before {
@@ -427,8 +434,8 @@ showwarning[show="false"] ~ part result[type="warning"]:before,
 showerror[show="false"] ~ part result[type="error"]:before {
   content: 'Some messages from an opened category are hidden.';
   display: block;
-  border: 1px solid #CCC;
-  background-color: #ED0;
+  border: 1px solid rgba(204,204,204,1);
+  background-color: rgba(238,221,0,1);
   position: fixed;
   padding: 3px 10px 5px;
   width: 190px;

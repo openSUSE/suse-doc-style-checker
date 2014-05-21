@@ -29,7 +29,8 @@
 <!ELEMENT id            (#PCDATA) >
 <!ELEMENT tag           (#PCDATA) >
 <!ELEMENT em            (#PCDATA) >
-<!ELEMENT quote         (#PCDATA) >
+<!ELEMENT quote         (#PCDATA | highlight | em | tag) >
+<!ELEMENT highlight     (#PCDATA) >
 <!ELEMENT withinid      (#PCDATA) >
 <!ELEMENT file          (#PCDATA) >
 <!ELEMENT line          (#PCDATA) >

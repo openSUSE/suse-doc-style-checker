@@ -153,6 +153,10 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
     # This should get us far enough for now
     sentences = sentencesegmenter( content )
 
+    # HACK: the counter goes up for the first word already, i.e. token[0],
+    # thus we just start at -1, so the first word gets to be 0.
+    currenttokeninparagraph = -1
+
     for sentence in sentences:
         # FIXME: Get something better than s.split. Some
         # existing tokenisers are overzealous, such as the default one from
@@ -165,6 +169,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
 
         skipcount = 0
         for wordposition, word in enumerate(words):
+            currenttokeninparagraph += 1
             # Idea here: if we previously matched a multi-word pattern, we can
             # simply skip the next few words since they were matched already.
             if skipcount > 0:
@@ -236,6 +241,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
 
                         contextmatches = 0
                         contextpatternstopatterngroup = contextpatterns[ patterngroupposition ]
+                        highlight = [ currenttokeninparagraph, skipcounttemporary ]
                         if trycontextpatterns:
                             if contextpatternstopatterngroup[0][0] is None:
                                 # easy positive
@@ -245,7 +251,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                                 messages.append( termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
                                     contentpretty, contextid, basefile,
-                                    messagetype ) )
+                                    messagetype, highlight ) )
                             else:
                                 for contextpattern in contextpatternstopatterngroup:
                                     if contextpattern[0]:
@@ -261,7 +267,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                                 messages.append( termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
                                     contentpretty, contextid, basefile,
-                                    messagetype ) )
+                                    messagetype, highlight ) )
                         patterngroupposition += 1
 
     if args.performance:
@@ -580,12 +586,11 @@ def xmlescape( text ):
     return "".join(escapetable.get(c,c) for c in text)
 
 def termcheckmessage(   acceptword, acceptcontext, word, line, content,
-                        contextid, basefile, messagetype ):
+                        contextid, basefile, messagetype, highlight ):
     # FIXME: shorten content string (in the right place), to get closer toward
     # more focused results
     message = None
-    content = xmlescape( content )
-
+    content = messagehighlight( xmlescape( content ), highlight )
     filename = ""
     if basefile:
         filename = "<file>%s</file>" % str( basefile )
@@ -615,6 +620,26 @@ def termcheckmessage(   acceptword, acceptcontext, word, line, content,
             <quote>%s</quote>.</suggestion>""" % word ) )
 
     return message
+
+def messagehighlight( text, highlightedtokens ):
+    tokens = text.split()
+    firsttoken = highlightedtokens[0]
+    lasttoken = highlightedtokens[0] + highlightedtokens[1]
+    if firsttoken <= ( len( tokens ) - 1 ):
+        tokens[ firsttoken ] = "<highlight>" + tokens[ firsttoken ]
+        if lasttoken <= ( len( tokens ) - 1 ):
+            tokens[ lasttoken ] = tokens[ lasttoken ] + "</highlight>"
+        # If the final highlight marker would be out of bounds, make sure
+        # that at least the tag is closed.
+        else:
+            tokens[ firsttoken ] = tokens[ firsttoken ] + "</highlight>"
+
+    text = ""
+    for position, token in enumerate( tokens ):
+        if not position == 0:
+            text += " "
+        text += token
+    return text
 
 def sentencelengthcheck( context, content, contentpretty, contextid, basefile ):
     messages = []
