@@ -54,7 +54,7 @@
                        methodname|option|package|parameter|prompt|replaceable|
                        sgmltag|structfield|systemitem|tag|userinput|varname|
                        keycombo|keycap|menuchoice|guimenu|email|filename|ulink|
-                       uri|xref"
+                       uri|xref|inlinemediaobject|symbol"
     mode="dupes">
     ##@ignore##
   </xsl:template>

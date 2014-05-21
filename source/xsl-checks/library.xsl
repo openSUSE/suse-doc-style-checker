@@ -223,6 +223,10 @@
     ##@ref##
   </xsl:template>
 
+  <xsl:template match="symbol|inlinemediaobject" mode="terminology-content">
+    ##@image##
+  </xsl:template>
+
   <xsl:template match="remark|indexterm" mode="terminology-content"/>
 
   <xsl:template match="*" mode="terminology-content">
