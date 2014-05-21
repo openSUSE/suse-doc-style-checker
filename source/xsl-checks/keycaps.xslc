@@ -11,8 +11,8 @@
       <xsl:value-of select="normalize-space(@function)"/>
     </xsl:variable>
     <xsl:variable name="text">
-      <xsl:call-template name="text">
-        <xsl:with-param name="text" select="text()"/>
+      <xsl:call-template name="change-case">
+        <xsl:with-param name="text" select="normalize-space(text())"/>
       </xsl:call-template>
     </xsl:variable>
 
@@ -37,41 +37,46 @@
   </xsl:template>
 
   <xsl:template match="keycap">
+
     <xsl:variable name="text">
-      <xsl:call-template name="text">
-        <xsl:with-param name="text" select="text()"/>
+      <xsl:value-of select="normalize-space(text())"/>
+    </xsl:variable>
+
+    <xsl:variable name="text-lower">
+      <xsl:call-template name="change-case">
+        <xsl:with-param name="text" select="$text"/>
       </xsl:call-template>
     </xsl:variable>
 
-    <xsl:if test="$text = 'alt' or $text = 'backspace' or
-                  $text = 'back' or $text = '&lt;—' or
-                  $text = '⌘' or $text = 'command' or $text = 'cmd' or
-                  $text = 'ctrl' or $text = 'control' or $text = 'del' or
-                  $text = 'delete' or $text = 'down' or
-                  $text = '↓' or $text = 'end' or
-                  $text = 'enter' or $text = 'return' or
-                  $text = 'esc' or $text = 'escape' or
-                  $text = 'home' or $text = 'ins' or
-                  $text = 'insert' or $text = 'left' or
-                  $text = '←' or $text = 'meta' or $text = 'super' or
-                  $text = 'win' or $text = 'windows' or
-                  $text = 'windows logo' or $text = 'windows-logo' or
-                  $text = 'option' or $text = '⌥' or
-                  $text = 'page down' or $text = 'pg down' or
-                  $text = 'pagedown' or
-                  $text = 'page ↓' or $text = 'pg ↓' or
-                  $text = 'page up' or $text = 'pg up' or
-                  $text = 'pageup' or
-                  $text = 'page ↑' or $text = 'pg ↑' or
-                  $text = 'right' or $text = '→' or
-                  $text = 'shift' or $text = 'space' or $text = ' ' or
-                  $text = 'spacebar' or $text = 'space bar' or
-                  $text = 'tab' or $text = '→|' or
-                  $text = 'up' or $text = '↑'">
+    <xsl:if test="$text-lower = 'alt' or $text-lower = 'backspace' or
+                  $text-lower = 'back' or $text-lower = '&lt;—' or
+                  $text-lower = '⌘' or $text-lower = 'command' or $text-lower = 'cmd' or
+                  $text-lower = 'ctrl' or $text-lower = 'control' or $text-lower = 'del' or
+                  $text-lower = 'delete' or $text-lower = 'down' or
+                  $text-lower = '↓' or $text-lower = 'end' or
+                  $text-lower = 'enter' or $text-lower = 'return' or
+                  $text-lower = 'esc' or $text-lower = 'escape' or
+                  $text-lower = 'home' or $text-lower = 'ins' or
+                  $text-lower = 'insert' or $text-lower = 'left' or
+                  $text-lower = '←' or $text-lower = 'meta' or $text-lower = 'super' or
+                  $text-lower = 'win' or $text-lower = 'windows' or
+                  $text-lower = 'windows logo' or $text-lower = 'windows-logo' or
+                  $text-lower = 'option' or $text-lower = '⌥' or
+                  $text-lower = 'page down' or $text-lower = 'pg down' or
+                  $text-lower = 'pagedown' or
+                  $text-lower = 'page ↓' or $text-lower = 'pg ↓' or
+                  $text-lower = 'page up' or $text-lower = 'pg up' or
+                  $text-lower = 'pageup' or
+                  $text-lower = 'page ↑' or $text-lower = 'pg ↑' or
+                  $text-lower = 'right' or $text-lower = '→' or
+                  $text-lower = 'shift' or $text-lower = 'space' or $text-lower = ' ' or
+                  $text-lower = 'spacebar' or $text-lower = 'space bar' or
+                  $text-lower = 'tab' or $text-lower = '→|' or
+                  $text-lower = 'up' or $text-lower = '↑'">
       <xsl:variable name="correct-attribute">
         <xsl:call-template
           name="correct-attribute">
-          <xsl:with-param name="raw" select="$text"/>
+          <xsl:with-param name="raw" select="$text-lower"/>
         </xsl:call-template>
       </xsl:variable>
 
@@ -88,17 +93,50 @@
         </suggestion>
       </result>
     </xsl:if>
+
+    <xsl:if test="$text = 'a' or $text = 'b' or $text = 'c' or $text = 'd' or
+                  $text = 'e' or $text = 'f' or $text = 'g' or $text = 'h' or
+                  $text = 'i' or $text = 'j' or $text = 'k' or $text = 'l' or
+                  $text = 'm' or $text = 'n' or $text = 'o' or $text = 'p' or
+                  $text = 'q' or $text = 'r' or $text = 's' or $text = 't' or
+                  $text = 'u' or $text = 'v' or $text = 'w' or $text = 'x' or
+                  $text = 'y' or $text = 'z'">
+      <xsl:variable name="upper">
+        <xsl:call-template name="change-case">
+          <xsl:with-param name="text" select="$text"/>
+          <xsl:with-param name="case" select="'upper'"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>Alphabetic keycap
+          <xsl:call-template name="createid"/>
+          is a lowercase letter.
+        </message>
+        <suggestion>Use the uppercase letter
+          <emphasis><xsl:value-of select="$upper"/></emphasis>
+          instead.
+        </suggestion>
+      </result>
+    </xsl:if>
   </xsl:template>
 
 
-  <xsl:template name="text">
+  <xsl:template name="change-case">
     <xsl:param name="text" select="'?'"/>
+    <xsl:param name="case" select="'lower'"/>
     <xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
     <xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
 
-    <xsl:value-of select="normalize-space(translate(text(),$upper,$lower))"/>
+    <xsl:choose>
+      <xsl:when test="case = 'upper'">
+        <xsl:value-of select="translate(text(),$lower,$upper)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="translate(text(),$upper,$lower)"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
-
 
   <xsl:template name="correct-attribute">
     <xsl:param name="raw" select="'?'"/>
