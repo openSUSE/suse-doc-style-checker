@@ -3188,7 +3188,11 @@
       <proposal>simplify</proposal>
     </accept>
     <patterngroup>
-      <pattern>(facilitat|eas)(e[sd]?|ing)</pattern>
+      <pattern>facilitat(e[sd]?|ing)|eas(e[sd]|ing)</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>ease</pattern>
+      <contextpattern match="negative">of</contextpattern>
     </patterngroup>
   </term>
 
