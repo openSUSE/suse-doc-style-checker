@@ -95,6 +95,31 @@ def printcolor( message, type = None ):
 def linenumber( context ):
     return context.context_node.sourceline
 
+def replacepunctuation( word, position ):
+    startpunctuation = '([{'
+    endpunctuation = ')]}/\\,:;!.'
+
+    if position == 'end':
+        word = word.rstrip( endpunctuation )
+    else:
+        word = word.lstrip( startpunctuation )
+    return word
+
+def tokenizer( text ):
+    return text.split()
+
+def sentencesegmenter( text ):
+    sentences = sentenceends.split( text )
+    # The last sentence's final punctuation has not yet been cut off, do that
+    # now.
+    sentences[-1] = lastsentenceends.sub( '', sentences[-1] )
+
+    # We also need to cut off parentheses etc. from the first word of the first
+    # sentence, as that has not been done so far either.
+    sentences[0] = replacepunctuation( sentences[0], 'start' )
+    return sentences
+
+
 def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
         messagetype ):
     # FIXME: Modes: para, title?
@@ -161,7 +186,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
         # FIXME: Get something better than s.split. Some
         # existing tokenisers are overzealous, such as the default one from
         # NLTK.
-        words = sentence.split()
+        words = tokenizer( sentence )
         totalwords = len( words )
 
         if args.performance:
@@ -622,7 +647,7 @@ def termcheckmessage(   acceptword, acceptcontext, word, line, content,
     return message
 
 def messagehighlight( text, highlightedtokens ):
-    tokens = text.split()
+    tokens = tokenizer( text )
     firsttoken = highlightedtokens[0]
     lasttoken = highlightedtokens[0] + highlightedtokens[1]
     if firsttoken <= ( len( tokens ) - 1 ):
@@ -670,7 +695,7 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile ):
         sentences = sentencesegmenter( content )
 
         for sentence in sentences:
-            words = sentence.split()
+            words = tokenizer( sentence )
             wordcount = len( words )
             if wordcount >= 26:
 
@@ -699,17 +724,6 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile ):
                     str( line ), str( wordcount ), contentpretty ) ) )
 
     return messages
-
-def sentencesegmenter( text ):
-    sentences = sentenceends.split( text )
-    # The last sentence's final punctuation has not yet been cut off, do that
-    # now.
-    sentences[-1] = lastsentenceends.sub( '', sentences[-1] )
-
-    # We also need to cut off parentheses etc. from the first word of the first
-    # sentence, as that has not been done so far either.
-    sentences[0] = replacepunctuation( sentences[0], 'start' )
-    return sentences
 
 def dupecheck( context, content, contentpretty, contextid, basefile ):
     messages = []
@@ -745,7 +759,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
 
     # FIXME: Get something better than s.split. Some existing tokenisers
     # are overzealous, such as the default one from NLTK.
-    words = content.split()
+    words = tokenizer( content )
     totalwords = len( words )
 
     if args.performance:
@@ -802,17 +816,6 @@ average time per word: %s\n"""
 
     return messages
 
-
-def replacepunctuation( word, position ):
-    startpunctuation = '([{'
-    endpunctuation = ')]}/\\,:;!.'
-
-    if position == 'end':
-        word = word.rstrip( endpunctuation )
-    else:
-        word = word.lstrip( startpunctuation )
-    return word
-
 def dupecheckmessage( word, line, content, contextid, basefile ):
     content = xmlescape( content )
 
@@ -841,7 +844,8 @@ def main():
     ns.prefix = 'py'
     ns.update( dict( linenumber = linenumber, termcheck = termcheck,
         buildtermdata = buildtermdata, dupecheck = dupecheck,
-        sentencelengthcheck = sentencelengthcheck ) )
+        sentencelengthcheck = sentencelengthcheck, tokenizer = tokenizer,
+        sentencesegmenter = sentencesegmenter) )
 
     location = os.path.dirname( os.path.realpath( __file__ ) )
 
