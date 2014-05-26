@@ -1960,7 +1960,7 @@
            that kind of detail in here...
       -->
       <contextpattern look="before" match="negative">installation</contextpattern>
-      <contextpattern match="negative">(file|message)s?</contextpattern>
+      <contextpattern match="negative">(file|message|into)s?</contextpattern>
       <contextpattern match="negative" location="2">to</contextpattern>
     </patterngroup>
     <patterngroup>
