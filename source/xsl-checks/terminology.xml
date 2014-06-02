@@ -1185,6 +1185,8 @@
     </accept>
     <patterngroup>
       <pattern>file-?systems?</pattern>
+      <!-- Don't match Filesystem Hierarchy Standard -->
+      <contextpattern match="negative" case="keep">Hierarchy</contextpattern>
     </patterngroup>
   </term>
 
