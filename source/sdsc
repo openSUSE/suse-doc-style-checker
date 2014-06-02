@@ -304,6 +304,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
     if args.performance:
         timeendmatch = time.time()
         timediffmatch = timeendmatch - timestartmatch
+        # FIXME: + .001 crudely avoids divisions by zero.
         print( """words: %s
 time for this para: %s
 average time per word: %s\n"""
@@ -905,7 +906,7 @@ def main():
         # FIXME: Should not use BaseException.
         except BaseException as error:
            print(error, file=sys.stderr)
-           sys.exit("Synactically broken check file: " + checkfile)
+           sys.exit("Syntactically broken check file: " + checkfile)
 
         try:
             result = transform( inputfile )
