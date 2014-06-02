@@ -31,6 +31,7 @@ parentheses = re.compile( r'(?<!\\)\((?![\?|\:])' )
 # Pattern to simplify looking for apostrophes, e.g. for searching contractions
 apostrophe = re.compile( r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]' )
 
+# Sentence end characters.
 # FIXME: English hardcoded
 # Lookbehinds need to have a fixed length... thus .ca
 # Do not use capture groups here -- re.split does odd things where those are.
@@ -41,6 +42,8 @@ lastsentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)\
 # FIXME: Number separation with spaces is a language-specific hack.
 dupeignore = re.compile( r'([0-9]{1,3}|##@ignore##)([\W\S](?=\s)|\s|$)' , re.I )
 
+# To find the number of tokens replaced by placeholders like ##@key-1##
+findnumberoftokens = re.compile( r'(?<=-)[0-9]*(?=##)' )
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
 # (self-explanatory anyway). Get rid of "optional arguments" header. Make sure
@@ -200,9 +203,19 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
 
         skipcount = 0
         for wordposition, word in enumerate(words):
+
             currenttokeninparagraph += 1
-            # Idea here: if we previously matched a multi-word pattern, we can
-            # simply skip the next few words since they were matched already.
+            if word != word.lstrip('##@'):
+                # We hit upon a placeholder, e.g. ##@key-1##. The number
+                # (here: 1) signifies the number of tokens this placeholder
+                # replaces.
+                replacedtokens = findnumberoftokens.search( word )
+                if replacedtokens:
+                    currenttokeninparagraph += int( replacedtokens.group(0) ) - 1
+
+            # Idea of skipcount: if we previously matched a multi-word pattern,
+            # we can simply skip the next few words since they were matched
+            # already.
             if skipcount > 0:
                 skipcount -= 1
                 continue
