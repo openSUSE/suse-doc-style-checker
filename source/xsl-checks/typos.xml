@@ -102,7 +102,7 @@ GNU GPL.
     </patterngroup>
     <patterngroup>
       <pattern case="keep">[Aa]d(?!-)</pattern>
-      <contextpattern look="before" match="negative">(an?|the|my|your|his|her|their|our)</contextpattern>
+      <contextpattern look="before" match="negative">(an?|the|my|your|his|her|their|our|802\.11)</contextpattern>
       <contextpattern match="negative">hoc</contextpattern>
     </patterngroup>
     <patterngroup>
