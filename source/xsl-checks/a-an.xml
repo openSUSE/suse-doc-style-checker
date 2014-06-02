@@ -21,6 +21,9 @@
     <patterngroup>
       <pattern>a(?!\W)</pattern>
       <!-- Keeping the words "one"/"once" out like this is not very clever. -->
+      <!-- RAID, SIP, FAT are usually all spoken as a word, not as individual
+           characters. The "improvement" made here may not be such a great
+           thing. -->
       <contextpattern case="keep">(8|[FHLMNORX][A-Z]|S[A-TV-Z]|[AEIaei]|[Oo][a-mo-z]|[Oo]n(?![ce])|[Uu][bfgh]|[Uu]n[a-hj-z]|[hlmnrx][bcdfghjklmnpqrtvwxz]|f[bcdfgjkmnpqtvwxz0-9]|s[bdfgjrxz0-9]|x[a-dfghj-np-tvwxz0-9]|[Uu]nin)[^\-\.]+|ha</contextpattern>
       <contextpattern look="before" match="negative" location="2">q\.?</contextpattern>
       <contextpattern match="negative" mode="fuzzy" location="2">[bco]\.?</contextpattern>
