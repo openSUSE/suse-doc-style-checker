@@ -3090,6 +3090,7 @@
     </accept>
     <patterngroup>
       <pattern>highlighted</pattern>
+      <contextpattern mode="fuzzy" location="3" match="negative">(light|dark|white|black|gr[ae]y|yellow|orange?|red|green|turquoise?|blue?|brown|purple?|pink)(ish)?</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>(blocked|chosen)</pattern>
