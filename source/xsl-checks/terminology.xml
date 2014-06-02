@@ -54,7 +54,7 @@
     <!-- Someone has been using the word checking option instead of check box. -->
     <patterngroup>
       <pattern>((block|tick)(ing|ed|s)|check(ed|s))</pattern>
-      <contextpattern mode="fuzzy" location="2">((check|tick)(ing|s)?|(option|boxe?)s?|##@ui##)</contextpattern>
+      <contextpattern mode="fuzzy" location="2">((check|tick)(ing|s)?|(option|boxe?)s?|##@ui-[0-9]*##)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>cho?os(es?|ing|n)</pattern>
@@ -420,7 +420,7 @@
     </accept>
     <patterngroup>
       <pattern>while</pattern>
-      <contextpattern>(the|a|##@ui##|##@mono##|##@key##)</contextpattern>
+      <contextpattern>(the|a|##@ui-[0-9]*##|##@mono-[0-9]*##|##@key-[0-9]*##)</contextpattern>
     </patterngroup>
   </term> -->
 
@@ -814,7 +814,7 @@
     </accept>
     <patterngroup>
       <pattern>(un|de)-?(block|check|tick)(ing|ed|s)</pattern>
-      <contextpattern mode="fuzzy" location="2">((check|tick)(ing|s)?|(option|boxe?)s?|##@ui##)</contextpattern>
+      <contextpattern mode="fuzzy" location="2">((check|tick)(ing|s)?|(option|boxe?)s?|##@ui-[0-9]*##)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>(un|de)-?((block|check|tick|deselect)(ing|ed|s)|ch[o]?os(e[s]?|ing|n))</pattern>
@@ -842,7 +842,7 @@
     </accept>
     <patterngroup>
       <pattern>((de-|un-?)select|(de|un)-?(block|choose?|highlight))(ing|s)?</pattern>
-      <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
+      <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?|##@mono-[0-9]*##</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>remov(e[ds]?|ing)</pattern>
@@ -2640,11 +2640,11 @@
     </accept>
     <patterngroup>
       <pattern>(hitt?(ing|ed|s)?|(punch|depress)(e[ds]|ing)?|strike([ds]|ing)?|struck)</pattern>
-      <contextpattern mode="fuzzy" location="3">(##@key##|key)</contextpattern>
+      <contextpattern mode="fuzzy" location="3">(##@key-[0-9]*##|key)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>(hitt?(ing|ed|s)?|(punch|depress)(e[ds]|ing)?|strike([ds]|ing)?|struck)</pattern>
-      <contextpattern mode="fuzzy" location="3" look="before">(##@key##|key)</contextpattern>
+      <contextpattern mode="fuzzy" location="3" look="before">(##@key-[0-9]*##|key)</contextpattern>
     </patterngroup>
   </term>
 
@@ -3070,7 +3070,7 @@
     </accept>
     <patterngroup>
       <pattern>(block|choose?|highlight)(s|ing)?</pattern>
-      <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
+      <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?|##@mono-[0-9]*##</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>add(ed|s|ing)?</pattern>
@@ -3093,7 +3093,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>(blocked|chosen)</pattern>
-      <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?|##@mono##</contextpattern>
+      <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?|##@mono-[0-9]*##</contextpattern>
     </patterngroup>
   </term>
 
@@ -3776,7 +3776,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>(un-|de-?)selected|(un|de)-(blocked|chosen)</pattern>
-      <contextpattern mode="fuzzy" location="3">((selection|text|entr(y|ie)|word)s?|##@mono##)</contextpattern>
+      <contextpattern mode="fuzzy" location="3">((selection|text|entr(y|ie)|word)s?|##@mono-[0-9]*##)</contextpattern>
     </patterngroup>
   </term>
 
