@@ -566,6 +566,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>start</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>stare?(s|d|ing)?</pattern>
+      <contextpattern>with</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>supposed</proposal>
     </accept>
     <patterngroup>
