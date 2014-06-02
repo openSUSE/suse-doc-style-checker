@@ -206,27 +206,42 @@
   <xsl:template match="classname|code|command|computeroutput|constant|envar|
                        exceptionname|filename|function|interfacename|literal|
                        methodname|option|package|parameter|prompt|replaceable|
-                       sgmltag|structfield|systemitem|tag|userinput|varname"
+                       sgmltag|structfield|systemitem|tag|userinput|varname|
+                       symbol|keycombo|keycap|menuchoice|guimenu|email|filename|
+                       ulink|uri|xrefsymbol|inlinemediaobject"
     mode="terminology-content">
-    ##@mono##
+
+    <!-- Find out number of tokens that are included within the element.
+         This helps us position of the red underline in errors. -->
+    <xsl:variable name="formatted">
+      <xsl:apply-templates select="self::*" mode="content-pretty"/>
+    </xsl:variable>
+    <xsl:variable name="tokens-candidate">
+      <xsl:value-of select="py:counttokens($formatted)"/>
+    </xsl:variable>
+    <xsl:variable name="tokens" select="normalize-space($tokens-candidate)"/>
+
+    <xsl:choose>
+      <xsl:when test="self::keycombo|self::keycap">
+        ##@key-<xsl:value-of select="$tokens"/>##
+      </xsl:when>
+      <xsl:when test="self::menuchoice|self::guimenu">
+        ##@ui-<xsl:value-of select="$tokens"/>##
+      </xsl:when>
+      <xsl:when test="self::email|self::filename|self::ulink|self::uri|
+                      self::xref">
+        ##@ref-<xsl:value-of select="$tokens"/>##
+      </xsl:when>
+      <xsl:when test="self::inlinemediaobject">
+        ##@image-<xsl:value-of select="$tokens"/>##
+      </xsl:when>
+      <xsl:otherwise>
+        ##@mono-<xsl:value-of select="$tokens"/>##
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="keycombo|keycap" mode="terminology-content">
-    ##@key##
-  </xsl:template>
-
-  <xsl:template match="menuchoice|guimenu" mode="terminology-content">
-    ##@ui##
-  </xsl:template>
-
-  <xsl:template match="email|filename|ulink|uri|xref" mode="terminology-content">
-    ##@ref##
-  </xsl:template>
-
-  <xsl:template match="symbol|inlinemediaobject" mode="terminology-content">
-    ##@image##
-  </xsl:template>
-
+  <!-- Hmm?? -->
   <xsl:template match="remark|indexterm" mode="terminology-content"/>
 
   <xsl:template match="*" mode="terminology-content">
@@ -305,6 +320,6 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="remark|indexterm" mode="content-pretty"/>
+  <xsl:template match="remark|indexterm|inlinemediaobject" mode="content-pretty"/>
 
 </xsl:stylesheet>

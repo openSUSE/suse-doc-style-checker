@@ -108,6 +108,12 @@ def replacepunctuation( word, position ):
 def tokenizer( text ):
     return text.split()
 
+def counttokens( context, text ):
+    count = 0
+    if text:
+        count = len( tokenizer( text[0] ) )
+    return count
+
 def sentencesegmenter( text ):
     sentences = sentenceends.split( text )
     # The last sentence's final punctuation has not yet been cut off, do that
@@ -845,7 +851,7 @@ def main():
     ns.update( dict( linenumber = linenumber, termcheck = termcheck,
         buildtermdata = buildtermdata, dupecheck = dupecheck,
         sentencelengthcheck = sentencelengthcheck, tokenizer = tokenizer,
-        sentencesegmenter = sentencesegmenter) )
+        sentencesegmenter = sentencesegmenter, counttokens = counttokens ) )
 
     location = os.path.dirname( os.path.realpath( __file__ ) )
 
@@ -898,8 +904,8 @@ def main():
             transform = etree.XSLT( etree.parse( checkfile, parser ) )
         # FIXME: Should not use BaseException.
         except BaseException as error:
-            print(error, file=sys.stderr)
-            sys.exit("Synactically broken check file: " + checkfile)
+           print(error, file=sys.stderr)
+           sys.exit("Synactically broken check file: " + checkfile)
 
         try:
             result = transform( inputfile )
