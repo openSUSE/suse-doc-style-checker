@@ -5,7 +5,7 @@
   <xsl:import href="library.xsl"/>
 
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
-  <xsl:param name="terminologyfile" select="'wrongplurals.xml'"/>
+  <xsl:param name="terminologyfile" select="'invariantplurals.xml'"/>
   <xsl:variable name="terminology" select="document($terminologyfile)/terminology"/>
   <xsl:variable name="termnodes" select="$terminology/term"/>
   <xsl:variable name="ignoredwords">
@@ -31,6 +31,6 @@
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="*" mode="part-title">Wrong Plurals</xsl:template>
+  <xsl:template match="*" mode="part-title">Invariant Plurals</xsl:template>
 
 </xsl:stylesheet>
