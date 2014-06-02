@@ -4087,23 +4087,28 @@
       <proposal>X Window System</proposal>
     </accept>
     <patterngroup>
+      <pattern case="keep">x</pattern>
+      <pattern>window</pattern>
+      <pattern>system</pattern>
+    </patterngroup>
+    <patterngroup>
       <pattern>x</pattern>
-      <pattern case="keep">Window</pattern>
+      <pattern case="keep">(window|WINDOW)</pattern>
       <pattern>system</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>x</pattern>
       <pattern>window</pattern>
-      <pattern case="keep">System</pattern>
+      <pattern case="keep">(system|SYSTEM)</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>x</pattern>
-      <pattern>windows?</pattern>
+      <pattern>windows</pattern>
       <pattern>system</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>X</pattern>
-      <pattern>Windows</pattern>
+      <pattern>x</pattern>
+      <pattern>windows</pattern>
     </patterngroup>
   </term>
 
