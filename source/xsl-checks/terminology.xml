@@ -1953,18 +1953,20 @@
     <accept>
       <proposal>log file</proposal>
     </accept>
-    <patterngroup>
+    <!-- This patterngroup is far too much trouble -- even the already
+         sprawling contextpatterns do not help very much. -->
+    <!-- <patterngroup>
       <pattern>logs?</pattern>
       <contextpattern look="before" match="negative" location="2" mode="fuzzy">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
-      <contextpattern look="before" location="4" mode="fuzzy">(the|an?)</contextpattern>
+      <contextpattern look="before" location="4" mode="fuzzy">(the|an?)</contextpattern> -->
       <!-- The installation log messages are shown in tab during SLE
            installation, thus not a file. Not sure if it is a good idea to put
            that kind of detail in here...
       -->
-      <contextpattern look="before" match="negative">installation</contextpattern>
+      <!-- <contextpattern look="before" match="negative">installation</contextpattern>
       <contextpattern match="negative">(file|message|into)s?</contextpattern>
       <contextpattern match="negative" location="2">to</contextpattern>
-    </patterngroup>
+    </patterngroup> -->
     <patterngroup>
       <pattern>log-?files?</pattern>
     </patterngroup>
