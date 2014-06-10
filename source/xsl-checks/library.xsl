@@ -208,7 +208,7 @@
                        methodname|option|package|parameter|prompt|replaceable|
                        sgmltag|structfield|systemitem|tag|userinput|varname|
                        symbol|keycombo|keycap|menuchoice|guimenu|email|filename|
-                       ulink|uri|xrefsymbol|inlinemediaobject"
+                       ulink|uri|xref|symbol|inlinemediaobject"
     mode="terminology-content">
 
     <!-- Find out number of tokens that are included within the element.
