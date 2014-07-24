@@ -168,6 +168,22 @@
       <pattern>reasons?</pattern>
       <pattern>that</pattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>(due|because)</pattern>
+      <pattern>(to|of)</pattern>
+      <pattern>the</pattern>
+      <pattern>fact</pattern>
+      <pattern>that</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(due|because)</pattern>
+      <pattern>(to|of)</pattern>
+      <pattern>the</pattern>
+      <!-- Allow for "simple" or otherwise adjective-enhanced facts -->
+      <pattern>\w+</pattern>
+      <pattern>fact</pattern>
+      <pattern>that</pattern>
+    </patterngroup>
   </term>
 
   <term>
@@ -860,6 +876,13 @@
     </accept>
     <patterngroup>
       <pattern>the</pattern>
+      <pattern>fact</pattern>
+      <pattern>that</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>the</pattern>
+      <!-- Allow for "simple" or otherwise adjective-enhanced facts -->
+      <pattern>.+</pattern>
       <pattern>fact</pattern>
       <pattern>that</pattern>
     </patterngroup>
