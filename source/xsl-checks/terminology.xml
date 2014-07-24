@@ -1953,7 +1953,7 @@
     <accept>
       <proposal>log file</proposal>
     </accept>
-    <!-- This patterngroup is far too much trouble -- even the already
+    <!-- This patterngroup is far too much trouble - even the already
          sprawling contextpatterns do not help very much. -->
     <!-- <patterngroup>
       <pattern>logs?</pattern>
