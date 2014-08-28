@@ -10,7 +10,8 @@
     </accept>
     <patterngroup>
       <pattern>an</pattern>
-      <contextpattern case="keep">([0-79]|[BCDGJKPQTUVWYZ][A-Z0-9]|[BCDGHJ-NP-TVWYZbcdghj-np-tvwyz][aeiou]|f([eiou]|a(?!q))|xy|[bcdfgkpt]r|st[aeiuo]|us|uni[ovt])[^\-]+</contextpattern>
+      <contextpattern case="keep">([0-79]|[BCDGJKPQTUVWYZ][A-Z0-9]|[BCDGHJ-NP-TVWYZbcdgj-np-tvwyz][aeiou]|h[aeiu]|ho[^u]|hou[^r]|f([eiou]|a(?!q))|xy|[bcdfgkpt]r|st[aeiuo]|us|uni[ovt])[^\-]+</contextpattern>
+      <contextpattern case="keep" match="negative">COPYING|CHANGELOG</contextpattern>
     </patterngroup>
   </term>
 
@@ -24,10 +25,11 @@
       <!-- RAID, SIP, FAT are usually all spoken as a word, not as individual
            characters. The "improvement" made here may not be such a great
            thing. -->
-      <contextpattern case="keep">(8|[FHLMNORX][A-Z]|S[A-TV-Z]|[AEIaei]|[Oo][a-mo-z]|[Oo]n(?![ce])|[Uu][bfgh]|[Uu]n[a-hj-z]|[hlmnrx][bcdfghjklmnpqrtvwxz]|f[bcdfgjkmnpqtvwxz0-9]|s[bdfgjrxz0-9]|x[a-dfghj-np-tvwxz0-9]|[Uu]nin)[^\-\.]+|ha</contextpattern>
+      <contextpattern case="keep">(8|[FHLMNORX][A-Z]|S[A-TV-Z]|[AEIaei]|[Oo][a-mo-z]|[Oo]n(?![ce])|[Uu][bfgh]|[Uu]n[a-hj-z]|[hlmnrx][bcdfghjklmnpqrtvwxz]|f[bcdfgjkmnpqtvwxz0-9]|s[bdfgjrxz0-9]|x[a-dfghj-np-tvwxz0-9]|[Uu]nin|hour)[^\-\.]+|ha</contextpattern>
       <contextpattern look="before" match="negative" location="2">q\.?</contextpattern>
       <contextpattern match="negative" mode="fuzzy" location="2">[bco]\.?</contextpattern>
       <contextpattern match="negative">and|or|with|but</contextpattern>
+      <contextpattern case="keep" match="negative">NIS|NFS|FAT|README|MANIFEST</contextpattern>
     </patterngroup>
   </term>
 
