@@ -472,6 +472,12 @@
       <proposal>few</proposal>
     </accept>
     <patterngroup>
+      <pattern>a</pattern>
+      <pattern>small</pattern>
+      <pattern>numbers?</pattern>
+      <pattern>of</pattern>
+    </patterngroup>
+    <patterngroup>
       <pattern>small</pattern>
       <pattern>numbers?</pattern>
       <pattern>of</pattern>
@@ -815,6 +821,12 @@
       <proposal>show</proposal>
     </accept>
     <patterngroup>
+      <pattern>(be|are|were|was)</pattern>
+      <pattern>(design(e[ds]?|ing)|us(e[ds]?|ing))</pattern>
+      <pattern>to</pattern>
+      <pattern>show</pattern>
+    </patterngroup>
+    <patterngroup>
       <pattern>(design(e[ds]?|ing)|us(e[ds]?|ing))</pattern>
       <pattern>to</pattern>
       <pattern>show</pattern>
@@ -857,6 +869,17 @@
 
   <term>
     <accept>
+      <proposal/>
+    </accept>
+    <patterngroup>
+      <pattern>some</pattern>
+      <contextpattern look="before" location="1">of</contextpattern>
+      <contextpattern look="before" location="2">list</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>tend</proposal>
     </accept>
     <patterngroup>
@@ -885,6 +908,24 @@
       <pattern>.+</pattern>
       <pattern>fact</pattern>
       <pattern>that</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>this means</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>what</pattern>
+      <pattern>this</pattern>
+      <pattern>tells</pattern>
+      <pattern>you</pattern>
+      <pattern>is</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>this</pattern>
+      <pattern>tells</pattern>
+      <pattern>you</pattern>
     </patterngroup>
   </term>
 
