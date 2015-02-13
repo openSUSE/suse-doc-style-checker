@@ -306,17 +306,20 @@ done:before {
 }
 
 done:after {
-  content: 'L';
+  content: '';
   display: block;
   position: absolute;
-  top: 1px;
-  right: 7px;
+  border-left: 4px solid #FFF;
+  border-bottom: 4px solid #FFF;
+  width: 15px;
+  height: 7px;
+  top: 7px;
+  right: 5px;
   z-index: 5;
-  color: #FFF;
   font-size: 24px;
   font-weight: bold;
-  -moz-transform: scale(-1, 1) rotate(-45deg);
-  -webkit-transform: scale(-1, 1) rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
 }
 
 result:hover done, result:focus done {
@@ -441,4 +444,13 @@ showerror[show="false"] ~ part result[type="error"]:before {
   width: 190px;
   right: 20px;
   top: 141px;
+  opacity: 0.5;
+}
+
+
+
+showinfo[show="false"] ~ part result[type="info"] ~ result:before,
+showwarning[show="false"] ~ part result[type="warning"] ~ result:before,
+showerror[show="false"] ~ part result[type="error"] ~ result:before {
+  content: none !important;
 }
