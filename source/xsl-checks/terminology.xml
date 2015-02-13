@@ -137,7 +137,7 @@
 
   <term>
     <accept>
-      <proposal>after</proposal>
+      <proposal>when</proposal>
       <context>time</context>
     </accept>
     <patterngroup>
@@ -285,6 +285,11 @@
       <pattern>back</pattern>
       <pattern>ups?</pattern>
       <contextpattern look="before">(the|a|local|remote|system|full|partial|automatic|manual|daily|hourly|monthly|yearly)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>back</pattern>
+      <pattern>ups?</pattern>
+      <contextpattern look="before" location="2">appl(y(ing)?|ie[sd])</contextpattern>
     </patterngroup>
   </term>
 
@@ -730,11 +735,13 @@
     <patterngroup>
       <pattern>hard-?links?</pattern>
       <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before" location="2">access</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>hard</pattern>
       <pattern>links?</pattern>
       <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before" location="2">access</contextpattern>
     </patterngroup>
   </term>
 
@@ -838,11 +845,12 @@
   <term>
     <accept>
       <proposal>deselect</proposal>
-      <context>text or list entries</context>
+      <context>list entries or text</context>
     </accept>
     <patterngroup>
       <pattern>((de-|un-?)select|(de|un)-?(block|choose?|highlight))(ing|s)?</pattern>
       <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?|##@mono-[0-9]*##</contextpattern>
+      <contextpattern match="negative" look="before">syntax</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>remov(e[ds]?|ing)</pattern>
@@ -1789,6 +1797,9 @@
       <proposal>key combination</proposal>
     </accept>
     <patterngroup>
+      <pattern>keycombos?</pattern>
+    </patterngroup>
+    <patterngroup>
       <pattern>key(board)?</pattern>
       <pattern>(accelerator|combo|shortcut)s?</pattern>
     </patterngroup>
@@ -1938,13 +1949,14 @@
     <accept>
       <proposal>localhost</proposal>
     </accept>
+    <!-- Do not correct plural! Not useful. -->
     <patterngroup>
-      <pattern>local-hosts?</pattern>
+      <pattern>local-host</pattern>
       <contextpattern look="before" match="negative">(a|the)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>local</pattern>
-      <pattern>hosts?</pattern>
+      <pattern>host</pattern>
       <contextpattern look="before" match="negative">(a|the)</contextpattern>
     </patterngroup>
   </term>
@@ -1987,6 +1999,7 @@
       <pattern>[io]ns?</pattern>
       <contextpattern look="before" mode="fuzzy" location="2">(the|an?)</contextpattern>
       <contextpattern match="negative">(the|an?)</contextpattern>
+      <contextpattern look="before" match="negative">(\w+(st|er)|audit)</contextpattern>
     </patterngroup>
     <patterngroup>
       <!-- "the # sign in the menu" etc.: location="1" -->
@@ -2015,6 +2028,7 @@
     <patterngroup>
       <pattern>logg?(ed|ing|s)</pattern>
       <pattern>on</pattern>
+      <contextpattern look="before" match="negative">(\w+(est|er)|audit)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>log</pattern>
@@ -2189,10 +2203,11 @@
     <accept>
       <proposal>man page</proposal>
     </accept>
-    <patterngroup>
+    <!-- This is not helpful at the beginning of sentences. -->
+    <!-- <patterngroup>
       <pattern case="keep">Man</pattern>
       <pattern>pages?</pattern>
-    </patterngroup>
+    </patterngroup>-->
     <patterngroup>
       <pattern>man-?pages?</pattern>
     </patterngroup>
@@ -2560,6 +2575,7 @@
     <patterngroup>
       <pattern>plug-?ins?</pattern>
       <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern>(program(me)|software|module|app(lication)?)s?</contextpattern>
     </patterngroup>
   </term>
 
@@ -3075,6 +3091,7 @@
     <patterngroup>
       <pattern>(choose?|highlight)(s|ing)?</pattern>
       <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?|##@mono-[0-9]*##</contextpattern>
+      <contextpattern match="negative" look="before">syntax</contextpattern>
     </patterngroup>
     <patterngroup>
       <!-- Dangerous block devices with ##@mono## names... -->
@@ -3901,6 +3918,9 @@
     </accept>
     <patterngroup>
       <pattern case="keep">(WEB|web)</pattern>
+      <contextpattern look="before" match="negative">spider</contextpattern>
+      <!-- Do not flag "web of trust". -->
+      <contextpattern location="2" match="negative">trust</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>interwebs?</pattern>
