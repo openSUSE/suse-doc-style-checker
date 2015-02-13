@@ -208,7 +208,7 @@
                        methodname|option|package|parameter|prompt|replaceable|
                        sgmltag|structfield|systemitem|tag|userinput|varname|
                        symbol|keycombo|keycap|menuchoice|guimenu|email|filename|
-                       ulink|uri|xref|symbol|inlinemediaobject"
+                       ulink|uri|xref|symbol|inlinemediaobject|citetitle"
     mode="terminology-content">
 
     <!-- Find out number of tokens that are included within the element.
@@ -234,6 +234,9 @@
       </xsl:when>
       <xsl:when test="self::inlinemediaobject">
         ##@image-<xsl:value-of select="$tokens"/>##
+      </xsl:when>
+      <xsl:when test="self::citetitle">
+        ##@quote-<xsl:value-of select="$tokens"/>##
       </xsl:when>
       <xsl:otherwise>
         ##@mono-<xsl:value-of select="$tokens"/>##
