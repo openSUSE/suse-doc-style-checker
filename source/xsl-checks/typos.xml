@@ -235,6 +235,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>extent</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>extends?</pattern>
+      <contextpattern look="before">(some|certain|small(er|est)?|large(r|st)?|big(ger|gest)?)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>ensure</proposal>
       <context>making sure of something</context>
     </accept>
@@ -297,6 +307,16 @@ GNU GPL.
     <patterngroup>
       <pattern>fro</pattern>
       <contextpattern look="before">away</contextpattern>
+    </patterngroup>
+  </term>
+
+    <term>
+    <accept>
+      <proposal>fully</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>full</pattern>
+      <contextpattern>qualified</contextpattern>
     </patterngroup>
   </term>
 
@@ -406,6 +426,17 @@ GNU GPL.
     <patterngroup>
       <pattern>loose</pattern>
       <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|i|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <!-- Fine-grained enough? -->
+  <term>
+    <accept>
+      <proposal>loose</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>lose</pattern>
+      <contextpattern>ends?</contextpattern>
     </patterngroup>
   </term>
 
@@ -520,6 +551,16 @@ GNU GPL.
       <pattern>remind</pattern>
       <contextpattern look="before">to</contextpattern>
       <contextpattern look="before" location="2">eas(y|ier|iest)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>regarding</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>regrading</pattern>
+      <!-- <contextpattern/> necessary? -->
     </patterngroup>
   </term>
 
