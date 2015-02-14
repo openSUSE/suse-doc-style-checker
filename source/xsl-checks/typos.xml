@@ -381,6 +381,26 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>issue</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>is</pattern>
+      <pattern case="keep">sue</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>issues</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>is</pattern>
+      <pattern case="keep">sues</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>itself</proposal>
     </accept>
     <patterngroup>
