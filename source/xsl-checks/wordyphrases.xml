@@ -776,6 +776,17 @@
 
   <term>
     <accept>
+      <proposal/>
+    </accept>
+    <patterngroup>
+      <pattern>from</pattern>
+      <pattern>happening</pattern>
+      <contextpattern look="before" location="2">prevent(s|ed|ing)?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>question</proposal>
     </accept>
     <patterngroup>
