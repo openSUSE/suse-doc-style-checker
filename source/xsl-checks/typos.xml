@@ -204,6 +204,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>compliant</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>complaint</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy">(be|is|are|were|was)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>date</proposal>
     </accept>
     <patterngroup>
