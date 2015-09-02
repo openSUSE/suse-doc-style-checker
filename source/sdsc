@@ -936,7 +936,7 @@ def main():
 
     if not output.xpath( '/results/part' ):
         output.append( etree.XML(
-             """<result typ="info>
+             """<result type="info">
                     <message>No problems detected.</message>
                     <suggestion>Celebrate!</suggestion>
                 </result>""" ) )
