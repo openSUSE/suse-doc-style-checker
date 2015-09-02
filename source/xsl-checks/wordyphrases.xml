@@ -916,7 +916,7 @@
     <patterngroup>
       <pattern>the</pattern>
       <!-- Allow for "simple" or otherwise adjective-enhanced facts -->
-      <pattern>.+</pattern>
+      <pattern>(simple|easy|obvious)</pattern>
       <pattern>fact</pattern>
       <pattern>that</pattern>
     </patterngroup>
