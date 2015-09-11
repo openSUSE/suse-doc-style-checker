@@ -493,6 +493,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>message</proposal>
+      <context>receiving information</context>
+    </accept>
+    <patterngroup>
+      <pattern>massag(e[sd]?|ing)</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>note</proposal>
     </accept>
     <patterngroup>
