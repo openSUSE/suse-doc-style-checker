@@ -489,11 +489,6 @@ GNU GPL.
       <pattern>with</pattern>
       <contextpattern look="before">multipl(y(ing)?|ie[ds])</contextpattern>
     </patterngroup>
-    <patterngroup>
-      <pattern>notice</pattern>
-      <contextpattern>that</contextpattern>
-      <contextpattern look="before" location="2" mode="fuzzy" match="negative">(will|\w+'ll|can|could|may|might|shall|should)</contextpattern>
-    </patterngroup>
   </term>
 
   <term>
