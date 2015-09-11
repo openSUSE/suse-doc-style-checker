@@ -29,7 +29,7 @@
       <contextpattern look="before" match="negative" location="2">q\.?</contextpattern>
       <contextpattern match="negative" mode="fuzzy" location="2">[bco]\.?</contextpattern>
       <contextpattern match="negative">and|or|with|but</contextpattern>
-      <contextpattern case="keep" match="negative">NIS|NFS|FAT|README|MANIFEST</contextpattern>
+      <contextpattern case="keep" match="negative">HOWTO|FAT|MAC|MANIFEST|NIS|NFS|RADIUS|RAID|RAM|README|RELAX|SAN|SCSI|SCHED|SIP|SLE[DS]?</contextpattern>
     </patterngroup>
   </term>
 
