@@ -431,6 +431,8 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
         trypattern( ignoredwords[0] )
         ignoredpattern = re.compile( manglepattern( ignoredwords[0], 0 ),
             flags = re.I )
+    else:
+        ignoredpattern = False
 
     firstpatterngroup = True
     for term in terms:
