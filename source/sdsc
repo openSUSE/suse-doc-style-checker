@@ -72,6 +72,10 @@ def parseargs():
             editor will open; in such cases, set the BROWSER variable with:
             export BROWSER=/MY/BROWSER ; Chromium or Firefox will both
             do the right thing""" )
+    parser.add_argument( '--module',
+        action = 'store_true',
+        default = False,
+        help = "writes name of current check module to stdout" )
     parser.add_argument( '--performance',
         action = 'store_true',
         default = False,
@@ -915,6 +919,11 @@ def main():
         sys.exit("No check files found in " + os.path.join( location, 'xsl-checks' ) )
 
     for checkfile in checkfiles:
+        if args.module or args.performance:
+            checkmodule = re.sub( r'^.*/', r'', checkfile )
+            checkmodule = re.sub( r'.xslc$', r'', checkmodule )
+            print( "Running module " +  checkmodule + "..." )
+
         try:
             transform = etree.XSLT( etree.parse( checkfile, parser ) )
         # FIXME: Should not use BaseException.
