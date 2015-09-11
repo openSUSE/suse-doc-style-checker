@@ -11,7 +11,6 @@
     <patterngroup>
       <pattern>an</pattern>
       <contextpattern case="keep">([0-79]|[BCDGJKPQTUVWYZ][A-Z0-9]|[BCDGHJ-NP-TVWYZbcdgj-np-tvwyz][aeiou]|h[aeiu]|ho[^u]|hou[^r]|f([eiou]|a(?!q))|xy|[bcdfgkpt]r|st[aeiuo]|us|uni[ovt])[^\-]+</contextpattern>
-      <contextpattern case="keep" match="negative">COPYING|CHANGELOG</contextpattern>
     </patterngroup>
   </term>
 
