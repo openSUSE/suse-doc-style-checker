@@ -457,6 +457,10 @@ GNU GPL.
       <pattern>loose</pattern>
       <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|i|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>loose</pattern>
+      <contextpattern look="after">(to|your?|him|her|its|their|our|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
   </term>
 
   <!-- Fine-grained enough? -->
