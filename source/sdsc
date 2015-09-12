@@ -322,12 +322,15 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
     if args.performance:
         timeendmatch = time.time()
         timediffmatch = timeendmatch - timestartmatch
-        # FIXME: + .001 crudely avoids divisions by zero.
+        timeperword = 0
+        if totalwords > 0:
+            timeperword = timediffmatch / totalwords
+
         print( """words: %s
 time for this para: %s
 average time per word: %s\n"""
             % ( str( totalwords ), str( timediffmatch ),
-                str( timediffmatch / (totalwords + .001 ) ) ) )
+                str( timeperword ) ) )
 
     return messages
 
