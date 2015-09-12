@@ -451,7 +451,7 @@ GNU GPL.
       <proposal>lose</proposal>
     </accept>
     <patterngroup>
-      <pattern>loose(e[ds]|ing)</pattern>
+      <pattern>loos(e[ds]|ing)</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>loose</pattern>
@@ -510,7 +510,7 @@ GNU GPL.
       <contextpattern look="before">do</contextpattern>
       <!-- This can't ever be comprehensive... maybe a blacklist approach is
            better suited here? No wait, I got it ... we need POS tagging.-->
-      <contextpattern location="2" mode="fuzzy">access|((de|re)?activate|affect|appear|apply|(re)?announce|belong|block|care|(ex)?change|clash|((left|middle|right)-?)click|(re)?configure|correspond|depend|differ|do|(en|dis)able|enforce|enter|exert|expect|extract|(re)?fill|fit|follow|forbid|forget|format|grant|have|implement|(de|re|un)?install|integrate|involve|(in|ex)clude|leave|like|(un|re)?load|log|need|obstruct|offer|own|overlap|(re)paint|pass|permit|(dis|re)?place|plan|press|precede|proceed|prove|provide|make|match|meet|modify|(un|re)?mount|(re)?move|notice|(re|en)quire|reside|run|scrub|see|seem|(de|re)?select|(un|re)?set|share|specify|(re)?store|suit|support|synchronize|(re)?title|try|(re)?use|want|work)</contextpattern>
+      <contextpattern location="2" mode="fuzzy">access|((de|re)?activate|affect|appear|apply|(re)?announce|belong|block|care|(ex)?change|clash|((left|middle|right)-?)click|(re)?configure|correspond|depend|differ|do|(en|dis)able|enforce|enter|exert|expect|extract|(re)?fill|fit|follow|forbid|forget|format|grant|have|implement|(de|re|un)?install|integrate|involve|(in|ex)clude|leave|like|(un|re)?load|log|need|obstruct|offer|own|overlap|(re)paint|pass|permit|(dis|re)?place|plan|press|precede|proceed|prove|provide|make|match|meet|modify|(un|re)?mount|(re)?move|notice|(re|en)quire|reside|run|scrub|see|seem|(de|re)?select|(un|re)?set|share|specify|(re)?store|suit|support|switch|synchronize|(re)?title|try|(re)?use|want|work)</contextpattern>
     </patterngroup>
   </term>
 
