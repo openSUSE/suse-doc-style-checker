@@ -34,6 +34,6 @@
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="*" mode="part-title">A/An Errors</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">A/An Errors</xsl:template>
 
 </xsl:stylesheet>

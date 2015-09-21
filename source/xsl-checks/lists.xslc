@@ -10,10 +10,11 @@
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
 
-  <xsl:template match="*" mode="part-title">Lists</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">Lists</xsl:template>
 
-  <xsl:template match="itemizedlist|orderedlist|variablelist">
-    <xsl:variable name="items" select="count(listitem|varlistentry)"/>
+  <xsl:template match="itemizedlist|orderedlist|variablelist|
+                       db5:itemizedlist|db5:orderedlist|db5:variablelist">
+    <xsl:variable name="items" select="count(listitem|varlistentry|db5:listitem|db5:varlistentry)"/>
     <xsl:variable name="nesting-level-candidate">
       <xsl:apply-templates mode="nesting-level" select=".."/>
     </xsl:variable>
@@ -45,19 +46,23 @@
 
   <!-- Find out nesting level by traversing the XML tree upwards. If we find
        another list we output a character. -->
-  <xsl:template match="itemizedlist|orderedlist|variablelist|procedure" mode="nesting-level" priority="1">
+  <xsl:template match="itemizedlist|orderedlist|variablelist|procedure|
+                       db5:itemizedlist|db5:orderedlist|db5:variablelist|
+                       db5:procedure"
+    mode="nesting-level" priority="1">
     <xsl:text>1</xsl:text>
     <xsl:choose>
-      <xsl:when test="parent::*">
-        <xsl:apply-templates mode="nesting-level" select="parent::*"/>
+      <xsl:when test="parent::*|parent::db5:*">
+        <xsl:apply-templates mode="nesting-level"
+         select="parent::*|parent::db5:*"/>
       </xsl:when>
       <xsl:otherwise/>
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="*" mode="nesting-level" priority="1">
+  <xsl:template match="*|db5:*" mode="nesting-level" priority="1">
     <xsl:choose>
-      <xsl:when test="parent::*">
+      <xsl:when test="parent::*|parent::db5:*">
         <xsl:apply-templates mode="nesting-level" select="parent::*"/>
       </xsl:when>
       <xsl:otherwise/>

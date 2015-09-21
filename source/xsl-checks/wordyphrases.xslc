@@ -37,6 +37,6 @@
 
   <xsl:template name="messagetype">warning</xsl:template>
 
-  <xsl:template match="*" mode="part-title">Wordy Phrases</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">Wordy Phrases</xsl:template>
 
 </xsl:stylesheet>

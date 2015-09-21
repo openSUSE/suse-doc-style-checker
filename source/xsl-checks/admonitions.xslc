@@ -9,11 +9,12 @@
 
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
-  <xsl:template match="*" mode="part-title">Admonitions</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">Admonitions</xsl:template>
 
 
-  <xsl:template match="caution|warning|important|note|tip">
-    <xsl:if test="self::caution">
+  <xsl:template match="caution|warning|important|note|tip|
+                          db5:caution|db5:warning|db5:important|db5:note|db5:tip">
+    <xsl:if test="self::caution|self::db5:caution">
       <result type="error">
         <xsl:call-template name="sourcehint"/>
         <message>Admonition <xsl:call-template name="createid"/>
@@ -28,7 +29,8 @@
       <xsl:variable name="output-type">
         <xsl:choose>
           <xsl:when
-            test="self::caution|self::warning|self::important">error</xsl:when>
+            test="self::caution|self::warning|self::important|
+                  self::db5:caution|self::db5:warning|self::db5:important">error</xsl:when>
           <xsl:otherwise>warning</xsl:otherwise>
         </xsl:choose>
       </xsl:variable>

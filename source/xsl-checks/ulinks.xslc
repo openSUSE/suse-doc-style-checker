@@ -12,8 +12,8 @@
   <xsl:template match="*" mode="part-title">Ulinks</xsl:template>
 
 
-  <xsl:template match="ulink">
-    <xsl:variable name="url" select="normalize-space(@url)"/>
+  <xsl:template match="ulink|db5:link">
+    <xsl:variable name="url" select="normalize-space(@url|@xlink:href)"/>
 
     <!-- Probably non-exhaustive. -->
     <xsl:if test="not(starts-with($url, 'http:') or
@@ -31,11 +31,11 @@
                         starts-with($url, 'bzr:')">
           <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <message>Ulink
+            <message>Link
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
-              links to URL that most browsers cannot open.
+              references a URL that most browsers cannot open.
             </message>
             <suggestion>To reference URLs browser cannot open, use the
               <tag>filename</tag> element.
@@ -45,11 +45,11 @@
         <xsl:when test="starts-with($url, 'info:')">
           <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <message>Ulink
+            <message>Link
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
-              links to an info page.
+              references an info page.
             </message>
             <suggestion>To reference info pages, use the phrase
               <quote>see the info page of <em>command</em></quote>.
@@ -59,11 +59,11 @@
         <xsl:when test="starts-with($url, 'man:')">
           <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <message>Ulink
+            <message>Link
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
-              links to a man page.
+              references a man page.
             </message>
             <suggestion>To reference man pages, use the phrase
               <quote>see the man page of <em>command</em></quote>.
@@ -74,11 +74,11 @@
                         starts-with($url, 'smb:')">
           <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <message>Ulink
+            <message>Link
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
-              links to a local file, directory or network.
+              references a local file, directory or network.
             </message>
             <suggestion>To reference local files, directories, or networks,
               use the <tag>filename</tag> element.
@@ -88,11 +88,11 @@
         <xsl:when test="starts-with($url, 'mailto:') or contains($url, '@')">
           <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <message>Ulink
+            <message>Link
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
-              links to an e-mail address.
+              references an e-mail address.
             </message>
             <suggestion>To reference e-mail addresses, use the
               <tag>email</tag> element.
@@ -108,7 +108,7 @@
                         contains($url, '.cn') or contains($url, '.in')">
           <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <message>Ulink
+            <message>Link
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
@@ -122,7 +122,7 @@
         <xsl:otherwise>
           <result type="error">
             <xsl:call-template name="sourcehint"/>
-            <message>Ulink
+            <message>Link
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
@@ -149,7 +149,7 @@
                       contains($url, 'en.opensuse.org'))">
       <result type="warning">
         <xsl:call-template name="sourcehint"/>
-        <message>Ulink
+        <message>Link
           <xsl:call-template name="createid">
             <xsl:with-param name="use-url-attribute" select="1"/>
           </xsl:call-template>

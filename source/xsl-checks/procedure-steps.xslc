@@ -10,10 +10,10 @@
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
 
-  <xsl:template match="*" mode="part-title">Procedures</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">Procedures</xsl:template>
 
-  <xsl:template match="procedure">
-    <xsl:variable name="steps" select="count(step)"/>
+  <xsl:template match="procedure|db5:procedure">
+    <xsl:variable name="steps" select="count(step|db5:step)"/>
     <xsl:choose>
       <xsl:when test="$steps &gt; 10">
         <result type="warning">

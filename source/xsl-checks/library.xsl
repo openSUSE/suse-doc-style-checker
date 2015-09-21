@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:db5="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:py="https://www.gitorious.org/style-checker/style-checker"
-  exclude-result-prefixes="py">
+  xmlns:exslt="http://exslt.org/common"
+  exclude-result-prefixes="db5 xlink py exslt">
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
-  <xsl:template match="*">
+  <xsl:template match="*|db5:*">
     <xsl:apply-templates/>
   </xsl:template>
 
@@ -28,33 +31,33 @@
 
   <xsl:template name="file">
     <xsl:param name="node" select="."/>
-    <xsl:if test="$node/ancestor::*[@xml:base]">
+    <xsl:if test="$node/ancestor::*[@xml:base]|$node/ancestor::db5:*[@xml:base]">
       <file>
-        <xsl:value-of select="$node/ancestor::*[@xml:base][1]/@xml:base"/>
+        <xsl:value-of select="$node/ancestor::*[@xml:base][1]/@xml:base|$node/ancestor::db5:*[@xml:base][1]/@xml:base"/>
       </file>
     </xsl:if>
   </xsl:template>
 
   <xsl:template name="withinid">
     <xsl:param name="node" select="."/>
-    <xsl:if test="$node/ancestor::*[@id]">
+    <xsl:if test="$node/ancestor::*[@id]|$node/ancestor::db5:*[@xml:id]">
       <withinid>
-        <xsl:value-of select="$node/ancestor::*[@id][1]/@id"/>
+        <xsl:value-of select="$node/ancestor::*[@id][1]/@id|$node/ancestor::db5:*[@xml:id][1]/@xml:id"/>
       </withinid>
     </xsl:if>
   </xsl:template>
 
   <xsl:template name="file-nomarkup">
     <xsl:param name="node" select="."/>
-    <xsl:if test="$node/ancestor::*[@xml:base]">
-        <xsl:value-of select="$node/ancestor::*[@xml:base][1]/@xml:base"/>
+    <xsl:if test="$node/ancestor::*[@xml:base]|$node/ancestor::db5:*[@xml:base]">
+        <xsl:value-of select="$node/ancestor::*[@xml:base][1]/@xml:base|$node/ancestor::db5:*[@xml:base][1]/@xml:base"/>
     </xsl:if>
   </xsl:template>
 
   <xsl:template name="withinid-nomarkup">
     <xsl:param name="node" select="."/>
-    <xsl:if test="$node/ancestor::*[@id]">
-        <xsl:value-of select="$node/ancestor::*[@id][1]/@id"/>
+    <xsl:if test="$node/ancestor::*[@id]|$node/ancestor::db5:*[@xml:id]">
+        <xsl:value-of select="$node/ancestor::*[@id][1]/@id|$node/ancestor::db5:*[@xml:id][1]/@xml:id"/>
     </xsl:if>
   </xsl:template>
 
@@ -65,8 +68,8 @@
     <xsl:param name="node" select="."/>
 
     <xsl:choose>
-      <xsl:when test="$node/@id">
-        <id><xsl:value-of select="$node/@id"/></id>
+      <xsl:when test="$node/@id|$node/@xml:id">
+        <id><xsl:value-of select="$node/@id|$node/@xml:id"/></id>
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
@@ -76,11 +79,11 @@
           <xsl:when test="$use-url-attribute = 1">
             <xsl:variable name="shortened">
               <xsl:choose>
-                <xsl:when test="string-length(normalize-space($node/@url)) &gt; 53">
-                  <xsl:value-of select="substring(normalize-space($node/@url), 1, 50)"/>…
+                <xsl:when test="string-length(normalize-space($node/@url|$node/@xlink:href)) &gt; 53">
+                  <xsl:value-of select="substring(normalize-space($node/@url|$node/@xlink:href), 1, 50)"/>…
                 </xsl:when>
                 <xsl:otherwise>
-                  <xsl:value-of select="normalize-space($node/@url)"/>
+                  <xsl:value-of select="normalize-space($node/@url|$node/@xlink:href)"/>
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:variable>
@@ -157,11 +160,11 @@
 
 
   <!-- Template that starts terminology check. -->
-  <xsl:template match="para|title|entry" mode="terminology">
-    <xsl:if test="self::entry/para">
+  <xsl:template match="para|title|entry|db5:para|db5:title|db5:entry" mode="terminology">
+    <xsl:if test="self::entry/para|self::db5:entry/db5:para">
       <xsl:apply-templates mode="terminology"/>
     </xsl:if>
-    <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
+    <xsl:if test="not(ancestor-or-self::*/@role = 'legal') and not(ancestor-or-self::db5:*/@role = 'legal')">
       <xsl:variable name="node" select="."/>
       <xsl:variable name="messagetype">
         <xsl:call-template name="messagetype"/>
@@ -189,7 +192,7 @@
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="*" mode="terminology">
+  <xsl:template match="*|db5:*" mode="terminology">
     <xsl:apply-templates mode="terminology"/>
   </xsl:template>
 
@@ -208,7 +211,16 @@
                        methodname|option|package|parameter|prompt|replaceable|
                        sgmltag|structfield|systemitem|tag|userinput|varname|
                        symbol|keycombo|keycap|menuchoice|guimenu|email|filename|
-                       ulink|uri|xref|symbol|inlinemediaobject|citetitle"
+                       ulink|uri|xref|symbol|inlinemediaobject|citetitle|
+                       db5:classname|db5:code|db5:command|db5:computeroutput|
+                       db5:constant|db5:envar|db5:exceptionname|db5:filename|
+                       db5:function|db5:interfacename|db5:literal|db5:methodname|
+                       db5:option|db5:package|db5:parameter|db5:prompt|
+                       db5:replaceable|db5:sgmltag|db5:structfield|
+                       db5:systemitem|db5:tag|db5:userinput|db5:varname|
+                       db5:symbol|db5:keycombo|db5:keycap|db5:menuchoice|
+                       db5:guimenu|db5:email|db5:filename|db5:link|db5:uri|
+                       db5:xref|db5:symbol|db5:inlinemediaobject|db5:citetitle"
     mode="terminology-content">
 
     <!-- Find out number of tokens that are included within the element.
@@ -222,20 +234,24 @@
     <xsl:variable name="tokens" select="normalize-space($tokens-candidate)"/>
 
     <xsl:choose>
-      <xsl:when test="self::keycombo|self::keycap">
+      <xsl:when test="self::keycombo|self::keycap|
+                      self::db5:keycombo|self::db5:keycap">
         ##@key-<xsl:value-of select="$tokens"/>##
       </xsl:when>
-      <xsl:when test="self::menuchoice|self::guimenu">
+      <xsl:when test="self::menuchoice|self::guimenu|
+     		      self::db5:menuchoice|self::db5:guimenu">
         ##@ui-<xsl:value-of select="$tokens"/>##
       </xsl:when>
       <xsl:when test="self::email|self::filename|self::ulink|self::uri|
-                      self::xref">
+                      self::xref|
+                      self::db5:email|self::db5:filename|self::db5:link|
+                      self::db5:uri|self::db5:xref">
         ##@ref-<xsl:value-of select="$tokens"/>##
       </xsl:when>
-      <xsl:when test="self::inlinemediaobject">
+      <xsl:when test="self::inlinemediaobject|self::db5:inlinemediaobject">
         ##@image-<xsl:value-of select="$tokens"/>##
       </xsl:when>
-      <xsl:when test="self::citetitle">
+      <xsl:when test="self::citetitle|self::db5:citetitle">
         ##@quote-<xsl:value-of select="$tokens"/>##
       </xsl:when>
       <xsl:otherwise>
@@ -245,15 +261,16 @@
   </xsl:template>
 
   <!-- Hmm?? -->
-  <xsl:template match="remark|indexterm" mode="terminology-content"/>
+  <xsl:template match="remark|indexterm|db5:remark|db5:indexterm"
+    mode="terminology-content"/>
 
-  <xsl:template match="*" mode="terminology-content">
+  <xsl:template match="*|db5:*" mode="terminology-content">
     <xsl:apply-templates mode="terminology-content"/>
   </xsl:template>
 
 
   <!-- Semi-format some elements for terminology check output. -->
-  <xsl:template match="*" mode="content-pretty">
+  <xsl:template match="*|db5:*" mode="content-pretty">
     <xsl:apply-templates mode="content-pretty"/>
   </xsl:template>
 
@@ -261,7 +278,7 @@
     <xsl:value-of select="."/>
   </xsl:template>
 
-  <xsl:template match="keycap" mode="content-pretty">
+  <xsl:template match="keycap|db5:keycap" mode="content-pretty">
     <xsl:choose>
       <xsl:when test="@function">
         <xsl:choose>
@@ -294,35 +311,37 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="keycombo" mode="content-pretty">
-    <xsl:for-each select="*">
+  <xsl:template match="keycombo|db5:keycombo" mode="content-pretty">
+    <xsl:for-each select="*|db5:*">
       <xsl:if test="position()&gt;1">–</xsl:if>
       <xsl:apply-templates mode="content-pretty" select="."/>
     </xsl:for-each>
   </xsl:template>
 
-  <xsl:template match="menuchoice" mode="content-pretty">
-    <xsl:for-each select="*">
+  <xsl:template match="menuchoice|db5:menuchoice" mode="content-pretty">
+    <xsl:for-each select="*|db5:*">
       <xsl:if test="position()&gt;1"> &gt; </xsl:if>
       <xsl:apply-templates mode="content-pretty" select="."/>
     </xsl:for-each>
   </xsl:template>
 
-  <xsl:template match="xref" mode="content-pretty">
+  <xsl:template match="xref|db5:xref" mode="content-pretty">
       <xsl:value-of select="@linkend"/>
   </xsl:template>
 
-  <xsl:template match="ulink" mode="content-pretty">
+  <xsl:template match="ulink|db5:link" mode="content-pretty">
     <xsl:choose>
       <xsl:when test="text()">
         <xsl:value-of select="."/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:value-of select="@url"/>
+        <xsl:value-of select="@url|@xlink:href"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="remark|indexterm|inlinemediaobject" mode="content-pretty"/>
+  <xsl:template match="remark|indexterm|inlinemediaobject|
+                       db5:remark|db5:indexterm|db5:inlinemediaobject"
+    mode="content-pretty"/>
 
 </xsl:stylesheet>

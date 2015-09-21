@@ -34,6 +34,6 @@
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="*" mode="part-title">Contractions</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">Contractions</xsl:template>
 
 </xsl:stylesheet>

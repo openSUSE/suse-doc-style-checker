@@ -9,16 +9,19 @@
 
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
-  <xsl:template match="*" mode="part-title">Figures</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">Figures</xsl:template>
 
-  <xsl:template match="mediaobject|inlinemediaobject">
+  <xsl:template match="mediaobject|inlinemediaobject|
+                       db5:mediaobject|db5:inlinemediaobject">
 
-    <xsl:if test="not(textobject/phrase)">
+    <xsl:if test="not(textobject/phrase) and not(db5:textobject/db5:phrase)">
       <result type="warning">
         <xsl:call-template name="sourcehint"/>
         <message>Media object
           <xsl:call-template name="createid">
-            <xsl:with-param name="node" select="imageobject[1]/imagedata[1]"/>
+            <xsl:with-param name="node"
+              select="imageobject[1]/imagedata[1]|
+                      db5:imageobject[1]/db5:imagedata[1]"/>
             <xsl:with-param name="use-fileref-attribute" select="1"/>
           </xsl:call-template>
           does not contain alternative text.
@@ -30,10 +33,10 @@
       </result>
     </xsl:if>
 
-    <xsl:apply-templates select="imageobject"/>
+    <xsl:apply-templates select="imageobject|db5:imageobject"/>
   </xsl:template>
 
-<xsl:template match="imagedata[@fileref]">
+<xsl:template match="imagedata[@fileref]|db5:imagedata[@fileref]">
     <xsl:variable name="fileref" select="normalize-space(@fileref)"/>
     <xsl:variable name="fileref-safe">
       <xsl:call-template name="safecharacters">

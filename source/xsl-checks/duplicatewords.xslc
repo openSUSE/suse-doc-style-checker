@@ -16,14 +16,15 @@
     </part>
   </xsl:template>
 
-  <xsl:template match="*" mode="part-title">Duplicated Words &amp; Phrases</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">Duplicated Words &amp; Phrases</xsl:template>
 
   <!-- The following template should probably match more elements. -->
-  <xsl:template match="para|title">
-    <xsl:if test="self::entry/para">
+  <xsl:template match="para|title|db5:para|db5:title">
+    <xsl:if test="self::entry/para|self::db5:entry/db5:para">
       <xsl:apply-templates/>
     </xsl:if>
-    <xsl:if test="not(ancestor-or-self::*/@role = 'legal')">
+    <xsl:if test="not(ancestor-or-self::*/@role = 'legal') and
+                  not(ancestor-or-self::db5:*/@role = 'legal')">
       <xsl:variable name="node" select="."/>
       <xsl:variable name="withinid">
         <xsl:call-template name="withinid-nomarkup"/>
@@ -57,14 +58,23 @@
                        methodname|option|package|parameter|prompt|replaceable|
                        sgmltag|structfield|systemitem|tag|userinput|varname|
                        keycombo|keycap|menuchoice|guimenu|email|filename|ulink|
-                       uri|xref|inlinemediaobject|symbol"
+                       uri|xref|inlinemediaobject|symbol|
+                       db5:classname|db5:code|db5:command|db5:computeroutput|
+                       db5:constant|db5:envar|db5:exceptionname|db5:filename|
+                       db5:function|db5:interfacename|db5:literal|db5:methodname|
+                       db5:option|db5:package|db5:parameter|db5:prompt|
+                       db5:replaceable|db5:sgmltag|db5:structfield|
+                       db5:systemitem|db5:tag|db5:userinput|db5:varname|
+                       db5:keycombo|db5:keycap|db5:menuchoice|db5:guimenu|
+                       db5:email|db5:filename|db5:link|db5:uri|db5:xref|
+                       db5:inlinemediaobject|db5:symbol"
     mode="dupes">
     ##@ignore##
   </xsl:template>
 
-  <xsl:template match="remark|indexterm" mode="dupes"/>
+  <xsl:template match="remark|indexterm|db5:remark|db5:indexterm" mode="dupes"/>
 
-  <xsl:template match="*" mode="dupes">
+  <xsl:template match="*|db5:*" mode="dupes">
     <xsl:apply-templates mode="dupes"/>
   </xsl:template>
 

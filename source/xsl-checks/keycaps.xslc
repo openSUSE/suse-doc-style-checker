@@ -9,9 +9,9 @@
 
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
-  <xsl:template match="*" mode="part-title">Keycaps</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">Keycaps</xsl:template>
 
-  <xsl:template match="keycap[@function]">
+  <xsl:template match="keycap[@function]|db5:keycap[@function]">
     <xsl:variable name="function">
       <xsl:value-of select="normalize-space(@function)"/>
     </xsl:variable>
@@ -41,7 +41,7 @@
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="keycap">
+  <xsl:template match="keycap|db5:keycap">
 
     <xsl:variable name="text">
       <xsl:value-of select="normalize-space(text())"/>

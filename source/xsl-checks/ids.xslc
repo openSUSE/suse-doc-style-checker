@@ -10,11 +10,20 @@
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
 
-  <xsl:template match="*" mode="part-title">Identifiers</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">Identifiers</xsl:template>
 
-  <xsl:template match="article[not(@id)]|chapter[not(@id)]|reference[not(@id)]|refentry[not(@id)]|appendix[not(@id)]|colophon[not(@id)]|
-                         section[not(@id)]|sect1[not(@id)]|sect2[not(@id)]|sect3[not(@id)]|sect4[not(@id)]|sect5[not(@id)]">
-    <xsl:if test="not(ancestor::preface or ancestor-or-self::*/@role = 'legal')">
+  <xsl:template match="article[not(@id)]|chapter[not(@id)]|reference[not(@id)]|
+                       refentry[not(@id)]|appendix[not(@id)]|colophon[not(@id)]|
+                       section[not(@id)]|sect1[not(@id)]|sect2[not(@id)]|
+                       sect3[not(@id)]|sect4[not(@id)]|sect5[not(@id)]|
+                       db5:article[not(@xml:id)]|db5:chapter[not(@xml:id)]|
+                       db5:reference[not(@xml:id)]|db5:refentry[not(@xml:id)]|
+                       db5:appendix[not(@xml:id)]|db5:colophon[not(@xml:id)]|
+                       db5:section[not(@xml:id)]|db5:sect1[not(@xml:id)]|
+                       db5:sect2[not(@xml:id)]|db5:sect3[not(@xml:id)]|
+                       db5:sect4[not(@xml:id)]|db5:sect5[not(@xml:id)]">
+    <xsl:if test="not(ancestor::preface or ancestor-or-self::*/@role = 'legal')
+              and not(ancestor::db5:preface or ancestor-or-self::db5:*/@role = 'legal')">
       <result type="error">
         <xsl:call-template name="sourcehint"/>
         <message>Section <xsl:call-template name="createid"/> has no identifier.
@@ -25,8 +34,8 @@
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="*[@id]">
-    <xsl:variable name="id" select="normalize-space(@id)"/>
+  <xsl:template match="*[@id]|db5:*[@xml:id]">
+    <xsl:variable name="id" select="normalize-space(@id|@xml:id)"/>
     <xsl:variable name="id-safe">
       <xsl:call-template name="safecharacters">
         <xsl:with-param name="input" select="$id"/>
@@ -34,29 +43,34 @@
     </xsl:variable>
     <xsl:variable name="correct-prefix">
       <xsl:choose>
-        <xsl:when test="self::appendix">app.</xsl:when>
-        <xsl:when test="self::book">book.</xsl:when>
-        <xsl:when test="self::co">co.</xsl:when>
-        <xsl:when test="self::chapter">cha.</xsl:when>
-        <xsl:when test="self::example">ex.</xsl:when>
-        <xsl:when test="self::figure">fig.</xsl:when>
-        <xsl:when test="self::glossary or self::glossterm">gl.</xsl:when>
-        <xsl:when test="self::itemizedlist">il.</xsl:when>
-        <xsl:when test="self::listitem">li.</xsl:when>
-        <xsl:when test="self::indexterm">idx.</xsl:when>
-        <xsl:when test="self::orderedlist">ol.</xsl:when>
-        <xsl:when test="self::part">part.</xsl:when>
-        <xsl:when test="self::procedure">pro.</xsl:when>
+        <xsl:when test="self::appendix or self::db5:appendix">app.</xsl:when>
+        <xsl:when test="self::book or self::db5:book">book.</xsl:when>
+        <xsl:when test="self::co or self::db5:co">co.</xsl:when>
+        <xsl:when test="self::chapter or self::db5:chapter">cha.</xsl:when>
+        <xsl:when test="self::example or self::db5:example">ex.</xsl:when>
+        <xsl:when test="self::figure or self::db5:figure">fig.</xsl:when>
+        <xsl:when test="self::glossary or self::glossterm or
+                        self::db5:glossary or self::db5:glossterm">gl.</xsl:when>
+        <xsl:when test="self::itemizedlist or self::db5:itemizedlist">il.</xsl:when>
+        <xsl:when test="self::listitem or self::db5:listitem">li.</xsl:when>
+        <xsl:when test="self::indexterm or self::db5:indexterm">idx.</xsl:when>
+        <xsl:when test="self::orderedlist or self::db5:orderedlist">ol.</xsl:when>
+        <xsl:when test="self::part or self::db5:part">part.</xsl:when>
+        <xsl:when test="self::procedure or self::db5:procedure">pro.</xsl:when>
         <xsl:when test="self::qandaset or self::qandadiv or
-                        self::qandaentry">qa.</xsl:when>
+                        self::qandaentry or
+                        self::db5:qandaset or self::db5:qandadiv or
+                        self::db5:qandaentry">qa.</xsl:when>
         <xsl:when test="self::sect1 or self::sect2 or self::sect3 or
-                        self::sect4 or self::sect5 or self::sect6 or
-                        self::section">sec.</xsl:when>
-        <xsl:when test="self::set">set.</xsl:when>
-        <xsl:when test="self::step">st.</xsl:when>
-        <xsl:when test="self::table">tab.</xsl:when>
-        <xsl:when test="self::variablelist">vl.</xsl:when>
-        <xsl:when test="self::varlistentry">vle.</xsl:when>
+                        self::sect4 or self::sect5 or self::section or
+                        self::db5:sect1 or self::db5:sect2 or self::db5:sect3 or
+                        self::db5:sect4 or self::db5:sect5 or
+                        self::db5:section">sec.</xsl:when>
+        <xsl:when test="self::set or self::db5:set">set.</xsl:when>
+        <xsl:when test="self::step or self::db5:step">st.</xsl:when>
+        <xsl:when test="self::table or self::db5:table">tab.</xsl:when>
+        <xsl:when test="self::variablelist or self::db5:variablelist">vl.</xsl:when>
+        <xsl:when test="self::varlistentry or self::db5:varlistentry">vle.</xsl:when>
         <xsl:otherwise>?</xsl:otherwise>
       </xsl:choose>
     </xsl:variable>

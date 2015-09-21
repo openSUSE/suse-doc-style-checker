@@ -9,13 +9,17 @@
 
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
-  <xsl:template match="*" mode="part-title">Computer Elements</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">Computer Elements</xsl:template>
 
 
-  <xsl:template match="command|replaceable|option|literal|filename">
+  <xsl:template match="command|replaceable|option|literal|filename|
+                       db5:command|db5:replaceable|db5:option|db5:literal|
+                       db5:filename">
     <xsl:variable name="length" select="string-length(normalize-space(text()))"/>
 
-    <xsl:if test="(self::command/parent::para or self::command/parent::title) and
+    <xsl:if test="(self::command/parent::para or self::command/parent::title or
+                  self::db5:command/parent::db5:para or
+                  self::db5:command/parent::db5:title) and
                   normalize-space(following-sibling::node()[1]) = '' and
                   (local-name(following-sibling::node()[2]) = 'option' or
                    local-name(following-sibling::node()[2]) = 'replaceable')">
