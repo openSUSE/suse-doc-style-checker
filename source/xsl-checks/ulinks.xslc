@@ -112,7 +112,7 @@
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
-              appears to contain no a protocol identifier.
+              appears to contain no protocol identifier.
             </message>
             <suggestion>If you have forgotten an <quote>http://</quote>
               or similar prefix, add it.
@@ -126,7 +126,7 @@
               <xsl:call-template name="createid">
                 <xsl:with-param name="use-url-attribute" select="1"/>
               </xsl:call-template>
-              appears to contain no a protocol identifier.
+              appears to contain no protocol identifier.
             </message>
             <suggestion>If you have forgotten an <quote>http://</quote>
               or similar prefix, add it.
