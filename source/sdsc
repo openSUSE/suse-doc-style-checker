@@ -583,10 +583,12 @@ def preparecontextpatterns( contextpatternxpath ):
 
     trypattern( contextpatternxpathcontent )
 
-    factor = 1
+    factors = [ 1 ]
     location = []
     fuzzymode = False
     positivematch = True
+    location = 1
+    actuallocations = []
 
     # Since this is now searched for instead of matched on, we need to avoid
     # searching for e.g. "mail" in "e-mail".
@@ -598,7 +600,9 @@ def preparecontextpatterns( contextpatternxpath ):
         contextpattern = re.compile( contextpatternxpathcontent, flags = re.I )
 
     if getattribute( contextpatternxpath, 'look' ) == 'before':
-        factor = -1
+        factors = [ -1 ]
+    if getattribute( contextpatternxpath, 'look' ) == 'bothways':
+        factors = [ -1 , 1 ]
 
     if getattribute( contextpatternxpath, 'mode' ) == 'fuzzy':
         fuzzymode = True
@@ -608,16 +612,18 @@ def preparecontextpatterns( contextpatternxpath ):
 
     locationxpath = getattribute( contextpatternxpath, 'location' )
     if locationxpath:
-        if fuzzymode:
-            locationrange = range( 1, ( int( locationxpath ) + 1 ) )
-            for i in locationrange:
-                location.append( i * factor )
-        else:
-            location = [ ( int( locationxpath ) * factor ) ]
-    else:
-        location = [ ( 1 * factor ) ]
+        location = int( locationxpath )
 
-    return [ contextpattern, location, positivematch ]
+    if fuzzymode:
+        locationrange = range( 1, ( location + 1 ) )
+        for i in locationrange:
+            for factor in factors:
+                actuallocations.append( i * factor )
+    else:
+        for factor in factors:
+            actuallocations.append( location * factor )
+
+    return [ contextpattern, actuallocations, positivematch ]
 
 def getattribute( element, attribute ):
     xpath = element.xpath( '@' + attribute )
