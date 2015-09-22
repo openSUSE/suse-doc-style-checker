@@ -9,7 +9,7 @@
 
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
-  <xsl:template match="*" mode="part-title">Ulinks</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">Links</xsl:template>
 
 
   <xsl:template match="ulink|db5:link">
