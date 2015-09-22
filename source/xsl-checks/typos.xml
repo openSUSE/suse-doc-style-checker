@@ -699,6 +699,20 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>tapping</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>taping</pattern>
+      <contextpattern look="before" location="3" mode="fuzzy">(touch(-?pads?)|systems?|machines?|computers?|connections?)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>taping</pattern>
+      <contextpattern look="after" location="3" mode="fuzzy">(touch(-?pads?)|systems?|machines?|computers?|connections?)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>than</proposal>
     </accept>
     <patterngroup>
