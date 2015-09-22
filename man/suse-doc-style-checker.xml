@@ -171,9 +171,16 @@
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><ulink url="https://www.gitorious.org/style-checker/style-checker/"/></term>
+        <term><ulink url="https://www.github.com/sknorr/suse-doc-style-checker/"/></term>
         <listitem>
          <para>Web site of &longname;.
+         </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><ulink url="https://opensuse.github.io/daps"/></term>
+        <listitem>
+         <para>Web site of DAPS.
          </para>
         </listitem>
       </varlistentry>
