@@ -5,6 +5,8 @@
   <!ENTITY longname     "SUSE Documentation Style Checker">
   <!ENTITY rpm          "suse-doc-style-checker">
   <!ENTITY command      "sdsc">
+  <!ENTITY daps         "DAPS">
+  <!ENTITY dapscommand  "daps">
   <!ENTITY version      "@VERSION@">
 ]>
 <refentry id="sdsc" lang="en">
@@ -66,7 +68,7 @@
       as input.
       Ideally, create the input file using DAPS:
     </para>
-    <screen><command>daps <option>-d <replaceable>DC-FILE</replaceable></option> <option>bigfile</option></command></screen>
+    <screen><command>&dapscommand; <option>-d <replaceable>DC-FILE</replaceable></option> <option>bigfile</option></command></screen>
     <para>All language checks assume that the input is written in American
       English.
     </para>
@@ -163,9 +165,9 @@
 
     <variablelist>
       <varlistentry>
-        <term><command>daps <option>stylecheck</option> <option>--help</option></command></term>
+        <term><command>&dapscommand; <option>stylecheck</option> <option>--help</option></command></term>
         <listitem>
-          <para>Help for the DAPS subcommand that uses
+          <para>Help for the &daps; subcommand that uses
             <command>&command;</command>.
           </para>
         </listitem>
@@ -180,7 +182,7 @@
       <varlistentry>
         <term><ulink url="https://opensuse.github.io/daps"/></term>
         <listitem>
-         <para>Web site of DAPS.
+         <para>Web site of &daps;.
          </para>
         </listitem>
       </varlistentry>
