@@ -37,6 +37,7 @@
     -->
     <cmdsynopsis><command>&command;</command>
       <arg choice="opt">--show</arg>
+      <arg choice="opt">--module</arg>
       <arg choice="opt">--performance</arg>
       <arg choice="opt">--checkpatterns</arg>&nbsp;<option><replaceable>INPUTFILE</replaceable></option>
       <arg choice="opt"><replaceable>OUTPUTFILE</replaceable></arg>
@@ -87,6 +88,13 @@
           <para>Open a Web page in the default browser that lets you install
             a bookmarklet to manage style checker results. (Try this option
             before checking a document for the first time!)
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--module</option></term>
+        <listitem>
+          <para>Show the check module currently running.
           </para>
         </listitem>
       </varlistentry>
