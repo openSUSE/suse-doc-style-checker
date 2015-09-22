@@ -60,9 +60,11 @@
   <refsect1>
     <title>Input</title>
 
-    <para>The input must be a single XML file without XIncludes or
-      custom entities. The checker is meant to be used with DocBook 4 or Novdoc
-      files as input. Ideally, create the input file using DAPS:
+    <para>
+      The input must be a single XML file without XIncludes or custom entities.
+      The checker is meant to be used with DocBook 4, DocBook 5 or Novdoc files
+      as input.
+      Ideally, create the input file using DAPS:
     </para>
     <screen><command>daps <option>-d <replaceable>DC-FILE</replaceable></option> <option>bigfile</option></command></screen>
     <para>All language checks assume that the input is written in American
