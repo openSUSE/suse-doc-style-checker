@@ -132,7 +132,7 @@
         In such cases, set the <literal>BROWSER</literal> variable manually:
       </para>
       <screen><command>export <option>BROWSER=<replaceable>/MY/BROWSER</replaceable></option></command></screen>
-      <para>Ideally, use Chrome, Chromium or Firefox.
+      <para>Ideally, use Chrome, Chromium, or Firefox.
       </para>
     </note>
   </refsect1>
