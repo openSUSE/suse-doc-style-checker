@@ -566,6 +566,24 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>nowadays</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>now</pattern>
+      <pattern>a</pattern>
+      <pattern>days?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>now</pattern>
+      <pattern>days?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>now(-?|-a?-?)days?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>one</proposal>
     </accept>
     <patterngroup>
