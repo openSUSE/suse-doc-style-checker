@@ -826,6 +826,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>there</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>their</pattern>
+      <contextpattern>are</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>than</proposal>
     </accept>
     <patterngroup>
