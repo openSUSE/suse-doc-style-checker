@@ -789,7 +789,7 @@
       <pattern>ssh</pattern>
       <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
       <!-- Crudely avoid false positive: ... access to SSH... -->
-      <contextpattern look="before" location="2" mode="negative">access</contextpattern>
+      <contextpattern look="before" location="2" match="negative">access</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>connect</pattern>
