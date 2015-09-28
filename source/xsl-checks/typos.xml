@@ -728,6 +728,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>there</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>(their|they're)</pattern>
+      <contextpattern>(are|is)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>to</proposal>
     </accept>
     <patterngroup>
