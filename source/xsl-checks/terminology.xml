@@ -2234,67 +2234,67 @@
       <proposal>middle-click</proposal>
     </accept>
     <patterngroup>
-      <pattern>mid(dle)?-?click(ed|ing)</pattern>
+      <pattern>(mid(dle)?|cent(er|re))-?click(ed|ing)</pattern>
       <pattern>on(to)?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>click(ed|ing)</pattern>
       <pattern>on(to)?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>mid(dle)?-?clicks?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))-?clicks?</pattern>
       <pattern>on(to)?</pattern>
       <contextpattern look="before">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>clicks?</pattern>
       <pattern>on(to)?</pattern>
       <contextpattern look="before">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>mid(dle)?click(ed|ing|s)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re)-?)click(ed|ing|s)?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>click(ed|ing|s)?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>click(ed|ing|s)?</pattern>
       <pattern>the</pattern>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>mouse</pattern>
       <pattern>button</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>click(ed|ing|s)?</pattern>
       <pattern>the</pattern>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>mouse</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>(mak(es?|ing)|made|do(es|ing)|did)</pattern>
       <pattern>an?</pattern>
-      <pattern>mid(dle)?-?clicks?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))-?clicks?</pattern>
       <pattern>on(to)?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>(mak(es?|ing)|made|do(es|ing)|did)</pattern>
       <pattern>an?</pattern>
-      <pattern>mid(dle)?-?clicks?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))-?clicks?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>(mak(es?|ing)|made|do(es|ing)|did)</pattern>
       <pattern>an?</pattern>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>clicks?</pattern>
       <pattern>on(to)?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>(mak(es?|ing)|made|do(es|ing)|did)</pattern>
       <pattern>an?</pattern>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>clicks?</pattern>
     </patterngroup>
   </term>
