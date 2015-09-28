@@ -129,7 +129,7 @@
             uses a lowercase letter.
           </message>
           <suggestion>Use the uppercased version
-            <emphasis><xsl:value-of select="$upper"/></emphasis>
+            <em><xsl:value-of select="$upper"/></em>
             instead.
           </suggestion>
         </result>
@@ -256,7 +256,7 @@
         </message>
         <suggestion>If this is markup for a key, use <tag>keycap</tag> with the
           text
-          <emphasis><xsl:value-of select="$upper"/></emphasis>
+          <em><xsl:value-of select="$upper"/></em>
           instead.
         </suggestion>
       </result>
@@ -290,7 +290,7 @@
         </message>
         <suggestion>If this is markup for a key, use <tag>keycap</tag> with the
           text
-          <emphasis><xsl:value-of select="$upper"/></emphasis>
+          <em><xsl:value-of select="$upper"/></em>
           instead.
         </suggestion>
       </result>
