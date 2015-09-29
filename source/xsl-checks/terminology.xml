@@ -4138,6 +4138,7 @@
     <patterngroup>
       <pattern>x</pattern>
       <pattern>windows</pattern>
+      <contextpattern look="before" match="negative">mac|os</contextpattern>
     </patterngroup>
   </term>
 
