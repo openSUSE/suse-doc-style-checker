@@ -3103,7 +3103,13 @@
     </patterngroup>
     <patterngroup>
       <!-- Dangerous block devices with ##@mono## names... -->
-      <pattern>block(s|ing)?</pattern>
+      <pattern>blocks?</pattern>
+      <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?</contextpattern>
+      <contextpattern mode="fuzzy" location="2" match="negative" look="before">a|the|one|[0-9]</contextpattern>
+      <contextpattern match="negative">of</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>blocking</pattern>
       <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?</contextpattern>
     </patterngroup>
     <patterngroup>
