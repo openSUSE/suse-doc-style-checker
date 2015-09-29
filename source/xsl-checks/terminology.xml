@@ -1999,6 +1999,7 @@
       <pattern>log</pattern>
       <pattern>[io]ns?</pattern>
       <contextpattern look="before" mode="fuzzy" location="2">(the|an?)</contextpattern>
+      <contextpattern look="before" match="negative">[a-z0-9]+[,:\)]</contextpattern>
       <contextpattern match="negative">(the|an?)</contextpattern>
       <contextpattern look="before" match="negative">(\w+(st|er)|audit)</contextpattern>
     </patterngroup>
