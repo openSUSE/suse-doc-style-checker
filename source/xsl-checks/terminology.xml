@@ -911,9 +911,15 @@
   <term>
     <accept>
       <proposal>directory</proposal>
+      <context>file systems</context>
     </accept>
     <patterngroup>
-      <pattern>(dir|folder)s?</pattern>
+      <pattern>dirs?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>folders?</pattern>
+      <contextpattern look="bothways" match="negative" mode="fuzzy" location="5">e-?mails?|bookmarks?|imap|subscri(b(e[sd]?|ing)|ptions?)|smtp|sent|inbox|outbox|drafts?|search|messages?|accounts?</contextpattern>
+      <contextpattern look="bothways" match="negative" mode="fuzzy" location="5" case="keep">Evolution|Exchange</contextpattern>
     </patterngroup>
   </term>
 
