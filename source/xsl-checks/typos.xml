@@ -527,11 +527,14 @@ GNU GPL.
       <pattern>not(ice)?</pattern>
       <contextpattern look="before">please</contextpattern>
     </patterngroup>
-    <patterngroup>
+    <!-- There is a difference between noting something and noticing something.
+         Often, indeed the former is meant, but not always, so avoid correcting
+         people on this. -->
+    <!-- <patterngroup>
       <pattern>notice</pattern>
       <contextpattern>that</contextpattern>
       <contextpattern look="before" location="2" mode="fuzzy" match="negative">(will|\w+'ll|can|could|may|might|shall|should)</contextpattern>
-    </patterngroup>
+    </patterngroup> -->
   </term>
 
   <term>
