@@ -749,6 +749,17 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>that</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>whether</pattern>
+      <contextpattern look="before" location="2">mak(e[ds]?|ing)</contextpattern>
+      <contextpattern look="before" location="1">sure</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>the</proposal>
     </accept>
     <patterngroup>
