@@ -427,6 +427,8 @@ GNU GPL.
       <pattern>now</pattern>
       <contextpattern look="before">to</contextpattern>
       <contextpattern look="before" location="2" match="negative">up</contextpattern>
+      <!-- Actually: any verb. -->
+      <contextpattern match="negative">be</contextpattern>
     </patterngroup>
   </term>
 
