@@ -594,6 +594,27 @@ GNU GPL.
     </patterngroup>
   </term>
 
+  <!-- Needs a check that no nouns like "things", "issues" etc. comes after. -->
+  <!-- <term>
+    <accept>
+      <proposal>others</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>other</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy">among</contextpattern>
+    </patterngroup>
+  </term> -->
+
+  <term>
+    <accept>
+      <proposal>other's</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>others</pattern>
+      <contextpattern look="before">each</contextpattern>
+    </patterngroup>
+  </term>
+
   <term>
     <accept>
       <proposal>parentheses</proposal>
