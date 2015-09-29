@@ -749,6 +749,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>the</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>the</pattern>
+      <pattern>(your|our|his|her|our|their)</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>there</proposal>
     </accept>
     <patterngroup>
