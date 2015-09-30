@@ -348,8 +348,8 @@ GNU GPL.
     </accept>
     <patterngroup>
       <pattern>hard</pattern>
-      <contextpattern look="before">(and|or)</contextpattern>
-      <contextpattern look="before" location="2">software</contextpattern>
+      <contextpattern>(and|or)</contextpattern>
+      <contextpattern location="2">software</contextpattern>
     </patterngroup>
   </term>
 
