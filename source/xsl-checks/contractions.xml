@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <terminology ignoredwords="[^cdhimostwy].+">
+  <term>
+    <accept>
+      <proposal>are not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>aren't</pattern>
+    </patterngroup>
+  </term>
 
   <term>
     <accept>
@@ -16,6 +24,24 @@
     </accept>
     <patterngroup>
       <pattern>couldn't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>do not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>don't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>did not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>didn't</pattern>
     </patterngroup>
   </term>
 
@@ -111,6 +137,15 @@
 
   <term>
     <accept>
+      <proposal>let us</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>let's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>must not</proposal>
     </accept>
     <patterngroup>
@@ -183,6 +218,15 @@
 
   <term>
     <accept>
+      <proposal>there is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>there's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>they are</proposal>
     </accept>
     <patterngroup>
@@ -214,6 +258,42 @@
     </accept>
     <patterngroup>
       <pattern>they'd</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>what is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>what's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>where is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>where's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>who is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>who's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>why is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>why's</pattern>
     </patterngroup>
   </term>
 

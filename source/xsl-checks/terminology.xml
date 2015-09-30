@@ -789,7 +789,7 @@
       <pattern>ssh</pattern>
       <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
       <!-- Crudely avoid false positive: ... access to SSH... -->
-      <contextpattern look="before" location="2" mode="negative">access</contextpattern>
+      <contextpattern look="before" location="2" match="negative">access</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>connect</pattern>
@@ -911,9 +911,15 @@
   <term>
     <accept>
       <proposal>directory</proposal>
+      <context>file systems</context>
     </accept>
     <patterngroup>
-      <pattern>(dir|folder)s?</pattern>
+      <pattern>dirs?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>folders?</pattern>
+      <contextpattern look="bothways" match="negative" mode="fuzzy" location="5">e-?mails?|bookmarks?|imap|subscri(b(e[sd]?|ing)|ptions?)|smtp|sent|inbox|outbox|drafts?|search|messages?|accounts?</contextpattern>
+      <contextpattern look="bothways" match="negative" mode="fuzzy" location="5" case="keep">Evolution|Exchange</contextpattern>
     </patterngroup>
   </term>
 
@@ -1999,6 +2005,7 @@
       <pattern>log</pattern>
       <pattern>[io]ns?</pattern>
       <contextpattern look="before" mode="fuzzy" location="2">(the|an?)</contextpattern>
+      <contextpattern look="before" match="negative">[a-z0-9]+[,:\)]</contextpattern>
       <contextpattern match="negative">(the|an?)</contextpattern>
       <contextpattern look="before" match="negative">(\w+(st|er)|audit)</contextpattern>
     </patterngroup>
@@ -2234,67 +2241,67 @@
       <proposal>middle-click</proposal>
     </accept>
     <patterngroup>
-      <pattern>mid(dle)?-?click(ed|ing)</pattern>
+      <pattern>(mid(dle)?|cent(er|re))-?click(ed|ing)</pattern>
       <pattern>on(to)?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>click(ed|ing)</pattern>
       <pattern>on(to)?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>mid(dle)?-?clicks?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))-?clicks?</pattern>
       <pattern>on(to)?</pattern>
       <contextpattern look="before">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>clicks?</pattern>
       <pattern>on(to)?</pattern>
       <contextpattern look="before">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>mid(dle)?click(ed|ing|s)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re)-?)click(ed|ing|s)?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>click(ed|ing|s)?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>click(ed|ing|s)?</pattern>
       <pattern>the</pattern>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>mouse</pattern>
       <pattern>button</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>click(ed|ing|s)?</pattern>
       <pattern>the</pattern>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>mouse</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>(mak(es?|ing)|made|do(es|ing)|did)</pattern>
       <pattern>an?</pattern>
-      <pattern>mid(dle)?-?clicks?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))-?clicks?</pattern>
       <pattern>on(to)?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>(mak(es?|ing)|made|do(es|ing)|did)</pattern>
       <pattern>an?</pattern>
-      <pattern>mid(dle)?-?clicks?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))-?clicks?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>(mak(es?|ing)|made|do(es|ing)|did)</pattern>
       <pattern>an?</pattern>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>clicks?</pattern>
       <pattern>on(to)?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>(mak(es?|ing)|made|do(es|ing)|did)</pattern>
       <pattern>an?</pattern>
-      <pattern>mid(dle)?</pattern>
+      <pattern>(mid(dle)?|cent(er|re))</pattern>
       <pattern>clicks?</pattern>
     </patterngroup>
   </term>
@@ -3096,7 +3103,13 @@
     </patterngroup>
     <patterngroup>
       <!-- Dangerous block devices with ##@mono## names... -->
-      <pattern>block(s|ing)?</pattern>
+      <pattern>blocks?</pattern>
+      <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?</contextpattern>
+      <contextpattern mode="fuzzy" location="2" match="negative" look="before">a|the|one|[0-9]</contextpattern>
+      <contextpattern match="negative">of</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>blocking</pattern>
       <contextpattern mode="fuzzy" location="3">(selection|text|entr(y|ie)|word)s?</contextpattern>
     </patterngroup>
     <patterngroup>
@@ -3178,6 +3191,7 @@
     <patterngroup>
       <pattern>shut-?downs?</pattern>
       <contextpattern>(the|an?)</contextpattern>
+      <contextpattern look="before" match="negative">(the|an?|one|[0-9]|another|each)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>shut-?downs?</pattern>
@@ -4137,6 +4151,7 @@
     <patterngroup>
       <pattern>x</pattern>
       <pattern>windows</pattern>
+      <contextpattern look="before" match="negative">mac|os</contextpattern>
     </patterngroup>
   </term>
 

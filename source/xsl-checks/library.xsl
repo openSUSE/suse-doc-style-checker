@@ -161,35 +161,40 @@
 
   <!-- Template that starts terminology check. -->
   <xsl:template match="para|title|entry|db5:para|db5:title|db5:entry" mode="terminology">
-    <xsl:if test="self::entry/para|self::db5:entry/db5:para">
-      <xsl:apply-templates mode="terminology"/>
-    </xsl:if>
-    <xsl:if test="not(ancestor-or-self::*/@role = 'legal') and not(ancestor-or-self::db5:*/@role = 'legal')">
-      <xsl:variable name="node" select="."/>
-      <xsl:variable name="messagetype">
-        <xsl:call-template name="messagetype"/>
-      </xsl:variable>
-      <xsl:variable name="withinid">
-        <xsl:call-template name="withinid-nomarkup"/>
-      </xsl:variable>
-      <xsl:variable name="file">
-        <xsl:call-template name="file-nomarkup"/>
-      </xsl:variable>
-      <xsl:variable name="content-candidate">
-        <xsl:apply-templates mode="terminology-content"/>
-      </xsl:variable>
-      <xsl:variable name="content-pretty-candidate">
-        <xsl:apply-templates mode="content-pretty"/>
-      </xsl:variable>
-      <xsl:variable name="content"><xsl:value-of
-        select="normalize-space($content-candidate)"/></xsl:variable>
-      <xsl:variable name="content-pretty"><xsl:value-of
-        select="normalize-space($content-pretty-candidate)"/></xsl:variable>
+    <xsl:choose>
+      <xsl:when test="(self::entry or self::db5:entry) and (para or db5:para)">
+        <xsl:apply-templates mode="terminology"/>
+      </xsl:when>
+      <xsl:when test="(ancestor-or-self::*/@role = 'legal') or (ancestor-or-self::db5:*/@role = 'legal')">
+        <!-- nothing -->
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="node" select="."/>
+        <xsl:variable name="messagetype">
+          <xsl:call-template name="messagetype"/>
+        </xsl:variable>
+        <xsl:variable name="withinid">
+          <xsl:call-template name="withinid-nomarkup"/>
+        </xsl:variable>
+        <xsl:variable name="file">
+          <xsl:call-template name="file-nomarkup"/>
+        </xsl:variable>
+        <xsl:variable name="content-candidate">
+          <xsl:apply-templates mode="terminology-content"/>
+        </xsl:variable>
+        <xsl:variable name="content-pretty-candidate">
+          <xsl:apply-templates mode="content-pretty"/>
+        </xsl:variable>
+        <xsl:variable name="content"><xsl:value-of
+          select="normalize-space($content-candidate)"/></xsl:variable>
+        <xsl:variable name="content-pretty"><xsl:value-of
+          select="normalize-space($content-pretty-candidate)"/></xsl:variable>
 
-      <xsl:copy-of
-        select="py:termcheck($termdataid, $content, $content-pretty, $withinid,
-                             $file, normalize-space($messagetype))"/>
-    </xsl:if>
+        <xsl:copy-of
+          select="py:termcheck($termdataid, $content, $content-pretty, $withinid,
+                               $file, normalize-space($messagetype))"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template match="*|db5:*" mode="terminology">

@@ -39,10 +39,12 @@
         select="normalize-space($content-candidate)"/></xsl:variable>
       <xsl:variable name="content-pretty"><xsl:value-of
         select="normalize-space($content-pretty-candidate)"/></xsl:variable>
+      <xsl:variable name="length-warning" select="26"/>
+      <xsl:variable name="length-error" select="35"/>
 
       <xsl:copy-of
         select="py:sentencelengthcheck($content, $content-pretty, $withinid,
-                                       $file)"/>
+                                       $file, $length-warning, $length-error)"/>
     </xsl:if>
   </xsl:template>
 

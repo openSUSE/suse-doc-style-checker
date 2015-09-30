@@ -5,6 +5,8 @@
   <!ENTITY longname     "SUSE Documentation Style Checker">
   <!ENTITY rpm          "suse-doc-style-checker">
   <!ENTITY command      "sdsc">
+  <!ENTITY daps         "DAPS">
+  <!ENTITY dapscommand  "daps">
   <!ENTITY version      "@VERSION@">
 ]>
 <refentry id="sdsc" lang="en">
@@ -37,6 +39,7 @@
     -->
     <cmdsynopsis><command>&command;</command>
       <arg choice="opt">--show</arg>
+      <arg choice="opt">--module</arg>
       <arg choice="opt">--performance</arg>
       <arg choice="opt">--checkpatterns</arg>&nbsp;<option><replaceable>INPUTFILE</replaceable></option>
       <arg choice="opt"><replaceable>OUTPUTFILE</replaceable></arg>
@@ -59,11 +62,13 @@
   <refsect1>
     <title>Input</title>
 
-    <para>The input must be a single XML file without XIncludes or
-      custom entities. The checker is meant to be used with DocBook 4 or Novdoc
-      files as input. Ideally, create the input file using DAPS:
+    <para>
+      The input must be a single XML file without XIncludes or custom entities.
+      The checker is meant to be used with DocBook 4, DocBook 5 or Novdoc files
+      as input.
+      Ideally, create the input file using DAPS:
     </para>
-    <screen><command>daps <option>-d <replaceable>DC-FILE</replaceable></option> <option>bigfile</option></command></screen>
+    <screen><command>&dapscommand; <option>-d <replaceable>DC-FILE</replaceable></option> <option>bigfile</option></command></screen>
     <para>All language checks assume that the input is written in American
       English.
     </para>
@@ -87,6 +92,13 @@
           <para>Open a Web page in the default browser that lets you install
             a bookmarklet to manage style checker results. (Try this option
             before checking a document for the first time!)
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--module</option></term>
+        <listitem>
+          <para>Show the check module currently running.
           </para>
         </listitem>
       </varlistentry>
@@ -120,7 +132,7 @@
         In such cases, set the <literal>BROWSER</literal> variable manually:
       </para>
       <screen><command>export <option>BROWSER=<replaceable>/MY/BROWSER</replaceable></option></command></screen>
-      <para>Ideally, use Chrome, Chromium or Firefox.
+      <para>Ideally, use Chrome, Chromium, or Firefox.
       </para>
     </note>
   </refsect1>
@@ -153,17 +165,24 @@
 
     <variablelist>
       <varlistentry>
-        <term><command>daps <option>stylecheck</option> <option>--help</option></command></term>
+        <term><command>&dapscommand; <option>stylecheck</option> <option>--help</option></command></term>
         <listitem>
-          <para>Help for the DAPS subcommand that uses
+          <para>Help for the &daps; subcommand that uses
             <command>&command;</command>.
           </para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><ulink url="https://www.gitorious.org/style-checker/style-checker/"/></term>
+        <term><ulink url="https://www.github.com/sknorr/suse-doc-style-checker/"/></term>
         <listitem>
          <para>Web site of &longname;.
+         </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><ulink url="https://opensuse.github.io/daps"/></term>
+        <listitem>
+         <para>Web site of &daps;.
          </para>
         </listitem>
       </varlistentry>

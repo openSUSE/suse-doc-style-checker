@@ -427,6 +427,8 @@ GNU GPL.
       <pattern>now</pattern>
       <contextpattern look="before">to</contextpattern>
       <contextpattern look="before" location="2" match="negative">up</contextpattern>
+      <!-- Actually: any verb. -->
+      <contextpattern match="negative">be</contextpattern>
     </patterngroup>
   </term>
 
@@ -527,11 +529,14 @@ GNU GPL.
       <pattern>not(ice)?</pattern>
       <contextpattern look="before">please</contextpattern>
     </patterngroup>
-    <patterngroup>
+    <!-- There is a difference between noting something and noticing something.
+         Often, indeed the former is meant, but not always, so avoid correcting
+         people on this. -->
+    <!-- <patterngroup>
       <pattern>notice</pattern>
       <contextpattern>that</contextpattern>
       <contextpattern look="before" location="2" mode="fuzzy" match="negative">(will|\w+'ll|can|could|may|might|shall|should)</contextpattern>
-    </patterngroup>
+    </patterngroup> -->
   </term>
 
   <term>
@@ -566,6 +571,24 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>nowadays</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>now</pattern>
+      <pattern>a</pattern>
+      <pattern>days?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>now</pattern>
+      <pattern>days?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>now(-?|-a?-?)days?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>one</proposal>
     </accept>
     <patterngroup>
@@ -573,6 +596,27 @@ GNU GPL.
       <contextpattern>of</contextpattern>
       <contextpattern location="2">the</contextpattern>
       <contextpattern location="3">(more|most|less|least|best|worst)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <!-- Needs a check that no nouns like "things", "issues" etc. comes after. -->
+  <!-- <term>
+    <accept>
+      <proposal>others</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>other</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy">among</contextpattern>
+    </patterngroup>
+  </term> -->
+
+  <term>
+    <accept>
+      <proposal>other's</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>others</pattern>
+      <contextpattern look="before">each</contextpattern>
     </patterngroup>
   </term>
 
@@ -681,6 +725,20 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>tapping</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>taping</pattern>
+      <contextpattern look="before" location="3" mode="fuzzy">(touch(-?pads?)|systems?|machines?|computers?|connections?)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>taping</pattern>
+      <contextpattern look="after" location="3" mode="fuzzy">(touch(-?pads?)|systems?|machines?|computers?|connections?)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>than</proposal>
     </accept>
     <patterngroup>
@@ -691,6 +749,37 @@ GNU GPL.
     <patterngroup>
       <pattern>then</pattern>
       <contextpattern look="before" location="2">(less|more)(?![,\)\]])</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>that</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>whether</pattern>
+      <contextpattern look="before" location="2">mak(e[ds]?|ing)</contextpattern>
+      <contextpattern look="before" location="1">sure</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>the</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>the</pattern>
+      <pattern>(your|our|his|her|our|their)</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>there</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>(their|they're)</pattern>
+      <contextpattern>(are|is)</contextpattern>
     </patterngroup>
   </term>
 
@@ -770,12 +859,12 @@ GNU GPL.
 
   <term>
     <accept>
-      <proposal>use</proposal>
+      <proposal>used</proposal>
     </accept>
     <patterngroup>
-      <pattern>use(?!,)</pattern>
-      <contextpattern look="before">to</contextpattern>
-      <contextpattern look="before">(the|an?)</contextpattern>
+      <pattern>use</pattern>
+      <contextpattern look="before">(get(s|ting)?|got|is|are|was|be)</contextpattern>
+      <contextpattern>to</contextpattern>
     </patterngroup>
   </term>
 

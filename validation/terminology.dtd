@@ -39,7 +39,7 @@
 
 <!--  Default values are after, exact, 1, positive, ignore. -->
 <!ATTLIST contextpattern
-                          look      (before|after)                  #IMPLIED
+                          look      (before|after|bothways)         #IMPLIED
                           mode      (fuzzy|exact)                   #IMPLIED
                           location  (1|2|3|4|5)                     #IMPLIED
                           match     (positive|negative)             #IMPLIED
