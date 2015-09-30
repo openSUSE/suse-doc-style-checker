@@ -859,12 +859,12 @@ GNU GPL.
 
   <term>
     <accept>
-      <proposal>use</proposal>
+      <proposal>used</proposal>
     </accept>
     <patterngroup>
-      <pattern>use(?!,)</pattern>
-      <contextpattern look="before">to</contextpattern>
-      <contextpattern look="before">(the|an?)</contextpattern>
+      <pattern>use</pattern>
+      <contextpattern look="before">(get(s|ting)?|got|is|are|was|be)</contextpattern>
+      <contextpattern>to</contextpattern>
     </patterngroup>
   </term>
 
