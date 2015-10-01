@@ -14,7 +14,7 @@ import webbrowser
 try:
     from lxml import etree
 except ImportError:
-    sys.exit("Could not import from LXML. Is LXML for Python 3 installed?")
+    sys.exit("! Could not import from LXML.\n  Is LXML for Python 3 installed?")
 
 __programname__ = "SUSE Documentation Style Checker"
 __version__ = "2014~02.2.99"
@@ -482,16 +482,22 @@ def trypattern( pattern ):
     if not args.checkpatterns:
         return True
 
+    # This is just a default that we can output if the pattern really is broken.
+    message = "Syntax error in expression"
+
     try:
         tryresult = re.search( pattern, "", flags = re.I )
+
         if tryresult:
-            sys.exit("Expression matches empty string: " + pattern )
+            message = "Expression matches empty string"
+            sys.exit()
 
         tryresult = re.search( pattern, " ", flags = re.I )
         if tryresult:
-            sys.exit("Expression matches string with a single space: " + pattern )
+            message = "Expression matches single space"
+            sys.exit()
     except:
-        sys.exit("Broken regular expression: " + pattern)
+        sys.exit(message + ": \"" + pattern + "\"")
 
     return True
 
@@ -633,8 +639,7 @@ def getattribute( element, attribute ):
         return None
 
 def emptypatternmessage( element ):
-    sys.exit( """Terminology: There is an empty {0} element.
-Make sure each {0} element in the terminology file(s) contains a pattern.""".format(element) )
+    sys.exit( "There is an empty {0} element in a terminology file.".format(element) )
 
 def xmlescape( text ):
     escapetable = {
@@ -955,7 +960,7 @@ def main():
 
 
     if not checkfiles:
-        sys.exit("No check files found in " + os.path.join( location, 'xsl-checks' ) )
+        sys.exit("! No check files found.\n  Add check files to " + os.path.join( location, 'xsl-checks' ) )
 
     for checkfile in checkfiles:
         if args.module or args.performance:
@@ -967,15 +972,15 @@ def main():
             transform = etree.XSLT( etree.parse( checkfile, parser ) )
         # FIXME: Should not use BaseException.
         except BaseException as error:
-           print(error, file=sys.stderr)
-           sys.exit("Syntactically broken check file: " + checkfile)
+           print("! Syntax error in check file.\n  " + checkfile, file=sys.stderr)
+           sys.exit("  " + str(error))
 
         try:
             result = transform( inputfile )
         # FIXME: Should not use BaseException.
         except BaseException as error:
-            print(error, file=sys.stderr)
-            sys.exit("Broken check file or Python function: " + checkfile)
+            print("! Broken check file or Python function.\n  " + checkfile, file=sys.stderr)
+            sys.exit("  " + str(error))
 
         result = result.getroot()
 
