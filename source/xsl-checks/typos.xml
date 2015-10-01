@@ -714,6 +714,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>starting point</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>staring</pattern>
+      <pattern>point</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>supposed</proposal>
     </accept>
     <patterngroup>
