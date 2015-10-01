@@ -5,7 +5,6 @@ import argparse
 import glob
 import os.path
 import re
-import subprocess
 import sys
 import time
 import random
