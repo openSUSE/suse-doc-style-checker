@@ -972,14 +972,14 @@ def main():
             transform = etree.XSLT( etree.parse( checkfile, parser ) )
         # FIXME: Should not use BaseException.
         except BaseException as error:
-           print("! Syntax error in check file.\n  " + checkfile, file=sys.stderr)
+           print("! Syntax error in check file.\n  " + checkfile)
            sys.exit("  " + str(error))
 
         try:
             result = transform( inputfile )
         # FIXME: Should not use BaseException.
         except BaseException as error:
-            print("! Broken check file or Python function.\n  " + checkfile, file=sys.stderr)
+            print("! Broken check file or Python function.\n  " + checkfile)
             sys.exit("  " + str(error))
 
         result = result.getroot()
