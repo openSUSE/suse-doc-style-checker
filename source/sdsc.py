@@ -137,6 +137,9 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
     # FIXME: Modes: para, title?
     messages = []
 
+    if not int(termfileid[0]) == int(termdataid):
+        sys.exit("Terminology data was not correctly initialized.")
+
     if content:
         # I get this as a list with one lxml.etree._ElementUnicodeResult.
         # I need a single string.
