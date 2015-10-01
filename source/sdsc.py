@@ -945,8 +945,6 @@ def main():
                             <results/>"""
                       % os.path.join( location, 'check.css' ) )
 
-    rootelement = output.xpath( '/results' )
-
     resultstitle = etree.Element( 'results-title' )
     resultstitle.text = "Style Checker Results for %s" % inputfilename
     output.append( resultstitle )
