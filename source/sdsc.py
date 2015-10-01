@@ -89,7 +89,7 @@ def parseargs():
 
     return parser.parse_args()
 
-def printcolor( message, type = None ):
+def printcolor( message, messagetype = None ):
     if sys.stdout.isatty():
         if type == 'error':
             print( '\033[0;31m' + message + '\033[0m' )
