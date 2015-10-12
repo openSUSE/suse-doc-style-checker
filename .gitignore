@@ -11,7 +11,7 @@ __pycache__/
 Thumbs.db
 .DS_Store
 MANIFEST
-/source/*.xml
+/src/*.xml
 /specs/build
 
 # C extensions
