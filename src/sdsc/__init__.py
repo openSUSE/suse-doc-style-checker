@@ -16,6 +16,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
 #
 
+__programname__ = "SUSE Documentation Style Checker"
+__version__ = "2014~02.2.99"
+__author__ = "Stefan Knorr, Thomas Schraitle"
+__license__ = "LGPL-2.1+"
+__description__ = "checks a given DocBook XML file for stylistic errors"
+
+
 import glob
 import os.path
 import re
@@ -25,13 +32,7 @@ import random
 import webbrowser
 
 from lxml import etree
-from sdsc.cli import printcolor, parseargs
-
-__programname__ = "SUSE Documentation Style Checker"
-__version__ = "2014~02.2.99"
-__author__ = "Stefan Knorr, Thomas Schraitle"
-__license__ = "LGPL-2.1+"
-__description__ = "checks a given DocBook XML file for stylistic errors"
+from .cli import printcolor, parseargs
 
 
 # In manglepattern(), only catch patterns that are not literal and are not
