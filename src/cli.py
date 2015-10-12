@@ -18,6 +18,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
 #
 
+"""SDSC Module that handles CLI-related tasks
+"""
+
 from . import __description__, __programname__, __version__
 
 import argparse
@@ -28,6 +31,12 @@ import sys
 # least important options (--help, --version) are listed last. Also, I really
 # liked being able to use sentences in the parameter descriptions.
 def parseargs():
+    """Parse command line arguments
+
+    :param list cliargs: Arguments to parse or None (=use sys.argv)
+    :return: parsed arguments
+    :rtype: argparse.Namespace
+    """
     parser = argparse.ArgumentParser(
         usage = "%(prog)s [options] inputfile [outputfile]",
         description = __description__ )
@@ -70,6 +79,11 @@ def parseargs():
 
 
 def printcolor( message, messagetype = None ):
+    """Print a colored message
+
+    :param str message: Error message
+    :param str errortype: Error type
+    """
     if sys.stdout.isatty():
         if type == 'error':
             print( '\033[0;31m' + message + '\033[0m' )
