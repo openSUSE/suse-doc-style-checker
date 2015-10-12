@@ -5,14 +5,12 @@ __pycache__/
 # Misc
 *.kate-swp
 *~
-*.~
 .*sw?
 \#*
 Thumbs.db
 .DS_Store
 MANIFEST
 /src/*.xml
-/specs/build
 
 # C extensions
 *.so
