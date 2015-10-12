@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 #
 # Copyright (c) 2015 SUSE Linux GmbH
 #
@@ -865,10 +863,16 @@ def dupecheckmessage( word, line, content, contextid, basefile ):
             <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
         </result>""" % ( filename, withinid, str(line), word, content, word ) )
 
-def main():
+
+def main(cliargs=None):
+    """Entry point for the application script
+
+    :param list cliargs: Arguments to parse or None (=use sys.argv)
+    """
 
     timestart = time.time()
 
+    # toms: Maybe we should change that to GitHub URL
     ns = etree.FunctionNamespace(
         'https://www.gitorious.org/style-checker/style-checker' )
     ns.prefix = 'py'

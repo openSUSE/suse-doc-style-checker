@@ -30,7 +30,8 @@ import sys
 # (self-explanatory anyway). Get rid of "optional arguments" header. Make sure
 # least important options (--help, --version) are listed last. Also, I really
 # liked being able to use sentences in the parameter descriptions.
-def parseargs():
+
+def parseargs(cliargs=None):
     """Parse command line arguments
 
     :param list cliargs: Arguments to parse or None (=use sys.argv)
@@ -75,7 +76,7 @@ def parseargs():
         nargs = "?" )
     parser.add_argument( 'outputfile', nargs = "?" )
 
-    return parser.parse_args()
+    return parser.parse_args(args=cliargs)
 
 
 def printcolor( message, messagetype = None ):
