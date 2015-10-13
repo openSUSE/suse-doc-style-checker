@@ -1,4 +1,5 @@
-<!--  DTD to validate the documentation style checker's result file. -->
+<!--  DTD to validate the result file of the SUSE Documentation Style Checker.
+-->
 <!--  To validate, do
         $ xmllint -dtdvalid [PATH TO THIS DTD] [PATH TO RESULT FILE]
 -->
