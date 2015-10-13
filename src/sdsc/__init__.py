@@ -138,7 +138,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
     if onepattern:
         if not onepattern.search( content ):
             if args.performance:
-                print("skipped entire paragraph\n")
+                printcolor("skipped entire paragraph\n", 'debug' )
             return messages
 
     # This if/else block should not be necessary (if there is content,
@@ -287,11 +287,11 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
         if totalwords > 0:
             timeperword = timediffmatch / totalwords
 
-        print( """words: %s
+        printcolor( """words: %s
 time for this para: %s
 average time per word: %s\n"""
             % ( str( totalwords ), str( timediffmatch ),
-                str( timeperword ) ) )
+                str( timeperword ) ), 'debug'  )
 
     return messages
 
@@ -435,7 +435,7 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
 
     if args.performance:
         timeendbuild = time.time()
-        print( "time to build: %s" % str( timeendbuild - timestartbuild ) )
+        printcolor( "time to build: %s" % str( timeendbuild - timestartbuild ), 'debug'  )
     return termdataid
 
 def trypattern( pattern ):
@@ -693,13 +693,13 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
         try:
             maximumlengths[0] = int( lengthwarning )
         except ValueError:
-            print('Sentence length check: Wrong type. Using default.')
+            printcolor('Sentence length check: Wrong type. Using default.', 'error')
 
     if lengtherror:
         try:
             maximumlengths[1] = int( lengtherror )
         except ValueError:
-            print('Sentence length check: Wrong type. Using default.')
+            printcolor('Sentence length check: Wrong type. Using default.', 'error')
 
     if content:
         # I get this as a list with one lxml.etree._ElementUnicodeResult, not
@@ -840,11 +840,11 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
     if args.performance:
         timeendmatch = time.time()
         timediffmatch = timeendmatch - timestartmatch
-        print( """words: %s
+        printcolor( """words: %s
 time for this para: %s
 average time per word: %s\n"""
             % ( str( totalwords ), str( timediffmatch ),
-                str( timediffmatch / (totalwords + .001 ) ) ) )
+                str( timediffmatch / (totalwords + .001 ) ) ) , 'debug' )
 
     return messages
 
@@ -975,4 +975,4 @@ def main(cliargs=None):
 
     printcolor( resultfile )
     if args.performance:
-        print( "Total: " +  str( time.time() - timestart ) )
+        printcolor( "Total: " +  str( time.time() - timestart ), 'debug' )
