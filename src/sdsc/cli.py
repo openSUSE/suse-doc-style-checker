@@ -82,8 +82,8 @@ def parseargs(cliargs=None):
 def printcolor( message, messagetype = None ):
     """Print a colored message
 
-    :param str message: Error message
-    :param str errortype: Error type
+    :param str message: Message
+    :param str messagetype: Type (none => green, 'error' => red)
     """
     if sys.stdout.isatty():
         if type == 'error':
