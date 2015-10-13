@@ -291,7 +291,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
 time for this para: %s
 average time per word: %s\n"""
             % ( str( totalwords ), str( timediffmatch ),
-                str( timeperword ) ), 'debug'  )
+                str( timeperword ) ), 'debug' )
 
     return messages
 
@@ -435,7 +435,7 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
 
     if args.performance:
         timeendbuild = time.time()
-        printcolor( "time to build: %s" % str( timeendbuild - timestartbuild ), 'debug'  )
+        printcolor( "time to build: %s" % str( timeendbuild - timestartbuild ), 'debug' )
     return termdataid
 
 def trypattern( pattern ):
@@ -601,7 +601,7 @@ def getattribute( element, attribute ):
         return None
 
 def emptypatternmessage( element ):
-    printcolor( "There is an empty {0} element in a terminology file.".format(element), 'error'  )
+    printcolor( "There is an empty {0} element in a terminology file.".format(element), 'error' )
     sys.exit(1)
 
 def xmlescape( text ):
