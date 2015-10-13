@@ -328,6 +328,18 @@
 
   <term>
     <accept>
+      <proposal>BIOS</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">[Bb]i/?os</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>b\.i\.o\.s</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>Bluetooth</proposal>
     </accept>
     <patterngroup>
