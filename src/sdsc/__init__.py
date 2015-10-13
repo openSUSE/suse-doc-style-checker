@@ -97,7 +97,8 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
     messages = []
 
     if not int(termfileid[0]) == int(termdataid):
-        sys.exit("Terminology data was not correctly initialized.")
+        printcolor( "Terminology data was not correctly initialized.", 'error' )
+        sys.exit(1)
 
     if content:
         # I get this as a list with one lxml.etree._ElementUnicodeResult.
@@ -450,14 +451,15 @@ def trypattern( pattern ):
 
         if tryresult:
             message = "Expression matches empty string"
-            sys.exit()
+            sys.exit(1)
 
         tryresult = re.search( pattern, " ", flags = re.I )
         if tryresult:
             message = "Expression matches single space"
-            sys.exit()
+            sys.exit(1)
     except:
-        sys.exit(message + ": \"" + pattern + "\"")
+        printcolor( message + ": \"" + pattern + "\"", 'error' )
+        sys.exit(1)
 
     return True
 
@@ -599,7 +601,8 @@ def getattribute( element, attribute ):
         return None
 
 def emptypatternmessage( element ):
-    sys.exit( "There is an empty {0} element in a terminology file.".format(element) )
+    printcolor( "There is an empty {0} element in a terminology file.".format(element), 'error'  )
+    sys.exit(1)
 
 def xmlescape( text ):
     escapetable = {
@@ -892,7 +895,7 @@ def main(cliargs=None):
             os.path.join( location, '..', 'bookmarklet',
                 'result-flagging-bookmarklet.html' ),
             new = 0, autoraise = True )
-        sys.exit()
+        sys.exit(0)
 
     inputfilename = os.path.basename( args.inputfile.name )
 
@@ -924,7 +927,8 @@ def main(cliargs=None):
 
 
     if not checkfiles:
-        sys.exit("! No check files found.\n  Add check files to " + os.path.join( location, 'xsl-checks' ) )
+        printcolor( "! No check files found.\n  Add check files to " + os.path.join( location, 'xsl-checks' ), 'error' )
+        sys.exit(1)
 
     for checkfile in checkfiles:
         if args.module or args.performance:
@@ -936,15 +940,17 @@ def main(cliargs=None):
             transform = etree.XSLT( etree.parse( checkfile, parser ) )
         # FIXME: Should not use BaseException.
         except BaseException as error:
-           print("! Syntax error in check file.\n  " + checkfile)
-           sys.exit("  " + str(error))
+           printcolor( "! Syntax error in check file.\n  " + checkfile, 'error' )
+           printcolor( "  " + str(error), 'error' )
+           sys.exit(1)
 
         try:
             result = transform( inputfile )
         # FIXME: Should not use BaseException.
         except BaseException as error:
-            print("! Broken check file or Python function.\n  " + checkfile)
-            sys.exit("  " + str(error))
+            printcolor( "! Broken check file or Python function.\n  " + checkfile, 'error' )
+            printcolor( "  " + str(error), 'error' )
+            sys.exit(1)
 
         result = result.getroot()
 
