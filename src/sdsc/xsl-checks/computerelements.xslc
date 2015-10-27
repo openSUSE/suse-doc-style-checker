@@ -10,6 +10,11 @@
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
   <xsl:template match="*|db5:*" mode="part-title">Computer Elements</xsl:template>
+
+  <xsl:template match="command|replaceable|option|literal|filename|
+                       db5:command|db5:replaceable|db5:option|db5:literal|
+                       db5:filename">
+    <xsl:variable name="length" select="string-length(normalize-space(text()))"/>
     <!-- Deliberately higher than the styleguide asks for. Try to avoid annoying
          people. -->
     <xsl:if test="$length &gt; 50">
