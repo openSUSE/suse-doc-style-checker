@@ -1023,6 +1023,46 @@
   </term>
 
   <term>
+    <accept>
+      <proposal>to use</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>(if|when)</pattern>
+      <pattern>you</pattern>
+      <pattern>want</pattern>
+      <pattern>to</pattern>
+      <pattern>use</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>in</pattern>
+      <pattern>case</pattern>
+      <pattern>you</pattern>
+      <pattern>want</pattern>
+      <pattern>to</pattern>
+      <pattern>use</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>in</pattern>
+      <pattern>the</pattern>
+      <pattern>case</pattern>
+      <pattern>you</pattern>
+      <pattern>want</pattern>
+      <pattern>to</pattern>
+      <pattern>use</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(for|in)</pattern>
+      <pattern>the</pattern>
+      <pattern>case</pattern>
+      <pattern>that</pattern>
+      <pattern>you</pattern>
+      <pattern>want</pattern>
+      <pattern>to</pattern>
+      <pattern>use</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
     <accept/>
     <patterngroup>
       <pattern>too</pattern>
