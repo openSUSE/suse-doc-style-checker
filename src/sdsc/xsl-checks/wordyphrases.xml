@@ -1059,6 +1059,23 @@
 
   <term>
     <accept>
+      <proposal>using</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>with</pattern>
+      <pattern>the</pattern>
+      <pattern>help</pattern>
+      <pattern>of</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>with</pattern>
+      <pattern>help</pattern>
+      <pattern>of</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>usually</proposal>
     </accept>
     <patterngroup>
