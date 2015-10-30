@@ -617,6 +617,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>occur</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>happen(s|ed|ing)?</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy">situations?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>one</proposal>
     </accept>
     <patterngroup>
