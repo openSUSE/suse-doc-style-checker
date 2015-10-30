@@ -189,6 +189,23 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>as usual</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>as</pattern>
+      <pattern>per</pattern>
+      <pattern>usual(ly)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>as</pattern>
+      <pattern>per</pattern>
+      <pattern>the</pattern>
+      <pattern>usual(ly)?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>by</proposal>
     </accept>
     <patterngroup>
