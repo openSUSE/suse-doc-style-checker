@@ -557,6 +557,26 @@ GNU GPL.
     </patterngroup>
   </term>
 
+  <term>
+    <accept>
+      <proposal>nor</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>not</pattern>
+      <contextpattern look="before" location="5">neither</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>nor</pattern>
+      <contextpattern>(be|is|are|was|were|will|would|do|does|did|can|could|shall|should|may|might|have|has|had)</contextpattern>
+      <contextpattern look="before" location="5" match="negative">neither</contextpattern>
+    </patterngroup>
+  </term>
 
   <term>
     <accept>
