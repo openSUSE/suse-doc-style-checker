@@ -486,6 +486,23 @@
 
   <term>
     <accept>
+      <proposal>for</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>for</pattern>
+      <pattern>the</pattern>
+      <pattern>purposes?</pattern>
+      <pattern>of</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>for</pattern>
+      <pattern>purposes?</pattern>
+      <pattern>of</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>for a time</proposal>
     </accept>
     <patterngroup>
@@ -996,17 +1013,6 @@
       <pattern>as</pattern>
       <pattern>a</pattern>
       <pattern>means</pattern>
-      <pattern>of</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>for</pattern>
-      <pattern>the</pattern>
-      <pattern>purposes?</pattern>
-      <pattern>of</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>for</pattern>
-      <pattern>purposes?</pattern>
       <pattern>of</pattern>
     </patterngroup>
     <patterngroup>
