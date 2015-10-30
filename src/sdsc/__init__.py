@@ -525,9 +525,6 @@ def preparepatterns( patterngroupxpath, useonepattern ):
             if i == 1:
                 emptypatternmessage( 'pattern' )
             else:
-                # FIXME: the implementation assumes that the e.g. the second
-                # pattern can only come from the pattern2 element --
-                # what about skipped pattern{x} elements?
                 break
         else:
             trypattern( patternxpathcontent )

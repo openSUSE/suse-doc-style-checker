@@ -620,6 +620,30 @@
 
   <term>
     <accept>
+      <proposal>list of all</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>complete</pattern>
+      <pattern>list</pattern>
+      <pattern>of</pattern>
+      <pattern>all</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>list of every</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>complete</pattern>
+      <pattern>list</pattern>
+      <pattern>of</pattern>
+      <pattern>every</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>little</proposal>
     </accept>
     <patterngroup>
