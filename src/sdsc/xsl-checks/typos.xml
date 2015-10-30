@@ -221,6 +221,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>choose</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>chose</pattern>
+      <contextpattern look="before">to</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>compliant</proposal>
     </accept>
     <patterngroup>
