@@ -679,6 +679,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>principle</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>principals?</pattern>
+      <contextpattern look="before">(in|on)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>remember</proposal>
     </accept>
     <patterngroup>
@@ -875,7 +885,6 @@ GNU GPL.
       <pattern>his</pattern>
     </patterngroup>
   </term>
-
 
   <term>
     <accept>
