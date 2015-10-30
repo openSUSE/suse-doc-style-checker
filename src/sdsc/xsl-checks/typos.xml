@@ -214,6 +214,17 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>conform</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>confirm(ed|s|ing)?</pattern>
+      <contextpattern>(to|with)</contextpattern>
+      <contextpattern location="5" mode="fuzzy">(style|schem[ea])s?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>date</proposal>
     </accept>
     <patterngroup>
