@@ -1115,6 +1115,12 @@
       <pattern>situations?</pattern>
       <pattern>when</pattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>as</pattern>
+      <pattern>soon</pattern>
+      <pattern>as</pattern>
+      <contextpattern match="negative" mode="fuzzy" location="2">possible</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
