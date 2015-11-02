@@ -679,6 +679,13 @@
       <pattern>command-?lines?</pattern>
       <contextpattern match="negative">(tool|program(me)?|software|option|parameter)</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>cmm?d-?lines?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>cmm?d</pattern>
+      <pattern>lines?</pattern>
+    </patterngroup>
   </term>
 
   <term>
