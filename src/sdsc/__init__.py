@@ -875,7 +875,7 @@ def main(cliargs=None):
 
     # toms: Maybe we should change that to GitHub URL
     ns = etree.FunctionNamespace(
-        'https://www.gitorious.org/style-checker/style-checker' )
+        'https://www.github.com/openSUSE/suse-doc-style-checker' )
     ns.prefix = 'py'
     ns.update( dict( linenumber = linenumber, termcheck = termcheck,
         buildtermdata = buildtermdata, dupecheck = dupecheck,

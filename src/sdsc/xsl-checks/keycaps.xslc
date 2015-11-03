@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:db5="http://docbook.org/ns/docbook"
   xmlns:xlink="http://www.w3.org/1999/xlink"
-  xmlns:py="https://www.gitorious.org/style-checker/style-checker"
+  xmlns:py="https://www.github.com/openSUSE/suse-doc-style-checker"
   xmlns:exslt="http://exslt.org/common"
   exclude-result-prefixes="db5 xlink py exslt">
   <xsl:import href="library.xsl"/>
