@@ -26,6 +26,7 @@ graft bookmarklet
 graft validation
 graft src/sdsc/xsl-checks
 graft test
+graft experimental-checks
 
 include ChangeLog
 include README*
