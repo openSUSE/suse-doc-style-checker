@@ -465,14 +465,13 @@ GNU GPL.
       <proposal>known</proposal>
     </accept>
     <patterngroup>
-      <pattern>know</pattern>
+      <pattern>know(?!-)</pattern>
       <contextpattern>(issue|problem|bug)s?</contextpattern>
       <contextpattern look="before" location="2" mode="fuzzy" match="negative">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>know</pattern>
-      <contextpattern look="before">also</contextpattern>
-      <contextpattern match="negative">(as|by|for)</contextpattern>
+      <pattern>know(?!-)</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy">(be|is|are|was|were)</contextpattern>
     </patterngroup>
   </term>
 
