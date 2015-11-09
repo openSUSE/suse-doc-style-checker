@@ -9,10 +9,9 @@ graft man
 prune man/build
 
 include .bumpversion.cfg
-include .coveragerc
+include .coverage*
 include .cookiecutterrc
 include .isort.cfg
-include .coverage*
 include .landscape.yml
 include .travis.yml
 include *requirements.txt
@@ -25,7 +24,7 @@ graft bookmarklet
 graft bookmarklet
 graft validation
 graft src/sdsc/xsl-checks
-graft test
+graft tests
 graft experimental-checks
 
 include ChangeLog
