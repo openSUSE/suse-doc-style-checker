@@ -8,20 +8,34 @@
 graft man
 prune man/build
 
+include .bumpversion.cfg
+include .coverage*
+include .cookiecutterrc
+include .isort.cfg
+include .landscape.yml
+include .travis.yml
+include *requirements.txt
+include tox.ini
+include AUTHORS.rst
+include CHANGELOG.rst
+include CONTRIBUTING.rst
+
 graft bookmarklet
 graft bookmarklet
 graft validation
 graft src/sdsc/xsl-checks
-graft test
+graft tests
+graft experimental-checks
 
 include ChangeLog
 include README*
 include LICENSE
 
-include .coverage*
-include .landscape.yml
-include .travis.yml
-include *requirements.txt
 include make_devsetup.sh
+recursive-include ci *.ini
+recursive-include ci *.py
+recursive-include ci *.yml
+recursive-include packaging *.spec
+recursive-include src *.css
 
 global-exclude *.py[cod] __pycache__ *.so *.dylib *~ *.bak
