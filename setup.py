@@ -99,7 +99,7 @@ setupdict = dict(
         'Programming Language :: Python :: 3.4',
     ],
 
-    keywords='docbook5 style style-checking',
+    keywords=["docbook5", "style", "style-checking"],
 
     # ----
     # Includes data files from MANIFEST.in

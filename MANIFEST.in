@@ -8,6 +8,15 @@
 graft man
 prune man/build
 
+include .bumpversion.cfg
+include .coveragerc
+include .cookiecutterrc
+include .isort.cfg
+
+include AUTHORS.rst
+include CHANGELOG.rst
+include CONTRIBUTING.rst
+
 graft bookmarklet
 graft bookmarklet
 graft validation
