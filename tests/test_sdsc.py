@@ -1,14 +1,14 @@
 #
 #
+import pytest
 
 from sdsc import __version__
-# from sdsc.__main__ import main
-
-def test_true():
-    assert True
+from sdsc.__main__ import main
 
 def test_version():
+    """checks for the version"""
     assert __version__
 
-#def test_main():
-#    assert main([]) == 0
+def test_main():
+    with pytest.raises(SystemExit):
+        main([])
