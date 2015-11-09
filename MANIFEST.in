@@ -12,7 +12,11 @@ include .bumpversion.cfg
 include .coveragerc
 include .cookiecutterrc
 include .isort.cfg
-
+include .coverage*
+include .landscape.yml
+include .travis.yml
+include *requirements.txt
+include tox.ini
 include AUTHORS.rst
 include CHANGELOG.rst
 include CONTRIBUTING.rst
@@ -27,10 +31,11 @@ include ChangeLog
 include README*
 include LICENSE
 
-include .coverage*
-include .landscape.yml
-include .travis.yml
-include *requirements.txt
 include make_devsetup.sh
+recursive-include ci *.ini
+recursive-include ci *.py
+recursive-include ci *.yml
+recursive-include packaging *.spec
+recursive-include src *.css
 
 global-exclude *.py[cod] __pycache__ *.so *.dylib *~ *.bak
