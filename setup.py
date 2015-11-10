@@ -66,7 +66,7 @@ setupdict = dict(
     version = find_version("src", "sdsc", "__init__.py"), # __version__,
 
     description = __description__,
-    long_description = "suse-doc-style-checker ",
+    long_description = "Checks a given DocBook XML file for stylistic errors using check files written in XSLT",
 
     # The project's main homepage.
     url = 'https://www.github.org/openSUSE/suse-doc-style-checker',
