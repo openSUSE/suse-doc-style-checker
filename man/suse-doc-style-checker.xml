@@ -7,7 +7,7 @@
   <!ENTITY command      "sdsc">
   <!ENTITY daps         "DAPS">
   <!ENTITY dapscommand  "daps">
-  <!ENTITY version      "0.1.0">
+  <!ENTITY version      "2014.02.2.99">
   <!ENTITY nbsp         "&#xa0;">
 ]>
 <refentry id="sdsc" lang="en">
