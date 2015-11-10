@@ -12,3 +12,10 @@ def test_version():
 def test_main():
     with pytest.raises(SystemExit):
         main([])
+
+def test_sdsc_version():
+    """checks for output of sdsc --version"""
+    with pytest.raises(SystemExit):
+        output = main("--version").split()
+        assert __version__ == output[-1]
+
