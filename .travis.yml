@@ -7,12 +7,9 @@ env:
   matrix:
     - TOXENV=check
 
-    - TOXENV=3.3-cover
-    - TOXENV=3.3-nocov
-    - TOXENV=3.4-cover
-    - TOXENV=3.4-nocov
-    - TOXENV=3.5-cover
-    - TOXENV=3.5-nocov
+    - TOXENV=3.3
+    - TOXENV=3.4
+    - TOXENV=3.5
 
 before_install:
   - python --version
