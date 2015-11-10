@@ -12,6 +12,9 @@ Thumbs.db
 MANIFEST
 /src/*.xml
 
+# Manpages
+man/*.1
+
 # C extensions
 *.so
 
