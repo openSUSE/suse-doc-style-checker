@@ -544,6 +544,17 @@
 
   <term>
     <accept>
+      <proposal>same</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>exact</pattern>
+      <pattern>same</pattern>
+      <contextpattern look="before">the</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>if</proposal>
     </accept>
     <patterngroup>
