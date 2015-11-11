@@ -16,9 +16,7 @@ include .landscape.yml
 include .travis.yml
 include *requirements.txt
 include tox.ini
-include AUTHORS.rst
-include CHANGELOG.rst
-include CONTRIBUTING.rst
+include *.md
 
 graft bookmarklet
 graft bookmarklet
