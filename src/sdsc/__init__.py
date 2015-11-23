@@ -873,7 +873,6 @@ def main(cliargs=None):
 
     timestart = time.time()
 
-    # toms: Maybe we should change that to GitHub URL
     ns = etree.FunctionNamespace(
         'https://www.github.com/openSUSE/suse-doc-style-checker' )
     ns.prefix = 'py'
