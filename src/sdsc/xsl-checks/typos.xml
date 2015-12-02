@@ -832,6 +832,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>throw</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>through</pattern>
+      <contextpattern location="2" mode="fuzzy">away</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>to</proposal>
     </accept>
     <patterngroup>
