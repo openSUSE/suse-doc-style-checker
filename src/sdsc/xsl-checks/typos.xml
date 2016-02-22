@@ -1040,7 +1040,7 @@ GNU GPL.
     </accept>
     <patterngroup>
       <pattern>your</pattern>
-      <contextpattern>(c|sh)ould</contextpattern>
+      <contextpattern>((c|sh)ould|are)</contextpattern>
     </patterngroup>
   </term>
 
