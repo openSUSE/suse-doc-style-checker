@@ -284,6 +284,20 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>disk</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>dicks?</pattern>
+      <contextpattern look="before">hard</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>dicks?</pattern>
+      <contextpattern>images?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>done</proposal>
     </accept>
     <patterngroup>
