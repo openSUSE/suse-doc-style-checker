@@ -512,21 +512,23 @@ GNU GPL.
     </patterngroup>
   </term>
 
-  <term>
+  <!-- It is probably a better idea to have a whitelist for this...
+       (or PoS tagging) -->
+  <!-- <term>
     <accept>
       <proposal>it is</proposal>
     </accept>
     <patterngroup>
       <pattern>its</pattern>
       <contextpattern>\w+?ing</contextpattern>
-      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir|includ)ing</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>its</pattern>
       <contextpattern location="2">\w+?ing</contextpattern>
-      <contextpattern match="negative" location="2">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
+      <contextpattern match="negative" location="2">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir|includ)ing</contextpattern>
     </patterngroup>
-  </term>
+  </term> -->
 
   <term>
     <accept>
@@ -634,7 +636,8 @@ GNU GPL.
     </patterngroup>
   </term>
 
-  <term>
+  <!-- Seems the following two are a bit too aggressive. -->
+  <!-- <term>
     <accept>
       <proposal>nor</proposal>
     </accept>
@@ -653,7 +656,7 @@ GNU GPL.
       <contextpattern>(be|is|are|was|were|will|would|do|does|did|can|could|shall|should|may|might|have|has|had)</contextpattern>
       <contextpattern look="before" location="5" match="negative">neither</contextpattern>
     </patterngroup>
-  </term>
+  </term> -->
 
   <term>
     <accept>
@@ -1108,8 +1111,12 @@ GNU GPL.
   <term>
     <accept/>
     <patterngroup>
-      <pattern>you(rs?)?</pattern>
-      <contextpattern>you(rs?)?</contextpattern>
+      <pattern>you</pattern>
+      <contextpattern>yours?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>yours?</pattern>
+      <contextpattern>you</contextpattern>
     </patterngroup>
   </term>
 
