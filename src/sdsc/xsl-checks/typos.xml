@@ -252,6 +252,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>consist of</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">consist(ed|ing|s|ances?)</pattern>
+      <contextpattern>on</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>date</proposal>
     </accept>
     <patterngroup>
@@ -414,6 +424,16 @@ GNU GPL.
     <patterngroup>
       <pattern>i(?![-,])</pattern>
       <contextpattern>you</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>insist on</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">insist(ed|ing|s|ances?)</pattern>
+      <contextpattern>of</contextpattern>
     </patterngroup>
   </term>
 
