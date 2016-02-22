@@ -72,6 +72,13 @@ min., max.
       <pattern>e\.</pattern>
       <pattern>g\.</pattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>f\.[ie]\.?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>f\.</pattern>
+      <pattern>[ie]\.</pattern>
+    </patterngroup>
   </term>
 
   <term>
