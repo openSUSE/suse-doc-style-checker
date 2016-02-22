@@ -459,6 +459,22 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>it is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>its</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>its</pattern>
+      <contextpattern location="2">\w+?ing</contextpattern>
+      <contextpattern match="negative" location="2">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>know</proposal>
     </accept>
     <patterngroup>
