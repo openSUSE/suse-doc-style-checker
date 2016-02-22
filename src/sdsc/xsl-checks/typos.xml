@@ -178,6 +178,17 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>bear</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>bare</pattern>
+      <contextpattern>in</contextpattern>
+      <contextpattern location="2">mind</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>begin</proposal>
     </accept>
     <patterngroup>
