@@ -244,7 +244,7 @@
         ##@key-<xsl:value-of select="$tokens"/>##
       </xsl:when>
       <xsl:when test="self::menuchoice|self::guimenu|
-     		      self::db5:menuchoice|self::db5:guimenu">
+                      self::db5:menuchoice|self::db5:guimenu">
         ##@ui-<xsl:value-of select="$tokens"/>##
       </xsl:when>
       <xsl:when test="self::email|self::filename|self::ulink|self::uri|
