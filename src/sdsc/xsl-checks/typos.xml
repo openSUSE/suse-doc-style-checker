@@ -273,6 +273,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>done</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>doe</pattern>
+      <contextpattern look="before">ha(ve|s|d)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>from</proposal>
     </accept>
     <patterngroup>
