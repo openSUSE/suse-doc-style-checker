@@ -1044,4 +1044,12 @@ GNU GPL.
     </patterngroup>
   </term>
 
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern>you(rs?)?</pattern>
+      <contextpattern>you(rs?)?</contextpattern>
+    </patterngroup>
+  </term>
+
 </terminology>
