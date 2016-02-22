@@ -3483,11 +3483,55 @@
 
   <term>
     <accept>
-      <proposal>SUSE Cloud</proposal>
+      <proposal>SUSE Enterprise Storage</proposal>
     </accept>
     <patterngroup>
       <pattern>suse</pattern>
       <pattern>(linux|ent(er|re)prise)</pattern>
+      <pattern>storage</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>(linux|ent(er|re)prise)</pattern>
+      <pattern>(linux|ent(er|re)prise)</pattern>
+      <pattern>storage</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>SUSE OpenStack Cloud</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>cloud</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>(linux|ent(er|re)prise)</pattern>
+      <pattern>cloud</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>(linux|ent(er|re)prise)</pattern>
+      <pattern>(linux|ent(er|re)prise)</pattern>
+      <pattern>openstack</pattern>
+      <pattern>cloud</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern case="keep">(open[Ss]tack|[oO]penstack|OPENSTACK|[Oo]penSTACK|OPENstack)</pattern>
+      <pattern>cloud</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>open-stack</pattern>
+      <pattern>cloud</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>open</pattern>
+      <pattern>stack</pattern>
       <pattern>cloud</pattern>
     </patterngroup>
   </term>
@@ -3504,6 +3548,7 @@
     <patterngroup>
       <pattern>suse</pattern>
       <pattern>ent(er|re)prise</pattern>
+      <contextpattern match="negative">storage</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
