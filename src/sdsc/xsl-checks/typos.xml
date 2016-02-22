@@ -1082,4 +1082,12 @@ GNU GPL.
     </patterngroup>
   </term>
 
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern>(the|a)</pattern>
+      <contextpattern>your</contextpattern>
+    </patterngroup>
+  </term>
+
 </terminology>
