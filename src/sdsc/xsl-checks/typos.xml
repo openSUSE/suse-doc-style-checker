@@ -736,6 +736,17 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>of</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>(if|on)</pattern>
+      <contextpattern>views?</contextpattern>
+      <contextpattern look="before">points?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>one</proposal>
     </accept>
     <patterngroup>
