@@ -297,22 +297,6 @@
     </xsl:if> -->
   </xsl:template>
 
-  <xsl:template name="change-case">
-    <xsl:param name="text" select="'?'"/>
-    <xsl:param name="case" select="'lower'"/>
-    <xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
-    <xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
-
-    <xsl:choose>
-      <xsl:when test="case = 'upper'">
-        <xsl:value-of select="translate($text,$lower,$upper)"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="translate($text,$upper,$lower)"/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-
   <xsl:template name="correct-attribute">
     <xsl:param name="raw" select="'?'"/>
 

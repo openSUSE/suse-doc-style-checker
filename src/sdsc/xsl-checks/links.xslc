@@ -14,8 +14,16 @@
 
   <xsl:template match="ulink|db5:link">
     <xsl:variable name="url" select="normalize-space(@url|@xlink:href)"/>
+    <xsl:variable name="url-lower">
+      <xsl:call-template name="change-case">
+        <xsl:with-param name="text" select="$url"/>
+      </xsl:call-template>
+    </xsl:variable>
 
     <!-- Probably non-exhaustive. -->
+    <!-- Using the original URL here, but not later: we are pretty strict in
+         what we accept as good but not so strict when we try to find bad
+         things. -->
     <xsl:if test="not(starts-with($url, 'http:') or
                       starts-with($url, 'https:') or
                       starts-with($url, 'ftp:') or
@@ -25,10 +33,10 @@
                       starts-with($url, 'mms:') or
                       starts-with($url, 'rm:'))">
       <xsl:choose>
-        <xsl:when test="starts-with($url, 'ssh:') or
-                        starts-with($url, 'ssh+svn:') or
-                        starts-with($url, 'git:') or
-                        starts-with($url, 'bzr:')">
+        <xsl:when test="starts-with($url-lower, 'ssh:') or
+                        starts-with($url-lower, 'ssh+svn:') or
+                        starts-with($url-lower, 'git:') or
+                        starts-with($url-lower, 'bzr:')">
           <result type="error">
             <xsl:call-template name="sourcehint"/>
             <message>Link
@@ -42,7 +50,7 @@
             </suggestion>
           </result>
         </xsl:when>
-        <xsl:when test="starts-with($url, 'info:')">
+        <xsl:when test="starts-with($url-lower, 'info:')">
           <result type="error">
             <xsl:call-template name="sourcehint"/>
             <message>Link
@@ -56,7 +64,7 @@
             </suggestion>
           </result>
         </xsl:when>
-        <xsl:when test="starts-with($url, 'man:')">
+        <xsl:when test="starts-with($url-lower, 'man:')">
           <result type="error">
             <xsl:call-template name="sourcehint"/>
             <message>Link
@@ -70,8 +78,8 @@
             </suggestion>
           </result>
         </xsl:when>
-        <xsl:when test="starts-with($url, 'file:') or
-                        starts-with($url, 'smb:')">
+        <xsl:when test="starts-with($url-lower, 'file:') or
+                        starts-with($url-lower, 'smb:')">
           <result type="error">
             <xsl:call-template name="sourcehint"/>
             <message>Link
@@ -85,7 +93,7 @@
             </suggestion>
           </result>
         </xsl:when>
-        <xsl:when test="starts-with($url, 'mailto:') or contains($url, '@')">
+        <xsl:when test="starts-with($url-lower, 'mailto:') or contains($url, '@')">
           <result type="error">
             <xsl:call-template name="sourcehint"/>
             <message>Link
@@ -99,13 +107,14 @@
             </suggestion>
           </result>
         </xsl:when>
-        <xsl:when test="contains($url, '.com') or contains($url, '.net') or
-                        contains($url, '.org') or contains($url, '.biz') or
-                        contains($url, '.co.') or contains($url, '.gov') or
-                        contains($url, '.edu') or contains($url, '.de') or
-                        contains($url, '.fr') or contains($url, '.es') or
-                        contains($url, '.ru') or contains($url, '.br') or
-                        contains($url, '.cn') or contains($url, '.in')">
+        <xsl:when test="contains($url-lower, '.com') or contains($url-lower, '.net') or
+                        contains($url-lower, '.org') or contains($url-lower, '.biz') or
+                        contains($url-lower, '.co.') or contains($url-lower, '.gov') or
+                        contains($url-lower, '.edu') or contains($url-lower, '.de') or
+                        contains($url-lower, '.fr') or contains($url-lower, '.es') or
+                        contains($url-lower, '.ru') or contains($url-lower, '.br') or
+                        contains($url-lower, '.cn') or contains($url-lower, '.cz') or
+                        contains($url-lower, '.in')">
           <result type="error">
             <xsl:call-template name="sourcehint"/>
             <message>Link
@@ -144,9 +153,9 @@
     <!-- These URL checks are pretty crude but should exclude some
          unshortenable URLs. -->
     <xsl:if test="string-length($url) &gt; 70 and
-                  not(contains($url, '.suse.com/documentation') or
-                      contains($url, '.suse.com/releasenotes') or
-                      contains($url, 'en.opensuse.org'))">
+                  not(contains($url-lower, '.suse.com/documentation') or
+                      contains($url-lower, '.suse.com/releasenotes') or
+                      contains($url-lower, 'en.opensuse.org'))">
       <result type="warning">
         <xsl:call-template name="sourcehint"/>
         <message>Link
@@ -159,14 +168,33 @@
           parts of it.
         </suggestion>
         <suggestion>Some pages
-          <xsl:if test="contains($url, '.h-online.com')">such as The H</xsl:if>
-          <xsl:if test="contains($url, '.heise.de')">such as Heise online</xsl:if>
-          <xsl:if test="contains($url, '.youtube.com')">such as YouTube</xsl:if>
-          <xsl:if test="contains($url, '.flickr.com')">such as Flickr</xsl:if>
-          <xsl:if test="contains($url, '.amazon.com')">such as Amazon</xsl:if>
-          offer a permanent link or short link function.
+          <xsl:if test="contains($url-lower, '.h-online.com')">such as The H</xsl:if>
+          <xsl:if test="contains($url-lower, '.heise.de')">such as Heise online</xsl:if>
+          <xsl:if test="contains($url-lower, '.youtube.com')">such as YouTube</xsl:if>
+          <xsl:if test="contains($url-lower, '.flickr.com')">such as Flickr</xsl:if>
+          <xsl:if test="contains($url-lower, '.amazon.com')">such as Amazon</xsl:if>
+          offer a permanent link or official short link function.
         </suggestion>
-        <suggestion>Do not use third-party URL shorteners.
+        <suggestion>Do not use a third-party URL shortening service.
+        </suggestion>
+      </result>
+    </xsl:if>
+    <xsl:if test="contains($url-lower, '//bit.ly/') or
+                  contains($url-lower, '//is.gd/') or
+                  contains($url-lower, '//goo.gl/') or
+                  contains($url-lower, '//lnk.in/') or
+                  contains($url-lower, '//ow.ly/') or
+                  contains($url-lower, '//tinyurl.com/') or
+                  contains($url-lower, '//t.co/')">
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>Link
+          <xsl:call-template name="createid">
+            <xsl:with-param name="use-url-attribute" select="1"/>
+          </xsl:call-template>
+          uses a third-party URL shortener.
+        </message>
+        <suggestion>Link to the original page instead.
         </suggestion>
       </result>
     </xsl:if>

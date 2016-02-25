@@ -158,6 +158,21 @@
       '')"/>
   </xsl:template>
 
+  <xsl:template name="change-case">
+    <xsl:param name="text" select="'?'"/>
+    <xsl:param name="case" select="'lower'"/>
+    <xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
+    <xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
+
+    <xsl:choose>
+      <xsl:when test="case = 'upper'">
+        <xsl:value-of select="translate($text,$lower,$upper)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="translate($text,$upper,$lower)"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
 
   <!-- Template that starts terminology check. -->
   <xsl:template match="para|title|entry|db5:para|db5:title|db5:entry" mode="terminology">
