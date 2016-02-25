@@ -36,7 +36,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>info(rmation)?'s</pattern>
-      <contextpattern match="negative" look="before">(the|a)</contextpattern>
+      <contextpattern match="negative" look="before">(the|an?)</contextpattern>
     </patterngroup>
   </term>
 
