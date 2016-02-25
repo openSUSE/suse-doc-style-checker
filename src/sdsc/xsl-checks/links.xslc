@@ -166,6 +166,8 @@
           <xsl:if test="contains($url, '.amazon.com')">such as Amazon</xsl:if>
           offer a permanent link or short link function.
         </suggestion>
+        <suggestion>Do not use third-party URL shorteners.
+        </suggestion>
       </result>
     </xsl:if>
   </xsl:template>
