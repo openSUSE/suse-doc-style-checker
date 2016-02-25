@@ -64,10 +64,12 @@ def replacepunctuation( word, position ):
     startpunctuation = '([{'
     endpunctuation = ')]}/\\,:;!.'
 
-    if position == 'end':
-        word = word.rstrip( endpunctuation )
-    else:
+    if position == 'start' or position == 'both':
         word = word.lstrip( startpunctuation )
+    if position == 'end' or position == 'both':
+        word = word.rstrip( endpunctuation )
+    # else:
+    #     throw tantrum? (FIXME)
     return word
 
 def tokenizer( text ):
@@ -829,7 +831,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
                         continue
 
         firstwordstripped = replacepunctuation( words[wordposition - 1], 'start' )
-        if word == firstwordstripped:
+        if wordstripped == firstwordstripped:
             line = linenumber( context )
             messages.append( dupecheckmessage( wordstripped,
                 line, contentpretty, contextid, basefile ) )
