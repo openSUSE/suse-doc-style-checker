@@ -743,6 +743,11 @@ GNU GPL.
       <contextpattern>views?</contextpattern>
       <contextpattern look="before">points?</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>(if|on)</pattern>
+      <contextpattern mode="fuzzy" location="2">[-a-z0-9]+s</contextpattern>
+      <contextpattern look="before">(amount|number)</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
