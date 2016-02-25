@@ -106,14 +106,24 @@ GNU GPL.
       <contextpattern match="negative">hoc</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>in</pattern>
+      <pattern>[ai]n</pattern>
       <contextpattern look="before">back</contextpattern>
       <contextpattern>fou?rth</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>in</pattern>
+      <pattern>[ai]n</pattern>
       <contextpattern look="before">one</contextpattern>
       <contextpattern location="2">same</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>[ai]n</pattern>
+      <contextpattern look="before">(left|right)</contextpattern>
+      <contextpattern>(left|right)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>[ai]n</pattern>
+      <contextpattern look="before">(down|up)</contextpattern>
+      <contextpattern>(down|up)</contextpattern>
     </patterngroup>
   </term>
 
