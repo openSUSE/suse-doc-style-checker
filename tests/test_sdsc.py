@@ -1,21 +1,14 @@
-#
-#
 import pytest
 
-from sdsc import __version__
-from sdsc.__main__ import main
-
-def test_version():
-    """checks for the version"""
-    assert __version__
+import sdsc
 
 def test_main():
     with pytest.raises(SystemExit):
-        main([])
+        sdsc.main([])
 
-def test_sdsc_version():
+def test_sdsc_version(capsys):
     """checks for output of sdsc --version"""
     with pytest.raises(SystemExit):
-        output = main("--version").split()
-        assert __version__ == output[-1]
-
+        sdsc.main(["--version"])
+    out, err = capsys.readouterr()
+    assert sdsc.__version__ == out.split()[-1]
