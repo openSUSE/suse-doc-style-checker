@@ -886,7 +886,7 @@ def main(cliargs=None):
     location = os.path.dirname( os.path.realpath( __file__ ) )
 
     global args
-    args = parseargs()
+    args = parseargs(cliargs)
 
     if args.bookmarklet:
         webbrowser.open(
