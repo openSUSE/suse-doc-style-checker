@@ -7,7 +7,6 @@ env:
   matrix:
     - TOXENV=check
 
-    - TOXENV=3.3
     - TOXENV=3.4
     - TOXENV=3.5
 
