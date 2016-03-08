@@ -22,7 +22,6 @@ __author__ = "Stefan Knorr, Thomas Schraitle"
 __license__ = "LGPL-2.1+"
 __description__ = "checks a given DocBook XML file for stylistic errors"
 
-
 import glob
 import os.path
 import re
@@ -866,47 +865,11 @@ def dupecheckmessage( word, line, content, contextid, basefile ):
             <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
         </result>""" % ( filename, withinid, str(line), word, content, word ) )
 
-
-def main(cliargs=None):
-    """Entry point for the application script
-
-    :param list cliargs: Arguments to parse or None (=use sys.argv)
-    """
-
-    timestart = time.time()
-
-    ns = etree.FunctionNamespace(
-        'https://www.github.com/openSUSE/suse-doc-style-checker' )
-    ns.prefix = 'py'
-    ns.update( dict( linenumber = linenumber, termcheck = termcheck,
-        buildtermdata = buildtermdata, dupecheck = dupecheck,
-        sentencelengthcheck = sentencelengthcheck, tokenizer = tokenizer,
-        sentencesegmenter = sentencesegmenter, counttokens = counttokens ) )
+def checkOneFile(inputfilepath):
+    """Checks one XML file and returns the result as XML. """
 
     location = os.path.dirname( os.path.realpath( __file__ ) )
-
-    global args
-    args = parseargs(cliargs)
-
-    if args.bookmarklet:
-        webbrowser.open(
-            os.path.join( location, '..', 'bookmarklet',
-                'result-flagging-bookmarklet.html' ),
-            new = 0, autoraise = True )
-        sys.exit(0)
-
-    inputfilename = os.path.basename( args.inputfile.name )
-
-    if args.outputfile:
-        resultfilename = args.outputfile
-        resultpath = os.path.dirname( os.path.realpath( args.outputfile ) )
-    else:
-        resultfilename = re.sub( r'(_bigfile)?\.xml', r'', inputfilename )
-        resultfilename = '%s-stylecheck.xml' % resultfilename
-        resultpath = os.path.dirname( os.path.realpath( args.inputfile.name ) )
-
-    resultfile = os.path.join( resultpath, resultfilename )
-
+    inputfilename = os.path.basename( inputfilepath )
     output = etree.XML(  """<?xml-stylesheet type="text/css" href="%s"?>
                             <results/>"""
                       % os.path.join( location, 'check.css' ) )
@@ -919,7 +882,7 @@ def main(cliargs=None):
     parser = etree.XMLParser(   ns_clean = True,
                                 remove_pis = False,
                                 dtd_validation = False )
-    inputfile = etree.parse( args.inputfile, parser )
+    inputfile = etree.parse( inputfilepath, parser )
 
     checkfiles = glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) )
 
@@ -962,11 +925,53 @@ def main(cliargs=None):
                     <suggestion>Celebrate!</suggestion>
                 </result>""" ) )
 
+    return etree.tostring(output.getroottree(),
+                          encoding = 'unicode',
+                          pretty_print = True )
 
-    output.getroottree().write( resultfile,
-                                xml_declaration = True,
-                                encoding = 'UTF-8',
-                                pretty_print = True )
+def main(cliargs=None):
+    """Entry point for the application script
+
+    :param list cliargs: Arguments to parse or None (=use sys.argv)
+    """
+
+    timestart = time.time()
+
+    ns = etree.FunctionNamespace(
+        'https://www.github.com/openSUSE/suse-doc-style-checker' )
+    ns.prefix = 'py'
+    ns.update( dict( linenumber = linenumber, termcheck = termcheck,
+        buildtermdata = buildtermdata, dupecheck = dupecheck,
+        sentencelengthcheck = sentencelengthcheck, tokenizer = tokenizer,
+        sentencesegmenter = sentencesegmenter, counttokens = counttokens ) )
+
+    location = os.path.dirname( os.path.realpath( __file__ ) )
+
+    global args
+    args = parseargs(cliargs)
+
+    if args.bookmarklet:
+        webbrowser.open(
+            os.path.join( location, '..', 'bookmarklet',
+                'result-flagging-bookmarklet.html' ),
+            new = 0, autoraise = True )
+        sys.exit(0)
+
+    if args.outputfile:
+        resultfilename = args.outputfile
+        resultpath = os.path.dirname( os.path.realpath( args.outputfile ) )
+    else:
+        resultfilename = re.sub( r'(_bigfile)?\.xml', r'', os.path.basename( args.inputfile.name ) )
+        resultfilename = '%s-stylecheck.xml' % resultfilename
+        resultpath = os.path.dirname( os.path.realpath( args.inputfile.name ) )
+
+    resultfile = os.path.join( resultpath, resultfilename )
+    resultfh = open( resultfile, 'w' )
+
+    result = checkOneFile( args.inputfile.name )
+
+    resultfh.write(str(result))
+    resultfh.close()
 
     if args.show:
         webbrowser.open( resultfile, new = 0 , autoraise = True )
