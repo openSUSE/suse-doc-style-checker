@@ -141,12 +141,11 @@ min., max.
     </patterngroup>
   </term>
 
-  <!-- At first: "I don't really think the following is very useful..." -->
-  <!-- But then: "Well, someone really used ASAP in documentation!" -->
+  <!-- Someone really used ASAP in SUSE's documentation... -->
   <term>
     <accept/>
     <patterngroup>
-      <pattern>(asap|imho|afaic[ts]|ftfy|lol|rofl|idk|yolo|ymmv|tia)</pattern>
+      <pattern>(asap|im((ns)?h)?o|afai(c[ts]|k)|ftfy|lol|rofl|idk|yolo|ymmv|tia)</pattern>
     </patterngroup>
   </term>
 
