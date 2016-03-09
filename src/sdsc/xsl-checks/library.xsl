@@ -15,10 +15,13 @@
 
   <xsl:template match="/">
     <part>
+      <xsl:attribute name="source"><xsl:apply-templates mode="part-source"/></xsl:attribute>
       <part-title><xsl:apply-templates mode="part-title"/></part-title>
       <xsl:apply-templates/>
     </part>
   </xsl:template>
+
+  <xsl:template match="*|db5:*" mode="part-source">FIXME</xsl:template>
 
   <xsl:template name="sourcehint">
     <xsl:param name="node" select="."/>

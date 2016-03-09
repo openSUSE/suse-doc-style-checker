@@ -10,6 +10,7 @@
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
   <xsl:template match="*|db5:*" mode="part-title">Admonitions</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-source">admonitions</xsl:template>
 
 
   <xsl:template match="caution|warning|important|note|tip|

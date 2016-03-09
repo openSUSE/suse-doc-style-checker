@@ -11,6 +11,7 @@
 
 
   <xsl:template match="*|db5:*" mode="part-title">Productnames, Productnumbers, &amp; Dates</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-source">products</xsl:template>
 
   <xsl:template match="book|article|set|db5:book|db5:article|db5:set">
 

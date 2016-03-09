@@ -11,6 +11,7 @@
 
 
   <xsl:template match="*|db5:*" mode="part-title">Procedures</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-source">procedure-steps.xslc</xsl:template>
 
   <xsl:template match="procedure|db5:procedure">
     <xsl:variable name="steps" select="count(step|db5:step)"/>
