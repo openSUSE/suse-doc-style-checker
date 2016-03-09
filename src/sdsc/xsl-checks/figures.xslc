@@ -38,27 +38,34 @@
 
 <xsl:template match="imagedata[@fileref]|db5:imagedata[@fileref]">
     <xsl:variable name="fileref" select="normalize-space(@fileref)"/>
-    <xsl:variable name="fileref-safe">
-      <xsl:call-template name="safecharacters">
+    <xsl:variable name="fileref-bad">
+      <xsl:call-template name="badcharacters">
         <xsl:with-param name="input" select="$fileref"/>
+        <xsl:with-param name="characters" select="'a-z|0-9|._-+'"/>
       </xsl:call-template>
     </xsl:variable>
 
-    <xsl:if test="not(string-length($fileref) = string-length(normalize-space($fileref-safe)))">
-      <xsl:variable name="fileref-safe-AZ">
-        <xsl:call-template name="safecharacters-AZ">
+    <xsl:if test="$fileref-bad = 'yes'">
+      <xsl:variable name="fileref-capital">
+        <xsl:call-template name="badcharacters">
           <xsl:with-param name="input" select="$fileref"/>
+          <xsl:with-param name="mode" select="'wanted'"/>
+          <xsl:with-param name="characters" select="'A-Z'"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:variable name="fileref-safe-special">
-        <xsl:call-template name="safecharacters-special">
+      <xsl:variable name="fileref-latinextra">
+        <xsl:call-template name="badcharacters">
           <xsl:with-param name="input" select="$fileref"/>
+          <xsl:with-param name="mode" select="'wanted'"/>
+          <xsl:with-param name="characters" select="'a-z[x]|A-Z[x]'"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:variable name="fileref-safe-AZ-state"
-        select="string-length($fileref) = string-length(normalize-space($fileref-safe-AZ))"/>
-      <xsl:variable name="fileref-safe-special-state"
-        select="string-length($fileref) = string-length(normalize-space($fileref-safe-special))"/>
+      <xsl:variable name="fileref-other">
+        <xsl:call-template name="badcharacters">
+          <xsl:with-param name="input" select="$fileref"/>
+          <xsl:with-param name="characters" select="'a-z|A-Z|a-z[x]|A-Z[x]|0-9|._-+'"/>
+        </xsl:call-template>
+      </xsl:variable>
       <result type="error">
         <xsl:call-template name="sourcehint"/>
         <message>Image file name
@@ -66,22 +73,46 @@
             <xsl:with-param name="use-fileref-attribute" select="1"/>
           </xsl:call-template>
           contains
-          <xsl:if test="$fileref-safe-AZ-state = false">
-            capital letters<xsl:choose><xsl:when test="$fileref-safe-special-state != false">.</xsl:when>
-              <xsl:otherwise>
-                and
-              </xsl:otherwise>
-            </xsl:choose>
+          <!-- This can't be the right way to construct a sentence... -->
+          <xsl:if test="$fileref-capital = 'yes'">
+            <xsl:text>capital letters</xsl:text>
           </xsl:if>
-          <xsl:if test="$fileref-safe-special-state = false">
-            special characters.
+          <xsl:choose>
+            <xsl:when test="$fileref-capital = 'yes' and $fileref-latinextra = 'yes' and $fileref-other = 'yes'">
+              <xsl:text>, </xsl:text>
+            </xsl:when>
+            <xsl:when test="($fileref-capital = 'yes' and $fileref-latinextra = 'yes') or
+                             ($fileref-capital = 'yes' and $fileref-other = 'yes')">
+              <xsl:text> and </xsl:text>
+            </xsl:when>
+          </xsl:choose>
+          <xsl:if test="$fileref-latinextra = 'yes'">
+            <xsl:text>accented letters or umlauts</xsl:text>
           </xsl:if>
+          <xsl:choose>
+            <xsl:when test="$fileref-capital = 'yes' and $fileref-latinextra = 'yes' and $fileref-other = 'yes'">
+              <xsl:text>, and </xsl:text>
+            </xsl:when>
+            <xsl:when test="$fileref-latinextra = 'yes' and $fileref-other = 'yes'">
+              <xsl:text> and </xsl:text>
+            </xsl:when>
+          </xsl:choose>
+          <xsl:if test="$fileref-other = 'yes'">
+            <xsl:text>special characters</xsl:text>
+          </xsl:if>
+          <xsl:text>.</xsl:text>
         </message>
-        <xsl:if test="$fileref-safe-AZ-state = false">
-          <suggestion>Use lowercase letters in image file names.
+        <xsl:if test="$fileref-capital = 'yes'">
+          <suggestion>When using letters in image file names, always use their
+           lowercase version.
           </suggestion>
         </xsl:if>
-        <xsl:if test="$fileref-safe-special-state = false">
+        <xsl:if test="$fileref-latinextra = 'yes'">
+          <suggestion>When using letters in image file names, only use those
+            occurring in the English alphabet.
+          </suggestion>
+        </xsl:if>
+        <xsl:if test="$fileref-other = 'yes'">
           <suggestion>Use only the following special characters in image file
             names: ._-+
           </suggestion>

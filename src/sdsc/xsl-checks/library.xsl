@@ -142,30 +142,143 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template name="safecharacters">
-    <!-- The (unfulfilled) aim being to only allow [a-z][0-9]\.-_+ -->
-    <xsl:param name="input" select="no_input"/>
+  <xsl:template name="badcharacters">
+    <!-- Allows checking if anything other than particular characters are
+         contained in a string. If there are bad characters, returns 'yes',
+         otherwise 'no'.
+         Unless $mode is 'wanted': If it is, we check whether at least one of
+         the characters given in $characters is contained in the input ('yes')
+         or not ('no').
+         -->
 
-    <xsl:value-of select="translate($input,
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZ?:;,!@#$%^§&amp;&lt;&gt;äàâãáåæÄÀÂÃÁÆÅçÇðÐèêéëËÉÈÊìîïíÍÏÌÎñÑòôõóöøœŒØÖÓÒÔÕùûüúÚÜÙÛýÿÝß©¢®þÞµ°[]“”{}|()= ',
-      '')"/>
+    <xsl:param name="mode" select="'allowed'"/>
+
+    <xsl:param name="input" select="'NO_INPUT'"/>
+
+    <!-- Function/usage of variable "characters":
+         + Allows specifying characters and pre-defined character classes
+           separated by pipe ("|") characters.
+         + Allows using the following character classes: a-z A-Z 0-9
+         + Use the following character classes to allow only umlauts and other
+           non-standard Latin characters: a-z[x] A-Z[x]
+         + To specify a literal "|" character, use this character class: pipe
+         + There is no need to escape any characters (e.g. "." is just "'.'"),
+           except of course the five that are expected to be escaped in XML.
+         + You can specify multiple characters directly after another, as long
+           as they do not match or contain a character class
+         + Examples:  ... select="'0-9|A-Z'" ...
+                  or: ... select="'a-z|0-9|-./|pipe'" ...
+    -->
+    <xsl:param name="characters" select="'a-z'"/>
+
+    <xsl:variable name="rawcharacters">
+      <xsl:call-template name="buildcharacterstring">
+        <xsl:with-param name="pipedstring" select="$characters"/>
+      </xsl:call-template>
+    </xsl:variable>
+
+    <xsl:variable name="translation" select="translate($input, $rawcharacters, '')"/>
+
+    <xsl:choose>
+      <xsl:when test="$mode='wanted'">
+        <xsl:choose>
+          <xsl:when test="string-length($input) = string-length($translation)">no</xsl:when>
+          <xsl:otherwise>yes</xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:choose>
+          <xsl:when test="string-length($translation) = 0">no</xsl:when>
+          <xsl:otherwise>yes</xsl:otherwise>
+        </xsl:choose>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
-  <xsl:template name="safecharacters-AZ">
-    <!-- The (unfulfilled) aim being to only allow [a-z][0-9]\.-_+ -->
-    <xsl:param name="input" select="no_input"/>
+  <xsl:template name="buildcharacterstring">
+    <xsl:param name="pipedstring" select="''"/>
+    <xsl:param name="characters" select="''"/>
 
-    <xsl:value-of select="translate($input, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '')"/>
+    <!-- Character classes... -->
+    <xsl:variable name="az-lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
+    <xsl:variable name="az-upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
+    <!-- FIXME: Below two are not exhaustive. (However, they cover German,
+         Czech, Polish, French/Spanish/Italian, Turkish, Swedish/Danish/
+         Norwegian and probably some more)
+         They should only include Latin-based characters to avoid them getting
+         too large. -->
+    <xsl:variable name="azx-lower" select="'áàäâãåæąçčðďþéèëêěęğíìïîıłñňóòöôõøœřšşßťúùüûůýÿźžż'"/>
+    <xsl:variable name="azx-upper" select="'ÁÀÄÂÃÅÆĄÇČÐĎÞÉÈËÊĚĘĞÍÌÏÎİŁÑŇÓÒÖÔÕØŒŘŠŞẞŤÚÙÜÛŮÝŸŹŽŻ'"/>
+    <xsl:variable name="numeric" select="'0123456789'"/>
+    <xsl:variable name="pipe" select="'|'"/>
+
+    <xsl:choose>
+      <xsl:when test="string-length($pipedstring) = 0">
+        <xsl:value-of select="$characters"/>
+      </xsl:when>
+      <!-- First, check if there is a pipe at the end of the string. Make it
+           easier to work with the string later. We do not want to put the
+           burden of adding pipes on the author, though. -->
+      <xsl:when test="not(substring($pipedstring, string-length($pipedstring), string-length($pipedstring) + 1) = '|')">
+        <xsl:call-template name="buildcharacterstring">
+          <xsl:with-param name="pipedstring" select="concat($pipedstring, '|')"/>
+          <xsl:with-param name="characters" select="$characters"/>
+        </xsl:call-template>
+      </xsl:when>
+      <!-- Cut pipe when it is the first character. -->
+      <xsl:when test="substring($pipedstring, 1, 2) = '|'">
+        <xsl:call-template name="buildcharacterstring">
+          <xsl:with-param name="pipedstring" select="substring-after($pipedstring, '|')"/>
+          <xsl:with-param name="characters" select="$characters"/>
+        </xsl:call-template>
+      </xsl:when>
+      <!-- Cut away and convert character groups. -->
+      <xsl:when test="substring-before($pipedstring, '|') = 'a-z'">
+        <xsl:call-template name="buildcharacterstring">
+          <xsl:with-param name="pipedstring" select="substring-after($pipedstring, '|')"/>
+          <xsl:with-param name="characters" select="concat($characters, $az-lower)"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="substring-before($pipedstring, '|') = 'A-Z'">
+        <xsl:call-template name="buildcharacterstring">
+          <xsl:with-param name="pipedstring" select="substring-after($pipedstring, '|')"/>
+          <xsl:with-param name="characters" select="concat($characters, $az-upper)"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="substring-before($pipedstring, '|') = 'a-z[x]'">
+        <xsl:call-template name="buildcharacterstring">
+          <xsl:with-param name="pipedstring" select="substring-after($pipedstring, '|')"/>
+          <xsl:with-param name="characters" select="concat($characters, $azx-lower)"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="substring-before($pipedstring, '|') = 'A-Z[x]'">
+        <xsl:call-template name="buildcharacterstring">
+          <xsl:with-param name="pipedstring" select="substring-after($pipedstring, '|')"/>
+          <xsl:with-param name="characters" select="concat($characters, $azx-upper)"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="substring-before($pipedstring, '|') = '0-9'">
+        <xsl:call-template name="buildcharacterstring">
+          <xsl:with-param name="pipedstring" select="substring-after($pipedstring, '|')"/>
+          <xsl:with-param name="characters" select="concat($characters, $numeric)"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="substring-before($pipedstring, '|') = 'pipe'">
+        <xsl:call-template name="buildcharacterstring">
+          <xsl:with-param name="pipedstring" select="substring-after($pipedstring, '|')"/>
+          <xsl:with-param name="characters" select="concat($characters, '|')"/>
+        </xsl:call-template>
+      </xsl:when>
+      <!-- Interpret given characters literally. -->
+      <xsl:otherwise>
+        <xsl:call-template name="buildcharacterstring">
+          <xsl:with-param name="pipedstring" select="substring-after($pipedstring, '|')"/>
+          <xsl:with-param name="characters" select="concat($characters, substring-before($pipedstring, '|'))"/>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
-  <xsl:template name="safecharacters-special">
-    <!-- The (unfulfilled) aim being to only allow [a-z][0-9]\.-_+ -->
-    <xsl:param name="input" select="no_input"/>
-
-    <xsl:value-of select="translate($input,
-      '?:;,!@#$%^§&amp;&lt;&gt;äàâãáåæÄÀÂÃÁÆÅçÇðÐèêéëËÉÈÊìîïíÍÏÌÎñÑòôõóöøœŒØÖÓÒÔÕùûüúÚÜÙÛýÿÝß©¢®þÞµ°[]“”{}|()= ',
-      '')"/>
-  </xsl:template>
 
   <xsl:template name="change-case">
     <xsl:param name="text" select="'?'"/>

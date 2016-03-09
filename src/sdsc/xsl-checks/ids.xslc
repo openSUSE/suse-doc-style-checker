@@ -36,9 +36,10 @@
 
   <xsl:template match="*[@id]|db5:*[@xml:id]">
     <xsl:variable name="id" select="normalize-space(@id|@xml:id)"/>
-    <xsl:variable name="id-safe">
-      <xsl:call-template name="safecharacters">
+    <xsl:variable name="id-bad">
+      <xsl:call-template name="badcharacters">
         <xsl:with-param name="input" select="$id"/>
+        <xsl:with-param name="characters" select="'a-z|0-9|._-'"/>
       </xsl:call-template>
     </xsl:variable>
     <xsl:variable name="correct-prefix">
@@ -90,44 +91,74 @@
       </result>
     </xsl:if>
 
-    <xsl:if test="not(string-length($id) = string-length(normalize-space($id-safe)))">
-      <xsl:variable name="id-safe-AZ">
-        <xsl:call-template name="safecharacters-AZ">
+    <xsl:if test="$id-bad = 'yes'">
+      <xsl:variable name="id-capital">
+        <xsl:call-template name="badcharacters">
           <xsl:with-param name="input" select="$id"/>
+          <xsl:with-param name="mode" select="'wanted'"/>
+          <xsl:with-param name="characters" select="'A-Z'"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:variable name="id-safe-special">
-        <xsl:call-template name="safecharacters-special">
+      <xsl:variable name="id-latinextra">
+        <xsl:call-template name="badcharacters">
           <xsl:with-param name="input" select="$id"/>
+          <xsl:with-param name="mode" select="'wanted'"/>
+          <xsl:with-param name="characters" select="'a-z[x]|A-Z[x]'"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:variable name="id-safe-AZ-state"
-        select="string-length($id) = string-length(normalize-space($id-safe-AZ))"/>
-      <xsl:variable name="id-safe-special-state"
-        select="string-length($id) = string-length(normalize-space($id-safe-special))"/>
+      <xsl:variable name="id-other">
+        <xsl:call-template name="badcharacters">
+          <xsl:with-param name="input" select="$id"/>
+          <xsl:with-param name="characters" select="'a-z|A-Z|a-z[x]|A-Z[x]|0-9|._-'"/>
+        </xsl:call-template>
+      </xsl:variable>
       <result type="warning">
         <xsl:call-template name="sourcehint"/>
         <message>Identifier
           <xsl:call-template name="createid"/>
           contains
-          <xsl:if test="$id-safe-AZ-state = false">
-            capital letters<xsl:choose><xsl:when test="$id-safe-special-state != false">.</xsl:when>
-              <xsl:otherwise>
-                and
-              </xsl:otherwise>
-            </xsl:choose>
+          <!-- This can't be the right way to construct a sentence... -->
+          <xsl:if test="$id-capital = 'yes'">
+            <xsl:text>capital letters</xsl:text>
           </xsl:if>
-          <xsl:if test="$id-safe-special-state = false">
-            special characters.
+          <xsl:choose>
+            <xsl:when test="$id-capital = 'yes' and $id-latinextra = 'yes' and $id-other = 'yes'">
+              <xsl:text>, </xsl:text>
+            </xsl:when>
+            <xsl:when test="($id-capital = 'yes' and $id-latinextra = 'yes') or
+                             ($id-capital = 'yes' and $id-other = 'yes')">
+              <xsl:text> and </xsl:text>
+            </xsl:when>
+          </xsl:choose>
+          <xsl:if test="$id-latinextra = 'yes'">
+            <xsl:text>accented letters or umlauts</xsl:text>
           </xsl:if>
+          <xsl:choose>
+            <xsl:when test="$id-capital = 'yes' and $id-latinextra = 'yes' and $id-other = 'yes'">
+              <xsl:text>, and </xsl:text>
+            </xsl:when>
+            <xsl:when test="$id-latinextra = 'yes' and $id-other = 'yes'">
+              <xsl:text> and </xsl:text>
+            </xsl:when>
+          </xsl:choose>
+          <xsl:if test="$id-other = 'yes'">
+            <xsl:text>special characters</xsl:text>
+          </xsl:if>
+          <xsl:text>.</xsl:text>
         </message>
-        <xsl:if test="$id-safe-AZ-state = false">
-          <suggestion>Use only lowercase letters in identifiers.
+        <xsl:if test="$id-capital = 'yes'">
+          <suggestion>When using letters in Identifiers, always use their
+           lowercase version.
           </suggestion>
         </xsl:if>
-        <xsl:if test="$id-safe-special-state = false">
+        <xsl:if test="$id-latinextra = 'yes'">
+          <suggestion>When using letters in Identifiers, only use those
+            occurring in the English alphabet.
+          </suggestion>
+        </xsl:if>
+        <xsl:if test="$id-other = 'yes'">
           <suggestion>Use only the following special characters in
-            identifiers: ._-
+            Identifiers: ._-
           </suggestion>
         </xsl:if>
       </result>
