@@ -366,7 +366,7 @@
     mode="terminology-content">
 
     <!-- Find out number of tokens that are included within the element.
-         This helps us position of the red underline in errors. -->
+         This helps us position the <highlight/> tags in messages. -->
     <xsl:variable name="formatted">
       <xsl:apply-templates select="self::*" mode="content-pretty"/>
     </xsl:variable>
@@ -402,7 +402,6 @@
     </xsl:choose>
   </xsl:template>
 
-  <!-- Hmm?? -->
   <xsl:template match="remark|indexterm|db5:remark|db5:indexterm"
     mode="terminology-content"/>
 
