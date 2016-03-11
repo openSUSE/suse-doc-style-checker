@@ -33,6 +33,10 @@ import webbrowser
 from lxml import etree
 from .cli import printcolor, parseargs
 
+# Global flags
+flag_performance = False
+flag_checkpatterns = False
+flag_module = False
 
 # In manglepattern(), only catch patterns that are not literal and are not
 # followed by an indicator of a lookahead/lookbehind (?) or are already
@@ -138,7 +142,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
     #     more compliant documentation will tip the scale in our favour
     if onepattern:
         if not onepattern.search( content ):
-            if args.performance:
+            if flag_performance:
                 printcolor("skipped entire paragraph\n", 'debug' )
             return messages
 
@@ -165,7 +169,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
         words = tokenizer( sentence )
         totalwords = len( words )
 
-        if args.performance:
+        if flag_performance:
             timestartmatch = time.time()
 
         skipcount = 0
@@ -281,7 +285,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                                     messagetype, highlight ) )
                         patterngroupposition += 1
 
-    if args.performance:
+    if flag_performance:
         timeendmatch = time.time()
         timediffmatch = timeendmatch - timestartmatch
         timeperword = 0
@@ -387,7 +391,7 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
     else:
         onepattern = None
 
-    if args.performance:
+    if flag_performance:
         timestartbuild = time.time()
 
     termdataid = random.randint(0, 999999999)
@@ -434,14 +438,14 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
     if useonepattern:
         onepattern = re.compile( manglepattern( onepattern, 'one' ), flags = re.I )
 
-    if args.performance:
+    if flag_performance:
         timeendbuild = time.time()
         printcolor( "time to build: %s" % str( timeendbuild - timestartbuild ), 'debug' )
     return termdataid
 
 def trypattern( pattern ):
 
-    if not args.checkpatterns:
+    if not flag_checkpatterns:
         return True
 
     # This is just a default that we can output if the pattern really is broken.
@@ -792,7 +796,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
     words = tokenizer( content )
     totalwords = len( words )
 
-    if args.performance:
+    if flag_performance:
         timestartmatch = time.time()
 
     for wordposition, word in enumerate(words):
@@ -835,7 +839,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
             messages.append( dupecheckmessage( wordstripped,
                 line, contentpretty, contextid, basefile ) )
 
-    if args.performance:
+    if flag_performance:
         timeendmatch = time.time()
         timediffmatch = timeendmatch - timestartmatch
         printcolor( """words: %s
@@ -892,7 +896,7 @@ def checkOneFile(inputfilepath):
         sys.exit(1)
 
     for checkfile in checkfiles:
-        if args.module or args.performance:
+        if flag_module or flag_performance:
             checkmodule = re.sub( r'^.*/', r'', checkfile )
             checkmodule = re.sub( r'.xslc$', r'', checkmodule )
             print( "Running module " +  checkmodule + "..." )
@@ -949,6 +953,9 @@ def main(cliargs=None):
 
     global args
     args = parseargs(cliargs)
+    flag_checkpatterns = args.checkpatterns
+    flag_performance = args.performance
+    flag_module = args.module
 
     if args.bookmarklet:
         webbrowser.open(
@@ -977,5 +984,5 @@ def main(cliargs=None):
         webbrowser.open( resultfile, new = 0 , autoraise = True )
 
     printcolor( resultfile )
-    if args.performance:
+    if flag_performance:
         printcolor( "Total: " +  str( time.time() - timestart ), 'debug' )
