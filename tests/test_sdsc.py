@@ -22,7 +22,10 @@ def test_xml(xmltestcase):
     for elem in inputtree.getiterator():
         id = elem.get("id")
         if id != None:
-            if not id.startswith("sdsc.test."):
+            if id.startswith("sdsc."):
+                if id in inputids:
+                    pytest.fail("Duplicate ID {0!r} in case {1!r}!".format(id, xmltestcase));
+                    
                 inputids.append(id)
     if len(inputids) == 0:
         pytest.skip("No tests found in {0}".format(os.path.basename(xmltestcase)))
