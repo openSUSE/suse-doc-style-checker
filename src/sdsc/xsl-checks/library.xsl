@@ -29,7 +29,7 @@
     </location>
   </xsl:template>
 
-  <xsl:template name="withinid">
+  <xsl:template name="file">
     <xsl:param name="node" select="."/>
     <xsl:variable name="candidate">
       <xsl:call-template name="file-nomarkup">
