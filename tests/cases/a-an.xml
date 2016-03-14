@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <chapter id="cha.test.a-an">
     <title>A-An test</title>
-    <para id="sdsc.expect.warning.a-an">
+    <para id="sdsc.expect.error.a-an.1">
+        an useless
+    </para>
+    <para id="sdsc.valid.2">
+        a useless
     </para>
 </chapter>
