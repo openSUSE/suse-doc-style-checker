@@ -29,35 +29,41 @@
     </location>
   </xsl:template>
 
-  <xsl:template name="file">
+  <xsl:template name="withinid">
     <xsl:param name="node" select="."/>
-    <xsl:if test="$node/ancestor::*[@xml:base]|$node/ancestor::db5:*[@xml:base]">
-      <file>
-        <xsl:value-of select="$node/ancestor::*[@xml:base][1]/@xml:base|$node/ancestor::db5:*[@xml:base][1]/@xml:base"/>
-      </file>
+    <xsl:variable name="candidate">
+      <xsl:call-template name="file-nomarkup">
+        <xsl:with-param name="node" select="$node"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:if test="string-length($candidate) &gt; 0">
+      <file><xsl:value-of select="$candidate"/></file>
     </xsl:if>
   </xsl:template>
 
   <xsl:template name="withinid">
     <xsl:param name="node" select="."/>
-    <xsl:if test="$node/ancestor::*[@id]|$node/ancestor::db5:*[@xml:id]">
-      <withinid>
-        <xsl:value-of select="$node/ancestor::*[@id][1]/@id|$node/ancestor::db5:*[@xml:id][1]/@xml:id"/>
-      </withinid>
+    <xsl:variable name="candidate">
+      <xsl:call-template name="withinid-nomarkup">
+        <xsl:with-param name="node" select="$node"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:if test="string-length($candidate) &gt; 0">
+      <withinid><xsl:value-of select="$candidate"/></withinid>
     </xsl:if>
   </xsl:template>
 
   <xsl:template name="file-nomarkup">
     <xsl:param name="node" select="."/>
-    <xsl:if test="$node/ancestor::*[@xml:base]|$node/ancestor::db5:*[@xml:base]">
-        <xsl:value-of select="$node/ancestor::*[@xml:base][1]/@xml:base|$node/ancestor::db5:*[@xml:base][1]/@xml:base"/>
+    <xsl:if test="$node/ancestor-or-self::*[@xml:base]|$node/ancestor-or-self::db5:*[@xml:base]">
+      <xsl:value-of select="$node/ancestor-or-self::*[@xml:base][1]/@xml:base|$node/ancestor-or-self::db5:*[@xml:base][1]/@xml:base"/>
     </xsl:if>
   </xsl:template>
 
   <xsl:template name="withinid-nomarkup">
     <xsl:param name="node" select="."/>
-    <xsl:if test="$node/ancestor::*[@id]|$node/ancestor::db5:*[@xml:id]">
-        <xsl:value-of select="$node/ancestor::*[@id][1]/@id|$node/ancestor::db5:*[@xml:id][1]/@xml:id"/>
+    <xsl:if test="$node/ancestor-or-self::*[@id]|$node/ancestor-or-self::db5:*[@xml:id]">
+      <xsl:value-of select="$node/ancestor-or-self::*[@id][1]/@id|$node/ancestor-or-self::db5:*[@xml:id][1]/@xml:id"/>
     </xsl:if>
   </xsl:template>
 
