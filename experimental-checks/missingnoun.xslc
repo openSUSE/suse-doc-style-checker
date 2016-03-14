@@ -33,6 +33,5 @@
   </xsl:template>
 
   <xsl:template match="*" mode="part-title">Missing Nouns</xsl:template>
-  <xsl:template match="*|db5:*" mode="part-source">missingnoun</xsl:template>
 
 </xsl:stylesheet>

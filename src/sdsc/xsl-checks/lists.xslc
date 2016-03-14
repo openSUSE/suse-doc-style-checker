@@ -11,7 +11,6 @@
 
 
   <xsl:template match="*|db5:*" mode="part-title">Lists</xsl:template>
-  <xsl:template match="*|db5:*" mode="part-source">lists</xsl:template>
 
   <xsl:template match="itemizedlist|orderedlist|variablelist|
                        db5:itemizedlist|db5:orderedlist|db5:variablelist">

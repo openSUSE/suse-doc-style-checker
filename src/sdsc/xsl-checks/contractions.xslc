@@ -36,6 +36,5 @@
   </xsl:template>
 
   <xsl:template match="*|db5:*" mode="part-title">Contractions</xsl:template>
-  <xsl:template match="*|db5:*" mode="part-source">contractions</xsl:template>
 
 </xsl:stylesheet>

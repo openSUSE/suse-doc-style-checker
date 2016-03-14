@@ -10,7 +10,6 @@
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
   <xsl:template match="*|db5:*" mode="part-title">Links</xsl:template>
-  <xsl:template match="*|db5:*" mode="part-source">links</xsl:template>
 
   <xsl:template match="ulink|db5:link">
     <xsl:variable name="url" select="normalize-space(@url|@xlink:href)"/>

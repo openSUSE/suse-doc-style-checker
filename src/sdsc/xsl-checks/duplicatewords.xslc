@@ -18,7 +18,6 @@
   </xsl:template>
 
   <xsl:template match="*|db5:*" mode="part-title">Duplicated Words &amp; Phrases</xsl:template>
-  <xsl:template match="*|db5:*" mode="part-source">duplicatewords</xsl:template>
 
   <!-- The following template should probably match more elements. -->
   <xsl:template match="para|title|db5:para|db5:title">

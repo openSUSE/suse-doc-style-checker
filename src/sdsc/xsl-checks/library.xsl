@@ -21,7 +21,7 @@
     </part>
   </xsl:template>
 
-  <xsl:template match="*|db5:*" mode="part-source">FIXME</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-source"><xsl:value-of select="$moduleName"/></xsl:template>
 
   <xsl:template name="sourcehint">
     <xsl:param name="node" select="."/>

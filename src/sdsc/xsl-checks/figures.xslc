@@ -10,7 +10,6 @@
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
   <xsl:template match="*|db5:*" mode="part-title">Figures</xsl:template>
-  <xsl:template match="*|db5:*" mode="part-source">figures</xsl:template>
 
   <xsl:template match="mediaobject|inlinemediaobject|
                        db5:mediaobject|db5:inlinemediaobject">

@@ -36,6 +36,5 @@
   </xsl:template>
 
   <xsl:template match="*|db5:*" mode="part-title">Invariant Plurals</xsl:template>
-  <xsl:template match="*|db5:*" mode="part-source">invariantplurals</xsl:template>
 
 </xsl:stylesheet>

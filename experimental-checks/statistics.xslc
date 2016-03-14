@@ -6,7 +6,6 @@
 
 
   <xsl:template match="*" mode="part-title">Statistics</xsl:template>
-  <xsl:template match="*|db5:*" mode="part-source">statistics</xsl:template>
 
   <xsl:template match="/">
     <part>

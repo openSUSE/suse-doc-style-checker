@@ -11,7 +11,6 @@
 
 
   <xsl:template match="*|db5:*" mode="part-title">Sections</xsl:template>
-  <xsl:template match="*|db5:*" mode="part-source">sects</xsl:template>
 
   <xsl:template match="article|chapter|reference|refentry|preface|appendix|colophon|
                        section|sect1|sect2|sect3|sect4|sect5|

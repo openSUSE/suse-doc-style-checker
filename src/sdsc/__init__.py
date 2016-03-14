@@ -896,9 +896,9 @@ def checkOneFile(inputfilepath):
         sys.exit(1)
 
     for checkfile in checkfiles:
+        checkmodule = re.sub( r'^.*/', r'', checkfile )
+        checkmodule = re.sub( r'.xslc$', r'', checkmodule )
         if flag_module or flag_performance:
-            checkmodule = re.sub( r'^.*/', r'', checkfile )
-            checkmodule = re.sub( r'.xslc$', r'', checkmodule )
             print( "Running module " +  checkmodule + "..." )
 
         try:
@@ -910,7 +910,7 @@ def checkOneFile(inputfilepath):
            sys.exit(1)
 
         try:
-            result = transform( inputfile )
+            result = transform( inputfile, moduleName = etree.XSLT.strparam(checkmodule) )
         # FIXME: Should not use BaseException.
         except BaseException as error:
             printcolor( "! Broken check file or Python function.\n  " + checkfile, 'error' )

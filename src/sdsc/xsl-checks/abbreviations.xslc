@@ -36,6 +36,5 @@
   </xsl:template>
 
   <xsl:template match="*|db5:*" mode="part-title">Abbreviations</xsl:template>
-  <xsl:template match="*|db5:*" mode="part-source">abbreviations</xsl:template>
 
 </xsl:stylesheet>
