@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.terminology">
+    <title>Terminology test</title>
+    <para id="sdsc.expect.error.terminology.1">
+        Two 32 bit systems equal one 64 bit system.
+    </para>
+    <para id="sdsc.valid">
+        Two 32-bit systems equal one 64-bit system.
+    </para>
+</chapter>

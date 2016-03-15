@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.procedure-steps">
+    <title>Test</title>
+    <para id="sdsc.expect.error.procedure-steps.1">
+        <procedure>
+            <step>Add more steps</step>
+        </procedure>
+    </para>
+    <para id="sdsc.expect.warning.procedure-steps.2">
+        <procedure>
+            <step>Remove some steps</step>
+            <step>Maybe</step>
+            <step>What if I like steps?</step>
+            <step></step>
+            <step>What, we are not talking about stairs?</step>
+            <step>Well, in that case</step>
+            <step>Add some more</step>
+            <step>Just to have more than 10</step>
+            <step>Almost there</step>
+            <step>Not quite</step>
+            <step>Now we got it!</step>
+        </procedure>
+    </para>
+    <para id="sdsc.valid">
+        <procedure>
+            <step>Have money</step>
+            <step>???</step>
+            <step>Profit!</step>
+        </procedure>
+    </para>
+</chapter>

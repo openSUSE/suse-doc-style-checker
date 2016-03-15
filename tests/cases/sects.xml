@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.sects">
+    <title>Sects test</title>
+    <para>a</para>
+    <sect1 id="sdsc.expect.warning.sects.1">
+        <para>a</para>
+        <sect2 id="sec.2">
+            <para>a</para>
+        </sect2>
+    </sect1>
+    
+    <sect1 id="sec.valid">
+        <para>content</para>
+    </sect1>
+</chapter>
