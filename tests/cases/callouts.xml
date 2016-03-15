@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.callouts">
+    <title>Callouts test</title>
+    <para>
+        <calloutlist id="sdsc.expect.error.callouts.1">
+            <callout>There</callout>
+            <callout>are</callout>
+            <callout>too</callout>
+            <callout>many</callout>
+            <callout>callouts</callout>
+            <callout>in</callout>
+            <callout>here</callout>
+            <callout></callout>
+            <callout></callout>
+            <callout></callout>
+            <callout></callout>
+        </calloutlist>
+        <calloutlist id="sdsc.valid.1">
+            <callout>There</callout>
+            <callout>are</callout>
+            <callout>not</callout>
+            <callout>too</callout>
+            <callout>many</callout>
+            <callout>callouts</callout>
+            <callout>in</callout>
+            <callout>here</callout>
+        </calloutlist>
+    </para>
+</chapter>
