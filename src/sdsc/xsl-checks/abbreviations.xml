@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<terminology ignoredwords="[bdghjkm-qsu-xz].*">
+<terminology ignoredwords="[A-Z]{8,}">
 
 <!--
 (Novl Styleguide)
