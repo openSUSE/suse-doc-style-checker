@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="sdsc.expect.warning.ids.1">
+    <title>ID test</title>
+    <para id="sdsc.expect.error.ids.2">
+        <sect2>
+            <para>I do not have an ID.</para>
+        </sect2>
+        <sect2>
+            <para>I do not have an ID.</para>
+        </sect2>
+    </para>
+    
+    <para>
+        <sect2 id="sdsc.expect.warning.ids.3">
+            <para>I have a wrong one.</para>
+        </sect2>
+        <sect2 id="sdsc.expect.warning.ids.4">
+            <para>Me too.</para>
+        </sect2>
+    </para>
+    
+    <para id="sdsc.valid">
+        <sect2 id="sec.valid">
+            <para>I do.</para>
+        </sect2>
+        <sect2 id="sec.valid2">
+            <para>I do.</para>
+        </sect2>
+    </para>
+</chapter>
