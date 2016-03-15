@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.figures">
+    <title>Figures test</title>
+    <para>
+        <mediaobject id="sdsc.expect.warning.figures.1">
+        </mediaobject>
+        <mediaobject id="sdsc.valid.1">
+            <textobject>
+                <phrase>Nothing to see here.</phrase>
+            </textobject>
+        </mediaobject>
+        
+        <imagedata fileref="Uppercasefile.name" id="sdsc.expect.error.figures.2">
+        </imagedata>
+        <imagedata fileref="special file.name" id="sdsc.expect.error.figures.3">
+        </imagedata>
+        <imagedata fileref="normalfile.name" id="sdsc.valid.2">
+        </imagedata>
+    </para>
+</chapter>
