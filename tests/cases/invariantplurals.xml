@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.invariantplurals">
+    <title>Invariant plurals test</title>
+    <para id="sdsc.expect.error.invariantplurals.1">
+        criterias
+    </para>
+    <para id="sdsc.expect.error.invariantplurals.2">
+        datas
+    </para>
+    <para id="sdsc.expect.error.invariantplurals.3">
+        informations
+    </para>
+    <para id="sdsc.expect.error.invariantplurals.4">
+        medias
+    </para>
+    <para id="sdsc.expect.error.invariantplurals.5">
+        metadatas
+    </para>
+</chapter>
