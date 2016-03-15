@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.duplicatewords">
+    <title>Duplicate words test</title>
+    <para id="sdsc.expect.error.duplicatewords.1">
+        In this paragraph, the
+        the word 'the' appears twice consecutively.
+    </para>
+</chapter>
