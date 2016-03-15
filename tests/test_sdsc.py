@@ -55,7 +55,7 @@ def test_xml(xmltestcase):
 
             formattedMessage = "<no message>"
             if message != None:
-                formattedMessage = etree.tostring(message, method="text").decode(encoding='UTF-8') # bytes to str
+                formattedMessage = etree.tostring(message, method="text", encoding='UTF-8').decode(encoding='UTF-8') # bytes to str
                 formattedMessage = " ".join(formattedMessage.split()).strip() # Remove excessive whitespace and newlines
 
             complaints[currentPartSource].append({ 'id': withinid, 'message': formattedMessage, 'type': elemType })
