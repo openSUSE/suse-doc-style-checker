@@ -14,7 +14,10 @@ def test_sdsc_version(capsys):
 # The xmltestcase fixture returns all files in tests/cases
 def test_xml(xmltestcase):
     nr_errors = 0
-    resultxml = sdsc.checkOneFile(xmltestcase)
+    try:
+        resultxml = sdsc.checkOneFile(xmltestcase)
+    except:
+        pytest.fail("Either testcase {0!r} or check XML have errors!".format(os.path.basename(xmltestcase)))
     
     # Parse the input file and gather all ids
     inputtree = etree.parse(xmltestcase)
@@ -80,4 +83,4 @@ def test_xml(xmltestcase):
             nr_errors += 1
     
     if nr_errors > 0:
-        pytest.fail("Test failed with {0} errors!".format(nr_errors))
+        pytest.fail("Test {0!r} failed with {1} errors!".format(os.path.basename(xmltestcase), nr_errors))
