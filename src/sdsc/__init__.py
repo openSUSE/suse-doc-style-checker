@@ -865,6 +865,13 @@ def dupecheckmessage( word, line, content, contextid, basefile ):
             <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
         </result>""" % ( filename, withinid, str(line), word, content, word ) )
 
+# This list is filled by initialize() with the following entries:
+# { 'name': 'typos', 'transform': <function> }
+prepared_checks = []
+
+# Global parser instance. Initialized by initialize()
+parser = None
+
 def checkOneFile(inputfilepath):
     """Checks one XML file and returns the result as XML. """
 
@@ -879,38 +886,19 @@ def checkOneFile(inputfilepath):
     output.append( resultstitle )
 
     # Checking via XSLT
-    parser = etree.XMLParser(   ns_clean = True,
-                                remove_pis = False,
-                                dtd_validation = False )
+    global parser
     inputfile = etree.parse( inputfilepath, parser )
 
-    checkfiles = glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) )
-
-
-    if not checkfiles:
-        printcolor( "! No check files found.\n  Add check files to " + os.path.join( location, 'xsl-checks' ), 'error' )
-        sys.exit(1)
-
-    for checkfile in checkfiles:
-        checkmodule = re.sub( r'^.*/', r'', checkfile )
-        checkmodule = re.sub( r'.xslc$', r'', checkmodule )
+    global prepared_checks
+    for check in prepared_checks:
         if flag_module or flag_performance:
-            print( "Running module " +  checkmodule + "..." )
+            print("Running module {0!r}...".format(check["name"]))
 
         try:
-            transform = etree.XSLT( etree.parse( checkfile, parser ) )
-        # FIXME: Should not use BaseException.
+            result = check["transform"](inputfile, moduleName = etree.XSLT.strparam(check["name"]))
         except BaseException as error:
-           printcolor( "! Syntax error in check file.\n  " + checkfile, 'error' )
-           printcolor( "  " + str(error), 'error' )
-           sys.exit(1)
-
-        try:
-            result = transform( inputfile, moduleName = etree.XSLT.strparam(checkmodule) )
-        # FIXME: Should not use BaseException.
-        except BaseException as error:
-            printcolor( "! Broken check file or Python function.\n  " + checkfile, 'error' )
-            printcolor( "  " + str(error), 'error' )
+            printcolor("! Broken check file or Python function (module {0!r})".format(check["name"]), 'error')
+            printcolor(str(error), 'error')
             sys.exit(1)
 
         result = result.getroot()
@@ -931,20 +919,47 @@ def checkOneFile(inputfilepath):
 
 sdsc_initialized = False
 def initialize():
+    """ Initializes global values such as prepared_checks and parser
+    to avoid doing it for each file. """
     global sdsc_initialized
+    global parser
+    global prepared_checks
 
     if sdsc_initialized:
-        return
+        return True
 
-    ns = etree.FunctionNamespace(
-        'https://www.github.com/openSUSE/suse-doc-style-checker' )
+    # Prepare parser (add py: namespace)
+    ns = etree.FunctionNamespace('https://www.github.com/openSUSE/suse-doc-style-checker')
     ns.prefix = 'py'
     ns.update( dict( linenumber = linenumber, termcheck = termcheck,
         buildtermdata = buildtermdata, dupecheck = dupecheck,
         sentencelengthcheck = sentencelengthcheck, tokenizer = tokenizer,
         sentencesegmenter = sentencesegmenter, counttokens = counttokens ) )
 
+    parser = etree.XMLParser(ns_clean = True,
+                             remove_pis = False,
+                             dtd_validation = False)
+
+    # Prepare all checks
+    location = os.path.dirname(os.path.realpath( __file__ ))
+    checkfiles = glob.glob(os.path.join(location, 'xsl-checks', '*.xslc'))
+
+    if not checkfiles:
+        printcolor( "! No check files found.\n  Add check files to " + os.path.join(location, 'xsl-checks'), 'error')
+        return False
+
+    for checkfile in checkfiles:
+        try:
+            checkmodule = re.sub(r'^.*/', r'', checkfile)
+            checkmodule = re.sub(r'.xslc$', r'', checkmodule)
+            transform = etree.XSLT(etree.parse(checkfile, parser))
+            prepared_checks.append({'name': checkmodule, 'transform': transform })
+        except BaseException as error:
+           printcolor( "! Syntax error in check file.\n  " + checkfile, 'error' )
+           printcolor( "  " + str(error), 'error' )
+
     sdsc_initialized = True
+    return True
 
 def main(cliargs=None):
     """Entry point for the application script
@@ -952,7 +967,8 @@ def main(cliargs=None):
     :param list cliargs: Arguments to parse or None (=use sys.argv)
     """
 
-    initialize()
+    if not initialize():
+        sys.exit(1)
 
     timestart = time.time()
 
