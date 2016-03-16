@@ -378,13 +378,12 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
 
     # list of contextpatterns, per patterngroup:
     # patterns = [ [ [ [ contextpattern, [-2,-1], True ], [ contextpattern, [1], False ], ... ], [], ... ], ... ]
-    #              <patterngroup/> #1,                                              <patterngroup/> #2
-    #                <contextpattern/> #1,          <contextpattern/> #2
-    #                                    position of tokens to check relative to pattern1 [= negative]
-    #                                             positive matching mode
-    #                                                                 position of tokens to check relative to last
-    #                                                                 pattern of patterngroup [= positive]
-    #                                                                            negative matching mode
+    #                <patterngroup/> #1,                                                         <patterngroup/> #2
+    #                  <contextpattern/> #1,              <contextpattern/> #2
+    #                                    position(s) of tokens to check relative to pattern1 [negative numbers => before]
+    #                                             matching mode [True => positive, pattern has to appear at least once]
+    #                                                                       position(s) of tokens to check relative to last [positive numbers => after]
+    #                                                                            matching mode [False => negative, pattern must not appear in any of given places]
     global contextpatterns
     contextpatterns = []
 
