@@ -34,7 +34,7 @@
         <xsl:call-template name="file-nomarkup"/>
       </xsl:variable>
       <xsl:variable name="content-candidate">
-        <xsl:apply-templates mode="dupes"/>
+        <xsl:apply-templates mode="terminology-content"/>
       </xsl:variable>
       <xsl:variable name="content-pretty-candidate">
         <xsl:apply-templates mode="content-pretty"/>
@@ -47,36 +47,6 @@
       <xsl:copy-of
         select="py:dupecheck($content, $content-pretty, $withinid, $file)"/>
     </xsl:if>
-  </xsl:template>
-
-
-  <xsl:template match="text()" mode="dupes">
-    <xsl:value-of select="."/>
-  </xsl:template>
-
-  <xsl:template match="classname|code|command|computeroutput|constant|envar|
-                       exceptionname|filename|function|interfacename|literal|
-                       methodname|option|package|parameter|prompt|replaceable|
-                       sgmltag|structfield|systemitem|tag|userinput|varname|
-                       keycombo|keycap|menuchoice|guimenu|email|filename|ulink|
-                       uri|xref|inlinemediaobject|symbol|
-                       db5:classname|db5:code|db5:command|db5:computeroutput|
-                       db5:constant|db5:envar|db5:exceptionname|db5:filename|
-                       db5:function|db5:interfacename|db5:literal|db5:methodname|
-                       db5:option|db5:package|db5:parameter|db5:prompt|
-                       db5:replaceable|db5:sgmltag|db5:structfield|
-                       db5:systemitem|db5:tag|db5:userinput|db5:varname|
-                       db5:keycombo|db5:keycap|db5:menuchoice|db5:guimenu|
-                       db5:email|db5:filename|db5:link|db5:uri|db5:xref|
-                       db5:inlinemediaobject|db5:symbol"
-    mode="dupes">
-    ##@ignore##
-  </xsl:template>
-
-  <xsl:template match="remark|indexterm|db5:remark|db5:indexterm" mode="dupes"/>
-
-  <xsl:template match="*|db5:*" mode="dupes">
-    <xsl:apply-templates mode="dupes"/>
   </xsl:template>
 
 </xsl:stylesheet>

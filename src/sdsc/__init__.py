@@ -55,7 +55,7 @@ sentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)\.?\.
 lastsentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)\.?\.?[\.!\?][\)\]\}]?\s*|[:;]\s*$' )
 
 # FIXME: Number separation with spaces is a language-specific hack.
-dupeignore = re.compile( r'([0-9]{1,3}|##@ignore##)([\W\S](?=\s)|\s|$)' , re.I )
+dupeignore = re.compile( r'([0-9]{1,3}|##@[a-z]+(-[0-9]+)?##)([\W\S](?=\s)|\s|$)' , re.I )
 
 # To find the number of tokens replaced by placeholders like ##@key-1##
 findnumberoftokens = re.compile( r'(?<=-)[0-9]*(?=##)' )
