@@ -896,10 +896,8 @@ def checkOneFile(inputfilepath):
     output.append( resultstitle )
 
     # Checking via XSLT
-    global parser
     inputfile = etree.parse( inputfilepath, parser )
 
-    global prepared_checks
     for check in prepared_checks:
         if flag_module or flag_performance:
             print("Running module {0!r}...".format(check["name"]))
@@ -927,14 +925,12 @@ def checkOneFile(inputfilepath):
                           encoding = 'unicode',
                           pretty_print = True )
 
+# Flag to avoid multiple initialization
 sdsc_initialized = False
 def initialize():
     """ Initializes global values such as prepared_checks and parser
     to avoid doing it for each file. """
     global sdsc_initialized
-    global parser
-    global prepared_checks
-
     if sdsc_initialized:
         return True
 
@@ -946,11 +942,14 @@ def initialize():
         sentencelengthcheck = sentencelengthcheck, tokenizer = tokenizer,
         sentencesegmenter = sentencesegmenter, counttokens = counttokens ) )
 
+    global parser
     parser = etree.XMLParser(ns_clean = True,
                              remove_pis = False,
                              dtd_validation = False)
 
     # Prepare all checks
+    global prepared_checks
+    prepared_checks = []
     location = os.path.dirname(os.path.realpath( __file__ ))
     checkfiles = glob.glob(os.path.join(location, 'xsl-checks', '*.xslc'))
 
