@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.sentencelength">
+    <title>Sentencelength test</title>
+    <para id="sdsc.expect.error.sentencelength">
+        This is supposed to be a very long (and thus very hard to read in one go) sentence,
+        with the intention of tripping the sentencelength check, which is written in XSLT,
+        a language that looks more like torture than an actual language,
+        where even very long sentences (such as this one) are relatively easy to
+        follow and do not require looking everywhere to be able to guess what an
+        XSLT file does.
+    </para>
+    <para id="sdsc.expect.warning.sentencelength">
+        This is supposed to be a long (and thus very hard to read in one go) sentence,
+        with the intention of tripping the sentencelength check, which is written in XSLT.
+    </para>
+    <para id="sdsc.valid">
+        A valid sentence.
+    </para>
+</chapter>

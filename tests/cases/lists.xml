@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.lists">
+    <title>Lists test</title>
+    <para id="sdsc.expect.error.lists.1">
+        <variablelist></variablelist>
+    </para>
+    <para id="sdsc.expect.warning.lists.2">
+        <variablelist>
+            <varlistentry>
+                <variablelist>
+                    <varlistentry>
+                        <variablelist>
+                            <varlistentry></varlistentry>
+                            <varlistentry></varlistentry>
+                        </variablelist>
+                    </varlistentry>
+                    <varlistentry></varlistentry>
+                 </variablelist>
+            </varlistentry>
+            <varlistentry></varlistentry>
+            </variablelist>
+    </para>
+    <para id="sdsc.valid">
+        <variablelist>
+            <varlistentry></varlistentry>
+            <varlistentry></varlistentry>
+        </variablelist>
+    </para>
+</chapter>

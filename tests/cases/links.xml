@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.links">
+    <title>Links test</title>
+    <para id="sdsc.expect.error.links.1">
+        <ulink url="ssh://localhost">Can you open me?</ulink>
+    </para>
+    <para id="sdsc.valid">
+        <ulink url="https://localhost">Can you open me?</ulink>
+    </para>
+</chapter>

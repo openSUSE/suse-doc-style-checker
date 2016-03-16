@@ -9,13 +9,6 @@
 
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 
-  <xsl:template match="/">
-    <part>
-      <part-title><xsl:apply-templates mode="part-title"/></part-title>
-      <xsl:apply-templates/>
-    </part>
-  </xsl:template>
-
   <xsl:template match="*|db5:*" mode="part-title">Sentence Length</xsl:template>
 
   <!-- The following template should probably match more elements. -->

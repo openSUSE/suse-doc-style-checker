@@ -22,7 +22,6 @@ __author__ = "Stefan Knorr, Thomas Schraitle"
 __license__ = "LGPL-2.1+"
 __description__ = "checks a given DocBook XML file for stylistic errors"
 
-
 import glob
 import os.path
 import re
@@ -34,6 +33,10 @@ import webbrowser
 from lxml import etree
 from .cli import printcolor, parseargs
 
+# Global flags
+flag_performance = False
+flag_checkpatterns = False
+flag_module = False
 
 # In manglepattern(), only catch patterns that are not literal and are not
 # followed by an indicator of a lookahead/lookbehind (?) or are already
@@ -139,7 +142,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
     #     more compliant documentation will tip the scale in our favour
     if onepattern:
         if not onepattern.search( content ):
-            if args.performance:
+            if flag_performance:
                 printcolor("skipped entire paragraph\n", 'debug' )
             return messages
 
@@ -166,7 +169,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
         words = tokenizer( sentence )
         totalwords = len( words )
 
-        if args.performance:
+        if flag_performance:
             timestartmatch = time.time()
 
         skipcount = 0
@@ -282,7 +285,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                                     messagetype, highlight ) )
                         patterngroupposition += 1
 
-    if args.performance:
+    if flag_performance:
         timeendmatch = time.time()
         timediffmatch = timeendmatch - timestartmatch
         timeperword = 0
@@ -388,7 +391,7 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
     else:
         onepattern = None
 
-    if args.performance:
+    if flag_performance:
         timestartbuild = time.time()
 
     termdataid = random.randint(0, 999999999)
@@ -435,14 +438,14 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
     if useonepattern:
         onepattern = re.compile( manglepattern( onepattern, 'one' ), flags = re.I )
 
-    if args.performance:
+    if flag_performance:
         timeendbuild = time.time()
         printcolor( "time to build: %s" % str( timeendbuild - timestartbuild ), 'debug' )
     return termdataid
 
 def trypattern( pattern ):
 
-    if not args.checkpatterns:
+    if not flag_checkpatterns:
         return True
 
     # This is just a default that we can output if the pattern really is broken.
@@ -793,7 +796,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
     words = tokenizer( content )
     totalwords = len( words )
 
-    if args.performance:
+    if flag_performance:
         timestartmatch = time.time()
 
     for wordposition, word in enumerate(words):
@@ -836,7 +839,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
             messages.append( dupecheckmessage( wordstripped,
                 line, contentpretty, contextid, basefile ) )
 
-    if args.performance:
+    if flag_performance:
         timeendmatch = time.time()
         timediffmatch = timeendmatch - timestartmatch
         printcolor( """words: %s
@@ -866,6 +869,69 @@ def dupecheckmessage( word, line, content, contextid, basefile ):
             <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
         </result>""" % ( filename, withinid, str(line), word, content, word ) )
 
+def checkOneFile(inputfilepath):
+    """Checks one XML file and returns the result as XML. """
+
+    location = os.path.dirname( os.path.realpath( __file__ ) )
+    inputfilename = os.path.basename( inputfilepath )
+    output = etree.XML(  """<?xml-stylesheet type="text/css" href="%s"?>
+                            <results/>"""
+                      % os.path.join( location, 'check.css' ) )
+
+    resultstitle = etree.Element( 'results-title' )
+    resultstitle.text = "Style Checker Results for %s" % inputfilename
+    output.append( resultstitle )
+
+    # Checking via XSLT
+    parser = etree.XMLParser(   ns_clean = True,
+                                remove_pis = False,
+                                dtd_validation = False )
+    inputfile = etree.parse( inputfilepath, parser )
+
+    checkfiles = glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) )
+
+
+    if not checkfiles:
+        printcolor( "! No check files found.\n  Add check files to " + os.path.join( location, 'xsl-checks' ), 'error' )
+        sys.exit(1)
+
+    for checkfile in checkfiles:
+        checkmodule = re.sub( r'^.*/', r'', checkfile )
+        checkmodule = re.sub( r'.xslc$', r'', checkmodule )
+        if flag_module or flag_performance:
+            print( "Running module " +  checkmodule + "..." )
+
+        try:
+            transform = etree.XSLT( etree.parse( checkfile, parser ) )
+        # FIXME: Should not use BaseException.
+        except BaseException as error:
+           printcolor( "! Syntax error in check file.\n  " + checkfile, 'error' )
+           printcolor( "  " + str(error), 'error' )
+           sys.exit(1)
+
+        try:
+            result = transform( inputfile, moduleName = etree.XSLT.strparam(checkmodule) )
+        # FIXME: Should not use BaseException.
+        except BaseException as error:
+            printcolor( "! Broken check file or Python function.\n  " + checkfile, 'error' )
+            printcolor( "  " + str(error), 'error' )
+            sys.exit(1)
+
+        result = result.getroot()
+
+        if result.xpath( '/part/result' ):
+            output.append( result )
+
+    if not output.xpath( '/results/part' ):
+        output.append( etree.XML(
+             """<result type="info">
+                    <message>No problems detected.</message>
+                    <suggestion>Celebrate!</suggestion>
+                </result>""" ) )
+
+    return etree.tostring(output.getroottree(),
+                          encoding = 'unicode',
+                          pretty_print = True )
 
 def main(cliargs=None):
     """Entry point for the application script
@@ -887,6 +953,9 @@ def main(cliargs=None):
 
     global args
     args = parseargs(cliargs)
+    flag_checkpatterns = args.checkpatterns
+    flag_performance = args.performance
+    flag_module = args.module
 
     if args.bookmarklet:
         webbrowser.open(
@@ -895,82 +964,25 @@ def main(cliargs=None):
             new = 0, autoraise = True )
         sys.exit(0)
 
-    inputfilename = os.path.basename( args.inputfile.name )
-
     if args.outputfile:
         resultfilename = args.outputfile
         resultpath = os.path.dirname( os.path.realpath( args.outputfile ) )
     else:
-        resultfilename = re.sub( r'(_bigfile)?\.xml', r'', inputfilename )
+        resultfilename = re.sub( r'(_bigfile)?\.xml', r'', os.path.basename( args.inputfile.name ) )
         resultfilename = '%s-stylecheck.xml' % resultfilename
         resultpath = os.path.dirname( os.path.realpath( args.inputfile.name ) )
 
     resultfile = os.path.join( resultpath, resultfilename )
+    resultfh = open( resultfile, 'w' )
 
-    output = etree.XML(  """<?xml-stylesheet type="text/css" href="%s"?>
-                            <results/>"""
-                      % os.path.join( location, 'check.css' ) )
+    result = checkOneFile( args.inputfile.name )
 
-    resultstitle = etree.Element( 'results-title' )
-    resultstitle.text = "Style Checker Results for %s" % inputfilename
-    output.append( resultstitle )
-
-    # Checking via XSLT
-    parser = etree.XMLParser(   ns_clean = True,
-                                remove_pis = False,
-                                dtd_validation = False )
-    inputfile = etree.parse( args.inputfile, parser )
-
-    checkfiles = glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) )
-
-
-    if not checkfiles:
-        printcolor( "! No check files found.\n  Add check files to " + os.path.join( location, 'xsl-checks' ), 'error' )
-        sys.exit(1)
-
-    for checkfile in checkfiles:
-        if args.module or args.performance:
-            checkmodule = re.sub( r'^.*/', r'', checkfile )
-            checkmodule = re.sub( r'.xslc$', r'', checkmodule )
-            print( "Running module " +  checkmodule + "..." )
-
-        try:
-            transform = etree.XSLT( etree.parse( checkfile, parser ) )
-        # FIXME: Should not use BaseException.
-        except BaseException as error:
-           printcolor( "! Syntax error in check file.\n  " + checkfile, 'error' )
-           printcolor( "  " + str(error), 'error' )
-           sys.exit(1)
-
-        try:
-            result = transform( inputfile )
-        # FIXME: Should not use BaseException.
-        except BaseException as error:
-            printcolor( "! Broken check file or Python function.\n  " + checkfile, 'error' )
-            printcolor( "  " + str(error), 'error' )
-            sys.exit(1)
-
-        result = result.getroot()
-
-        if result.xpath( '/part/result' ):
-            output.append( result )
-
-    if not output.xpath( '/results/part' ):
-        output.append( etree.XML(
-             """<result type="info">
-                    <message>No problems detected.</message>
-                    <suggestion>Celebrate!</suggestion>
-                </result>""" ) )
-
-
-    output.getroottree().write( resultfile,
-                                xml_declaration = True,
-                                encoding = 'UTF-8',
-                                pretty_print = True )
+    resultfh.write(str(result))
+    resultfh.close()
 
     if args.show:
         webbrowser.open( resultfile, new = 0 , autoraise = True )
 
     printcolor( resultfile )
-    if args.performance:
+    if flag_performance:
         printcolor( "Total: " +  str( time.time() - timestart ), 'debug' )

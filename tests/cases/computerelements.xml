@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.computerelements">
+    <title>Computerelements test</title>
+    <para>
+        <command id="sdsc.expect.warning.computerelements">
+            This is a very long command with mode than 50 characters
+            so it should trip the XSLT test and cause an error here, hopefully.
+        </command>
+        <command id="sdsc.valid.1">
+            a short command.
+        </command>
+        
+        <filename id="sdsc.expect.warning.computerelements.2">
+            /boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot
+        </filename>
+        <filename id="sdsc.valid.2">
+            /proc/kcore
+        </filename>
+    </para>
+</chapter>

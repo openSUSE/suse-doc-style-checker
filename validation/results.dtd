@@ -12,6 +12,7 @@
 
 <!ELEMENT results-title (#PCDATA) >
 <!ELEMENT part          (part-title, result+) >
+<!ATTLIST part          source CDATA #REQUIRED >
 
 
 <!ELEMENT part-title    (#PCDATA) >

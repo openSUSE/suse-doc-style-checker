@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.abbreviations">
+    <title>Abbreviations test</title>
+    <para id="sdsc.expect.error.abbreviations.1">
+        My feelings about XSLT are ca. 100% hate.
+    </para>
+    <para id="sdsc.expect.error.abbreviations.2">
+        100 chameleon sized horses vs. 1 horse sized chameleon
+    </para>
+    <para id="sdsc.expect.error.abbreviations.3">
+        et al.
+    </para>
+    <para id="sdsc.expect.error.abbreviations.4">
+        ibid.
+    </para>
+    <para id="sdsc.expect.error.abbreviations.5">
+        Bad inventions, e.g. XSLT.
+    </para>
+    <para id="sdsc.expect.error.abbreviations.6">
+        NB that I am serious about this.
+    </para>
+    <para id="sdsc.expect.error.abbreviations.7">
+        q.v.
+    </para>
+    <para id="sdsc.expect.error.abbreviations.8">
+        i.e.
+    </para>
+    <para id="sdsc.expect.error.abbreviations.9">
+        re:
+    </para>
+    <para id="sdsc.expect.error.abbreviations.10">
+        resp.
+    </para>
+    <para id="sdsc.expect.error.abbreviations.11">
+        IMHO, ASAP, but IDK.
+    </para>
+</chapter>

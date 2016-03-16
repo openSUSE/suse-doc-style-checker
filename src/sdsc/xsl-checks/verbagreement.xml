@@ -149,7 +149,7 @@
       <proposal>should be</proposal>
     </accept>
     <patterngroup>
-      <pattern>shall</pattern>
+      <pattern>should</pattern>
       <contextpattern>\w+?ing</contextpattern>
       <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir)ing</contextpattern>
     </patterngroup>

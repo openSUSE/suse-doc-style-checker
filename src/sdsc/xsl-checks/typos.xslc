@@ -28,6 +28,7 @@
   <xsl:template match="/">
     <xsl:if test="exslt:node-set($termnodes)">
       <part>
+        <xsl:attribute name="source"><xsl:apply-templates mode="part-source"/></xsl:attribute>
         <part-title><xsl:apply-templates mode="part-title"/></part-title>
         <xsl:apply-templates mode="terminology"/>
       </part>

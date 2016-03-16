@@ -133,8 +133,6 @@ GNU GPL.
     </accept>
     <patterngroup>
       <pattern>ant</pattern>
-      <contextpattern look="before" mode="fuzzy" location="5">(buil[dt](s|ing)?|java)</contextpattern>
-      <contextpattern mode="fuzzy" location="5">(buil[dt](s|ing)?|java)</contextpattern>
     </patterngroup>
   </term>
 

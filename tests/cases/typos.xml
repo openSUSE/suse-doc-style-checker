@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.typos">
+    <title>Test for typos</title>
+    <para id="sdsc.expect.error.typos.1">
+        always adopts
+    </para>
+    <para id="sdsc.expect.error.typos.2">
+        this is a test fro typos
+    </para>
+    <para id="sdsc.expect.error.typos.3">
+        adoptation
+    </para>
+    <para id="sdsc.expect.error.typos.4">
+        was adapt
+    </para>
+    <para id="sdsc.expect.error.typos.5">
+        widely adapted
+    </para>
+    <para id="sdsc.expect.error.typos.6">
+        for along time
+    </para>
+    <para id="sdsc.expect.error.typos.7">
+        in all though
+    </para>
+    <para id="sdsc.expect.error.typos.8">
+        was aloud to
+    </para>
+    <para id="sdsc.expect.error.typos.9">
+        left in right
+    </para>
+    <para id="sdsc.expect.error.typos.10">
+        ant one of those
+    </para>
+    <para id="sdsc.expect.error.typos.11">
+        I do not want to write XML any more
+    </para>
+    <para id="sdsc.expect.error.typos.12">
+        anymore of those and I'll puke
+    </para>
+    <para id="sdsc.expect.error.typos.13">
+        a s a well
+    </para>
+    <para id="sdsc.expect.error.typos.14">
+        as oppose to
+    </para>
+    <para id="sdsc.expect.error.typos.15">
+        bare in mind
+    </para>
+    <para id="sdsc.expect.error.typos.16">
+        To being with,
+    </para>
+    <para id="sdsc.expect.error.typos.17">
+        as per the usually
+    </para>
+    <para id="sdsc.expect.error.typos.18">
+        bye the way
+    </para>
+    <para id="sdsc.expect.error.typos.19">
+        per default
+    </para>
+    <para id="sdsc.expect.error.typos.20">
+        to chose
+    </para>
+    <para id="sdsc.expect.error.typos.21">
+        it was complaint
+    </para>
+    <para id="sdsc.expect.error.typos.22">
+        confirmed to style
+    </para>
+    <para id="sdsc.expect.error.typos.23">
+        consisted on
+    </para>
+    <para id="sdsc.expect.error.typos.24">
+        up to data
+    </para>
+    <para id="sdsc.expect.error.typos.25">
+        hard dick images
+    </para>
+    <para id="sdsc.expect.error.typos.26">
+        had doe
+    </para>
+    <para id="sdsc.expect.error.typos.27">
+        apart form
+    </para>
+</chapter>

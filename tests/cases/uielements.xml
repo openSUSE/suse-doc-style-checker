@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.uielements">
+    <title>UI elements test</title>
+    <para id="sdsc.expect.error.uielements">
+        <guimenu>Quit.</guimenu>
+    </para>
+    <para id="sdsc.valid.2">
+        <guimenu>Quit</guimenu>
+    </para>
+</chapter>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.wordyphrases">
+    <title>Wordyphrases test</title>
+    <para id="sdsc.expect.warning.wordyphrases.1">
+        This is having to do with XML in a way.
+    </para>
+    <para id="sdsc.expect.warning.wordyphrases.2">
+        In my opinion, using XML here is not adequate enough.
+    </para>
+    <para id="sdsc.expect.warning.wordyphrases.3">
+        After periods of creating and testing tests, it is slowly getting boring.
+    </para>
+    <para id="sdsc.expect.warning.wordyphrases.4">
+        Sadly, I do not have alternative choices.
+    </para>
+</chapter>

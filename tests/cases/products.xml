@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="cha.test.products">
+    <title>Products test</title>
+    <para></para>
+    <article id="sdsc.expect.error.products.1">
+        <articleinfo><date/></articleinfo>
+        <para></para>
+    </article>
+    
+    <article id="sdsc.valid">
+        <articleinfo>
+            <productname>Bugs</productname>
+            <productnumber>42</productnumber>
+            <date/>
+        </articleinfo>
+        <para></para>
+    </article>
+    
+    <para id="sdsc.expect.error.products.2">
+        <productname/>
+    </para>
+</chapter>
