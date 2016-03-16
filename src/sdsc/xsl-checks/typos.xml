@@ -76,7 +76,13 @@ GNU GPL.
     <patterngroup>
       <pattern>all</pattern>
       <pattern>though</pattern>
-      <contextpattern look="before">(in|of|not|at)</contextpattern>
+      <contextpattern look="before">(of|not|at)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>all</pattern>
+      <pattern>though</pattern>
+      <contextpattern look="before">in</contextpattern>
+      <contextpattern look="before" position="2" match="negative">all</contextpattern>
     </patterngroup>
   </term>
 
