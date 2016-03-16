@@ -3,6 +3,7 @@
     <title>Sects test</title>
     <para>a</para>
     <sect1 id="sdsc.expect.warning.sects.1">
+        <title/>
         <para>a</para>
         <sect2 id="sec.2">
             <para>a</para>
@@ -10,6 +11,7 @@
     </sect1>
     
     <sect1 id="sec.valid">
+        <title/>
         <para>content</para>
     </sect1>
 </chapter>

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <chapter id="cha.test.products">
     <title>Products test</title>
-    <para></para>
-    <article id="sdsc.expect.error.products.1">
+
+    <para id="sdsc.expect.error.products.1">
+        <productname/>
+    </para>
+    <article id="sdsc.expect.error.products.2">
         <articleinfo><date/></articleinfo>
         <para></para>
     </article>
@@ -15,8 +18,4 @@
         </articleinfo>
         <para></para>
     </article>
-    
-    <para id="sdsc.expect.error.products.2">
-        <productname/>
-    </para>
 </chapter>

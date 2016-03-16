@@ -2,6 +2,6 @@
 <chapter id="cha.test.keycaps">
     <title>Keycaps test</title>
     <para id="sdsc.expect.warning.keycaps.1">
-        <keycap function="1">text</keycap>
+        <keycap function="control">text</keycap>
     </para>
 </chapter>
