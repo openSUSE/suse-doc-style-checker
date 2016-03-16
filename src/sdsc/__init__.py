@@ -60,8 +60,18 @@ dupeignore = re.compile( r'([0-9]{1,3}|##@ignore##)([\W\S](?=\s)|\s|$)' , re.I )
 # To find the number of tokens replaced by placeholders like ##@key-1##
 findnumberoftokens = re.compile( r'(?<=-)[0-9]*(?=##)' )
 
-def profile(x):
-    return x
+re_cache = {}
+
+def re_compile(pattern, flags=0):
+    """Caching version of re.compile"""
+    global re_cache
+    try:
+        return re_cache[flags][pattern]
+    except:
+        if not flags in re_cache:
+            re_cache[flags] = {}
+        re_cache[flags][pattern] = re.compile(pattern, flags)
+        return re_cache[flags][pattern]
 
 def linenumber( context ):
     return context.context_node.sourceline
@@ -401,7 +411,7 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
 
     if ignoredwords:
         trypattern( ignoredwords[0] )
-        ignoredpattern = re.compile( manglepattern( ignoredwords[0], 0 ),
+        ignoredpattern = re_compile( manglepattern( ignoredwords[0], 0 ),
             flags = re.I )
     else:
         ignoredpattern = False
@@ -439,7 +449,7 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
         patterns.append( patternsofterm )
 
     if useonepattern:
-        onepattern = re.compile( manglepattern( onepattern, 'one' ), flags = re.I )
+        onepattern = re_compile( manglepattern( onepattern, 'one' ), flags = re.I )
 
     if flag_performance:
         timeendbuild = time.time()
@@ -542,9 +552,9 @@ def preparepatterns( patterngroupxpath, useonepattern ):
 
         pattern = None
         if patternxpath[0].get( 'case' ) == 'keep':
-            pattern = re.compile( patternxpathcontent )
+            pattern = re_compile( patternxpathcontent )
         else:
-            pattern = re.compile( patternxpathcontent, flags = re.I )
+            pattern = re_compile( patternxpathcontent, flags = re.I )
         patternsofpatterngroup.append( pattern )
 
     return [ patternsofpatterngroup, patternforonepattern ]
@@ -568,9 +578,9 @@ def preparecontextpatterns( contextpatternxpath ):
     contextpatternxpathcontent = manglepattern( contextpatternxpathcontent, 'context' )
 
     if contextpatternxpath.get( 'case' ) == 'keep':
-        contextpattern = re.compile( contextpatternxpathcontent )
+        contextpattern = re_compile( contextpatternxpathcontent )
     else:
-        contextpattern = re.compile( contextpatternxpathcontent, flags = re.I )
+        contextpattern = re_compile( contextpatternxpathcontent, flags = re.I )
 
     if contextpatternxpath.get( 'look' ) == 'before':
         factors = [ -1 ]
@@ -893,12 +903,12 @@ def checkOneFile(inputfilepath):
     for check in prepared_checks:
         if flag_module or flag_performance:
             print("Running module {0!r}...".format(check["name"]))
-
+        result = check["transform"](inputfile, moduleName = etree.XSLT.strparam(check["name"]))
         try:
             result = check["transform"](inputfile, moduleName = etree.XSLT.strparam(check["name"]))
         except BaseException as error:
             printcolor("! Broken check file or Python function (module {0!r})".format(check["name"]), 'error')
-            printcolor(str(error), 'error')
+            printcolor("  " + str(error), 'error')
             sys.exit(1)
 
         result = result.getroot()
