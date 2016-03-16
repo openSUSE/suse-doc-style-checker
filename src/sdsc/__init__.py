@@ -60,6 +60,9 @@ dupeignore = re.compile( r'([0-9]{1,3}|##@ignore##)([\W\S](?=\s)|\s|$)' , re.I )
 # To find the number of tokens replaced by placeholders like ##@key-1##
 findnumberoftokens = re.compile( r'(?<=-)[0-9]*(?=##)' )
 
+def profile(x):
+    return x
+
 def linenumber( context ):
     return context.context_node.sourceline
 
@@ -538,7 +541,7 @@ def preparepatterns( patterngroupxpath, useonepattern ):
             patternxpathcontent = manglepattern( patternxpathcontent, 'default' )
 
         pattern = None
-        if getattribute( patternxpath[0], 'case' ) == 'keep':
+        if patternxpath[0].get( 'case' ) == 'keep':
             pattern = re.compile( patternxpathcontent )
         else:
             pattern = re.compile( patternxpathcontent, flags = re.I )
@@ -564,23 +567,23 @@ def preparecontextpatterns( contextpatternxpath ):
     # searching for e.g. "mail" in "e-mail".
     contextpatternxpathcontent = manglepattern( contextpatternxpathcontent, 'context' )
 
-    if getattribute( contextpatternxpath, 'case' ) == 'keep':
+    if contextpatternxpath.get( 'case' ) == 'keep':
         contextpattern = re.compile( contextpatternxpathcontent )
     else:
         contextpattern = re.compile( contextpatternxpathcontent, flags = re.I )
 
-    if getattribute( contextpatternxpath, 'look' ) == 'before':
+    if contextpatternxpath.get( 'look' ) == 'before':
         factors = [ -1 ]
-    if getattribute( contextpatternxpath, 'look' ) == 'bothways':
+    elif contextpatternxpath.get( 'look' ) == 'bothways':
         factors = [ -1 , 1 ]
 
-    if getattribute( contextpatternxpath, 'mode' ) == 'fuzzy':
+    if contextpatternxpath.get( 'mode' ) == 'fuzzy':
         fuzzymode = True
 
-    if getattribute( contextpatternxpath, 'match' ) == 'negative':
+    if contextpatternxpath.get( 'match' ) == 'negative':
         positivematch = False
 
-    locationxpath = getattribute( contextpatternxpath, 'location' )
+    locationxpath = contextpatternxpath.get( 'location' )
     if locationxpath:
         location = int( locationxpath )
 
@@ -594,13 +597,6 @@ def preparecontextpatterns( contextpatternxpath ):
             actuallocations.append( location * factor )
 
     return [ contextpattern, actuallocations, positivematch ]
-
-def getattribute( element, attribute ):
-    xpath = element.xpath( '@' + attribute )
-    if xpath:
-        return xpath[0]
-    else:
-        return None
 
 def emptypatternmessage( element ):
     printcolor( "There is an empty {0} element in a terminology file.".format(element), 'error' )
@@ -933,13 +929,12 @@ def checkOneFile(inputfilepath):
                           encoding = 'unicode',
                           pretty_print = True )
 
-def main(cliargs=None):
-    """Entry point for the application script
+sdsc_initialized = False
+def initialize():
+    global sdsc_initialized
 
-    :param list cliargs: Arguments to parse or None (=use sys.argv)
-    """
-
-    timestart = time.time()
+    if sdsc_initialized:
+        return
 
     ns = etree.FunctionNamespace(
         'https://www.github.com/openSUSE/suse-doc-style-checker' )
@@ -948,6 +943,18 @@ def main(cliargs=None):
         buildtermdata = buildtermdata, dupecheck = dupecheck,
         sentencelengthcheck = sentencelengthcheck, tokenizer = tokenizer,
         sentencesegmenter = sentencesegmenter, counttokens = counttokens ) )
+
+    sdsc_initialized = True
+
+def main(cliargs=None):
+    """Entry point for the application script
+
+    :param list cliargs: Arguments to parse or None (=use sys.argv)
+    """
+
+    initialize()
+
+    timestart = time.time()
 
     location = os.path.dirname( os.path.realpath( __file__ ) )
 

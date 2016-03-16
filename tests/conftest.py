@@ -1,5 +1,11 @@
 import glob
 import os
+import sdsc
+import pytest
+
+@pytest.fixture(scope="session", autouse=True)
+def initialize_sdsc():
+    sdsc.initialize()
 
 def pytest_generate_tests(metafunc):
     """Replace the xmltestcases fixture by all files in tests/cases """
