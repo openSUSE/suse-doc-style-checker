@@ -60,6 +60,19 @@ dupeignore = re.compile( r'([0-9]{1,3}|##@ignore##)([\W\S](?=\s)|\s|$)' , re.I )
 # To find the number of tokens replaced by placeholders like ##@key-1##
 findnumberoftokens = re.compile( r'(?<=-)[0-9]*(?=##)' )
 
+re_cache = {}
+
+def re_compile(pattern, flags=0):
+    """Caching version of re.compile"""
+    global re_cache
+    try:
+        return re_cache[flags][pattern]
+    except:
+        if not flags in re_cache:
+            re_cache[flags] = {}
+        re_cache[flags][pattern] = re.compile(pattern, flags)
+        return re_cache[flags][pattern]
+
 def linenumber( context ):
     return context.context_node.sourceline
 
@@ -398,7 +411,7 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
 
     if ignoredwords:
         trypattern( ignoredwords[0] )
-        ignoredpattern = re.compile( manglepattern( ignoredwords[0], 0 ),
+        ignoredpattern = re_compile( manglepattern( ignoredwords[0], 0 ),
             flags = re.I )
     else:
         ignoredpattern = False
@@ -436,7 +449,7 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
         patterns.append( patternsofterm )
 
     if useonepattern:
-        onepattern = re.compile( manglepattern( onepattern, 'one' ), flags = re.I )
+        onepattern = re_compile( manglepattern( onepattern, 'one' ), flags = re.I )
 
     if flag_performance:
         timeendbuild = time.time()
@@ -538,10 +551,10 @@ def preparepatterns( patterngroupxpath, useonepattern ):
             patternxpathcontent = manglepattern( patternxpathcontent, 'default' )
 
         pattern = None
-        if getattribute( patternxpath[0], 'case' ) == 'keep':
-            pattern = re.compile( patternxpathcontent )
+        if patternxpath[0].get( 'case' ) == 'keep':
+            pattern = re_compile( patternxpathcontent )
         else:
-            pattern = re.compile( patternxpathcontent, flags = re.I )
+            pattern = re_compile( patternxpathcontent, flags = re.I )
         patternsofpatterngroup.append( pattern )
 
     return [ patternsofpatterngroup, patternforonepattern ]
@@ -564,23 +577,23 @@ def preparecontextpatterns( contextpatternxpath ):
     # searching for e.g. "mail" in "e-mail".
     contextpatternxpathcontent = manglepattern( contextpatternxpathcontent, 'context' )
 
-    if getattribute( contextpatternxpath, 'case' ) == 'keep':
-        contextpattern = re.compile( contextpatternxpathcontent )
+    if contextpatternxpath.get( 'case' ) == 'keep':
+        contextpattern = re_compile( contextpatternxpathcontent )
     else:
-        contextpattern = re.compile( contextpatternxpathcontent, flags = re.I )
+        contextpattern = re_compile( contextpatternxpathcontent, flags = re.I )
 
-    if getattribute( contextpatternxpath, 'look' ) == 'before':
+    if contextpatternxpath.get( 'look' ) == 'before':
         factors = [ -1 ]
-    if getattribute( contextpatternxpath, 'look' ) == 'bothways':
+    elif contextpatternxpath.get( 'look' ) == 'bothways':
         factors = [ -1 , 1 ]
 
-    if getattribute( contextpatternxpath, 'mode' ) == 'fuzzy':
+    if contextpatternxpath.get( 'mode' ) == 'fuzzy':
         fuzzymode = True
 
-    if getattribute( contextpatternxpath, 'match' ) == 'negative':
+    if contextpatternxpath.get( 'match' ) == 'negative':
         positivematch = False
 
-    locationxpath = getattribute( contextpatternxpath, 'location' )
+    locationxpath = contextpatternxpath.get( 'location' )
     if locationxpath:
         location = int( locationxpath )
 
@@ -594,13 +607,6 @@ def preparecontextpatterns( contextpatternxpath ):
             actuallocations.append( location * factor )
 
     return [ contextpattern, actuallocations, positivematch ]
-
-def getattribute( element, attribute ):
-    xpath = element.xpath( '@' + attribute )
-    if xpath:
-        return xpath[0]
-    else:
-        return None
 
 def emptypatternmessage( element ):
     printcolor( "There is an empty {0} element in a terminology file.".format(element), 'error' )
@@ -869,6 +875,13 @@ def dupecheckmessage( word, line, content, contextid, basefile ):
             <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
         </result>""" % ( filename, withinid, str(line), word, content, word ) )
 
+# This list is filled by initialize() with the following entries:
+# { 'name': 'typos', 'transform': <function> }
+prepared_checks = []
+
+# Global parser instance. Initialized by initialize()
+parser = None
+
 def checkOneFile(inputfilepath):
     """Checks one XML file and returns the result as XML. """
 
@@ -883,38 +896,17 @@ def checkOneFile(inputfilepath):
     output.append( resultstitle )
 
     # Checking via XSLT
-    parser = etree.XMLParser(   ns_clean = True,
-                                remove_pis = False,
-                                dtd_validation = False )
     inputfile = etree.parse( inputfilepath, parser )
 
-    checkfiles = glob.glob( os.path.join( location, 'xsl-checks', '*.xslc' ) )
-
-
-    if not checkfiles:
-        printcolor( "! No check files found.\n  Add check files to " + os.path.join( location, 'xsl-checks' ), 'error' )
-        sys.exit(1)
-
-    for checkfile in checkfiles:
-        checkmodule = re.sub( r'^.*/', r'', checkfile )
-        checkmodule = re.sub( r'.xslc$', r'', checkmodule )
+    for check in prepared_checks:
         if flag_module or flag_performance:
-            print( "Running module " +  checkmodule + "..." )
-
+            print("Running module {0!r}...".format(check["name"]))
+        result = check["transform"](inputfile, moduleName = etree.XSLT.strparam(check["name"]))
         try:
-            transform = etree.XSLT( etree.parse( checkfile, parser ) )
-        # FIXME: Should not use BaseException.
+            result = check["transform"](inputfile, moduleName = etree.XSLT.strparam(check["name"]))
         except BaseException as error:
-           printcolor( "! Syntax error in check file.\n  " + checkfile, 'error' )
-           printcolor( "  " + str(error), 'error' )
-           sys.exit(1)
-
-        try:
-            result = transform( inputfile, moduleName = etree.XSLT.strparam(checkmodule) )
-        # FIXME: Should not use BaseException.
-        except BaseException as error:
-            printcolor( "! Broken check file or Python function.\n  " + checkfile, 'error' )
-            printcolor( "  " + str(error), 'error' )
+            printcolor("! Broken check file or Python function (module {0!r})".format(check["name"]), 'error')
+            printcolor("  " + str(error), 'error')
             sys.exit(1)
 
         result = result.getroot()
@@ -933,21 +925,61 @@ def checkOneFile(inputfilepath):
                           encoding = 'unicode',
                           pretty_print = True )
 
+# Flag to avoid multiple initialization
+sdsc_initialized = False
+def initialize():
+    """ Initializes global values such as prepared_checks and parser
+    to avoid doing it for each file. """
+    global sdsc_initialized
+    if sdsc_initialized:
+        return True
+
+    # Prepare parser (add py: namespace)
+    ns = etree.FunctionNamespace('https://www.github.com/openSUSE/suse-doc-style-checker')
+    ns.prefix = 'py'
+    ns.update( dict( linenumber = linenumber, termcheck = termcheck,
+        buildtermdata = buildtermdata, dupecheck = dupecheck,
+        sentencelengthcheck = sentencelengthcheck, tokenizer = tokenizer,
+        sentencesegmenter = sentencesegmenter, counttokens = counttokens ) )
+
+    global parser
+    parser = etree.XMLParser(ns_clean = True,
+                             remove_pis = False,
+                             dtd_validation = False)
+
+    # Prepare all checks
+    global prepared_checks
+    prepared_checks = []
+    location = os.path.dirname(os.path.realpath( __file__ ))
+    checkfiles = glob.glob(os.path.join(location, 'xsl-checks', '*.xslc'))
+
+    if not checkfiles:
+        printcolor( "! No check files found.\n  Add check files to " + os.path.join(location, 'xsl-checks'), 'error')
+        return False
+
+    for checkfile in checkfiles:
+        try:
+            checkmodule = re.sub(r'^.*/', r'', checkfile)
+            checkmodule = re.sub(r'.xslc$', r'', checkmodule)
+            transform = etree.XSLT(etree.parse(checkfile, parser))
+            prepared_checks.append({'name': checkmodule, 'transform': transform })
+        except BaseException as error:
+           printcolor( "! Syntax error in check file.\n  " + checkfile, 'error' )
+           printcolor( "  " + str(error), 'error' )
+
+    sdsc_initialized = True
+    return True
+
 def main(cliargs=None):
     """Entry point for the application script
 
     :param list cliargs: Arguments to parse or None (=use sys.argv)
     """
 
-    timestart = time.time()
+    if not initialize():
+        sys.exit(1)
 
-    ns = etree.FunctionNamespace(
-        'https://www.github.com/openSUSE/suse-doc-style-checker' )
-    ns.prefix = 'py'
-    ns.update( dict( linenumber = linenumber, termcheck = termcheck,
-        buildtermdata = buildtermdata, dupecheck = dupecheck,
-        sentencelengthcheck = sentencelengthcheck, tokenizer = tokenizer,
-        sentencesegmenter = sentencesegmenter, counttokens = counttokens ) )
+    timestart = time.time()
 
     location = os.path.dirname( os.path.realpath( __file__ ) )
 
