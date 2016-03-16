@@ -58,6 +58,7 @@ message:before {
   border-radius: 10px;
   position: absolute;
   left: 0px;
+  top: 5px;
   border: 1px solid transparent;
 }
 
@@ -79,10 +80,11 @@ result[type="error"] > message:before {
 }
 
 message {
-  /* font-size: 20px; Disabled to to buggy background-color in chromium */
+  font-size: 20px;
   display: block;
   padding-left: 30px;
   position: relative;
+  line-height: 1.3em;
 }
 
 suggestion {
