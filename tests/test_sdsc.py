@@ -11,6 +11,16 @@ def test_sdsc_version(capsys):
     out, err = capsys.readouterr()
     assert sdsc.__version__ == out.split()[-1]
 
+def test_tokenizer():
+    """checks whether the tokenizer works as expected"""
+    tokens = sdsc.tokenizer("This is a simple sentence.")
+    assert(tokens == ["This", "is", "a", "simple", "sentence."])
+
+def test_sentencesegmenter():
+    """checks whether sentencesegmenter behaves sane"""
+    sentences = sdsc.sentencesegmenter("This is a simple ##@This is a simple.## sentence. This one as well.")
+    assert(sentences == ["This is a simple ##@This is a simple.## sentence", "This one as well"])
+
 # The xmltestcase fixture returns all files in tests/cases
 def test_xml(xmltestcase):
     nr_errors = 0
