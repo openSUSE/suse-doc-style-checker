@@ -12,7 +12,7 @@
     
     <para>
         <sect2 id="sdsc.expect.warning.ids.3">
-            <para>I have a wrong one.</para>
+            <para>I have a bad ID.</para>
         </sect2>
         <sect2 id="sdsc.expect.warning.ids.4">
             <para>Me too.</para>
@@ -21,10 +21,10 @@
     
     <para id="sdsc.valid">
         <sect2 id="sec.valid">
-            <para>I do.</para>
+            <para>I have a good ID.</para>
         </sect2>
         <sect2 id="sec.valid2">
-            <para>I do.</para>
+            <para>I do too.</para>
         </sect2>
     </para>
 </chapter>

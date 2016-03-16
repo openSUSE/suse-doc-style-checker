@@ -2,84 +2,85 @@
 <chapter id="cha.test.typos">
     <title>Test for typos</title>
     <para id="sdsc.expect.error.typos.1">
-        always adopts
+        Hence, the file is always adopted before it is used.
     </para>
     <para id="sdsc.expect.error.typos.2">
-        this is a test fro typos
+        This is a test fro typos.
     </para>
     <para id="sdsc.expect.error.typos.3">
         adoptation
     </para>
     <para id="sdsc.expect.error.typos.4">
-        was adapt
+        He was adapt at creating test cases.
     </para>
     <para id="sdsc.expect.error.typos.5">
-        widely adapted
+        XML is widely adapted standard.
     </para>
     <para id="sdsc.expect.error.typos.6">
-        for along time
+        For along time, however, it was shunned by many people.
     </para>
     <para id="sdsc.expect.error.typos.7">
         in all though
     </para>
     <para id="sdsc.expect.error.typos.8">
-        was aloud to
+        I was aloud to write these wonderful tests.
     </para>
     <para id="sdsc.expect.error.typos.9">
-        left in right
+        The tests are flying in left in right.
     </para>
     <para id="sdsc.expect.error.typos.10">
-        ant one of those
+        If you look at ant one of these sentences, you will see they do not make
+        a lot of sense.
     </para>
     <para id="sdsc.expect.error.typos.11">
         I do not want to write XML any more
     </para>
     <para id="sdsc.expect.error.typos.12">
-        anymore of those and I'll puke
+        Anymore of those and I'll open a rainbow factory.
     </para>
     <para id="sdsc.expect.error.typos.13">
-        a s a well
+        Try to format your documentation a s a Markdown file.
     </para>
     <para id="sdsc.expect.error.typos.14">
-        as oppose to
+        A bear market as oppose to a bull market.
     </para>
     <para id="sdsc.expect.error.typos.15">
-        bare in mind
+        You need to bare in mind, that nothing is bad.
     </para>
     <para id="sdsc.expect.error.typos.16">
-        To being with,
+        To being with, I expected more people to show up.
     </para>
     <para id="sdsc.expect.error.typos.17">
-        as per the usually
+        As per the usually, meetings start at 4 AM.
     </para>
     <para id="sdsc.expect.error.typos.18">
-        bye the way
+        Bye the way: Try a new programming language once in a while.
     </para>
     <para id="sdsc.expect.error.typos.19">
-        per default
+        I was trying to do good things "per default".
     </para>
     <para id="sdsc.expect.error.typos.20">
-        to chose
+        To chose wisely is to choose to write documentation.
     </para>
     <para id="sdsc.expect.error.typos.21">
-        it was complaint
+        If I had a chance, I would have made sure it was complaint!
     </para>
     <para id="sdsc.expect.error.typos.22">
-        confirmed to style
+        Everything confirmed to style.
     </para>
     <para id="sdsc.expect.error.typos.23">
-        consisted on
+        It consisted on various things.
     </para>
     <para id="sdsc.expect.error.typos.24">
-        up to data
+        Having an up to data system is very important.
     </para>
     <para id="sdsc.expect.error.typos.25">
-        hard dick images
+        Before you can start the VM, create a hard dick image.
     </para>
     <para id="sdsc.expect.error.typos.26">
-        had doe
+        We later found out what we had doe.
     </para>
     <para id="sdsc.expect.error.typos.27">
-        apart form
+        But apart form minor hiccups, there was nothing.
     </para>
 </chapter>

@@ -6,7 +6,9 @@
             <title>This should be a warning tag instead.</title>
         </caution>
         <warning id="sdsc.expect.error.admonitions.2">
-            This needs a title.
+            <para>
+                This needs a title.
+            </para>
         </warning>
         <warning id="sdsc.valid.1">
             <title>This should not be a caution tag.</title>
