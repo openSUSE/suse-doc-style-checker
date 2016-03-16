@@ -732,12 +732,25 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
             contentpretty = content
 
         sentences = sentencesegmenter( content )
+        # We need to find the current sentence inside of contentpretty by counting tokens.
+        # In content, some tags like <command/> are replaced by
+        # "##@command-<nr tokens>##" so we need to count that as well.
+        sentencestart = 0
+        sentenceend = 0
 
         for sentence in sentences:
             words = tokenizer( sentence )
             wordcount = len( words )
-            if wordcount >= maximumlengths[0]:
 
+            # Count tag replacements
+            for token in words:
+                meta = re.match("##@\D+(\d+)##", token)
+                if meta:
+                    sentenceend += int(meta.group(1))
+                else:
+                    sentenceend += 1
+
+            if wordcount >= maximumlengths[0]:
                 filename = ""
                 if basefile:
                     filename = "<file>%s</file>" % str( basefile )
@@ -750,9 +763,14 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
                 if wordcount >= maximumlengths[1]:
                     messagetype = 'error'
 
-                contentpretty = xmlescape( contentpretty )
+                contentpretty = xmlescape(contentpretty)
+                prettytokens = tokenizer(contentpretty)
+                # Highlight the sentence
+                # TODO: Avoid spaces added by the join here
+                prettytokens.insert(sentencestart, "<highlight>")
+                prettytokens.insert(sentenceend + 1, "</highlight>")
                 line = linenumber( context )
-                messages.append( etree.XML( """<result type="%s">
+                messages.append(etree.XML( """<result type="%s">
                                 <location>%s%s<line>%s</line></location>
                                 <message>Sentence with %s words:
                                 <quote>%s</quote>
@@ -760,7 +778,9 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
                             <suggestion>Remove unnecessary words.</suggestion>
                             <suggestion>Split the sentence.</suggestion>
                         </result>""" % ( messagetype, filename, withinid,
-                    str( line ), str( wordcount ), contentpretty ) ) )
+                    str( line ), str( wordcount ), " ".join(prettytokens))))
+
+            sentencestart = sentenceend
 
     return messages
 

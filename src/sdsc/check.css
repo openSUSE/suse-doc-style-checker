@@ -79,7 +79,7 @@ result[type="error"] > message:before {
 }
 
 message {
-  font-size: 20px;
+  /* font-size: 20px; Disabled to to buggy background-color in chromium */
   display: block;
   padding-left: 30px;
   position: relative;
@@ -126,10 +126,7 @@ id, withinid, em {
 }
 
 highlight {
-  display: inline-block;
-  border-bottom: 3px solid rgba(239,41,41,0.5);
-  margin-bottom: -3px;
-  padding: 0 3px;
+  background-color:#FFFF77;
 }
 
 location {
