@@ -737,16 +737,19 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
         sentencestart = 0
         sentenceend = 0
 
+        # FIXME: This should become a function returning [True/False, int(# of words)]
+        tagreplacement = re_compile( "##@\w+(?:-(\d+))?##")
+
         for sentence in sentences:
             words = tokenizer( sentence )
             wordcount = len( words )
 
             # Count tag replacements
             for token in words:
-                meta = re.match("##@\w+(?:-(\d+))?##", token)
-                if meta:
-                    sentenceend += int(meta.group(1))
-                    if int(meta.group(1)) == 0:
+                istagreplacement = tagreplacement.search( token )
+                if istagreplacement:
+                    sentenceend += int(istagreplacement.group(1))
+                    if int(istagreplacement.group(1)) == 0:
                         # We want to count tag placeholders as 1 word, except
                         # when empty, then they equal 0 words.
                         wordcount -= 1
