@@ -64,10 +64,9 @@ re_cache = {}
 
 def re_compile(pattern, flags=0):
     """Caching version of re.compile"""
-    global re_cache
     try:
         return re_cache[flags][pattern]
-    except:
+    except KeyError:
         if not flags in re_cache:
             re_cache[flags] = {}
         re_cache[flags][pattern] = re.compile(pattern, flags)
@@ -477,7 +476,7 @@ def trypattern( pattern ):
         if tryresult:
             message = "Expression matches single space"
             sys.exit(1)
-    except:
+    except SystemExit:
         printcolor( message + ": \"" + pattern + "\"", 'error' )
         sys.exit(1)
 
@@ -666,7 +665,7 @@ def highlight(tokens, highlightstart, highlightend):
        return "highlight <highlight>these two</highlight> words"
        tokens can be a string as well, it will be tokenized automatically."""
 
-    if type(tokens) == type(""):
+    if isinstance(tokens, str):
         return highlight(tokenizer(tokens), highlightstart, highlightend)
 
     if highlightstart >= len(tokens) or highlightend < highlightstart:
