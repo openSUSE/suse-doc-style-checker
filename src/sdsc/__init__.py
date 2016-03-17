@@ -54,8 +54,6 @@ apostrophe = re.compile( r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]' )
 sentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?]|[:;])\s+[[({]?(?=[A-Z0-9#])' )
 lastsentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?][])}]?|[:;])\s*$' )
 
-# FIXME: Number separation with spaces is a language-specific hack.
-dupeignore = re.compile( r'([0-9]{1,3}|##@[a-z]+(-[0-9]+)?##)([\W\S](?=\s)|\s|$)' , re.I )
 
 # To find the number of tokens replaced by placeholders like ##@key-1##
 findnumberoftokens = re.compile( r'(?<=-)[0-9]*(?=##)' )
@@ -745,9 +743,13 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
 
             # Count tag replacements
             for token in words:
-                meta = re.match("##@\D+(\d+)##", token)
+                meta = re.match("##@\w+(?:-(\d+))?##", token)
                 if meta:
                     sentenceend += int(meta.group(1))
+                    if int(meta.group(1)) == 0:
+                        # We want to count tag placeholders as 1 word, except
+                        # when empty, then they equal 0 words.
+                        wordcount -= 1
                 else:
                     sentenceend += 1
 
@@ -821,11 +823,22 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
     if flag_performance:
         timestartmatch = time.time()
 
+    # TAGIGNORE: character sequences that should be ignored by the duplicate
+    # words check
+    # Ignored contents from tags can take either of the two forms below:
+    #    ##@lowercase-1##
+    #    ##@lowercase##
+    # The second form is counted as one token, the first one is counted as as many
+    # tokens as the number given after the dash.
+    numberignore = re_compile( r'[[{(\'"\s]*[-+]?[0-9]+(?:[.,][0-9]+)*[]})\'";:.\s]*' )
+    tagignore = re_compile( r'[[{(\'"\s]*([0-9]{1,3}|##@\w+(?:-\d+)?##)[]})\'";:.\s]*' )
+
+
     for wordposition, word in enumerate(words):
         if wordposition < 1:
             continue
 
-        if dupeignore.match( word ):
+        if numberignore.match( word ) or tagignore.search( word ):
             continue
 
         wordstripped = replacepunctuation( word, 'end' )
@@ -834,7 +847,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
         # To its credit: it kinda works.
         if wordposition >= 5:
             if wordstripped == words[wordposition - 3]:
-                if not ( dupeignore.match( words[wordposition - 1] ) or dupeignore.match( words[wordposition - 2] ) ):
+                if not ( tagignore.match( words[wordposition - 1] ) or tagignore.match( words[wordposition - 2] ) ):
                     if words[wordposition - 1] == words[wordposition - 4]:
                         firstwordstripped = replacepunctuation( words[wordposition - 5], 'start' )
                         if words[wordposition - 2] == firstwordstripped:
@@ -846,7 +859,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
 
         if wordposition >= 3:
             if wordstripped == words[wordposition - 2]:
-                if not dupeignore.match( words[wordposition - 1] ):
+                if not tagignore.match( words[wordposition - 1] ):
                     firstwordstripped = replacepunctuation( words[wordposition - 3], 'start' )
                     if words[wordposition - 1] == firstwordstripped:
                         line = linenumber( context )
