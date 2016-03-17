@@ -51,8 +51,8 @@ apostrophe = re.compile( r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]' )
 # Lookbehinds need to have a fixed length... thus .ca
 # Do not use capture groups together with re.split, as it does additional splits
 # for each capture group it finds.
-sentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)\.?\.?\.[\)\]\}]?\s[\(\[\{]?(?=[A-Z0-9#])|\.?\.?[!\?][\)\]\}]?\s[\(\[\{]?(?=[A-Z0-9#])|[:;]\s' )
-lastsentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)\.?\.?[\.!\?][\)\]\}]?\s*|[:;]\s*$' )
+sentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?]|[:;])\s+[[({]?(?=[A-Z0-9#])' )
+lastsentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?][])}]?|[:;])\s*$' )
 
 # FIXME: Number separation with spaces is a language-specific hack.
 dupeignore = re.compile( r'([0-9]{1,3}|##@[a-z]+(-[0-9]+)?##)([\W\S](?=\s)|\s|$)' , re.I )

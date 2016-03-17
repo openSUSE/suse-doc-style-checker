@@ -18,8 +18,8 @@ def test_tokenizer():
 
 def test_sentencesegmenter():
     """checks whether sentencesegmenter behaves sane"""
-    sentences = sdsc.sentencesegmenter("This is a simple ##@This is a simple.## sentence. This one as well.")
-    assert(sentences == ["This is a simple ##@This is a simple.## sentence", "This one as well"])
+    sentences = sdsc.sentencesegmenter("This is a simple ##@command-2## sentence. This one as well.")
+    assert(sentences == ["This is a simple ##@command-2## sentence", "This one as well"])
     sentences = sdsc.sentencesegmenter("This is not a test in one go. wicked is not written with a capital letter.")
     assert(sentences == ["This is not a test in one go", "wicked is not written with a capital letter"])
 
