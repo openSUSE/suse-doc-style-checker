@@ -87,10 +87,10 @@ def printcolor( message, messagetype = None ):
     """
     if sys.stdout.isatty():
         if messagetype == 'error':
-            print( '\033[0;31m' + message + '\033[0m' )
+            print( '\033[0;31m' + message + '\033[0m', file=sys.stderr )
         elif messagetype == 'debug':
-            print( '\033[0;36m' + message + '\033[0m' )
+            print( '\033[0;36m' + message + '\033[0m', file=sys.stderr )
         else:
-            print( '\033[0;32m' + message + '\033[0m' )
+            print( '\033[0;32m' + message + '\033[0m', file=sys.stdout )
     else:
         print( message )
