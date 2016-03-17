@@ -20,6 +20,13 @@ def test_sentencesegmenter():
     """checks whether sentencesegmenter behaves sane"""
     sentences = sdsc.sentencesegmenter("This is a simple ##@This is a simple.## sentence. This one as well.")
     assert(sentences == ["This is a simple ##@This is a simple.## sentence", "This one as well"])
+    sentences = sdsc.sentencesegmenter("This not a test in one go. wicked is not written with a capital letter.")
+    assert(sentences == ["This is not a test in one go", "wicked is not written with a capital letter"])
+
+def test_highlighter():
+    """checks whether the highlight function works"""
+    xml = sdsc.highlight(["highlight", "these", "two", "words"], 1, 2)
+    assert(xml == "highlight <highlight>these two</highlight> words")
 
 # The xmltestcase fixture returns all files in tests/cases
 def test_xml(xmltestcase):

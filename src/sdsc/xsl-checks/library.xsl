@@ -265,26 +265,26 @@
     <xsl:choose>
       <xsl:when test="self::keycombo|self::keycap|
                       self::db5:keycombo|self::db5:keycap">
-        ##@key-<xsl:value-of select="$tokens"/>##
+        <xsl:text>##@key-</xsl:text><xsl:value-of select="$tokens"/><xsl:text>##</xsl:text>
       </xsl:when>
       <xsl:when test="self::menuchoice|self::guimenu|
                       self::db5:menuchoice|self::db5:guimenu">
-        ##@ui-<xsl:value-of select="$tokens"/>##
+        <xsl:text>##@ui-</xsl:text><xsl:value-of select="$tokens"/><xsl:text>##</xsl:text>
       </xsl:when>
       <xsl:when test="self::email|self::filename|self::ulink|self::uri|
                       self::xref|
                       self::db5:email|self::db5:filename|self::db5:link|
                       self::db5:uri|self::db5:xref">
-        ##@ref-<xsl:value-of select="$tokens"/>##
+        <xsl:text>##@ref-</xsl:text><xsl:value-of select="$tokens"/><xsl:text>##</xsl:text>
       </xsl:when>
       <xsl:when test="self::inlinemediaobject|self::db5:inlinemediaobject">
-        ##@image-<xsl:value-of select="$tokens"/>##
+        <xsl:text>##@image-</xsl:text><xsl:value-of select="$tokens"/><xsl:text>##</xsl:text>
       </xsl:when>
       <xsl:when test="self::citetitle|self::db5:citetitle">
-        ##@quote-<xsl:value-of select="$tokens"/>##
+        <xsl:text>##@quote-</xsl:text><xsl:value-of select="$tokens"/><xsl:text>##</xsl:text>
       </xsl:when>
       <xsl:otherwise>
-        ##@mono-<xsl:value-of select="$tokens"/>##
+        <xsl:text>##@mono-</xsl:text><xsl:value-of select="$tokens"/><xsl:text>##</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>

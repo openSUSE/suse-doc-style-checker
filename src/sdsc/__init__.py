@@ -269,17 +269,19 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
 
                         contextmatches = 0
                         contextpatternstopatterngroup = contextpatterns[ patterngroupposition ]
-                        highlight = [ currenttokeninparagraph, skipcounttemporary ]
+                        highlightstart = currenttokeninparagraph
+                        highlightend = highlightstart + skipcounttemporary
                         if trycontextpatterns:
                             if contextpatternstopatterngroup[0][0] is None:
                                 # easy positive
                                 skipcount = skipcounttemporary
                                 trynextterm = False
                                 line = linenumber ( context )
-                                messages.append( termcheckmessage(
+                                contenthighlighted = highlight(xmlescape(contentpretty), highlightstart, highlightend)
+                                messages.append(termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
-                                    contentpretty, contextid, basefile,
-                                    messagetype, highlight ) )
+                                    contenthighlighted, contextid, basefile,
+                                    messagetype))
                             else:
                                 for contextpattern in contextpatternstopatterngroup:
                                     if contextpattern[0]:
@@ -292,10 +294,11 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                                 skipcount = skipcounttemporary
                                 trynextterm = False
                                 line = linenumber ( context )
-                                messages.append( termcheckmessage(
+                                contenthighlighted = highlight(xmlescape(contentpretty), highlightstart, highlightend)
+                                messages.append(termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
-                                    contentpretty, contextid, basefile,
-                                    messagetype, highlight ) )
+                                    contenthighlighted, contextid, basefile,
+                                    messagetype))
                         patterngroupposition += 1
 
     if flag_performance:
@@ -622,11 +625,10 @@ def xmlescape( text ):
     return "".join(escapetable.get(c,c) for c in text)
 
 def termcheckmessage(   acceptword, acceptcontext, word, line, content,
-                        contextid, basefile, messagetype, highlight ):
+                        contextid, basefile, messagetype):
     # FIXME: shorten content string (in the right place), to get closer toward
     # more focused results
     message = None
-    content = messagehighlight( xmlescape( content ), highlight )
     filename = ""
     if basefile:
         filename = "<file>%s</file>" % str( basefile )
@@ -657,25 +659,25 @@ def termcheckmessage(   acceptword, acceptcontext, word, line, content,
 
     return message
 
-def messagehighlight( text, highlightedtokens ):
-    tokens = tokenizer( text )
-    firsttoken = highlightedtokens[0]
-    lasttoken = highlightedtokens[0] + highlightedtokens[1]
-    if firsttoken <= ( len( tokens ) - 1 ):
-        tokens[ firsttoken ] = "<highlight>" + tokens[ firsttoken ]
-        if lasttoken <= ( len( tokens ) - 1 ):
-            tokens[ lasttoken ] = tokens[ lasttoken ] + "</highlight>"
-        # If the final highlight marker would be out of bounds, make sure
-        # that at least the tag is closed.
-        else:
-            tokens[ firsttoken ] = tokens[ firsttoken ] + "</highlight>"
+def highlight(tokens, highlightstart, highlightend):
+    """tokens = ["highlight", "these", "two", "words"]
+       highlightstart = 1
+       highlightend = 2
+       return "highlight <highlight>these two</highlight> words"
+       tokens can be a string as well, it will be tokenized automatically."""
 
-    text = ""
-    for position, token in enumerate( tokens ):
-        if not position == 0:
-            text += " "
-        text += token
-    return text
+    if type(tokens) == type(""):
+        return highlight(tokenizer(tokens), highlightstart, highlightend)
+
+    if highlightstart >= len(tokens) or highlightend < highlightstart:
+        return "" # Nothing to highlight
+
+    highlightend = min(highlightend, len(tokens) - 1)
+
+    tokens[highlightstart] = "<highlight>" + tokens[highlightstart]
+    tokens[highlightend] = tokens[highlightend] + "</highlight>"
+
+    return " ".join(tokens)
 
 def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
                          lengthwarning, lengtherror ):
@@ -765,10 +767,6 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
 
                 contentpretty = xmlescape(contentpretty)
                 prettytokens = tokenizer(contentpretty)
-                # Highlight the sentence
-                # TODO: Avoid spaces added by the join here
-                prettytokens.insert(sentencestart, "<highlight>")
-                prettytokens.insert(sentenceend + 1, "</highlight>")
                 line = linenumber( context )
                 messages.append(etree.XML( """<result type="%s">
                                 <location>%s%s<line>%s</line></location>
@@ -778,7 +776,7 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
                             <suggestion>Remove unnecessary words.</suggestion>
                             <suggestion>Split the sentence.</suggestion>
                         </result>""" % ( messagetype, filename, withinid,
-                    str( line ), str( wordcount ), " ".join(prettytokens))))
+                    str( line ), str( wordcount ), highlight(prettytokens, sentencestart, sentenceend - 1))))
 
             sentencestart = sentenceend
 
