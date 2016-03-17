@@ -1017,6 +1017,9 @@ def main(cliargs=None):
 
     global args
     args = parseargs(cliargs)
+    global flag_checkpatterns
+    global flag_performance
+    global flag_module
     flag_checkpatterns = args.checkpatterns
     flag_performance = args.performance
     flag_module = args.module
