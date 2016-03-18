@@ -78,8 +78,8 @@ def linenumber( context ):
     return context.context_node.sourceline
 
 def replacepunctuation( word, position ):
-    startpunctuation = '([{'
-    endpunctuation = ')]}/\\,:;!.'
+    startpunctuation = '([{"\''
+    endpunctuation = ')]}/\\"\',:;!.'
 
     if position == 'start' or position == 'both':
         word = word.lstrip( startpunctuation )
@@ -672,6 +672,7 @@ def highlight(tokens, highlightstart, highlightend):
        return "highlight <highlight>these two</highlight> words"
        tokens can be a string as well, it will be tokenized automatically."""
 
+    tokens = tokens[:]
     if isinstance(tokens, str):
         return highlight(tokenizer(tokens), highlightstart, highlightend)
 
@@ -804,7 +805,6 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
     # I get this as a list with one lxml.etree._ElementUnicodeResult, not
     # as a list with a string.
     content = str( content[0] )
-
     if basefile:
         basefile = basefile[0]
     else:
@@ -823,72 +823,42 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
     else:
         contentpretty = content
 
-    # FIXME: Find a clever way to be able to check for variants of the same
-    # word, such as: a/an, singular/plural, verb tenses. It should ideally
-    # not be hardcoded here.
+    tokens = tokenizer(content)
+    # Get pretty indices
+    wordtuples = []
+    currentIndex = 0
+    for word in tokens:
+        wordtuples.append((currentIndex, word))
+        meta = re_compile("##@\w+(?:-(\d+))?##").match(word)
+        if meta:
+            currentIndex += int(meta.group(1))
+        else:
+            currentIndex += 1
 
-    # FIXME: Get something better than s.split. Some existing tokenisers
-    # are overzealous, such as the default one from NLTK.
-    words = tokenizer( content )
-    totalwords = len( words )
+    # Remove punctuation
+    wordtuplesFiltered = [(index, replacepunctuation(word, 'both')) for index, word in wordtuples]
+    words = [word for index, word in wordtuplesFiltered]
+    indices = [index for index, word in wordtuplesFiltered]
 
     if flag_performance:
         timestartmatch = time.time()
 
-    # TAGIGNORE: character sequences that should be ignored by the duplicate
-    # words check
-    # Ignored contents from tags can take either of the two forms below:
-    #    ##@lowercase-1##
-    #    ##@lowercase##
-    # The second form is counted as one token, the first one is counted as as many
-    # tokens as the number given after the dash.
-    numberignore = re_compile( r'[[{(\'"\s]*[-+]?[0-9]+(?:[.,][0-9]+)*[]})\'";:.\s]*' )
-    tagignore = re_compile( r'[[{(\'"\s]*([0-9]{1,3}|##@\w+(?:-\d+)?##)[]})\'";:.\s]*' )
-
-
     for wordposition, word in enumerate(words):
-        if wordposition < 1:
-            continue
+        dupeLen = isDupe(words, wordposition)
+        if dupeLen == 0:
+            continue # No dupes found
 
-        if numberignore.match( word ) or tagignore.search( word ):
-            continue
-
-        wordstripped = replacepunctuation( word, 'end' )
-
-        # FIXME: This implementation is a WTF and not especially extensible.
-        # To its credit: it kinda works.
-        if wordposition >= 5:
-            if wordstripped == words[wordposition - 3]:
-                if not ( tagignore.match( words[wordposition - 1] ) or tagignore.match( words[wordposition - 2] ) ):
-                    if words[wordposition - 1] == words[wordposition - 4]:
-                        firstwordstripped = replacepunctuation( words[wordposition - 5], 'start' )
-                        if words[wordposition - 2] == firstwordstripped:
-                            line = linenumber( context )
-                            resultwords = words[wordposition - 2] + " " + words[wordposition - 1] + " " + wordstripped
-                            messages.append( dupecheckmessage( resultwords,
-                                line, contentpretty, contextid, basefile ) )
-                            continue
-
-        if wordposition >= 3:
-            if wordstripped == words[wordposition - 2]:
-                if not tagignore.match( words[wordposition - 1] ):
-                    firstwordstripped = replacepunctuation( words[wordposition - 3], 'start' )
-                    if words[wordposition - 1] == firstwordstripped:
-                        line = linenumber( context )
-                        resultwords = words[wordposition - 1] + " " + wordstripped
-                        messages.append( dupecheckmessage( resultwords,
-                            line, contentpretty, contextid, basefile ) )
-                        continue
-
-        firstwordstripped = replacepunctuation( words[wordposition - 1], 'start' )
-        if wordstripped == firstwordstripped:
-            line = linenumber( context )
-            messages.append( dupecheckmessage( wordstripped,
-                line, contentpretty, contextid, basefile ) )
+        highlightStart = indices[wordposition - dupeLen]
+        highlightEnd = indices[wordposition + dupeLen - 1]
+        prettyTokens = tokenizer(contentpretty)
+        quote = highlight(prettyTokens, highlightStart, highlightEnd)
+        duplicate = xmlescape(" ".join(prettyTokens[indices[wordposition-dupeLen]:indices[wordposition]]))
+        messages.append(dupecheckmessage(context, quote, duplicate, contextid, basefile))
 
     if flag_performance:
         timeendmatch = time.time()
         timediffmatch = timeendmatch - timestartmatch
+        totalwords = len(words)
         printcolor( """words: %s
 time for this para: %s
 average time per word: %s\n"""
@@ -897,16 +867,46 @@ average time per word: %s\n"""
 
     return messages
 
-def dupecheckmessage( word, line, content, contextid, basefile ):
-    content = xmlescape( content )
+def canBeDupe(word):
+    """TAGIGNORE: character sequences that should be ignored by the duplicate
+    words check
+    Ignored contents from tags can take either of the two forms below:
+       ##@lowercase-1##
+       ##@lowercase##
+    The second form is counted as one token, the first one is counted as as many
+    tokens as the number given after the dash."""
 
+    numberignore = re_compile( r'[[{(\'"\s]*[-+]?[0-9]+(?:[.,][0-9]+)*[]})\'";:.\s]*' )
+    tagignore = re_compile( r'[[{(\'"\s]*([0-9]{1,3}|##@\w+(?:-\d+)?##)[]})\'";:.\s]*' )
+
+    return len(word) > 0 and not numberignore.match(word) and not tagignore.search(word)
+
+def isDupe(tokens, pos):
+    """Returns how many tokens at pos are duplicated
+       tokens = ["this", "is", "is", "a", "test"]
+       pos = 2
+       return 1"""
+    # FIXME: Find a clever way to be able to check for variants of the same
+    # word, such as: a/an, singular/plural, verb tenses. It should ideally
+    # not be hardcoded here.
+    maxlen = min(3, pos, len(tokens) - pos)
+    for l in range(1, maxlen+1):
+        if not canBeDupe(tokens[pos]):
+            return 0
+
+        if tokens[pos-l:pos] == tokens[pos:pos+l]:
+            return l;
+
+    return 0;
+
+def dupecheckmessage(context, quote, duplicate, contextid, basefile):
     filename = ""
     if basefile:
-        filename = "<file>%s</file>" % str( basefile )
+        filename = "<file>%s</file>" % str(basefile)
 
     withinid = ""
     if contextid:
-        withinid = "<withinid>%s</withinid>" % str( contextid )
+        withinid = "<withinid>%s</withinid>" % str(contextid)
 
     return etree.XML( """<result type="error">
             <location>%s%s<line>%s</line></location>
@@ -914,7 +914,8 @@ def dupecheckmessage( word, line, content, contextid, basefile ):
                 <quote>%s</quote>
             </message>
             <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
-        </result>""" % ( filename, withinid, str(line), word, content, word ) )
+        </result>""" % ( filename, withinid, str(linenumber(context)), duplicate, quote, duplicate))
+
 
 # This list is filled by initialize() with the following entries:
 # { 'name': 'typos', 'transform': <function> }
