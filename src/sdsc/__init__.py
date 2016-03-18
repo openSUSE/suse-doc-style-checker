@@ -900,6 +900,7 @@ def dupecheck(context, content, contentpretty, contextid, basefile):
     if flag_performance:
         timeendmatch = time.time()
         timediffmatch = timeendmatch - timestartmatch
+        totalwords = len(words)
         printcolor( """words: %s
 time for this para: %s
 average time per word: %s\n"""
