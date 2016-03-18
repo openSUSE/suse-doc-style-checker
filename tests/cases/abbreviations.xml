@@ -2,37 +2,36 @@
 <chapter id="cha.test.abbreviations">
     <title>Abbreviations test</title>
     <para id="sdsc.expect.error.abbreviations.1">
-        My feelings about XSLT are ca. 100% love.
+        My feelings about XSLT are ca. 100% hate.
     </para>
     <para id="sdsc.expect.error.abbreviations.2">
-        Who would win in a race of 100 chameleon-sized horses vs. 1 horse-sized
-        chameleon?
+        100 chameleon sized horses vs. 1 horse sized chameleon
     </para>
     <para id="sdsc.expect.error.abbreviations.3">
-        This was summarily disproven by Brontosaurus et al.
+        et al.
     </para>
     <para id="sdsc.expect.error.abbreviations.4">
-        Ibid., see page 347.
+        ibid.
     </para>
     <para id="sdsc.expect.error.abbreviations.5">
-        Humanity has brought forth over ten awesome inventions, e.g. XSLT.
+        Bad inventions, e.g. XSLT.
     </para>
     <para id="sdsc.expect.error.abbreviations.6">
         NB that I am serious about this.
     </para>
     <para id="sdsc.expect.error.abbreviations.7">
-        For more information, q. v. the other page.
+        q.v.
     </para>
     <para id="sdsc.expect.error.abbreviations.8">
-        I am not sure this works well, i. e. there may be issues.
+        i.e.
     </para>
     <para id="sdsc.expect.error.abbreviations.9">
-        Bernd, re: our recent discussion, I think you are right.
+        re:
     </para>
     <para id="sdsc.expect.error.abbreviations.10">
-        Resp., our tried and true apporach of argumentation.
+        resp.
     </para>
     <para id="sdsc.expect.error.abbreviations.11">
-        IMHO, this should happen ASAP, but IDK.
+        IMHO, ASAP, but IDK.
     </para>
 </chapter>

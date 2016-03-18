@@ -2,20 +2,18 @@
 <chapter id="cha.test.invariantplurals">
     <title>Invariant plurals test</title>
     <para id="sdsc.expect.error.invariantplurals.1">
-        Given the selected criterias, it is impossible to ever be
-        disappointed again.
+        criterias
     </para>
     <para id="sdsc.expect.error.invariantplurals.2">
-        Datas were carefully selected and discarded.
+        datas
     </para>
     <para id="sdsc.expect.error.invariantplurals.3">
-        We feast on informations.
+        informations
     </para>
     <para id="sdsc.expect.error.invariantplurals.4">
-        The "medias" are always inserted left side up.
+        medias
     </para>
     <para id="sdsc.expect.error.invariantplurals.5">
-        I found out some interesting information on my phone connection
-        (metadatas): Everything is great!
+        metadatas
     </para>
 </chapter>

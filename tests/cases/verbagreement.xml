@@ -2,10 +2,10 @@
 <chapter id="cha.test.verbagreement">
     <title>Verbagreement test</title>
     <para id="sdsc.expect.error.verbagreement.1">
-        Working with XML should amazing, and it is.
+        Working with XML should amazing, but it is not.
     </para>
     <para id="sdsc.valid.2">
-        Working with XSLT, however, must be awesome.
+        Working with XSLT, however, must be annoying.
         It is part of the language.
     </para>
 </chapter>
