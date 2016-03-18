@@ -16,6 +16,8 @@ def test_tokenizer():
     """checks whether the tokenizer works as expected"""
     tokens = sdsc.tokenizer("This is a simple sentence.")
     assert(tokens == ["This", "is", "a", "simple", "sentence."])
+    tokens = sdsc.tokenizer("This is a less simple sentence with a\xa0nbsp.")
+    assert(tokens == ["This", "is", "a", "less", "simple", "sentence", "with", "a", "nbsp."])
 
 def test_sentencesegmenter():
     """checks whether sentencesegmenter behaves sane"""
@@ -23,6 +25,14 @@ def test_sentencesegmenter():
     assert(sentences == ["This is a simple ##@command-2## sentence", "This one as well"])
     sentences = sdsc.sentencesegmenter("This is not a test in one go. openSUSE is not written with a capital letter.")
     assert(sentences == ["This is not a test in one go", "openSUSE is not written with a capital letter"])
+
+def test_isDupe():
+    tokens = ["this", "is", "a", "test"]
+    assert(sdsc.isDupe(tokens, 2) == 0)
+    tokens = ["this", "is", "is", "a", "test"]
+    assert(sdsc.isDupe(tokens, 2) == 1)
+    tokens = ["this", "is", "this", "is", "a", "test"]
+    assert(sdsc.isDupe(tokens, 2) == 2)
 
 def test_highlighter():
     """checks whether the highlight function works"""
@@ -104,4 +114,4 @@ def test_xml(xmltestcase):
             nr_errors += 1
 
     if nr_errors > 0:
-        pytest.fail("Test {0!r} failed with {1} errors!".format(os.path.basename(xmltestcase), nr_errors))
+        pytest.fail(msg="Test {0!r} failed with {1} errors!".format(os.path.basename(xmltestcase), nr_errors), pytrace=False)
