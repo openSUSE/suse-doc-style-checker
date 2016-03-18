@@ -74,8 +74,8 @@ def linenumber( context ):
     return context.context_node.sourceline
 
 def replacepunctuation( word, position ):
-    startpunctuation = '([{'
-    endpunctuation = ')]}/\\,:;!.'
+    startpunctuation = '([{\"\''
+    endpunctuation = ')]}/\\"\',:;!.'
 
     if position == 'start' or position == 'both':
         word = word.lstrip( startpunctuation )
@@ -843,10 +843,11 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
         if wordposition < 1:
             continue
 
-        if numberignore.match( word ) or tagignore.search( word ):
-            continue
+        wordstripped = replacepunctuation( word, 'start' )
+        wordstripped = replacepunctuation( wordstripped, 'end' )
 
-        wordstripped = replacepunctuation( word, 'end' )
+        if len(wordstripped) == 0 or numberignore.match( word ) or tagignore.search( word ):
+            continue
 
         # FIXME: This implementation is a WTF and not especially extensible.
         # To its credit: it kinda works.

@@ -5,4 +5,7 @@
         In this paragraph, the
         the word 'the' appears twice consecutively.
     </para>
+    <para id="sdsc.valid.1">
+        This " " should be valid as '"' is not a word.
+    </para>
 </chapter>
