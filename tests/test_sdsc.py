@@ -26,6 +26,14 @@ def test_sentencesegmenter():
     sentences = sdsc.sentencesegmenter("This is not a test in one go. openSUSE is not written with a capital letter.")
     assert(sentences == ["This is not a test in one go", "openSUSE is not written with a capital letter"])
 
+def test_isDupe():
+    tokens = ["this", "is", "a", "test"]
+    assert(sdsc.isDupe(tokens, 2) == 0)
+    tokens = ["this", "is", "is", "a", "test"]
+    assert(sdsc.isDupe(tokens, 2) == 1)
+    tokens = ["this", "is", "this", "is", "a", "test"]
+    assert(sdsc.isDupe(tokens, 2) == 2)
+
 def test_highlighter():
     """checks whether the highlight function works"""
     xml = sdsc.highlight(["highlight", "these", "two", "words"], 1, 2)
