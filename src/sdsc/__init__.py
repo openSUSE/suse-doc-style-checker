@@ -67,7 +67,11 @@ def re_compile(pattern, flags=0):
     except KeyError:
         if not flags in re_cache:
             re_cache[flags] = {}
-        re_cache[flags][pattern] = re.compile(pattern, flags)
+        try:
+            re_cache[flags][pattern] = re.compile(pattern, flags)
+        except re.error:
+            expressionerror( "Syntax error in expression", pattern)
+
         return re_cache[flags][pattern]
 
 def linenumber( context ):
@@ -455,30 +459,33 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
         printcolor( "time to build: %s" % str( timeendbuild - timestartbuild ), 'debug' )
     return termdataid
 
+# FIXME: This might be functionality better suited for a test case instead of
+# built-in
 def trypattern( pattern ):
 
     if not flag_checkpatterns:
         return True
 
-    # This is just a default that we can output if the pattern really is broken.
-    message = "Syntax error in expression"
+    expression = re_compile( pattern, flags = re.I )
 
     try:
-        tryresult = re.search( pattern, "", flags = re.I )
-
+        tryresult = expression.search( "" )
         if tryresult:
             message = "Expression matches empty string"
             sys.exit(1)
 
-        tryresult = re.search( pattern, " ", flags = re.I )
+        tryresult = expression.search( " " )
         if tryresult:
             message = "Expression matches single space"
             sys.exit(1)
     except SystemExit:
-        printcolor( message + ": \"" + pattern + "\"", 'error' )
-        sys.exit(1)
+        expressionerror( message, pattern )
 
     return True
+
+def expressionerror( message, expression="muschebubu" ):
+    printcolor( message + ": \"" + expression + "\"", 'error' )
+    sys.exit(1)
 
 
 def manglepattern( pattern, mode ):
