@@ -65,7 +65,7 @@ def re_compile(pattern, flags=0):
     try:
         return re_cache[flags][pattern]
     except KeyError:
-        if not flags in re_cache:
+        if flags not in re_cache:
             re_cache[flags] = {}
         re_cache[flags][pattern] = re.compile(pattern, flags)
         return re_cache[flags][pattern]
@@ -682,18 +682,18 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
                          lengthwarning, lengtherror ):
     messages = []
 
-   # Try to use sensible defaults. The following seems like better advice than
-   # the SUSE Documentation Style Guide has to offer:
-   # "Sometimes sentence length affects the quality of the writing. In general,
-   # an average of 15 to 20 words is effective for most technical communication.
-   # A series of 10-word sentences would be choppy. A series of 35-word
-   # sentences would probably be too demanding. And a succession of sentences
-   # of approximately the same length would be monotonous.
-   # -- Mike Markel, Technical Communication, 9th ed. Bedford/St Martin's, 2010
-   #    (via http://grammar.about.com/od/rs/g/Sentence-Length.htm)
-   # However, it makes me think that we might be optimizing for the wrong metric
-   # here. Otoh, it can't be good to allow 50-word or longer sentences. 35 words
-   # does seem like some sort of boundary.
+    # Try to use sensible defaults. The following seems like better advice than
+    # the SUSE Documentation Style Guide has to offer:
+    # "Sometimes sentence length affects the quality of the writing. In general,
+    # an average of 15 to 20 words is effective for most technical communication.
+    # A series of 10-word sentences would be choppy. A series of 35-word
+    # sentences would probably be too demanding. And a succession of sentences
+    # of approximately the same length would be monotonous.
+    # -- Mike Markel, Technical Communication, 9th ed. Bedford/St Martin's, 2010
+    #    (via http://grammar.about.com/od/rs/g/Sentence-Length.htm)
+    # However, it makes me think that we might be optimizing for the wrong metric
+    # here. Otoh, it can't be good to allow 50-word or longer sentences. 35 words
+    # does seem like some sort of boundary.
 
     maximumlengths = [24, 35]
 
@@ -998,8 +998,8 @@ def initialize():
             transform = etree.XSLT(etree.parse(checkfile, parser))
             prepared_checks.append({'name': checkmodule, 'transform': transform })
         except BaseException as error:
-           printcolor( "! Syntax error in check file.\n  " + checkfile, 'error' )
-           printcolor( "  " + str(error), 'error' )
+            printcolor( "! Syntax error in check file.\n  " + checkfile, 'error' )
+            printcolor( "  " + str(error), 'error' )
 
     sdsc_initialized = True
     return True
