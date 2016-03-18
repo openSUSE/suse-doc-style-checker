@@ -16,6 +16,8 @@ def test_tokenizer():
     """checks whether the tokenizer works as expected"""
     tokens = sdsc.tokenizer("This is a simple sentence.")
     assert(tokens == ["This", "is", "a", "simple", "sentence."])
+    tokens = sdsc.tokenizer("This is a less simple sentence with a\xa0nbsp.")
+    assert(tokens == ["This", "is", "a", "less", "simple", "sentence", "with", "a", "nbsp."])
 
 def test_sentencesegmenter():
     """checks whether sentencesegmenter behaves sane"""
