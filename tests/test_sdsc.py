@@ -104,4 +104,4 @@ def test_xml(xmltestcase):
             nr_errors += 1
 
     if nr_errors > 0:
-        pytest.fail("Test {0!r} failed with {1} errors!".format(os.path.basename(xmltestcase), nr_errors))
+        pytest.fail(msg="Test {0!r} failed with {1} errors!".format(os.path.basename(xmltestcase), nr_errors), pytrace=False)
