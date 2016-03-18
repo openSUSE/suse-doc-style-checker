@@ -2,9 +2,9 @@
 <chapter id="cha.test.uielements">
     <title>UI elements test</title>
     <para id="sdsc.expect.error.uielements">
-        <guimenu>Quit.</guimenu>
+        Click <guimenu>Choose...</guimenu>.
     </para>
     <para id="sdsc.valid.2">
-        <guimenu>Quit</guimenu>
+        Click <guimenu>OK</guimenu>.
     </para>
 </chapter>

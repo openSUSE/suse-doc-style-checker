@@ -2,9 +2,9 @@
 <chapter id="cha.test.a-an">
     <title>A-An test</title>
     <para id="sdsc.expect.error.a-an.1">
-        an useless
+        We have an useless sentence here.
     </para>
     <para id="sdsc.valid.2">
-        a useless
+        This is also a useless sentence.
     </para>
 </chapter>
