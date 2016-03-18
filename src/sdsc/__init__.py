@@ -813,6 +813,9 @@ def isDupe(tokens, pos):
     # not be hardcoded here.
     maxlen = min(3, pos, len(tokens) - pos)
     for l in range(1, maxlen+1):
+        if not canBeDupe(tokens[pos]):
+            return 0
+
         if tokens[pos-l:pos] == tokens[pos:pos+l]:
             return l;
 
@@ -876,8 +879,6 @@ def dupecheck(context, content, contentpretty, contextid, basefile):
 
     # Remove punctuation
     wordtuplesFiltered = [(index, replacepunctuation(word, 'both')) for index, word in wordtuples]
-    # Filter out numbers, tags and empty tokens
-    wordtuplesFiltered = [(index, word) for index, word in wordtuplesFiltered if canBeDupe(word)]
     words = [word for index, word in wordtuplesFiltered]
     indices = [index for index, word in wordtuplesFiltered]
     

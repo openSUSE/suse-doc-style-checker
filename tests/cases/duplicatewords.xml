@@ -2,14 +2,14 @@
 <chapter id="cha.test.duplicatewords">
     <title>Duplicate words test</title>
     <para id="sdsc.expect.error.duplicatewords.1">
-        In this paragraph, the <command>nothing whatsoever</command> the
-        word 'the' appears twice consecutively.
-    </para>
-    <para id="sdsc.expect.error.duplicatewords.2">
         In this paragraph, <command>nothing whatsoever</command> the
         the word 'the' appears twice consecutively.
     </para>
     <para id="sdsc.valid.1">
         This " " should be valid as '"' is not a word.
+    </para>
+    <para id="sdsc.valid.2">
+        In this paragraph, the <command>nothing whatsoever</command> the
+        word 'the' appears twice consecutively.
     </para>
 </chapter>
