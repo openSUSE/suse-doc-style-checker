@@ -93,6 +93,7 @@ def tokenizer( text ):
     return text.split()
 
 def counttokens( context, text ):
+    del context # not used
     count = 0
     if text:
         count = len( tokenizer( text[0] ) )
@@ -360,6 +361,7 @@ def matchcontextpattern( words, wordposition, totalwords,
     return contextmatches
 
 def buildtermdata( context, terms, ignoredwords, useonepattern ):
+    del context # not used
 
     # random ID to find out if the termdata is still up-to-date
     global termdataid
