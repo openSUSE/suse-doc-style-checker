@@ -9,7 +9,7 @@
             <para>I do not have an ID.</para>
         </sect2>
     </para>
-    
+
     <para>
         <sect2 id="sdsc.expect.warning.ids.3">
             <para>I have a wrong one.</para>
@@ -18,13 +18,11 @@
             <para>Me too.</para>
         </sect2>
     </para>
-    
-    <para id="sdsc.valid">
-        <sect2 id="sec.valid">
-            <para>I do.</para>
-        </sect2>
-        <sect2 id="sec.valid2">
-            <para>I do.</para>
-        </sect2>
-    </para>
+
+    <sect2 id="sec.valid">
+        <para>I do.</para>
+    </sect2>
+    <sect2 id="sec.valid2">
+        <para>I do.</para>
+    </sect2>
 </chapter>

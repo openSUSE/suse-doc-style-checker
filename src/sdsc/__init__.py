@@ -835,7 +835,7 @@ def dupecheckmessage(context, quote, duplicate, contextid, basefile):
             <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
         </result>""" % ( filename, withinid, str(linenumber(context)), duplicate, quote, duplicate))
 
-def dupecheck( context, content, contentpretty, contextid, basefile ):
+def dupecheck(context, content, contentpretty, contextid, basefile):
     messages = []
 
     if not content:
@@ -844,7 +844,6 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
     # I get this as a list with one lxml.etree._ElementUnicodeResult, not
     # as a list with a string.
     content = str(content[0])
-
     if basefile:
         basefile = basefile[0]
     else:
@@ -894,7 +893,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
         highlightEnd = indices[wordposition + dupeLen - 1]
         prettyTokens = tokenizer(contentpretty)
         quote = highlight(prettyTokens, highlightStart, highlightEnd)
-        duplicate = xmlescape(" ".join(prettyTokens[indices[wordposition]:indices[wordposition+dupeLen]]))
+        duplicate = xmlescape(" ".join(prettyTokens[indices[wordposition-dupeLen]:indices[wordposition]]))
         messages.append(dupecheckmessage(context, quote, duplicate, contextid, basefile))
 
     if flag_performance:
