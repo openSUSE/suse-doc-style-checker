@@ -117,34 +117,24 @@ def sentencesegmenter(text):
 
 
 def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
-        messagetype):
+              messagetype):
     # FIXME: Modes: para, title?
-    messages = []
-
     if not int(termfileid[0]) == int(termdataid):
         printcolor("Terminology data was not correctly initialized.", 'error')
         sys.exit(1)
 
-    if content:
-        # I get this as a list with one lxml.etree._ElementUnicodeResult.
-        # I need a single string.
-        # For whatever reason, this made termcheckmessage() crash
-        # happily and semi-randomly.
-        # Also make sure that we always get the same kind of apostrophe.
-        content = apostrophe.sub('\'', str(content[0]))
-
     if not content:
-        return messages
+        return []
 
-    if basefile:
-        basefile = basefile[0]
-    else:
-        basefile = None
+    # I get this as a list with one lxml.etree._ElementUnicodeResult.
+    # I need a single string.
+    # For whatever reason, this made termcheckmessage() crash
+    # happily and semi-randomly.
+    # Also make sure that we always get the same kind of apostrophe.
+    content = apostrophe.sub('\'', str(content[0]))
 
-    if contextid:
-        contextid = contextid[0]
-    else:
-        contextid = None
+    basefile = basefile[0] if basefile else None
+    contextid = contextid[0] if contextid else None
 
     # sanitize this...
     if not messagetype == 'warning' or messagetype == 'info':
@@ -164,15 +154,12 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
         if not onepattern.search(content):
             if flag_performance:
                 printcolor("skipped entire paragraph\n", 'debug')
-            return messages
+            return []
 
     # This if/else block should not be necessary (if there is content,
     # there should always also be pretty content, but that depends on the
     # XSLT used for checking). It hopefully won't hurt either.
-    if contentpretty:
-        contentpretty = str(contentpretty[0])
-    else:
-        contentpretty = content
+    contentpretty = str(contentpretty[0]) if contentpretty else content
 
     # This should get us far enough for now
     sentences = sentencesegmenter(content)
@@ -181,6 +168,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
     # thus we just start at -1, so the first word gets to be 0.
     currenttokeninparagraph = -1
 
+    messages = []
     for sentence in sentences:
         # FIXME: Get something better than s.split. Some
         # existing tokenisers are overzealous, such as the default one from
@@ -309,9 +297,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
     if flag_performance:
         timeendmatch = time.time()
         timediffmatch = timeendmatch - timestartmatch
-        timeperword = 0
-        if totalwords > 0:
-            timeperword = timediffmatch / totalwords
+        timeperword = 0 if totalwords < 1 else timediffmatch / totalwords
 
         printcolor("""words: %s
 time for this para: %s
@@ -323,7 +309,7 @@ average time per word: %s\n"""
 
 
 def matchcontextpattern(words, wordposition, totalwords,
-                         patterngrouppatternposition, contextpattern):
+                        patterngrouppatternposition, contextpattern):
 
     contextwheres = contextpattern[1]
     contextmatches = 0
@@ -364,6 +350,31 @@ def matchcontextpattern(words, wordposition, totalwords,
 
     return contextmatches
 
+def preparetermpatterns(term, useonepattern):
+    global onepattern
+    patternsofterm = []
+    patterngroupxpaths = term.xpath('patterngroup')
+    for patterngroupxpath in patterngroupxpaths:
+        preparedpatterns = preparepatterns(patterngroupxpath, useonepattern)
+        if useonepattern:
+            # use (?: to create non-capturing groups: the re module's
+            # implementation only supports up to 100 named groups per
+            # expression
+            onepattern += '|(?:%s)' % (preparedpatterns[1])
+
+        patternsofterm.append(preparedpatterns[0])
+
+        contextpatternsofpatterngroup = []
+        contextpatternxpaths = patterngroupxpath.xpath('contextpattern')
+        if contextpatternxpaths:
+            for contextpatternxpath in contextpatternxpaths:
+                contextpatternsofpatterngroup.append(
+                    preparecontextpatterns(contextpatternxpath))
+        else:
+            contextpatternsofpatterngroup.append([None])
+        contextpatterns.append(contextpatternsofpatterngroup)
+
+    return patternsofterm
 
 def buildtermdata(context, terms, ignoredwords, useonepattern):
     del context  # not used
@@ -409,54 +420,27 @@ def buildtermdata(context, terms, ignoredwords, useonepattern):
             useonepatterntemp = False
     useonepattern = useonepatterntemp
 
-    if useonepattern:
-        onepattern = ""
-    else:
-        onepattern = None
+    onepattern = "" if useonepattern else None
 
     if flag_performance:
         timestartbuild = time.time()
 
+    # FIXME: Obviously this needs to be done in a better way,
+    # like an incrementing counter
     termdataid = random.randint(0, 999999999)
 
     if ignoredwords:
         trypattern(ignoredwords[0])
         ignoredpattern = re_compile(manglepattern(ignoredwords[0], 0),
-            flags=re.I)
+                                    flags=re.I)
     else:
         ignoredpattern = False
 
-    firstpatterngroup = True
-    for term in terms:
-        accepts.append(prepareaccept(term))
+    accepts = list(map(prepareaccept, terms))
+    patterns = list(map(lambda term: preparetermpatterns(term, useonepattern), terms))
 
-        patternsofterm = []
-        patterngroupxpaths = term.xpath('patterngroup')
-        for patterngroupxpath in patterngroupxpaths:
-            preparedpatterns = preparepatterns(patterngroupxpath, useonepattern)
-            if useonepattern:
-                onepatternseparator = '|'
-                if firstpatterngroup:
-                    onepatternseparator = ''
-                    firstpatterngroup = False
-                # use (?: to create non-capturing groups: the re module's
-                # implementation only supports up to 100 named groups per
-                # expression
-                onepattern += '%s(?:%s)' % (onepatternseparator, preparedpatterns[1])
-
-            patternsofterm.append(preparedpatterns[0])
-
-            contextpatternsofpatterngroup = []
-            contextpatternxpaths = patterngroupxpath.xpath('contextpattern')
-            if contextpatternxpaths:
-                for contextpatternxpath in contextpatternxpaths:
-                    contextpatternsofpatterngroup.append(
-                        preparecontextpatterns(contextpatternxpath))
-            else:
-                contextpatternsofpatterngroup.append([None])
-            contextpatterns.append(contextpatternsofpatterngroup)
-
-        patterns.append(patternsofterm)
+    if useonepattern:
+        onepattern = onepattern[1:]
 
     if useonepattern:
         onepattern = re_compile(manglepattern(onepattern, 'one'), flags=re.I)
@@ -702,8 +686,7 @@ def highlight(tokens, highlightstart, highlightend):
 
 
 def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
-                         lengthwarning, lengtherror):
-    messages = []
+                        lengthwarning, lengtherror):
     # Try to use sensible defaults. The following seems like better advice than
     # the SUSE Documentation Style Guide has to offer:
     # "Sometimes sentence length affects the quality of the writing. In general,
@@ -731,154 +714,68 @@ def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
         except ValueError:
             printcolor('Sentence length check: Wrong type. Using default.', 'error')
 
-    if content:
-        # I get this as a list with one lxml.etree._ElementUnicodeResult, not
-        # as a list with a string.
-        content = str(content[0])
-
-        if basefile:
-            basefile = basefile[0]
-        else:
-            basefile = None
-
-        if contextid:
-            contextid = contextid[0]
-        else:
-            contextid = None
-
-        # This if/else block should not be necessary (if there is content,
-        # there should always also be pretty content, but that depends on the
-        # XSLT used for checking). It hopefully won't hurt either.
-        if contentpretty:
-            contentpretty = str(contentpretty[0])
-        else:
-            contentpretty = content
-
-        sentences = sentencesegmenter(content)
-        # We need to find the current sentence inside of contentpretty by counting tokens.
-        # In content, some tags like <command/> are replaced by
-        # "##@command-<nr tokens>##" so we need to count that as well.
-        sentencestart = 0
-        sentenceend = 0
-
-        # FIXME: This should become a function returning [True/False, int(# of words)]
-        tagreplacement = re_compile("##@\w+(?:-(\d+))?##")
-
-        for sentence in sentences:
-            words = tokenizer(sentence)
-            wordcount = len(words)
-
-            # Count tag replacements
-            for token in words:
-                istagreplacement = tagreplacement.search(token)
-                if istagreplacement:
-                    sentenceend += int(istagreplacement.group(1))
-                    if int(istagreplacement.group(1)) == 0:
-                        # We want to count tag placeholders as 1 word, except
-                        # when empty, then they equal 0 words.
-                        wordcount -= 1
-                else:
-                    sentenceend += 1
-
-            if wordcount >= maximumlengths[0]:
-                filename = ""
-                if basefile:
-                    filename = "<file>%s</file>" % str(basefile)
-
-                withinid = ""
-                if contextid:
-                    withinid = "<withinid>%s</withinid>" % str(contextid)
-
-                messagetype = 'warning'
-                if wordcount >= maximumlengths[1]:
-                    messagetype = 'error'
-
-                contentpretty = xmlescape(contentpretty)
-                prettytokens = tokenizer(contentpretty)
-                line = linenumber(context)
-                messages.append(etree.XML("""<result type="%s">
-                                <location>%s%s<line>%s</line></location>
-                                <message>Sentence with %s words:
-                                <quote>%s</quote>
-                            </message>
-                            <suggestion>Remove unnecessary words.</suggestion>
-                            <suggestion>Split the sentence.</suggestion>
-                        </result>""" % (messagetype, filename, withinid,
-                    str(line), str(wordcount), highlight(prettytokens, sentencestart, sentenceend - 1))))
-
-            sentencestart = sentenceend
-
-    return messages
-
-
-def dupecheck(context, content, contentpretty, contextid, basefile):
-    messages = []
-
     if not content:
-        return messages
+        return []
 
+    messages = []
     # I get this as a list with one lxml.etree._ElementUnicodeResult, not
     # as a list with a string.
     content = str(content[0])
-    if basefile:
-        basefile = basefile[0]
-    else:
-        basefile = None
 
-    if contextid:
-        contextid = contextid[0]
-    else:
-        contextid = None
+    basefile = basefile[0] if basefile else None
+    contextid = contextid[0] if contextid else None
 
     # This if/else block should not be necessary (if there is content,
     # there should always also be pretty content, but that depends on the
     # XSLT used for checking). It hopefully won't hurt either.
-    if contentpretty:
-        contentpretty = str(contentpretty[0])
-    else:
-        contentpretty = content
+    contentpretty = str(contentpretty[0]) if contentpretty else content
 
-    tokens = tokenizer(content)
-    # Get pretty indices
-    wordtuples = []
-    currentIndex = 0
-    for word in tokens:
-        wordtuples.append((currentIndex, word))
-        meta = re_compile("##@\w+(?:-(\d+))?##").match(word)
-        if meta:
-            currentIndex += int(meta.group(1))
-        else:
-            currentIndex += 1
+    sentences = sentencesegmenter(content)
+    # We need to find the current sentence inside of contentpretty by counting tokens.
+    # In content, some tags like <command/> are replaced by
+    # "##@command-<nr tokens>##" so we need to count that as well.
+    sentencestart = 0
+    sentenceend = 0
 
-    # Remove punctuation
-    wordtuplesFiltered = [(index, replacepunctuation(word, 'both')) for index, word in wordtuples]
-    words = [word for index, word in wordtuplesFiltered]
-    indices = [index for index, word in wordtuplesFiltered]
+    # TODO: This should become a function returning [True/False, int(# of words)]
+    tagreplacement = re_compile("##@\w+(?:-(\d+))?##")
 
-    if flag_performance:
-        timestartmatch = time.time()
+    for sentence in sentences:
+        words = tokenizer(sentence)
+        wordcount = len(words)
 
-    for wordposition, word in enumerate(words):
-        dupeLen = isDupe(words, wordposition)
-        if dupeLen == 0:
-            continue  # No dupes found
+        # Count tag replacements
+        for token in words:
+            istagreplacement = tagreplacement.search(token)
+            if istagreplacement:
+                sentenceend += int(istagreplacement.group(1))
+                # We want to count tag placeholders as 1 word, except
+                # when empty, then they equal 0 words.
+                if int(istagreplacement.group(1)) == 0:
+                    wordcount -= 1
+            else:
+                sentenceend += 1
 
-        highlightStart = indices[wordposition - dupeLen]
-        highlightEnd = indices[wordposition + dupeLen - 1]
-        prettyTokens = tokenizer(contentpretty)
-        quote = highlight(prettyTokens, highlightStart, highlightEnd)
-        duplicate = xmlescape(" ".join(prettyTokens[indices[wordposition - dupeLen]:indices[wordposition]]))
-        messages.append(dupecheckmessage(context, quote, duplicate, contextid, basefile))
+        if wordcount >= maximumlengths[0]:
+            filename = "<file>{0}</file>".format(basefile) if basefile else ""
+            withinid = "<withinid>{0}</withinid>".format(contextid) if contextid else ""
+            messagetype = "error" if wordcount >= maximumlengths[1] else "warning"
 
-    if flag_performance:
-        timeendmatch = time.time()
-        timediffmatch = timeendmatch - timestartmatch
-        totalwords = len(words)
-        printcolor("""words: %s
-time for this para: %s
-average time per word: %s\n"""
-            % (str(totalwords), str(timediffmatch),
-                str(timediffmatch / (totalwords + .001))), 'debug')
+            contentpretty = xmlescape(contentpretty)
+            prettytokens = tokenizer(contentpretty)
+            line = linenumber(context)
+            highlightedcontent = highlight(prettytokens, sentencestart, sentenceend - 1)
+            messages.append(etree.XML("""<result type="%s">
+                            <location>%s%s<line>%s</line></location>
+                            <message>Sentence with %s words:
+                            <quote>%s</quote>
+                        </message>
+                        <suggestion>Remove unnecessary words.</suggestion>
+                        <suggestion>Split the sentence.</suggestion>
+                    </result>""" % (messagetype, filename, withinid, str(line),
+                                    str(wordcount), highlightedcontent)))
+
+        sentencestart = sentenceend
 
     return messages
 
@@ -933,6 +830,64 @@ def dupecheckmessage(context, quote, duplicate, contextid, basefile):
             </message>
             <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
         </result>""" % (filename, withinid, str(linenumber(context)), duplicate, quote, duplicate))
+
+
+def dupecheck(context, content, contentpretty, contextid, basefile):
+    if not content:
+        return []
+
+    # I get this as a list with one lxml.etree._ElementUnicodeResult, not
+    # as a list with a string.
+    content = str(content[0])
+    basefile = basefile[0] if basefile else None
+    contextid = contextid[0] if contextid else None
+
+    # This if/else block should not be necessary (if there is content,
+    # there should always also be pretty content, but that depends on the
+    # XSLT used for checking). It hopefully won't hurt either.
+    contentpretty = str(contentpretty[0]) if contentpretty else content
+
+    tokens = tokenizer(content)
+    # Get pretty indices
+    wordtuples = []
+    currentIndex = 0
+    for word in tokens:
+        wordtuples.append((currentIndex, word))
+        meta = re_compile("##@\w+(?:-(\d+))?##").match(word)
+        if meta:
+            currentIndex += int(meta.group(1))
+        else:
+            currentIndex += 1
+
+    # Remove punctuation
+    wordtuples = [(index, replacepunctuation(word, 'both')) for index, word in wordtuples]
+    words = [word for index, word in wordtuples]
+    indices = [index for index, word in wordtuples]
+
+    if flag_performance:
+        timestartmatch = time.time()
+
+    messages = []
+    for wordposition, word in enumerate(words):
+        dupeLen = isDupe(words, wordposition)
+        if dupeLen == 0:
+            continue  # No dupes found
+
+        prettyTokens = tokenizer(contentpretty)
+        quote = highlight(prettyTokens, indices[wordposition - dupeLen], indices[wordposition + dupeLen - 1])
+        duplicate = xmlescape(" ".join(prettyTokens[indices[wordposition - dupeLen]:indices[wordposition]]))
+        messages.append(dupecheckmessage(context, quote, duplicate, contextid, basefile))
+
+    if flag_performance and len(words) > 0:
+        timediffmatch = time.time() - timestartmatch
+        printcolor("""words: %s
+time for this para: %s
+average time per word: %s\n"""
+            % (str(len(words)), str(timediffmatch),
+                str(timediffmatch / len(words))), 'debug')
+
+    return messages
+
 
 # This list is filled by initialize() with the following entries:
 # { 'name': 'typos', 'transform': <function> }
@@ -1000,9 +955,10 @@ def initialize():
     ns = etree.FunctionNamespace('https://www.github.com/openSUSE/suse-doc-style-checker')
     ns.prefix = 'py'
     ns.update(dict(linenumber=linenumber, termcheck=termcheck,
-        buildtermdata=buildtermdata, dupecheck=dupecheck,
-        sentencelengthcheck=sentencelengthcheck, tokenizer=tokenizer,
-        sentencesegmenter=sentencesegmenter, counttokens=counttokens))
+                   buildtermdata=buildtermdata, dupecheck=dupecheck,
+                   sentencelengthcheck=sentencelengthcheck,
+                   sentencesegmenter=sentencesegmenter,
+                   tokenizer=tokenizer, counttokens=counttokens))
 
     global parser
     parser = etree.XMLParser(ns_clean=True,
