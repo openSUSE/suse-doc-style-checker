@@ -43,8 +43,6 @@ flag_module = False
 # non-capturing groups
 parentheses = re.compile(r'(?<!\\)\((?![\?|\:])')
 
-# Pattern to simplify looking for apostrophes, e.g. for searching contractions
-apostrophe = re.compile(r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]')
 
 # Sentence end characters.
 # FIXME: English hardcoded
@@ -99,6 +97,27 @@ def replacepunctuation(word, position='both'):
     return word
 
 
+def sanitizepunctuation(text, quotes=False, apostrophes=False):
+    """Ensures that we always work on the same kind of quotes and apostrophes.
+
+    Parameters:
+    text   - str() of text that we want to look at
+    quotes - bool(): quotes should quotes be sanitized?
+    apos   - bool(): quotes should apostrophes be sanitized?
+    """
+
+    if quotes:
+        # FIXME: In enough cases, using this will lose the information whether this
+        # was a opening quote or a closing quote.
+        # Replace quotes only if they are at start/end of a word.
+        quote = re_compile(r'((?<=^)[«»‹›“”„‟‘’‚‛「」『』](?=[a-z0-9])|(?<=\s)[«»‹›“”„‟‘’‚‛「」『』](?=[a-z0-9])|(?<=[a-z0-9])[«»‹›“”„‟‘’‚‛「」『』](?=$|\s))', re.I)
+        text = quote.sub('"', text)
+    if apostrophes:
+        apostrophe = re_compile(r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]')
+        text = apostrophe.sub('\'', text)
+    return text
+
+
 def tokenizer(text):
     return text.split()
 
@@ -137,8 +156,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
     # I need a single string.
     # For whatever reason, this made termcheckmessage() crash
     # happily and semi-randomly.
-    # Also make sure that we always get the same kind of apostrophe.
-    content = apostrophe.sub('\'', str(content[0]))
+    content = sanitizepunctuation(str(content[0]), quotes=False, apostrophes=True)
 
     basefile = basefile[0] if basefile else None
     contextid = contextid[0] if contextid else None
