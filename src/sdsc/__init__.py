@@ -82,8 +82,8 @@ def replacepunctuation(word, position='both'):
             word = word[:-1] + [replacepunctuation(word[-1], 'end')]
         return word
 
-    startpunctuation = '([{"\''
-    endpunctuation = ')]}/\\"\',:;!?.'
+    startpunctuation = '([{"\'¡¿'
+    endpunctuation = ')]}/\\"\',:;!?.‥…‼‽⁇⁈⁉'
 
     if position == 'start' or position == 'both':
         word = word.lstrip(startpunctuation)
