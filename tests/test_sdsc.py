@@ -33,6 +33,8 @@ def test_isDupe():
     assert(sdsc.isDupe(tokens, 2) == 1)
     tokens = ["this", "is", "this", "is", "a", "test"]
     assert(sdsc.isDupe(tokens, 2) == 2)
+    tokens = ["this", "is", "(this", "is)", "a", "test"]
+    assert(sdsc.isDupe(tokens, 2) == 0)
 
 def test_highlighter():
     """checks whether the highlight function works"""
