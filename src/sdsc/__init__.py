@@ -74,23 +74,30 @@ def linenumber(context):
     return context.context_node.sourceline
 
 
-def replacepunctuation(word, position='both'):
+def removepunctuation(word, start=False, end=False):
+    """Removes punctuation from beginning/end of tokens (i.e. does not
+    expect sentences!).
+
+    Parameters:
+    text  - str(), token that we want to look at
+    start  - bool(): remove punctuation from start of token?
+    apos   - bool(): remove punctuation from end of token?
+    """
+
     if isinstance(word, list):
-        if position == 'start' or position == 'both':
-            word = [replacepunctuation(word[0], 'start')] + word[1:]
-        if position == 'end' or position == 'both':
-            word = word[:-1] + [replacepunctuation(word[-1], 'end')]
+        if start:
+            word = [removepunctuation(word[0], start=True)] + word[1:]
+        if end:
+            word = word[:-1] + [removepunctuation(word[-1], end=True)]
         return word
 
     startpunctuation = '([{"\'¡¿'
     endpunctuation = ')]}/\\"\',:;!?.‥…‼‽⁇⁈⁉'
 
-    if position == 'start' or position == 'both':
+    if start:
         word = word.lstrip(startpunctuation)
-    if position == 'end' or position == 'both':
+    if end:
         word = word.rstrip(endpunctuation)
-    # else:
-    #     throw tantrum? (FIXME)
     return word
 
 
@@ -156,7 +163,7 @@ def sentencesegmenter(text):
 
     # We also need to cut off parentheses etc. from the first word of the first
     # sentence, as that has not been done so far either.
-    sentences[0] = replacepunctuation(sentences[0], 'start')
+    sentences[0] = removepunctuation(sentences[0], start=True)
     return sentences
 
 
@@ -242,7 +249,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
                 skipcount -= 1
                 continue
 
-            word = replacepunctuation(word, "start")
+            word = removepunctuation(word, start=True)
 
             # don't burn time on checking small words like "the," "a," "of" etc.
             # (configurable from within terminology file)
@@ -286,7 +293,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
                             matchword = None
 
                             # This if/else is a bit dumb, but we already did
-                            # replacepunctuation() on word, so it is not
+                            # removepunctuation() on word, so it is not
                             # the same as words[ patternposition ] any more.
                             if patterngrouppatternposition == 0:
                                 matchword = patterngrouppattern.match(word)
@@ -848,10 +855,10 @@ def isDupe(tokens, pos):
     maxlen = min(3, pos, len(tokens) - pos)
     tokens = tokens[:]
     for l in range(1, maxlen + 1):
-        if not canBeDupe(replacepunctuation(tokens[pos + l - 1])):
+        if not canBeDupe(removepunctuation(tokens[pos + l - 1], start=True, end=True)):
             return 0
 
-        if replacepunctuation(tokens[pos - l:pos], 'start') == replacepunctuation(tokens[pos:pos + l], 'end'):
+        if removepunctuation(tokens[pos - l:pos], start=True) == removepunctuation(tokens[pos:pos + l], end=True):
             return l
 
     return 0
