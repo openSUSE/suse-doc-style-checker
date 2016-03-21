@@ -52,9 +52,6 @@ parentheses = re.compile(r'(?<!\\)\((?![\?|\:])')
 sentenceends = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?]|[:;])\s+[[({]?(?=(?:[A-Z0-9#]|openSUSE))')
 lastsentenceends = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?][])}]?|[:;])\s*$')
 
-# To find the number of tokens replaced by placeholders like ##@key-1##
-findnumberoftokens = re.compile(r'(?<=-)[0-9]*(?=##)')
-
 re_cache = {}
 
 
@@ -116,6 +113,27 @@ def sanitizepunctuation(text, quotes=False, apostrophes=False):
         apostrophe = re_compile(r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]')
         text = apostrophe.sub('\'', text)
     return text
+
+def findtagreplacement(text):
+    """Search through a token to see whether it contains a replaced tag.
+    Allows finding a single tag replacement only.
+
+    text - str(): a token
+    """
+
+    tagfound = False
+    tagtype = None
+    tokens = 1
+
+    tagreplacement = re_compile('##@(\w+)-(\d+)##')
+    tagsreplaced = tagreplacement.search(text)
+
+    if tagsreplaced:
+        tagfound = True
+        tagtype = str(tagsreplaced.group(1))
+        tokens = int(tagsreplaced.group(2))
+
+    return (tagfound, tagtype, tokens)
 
 
 def tokenizer(text):
@@ -208,13 +226,14 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
         for wordposition, word in enumerate(words):
 
             currenttokeninparagraph += 1
-            if word != word.lstrip('##@'):
+
+            istagreplacement, tagtype, tagtokens = findtagreplacement(word)
+
+            if istagreplacement:
                 # We hit upon a placeholder, e.g. ##@key-1##. The number
                 # (here: 1) signifies the number of tokens this placeholder
                 # replaces.
-                replacedtokens = findnumberoftokens.search(word)
-                if replacedtokens:
-                    currenttokeninparagraph += int(replacedtokens.group(0)) - 1
+                currenttokeninparagraph += tagtokens - 1
 
             # Idea of skipcount: if we previously matched a multi-word pattern,
             # we can simply skip the next few words since they were matched
@@ -762,21 +781,18 @@ def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
     sentencestart = 0
     sentenceend = 0
 
-    # TODO: This should become a function returning [True/False, int(# of words)]
-    tagreplacement = re_compile("##@\w+(?:-(\d+))?##")
-
     for sentence in sentences:
         words = tokenizer(sentence)
         wordcount = len(words)
 
         # Count tag replacements
         for token in words:
-            istagreplacement = tagreplacement.search(token)
+            istagreplacement, tagtype, tagtokens = findtagreplacement(token)
             if istagreplacement:
-                sentenceend += int(istagreplacement.group(1))
+                sentenceend += tagtokens
                 # We want to count tag placeholders as 1 word, except
                 # when empty, then they equal 0 words.
-                if int(istagreplacement.group(1)) == 0:
+                if tagtokens == 0:
                     wordcount -= 1
             else:
                 sentenceend += 1
@@ -815,9 +831,10 @@ def canBeDupe(word):
     tokens as the number given after the dash."""
 
     numberignore = re_compile(r'[[{(\'"\s]*[-+]?[0-9]+(?:[.,][0-9]+)*[]})\'";:.\s]*')
-    tagignore = re_compile(r'[[{(\'"\s]*([0-9]{1,3}|##@\w+(?:-\d+)?##)[]})\'";:.\s]*')
 
-    return len(word) > 0 and not numberignore.match(word) and not tagignore.search(word)
+    istagreplacement, tagtype, tagtokens = findtagreplacement(word)
+
+    return len(word) > 0 and not numberignore.match(word) and not istagreplacement
 
 
 def isDupe(tokens, pos):
@@ -879,11 +896,9 @@ def dupecheck(context, content, contentpretty, contextid, basefile):
     currentIndex = 0
     for word in tokens:
         wordtuples.append((currentIndex, word))
-        meta = re_compile("##@\w+(?:-(\d+))?##").search(word)
-        if meta:
-            currentIndex += int(meta.group(1))
-        else:
-            currentIndex += 1
+
+        istagreplacement, tagtype, tagtokens = findtagreplacement(word)
+        currentIndex += tagtokens
 
     words = [word for index, word in wordtuples]
     indices = [index for index, word in wordtuples]
