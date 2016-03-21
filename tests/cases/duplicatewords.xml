@@ -5,11 +5,25 @@
         In this paragraph, <command>nothing whatsoever</command> the
         the word 'the' appears twice consecutively.
     </para>
+    <para id="sdsc.expect.error.duplicatewords.2">
+        What what time is it?
+    </para>
     <para id="sdsc.valid.1">
         This " " should be valid as '"' is not a word.
     </para>
     <para id="sdsc.valid.2">
         In this paragraph, the <command>nothing whatsoever</command> the
         word 'the' appears twice but with a command in between.
+    </para>
+    <para id="sdsc.valid.3">
+        In this paragraph, the <command>nothing whatsoever</command>
+        the <command>nothing whatsoever</command> the word 'the'
+        appears three times but with two command in between.
+    </para>
+    <para id="sdsc.valid.4">
+        This is (is) a test with a word in braces.
+    </para>
+    <para id="sdsc.valid.5">
+        What time is it? It is late.
     </para>
 </chapter>

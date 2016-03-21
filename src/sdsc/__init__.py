@@ -79,9 +79,16 @@ def linenumber(context):
     return context.context_node.sourceline
 
 
-def replacepunctuation(word, position):
+def replacepunctuation(word, position='both'):
+    if isinstance(word, list):
+        if position == 'start' or position == 'both':
+            word = [replacepunctuation(word[0], 'start')] + word[1:]
+        if position == 'end' or position == 'both':
+            word = word[:-1] + [replacepunctuation(word[-1], 'end')]
+        return word
+
     startpunctuation = '([{"\''
-    endpunctuation = ')]}/\\"\',:;!.'
+    endpunctuation = ')]}/\\"\',:;!?.'
 
     if position == 'start' or position == 'both':
         word = word.lstrip(startpunctuation)
@@ -804,11 +811,12 @@ def isDupe(tokens, pos):
     # word, such as: a/an, singular/plural, verb tenses. It should ideally
     # not be hardcoded here.
     maxlen = min(3, pos, len(tokens) - pos)
+    tokens = tokens[:]
     for l in range(1, maxlen + 1):
-        if not canBeDupe(tokens[pos]):
+        if not canBeDupe(replacepunctuation(tokens[pos + l - 1])):
             return 0
 
-        if tokens[pos - l:pos] == tokens[pos:pos + l]:
+        if replacepunctuation(tokens[pos - l:pos], 'start') == replacepunctuation(tokens[pos:pos + l], 'end'):
             return l
 
     return 0
@@ -847,20 +855,18 @@ def dupecheck(context, content, contentpretty, contextid, basefile):
     # XSLT used for checking). It hopefully won't hurt either.
     contentpretty = str(contentpretty[0]) if contentpretty else content
 
-    tokens = tokenizer(content)
+    tokens = tokenizer(content.lower())
     # Get pretty indices
     wordtuples = []
     currentIndex = 0
     for word in tokens:
         wordtuples.append((currentIndex, word))
-        meta = re_compile("##@\w+(?:-(\d+))?##").match(word)
+        meta = re_compile("##@\w+(?:-(\d+))?##").search(word)
         if meta:
             currentIndex += int(meta.group(1))
         else:
             currentIndex += 1
 
-    # Remove punctuation
-    wordtuples = [(index, replacepunctuation(word, 'both')) for index, word in wordtuples]
     words = [word for index, word in wordtuples]
     indices = [index for index, word in wordtuples]
 
@@ -873,7 +879,7 @@ def dupecheck(context, content, contentpretty, contextid, basefile):
         if dupeLen == 0:
             continue  # No dupes found
 
-        prettyTokens = tokenizer(contentpretty)
+        prettyTokens = tokenizer(xmlescape(contentpretty))
         quote = highlight(prettyTokens, indices[wordposition - dupeLen], indices[wordposition + dupeLen - 1])
         duplicate = xmlescape(" ".join(prettyTokens[indices[wordposition - dupeLen]:indices[wordposition]]))
         messages.append(dupecheckmessage(context, quote, duplicate, contextid, basefile))
