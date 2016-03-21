@@ -41,24 +41,24 @@ flag_module = False
 # In manglepattern(), only catch patterns that are not literal and are not
 # followed by an indicator of a lookahead/lookbehind (?) or are already
 # non-capturing groups
-parentheses = re.compile( r'(?<!\\)\((?![\?|\:])' )
+parentheses = re.compile(r'(?<!\\)\((?![\?|\:])')
 
 # Pattern to simplify looking for apostrophes, e.g. for searching contractions
-apostrophe = re.compile( r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]' )
+apostrophe = re.compile(r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]')
 
 # Sentence end characters.
 # FIXME: English hardcoded
 # Lookbehinds need to have a fixed length... thus .ca
 # Do not use capture groups together with re.split, as it does additional splits
 # for each capture group it finds.
-sentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?]|[:;])\s+[[({]?(?=(?:[A-Z0-9#]|openSUSE))' )
-lastsentenceends = re.compile( r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?][])}]?|[:;])\s*$' )
-
+sentenceends = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?]|[:;])\s+[[({]?(?=(?:[A-Z0-9#]|openSUSE))')
+lastsentenceends = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?][])}]?|[:;])\s*$')
 
 # To find the number of tokens replaced by placeholders like ##@key-1##
-findnumberoftokens = re.compile( r'(?<=-)[0-9]*(?=##)' )
+findnumberoftokens = re.compile(r'(?<=-)[0-9]*(?=##)')
 
 re_cache = {}
+
 
 def re_compile(pattern, flags=0):
     """Caching version of re.compile"""
@@ -70,54 +70,59 @@ def re_compile(pattern, flags=0):
         try:
             re_cache[flags][pattern] = re.compile(pattern, flags)
         except re.error:
-            expressionerror( "Syntax error in expression", pattern)
+            expressionerror("Syntax error in expression", pattern)
 
         return re_cache[flags][pattern]
 
-def linenumber( context ):
+
+def linenumber(context):
     return context.context_node.sourceline
 
-def replacepunctuation( word, position ):
+
+def replacepunctuation(word, position):
     startpunctuation = '([{"\''
     endpunctuation = ')]}/\\"\',:;!.'
 
     if position == 'start' or position == 'both':
-        word = word.lstrip( startpunctuation )
+        word = word.lstrip(startpunctuation)
     if position == 'end' or position == 'both':
-        word = word.rstrip( endpunctuation )
+        word = word.rstrip(endpunctuation)
     # else:
     #     throw tantrum? (FIXME)
     return word
 
-def tokenizer( text ):
+
+def tokenizer(text):
     return text.split()
 
-def counttokens( context, text ):
-    del context # not used
+
+def counttokens(context, text):
+    del context  # not used
     count = 0
     if text:
-        count = len( tokenizer( text[0] ) )
+        count = len(tokenizer(text[0]))
     return count
 
-def sentencesegmenter( text ):
-    sentences = sentenceends.split( text )
+
+def sentencesegmenter(text):
+    sentences = sentenceends.split(text)
     # The last sentence's final punctuation has not yet been cut off, do that
     # now.
-    sentences[-1] = lastsentenceends.sub( '', sentences[-1] )
+    sentences[-1] = lastsentenceends.sub('', sentences[-1])
 
     # We also need to cut off parentheses etc. from the first word of the first
     # sentence, as that has not been done so far either.
-    sentences[0] = replacepunctuation( sentences[0], 'start' )
+    sentences[0] = replacepunctuation(sentences[0], 'start')
     return sentences
 
 
-def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
-        messagetype ):
+def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
+        messagetype):
     # FIXME: Modes: para, title?
     messages = []
 
     if not int(termfileid[0]) == int(termdataid):
-        printcolor( "Terminology data was not correctly initialized.", 'error' )
+        printcolor("Terminology data was not correctly initialized.", 'error')
         sys.exit(1)
 
     if content:
@@ -126,7 +131,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
         # For whatever reason, this made termcheckmessage() crash
         # happily and semi-randomly.
         # Also make sure that we always get the same kind of apostrophe.
-        content = apostrophe.sub( '\'', str( content[0] ) )
+        content = apostrophe.sub('\'', str(content[0]))
 
     if not content:
         return messages
@@ -156,22 +161,21 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
     #   = worst case: similar time, best case: slight win,
     #     more compliant documentation will tip the scale in our favour
     if onepattern:
-        if not onepattern.search( content ):
+        if not onepattern.search(content):
             if flag_performance:
-                printcolor("skipped entire paragraph\n", 'debug' )
+                printcolor("skipped entire paragraph\n", 'debug')
             return messages
 
     # This if/else block should not be necessary (if there is content,
     # there should always also be pretty content, but that depends on the
     # XSLT used for checking). It hopefully won't hurt either.
     if contentpretty:
-        contentpretty = str( contentpretty[0] )
+        contentpretty = str(contentpretty[0])
     else:
         contentpretty = content
 
-
     # This should get us far enough for now
-    sentences = sentencesegmenter( content )
+    sentences = sentencesegmenter(content)
 
     # HACK: the counter goes up for the first word already, i.e. token[0],
     # thus we just start at -1, so the first word gets to be 0.
@@ -181,8 +185,8 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
         # FIXME: Get something better than s.split. Some
         # existing tokenisers are overzealous, such as the default one from
         # NLTK.
-        words = tokenizer( sentence )
-        totalwords = len( words )
+        words = tokenizer(sentence)
+        totalwords = len(words)
 
         if flag_performance:
             timestartmatch = time.time()
@@ -195,9 +199,9 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                 # We hit upon a placeholder, e.g. ##@key-1##. The number
                 # (here: 1) signifies the number of tokens this placeholder
                 # replaces.
-                replacedtokens = findnumberoftokens.search( word )
+                replacedtokens = findnumberoftokens.search(word)
                 if replacedtokens:
-                    currenttokeninparagraph += int( replacedtokens.group(0) ) - 1
+                    currenttokeninparagraph += int(replacedtokens.group(0)) - 1
 
             # Idea of skipcount: if we previously matched a multi-word pattern,
             # we can simply skip the next few words since they were matched
@@ -206,14 +210,13 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                 skipcount -= 1
                 continue
 
-            word = replacepunctuation( word, "start" )
+            word = replacepunctuation(word, "start")
 
             # don't burn time on checking small words like "the," "a," "of" etc.
             # (configurable from within terminology file)
             if ignoredpattern:
-                if ignoredpattern.match( word ):
+                if ignoredpattern.match(word):
                     continue
-
 
             # When a pattern already matches on a word, don't try to find more
             # problems with it.
@@ -224,17 +227,17 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
             # Don't use enumerate with patterngroupposition, its value
             # depends on being defined in this scope.
             patterngroupposition = 0
-            for acceptposition, accept in enumerate( accepts ):
+            for acceptposition, accept in enumerate(accepts):
                 if trynextterm:
                     acceptword = accept[0]
                     acceptcontext = accept[1]
 
                     # FIXME: variable names are a bit of a mouthful
-                    patterngroupstoaccept = patterns[ acceptposition ]
+                    patterngroupstoaccept = patterns[acceptposition]
                     for patterngrouppatterns in patterngroupstoaccept:
                         if not trynextterm:
                             break
-                        if ( wordposition + len( patterngrouppatterns ) ) > totalwords:
+                        if (wordposition + len(patterngrouppatterns)) > totalwords:
                             patterngroupposition += 1
                             continue
                         trycontextpatterns = True
@@ -245,7 +248,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                         skipcounttemporary = 0
                         for patterngrouppattern in patterngrouppatterns:
                             patternposition = wordposition + patterngrouppatternposition
-                            if patternposition > ( totalwords - 1 ):
+                            if patternposition > (totalwords - 1):
                                 trycontextpatterns = False
                                 break
                             matchword = None
@@ -254,9 +257,9 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                             # replacepunctuation() on word, so it is not
                             # the same as words[ patternposition ] any more.
                             if patterngrouppatternposition == 0:
-                                matchword = patterngrouppattern.match( word )
+                                matchword = patterngrouppattern.match(word)
                             else:
-                                matchword = patterngrouppattern.match( words[ patternposition ] )
+                                matchword = patterngrouppattern.match(words[patternposition])
                             if matchword:
                                 if not patterngrouppatternposition == 0:
                                     # The first matched pattern should not make
@@ -270,7 +273,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                             patterngrouppatternposition += 1
 
                         contextmatches = 0
-                        contextpatternstopatterngroup = contextpatterns[ patterngroupposition ]
+                        contextpatternstopatterngroup = contextpatterns[patterngroupposition]
                         highlightstart = currenttokeninparagraph
                         highlightend = highlightstart + skipcounttemporary
                         if trycontextpatterns:
@@ -278,7 +281,7 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                                 # easy positive
                                 skipcount = skipcounttemporary
                                 trynextterm = False
-                                line = linenumber ( context )
+                                line = linenumber(context)
                                 contenthighlighted = highlight(xmlescape(contentpretty), highlightstart, highlightend)
                                 messages.append(termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
@@ -287,15 +290,15 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
                             else:
                                 for contextpattern in contextpatternstopatterngroup:
                                     if contextpattern[0]:
-                                        contextmatches += matchcontextpattern( words,
+                                        contextmatches += matchcontextpattern(words,
                                                             wordposition, totalwords,
                                                             patterngrouppatternposition,
-                                                            contextpattern )
+                                                            contextpattern)
 
-                            if ( len( contextpatternstopatterngroup ) == contextmatches ):
+                            if (len(contextpatternstopatterngroup) == contextmatches):
                                 skipcount = skipcounttemporary
                                 trynextterm = False
-                                line = linenumber ( context )
+                                line = linenumber(context)
                                 contenthighlighted = highlight(xmlescape(contentpretty), highlightstart, highlightend)
                                 messages.append(termcheckmessage(
                                     acceptword, acceptcontext, matchwords, line,
@@ -310,16 +313,17 @@ def termcheck( context, termfileid, content, contentpretty, contextid, basefile,
         if totalwords > 0:
             timeperword = timediffmatch / totalwords
 
-        printcolor( """words: %s
+        printcolor("""words: %s
 time for this para: %s
 average time per word: %s\n"""
-            % ( str( totalwords ), str( timediffmatch ),
-                str( timeperword ) ), 'debug' )
+            % (str(totalwords), str(timediffmatch),
+                str(timeperword)), 'debug')
 
     return messages
 
-def matchcontextpattern( words, wordposition, totalwords,
-                         patterngrouppatternposition, contextpattern ):
+
+def matchcontextpattern(words, wordposition, totalwords,
+                         patterngrouppatternposition, contextpattern):
 
     contextwheres = contextpattern[1]
     contextmatches = 0
@@ -332,10 +336,10 @@ def matchcontextpattern( words, wordposition, totalwords,
             # patterngrouppatternposition is at 1,
             # even if there was just one pattern
             contextposition += patterngrouppatternposition - 1
-        if ( contextposition < 0 or contextposition > ( totalwords - 1 ) ):
+        if (contextposition < 0 or contextposition > (totalwords - 1)):
             continue
         else:
-            contextstring += str( words[ contextposition ] ) + " "
+            contextstring += str(words[contextposition]) + " "
 
     # We could check for an empty context
     # here and then not run any check,
@@ -346,7 +350,7 @@ def matchcontextpattern( words, wordposition, totalwords,
     # positive matching
     if contextpattern[2]:
         if contextstring:
-            contextword = contextpattern[0].search( contextstring )
+            contextword = contextpattern[0].search(contextstring)
             if contextword:
                 contextmatches += 1
     # negative matching
@@ -354,14 +358,15 @@ def matchcontextpattern( words, wordposition, totalwords,
         if not contextstring:
             contextmatches += 1
         else:
-            contextword = contextpattern[0].search( contextstring )
+            contextword = contextpattern[0].search(contextstring)
             if not contextword:
                 contextmatches += 1
 
     return contextmatches
 
-def buildtermdata( context, terms, ignoredwords, useonepattern ):
-    del context # not used
+
+def buildtermdata(context, terms, ignoredwords, useonepattern):
+    del context  # not used
 
     # random ID to find out if the termdata is still up-to-date
     global termdataid
@@ -415,20 +420,20 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
     termdataid = random.randint(0, 999999999)
 
     if ignoredwords:
-        trypattern( ignoredwords[0] )
-        ignoredpattern = re_compile( manglepattern( ignoredwords[0], 0 ),
-            flags = re.I )
+        trypattern(ignoredwords[0])
+        ignoredpattern = re_compile(manglepattern(ignoredwords[0], 0),
+            flags=re.I)
     else:
         ignoredpattern = False
 
     firstpatterngroup = True
     for term in terms:
-        accepts.append( prepareaccept( term ) )
+        accepts.append(prepareaccept(term))
 
         patternsofterm = []
-        patterngroupxpaths = term.xpath( 'patterngroup' )
+        patterngroupxpaths = term.xpath('patterngroup')
         for patterngroupxpath in patterngroupxpaths:
-            preparedpatterns = preparepatterns( patterngroupxpath, useonepattern )
+            preparedpatterns = preparepatterns(patterngroupxpath, useonepattern)
             if useonepattern:
                 onepatternseparator = '|'
                 if firstpatterngroup:
@@ -437,60 +442,62 @@ def buildtermdata( context, terms, ignoredwords, useonepattern ):
                 # use (?: to create non-capturing groups: the re module's
                 # implementation only supports up to 100 named groups per
                 # expression
-                onepattern += '%s(?:%s)' % ( onepatternseparator, preparedpatterns[1] )
+                onepattern += '%s(?:%s)' % (onepatternseparator, preparedpatterns[1])
 
-            patternsofterm.append( preparedpatterns[0] )
+            patternsofterm.append(preparedpatterns[0])
 
             contextpatternsofpatterngroup = []
-            contextpatternxpaths = patterngroupxpath.xpath( 'contextpattern' )
+            contextpatternxpaths = patterngroupxpath.xpath('contextpattern')
             if contextpatternxpaths:
                 for contextpatternxpath in contextpatternxpaths:
                     contextpatternsofpatterngroup.append(
-                        preparecontextpatterns( contextpatternxpath ) )
+                        preparecontextpatterns(contextpatternxpath))
             else:
-                contextpatternsofpatterngroup.append( [ None ] )
-            contextpatterns.append( contextpatternsofpatterngroup )
+                contextpatternsofpatterngroup.append([None])
+            contextpatterns.append(contextpatternsofpatterngroup)
 
-        patterns.append( patternsofterm )
+        patterns.append(patternsofterm)
 
     if useonepattern:
-        onepattern = re_compile( manglepattern( onepattern, 'one' ), flags = re.I )
+        onepattern = re_compile(manglepattern(onepattern, 'one'), flags=re.I)
 
     if flag_performance:
         timeendbuild = time.time()
-        printcolor( "time to build: %s" % str( timeendbuild - timestartbuild ), 'debug' )
+        printcolor("time to build: %s" % str(timeendbuild - timestartbuild), 'debug')
     return termdataid
+
 
 # FIXME: This might be functionality better suited for a test case instead of
 # built-in
-def trypattern( pattern ):
+def trypattern(pattern):
 
     if not flag_checkpatterns:
         return True
 
-    expression = re_compile( pattern, flags = re.I )
+    expression = re_compile(pattern, flags=re.I)
 
     try:
-        tryresult = expression.search( "" )
+        tryresult = expression.search("")
         if tryresult:
             message = "Expression matches empty string"
             sys.exit(1)
 
-        tryresult = expression.search( " " )
+        tryresult = expression.search(" ")
         if tryresult:
             message = "Expression matches single space"
             sys.exit(1)
     except SystemExit:
-        expressionerror( message, pattern )
+        expressionerror(message, pattern)
 
     return True
 
-def expressionerror( message, expression="muschebubu" ):
-    printcolor( message + ": \"" + expression + "\"", 'error' )
+
+def expressionerror(message, expression="muschebubu"):
+    printcolor(message + ": \"" + expression + "\"", 'error')
     sys.exit(1)
 
 
-def manglepattern( pattern, mode ):
+def manglepattern(pattern, mode):
     # Use (?: to create non-capturing groups: the re module's
     # implementation only supports up to 100 named groups per
     # expression. onepattern often contains more than 100 groups.
@@ -514,67 +521,70 @@ def manglepattern( pattern, mode ):
     # for the end of the string or a space makes sure we don't match e.g.
     # "just" in "just-installed".
     # This is enough for all words that are re.match()ed.
-    pattern = ( r'(?:%s)(?=\W{0,5}(?:\s|$))' % pattern )
+    pattern = (r'(?:%s)(?=\W{0,5}(?:\s|$))' % pattern)
 
     return pattern
 
-def prepareaccept( term ):
-    acceptwordxpath = term.xpath( 'accept[1]/proposal[1]' )
+
+def prepareaccept(term):
+    acceptwordxpath = term.xpath('accept[1]/proposal[1]')
     acceptwordxpathcontent = None
     if acceptwordxpath:
         acceptwordxpathcontent = acceptwordxpath[0].text
     # If there is no accepted word, we don't care about the context
     if acceptwordxpathcontent:
-        acceptlist = [ acceptwordxpathcontent ]
-        acceptcontextxpath = term.xpath( 'accept[1]/context[1]' )
+        acceptlist = [acceptwordxpathcontent]
+        acceptcontextxpath = term.xpath('accept[1]/context[1]')
         if acceptcontextxpath:
-            acceptlist.append( acceptcontextxpath[0].text )
+            acceptlist.append(acceptcontextxpath[0].text)
         else:
-            acceptlist.append( None )
+            acceptlist.append(None)
 
         return acceptlist
     else:
-        return [ None, None ]
+        return [None, None]
 
-def preparepatterns( patterngroupxpath, useonepattern ):
+
+def preparepatterns(patterngroupxpath, useonepattern):
     patternsofpatterngroup = []
     patternforonepattern = None
 
-    lengthpatterngroupxpath = len( patterngroupxpath.xpath( 'pattern') )
+    lengthpatterngroupxpath = len(patterngroupxpath.xpath('pattern'))
     for i in range(1, lengthpatterngroupxpath + 1):
-        patternxpath = patterngroupxpath.xpath( 'pattern[%s]' % i )
+        patternxpath = patterngroupxpath.xpath('pattern[%s]' % i)
         patternxpathcontent = None
         if patternxpath:
             patternxpathcontent = patternxpath[0].text
 
         if not patternxpathcontent:
             if i == 1:
-                emptypatternmessage( 'pattern' )
+                emptypatternmessage('pattern')
             else:
                 break
         else:
-            trypattern( patternxpathcontent )
+            trypattern(patternxpathcontent)
             if i == 1 and useonepattern:
                 patternforonepattern = patternxpathcontent
-            patternxpathcontent = manglepattern( patternxpathcontent, 'default' )
+            patternxpathcontent = manglepattern(patternxpathcontent, 'default')
 
         pattern = None
-        if patternxpath[0].get( 'case' ) == 'keep':
-            pattern = re_compile( patternxpathcontent )
+        if patternxpath[0].get('case') == 'keep':
+            pattern = re_compile(patternxpathcontent)
         else:
-            pattern = re_compile( patternxpathcontent, flags = re.I )
-        patternsofpatterngroup.append( pattern )
+            pattern = re_compile(patternxpathcontent, flags=re.I)
+        patternsofpatterngroup.append(pattern)
 
-    return [ patternsofpatterngroup, patternforonepattern ]
+    return [patternsofpatterngroup, patternforonepattern]
 
-def preparecontextpatterns( contextpatternxpath ):
+
+def preparecontextpatterns(contextpatternxpath):
     contextpatternxpathcontent = contextpatternxpath.text
     if not contextpatternxpathcontent:
-        emptypatternmessage( 'contextpattern' )
+        emptypatternmessage('contextpattern')
 
-    trypattern( contextpatternxpathcontent )
+    trypattern(contextpatternxpathcontent)
 
-    factors = [ 1 ]
+    factors = [1]
     location = []
     fuzzymode = False
     positivematch = True
@@ -583,44 +593,46 @@ def preparecontextpatterns( contextpatternxpath ):
 
     # Since this is now searched for instead of matched on, we need to avoid
     # searching for e.g. "mail" in "e-mail".
-    contextpatternxpathcontent = manglepattern( contextpatternxpathcontent, 'context' )
+    contextpatternxpathcontent = manglepattern(contextpatternxpathcontent, 'context')
 
-    if contextpatternxpath.get( 'case' ) == 'keep':
-        contextpattern = re_compile( contextpatternxpathcontent )
+    if contextpatternxpath.get('case') == 'keep':
+        contextpattern = re_compile(contextpatternxpathcontent)
     else:
-        contextpattern = re_compile( contextpatternxpathcontent, flags = re.I )
+        contextpattern = re_compile(contextpatternxpathcontent, flags=re.I)
 
-    if contextpatternxpath.get( 'look' ) == 'before':
-        factors = [ -1 ]
-    elif contextpatternxpath.get( 'look' ) == 'bothways':
-        factors = [ -1 , 1 ]
+    if contextpatternxpath.get('look') == 'before':
+        factors = [-1]
+    elif contextpatternxpath.get('look') == 'bothways':
+        factors = [-1, 1]
 
-    if contextpatternxpath.get( 'mode' ) == 'fuzzy':
+    if contextpatternxpath.get('mode') == 'fuzzy':
         fuzzymode = True
 
-    if contextpatternxpath.get( 'match' ) == 'negative':
+    if contextpatternxpath.get('match') == 'negative':
         positivematch = False
 
-    locationxpath = contextpatternxpath.get( 'location' )
+    locationxpath = contextpatternxpath.get('location')
     if locationxpath:
-        location = int( locationxpath )
+        location = int(locationxpath)
 
     if fuzzymode:
-        locationrange = range( 1, ( location + 1 ) )
+        locationrange = range(1, (location + 1))
         for i in locationrange:
             for factor in factors:
-                actuallocations.append( i * factor )
+                actuallocations.append(i * factor)
     else:
         for factor in factors:
-            actuallocations.append( location * factor )
+            actuallocations.append(location * factor)
 
-    return [ contextpattern, actuallocations, positivematch ]
+    return [contextpattern, actuallocations, positivematch]
 
-def emptypatternmessage( element ):
-    printcolor( "There is an empty {0} element in a terminology file.".format(element), 'error' )
+
+def emptypatternmessage(element):
+    printcolor("There is an empty {0} element in a terminology file.".format(element), 'error')
     sys.exit(1)
 
-def xmlescape( text ):
+
+def xmlescape(text):
     escapetable = {
         "&": "&amp;",
         '"': "&quot;",
@@ -628,42 +640,44 @@ def xmlescape( text ):
         ">": "&gt;",
         "<": "&lt;",
         }
-    return "".join(escapetable.get(c,c) for c in text)
+    return "".join(escapetable.get(c, c) for c in text)
 
-def termcheckmessage(   acceptword, acceptcontext, word, line, content,
+
+def termcheckmessage(acceptword, acceptcontext, word, line, content,
                         contextid, basefile, messagetype):
     # FIXME: shorten content string (in the right place), to get closer toward
     # more focused results
     message = None
     filename = ""
     if basefile:
-        filename = "<file>%s</file>" % str( basefile )
+        filename = "<file>%s</file>" % str(basefile)
 
     withinid = ""
     if contextid:
-        withinid = "<withinid>%s</withinid>" % str( contextid )
+        withinid = "<withinid>%s</withinid>" % str(contextid)
 
-    message = etree.XML(  """<result type="%s">
+    message = etree.XML("""<result type="%s">
             <location>%s%s<line>%s</line></location>
-        </result>""" % ( messagetype, filename, withinid, str( line ) ) )
+        </result>""" % (messagetype, filename, withinid, str(line)))
 
     if acceptcontext:
-        message.append( etree.XML( """<message>In the context of %s,
+        message.append(etree.XML("""<message>In the context of %s,
             do not use <quote>%s</quote>:
-            <quote>%s</quote></message>""" % ( acceptcontext, word, content ) ) )
+            <quote>%s</quote></message>""" % (acceptcontext, word, content)))
     else:
-        message.append( etree.XML( """<message>Do not use
+        message.append(etree.XML("""<message>Do not use
             <quote>%s</quote> here:
-            <quote>%s</quote></message>""" % ( word, content ) ) )
+            <quote>%s</quote></message>""" % (word, content)))
 
     if acceptword:
-        message.append( etree.XML( """<suggestion>Use <quote>%s</quote>
-            instead.</suggestion>""" % acceptword ) )
+        message.append(etree.XML("""<suggestion>Use <quote>%s</quote>
+            instead.</suggestion>""" % acceptword))
     else:
-        message.append( etree.XML( """<suggestion>Remove
-            <quote>%s</quote>.</suggestion>""" % word ) )
+        message.append(etree.XML("""<suggestion>Remove
+            <quote>%s</quote>.</suggestion>""" % word))
 
     return message
+
 
 def highlight(tokens, highlightstart, highlightend):
     """tokens = ["highlight", "these", "two", "words"]
@@ -677,7 +691,7 @@ def highlight(tokens, highlightstart, highlightend):
         return highlight(tokenizer(tokens), highlightstart, highlightend)
 
     if highlightstart >= len(tokens) or highlightend < highlightstart:
-        return "" # Nothing to highlight
+        return ""  # Nothing to highlight
 
     highlightend = min(highlightend, len(tokens) - 1)
 
@@ -686,10 +700,10 @@ def highlight(tokens, highlightstart, highlightend):
 
     return " ".join(tokens)
 
-def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
-                         lengthwarning, lengtherror ):
-    messages = []
 
+def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
+                         lengthwarning, lengtherror):
+    messages = []
     # Try to use sensible defaults. The following seems like better advice than
     # the SUSE Documentation Style Guide has to offer:
     # "Sometimes sentence length affects the quality of the writing. In general,
@@ -707,20 +721,20 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
 
     if lengthwarning:
         try:
-            maximumlengths[0] = int( lengthwarning )
+            maximumlengths[0] = int(lengthwarning)
         except ValueError:
             printcolor('Sentence length check: Wrong type. Using default.', 'error')
 
     if lengtherror:
         try:
-            maximumlengths[1] = int( lengtherror )
+            maximumlengths[1] = int(lengtherror)
         except ValueError:
             printcolor('Sentence length check: Wrong type. Using default.', 'error')
 
     if content:
         # I get this as a list with one lxml.etree._ElementUnicodeResult, not
         # as a list with a string.
-        content = str( content[0] )
+        content = str(content[0])
 
         if basefile:
             basefile = basefile[0]
@@ -736,11 +750,11 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
         # there should always also be pretty content, but that depends on the
         # XSLT used for checking). It hopefully won't hurt either.
         if contentpretty:
-            contentpretty = str( contentpretty[0] )
+            contentpretty = str(contentpretty[0])
         else:
             contentpretty = content
 
-        sentences = sentencesegmenter( content )
+        sentences = sentencesegmenter(content)
         # We need to find the current sentence inside of contentpretty by counting tokens.
         # In content, some tags like <command/> are replaced by
         # "##@command-<nr tokens>##" so we need to count that as well.
@@ -748,15 +762,15 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
         sentenceend = 0
 
         # FIXME: This should become a function returning [True/False, int(# of words)]
-        tagreplacement = re_compile( "##@\w+(?:-(\d+))?##")
+        tagreplacement = re_compile("##@\w+(?:-(\d+))?##")
 
         for sentence in sentences:
-            words = tokenizer( sentence )
-            wordcount = len( words )
+            words = tokenizer(sentence)
+            wordcount = len(words)
 
             # Count tag replacements
             for token in words:
-                istagreplacement = tagreplacement.search( token )
+                istagreplacement = tagreplacement.search(token)
                 if istagreplacement:
                     sentenceend += int(istagreplacement.group(1))
                     if int(istagreplacement.group(1)) == 0:
@@ -769,11 +783,11 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
             if wordcount >= maximumlengths[0]:
                 filename = ""
                 if basefile:
-                    filename = "<file>%s</file>" % str( basefile )
+                    filename = "<file>%s</file>" % str(basefile)
 
                 withinid = ""
                 if contextid:
-                    withinid = "<withinid>%s</withinid>" % str( contextid )
+                    withinid = "<withinid>%s</withinid>" % str(contextid)
 
                 messagetype = 'warning'
                 if wordcount >= maximumlengths[1]:
@@ -781,22 +795,23 @@ def sentencelengthcheck( context, content, contentpretty, contextid, basefile,
 
                 contentpretty = xmlescape(contentpretty)
                 prettytokens = tokenizer(contentpretty)
-                line = linenumber( context )
-                messages.append(etree.XML( """<result type="%s">
+                line = linenumber(context)
+                messages.append(etree.XML("""<result type="%s">
                                 <location>%s%s<line>%s</line></location>
                                 <message>Sentence with %s words:
                                 <quote>%s</quote>
                             </message>
                             <suggestion>Remove unnecessary words.</suggestion>
                             <suggestion>Split the sentence.</suggestion>
-                        </result>""" % ( messagetype, filename, withinid,
-                    str( line ), str( wordcount ), highlight(prettytokens, sentencestart, sentenceend - 1))))
+                        </result>""" % (messagetype, filename, withinid,
+                    str(line), str(wordcount), highlight(prettytokens, sentencestart, sentenceend - 1))))
 
             sentencestart = sentenceend
 
     return messages
 
-def dupecheck( context, content, contentpretty, contextid, basefile ):
+
+def dupecheck(context, content, contentpretty, contextid, basefile):
     messages = []
 
     if not content:
@@ -804,7 +819,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
 
     # I get this as a list with one lxml.etree._ElementUnicodeResult, not
     # as a list with a string.
-    content = str( content[0] )
+    content = str(content[0])
     if basefile:
         basefile = basefile[0]
     else:
@@ -819,7 +834,7 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
     # there should always also be pretty content, but that depends on the
     # XSLT used for checking). It hopefully won't hurt either.
     if contentpretty:
-        contentpretty = str( contentpretty[0] )
+        contentpretty = str(contentpretty[0])
     else:
         contentpretty = content
 
@@ -846,26 +861,27 @@ def dupecheck( context, content, contentpretty, contextid, basefile ):
     for wordposition, word in enumerate(words):
         dupeLen = isDupe(words, wordposition)
         if dupeLen == 0:
-            continue # No dupes found
+            continue  # No dupes found
 
         highlightStart = indices[wordposition - dupeLen]
         highlightEnd = indices[wordposition + dupeLen - 1]
         prettyTokens = tokenizer(contentpretty)
         quote = highlight(prettyTokens, highlightStart, highlightEnd)
-        duplicate = xmlescape(" ".join(prettyTokens[indices[wordposition-dupeLen]:indices[wordposition]]))
+        duplicate = xmlescape(" ".join(prettyTokens[indices[wordposition - dupeLen]:indices[wordposition]]))
         messages.append(dupecheckmessage(context, quote, duplicate, contextid, basefile))
 
     if flag_performance:
         timeendmatch = time.time()
         timediffmatch = timeendmatch - timestartmatch
         totalwords = len(words)
-        printcolor( """words: %s
+        printcolor("""words: %s
 time for this para: %s
 average time per word: %s\n"""
-            % ( str( totalwords ), str( timediffmatch ),
-                str( timediffmatch / (totalwords + .001 ) ) ) , 'debug' )
+            % (str(totalwords), str(timediffmatch),
+                str(timediffmatch / (totalwords + .001))), 'debug')
 
     return messages
+
 
 def canBeDupe(word):
     """TAGIGNORE: character sequences that should be ignored by the duplicate
@@ -876,10 +892,11 @@ def canBeDupe(word):
     The second form is counted as one token, the first one is counted as as many
     tokens as the number given after the dash."""
 
-    numberignore = re_compile( r'[[{(\'"\s]*[-+]?[0-9]+(?:[.,][0-9]+)*[]})\'";:.\s]*' )
-    tagignore = re_compile( r'[[{(\'"\s]*([0-9]{1,3}|##@\w+(?:-\d+)?##)[]})\'";:.\s]*' )
+    numberignore = re_compile(r'[[{(\'"\s]*[-+]?[0-9]+(?:[.,][0-9]+)*[]})\'";:.\s]*')
+    tagignore = re_compile(r'[[{(\'"\s]*([0-9]{1,3}|##@\w+(?:-\d+)?##)[]})\'";:.\s]*')
 
     return len(word) > 0 and not numberignore.match(word) and not tagignore.search(word)
+
 
 def isDupe(tokens, pos):
     """Returns how many tokens at pos are duplicated
@@ -890,14 +907,15 @@ def isDupe(tokens, pos):
     # word, such as: a/an, singular/plural, verb tenses. It should ideally
     # not be hardcoded here.
     maxlen = min(3, pos, len(tokens) - pos)
-    for l in range(1, maxlen+1):
+    for l in range(1, maxlen + 1):
         if not canBeDupe(tokens[pos]):
             return 0
 
-        if tokens[pos-l:pos] == tokens[pos:pos+l]:
-            return l;
+        if tokens[pos - l:pos] == tokens[pos:pos + l]:
+            return l
 
-    return 0;
+    return 0
+
 
 def dupecheckmessage(context, quote, duplicate, contextid, basefile):
     filename = ""
@@ -908,14 +926,13 @@ def dupecheckmessage(context, quote, duplicate, contextid, basefile):
     if contextid:
         withinid = "<withinid>%s</withinid>" % str(contextid)
 
-    return etree.XML( """<result type="error">
+    return etree.XML("""<result type="error">
             <location>%s%s<line>%s</line></location>
             <message><quote>%s</quote> is duplicated:
                 <quote>%s</quote>
             </message>
             <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
-        </result>""" % ( filename, withinid, str(linenumber(context)), duplicate, quote, duplicate))
-
+        </result>""" % (filename, withinid, str(linenumber(context)), duplicate, quote, duplicate))
 
 # This list is filled by initialize() with the following entries:
 # { 'name': 'typos', 'transform': <function> }
@@ -924,28 +941,29 @@ prepared_checks = []
 # Global parser instance. Initialized by initialize()
 parser = None
 
+
 def checkOneFile(inputfilepath):
     """Checks one XML file and returns the result as XML. """
 
-    location = os.path.dirname( os.path.realpath( __file__ ) )
-    inputfilename = os.path.basename( inputfilepath )
-    output = etree.XML(  """<?xml-stylesheet type="text/css" href="%s"?>
+    location = os.path.dirname(os.path.realpath(__file__))
+    inputfilename = os.path.basename(inputfilepath)
+    output = etree.XML("""<?xml-stylesheet type="text/css" href="%s"?>
                             <results/>"""
-                      % os.path.join( location, 'check.css' ) )
+                      % os.path.join(location, 'check.css'))
 
-    resultstitle = etree.Element( 'results-title' )
+    resultstitle = etree.Element('results-title')
     resultstitle.text = "Style Checker Results for %s" % inputfilename
-    output.append( resultstitle )
+    output.append(resultstitle)
 
     # Checking via XSLT
-    inputfile = etree.parse( inputfilepath, parser )
+    inputfile = etree.parse(inputfilepath, parser)
 
     for check in prepared_checks:
         if flag_module or flag_performance:
             print("Running module {0!r}...".format(check["name"]))
-        result = check["transform"](inputfile, moduleName = etree.XSLT.strparam(check["name"]))
+        result = check["transform"](inputfile, moduleName=etree.XSLT.strparam(check["name"]))
         try:
-            result = check["transform"](inputfile, moduleName = etree.XSLT.strparam(check["name"]))
+            result = check["transform"](inputfile, moduleName=etree.XSLT.strparam(check["name"]))
         except BaseException as error:
             printcolor("! Broken check file or Python function (module {0!r})".format(check["name"]), 'error')
             printcolor("  " + str(error), 'error')
@@ -953,22 +971,24 @@ def checkOneFile(inputfilepath):
 
         result = result.getroot()
 
-        if result.xpath( '/part/result' ):
-            output.append( result )
+        if result.xpath('/part/result'):
+            output.append(result)
 
-    if not output.xpath( '/results/part' ):
-        output.append( etree.XML(
+    if not output.xpath('/results/part'):
+        output.append(etree.XML(
              """<result type="info">
                     <message>No problems detected.</message>
                     <suggestion>Celebrate!</suggestion>
-                </result>""" ) )
+                </result>"""))
 
     return etree.tostring(output.getroottree(),
-                          encoding = 'unicode',
-                          pretty_print = True )
+                          encoding='unicode',
+                          pretty_print=True)
 
 # Flag to avoid multiple initialization
 sdsc_initialized = False
+
+
 def initialize():
     """ Initializes global values such as prepared_checks and parser
     to avoid doing it for each file. """
@@ -979,24 +999,24 @@ def initialize():
     # Prepare parser (add py: namespace)
     ns = etree.FunctionNamespace('https://www.github.com/openSUSE/suse-doc-style-checker')
     ns.prefix = 'py'
-    ns.update( dict( linenumber = linenumber, termcheck = termcheck,
-        buildtermdata = buildtermdata, dupecheck = dupecheck,
-        sentencelengthcheck = sentencelengthcheck, tokenizer = tokenizer,
-        sentencesegmenter = sentencesegmenter, counttokens = counttokens ) )
+    ns.update(dict(linenumber=linenumber, termcheck=termcheck,
+        buildtermdata=buildtermdata, dupecheck=dupecheck,
+        sentencelengthcheck=sentencelengthcheck, tokenizer=tokenizer,
+        sentencesegmenter=sentencesegmenter, counttokens=counttokens))
 
     global parser
-    parser = etree.XMLParser(ns_clean = True,
-                             remove_pis = False,
-                             dtd_validation = False)
+    parser = etree.XMLParser(ns_clean=True,
+                             remove_pis=False,
+                             dtd_validation=False)
 
     # Prepare all checks
     global prepared_checks
     prepared_checks = []
-    location = os.path.dirname(os.path.realpath( __file__ ))
+    location = os.path.dirname(os.path.realpath(__file__))
     checkfiles = glob.glob(os.path.join(location, 'xsl-checks', '*.xslc'))
 
     if not checkfiles:
-        printcolor( "! No check files found.\n  Add check files to " + os.path.join(location, 'xsl-checks'), 'error')
+        printcolor("! No check files found.\n  Add check files to " + os.path.join(location, 'xsl-checks'), 'error')
         return False
 
     for checkfile in checkfiles:
@@ -1004,13 +1024,14 @@ def initialize():
             checkmodule = re.sub(r'^.*/', r'', checkfile)
             checkmodule = re.sub(r'.xslc$', r'', checkmodule)
             transform = etree.XSLT(etree.parse(checkfile, parser))
-            prepared_checks.append({'name': checkmodule, 'transform': transform })
+            prepared_checks.append({'name': checkmodule, 'transform': transform})
         except BaseException as error:
-            printcolor( "! Syntax error in check file.\n  " + checkfile, 'error' )
-            printcolor( "  " + str(error), 'error' )
+            printcolor("! Syntax error in check file.\n  " + checkfile, 'error')
+            printcolor("  " + str(error), 'error')
 
     sdsc_initialized = True
     return True
+
 
 def main(cliargs=None):
     """Entry point for the application script
@@ -1023,7 +1044,7 @@ def main(cliargs=None):
 
     timestart = time.time()
 
-    location = os.path.dirname( os.path.realpath( __file__ ) )
+    location = os.path.dirname(os.path.realpath(__file__))
 
     global args
     args = parseargs(cliargs)
@@ -1036,30 +1057,30 @@ def main(cliargs=None):
 
     if args.bookmarklet:
         webbrowser.open(
-            os.path.join( location, '..', 'bookmarklet',
-                'result-flagging-bookmarklet.html' ),
-            new = 0, autoraise = True )
+            os.path.join(location, '..', 'bookmarklet',
+                'result-flagging-bookmarklet.html'),
+            new=0, autoraise=True)
         sys.exit(0)
 
     if args.outputfile:
         resultfilename = args.outputfile
-        resultpath = os.path.dirname( os.path.realpath( args.outputfile ) )
+        resultpath = os.path.dirname(os.path.realpath(args.outputfile))
     else:
-        resultfilename = re.sub( r'(_bigfile)?\.xml', r'', os.path.basename( args.inputfile.name ) )
+        resultfilename = re.sub(r'(_bigfile)?\.xml', r'', os.path.basename(args.inputfile.name))
         resultfilename = '%s-stylecheck.xml' % resultfilename
-        resultpath = os.path.dirname( os.path.realpath( args.inputfile.name ) )
+        resultpath = os.path.dirname(os.path.realpath(args.inputfile.name))
 
-    resultfile = os.path.join( resultpath, resultfilename )
-    resultfh = open( resultfile, 'w' )
+    resultfile = os.path.join(resultpath, resultfilename)
+    resultfh = open(resultfile, 'w')
 
-    result = checkOneFile( args.inputfile.name )
+    result = checkOneFile(args.inputfile.name)
 
     resultfh.write(str(result))
     resultfh.close()
 
     if args.show:
-        webbrowser.open( resultfile, new = 0 , autoraise = True )
+        webbrowser.open(resultfile, new=0, autoraise=True)
 
-    printcolor( resultfile )
+    printcolor(resultfile)
     if flag_performance:
-        printcolor( "Total: " +  str( time.time() - timestart ), 'debug' )
+        printcolor("Total: " + str(time.time() - timestart), 'debug')
