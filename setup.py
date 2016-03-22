@@ -7,6 +7,7 @@ import os.path
 import re
 
 from setuptools import setup, find_packages
+from setuptools.command.test import test as TestCommand
 
 # FIXME: this information should come from the script itself...
 __projectname__ = "suse-doc-style-checker"
@@ -18,6 +19,24 @@ __description__ = "checks a given DocBook XML file for stylistic errors"
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
+
+class PyTest(TestCommand):
+    user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
+
+    def initialize_options(self):
+        TestCommand.initialize_options(self)
+        self.pytest_args = []
+
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        #import here, cause outside the eggs aren't loaded
+        import pytest
+        errno = pytest.main(self.pytest_args)
+        sys.exit(errno)
 
 def read(*names, **kwargs):
     """Read in file
@@ -119,7 +138,7 @@ setupdict = dict(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    # install_requires=['lxml'],
+    install_requires=['lxml'],
 
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these
@@ -142,6 +161,9 @@ setupdict = dict(
 
     # Required packages for testing
     tests_require=['pytest'],
+
+    # Actually run tests
+    cmdclass = {'test': PyTest},
     )
 
 
