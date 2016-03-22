@@ -33,6 +33,14 @@ def test_sentencesegmenter():
         "This is not a test in one go. openSUSE is not written with a capital letter.")
     assert(sentences == ["This is not a test in one go",
                          "openSUSE is not written with a capital letter"])
+    sentences = sdsc.sentencesegmenter("This is a sentence, e.g. for me.")
+    assert(sentences == ["This is a sentence, e.g. for me"])
+    sentences = sdsc.sentencesegmenter("E. g. this is a sentence.")
+    assert(sentences == ["E. g. this is a sentence"])
+    sentences = sdsc.sentencesegmenter(
+        "An above average chance stands e.g. Michael. Marta is also on the list.")
+    assert(sentences == ["An above average chance stands e.g. Michael",
+                         "Marta is also on the list"])
 
 
 def test_isDupe():
