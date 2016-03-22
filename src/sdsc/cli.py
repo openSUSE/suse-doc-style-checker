@@ -31,6 +31,7 @@ import sys
 # least important options (--help, --version) are listed last. Also, I really
 # liked being able to use sentences in the parameter descriptions.
 
+
 def parseargs(cliargs=None):
     """Parse command line arguments
 
@@ -39,47 +40,47 @@ def parseargs(cliargs=None):
     :rtype: argparse.Namespace
     """
     parser = argparse.ArgumentParser(
-        usage = "%(prog)s [options] inputfile [outputfile]",
-        description = __description__ )
+        usage="%(prog)s [options] inputfile [outputfile]",
+        description=__description__)
     fileorbookmark = parser.add_mutually_exclusive_group(required=True)
     parser.add_argument('-v', '--version',
-        action = 'version',
-        version = __programname__ + " " + __version__,
-        help = "show version number and exit")
-    fileorbookmark.add_argument( '-b', '--bookmarklet',
-        action = 'store_true',
-        default = False,
-        help = """open Web page that lets you install a bookmarklet to manage
+                        action='version',
+                        version=__programname__ + " " + __version__,
+                        help="show version number and exit")
+    fileorbookmark.add_argument('-b', '--bookmarklet',
+                                action='store_true',
+                                default=False,
+                                help="""open Web page that lets you install a bookmarklet to manage
             style checker results""" )
-    parser.add_argument( '-s', '--show',
-        action = 'store_true',
-        default = False,
-        help = """show final report in $BROWSER, or default browser if unset; not
+    parser.add_argument('-s', '--show',
+                        action='store_true',
+                        default=False,
+                        help="""show final report in $BROWSER, or default browser if unset; not
             all browsers open report files correctly and for some users, a text
             editor will open; in such cases, set the BROWSER variable with:
             export BROWSER=/MY/BROWSER ; Chromium or Firefox will both
             do the right thing""" )
-    parser.add_argument( '--module',
-        action = 'store_true',
-        default = False,
-        help = "writes name of current check module to stdout" )
-    parser.add_argument( '--performance',
-        action = 'store_true',
-        default = False,
-        help = "write performance measurements to stdout" )
-    parser.add_argument( '--checkpatterns',
-        action = 'store_true',
-        default = False,
-        help = """check formal validity of built-in regular expression
+    parser.add_argument('--module',
+                        action='store_true',
+                        default=False,
+                        help="writes name of current check module to stdout")
+    parser.add_argument('--performance',
+                        action='store_true',
+                        default=False,
+                        help="write performance measurements to stdout")
+    parser.add_argument('--checkpatterns',
+                        action='store_true',
+                        default=False,
+                        help="""check formal validity of built-in regular expression
             patterns""" )
-    fileorbookmark.add_argument( 'inputfile', type=argparse.FileType('r'),
-        nargs = "?" )
-    parser.add_argument( 'outputfile', nargs = "?" )
+    fileorbookmark.add_argument('inputfile', type=argparse.FileType('r'),
+                                nargs="?")
+    parser.add_argument('outputfile', nargs="?")
 
     return parser.parse_args(args=cliargs)
 
 
-def printcolor( message, messagetype = None ):
+def printcolor(message, messagetype=None):
     """Print a colored message
 
     :param str message: Message
