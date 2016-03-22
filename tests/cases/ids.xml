@@ -1,29 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <chapter id="sdsc.expect.warning.ids.1">
-    <title>ID test</title>
-    <para id="sdsc.expect.error.ids.2">
-        <sect2>
-            <para>I do not have an ID.</para>
-        </sect2>
-        <sect2>
-            <para>I do not have an ID.</para>
-        </sect2>
-    </para>
+    <para/>
 
-    <para>
-        <sect2 id="sdsc.expect.warning.ids.3">
-            <para>I have a bad ID.</para>
+    <title>ID test</title>
+    <sect1 id="sdsc.expect.error.ids.2">
+        <para/>
+        <sect2>
+            <para>I do not have an ID.</para>
         </sect2>
-        <sect2 id="sdsc.expect.warning.ids.4">
+        <sect2 id="sec.avoid.lone.subsection.message.1">
+            <para/>
+        </sect2>
+    </sect1>
+
+    <sect1 id="sec.bad.prefix">
+        <para/>
+        <sect2 id="override.sdsc.expect.warning.ids.3">
+            <para>I have a badly prefixed ID.</para>
+        </sect2>
+        <sect2 id="override.sdsc.expect.warning.ids.4">
             <para>Me too.</para>
         </sect2>
-    </para>
+    </sect1>
 
-    <sect2 id="sec.valid">
-        <para>I have a good ID.</para>
-    </sect2>
-    <sect2 id="sec.valid2">
-        <para>I do too.</para>
-    </sect2>
+    <sect1 id="sec.bad.specialcharacters">
+        <para/>
+        <sect2 id="sec.override.sdsc.expect.warning.ids.5/">
+            <para>I have an ID with special characters.</para>
+        </sect2>
+        <sect2 id="sec.override.sdsc.expect.warning.ids.6ü">
+            <para>Me too.</para>
+        </sect2>
+    </sect1>
+
+    <sect1 id="sec.valid.ids">
+        <para/>
+        <sect2 id="sec.valid">
+            <para>I have a good ID.</para>
+        </sect2>
+        <sect2 id="sec.valid-2">
+            <para>I do too.</para>
+        </sect2>
+    </sect1>
 </chapter>
 
