@@ -62,10 +62,7 @@ def re_compile(pattern, flags=0):
     except KeyError:
         if flags not in re_cache:
             re_cache[flags] = {}
-        try:
-            re_cache[flags][pattern] = re.compile(pattern, flags)
-        except re.error:
-            expressionerror("Syntax error in expression", pattern)
+        re_cache[flags][pattern] = re.compile(pattern, flags)
 
         return re_cache[flags][pattern]
 
@@ -509,7 +506,10 @@ def trypattern(pattern):
     if not flag_checkpatterns:
         return True
 
-    expression = re_compile(pattern, flags=re.I)
+    try:
+        expression = re_compile(pattern, flags=re.I)
+    except re.error as error:
+        expressionerror("Syntax error in expression (%s)" % error, pattern)
 
     try:
         tryresult = expression.search("")
