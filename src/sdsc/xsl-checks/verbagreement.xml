@@ -3,6 +3,21 @@
 
   <term>
     <accept>
+      <proposal>be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>(is|was|were)</pattern>
+      <contextpattern look="before">will</contextpattern>
+      <contextpattern look="before" location="2" match="negative">(my|his|her|their|our|the|a)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(is|was|were)</pattern>
+      <contextpattern look="before">would</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>can be</proposal>
     </accept>
     <patterngroup>
