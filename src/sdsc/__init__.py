@@ -962,7 +962,7 @@ def checkOneFile(inputfilepath):
     for check in prepared_checks:
         if flag_module or flag_performance:
             print("Running module {0!r}...".format(check["name"]))
-        result = check["transform"](inputfile, moduleName=etree.XSLT.strparam(check["name"]))
+
         try:
             result = check["transform"](inputfile, moduleName=etree.XSLT.strparam(check["name"]))
         except BaseException as error:
