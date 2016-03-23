@@ -615,11 +615,9 @@ def preparecontextpatterns(contextpatternxpath):
     trypattern(contextpatternxpathcontent)
 
     factors = [1]
-    location = []
+    locations = [1]
     fuzzymode = False
     positivematch = True
-    location = 1
-    actuallocations = []
 
     # Since this is now searched for instead of matched on, we need to avoid
     # searching for e.g. "mail" in "e-mail".
@@ -643,18 +641,16 @@ def preparecontextpatterns(contextpatternxpath):
 
     locationxpath = contextpatternxpath.get('location')
     if locationxpath:
-        location = int(locationxpath)
+        locations = [int(locationxpath)]
 
     if fuzzymode:
-        locationrange = range(1, (location + 1))
-        for i in locationrange:
-            for factor in factors:
-                actuallocations.append(i * factor)
-    else:
-        for factor in factors:
-            actuallocations.append(location * factor)
+        # Convert locations to ranges
+        locations = [locr for loc in locations for locr in range(1, loc + 1)]
 
-    return [contextpattern, actuallocations, positivematch]
+    # Apply all factors to all locations
+    locations = [loc * factor for loc in locations for factor in factors]
+
+    return [contextpattern, locations, positivematch]
 
 
 def emptypatternmessage(element):
