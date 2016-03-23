@@ -129,7 +129,7 @@ def findtagreplacement(text):
     tagtype = None
     tokens = 1
 
-    tagreplacement = re_compile('##@(\w+)-(\d+)##')
+    tagreplacement = re_compile(r'##@(\w+)-(\d+)##')
     tagsreplaced = tagreplacement.search(text)
 
     if tagsreplaced:
@@ -167,7 +167,7 @@ def sentencesegmenter(text):
 def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
               messagetype):
     # FIXME: Modes: para, title?
-    if not int(termfileid[0]) == int(termdataid):
+    if int(termfileid[0]) != int(termdataid):
         printcolor("Terminology data was not correctly initialized.", 'error')
         sys.exit(1)
 
@@ -291,7 +291,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
                             else:
                                 matchword = patterngrouppattern.match(words[patternposition])
                             if matchword:
-                                if not patterngrouppatternposition == 0:
+                                if patterngrouppatternposition != 0:
                                     # The first matched pattern should not make
                                     # us skip a word ahead.
                                     skipcounttemporary += 1
@@ -325,7 +325,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
                                                             patterngrouppatternposition,
                                                             contextpattern)
 
-                            if (len(contextpatternstopatterngroup) == contextmatches):
+                            if len(contextpatternstopatterngroup) == contextmatches:
                                 skipcount = skipcounttemporary
                                 trynextterm = False
                                 line = linenumber(context)
@@ -364,7 +364,7 @@ def matchcontextpattern(words, wordposition, totalwords,
             # patterngrouppatternposition is at 1,
             # even if there was just one pattern
             contextposition += patterngrouppatternposition - 1
-        if (contextposition < 0 or contextposition > (totalwords - 1)):
+        if contextposition < 0 or contextposition > (totalwords - 1):
             continue
         else:
             contextstring += str(words[contextposition]) + " "
@@ -479,8 +479,8 @@ def buildtermdata(context, terms, ignoredwords, useonepattern):
     else:
         ignoredpattern = False
 
-    accepts = list(map(prepareaccept, terms))
-    patterns = list(map(lambda term: preparetermpatterns(term, useonepattern), terms))
+    accepts = [prepareaccept(term) for term in terms]
+    patterns = [preparetermpatterns(term, useonepattern) for term in terms]
 
     if useonepattern:
         onepattern = onepattern[1:]
