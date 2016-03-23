@@ -607,17 +607,22 @@ def preparepatterns(patterngroupxpath, useonepattern):
     return [patternsofpatterngroup, patternforonepattern]
 
 
+def contextpatternlocations(locations, factors, fuzzymode=False):
+    """Returns locations to check for a contextpattern."""
+    if fuzzymode:
+        # Convert locations to ranges
+        locations = [locr for loc in locations for locr in range(1, loc + 1)]
+
+    # Apply all factors to all locations
+    return [loc * factor for loc in locations for factor in factors]
+
+
 def preparecontextpatterns(contextpatternxpath):
     contextpatternxpathcontent = contextpatternxpath.text
     if not contextpatternxpathcontent:
         emptypatternmessage('contextpattern')
 
     trypattern(contextpatternxpathcontent)
-
-    factors = [1]
-    locations = [1]
-    fuzzymode = False
-    positivematch = True
 
     # Since this is now searched for instead of matched on, we need to avoid
     # searching for e.g. "mail" in "e-mail".
@@ -628,27 +633,18 @@ def preparecontextpatterns(contextpatternxpath):
     else:
         contextpattern = re_compile(contextpatternxpathcontent, flags=re.I)
 
+    factors = [1]
     if contextpatternxpath.get('look') == 'before':
         factors = [-1]
     elif contextpatternxpath.get('look') == 'bothways':
         factors = [-1, 1]
 
-    if contextpatternxpath.get('mode') == 'fuzzy':
-        fuzzymode = True
-
-    if contextpatternxpath.get('match') == 'negative':
-        positivematch = False
+    fuzzymode = contextpatternxpath.get('mode') == 'fuzzy'
+    positivematch = contextpatternxpath.get('match') != 'negative'
 
     locationxpath = contextpatternxpath.get('location')
-    if locationxpath:
-        locations = [int(locationxpath)]
-
-    if fuzzymode:
-        # Convert locations to ranges
-        locations = [locr for loc in locations for locr in range(1, loc + 1)]
-
-    # Apply all factors to all locations
-    locations = [loc * factor for loc in locations for factor in factors]
+    locations = [int(locationxpath)] if locationxpath else [1]
+    locations = contextpatternlocations(locations, factors, fuzzymode)
 
     return [contextpattern, locations, positivematch]
 

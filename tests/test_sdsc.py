@@ -59,6 +59,14 @@ def test_highlighter():
     assert xml == "highlight <highlight>these two</highlight> words"
 
 
+def test_contextpatternlocations():
+    """checks the contextpatternlocations function"""
+    assert sdsc.contextpatternlocations([1], [1]) == [1]
+    assert sdsc.contextpatternlocations([2], [-1, 1]) == [-2, 2]
+    assert sdsc.contextpatternlocations([3], [1], True) == [1, 2, 3]
+    assert sdsc.contextpatternlocations([3], [-1], True) == [-1, -2, -3]
+
+
 def test_xml(xmltestcase):
     """Runs specified testcase and validates the output of all checks.
     The xmltestcase fixture returns all files in tests/cases"""
