@@ -228,16 +228,11 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
 
         skipcount = 0
         for wordposition, word in enumerate(words):
-
-            currenttokeninparagraph += 1
-
-            istagreplacement, tagtype, tagtokens = findtagreplacement(word)
-
-            if istagreplacement:
-                # We hit upon a placeholder, e.g. ##@key-1##. The number
-                # (here: 1) signifies the number of tokens this placeholder
-                # replaces.
-                currenttokeninparagraph += tagtokens - 1
+            # If we hit a placeholder, e.g. ##@key-1##, the number
+            # (here: 1) signifies the number of tokens this placeholder
+            # replaces. If no placeholder found, tagtokens is 1.
+            _, _, tagtokens = findtagreplacement(word)
+            currenttokeninparagraph += tagtokens
 
             # Idea of skipcount: if we previously matched a multi-word pattern,
             # we can simply skip the next few words since they were matched
@@ -250,9 +245,8 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
 
             # don't burn time on checking small words like "the," "a," "of" etc.
             # (configurable from within terminology file)
-            if ignoredpattern:
-                if ignoredpattern.match(word):
-                    continue
+            if ignoredpattern and ignoredpattern.match(word):
+                continue
 
             # When a pattern already matches on a word, don't try to find more
             # problems with it.
@@ -423,6 +417,7 @@ def preparetermpatterns(term, useonepattern):
         contextpatterns.append(contextpatternsofpatterngroup)
 
     return patternsofterm
+
 
 def buildtermdata(context, terms, ignoredwords, useonepattern):
     del context  # not used
@@ -790,19 +785,15 @@ def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
 
     for sentence in sentences:
         words = tokenizer(sentence)
-        wordcount = len(words)
 
         # Count tag replacements
+        wordcount = 0
         for token in words:
-            istagreplacement, tagtype, tagtokens = findtagreplacement(token)
-            if istagreplacement:
-                sentenceend += tagtokens
-                # We want to count tag placeholders as 1 word, except
-                # when empty, then they equal 0 words.
-                if tagtokens == 0:
-                    wordcount -= 1
-            else:
-                sentenceend += 1
+            _, _, tagtokens = findtagreplacement(token)
+
+            sentenceend += tagtokens
+            # Tag placeholders count as max. 1 word.
+            wordcount += min(1, tagtokens)
 
         if wordcount >= maximumlengths[0]:
             filename = "<file>{0}</file>".format(basefile) if basefile else ""
@@ -839,9 +830,7 @@ def canBeDupe(word):
 
     numberignore = re_compile(r'[[{(\'"\s]*[-+]?[0-9]+(?:[.,][0-9]+)*[]})\'";:.\s]*')
 
-    istagreplacement, tagtype, tagtokens = findtagreplacement(word)
-
-    return len(word) > 0 and not numberignore.match(word) and not istagreplacement
+    return len(word) > 0 and not numberignore.match(word) and not findtagreplacement(word)[0]
 
 
 def isDupe(tokens, pos):
@@ -903,8 +892,7 @@ def dupecheck(context, content, contentpretty, contextid, basefile):
     currentIndex = 0
     for word in tokens:
         wordtuples.append((currentIndex, word))
-
-        istagreplacement, tagtype, tagtokens = findtagreplacement(word)
+        _, _, tagtokens = findtagreplacement(word)
         currentIndex += tagtokens
 
     words = [word for index, word in wordtuples]
