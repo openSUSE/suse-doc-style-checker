@@ -1,6 +1,12 @@
 language: python
-python: '3.5'
 sudo: false
+addons:
+  apt:
+    sources:
+      - deadsnakes
+    packages:
+      - python3.5
+      - python3.5-dev
 env:
   global:
     LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
