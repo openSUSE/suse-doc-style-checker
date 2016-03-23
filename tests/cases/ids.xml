@@ -3,7 +3,7 @@
     <para/>
 
     <title>ID test</title>
-    <sect1 id="sdsc.expect.error.ids.2">
+    <sect1 id="sec.sdsc.expect.error.ids.2">
         <para/>
         <sect2>
             <para>I do not have an ID.</para>
@@ -15,20 +15,20 @@
 
     <sect1 id="sec.bad.prefix">
         <para/>
-        <sect2 id="override.sdsc.expect.warning.ids.3">
+        <sect2 id="badprefix.sdsc.expect.warning.ids.3">
             <para>I have a badly prefixed ID.</para>
         </sect2>
-        <sect2 id="override.sdsc.expect.warning.ids.4">
+        <sect2 id="badprefix.sdsc.expect.warning.ids.4">
             <para>Me too.</para>
         </sect2>
     </sect1>
 
     <sect1 id="sec.bad.specialcharacters">
         <para/>
-        <sect2 id="sec.override.sdsc.expect.warning.ids.5/">
+        <sect2 id="sec.sdsc.expect.warning.ids.5/">
             <para>I have an ID with special characters.</para>
         </sect2>
-        <sect2 id="sec.override.sdsc.expect.warning.ids.6ü">
+        <sect2 id="sec.sdsc.expect.warning.ids.6ü">
             <para>Me too.</para>
         </sect2>
     </sect1>
