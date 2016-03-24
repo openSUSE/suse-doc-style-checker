@@ -1,25 +1,23 @@
 language: python
 sudo: false
-addons:
-  apt:
-    sources:
-      - deadsnakes
-    packages:
-      - python3.5
-      - python3.5-dev
 env:
   global:
     LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
-  matrix:
-    - TOXENV=check
+    CFLAGS="-O0"
 
-    - TOXENV=3.4
-    - TOXENV=3.5
+matrix:
+  include:
+    - env: TOXENV=check
+    - env: TOXENV=3.4
+    - env: TOXENV=3.5
+      addons:
+        apt:
+          sources:
+          - deadsnakes
+          packages:
+          - python3.5
+          - python3.5-dev
 
-before_install:
-  - python3.5 --version
-  - uname -a
-  - lsb_release -a
 install:
   - pip install tox
   - virtualenv --version
@@ -27,7 +25,7 @@ install:
   - pip --version
   - tox --version
 script:
-  - CFLAGS="-O0" tox -v
+  - tox -v
 after_failure:
   - more .tox/log/* | cat
   - more .tox/*/log/* | cat
