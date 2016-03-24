@@ -921,7 +921,7 @@ def checkOneFile(inputfilepath):
 
         try:
             result = check["transform"](inputfile, moduleName=etree.XSLT.strparam(check["name"]))
-        except BaseException as error:
+        except Exception as error:
             printcolor("! Broken check file or Python function (module {0!r})".format(check["name"]), 'error')
             printcolor("  " + str(error), 'error')
             sys.exit(1)
@@ -983,7 +983,7 @@ def initialize():
             checkmodule = re.sub(r'.xslc$', r'', checkmodule)
             transform = etree.XSLT(etree.parse(checkfile, parser))
             prepared_checks.append({'name': checkmodule, 'transform': transform})
-        except BaseException as error:
+        except Exception as error:
             printcolor("! Syntax error in check file.\n  " + checkfile, 'error')
             printcolor("  " + str(error), 'error')
 
@@ -1031,7 +1031,14 @@ def main(cliargs=None):
     resultfile = os.path.join(resultpath, resultfilename)
     resultfh = open(resultfile, 'w')
 
-    result = checkOneFile(args.inputfile.name)
+    try:
+        result = checkOneFile(args.inputfile.name)
+    except KeyboardInterrupt:
+        printcolor("Operation cancelled!", 'error')
+        sys.exit(1)
+    except etree.Error as error:
+        printcolor("Syntax error in input: {0}!".format(error.msg), 'error')
+        sys.exit(1)
 
     resultfh.write(str(result))
     resultfh.close()

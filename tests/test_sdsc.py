@@ -71,11 +71,12 @@ def test_xml(xmltestcase):
     """Runs specified testcase and validates the output of all checks.
     The xmltestcase fixture returns all files in tests/cases"""
     nr_errors = 0
+
+    testname = os.path.basename(xmltestcase)
     try:
         resultxml = sdsc.checkOneFile(xmltestcase)
-    except:
-        pytest.fail("Either testcase {0!r} or check XML have errors!".format(
-            os.path.basename(xmltestcase)))
+    except etree.Error as error:
+        pytest.fail("Syntax error in testcase {0!r}: {1}!".format(testname, error.msg))
 
     # Parse the input file and gather all ids
     inputtree = etree.parse(xmltestcase)
@@ -86,12 +87,11 @@ def test_xml(xmltestcase):
             if eid.count("sdsc."):
                 if eid in inputids:
                     pytest.fail(
-                        "Duplicate ID {0!r} in case {1!r}!".format(eid, xmltestcase))
+                        "Duplicate ID {0!r} in case {1!r}!".format(eid, testname))
 
                 inputids.append(eid)
     if len(inputids) == 0:
-        pytest.skip("No tests found in {0}".format(
-            os.path.basename(xmltestcase)))
+        pytest.skip("No tests found in {0}".format(testname))
 
     # Parse the result file and collect ids of errors and warnings
     resulttree = etree.fromstring(resultxml)
