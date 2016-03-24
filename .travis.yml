@@ -27,7 +27,7 @@ install:
   - pip --version
   - tox --version
 script:
-  - tox -v
+  - CFLAGS="-O0" tox -v
 after_failure:
   - more .tox/log/* | cat
   - more .tox/*/log/* | cat
