@@ -17,11 +17,11 @@ env:
     - TOXENV=3.5
 
 before_install:
-  - python --version
+  - python3.5 --version
   - uname -a
   - lsb_release -a
 install:
-  - pip install -r test_requirements.txt
+  - pip install tox
   - virtualenv --version
   - easy_install --version
   - pip --version
