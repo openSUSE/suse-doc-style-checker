@@ -302,39 +302,36 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
                                 break
                             patterngrouppatternposition += 1
 
-                        contextmatches = 0
                         contextpatternstopatterngroup = contextpatterns[patterngroupposition]
                         highlightstart = currenttokeninparagraph
                         highlightend = highlightstart + skipcounttemporary
-                        if trycontextpatterns:
-                            if contextpatternstopatterngroup[0][0] is None:
-                                # easy positive
-                                skipcount = skipcounttemporary
-                                trynextterm = False
-                                line = linenumber(context)
-                                contenthighlighted = highlight(xmlescape(contentpretty), highlightstart, highlightend)
-                                messages.append(termcheckmessage(
-                                    acceptword, acceptcontext, matchwords, line,
-                                    contenthighlighted, contextid, basefile,
-                                    messagetype))
-                            else:
-                                for contextpattern in contextpatternstopatterngroup:
-                                    if contextpattern[0]:
-                                        contextmatches += matchcontextpattern(words,
-                                                            wordposition, totalwords,
-                                                            patterngrouppatternposition,
-                                                            contextpattern)
-
-                            if len(contextpatternstopatterngroup) == contextmatches:
-                                skipcount = skipcounttemporary
-                                trynextterm = False
-                                line = linenumber(context)
-                                contenthighlighted = highlight(xmlescape(contentpretty), highlightstart, highlightend)
-                                messages.append(termcheckmessage(
-                                    acceptword, acceptcontext, matchwords, line,
-                                    contenthighlighted, contextid, basefile,
-                                    messagetype))
                         patterngroupposition += 1
+                        if not trycontextpatterns:
+                            continue
+
+                        matches = False
+                        if contextpatternstopatterngroup[0][0] is None:
+                            # easy positive
+                            matches = True
+                        else:
+                            matches = True
+                            for contextpattern in contextpatternstopatterngroup:
+                                if not contextpattern[0] or not matchcontextpattern(words,
+                                                        wordposition, totalwords,
+                                                        patterngrouppatternposition,
+                                                        contextpattern):
+                                    matches = False
+                                    break
+
+                        if matches:
+                            skipcount = skipcounttemporary
+                            trynextterm = False
+                            line = linenumber(context)
+                            contenthighlighted = highlight(xmlescape(contentpretty), highlightstart, highlightend)
+                            messages.append(termcheckmessage(
+                                acceptword, acceptcontext, matchwords, line,
+                                contenthighlighted, contextid, basefile,
+                                messagetype))
 
     if flag_performance:
         timeendmatch = time.time()
@@ -354,7 +351,6 @@ def matchcontextpattern(words, wordposition, totalwords,
                         patterngrouppatternposition, contextpattern):
 
     contextwheres = contextpattern[1]
-    contextmatches = 0
 
     contextstring = ""
     for contextwhere in contextwheres:
@@ -380,17 +376,17 @@ def matchcontextpattern(words, wordposition, totalwords,
         if contextstring:
             contextword = contextpattern[0].search(contextstring)
             if contextword:
-                contextmatches += 1
+                return True
     # negative matching
     else:
         if not contextstring:
-            contextmatches += 1
+            return True
         else:
             contextword = contextpattern[0].search(contextstring)
             if not contextword:
-                contextmatches += 1
+                return True
 
-    return contextmatches
+    return False
 
 def preparetermpatterns(term, useonepattern):
     global onepattern
