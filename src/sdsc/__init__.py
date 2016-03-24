@@ -129,7 +129,7 @@ def findtagreplacement(text):
     tagtype = None
     tokens = 1
 
-    tagreplacement = re_compile('##@(\w+)-(\d+)##')
+    tagreplacement = re_compile(r'##@(\w+)-(\d+)##')
     tagsreplaced = tagreplacement.search(text)
 
     if tagsreplaced:
@@ -167,7 +167,7 @@ def sentencesegmenter(text):
 def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
               messagetype):
     # FIXME: Modes: para, title?
-    if not int(termfileid[0]) == int(termdataid):
+    if int(termfileid[0]) != int(termdataid):
         printcolor("Terminology data was not correctly initialized.", 'error')
         sys.exit(1)
 
@@ -291,7 +291,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
                             else:
                                 matchword = patterngrouppattern.match(words[patternposition])
                             if matchword:
-                                if not patterngrouppatternposition == 0:
+                                if patterngrouppatternposition != 0:
                                     # The first matched pattern should not make
                                     # us skip a word ahead.
                                     skipcounttemporary += 1
@@ -325,7 +325,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
                                                             patterngrouppatternposition,
                                                             contextpattern)
 
-                            if (len(contextpatternstopatterngroup) == contextmatches):
+                            if len(contextpatternstopatterngroup) == contextmatches:
                                 skipcount = skipcounttemporary
                                 trynextterm = False
                                 line = linenumber(context)
@@ -364,7 +364,7 @@ def matchcontextpattern(words, wordposition, totalwords,
             # patterngrouppatternposition is at 1,
             # even if there was just one pattern
             contextposition += patterngrouppatternposition - 1
-        if (contextposition < 0 or contextposition > (totalwords - 1)):
+        if contextposition < 0 or contextposition > (totalwords - 1):
             continue
         else:
             contextstring += str(words[contextposition]) + " "
@@ -479,8 +479,8 @@ def buildtermdata(context, terms, ignoredwords, useonepattern):
     else:
         ignoredpattern = False
 
-    accepts = list(map(prepareaccept, terms))
-    patterns = list(map(lambda term: preparetermpatterns(term, useonepattern), terms))
+    accepts = [prepareaccept(term) for term in terms]
+    patterns = [preparetermpatterns(term, useonepattern) for term in terms]
 
     if useonepattern:
         onepattern = onepattern[1:]
@@ -607,19 +607,22 @@ def preparepatterns(patterngroupxpath, useonepattern):
     return [patternsofpatterngroup, patternforonepattern]
 
 
+def contextpatternlocations(locations, factors, fuzzymode=False):
+    """Returns locations to check for a contextpattern."""
+    if fuzzymode:
+        # Convert locations to ranges
+        locations = [locr for loc in locations for locr in range(1, loc + 1)]
+
+    # Apply all factors to all locations
+    return [loc * factor for loc in locations for factor in factors]
+
+
 def preparecontextpatterns(contextpatternxpath):
     contextpatternxpathcontent = contextpatternxpath.text
     if not contextpatternxpathcontent:
         emptypatternmessage('contextpattern')
 
     trypattern(contextpatternxpathcontent)
-
-    factors = [1]
-    location = []
-    fuzzymode = False
-    positivematch = True
-    location = 1
-    actuallocations = []
 
     # Since this is now searched for instead of matched on, we need to avoid
     # searching for e.g. "mail" in "e-mail".
@@ -630,31 +633,20 @@ def preparecontextpatterns(contextpatternxpath):
     else:
         contextpattern = re_compile(contextpatternxpathcontent, flags=re.I)
 
+    factors = [1]
     if contextpatternxpath.get('look') == 'before':
         factors = [-1]
     elif contextpatternxpath.get('look') == 'bothways':
         factors = [-1, 1]
 
-    if contextpatternxpath.get('mode') == 'fuzzy':
-        fuzzymode = True
-
-    if contextpatternxpath.get('match') == 'negative':
-        positivematch = False
+    fuzzymode = contextpatternxpath.get('mode') == 'fuzzy'
+    positivematch = contextpatternxpath.get('match') != 'negative'
 
     locationxpath = contextpatternxpath.get('location')
-    if locationxpath:
-        location = int(locationxpath)
+    locations = [int(locationxpath)] if locationxpath else [1]
+    locations = contextpatternlocations(locations, factors, fuzzymode)
 
-    if fuzzymode:
-        locationrange = range(1, (location + 1))
-        for i in locationrange:
-            for factor in factors:
-                actuallocations.append(i * factor)
-    else:
-        for factor in factors:
-            actuallocations.append(location * factor)
-
-    return [contextpattern, actuallocations, positivematch]
+    return [contextpattern, locations, positivematch]
 
 
 def emptypatternmessage(element):

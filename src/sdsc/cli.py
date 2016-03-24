@@ -21,10 +21,10 @@
 """SDSC Module that handles CLI-related tasks
 """
 
-from . import __description__, __programname__, __version__
-
 import argparse
 import sys
+
+from . import __description__, __programname__, __version__
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
 # (self-explanatory anyway). Get rid of "optional arguments" header. Make sure
@@ -51,7 +51,7 @@ def parseargs(cliargs=None):
                                 action='store_true',
                                 default=False,
                                 help="""open Web page that lets you install a bookmarklet to manage
-            style checker results""" )
+            style checker results""")
     parser.add_argument('-s', '--show',
                         action='store_true',
                         default=False,
@@ -59,7 +59,7 @@ def parseargs(cliargs=None):
             all browsers open report files correctly and for some users, a text
             editor will open; in such cases, set the BROWSER variable with:
             export BROWSER=/MY/BROWSER ; Chromium or Firefox will both
-            do the right thing""" )
+            do the right thing""")
     parser.add_argument('--module',
                         action='store_true',
                         default=False,
@@ -72,7 +72,7 @@ def parseargs(cliargs=None):
                         action='store_true',
                         default=False,
                         help="""check formal validity of built-in regular expression
-            patterns""" )
+            patterns""")
     fileorbookmark.add_argument('inputfile', type=argparse.FileType('r'),
                                 nargs="?")
     parser.add_argument('outputfile', nargs="?")
