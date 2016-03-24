@@ -349,20 +349,14 @@ average time per word: %s\n"""
 
 def matchcontextpattern(words, wordposition, totalwords,
                         patterngrouppatternposition, contextpattern):
-
-    contextwheres = contextpattern[1]
-
     contextstring = ""
-    for contextwhere in contextwheres:
-        contextposition = None
+    for contextwhere in contextpattern[1]:
         contextposition = wordposition + contextwhere
         if contextwhere > 0:
             # patterngrouppatternposition is at 1,
             # even if there was just one pattern
             contextposition += patterngrouppatternposition - 1
-        if contextposition < 0 or contextposition > (totalwords - 1):
-            continue
-        else:
+        if contextposition >= 0 and contextposition <= (totalwords - 1):
             contextstring += str(words[contextposition]) + " "
 
     # We could check for an empty context
@@ -371,22 +365,8 @@ def matchcontextpattern(words, wordposition, totalwords,
     # results when doing negative
     # matching.
 
-    # positive matching
-    if contextpattern[2]:
-        if contextstring:
-            contextword = contextpattern[0].search(contextstring)
-            if contextword:
-                return True
-    # negative matching
-    else:
-        if not contextstring:
-            return True
-        else:
-            contextword = contextpattern[0].search(contextstring)
-            if not contextword:
-                return True
-
-    return False
+    match = bool(contextstring) and bool(contextpattern[0].search(contextstring))
+    return bool(contextpattern[2]) == match
 
 def preparetermpatterns(term, useonepattern):
     global onepattern
