@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter id="cha.test.figures">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.figures">
     <title>Figures test</title>
-    <para>
-        <mediaobject id="sdsc.expect.warning.figures.1">
+    <para/>
+    <sect1 xml:id="sec.asdf1">
+        <para/>
+        <mediaobject xml:id="sdsc.expect.warning.figures.1">
+            <imageobject>
+                <imagedata fileref="normal_file.name"/>
+            </imageobject>
         </mediaobject>
-        <mediaobject id="sdsc.valid.1">
+        <mediaobject xml:id="sdsc.valid.1">
             <textobject>
                 <phrase>Nothing to see here.</phrase>
             </textobject>
         </mediaobject>
 
-        <imagedata fileref="Uppercasefile.name" id="sdsc.expect.error.figures.2"/>
-        <imagedata fileref="filename with.space" id="sdsc.expect.error.figures.3"/>
-        <imagedata fileref="$pecia!f1le.name" id="sdsc.expect.error.figures.4"/>
-        <imagedata fileref="ümlautfile.name" id="sdsc.expect.error.figures.5"/>
-        <imagedata fileref="normal_file.name" id="sdsc.valid.2"/>
-        <imagedata fileref="1-normalfile.name" id="sdsc.valid.3"/>
-    </para>
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="Uppercasefile.name" xml:id="sdsc.expect.error.figures.2"/>
+            </imageobject>
+            <imageobject>
+                <imagedata fileref="filename with.space" xml:id="sdsc.expect.error.figures.3"/>
+            </imageobject>
+            <imageobject>
+                <imagedata fileref="$pecia!f1le.name" xml:id="sdsc.expect.error.figures.4"/>
+            </imageobject>
+            <imageobject>
+                <imagedata fileref="ümlautfile.name" xml:id="sdsc.expect.error.figures.5"/>
+            </imageobject>
+            <imageobject>
+                <imagedata fileref="normal_file.name" xml:id="sdsc.valid.2"/>
+            </imageobject>
+            <imageobject>
+                <imagedata fileref="1-normalfile.name" xml:id="sdsc.valid.3"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+    </sect1>
+    <sect1 xml:id="sec.asdf2">
+        <para/>
+    </sect1>
 </chapter>

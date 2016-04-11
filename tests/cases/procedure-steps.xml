@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter id="cha.test.procedure-steps">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.procedure-steps">
     <title>Test</title>
-    <para id="sdsc.expect.error.procedure-steps.1">
+    <para xml:id="sdsc.expect.error.procedure-steps.1">
         <procedure>
-            <step>Add more steps</step>
+            <step><para>Add more steps</para></step>
         </procedure>
     </para>
-    <para id="sdsc.expect.warning.procedure-steps.2">
+    <para xml:id="sdsc.expect.warning.procedure-steps.2">
         <procedure>
-            <step>Remove some steps</step>
-            <step>Maybe</step>
-            <step>What if I like steps?</step>
-            <step></step>
-            <step>What, we are not talking about stairs?</step>
-            <step>Well, in that case</step>
-            <step>Add some more</step>
-            <step>Just to have more than 10</step>
-            <step>Almost there</step>
-            <step>Not quite</step>
-            <step>Now we got it!</step>
+            <step><para>Remove some steps</para></step>
+            <step><para>Maybe</para></step>
+            <step><para>What if I like steps?</para></step>
+            <step><para></para></step>
+            <step><para>What, we are not talking about stairs?</para></step>
+            <step><para>Well, in that case</para></step>
+            <step><para>Add some more</para></step>
+            <step><para>Just to have more than 10</para></step>
+            <step><para>Almost there</para></step>
+            <step><para>Not quite</para></step>
+            <step><para>Now we got it!</para></step>
         </procedure>
     </para>
-    <para id="sdsc.valid">
+    <para xml:id="sdsc.valid">
         <procedure>
-            <step>Have money</step>
-            <step>???</step>
-            <step>Profit!</step>
+            <step><para>Have money</para></step>
+            <step><para>???</para></step>
+            <step><para>Profit!</para></step>
         </procedure>
     </para>
 </chapter>

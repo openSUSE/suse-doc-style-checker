@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter id="sdsc.expect.warning.ids.1">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="sdsc.expect.warning.ids.1">
+    <title>ID test</title>
     <para/>
 
-    <title>ID test</title>
-    <sect1 id="sec.sdsc.expect.error.ids.2">
+    <sect1 xml:id="sec.sdsc.expect.error.ids.2">
         <para/>
         <sect2>
             <para>I do not have an ID.</para>
         </sect2>
-        <sect2 id="sec.avoid.lone.subsection.message.1">
+        <sect2 xml:id="sec.avoid.lone.subsection.message.1">
             <para/>
         </sect2>
     </sect1>
 
-    <sect1 id="sec.bad.prefix">
+    <sect1 xml:id="sec.bad.prefix">
         <para/>
-        <sect2 id="badprefix.sdsc.expect.warning.ids.3">
+        <sect2 xml:id="badprefix.sdsc.expect.warning.ids.3">
             <para>I have a badly prefixed ID.</para>
         </sect2>
-        <sect2 id="badprefix.sdsc.expect.warning.ids.4">
+        <sect2 xml:id="badprefix.sdsc.expect.warning.ids.4">
             <para>Me too.</para>
         </sect2>
     </sect1>
 
-    <sect1 id="sec.bad.specialcharacters">
+    <sect1 xml:id="sec.bad.specialcharacters">
         <para/>
-        <sect2 id="sec.sdsc.expect.warning.ids.5/">
+        <sect2 xml:id="sec.sdsc.expect.warning.ids.5ü">
             <para>I have an ID with special characters.</para>
         </sect2>
-        <sect2 id="sec.sdsc.expect.warning.ids.6ü">
+        <sect2 xml:id="sec.sdsc.expect.warning.ids.6ß">
             <para>Me too.</para>
         </sect2>
     </sect1>
 
-    <sect1 id="sec.valid.ids">
+    <sect1 xml:id="sec.valid.ids">
         <para/>
-        <sect2 id="sec.valid">
+        <sect2 xml:id="sec.valid">
             <para>I have a good ID.</para>
         </sect2>
-        <sect2 id="sec.valid-2">
+        <sect2 xml:id="sec.valid-2">
             <para>I do too.</para>
         </sect2>
     </sect1>

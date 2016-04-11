@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter id="cha.test.contractions">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.contractions">
     <title>Contractions test</title>
-    <para id="sdsc.expect.error.contractions.1">
+    <para xml:id="sdsc.expect.error.contractions.1">
         I'm a contraction.
     </para>
-    <para id="sdsc.valid.1">
+    <para xml:id="sdsc.valid.1">
         I am not.
     </para>
 </chapter>

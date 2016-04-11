@@ -12,7 +12,7 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Callouts</xsl:template>
 
-  <xsl:template match="calloutlist|db5:*">
+  <xsl:template match="calloutlist|db5:calloutlist">
     <xsl:variable name="callouts" select="count(callout|db5:callout)"/>
 
     <xsl:if test="$callouts &gt; 10">

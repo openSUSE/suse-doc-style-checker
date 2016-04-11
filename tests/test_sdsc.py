@@ -82,7 +82,7 @@ def test_xml(xmltestcase):
     inputtree = etree.parse(xmltestcase)
     inputids = []
     for elem in inputtree.getiterator():
-        eid = elem.get("id")
+        eid = elem.get("{http://www.w3.org/XML/1998/namespace}id", elem.get("id")) 
         if eid is not None:
             if eid.count("sdsc."):
                 if eid in inputids:

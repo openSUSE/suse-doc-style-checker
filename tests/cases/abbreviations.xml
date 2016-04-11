@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter id="cha.test.abbreviations">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.abbreviations">
     <title>Abbreviations test</title>
-    <para id="sdsc.expect.error.abbreviations.1">
+    <para xml:id="sdsc.expect.error.abbreviations.1">
         My feelings about XSLT are ca. 100% love.
     </para>
-    <para id="sdsc.expect.error.abbreviations.2">
+    <para xml:id="sdsc.expect.error.abbreviations.2">
         Who would win in a race of 100 chameleon-sized horses vs. 1 horse-sized
         chameleon?
     </para>
-    <para id="sdsc.expect.error.abbreviations.3">
+    <para xml:id="sdsc.expect.error.abbreviations.3">
         This was summarily disproven by Brontosaurus et al.
     </para>
-    <para id="sdsc.expect.error.abbreviations.4">
+    <para xml:id="sdsc.expect.error.abbreviations.4">
         Ibid., see page 347.
     </para>
-    <para id="sdsc.expect.error.abbreviations.5">
+    <para xml:id="sdsc.expect.error.abbreviations.5">
         Humanity has brought forth over ten awesome inventions, e.g. XSLT.
     </para>
-    <para id="sdsc.expect.error.abbreviations.6">
+    <para xml:id="sdsc.expect.error.abbreviations.6">
         NB that I am serious about this.
     </para>
-    <para id="sdsc.expect.error.abbreviations.7">
+    <para xml:id="sdsc.expect.error.abbreviations.7">
         For more information, q. v. the other page.
     </para>
-    <para id="sdsc.expect.error.abbreviations.8">
+    <para xml:id="sdsc.expect.error.abbreviations.8">
         I am not sure this works well, i. e. there may be issues.
     </para>
-    <para id="sdsc.expect.error.abbreviations.9">
+    <para xml:id="sdsc.expect.error.abbreviations.9">
         Bernd, re: our recent discussion, I think you are right.
     </para>
-    <para id="sdsc.expect.error.abbreviations.10">
+    <para xml:id="sdsc.expect.error.abbreviations.10">
         Resp., our tried and true approach of argumentation.
     </para>
-    <para id="sdsc.expect.error.abbreviations.11">
+    <para xml:id="sdsc.expect.error.abbreviations.11">
         IMHO, this should happen ASAP, but IDK.
     </para>
 </chapter>
