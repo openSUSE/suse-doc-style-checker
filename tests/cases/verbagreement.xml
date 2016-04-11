@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter id="cha.test.verbagreement">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.verbagreement">
     <title>Verbagreement test</title>
-    <para id="sdsc.expect.error.verbagreement.1">
+    <para xml:id="sdsc.expect.error.verbagreement.1">
         Working with XML should amazing, and it is.
     </para>
-    <para id="sdsc.valid.2">
+    <para xml:id="sdsc.valid.2">
         Working with XSLT, however, must be awesome.
         It is part of the language.
     </para>

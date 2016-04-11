@@ -1,86 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter id="cha.test.typos">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.typos">
     <title>Test for typos</title>
-    <para id="sdsc.expect.error.typos.1">
+    <para xml:id="sdsc.expect.error.typos.1">
         Hence, the file is always adopted before it is used.
     </para>
-    <para id="sdsc.expect.error.typos.2">
+    <para xml:id="sdsc.expect.error.typos.2">
         This is a test fro typos.
     </para>
-    <para id="sdsc.expect.error.typos.3">
+    <para xml:id="sdsc.expect.error.typos.3">
         adoptation
     </para>
-    <para id="sdsc.expect.error.typos.4">
+    <para xml:id="sdsc.expect.error.typos.4">
         He was adapt at creating test cases.
     </para>
-    <para id="sdsc.expect.error.typos.5">
+    <para xml:id="sdsc.expect.error.typos.5">
         XML is widely adapted standard.
     </para>
-    <para id="sdsc.expect.error.typos.6">
+    <para xml:id="sdsc.expect.error.typos.6">
         For along time, however, it was shunned by many people.
     </para>
-    <para id="sdsc.expect.error.typos.7">
+    <para xml:id="sdsc.expect.error.typos.7">
         in all though
     </para>
-    <para id="sdsc.expect.error.typos.8">
+    <para xml:id="sdsc.expect.error.typos.8">
         I was aloud to write these wonderful tests.
     </para>
-    <para id="sdsc.expect.error.typos.9">
+    <para xml:id="sdsc.expect.error.typos.9">
         The tests are flying in left in right.
     </para>
-    <para id="sdsc.expect.error.typos.10">
+    <para xml:id="sdsc.expect.error.typos.10">
         If you look at ant one of these sentences, you will see they do not make
         a lot of sense.
     </para>
-    <para id="sdsc.expect.error.typos.11">
+    <para xml:id="sdsc.expect.error.typos.11">
         I do not want to write XML any more
     </para>
-    <para id="sdsc.expect.error.typos.12">
+    <para xml:id="sdsc.expect.error.typos.12">
         Anymore of those and I'll open a rainbow factory.
     </para>
-    <para id="sdsc.expect.error.typos.13">
+    <para xml:id="sdsc.expect.error.typos.13">
         Try to format your documentation a s a Markdown file.
     </para>
-    <para id="sdsc.expect.error.typos.14">
+    <para xml:id="sdsc.expect.error.typos.14">
         A bear market as oppose to a bull market.
     </para>
-    <para id="sdsc.expect.error.typos.15">
+    <para xml:id="sdsc.expect.error.typos.15">
         You need to bare in mind, that nothing is bad.
     </para>
-    <para id="sdsc.expect.error.typos.16">
+    <para xml:id="sdsc.expect.error.typos.16">
         To being with, I expected more people to show up.
     </para>
-    <para id="sdsc.expect.error.typos.17">
+    <para xml:id="sdsc.expect.error.typos.17">
         As per the usually, meetings start at 4 AM.
     </para>
-    <para id="sdsc.expect.error.typos.18">
+    <para xml:id="sdsc.expect.error.typos.18">
         Bye the way: Try a new programming language once in a while.
     </para>
-    <para id="sdsc.expect.error.typos.19">
+    <para xml:id="sdsc.expect.error.typos.19">
         I was trying to do good things "per default".
     </para>
-    <para id="sdsc.expect.error.typos.20">
+    <para xml:id="sdsc.expect.error.typos.20">
         To chose wisely is to choose to write documentation.
     </para>
-    <para id="sdsc.expect.error.typos.21">
+    <para xml:id="sdsc.expect.error.typos.21">
         If I had a chance, I would have made sure it was complaint!
     </para>
-    <para id="sdsc.expect.error.typos.22">
+    <para xml:id="sdsc.expect.error.typos.22">
         Everything confirmed to style.
     </para>
-    <para id="sdsc.expect.error.typos.23">
+    <para xml:id="sdsc.expect.error.typos.23">
         It consisted on various things.
     </para>
-    <para id="sdsc.expect.error.typos.24">
+    <para xml:id="sdsc.expect.error.typos.24">
         Having an up to data system is very important.
     </para>
-    <para id="sdsc.expect.error.typos.25">
+    <para xml:id="sdsc.expect.error.typos.25">
         Before you can start the VM, create a hard dick image.
     </para>
-    <para id="sdsc.expect.error.typos.26">
+    <para xml:id="sdsc.expect.error.typos.26">
         We later found out what we had doe.
     </para>
-    <para id="sdsc.expect.error.typos.27">
+    <para xml:id="sdsc.expect.error.typos.27">
         But apart form minor hiccups, there was nothing.
     </para>
 </chapter>

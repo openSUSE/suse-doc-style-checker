@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter id="cha.test.admonitions">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.admonitions">
     <title>Admonitions test</title>
     <para>
-        <caution id="sdsc.expect.error.admonitions.1">
+        <caution xml:id="sdsc.expect.error.admonitions.1">
             <title>This should be a warning tag instead.</title>
+            <para></para>
         </caution>
-        <warning id="sdsc.expect.error.admonitions.2">
+        <warning xml:id="sdsc.expect.error.admonitions.2">
             <para>
                 This needs a title.
             </para>
         </warning>
-        <warning id="sdsc.valid.1">
+        <warning xml:id="sdsc.valid.1">
             <title>This should not be a caution tag.</title>
+            <para></para>
         </warning>
     </para>
 </chapter>

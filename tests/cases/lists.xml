@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter id="cha.test.lists">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.lists">
     <title>Lists test</title>
-    <para id="sdsc.expect.error.lists.1">
-        <variablelist></variablelist>
-    </para>
-    <para id="sdsc.expect.warning.lists.2">
+    <para xml:id="sdsc.expect.warning.lists.2">
         <variablelist>
-            <varlistentry>
+            <varlistentry><term/><listitem>
                 <variablelist>
-                    <varlistentry>
+                    <varlistentry><term/><listitem>
                         <variablelist>
-                            <varlistentry></varlistentry>
-                            <varlistentry></varlistentry>
+                            <varlistentry><term/><listitem><para/></listitem></varlistentry>
+                            <varlistentry><term/><listitem><para/></listitem></varlistentry>
                         </variablelist>
-                    </varlistentry>
-                    <varlistentry></varlistentry>
+                    </listitem></varlistentry>
+                    <varlistentry><term/><listitem><para/></listitem></varlistentry>
                  </variablelist>
-            </varlistentry>
-            <varlistentry></varlistentry>
+            </listitem></varlistentry>
+            <varlistentry><term/><listitem><para/></listitem></varlistentry>
             </variablelist>
     </para>
-    <para id="sdsc.valid">
+    <para xml:id="sdsc.valid">
         <variablelist>
-            <varlistentry></varlistentry>
-            <varlistentry></varlistentry>
+            <varlistentry><term/><listitem><para/></listitem></varlistentry>
+            <varlistentry><term/><listitem><para/></listitem></varlistentry>
         </variablelist>
     </para>
 </chapter>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter id="cha.test.sects">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.sects">
     <title>Sects test</title>
     <para>a</para>
-    <sect1 id="sec.sdsc.expect.warning.sects.1">
+    <sect1 xml:id="sec.sdsc.expect.warning.sects.1">
         <title/>
         <para>a</para>
-        <sect2 id="sec.2">
+        <sect2 xml:id="sec.2">
             <para>a</para>
         </sect2>
     </sect1>
 
-    <sect1 id="sec.valid">
+    <sect1 xml:id="sec.valid">
         <title/>
         <para>content</para>
     </sect1>
