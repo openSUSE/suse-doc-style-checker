@@ -53,7 +53,7 @@
     <xsl:apply-templates/>
   </xsl:template>
 
-  <xsl:template match="productname">
+  <xsl:template match="productname|db5:productname">
     <xsl:if test="not(parent::articleinfo or parent::bookinfo or
                       parent::setinfo) and
                   not(parent::db5:info)">
@@ -70,7 +70,7 @@
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="productnumber">
+  <xsl:template match="productnumber|db5:productnumber">
     <xsl:if test="not(parent::articleinfo or parent::bookinfo or
                       parent::setinfo) and
                   not(parent::db5:info)">
