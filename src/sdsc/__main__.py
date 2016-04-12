@@ -20,4 +20,4 @@ import sdsc
 import sys
 
 if __name__ == "__main__":
-    sdsc.main(sys.argv[1:])
+    sys.exit(sdsc.main(sys.argv[1:]))

@@ -22,10 +22,17 @@ def test_check_performance(capsys):
     sdsc.flag_performance = False
 
 
+def test_sdsc_output(capsys):
+    """checks whether output to files works"""
+    path = os.path.dirname(os.path.realpath(__file__)) + "/cases/a-an.xml"
+    sdsc.main([path, "/dev/null"])
+    out, _ = capsys.readouterr()
+    assert out == "/dev/null\n"
+
+
 def test_sdsc_version(capsys):
     """checks for output of sdsc --version"""
-    with pytest.raises(SystemExit):
-        sdsc.main(["--version"])
+    assert sdsc.main(["--version"]) == 0
     out, _ = capsys.readouterr()
     assert sdsc.__version__ == out.split()[-1]
 

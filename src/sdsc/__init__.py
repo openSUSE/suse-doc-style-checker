@@ -997,14 +997,18 @@ def main(cliargs=None):
     """
 
     if not initialize():
-        sys.exit(1)
+        return 1
 
     timestart = time.time()
 
     location = os.path.dirname(os.path.realpath(__file__))
 
     global args
-    args = parseargs(cliargs)
+    try:
+        args = parseargs(cliargs)
+    except SystemExit as exc:
+        return exc.code
+
     global flag_checkpatterns
     global flag_performance
     global flag_module
@@ -1017,7 +1021,7 @@ def main(cliargs=None):
             os.path.join(location, '..', 'bookmarklet',
                 'result-flagging-bookmarklet.html'),
             new=0, autoraise=True)
-        sys.exit(0)
+        return 0
 
     if args.outputfile:
         resultfilename = args.outputfile
@@ -1034,10 +1038,10 @@ def main(cliargs=None):
         result = checkOneFile(args.inputfile.name)
     except KeyboardInterrupt:
         printcolor("Operation cancelled!", 'error')
-        sys.exit(1)
+        return 1
     except etree.Error as error:
         printcolor("Syntax error in input: {0}!".format(error.msg), 'error')
-        sys.exit(1)
+        return 1
 
     resultfh.write(str(result))
     resultfh.close()
@@ -1048,3 +1052,5 @@ def main(cliargs=None):
     printcolor(resultfile)
     if flag_performance:
         printcolor("Total: " + str(time.time() - timestart), 'debug')
+
+    return 0
