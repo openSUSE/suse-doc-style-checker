@@ -167,12 +167,11 @@ def sentencesegmenter(text):
 def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
               messagetype):
     # FIXME: Modes: para, title?
-    if int(termfileid[0]) != int(termdataid):
-        printcolor("Terminology data was not correctly initialized.", 'error')
-        sys.exit(1)
 
     if not content:
         return []
+
+    assert int(termfileid[0]) == int(termdataid), "Terminology data was not correctly initialized."
 
     # I get this as a list with one lxml.etree._ElementUnicodeResult.
     # I need a single string.

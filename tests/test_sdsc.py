@@ -7,10 +7,19 @@ import sdsc
 
 
 def test_main(capsys):
-    """runs __main__.py     """
+    """runs __main__.py"""
     with pytest.raises(SystemExit):
         path = os.path.dirname(os.path.realpath(__file__)) + "/../src/sdsc/__main__.py"
         exec(compile(open(path).read(), path, "exec"), {}, {"__name__": "__main__"})
+
+
+def test_check_performance(capsys):
+    """checks whether the flag_performance stuff works"""
+    sdsc.flag_performance = True
+    path = os.path.dirname(os.path.realpath(__file__)) + "/cases/a-an.xml"
+    sdsc.checkOneFile(path)
+    assert  capsys.readouterr()[0].count("Running module") > 0
+    sdsc.flag_performance = False
 
 
 def test_sdsc_version(capsys):
