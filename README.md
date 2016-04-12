@@ -1,12 +1,10 @@
 Style checker for SUSE documentation
 ====================================
 
-[![Build
-Status](https://travis-ci.org/openSUSE/suse-doc-style-checker.svg?branch=develop)](https://travis-ci.org/openSUSE/suse-doc-style-checker)
-[![Code
-Health](https://landscape.io/github/openSUSE/suse-doc-style-checker/develop/landscape.svg?style=flat)](https://landscape.io/github/openSUSE/suse-doc-style-checker/develop)
-[![Scrutinizer Code
-Quality](https://scrutinizer-ci.com/g/openSUSE/suse-doc-style-checker/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/openSUSE/suse-doc-style-checker/?branch=develop)
+[![Build Status](https://travis-ci.org/openSUSE/suse-doc-style-checker.svg?branch=develop)](https://travis-ci.org/openSUSE/suse-doc-style-checker)
+[![Coverage Status](https://coveralls.io/repos/github/openSUSE/suse-doc-style-checker/badge.svg?branch=feature%2Fcoverage)](https://coveralls.io/github/openSUSE/suse-doc-style-checker?branch=feature%2Fcoverage)
+[![Code Health](https://landscape.io/github/openSUSE/suse-doc-style-checker/develop/landscape.svg?style=flat)](https://landscape.io/github/openSUSE/suse-doc-style-checker/develop)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/openSUSE/suse-doc-style-checker/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/openSUSE/suse-doc-style-checker/?branch=develop)
 
 
 Tries as hard as its little mind can to check whether documentation is compliant with the
