@@ -18,8 +18,16 @@ def test_check_performance(capsys):
     sdsc.flag_performance = True
     path = os.path.dirname(os.path.realpath(__file__)) + "/cases/a-an.xml"
     sdsc.checkOneFile(path)
-    assert  capsys.readouterr()[0].count("Running module") > 0
+    assert capsys.readouterr()[0].count("Running module") > 0
     sdsc.flag_performance = False
+
+
+def test_checkpatterns(capsys):
+    """checks whether the patterns are sane"""
+    sdsc.flag_checkpatterns = True
+    path = os.path.dirname(os.path.realpath(__file__)) + "/cases/a-an.xml"
+    sdsc.checkOneFile(path)
+    sdsc.flag_checkpatterns = False
 
 
 def test_sdsc_output(capsys):
