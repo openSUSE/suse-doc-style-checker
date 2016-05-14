@@ -614,6 +614,17 @@
 
   <term>
     <accept>
+      <proposal/>
+    </accept>
+    <patterngroup>
+      <pattern>in</pattern>
+      <pattern>order</pattern>
+      <pattern>(to|for)</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>join</proposal>
     </accept>
     <patterngroup>
@@ -1068,11 +1079,6 @@
       <pattern>a</pattern>
       <pattern>means</pattern>
       <pattern>of</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>in</pattern>
-      <pattern>order</pattern>
-      <pattern>to</pattern>
     </patterngroup>
   </term>
 
