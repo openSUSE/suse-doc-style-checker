@@ -354,6 +354,7 @@
                        sgmltag|structfield|systemitem|tag|userinput|varname|
                        symbol|keycombo|keycap|menuchoice|guimenu|email|filename|
                        ulink|uri|xref|symbol|inlinemediaobject|citetitle|
+                       lineannotation|programlisting|screen|synopsis|
                        db5:classname|db5:code|db5:command|db5:computeroutput|
                        db5:constant|db5:envar|db5:exceptionname|db5:filename|
                        db5:function|db5:interfacename|db5:literal|db5:methodname|
@@ -362,7 +363,9 @@
                        db5:systemitem|db5:tag|db5:userinput|db5:varname|
                        db5:symbol|db5:keycombo|db5:keycap|db5:menuchoice|
                        db5:guimenu|db5:email|db5:filename|db5:link|db5:uri|
-                       db5:xref|db5:symbol|db5:inlinemediaobject|db5:citetitle"
+                       db5:xref|db5:symbol|db5:inlinemediaobject|db5:citetitle|
+                       db5:lineannotation|db5:programlisting|db5:screen|
+                       db5:synopsis"
     mode="terminology-content">
 
     <!-- Find out number of tokens that are included within the element.
