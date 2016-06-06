@@ -1194,7 +1194,7 @@ GNU GPL.
     <accept/>
     <patterngroup>
       <pattern>(the|a)</pattern>
-      <contextpattern>your</contextpattern>
+      <contextpattern>(your|which|those)</contextpattern>
     </patterngroup>
   </term>
 
