@@ -928,6 +928,19 @@
       <pattern>the</pattern>
       <contextpattern match="negative">(.*?([oea]st|er|ing|ed)|main|key|more|less)</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>a</pattern>
+      <pattern>certain</pattern>
+      <pattern>amount</pattern>
+      <pattern>of</pattern>
+      <contextpattern look="before">(giv|provid|mak)(e[ds]?|ing)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>certain</pattern>
+      <pattern>amounts</pattern>
+      <pattern>of</pattern>
+      <contextpattern look="before">(giv|provid|mak)(e[ds]?|ing)</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
