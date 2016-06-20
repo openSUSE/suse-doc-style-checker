@@ -1057,6 +1057,34 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>TLS</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">TSL</pattern>
+      <contextpattern case="keep" look="before" location="5" mode="fuzzy">(SSL|HTTPS|protocols?|security)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern case="keep">TSL</pattern>
+      <contextpattern case="keep" location="5" mode="fuzzy">(SSL|HTTPS|protocols?|security)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>TLS/SSL</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">(TSL/SSL|SSL/T(LS|SL))</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern case="keep">(TSL|SSL)</pattern>
+      <pattern case="keep">.</pattern>
+      <pattern case="keep">(TSL|SSL)</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>two</proposal>
     </accept>
     <patterngroup>
