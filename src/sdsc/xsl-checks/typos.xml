@@ -82,7 +82,7 @@ GNU GPL.
       <pattern>all</pattern>
       <pattern>though</pattern>
       <contextpattern look="before">in</contextpattern>
-      <contextpattern look="before" position="2" match="negative">all</contextpattern>
+      <contextpattern look="before" location="2" match="negative">all</contextpattern>
     </patterngroup>
   </term>
 
