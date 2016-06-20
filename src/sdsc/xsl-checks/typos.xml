@@ -1124,6 +1124,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>where</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>were</pattern>
+      <contextpattern look="before">is</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>whether</proposal>
     </accept>
     <patterngroup>
