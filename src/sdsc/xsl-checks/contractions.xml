@@ -101,6 +101,24 @@
 
   <term>
     <accept>
+      <proposal>I will</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>i'll</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>I would</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>i'[ds]</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>it is</proposal>
     </accept>
     <patterngroup>
