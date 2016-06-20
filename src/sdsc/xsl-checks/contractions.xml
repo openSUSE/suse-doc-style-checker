@@ -141,6 +141,7 @@
     </accept>
     <patterngroup>
       <pattern>let's</pattern>
+      <contextpattern case="keep">Encrypt</contextpattern>
     </patterngroup>
   </term>
 
