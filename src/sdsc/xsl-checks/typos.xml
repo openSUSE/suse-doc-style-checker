@@ -1078,7 +1078,7 @@ GNU GPL.
     </patterngroup>
     <patterngroup>
       <pattern case="keep">(TSL|SSL)</pattern>
-      <pattern case="keep">.</pattern>
+      <pattern case="keep">(/|and)</pattern>
       <pattern case="keep">(TSL|SSL)</pattern>
     </patterngroup>
   </term>
