@@ -422,6 +422,16 @@
 
   <term>
     <accept>
+      <proposal/>
+    </accept>
+    <patterngroup>
+      <pattern>different</pattern>
+      <contextpattern look="before">(several|few|many)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>during</proposal>
     </accept>
     <patterngroup>
