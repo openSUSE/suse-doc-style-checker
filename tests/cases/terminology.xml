@@ -4,7 +4,13 @@
     <para xml:id="sdsc.expect.error.terminology.1">
         Two 32 bit systems equal one 64 bit system.
     </para>
-    <para xml:id="sdsc.valid">
+    <para xml:id="sdsc.valid.1">
         Two 32-bit systems equal one 64-bit system.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.2">
+        I use Mac OS X at work.
+    </para>
+    <para xml:id="sdsc.valid.2">
+        I have several macOS boxes at home.
     </para>
 </chapter>

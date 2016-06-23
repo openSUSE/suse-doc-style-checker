@@ -2221,6 +2221,27 @@
 
   <term>
     <accept>
+      <proposal>macOS</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">MacOS|macos</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>osx</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>os</pattern>
+      <pattern>x</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>mac</pattern>
+      <pattern>os</pattern>
+      <pattern>x</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>man page</proposal>
     </accept>
     <!-- This is not helpful at the beginning of sentences. -->
