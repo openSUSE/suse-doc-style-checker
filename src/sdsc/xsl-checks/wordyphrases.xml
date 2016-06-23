@@ -32,6 +32,16 @@
 
   <term>
     <accept>
+      <proposal/>
+    </accept>
+    <patterngroup>
+      <pattern>additionally</pattern>
+      <contextpattern look="before">and</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>adequate</proposal>
     </accept>
     <patterngroup>
@@ -74,6 +84,16 @@
     <patterngroup>
       <pattern>alternative</pattern>
       <pattern>choices?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal/>
+    </accept>
+    <patterngroup>
+      <pattern>alternatively</pattern>
+      <contextpattern look="before">or</contextpattern>
     </patterngroup>
   </term>
 
