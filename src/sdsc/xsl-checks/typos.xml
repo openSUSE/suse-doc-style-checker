@@ -809,6 +809,16 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>peak</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>peek</pattern>
+      <contextpattern look="bothways" location="2" mode="fuzzy">(load|performance|time)s?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>peek</proposal>
     </accept>
     <patterngroup>
