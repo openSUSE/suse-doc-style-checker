@@ -936,11 +936,7 @@ GNU GPL.
     </accept>
     <patterngroup>
       <pattern>taping</pattern>
-      <contextpattern look="before" location="3" mode="fuzzy">(touch(-?pads?)|systems?|machines?|computers?|connections?)</contextpattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>taping</pattern>
-      <contextpattern look="after" location="3" mode="fuzzy">(touch(-?pads?)|systems?|machines?|computers?|connections?)</contextpattern>
+      <contextpattern look="bothways" location="3" mode="fuzzy">(touch(-?pads?)|systems?|machines?|computers?|connections?)</contextpattern>
     </patterngroup>
   </term>
 
@@ -1071,11 +1067,7 @@ GNU GPL.
     </accept>
     <patterngroup>
       <pattern case="keep">TSL</pattern>
-      <contextpattern case="keep" look="before" location="5" mode="fuzzy">(SSL|HTTPS|protocols?|security)</contextpattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern case="keep">TSL</pattern>
-      <contextpattern case="keep" location="5" mode="fuzzy">(SSL|HTTPS|protocols?|security)</contextpattern>
+      <contextpattern case="keep" look="bothways" location="5" mode="fuzzy">(SSL|HTTPS|protocols?|security)</contextpattern>
     </patterngroup>
   </term>
 
