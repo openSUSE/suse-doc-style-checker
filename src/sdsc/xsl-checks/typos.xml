@@ -306,7 +306,7 @@ GNU GPL.
     </patterngroup>
     <patterngroup>
       <pattern>dicks?</pattern>
-      <contextpattern>images?</contextpattern>
+      <contextpattern>(image|cache|size)s?</contextpattern>
     </patterngroup>
   </term>
 
