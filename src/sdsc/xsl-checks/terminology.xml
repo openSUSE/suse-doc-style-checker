@@ -137,6 +137,19 @@
 
   <term>
     <accept>
+      <proposal>afterward</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>afterwards</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>after</pattern>
+      <pattern>wards?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>when</proposal>
       <context>time</context>
     </accept>
@@ -291,6 +304,19 @@
       <pattern>back</pattern>
       <pattern>ups?</pattern>
       <contextpattern look="before" location="2">appl(y(ing)?|ie[sd])</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>backward</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>backwards</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>back</pattern>
+      <pattern>wards?</pattern>
     </patterngroup>
   </term>
 
@@ -1250,6 +1276,19 @@
 
   <term>
     <accept>
+      <proposal>forward</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>forwards</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>for</pattern>
+      <pattern>wards?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>framebuffer</proposal>
     </accept>
     <patterngroup>
@@ -1633,6 +1672,21 @@
       <pattern>Intranet</pattern>
     </patterngroup>
   </term> -->
+
+  <term>
+    <accept>
+      <proposal>inward</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>inwards</pattern>
+    </patterngroup>
+    <!-- Even though we are not writing much about hospitals, this one might
+    legitimately happen... -->
+    <!-- <patterngroup>
+      <pattern>in</pattern>
+      <pattern>wards?</pattern>
+    </patterngroup> -->
+  </term>
 
   <term>
     <accept>
@@ -2586,6 +2640,19 @@
 
   <term>
     <accept>
+      <proposal>outward</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>outwards</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>out</pattern>
+      <pattern>wards?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>paravirtualized</proposal>
     </accept>
     <patterngroup>
@@ -3295,6 +3362,19 @@
 
   <term>
     <accept>
+      <proposal>sideward</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>sidewards</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>side</pattern>
+      <pattern>wards?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>SLE</proposal>
     </accept>
     <patterngroup>
@@ -3905,6 +3985,19 @@
     </patterngroup>
     <patterngroup>
       <pattern>tool-tips?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>toward</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>towards</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>wards?</pattern>
     </patterngroup>
   </term>
 
