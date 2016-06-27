@@ -627,6 +627,7 @@
   <term>
     <accept>
       <proposal>click</proposal>
+      <context>mouses and other pointing devices</context>
     </accept>
     <patterngroup>
       <pattern>click(ed|ing)</pattern>
@@ -648,6 +649,15 @@
       <pattern>(mak(es?|ing)|made|do(es|ing)|did)</pattern>
       <pattern>an?</pattern>
       <pattern>clicks?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>press(e[ds]|ing)</pattern>
+      <pattern>on(to)?</pattern>
+      <contextpattern location="2" mode="fuzzy">##@ui-[0-9]+##</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>press(e[ds]|ing)</pattern>
+      <contextpattern location="2" mode="fuzzy">##@ui-[0-9]+##</contextpattern>
     </patterngroup>
   </term>
 
@@ -2822,7 +2832,7 @@
   <term>
     <accept>
       <proposal>press</proposal>
-      <context>keys or mouse buttons</context>
+      <context>keys or buttons</context>
     </accept>
     <patterngroup>
       <pattern>(hitt?(ing|ed|s)?|(punch|depress)(e[ds]|ing)?|strike([ds]|ing)?|struck)</pattern>
