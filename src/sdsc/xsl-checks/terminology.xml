@@ -1276,6 +1276,16 @@
 
   <term>
     <accept>
+      <proposal>for example</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>for</pattern>
+      <pattern>instances?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>forward</proposal>
     </accept>
     <patterngroup>
