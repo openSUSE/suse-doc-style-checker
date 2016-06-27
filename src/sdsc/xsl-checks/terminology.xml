@@ -150,6 +150,23 @@
 
   <term>
     <accept>
+      <proposal>AArch64</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>arm-?(64|v8)</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>arm</pattern>
+      <pattern>(64(-?bit)?|v8)</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>64(-?bit)?</pattern>
+      <pattern>arm</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>when</proposal>
       <context>time</context>
     </accept>
@@ -1598,6 +1615,18 @@
 
   <term>
     <accept>
+      <proposal>ipf</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>ia-?64</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>Itanium</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>indexes</proposal>
     </accept>
     <patterngroup>
@@ -2782,6 +2811,31 @@
       <pattern>(at|on)</pattern>
       <pattern>the</pattern>
       <pattern>ports?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>POWER</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>ppc64(le)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>ppc</pattern>
+      <pattern>64-?bit?</pattern>
+      <pattern>lower-?endian</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>ppc</pattern>
+      <pattern>64-?bit?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>64-?bit?</pattern>
+      <pattern>ppc64(le)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>power8</pattern>
     </patterngroup>
   </term>
 
@@ -4462,6 +4516,41 @@
 
   <term>
     <accept>
+      <proposal>x86</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>i[123456]86</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>32-?bit</pattern>
+      <pattern>(intel|amd)</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(amd|intel)</pattern>
+      <pattern>32(-?bit)?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>AMD64/Intel 64</proposal>
+    </accept>
+    <!-- FIXME: Somewhat incomplete at the moment -->
+    <patterngroup>
+      <pattern>(x86[-_.])64|x64|em64t</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>64(-?bit)?</pattern>
+      <pattern>amd(/?intel)?|intel(/?amd)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>amd(/?intel)?|intel(/?amd)?</pattern>
+      <pattern>64-?bit</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>X Window System</proposal>
     </accept>
     <patterngroup>
@@ -4518,6 +4607,30 @@
     </patterngroup>
     <patterngroup>
       <pattern>yast2</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>z Systems</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>s(erie|ystem)s?</pattern>
+      <pattern>z</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>z</pattern>
+      <pattern>s(eries?|ystem)</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>c</pattern>
+      <pattern>s(ystem|erie)s</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>([zc]-?s(erie|ystem)s?|s(erie|ystem)s?-?[zc])</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>s390x?</pattern>
     </patterngroup>
   </term>
 
