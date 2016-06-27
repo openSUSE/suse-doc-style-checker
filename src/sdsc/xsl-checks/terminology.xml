@@ -1818,6 +1818,16 @@
 
   <term>
     <accept>
+      <proposal>KIWI</proposal>
+      <context>operating system images</context>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">[Kk]iwi</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>K Desktop Environment</proposal>
     </accept>
     <patterngroup>
