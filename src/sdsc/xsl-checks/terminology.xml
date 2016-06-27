@@ -3716,6 +3716,51 @@
 
   <term>
     <accept>
+      <proposal>systemd</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">(Sys(tem)?[Dd]|sys(tem)?D)</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(sys(tem)?[-_.]d|sys(tem)[-_.]?500)</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>sys(tem)?</pattern>
+      <pattern>(d|500)s?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>System V init</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">System</pattern>
+      <pattern>v</pattern>
+      <pattern>inits?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>system</pattern>
+      <pattern case="keep">V</pattern>
+      <pattern>inits?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>system</pattern>
+      <pattern>5</pattern>
+      <pattern>inits?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>sys</pattern>
+      <pattern>[v5]</pattern>
+      <pattern>inits?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>sys(tem)?-?[v5]-?inits?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>TAR archive</proposal>
     </accept>
     <patterngroup>
