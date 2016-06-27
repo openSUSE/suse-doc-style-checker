@@ -516,6 +516,16 @@
 
   <term>
     <accept>
+      <proposal>finish</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>finish(e[ds]|ing)?</pattern>
+      <pattern>up</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>for</proposal>
     </accept>
     <patterngroup>
