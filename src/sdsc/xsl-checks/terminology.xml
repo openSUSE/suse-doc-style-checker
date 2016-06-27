@@ -855,6 +855,16 @@
 
   <term>
     <accept>
+      <proposal>cursor</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>keyboard</pattern>
+      <pattern>cursors?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>deactivate</proposal>
       <context>check boxes</context>
     </accept>
@@ -2717,6 +2727,21 @@
       <pattern>plug-?ins?</pattern>
       <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
       <contextpattern>(program(me)|software|module|app(lication)?)s?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>pointer</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>(mouse|touch(pad)?|joystick)s?</pattern>
+      <pattern>cursors?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>cursors?</pattern>
+      <contextpattern look="bothways" location="2" mode="fuzzy">(mouse|touch(pad)?|joystick)s?</contextpattern>
+      <contextpattern look="bothways" location="3" mode="fuzzy" match="negative">key(board)s?</contextpattern>
     </patterngroup>
   </term>
 
