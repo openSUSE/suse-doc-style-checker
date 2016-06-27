@@ -4228,6 +4228,23 @@
 
   <term>
     <accept>
+      <proposal>Web cam</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">(WEB|web)</pattern>
+      <pattern>cam(era)?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>internet</pattern>
+      <pattern>cam(era)?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>webcam(era)?s?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>Web page</proposal>
     </accept>
     <patterngroup>
