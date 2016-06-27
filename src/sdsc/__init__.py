@@ -52,6 +52,12 @@ parentheses = re.compile(r'(?<!\\)\((?![\?|\:])')
 sentenceends = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?]|[:;])\s+[[({]?(?=(?:[A-Z0-9#]|openSUSE))')
 lastsentenceends = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?][])}]?|[:;])\s*$')
 
+# trypatterns() checks if a sub-pattern of a given pattern matches nothing
+# (and looks unusual while doing that), i.e. subpatterns like (this|), (|this),
+# or (th||is)
+emptysubpattern = re.compile(r'(?<!\\)(\|\)|\(\||\|\|)')
+
+
 re_cache = {}
 
 
@@ -490,6 +496,11 @@ def trypattern(pattern):
         tryresult = expression.search(" ")
         if tryresult:
             message = "Expression matches single space"
+            sys.exit(1)
+
+        tryresult = emptysubpattern.search(pattern)
+        if tryresult:
+            message = "Part of Expression matches empty string"
             sys.exit(1)
     except SystemExit:
         expressionerror(message, pattern)
