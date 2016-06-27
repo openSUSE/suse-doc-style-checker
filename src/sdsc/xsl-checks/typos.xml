@@ -283,6 +283,10 @@ GNU GPL.
       <pattern case="keep">consist(ed|ing|s|ances?)</pattern>
       <contextpattern>on</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>compris(e[ds]|ing)</pattern>
+      <contextpattern>of</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
