@@ -3827,6 +3827,19 @@
     </patterngroup>
   </term>
 
+  <term>
+    <accept>
+      <proposal>toolchain</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>tool</pattern>
+      <pattern>chains?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>tool-chains?</pattern>
+    </patterngroup>
+  </term>
+
   <!-- This one should have more rejects. -->
   <term>
     <accept>
