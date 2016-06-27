@@ -3032,6 +3032,15 @@
     </patterngroup>
   </term>
 
+  <term>
+    <accept>
+      <proposal>Samba</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">(samba|SAMBA)</pattern>
+    </patterngroup>
+  </term>
+
   <!-- This makes some questionable recommendations, disable for now. -->
   <!-- <term>
     <accept>
