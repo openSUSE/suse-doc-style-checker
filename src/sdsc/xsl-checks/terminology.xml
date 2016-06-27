@@ -1804,6 +1804,19 @@
 
   <term>
     <accept>
+      <proposal>kernel space</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>kernel</pattern>
+      <pattern>lands?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>kernel-?(space|land)s?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>Kprobes</proposal>
     </accept>
     <patterngroup>
@@ -3915,6 +3928,19 @@
     </accept>
     <patterngroup>
       <pattern>utili[sz](e[ds]?|ing)</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>user space</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>user</pattern>
+      <pattern>lands?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>user-?(space|land)s?</pattern>
     </patterngroup>
   </term>
 
