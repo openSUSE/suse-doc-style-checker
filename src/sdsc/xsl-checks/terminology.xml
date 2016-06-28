@@ -2095,6 +2095,50 @@
 
   <term>
     <accept>
+      <proposal>live CD</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">LIVE</pattern>
+      <pattern>cds?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>live-?cds?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>live DVD</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">LIVE</pattern>
+      <pattern>dvds?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>live-?dvds?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>live image</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">LIVE</pattern>
+      <pattern>images?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>live</pattern>
+      <pattern>disk</pattern>
+      <pattern>images?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>live-?(disk-?)?images?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>local host</proposal>
     </accept>
     <patterngroup>
@@ -3936,7 +3980,7 @@
       <proposal>System V init</proposal>
     </accept>
     <patterngroup>
-      <pattern case="keep">System</pattern>
+      <pattern case="keep">system</pattern>
       <pattern>v</pattern>
       <pattern>inits?</pattern>
     </patterngroup>
