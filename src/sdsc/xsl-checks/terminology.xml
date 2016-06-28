@@ -1615,13 +1615,16 @@
 
   <term>
     <accept>
-      <proposal>ipf</proposal>
+      <proposal>IA64</proposal>
     </accept>
     <patterngroup>
-      <pattern>ia-?64</pattern>
+      <pattern case="keep">ia64</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>Itanium</pattern>
+      <pattern>ia-64</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(itanium|ipf)</pattern>
     </patterngroup>
   </term>
 
