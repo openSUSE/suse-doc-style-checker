@@ -3,17 +3,37 @@
     <title>Figures test</title>
     <para/>
     <sect1 xml:id="sec.asdf1">
-        <para/>
-        <mediaobject xml:id="sdsc.expect.warning.figures.1">
+    <title>Figures section</title>
+        <para>
+          <inlinemediaobject xml:id="sdsc.expect.warning.figures.1">
             <imageobject>
-                <imagedata fileref="normal_file.name"/>
+              <imagedata fileref="file.name"/>
             </imageobject>
-        </mediaobject>
-        <mediaobject xml:id="sdsc.valid.1">
-            <textobject>
-                <phrase>Nothing to see here.</phrase>
-            </textobject>
-        </mediaobject>
+          </inlinemediaobject>
+        </para>
+        <informalfigure xml:id="fig.sdsc.expect.warning.figures.2">
+          <mediaobject>
+              <imageobject>
+                  <imagedata fileref="normal_file.name"/>
+              </imageobject>
+          </mediaobject>
+        </informalfigure>
+        <figure xml:id="fig.sdsc.valid.1">
+          <title>Title</title>
+          <mediaobject>
+              <imageobject>
+                  <imagedata fileref="normal_file.name"/>
+              </imageobject>
+          </mediaobject>
+        </figure>
+        <figure xml:id="fig.sdsc.valid.2">
+          <title>Title</title>
+          <mediaobject>
+              <textobject>
+                  <phrase>Nothing to see here.</phrase>
+              </textobject>
+          </mediaobject>
+        </figure>
 
         <mediaobject>
             <imageobject>
@@ -29,10 +49,10 @@
                 <imagedata fileref="ümlautfile.name" xml:id="sdsc.expect.error.figures.5"/>
             </imageobject>
             <imageobject>
-                <imagedata fileref="normal_file.name" xml:id="sdsc.valid.2"/>
+                <imagedata fileref="normal_file.name" xml:id="sdsc.valid.3"/>
             </imageobject>
             <imageobject>
-                <imagedata fileref="1-normalfile.name" xml:id="sdsc.valid.3"/>
+                <imagedata fileref="1-normalfile.name" xml:id="sdsc.valid.4"/>
             </imageobject>
             <textobject>
                 <phrase>Nothing to see here either.</phrase>

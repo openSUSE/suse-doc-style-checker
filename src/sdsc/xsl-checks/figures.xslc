@@ -14,7 +14,10 @@
   <xsl:template match="mediaobject|inlinemediaobject|
                        db5:mediaobject|db5:inlinemediaobject">
 
-    <xsl:if test="not(textobject/phrase) and not(db5:textobject/db5:phrase)">
+    <xsl:if
+      test="(ancestor::informalfigure or ancestor::db5:informalfigure or
+             self::inlinemediaobject or self::db5:inlinemediaobject) and
+            not(textobject/phrase) and not(db5:textobject/db5:phrase)">
       <result type="warning">
         <xsl:call-template name="sourcehint"/>
         <message>Media object
