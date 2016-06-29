@@ -64,7 +64,7 @@
     </xsl:if>
 
     <xsl:if test="$lone = 1">
-      <result type="warning">
+      <result type="error">
         <xsl:call-template name="sourcehint"/>
         <message>Section <xsl:call-template name="createid"/> contains a lone
           subsection.
