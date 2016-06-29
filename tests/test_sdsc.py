@@ -182,3 +182,9 @@ def test_xml(xmltestcase):
     if nr_errors > 0:
         pytest.fail(msg="Test {0!r} failed with {1} errors!".format(
             os.path.basename(xmltestcase), nr_errors), pytrace=False)
+
+def test_terminologydtd(terminologyvalidation, terminologydtd):
+    doc = etree.parse(terminologyvalidation)
+    if not terminologydtd.validate(doc):
+        raise AssertionError(terminologydtd.error_log.filter_from_errors()[0])
+
