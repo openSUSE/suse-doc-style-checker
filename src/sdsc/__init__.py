@@ -901,6 +901,37 @@ average time per word: %s\n"""
     return messages
 
 
+def splitpath(context, path, wantedsegment='filename'):
+    """Split a path into segments and return the wanted segment.
+    :param str context: Context node (ignored)
+    :param str path: Input path or file name
+    :param str wantedsegment: Segment that you want as output
+        ('path' => path without file name and without trailing slash,
+        'filename' => filename without extension,
+        'extension' => file extension with leading dot and in lowercase)
+    """
+    del context # not used
+
+    if not path:
+        return []
+
+    # I get this as a list with one lxml.etree._ElementUnicodeResult, not
+    # as a list with a string.
+    path = str(path[0])
+
+    splitpath = os.path.split(path)
+    splitfile = os.path.splitext(splitpath[1])
+
+    if wantedsegment == 'path':
+        return splitpath[0]
+    elif wantedsegment == 'filename':
+        return splitfile[0]
+    elif wantedsegment == 'extension':
+        return splitfile[1].lower().lstrip('.')
+    else:
+        return path
+
+
 # This list is filled by initialize() with the following entries:
 # { 'name': 'typos', 'transform': <function> }
 prepared_checks = []
@@ -970,7 +1001,8 @@ def initialize():
                    buildtermdata=buildtermdata, dupecheck=dupecheck,
                    sentencelengthcheck=sentencelengthcheck,
                    sentencesegmenter=sentencesegmenter,
-                   tokenizer=tokenizer, counttokens=counttokens))
+                   tokenizer=tokenizer, counttokens=counttokens,
+                   splitpath=splitpath))
 
     global parser
     parser = etree.XMLParser(ns_clean=True,

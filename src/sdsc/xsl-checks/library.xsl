@@ -287,7 +287,7 @@
     <xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
 
     <xsl:choose>
-      <xsl:when test="case = 'upper'">
+      <xsl:when test="$case = 'upper'">
         <xsl:value-of select="translate($text,$lower,$upper)"/>
       </xsl:when>
       <xsl:otherwise>

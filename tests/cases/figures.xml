@@ -2,64 +2,147 @@
 <chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.figures">
     <title>Figures test</title>
     <para/>
-    <sect1 xml:id="sec.asdf1">
+    <sect1 xml:id="sec.valid.figures">
     <title>Figures section</title>
+
         <para>
+          <!-- Warning: no textobject/phrase -->
           <inlinemediaobject xml:id="sdsc.expect.warning.figures.1">
             <imageobject>
               <imagedata fileref="file.name"/>
             </imageobject>
           </inlinemediaobject>
         </para>
+
+        <!-- Warning: no textobject/phrase -->
         <informalfigure xml:id="fig.sdsc.expect.warning.figures.2">
           <mediaobject>
-              <imageobject>
-                  <imagedata fileref="normal_file.name"/>
-              </imageobject>
+            <imageobject>
+              <imagedata fileref="normal_file.name"/>
+            </imageobject>
           </mediaobject>
         </informalfigure>
-        <figure xml:id="fig.sdsc.valid.1">
+
+        <figure xml:id="fig.sdsc.valid.3">
           <title>Title</title>
           <mediaobject>
-              <imageobject>
-                  <imagedata fileref="normal_file.name"/>
-              </imageobject>
-          </mediaobject>
-        </figure>
-        <figure xml:id="fig.sdsc.valid.2">
-          <title>Title</title>
-          <mediaobject>
-              <textobject>
-                  <phrase>Nothing to see here.</phrase>
-              </textobject>
+            <imageobject>
+              <imagedata fileref="normal_file.name"/>
+            </imageobject>
           </mediaobject>
         </figure>
 
+        <figure xml:id="fig.sdsc.valid.4">
+          <title>Title</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="normal_file.name"/>
+            </imageobject>
+            <textobject>
+              <phrase>Nothing to see here.</phrase>
+            </textobject>
+          </mediaobject>
+        </figure>
+
+        <!-- Error: Two imageobjects, neither has a "role" -->
+        <figure xml:id="fig.sdsc.expect.error.figures.5">
+          <title>Title</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="this_is_a.png"/>
+            </imageobject>
+            <imageobject>
+              <imagedata fileref="this_is_a.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <!-- Error: Same file format, different file names -->
+        <figure xml:id="fig.sdsc.expect.error.figures.6">
+          <title>Title</title>
+          <mediaobject>
+            <imageobject role="fo">
+              <imagedata fileref="this_is_a.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="html">
+              <imagedata fileref="this_is_a_very_different.png" format="PNG"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <!-- Error: File format in format does not match file extension -->
+        <figure xml:id="fig.sdsc.expect.error.figures.7">
+          <title>Title</title>
+          <mediaobject>
+            <imageobject role="fo">
+              <imagedata fileref="this_is_a.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="html">
+              <imagedata fileref="this_is_a.svg" format="PNG"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <figure xml:id="fig.sdsc.valid.8">
+          <title>Title</title>
+          <mediaobject>
+            <imageobject role="fo">
+              <imagedata fileref="this_is_a.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="html">
+              <imagedata fileref="this_is_a.svg" format="SVG"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <!-- Error: One imageobject but there is a role
+        (making it appear only in FO) -->
+        <figure xml:id="fig.sdsc.expect.error.figures.9">
+          <title>Title</title>
+          <mediaobject>
+            <imageobject role="fo">
+              <imagedata fileref="this_is_a.png" format="SVG"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <!-- Errors: We only like lowercase alphanumeric file names -->
         <mediaobject>
-            <imageobject>
-                <imagedata fileref="Uppercasefile.name" xml:id="sdsc.expect.error.figures.2"/>
+            <imageobject role="fo">
+                <imagedata fileref="Uppercasefile.name" xml:id="sdsc.expect.error.figures.10"/>
             </imageobject>
-            <imageobject>
-                <imagedata fileref="filename with.space" xml:id="sdsc.expect.error.figures.3"/>
+            <imageobject role="html">
+                <imagedata fileref="filename with.space" xml:id="sdsc.expect.error.figures.11"/>
             </imageobject>
-            <imageobject>
-                <imagedata fileref="$pecia!f1le.name" xml:id="sdsc.expect.error.figures.4"/>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        <mediaobject>
+        </mediaobject>
+            <imageobject role="fo">
+                <imagedata fileref="$pecia!f1le.name" xml:id="sdsc.expect.error.figures.12"/>
             </imageobject>
-            <imageobject>
-                <imagedata fileref="ümlautfile.name" xml:id="sdsc.expect.error.figures.5"/>
+            <imageobject role="html">
+                <imagedata fileref="ümlautfile.name2" xml:id="sdsc.expect.error.figures.13"/>
             </imageobject>
-            <imageobject>
-                <imagedata fileref="normal_file.name" xml:id="sdsc.valid.3"/>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        <mediaobject>
+        </mediaobject>
+            <imageobject role="fo">
+                <imagedata fileref="normal_file.name" xml:id="sdsc.valid.14"/>
             </imageobject>
-            <imageobject>
-                <imagedata fileref="1-normalfile.name" xml:id="sdsc.valid.4"/>
+            <imageobject role="html">
+                <imagedata fileref="1-normalfile.name2" xml:id="sdsc.valid.15"/>
             </imageobject>
             <textobject>
                 <phrase>Nothing to see here either.</phrase>
             </textobject>
         </mediaobject>
     </sect1>
-    <sect1 xml:id="sec.asdf2">
-        <para/>
+    <sect1 xml:id="sec.valid.avoidlonesection">
+      <title/>
+      <para/>
     </sect1>
 </chapter>

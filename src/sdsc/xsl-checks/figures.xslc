@@ -39,7 +39,126 @@
     <xsl:apply-templates select="imageobject|db5:imageobject"/>
   </xsl:template>
 
-<xsl:template match="imagedata[@fileref]|db5:imagedata[@fileref]">
+
+  <xsl:template match="imageobject|db5:imageobject">
+
+
+    <xsl:if
+      test="not(preceding-sibling::imageobject) and
+            not(preceding-sibling::db5:imageobject) and
+            (following-sibling::imageobject or
+            following-sibling::db5:imageobject)">
+
+      <xsl:variable name="this-file"
+        select="(imagedata[1]/@fileref|db5:imagedata[1]/@fileref)[1]"/>
+      <xsl:variable name="this-name"
+        select="py:splitpath($this-file,'filename')"/>
+      <xsl:variable name="this-extension"
+        select="py:splitpath($this-file,'extension')"/>
+
+      <xsl:variable name="next-file"
+        select="(following-sibling::imageobject[1]/imagedata[1]/@fileref|following-sibling::db5:imageobject[1]/db5:imagedata[1]/@fileref)[1]"/>
+      <xsl:variable name="next-name"
+        select="py:splitpath($next-file,'filename')"/>
+      <xsl:variable name="next-extension"
+        select="py:splitpath($next-file,'extension')"/>
+
+      <!-- Error if multiple imageobjects given but no roles set. -->
+      <xsl:if
+        test="(../imageobject[not(@role)] or ../db5:imageobject[not(@role)])">
+        <result type="error">
+          <xsl:call-template name="sourcehint"/>
+          <message>Media object
+            <xsl:call-template name="createid">
+              <xsl:with-param name="node"
+                select="imagedata[1]|db5:imagedata[1]"/>
+              <xsl:with-param name="use-fileref-attribute" select="1"/>
+            </xsl:call-template>
+            contains multiple <tag>imageobject</tag> elements but not all have a
+            role.
+          </message>
+          <suggestion>If you intend to use different image attributes for
+            different output formats, add a <quote>role</quote> attribute with
+            the value being either <quote>fo</quote> (PDF) or
+            <quote>html</quote> (XHTML/EPUB).
+          </suggestion>
+          <suggestion>If you do not intend to use different image attributes
+            for different output formats, remove one of the
+            <tag>imageobject</tag> elements.
+          </suggestion>
+        </result>
+      </xsl:if>
+
+      <!-- Error if file name for multiple mediaobjects is different but
+      file format is the same. -->
+      <xsl:if
+        test="$this-extension = $next-extension and
+              not($this-name = $next-name)">
+        <result type="error">
+          <xsl:call-template name="sourcehint"/>
+          <message>Media object
+            <xsl:call-template name="createid">
+              <xsl:with-param name="node"
+                select="imagedata[1]|db5:imagedata[1]"/>
+              <xsl:with-param name="use-fileref-attribute" select="1"/>
+            </xsl:call-template>
+            contains multiple <tag>imagedata</tag> elements which reference
+            files of the same type but with different file names.
+          </message>
+          <suggestion>Check if there is an issue with one of the file names
+            or formats being referenced.
+          </suggestion>
+        </result>
+      </xsl:if>
+    </xsl:if>
+
+    <!-- Error if single imageobject, but role is set -->
+    <xsl:if
+      test="@role and
+            not(preceding-sibling::imageobject) and
+            not(preceding-sibling::db5:imageobject) and
+            not(following-sibling::imageobject) and
+            not(following-sibling::db5:imageobject)">
+      <xsl:variable name="suggested-role">
+        <xsl:choose>
+          <xsl:when test="@role='html'">fo</xsl:when>
+          <xsl:when test="@role='fo'">html</xsl:when>
+        </xsl:choose>
+      </xsl:variable>
+
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>Media object
+          <xsl:call-template name="createid">
+            <xsl:with-param name="node"
+              select="imagedata[1]|db5:imagedata[1]"/>
+            <xsl:with-param name="use-fileref-attribute" select="1"/>
+          </xsl:call-template>
+          contains a single <tag>imageobject</tag> with a role.
+        </message>
+        <suggestion>If you intend to use different image attributes for 
+          different output formats, add a second <tag>imageobject</tag> with
+          <xsl:choose>
+            <xsl:when test="$suggested-role != ''">
+              the role <quote><xsl:value-of select="$suggested-role"/></quote>.
+            </xsl:when>
+            <xsl:otherwise>
+              a different role.
+            </xsl:otherwise>
+          </xsl:choose>
+        </suggestion>
+        <suggestion>If you do not intend to use different image attributes
+          for different output formats, remove the <quote>role</quote>
+          attribute from the <tag>imageobject</tag> element.
+        </suggestion>
+      </result>
+    </xsl:if>
+
+    <xsl:apply-templates select="imagedata|db5:imagedata"/>
+  </xsl:template>
+
+
+  <xsl:template match="imagedata[@fileref]|db5:imagedata[@fileref]">
     <xsl:variable name="fileref" select="normalize-space(@fileref)"/>
     <xsl:variable name="fileref-bad">
       <xsl:call-template name="badcharacters">
@@ -122,6 +241,35 @@
         </xsl:if>
       </result>
     </xsl:if>
+
+    <!-- Error if filename and format attribute do not match -->
+    <xsl:if test="@format">
+      <xsl:variable name="format">
+        <xsl:call-template name="change-case">
+          <xsl:with-param name="text" select="@format"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="this-extension"
+        select="py:splitpath(@fileref,'extension')"/>
+
+      <xsl:if test="not($format = $this-extension)">
+        <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>
+          In media file reference
+          <xsl:call-template name="createid">
+            <xsl:with-param name="node"
+              select="."/>
+            <xsl:with-param name="use-fileref-attribute" select="1"/>
+          </xsl:call-template>,
+          the file format from the attribute <quote>format</quote> does
+          not match the file extension in <quote>fileref</quote>.
+        </message>
+        <suggestion>Make sure both extensions match.</suggestion>
+      </result>
+      </xsl:if>
+    </xsl:if>
+
   </xsl:template>
 
 </xsl:stylesheet>
