@@ -281,11 +281,11 @@ GNU GPL.
     </accept>
     <patterngroup>
       <pattern case="keep">consist(ed|ing|s|ances?)</pattern>
-      <contextpattern>on</contextpattern>
+      <pattern>on</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>(compris(e[ds]|ing)|contain(ed|s|ing))</pattern>
-      <contextpattern>of</contextpattern>
+      <pattern>of</pattern>
     </patterngroup>
   </term>
 
