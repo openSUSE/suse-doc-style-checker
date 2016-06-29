@@ -972,14 +972,11 @@
       <proposal>dialog</proposal>
     </accept>
     <patterngroup>
-      <pattern>dialogues?</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>dialog(box|window)s?</pattern>
-    </patterngroup>
-    <patterngroup>
       <pattern>dialog(ue)?</pattern>
       <pattern>(box|window)s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(dialogue|mask|dialog(ue)?(box|window))s?</pattern>
     </patterngroup>
   </term>
 
