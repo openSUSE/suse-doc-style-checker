@@ -2,7 +2,7 @@
 <chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.sects">
     <title>Sects test</title>
     <para>a</para>
-    <sect1 xml:id="sec.sdsc.expect.warning.sects.1">
+    <sect1 xml:id="sec.sdsc.expect.error.sects.1">
         <title/>
         <para>a</para>
         <sect2 xml:id="sec.2">
