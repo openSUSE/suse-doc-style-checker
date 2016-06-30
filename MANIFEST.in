@@ -36,4 +36,4 @@ recursive-include ci *.yml
 recursive-include packaging *.spec
 recursive-include src *.css
 
-global-exclude *.py[cod] __pycache__ *.so *.dylib *~ *.bak
+global-exclude *.py[cod] __pycache__ *.so *.dylib *~ *.bak *.doap *.kdevelop
