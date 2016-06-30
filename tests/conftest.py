@@ -20,7 +20,7 @@ def pytest_generate_tests(metafunc):
         testcase = glob.glob(location + "/*.xml")
         metafunc.parametrize("terminologyvalidation", testcase)
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def terminologydtd():
     dtdfile = os.path.join(os.path.dirname(__file__), '../validation/terminology.dtd')
     dtd = etree.DTD(file=dtdfile)
