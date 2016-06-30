@@ -1,10 +1,77 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Misc
+*.kate-swp
 *~
 .*sw?
 \#*
-/specs/build
-__pycache__
-.DS_Store
 Thumbs.db
-/source/*.xml
+.DS_Store
 MANIFEST
-dist
+/src/*.xml
+
+# Manpages
+man/*.1
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+.env/
+build/
+develop-eggs/
+dist/
+downloads/
+bin/
+include/
+eggs/
+.eggs/
+lib/
+lib64
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+.tmp/
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Pip
+pip-selfcheck.json
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/

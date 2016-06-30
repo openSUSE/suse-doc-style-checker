@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:db5="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:py="https://www.github.com/openSUSE/suse-doc-style-checker"
+  xmlns:exslt="http://exslt.org/common"
+  exclude-result-prefixes="db5 xlink py exslt">
+  <xsl:import href="library.xsl"/>
+
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+
+  <xsl:template match="*|db5:*" mode="part-title">Productnames, Productnumbers, &amp; Dates</xsl:template>
+
+  <xsl:template match="book|article|set|db5:book|db5:article|db5:set">
+
+    <xsl:if test="not(bookinfo/productname or articleinfo/productname or
+                      setinfo/productname) and
+                  not(db5:info/db5:productname)">
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>Deliverable <xsl:call-template name="createid"/> does not contain
+          a productname.
+        </message>
+        <suggestion>Add a <tag>productname</tag> element.</suggestion>
+      </result>
+    </xsl:if>
+
+    <xsl:if test="not(bookinfo/productnumber or articleinfo/productnumber or
+                      setinfo/productnumber) and
+                  not(db5:info/db5:productnumber)">
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>Deliverable <xsl:call-template name="createid"/> does not contain
+          a productnumber.
+        </message>
+        <suggestion>Add a <tag>productnumber</tag> element.</suggestion>
+      </result>
+    </xsl:if>
+
+    <xsl:if test="not(bookinfo/date or articleinfo/date or
+                      setinfo/date) and
+                  not(db5:info/db5:date)">
+      <result type="warning">
+        <xsl:call-template name="sourcehint"/>
+        <message>Deliverable <xsl:call-template name="createid"/> does not
+          contain a date.
+        </message>
+        <suggestion>Add a <tag>date</tag> element, use &lt;?dbtimestamp?&gt; inside.</suggestion>
+      </result>
+    </xsl:if>
+
+    <xsl:apply-templates/>
+  </xsl:template>
+
+  <xsl:template match="productname|db5:productname">
+    <xsl:if test="not(parent::articleinfo or parent::bookinfo or
+                      parent::setinfo) and
+                  not(parent::db5:info)">
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>Section <xsl:call-template name="createid"/> contains a
+          productname.
+        </message>
+        <suggestion>Remove the <tag>productname</tag> element</suggestion>
+        <suggestion>Use <tag>productname</tag> only in sets, books, and articles.
+        </suggestion>
+      </result>
+      <xsl:apply-templates/>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="productnumber|db5:productnumber">
+    <xsl:if test="not(parent::articleinfo or parent::bookinfo or
+                      parent::setinfo) and
+                  not(parent::db5:info)">
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>Section <xsl:call-template name="createid"/> contains a
+          productnumber.
+        </message>
+        <suggestion>Remove the <tag>productnumber</tag> element</suggestion>
+        <suggestion>Use <tag>productnumber</tag> only in sets, books, and
+          articles.
+        </suggestion>
+      </result>
+      <xsl:apply-templates/>
+    </xsl:if>
+  </xsl:template>
+
+</xsl:stylesheet>

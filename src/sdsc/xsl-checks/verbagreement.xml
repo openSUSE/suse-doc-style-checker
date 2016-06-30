@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminology ignoredwords="(the|a|an|this|there|that|these|those|one|by|on|over|under|about|to|at|in|from|if|when|as|while|where|who|why|what)">
+
+  <term>
+    <accept>
+      <proposal>be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>(is|was|were)</pattern>
+      <contextpattern look="before">will</contextpattern>
+      <contextpattern look="before" location="2" match="negative">(my|his|her|their|our|the|a)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(is|was|were)</pattern>
+      <contextpattern look="before">would</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>can be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>can</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>cannot be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>cannot</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>can</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>could be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>could</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>could not be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>could</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>may be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>may</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>may not be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>may</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>must be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>must</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>must not be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>must</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>might be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>might</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>might not be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>might</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>shall be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>shall</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>shall not be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>shall</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>should be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>should</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>should not be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>should</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>ought be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>ought</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>ought not be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>ought</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>will be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>will</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>will not be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>will</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>would be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>would</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>would not be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>would</pattern>
+      <pattern>not</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z)ing</contextpattern>
+    </patterngroup>
+  </term>
+
+</terminology>

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminology ignoredwords="[^cdhimostwy].+">
+  <term>
+    <accept>
+      <proposal>are not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>aren't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>cannot</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>can't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>could not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>couldn't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>do not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>don't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>did not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>didn't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>does not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>doesn't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>has not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>hasn't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>he is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>he's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>he will</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>he'll</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>he would</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>he'd</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>I am</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>i'm</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>I will</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>i'll</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>I would</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>i'[ds]</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>it is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>it's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>it will</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>it'll</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>it would</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>it'd</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>is not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>(ai|is)n't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>let us</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>let's</pattern>
+      <contextpattern case="keep">Encrypt</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>must not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>mustn't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>ought not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>oughtn't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>shall not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>shan't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>she is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>she's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>she will</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>she'll</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>she would</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>she'd</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>that is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>that's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>that will</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>that'll</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>there is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>there's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>they are</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>they're</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>they have</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>they've</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>they will</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>they'll</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>they would</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>they'd</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>what is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>what's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>where is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>where's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>who is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>who's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>why is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>why's</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>will not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>won't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>would not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>wouldn't</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>you are</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>you're</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>you have</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>you've</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>you will</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>you'll</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>you would</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>you'd</pattern>
+    </patterngroup>
+  </term>
+
+</terminology>

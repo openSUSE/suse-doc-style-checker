@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:db5="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:py="https://www.github.com/openSUSE/suse-doc-style-checker"
+  xmlns:exslt="http://exslt.org/common"
+  exclude-result-prefixes="db5 xlink py exslt">
+  <xsl:import href="library.xsl"/>
+
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+
+  <xsl:template match="*|db5:*" mode="part-title">Procedures</xsl:template>
+
+  <xsl:template match="procedure|db5:procedure">
+    <xsl:variable name="steps" select="count(step|db5:step)"/>
+    <xsl:choose>
+      <xsl:when test="$steps &gt; 10">
+        <result type="warning">
+          <xsl:call-template name="sourcehint"/>
+          <message>Procedure <xsl:call-template name="createid"/> contains
+            <xsl:value-of select="$steps"/> steps.
+          </message>
+          <suggestion>Procedures may contain up to 10 steps.</suggestion>
+        </result>
+      </xsl:when>
+      <xsl:when test="$steps &lt; 2">
+        <result type="error">
+          <xsl:call-template name="sourcehint"/>
+          <message>Procedure <xsl:call-template name="createid"/> contains
+            <xsl:value-of select="$steps"/> step.
+          </message>
+          <suggestion>Procedures should contain at least 2 steps.</suggestion>
+        </result>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+</xsl:stylesheet>

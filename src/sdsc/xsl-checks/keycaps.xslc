@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:db5="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:py="https://www.github.com/openSUSE/suse-doc-style-checker"
+  xmlns:exslt="http://exslt.org/common"
+  exclude-result-prefixes="db5 xlink py exslt">
+  <xsl:import href="library.xsl"/>
+
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:template match="*|db5:*" mode="part-title">Keycaps</xsl:template>
+
+  <xsl:template match="keycap[@function]|db5:keycap[@function]">
+    <xsl:variable name="function">
+      <xsl:value-of select="normalize-space(@function)"/>
+    </xsl:variable>
+    <xsl:variable name="text">
+      <xsl:call-template name="change-case">
+        <xsl:with-param name="text" select="normalize-space(text())"/>
+      </xsl:call-template>
+    </xsl:variable>
+
+    <xsl:if test="not($function = 0) and not($text = '')">
+      <xsl:variable name="correct-attribute">
+        <xsl:call-template name="correct-attribute">
+          <xsl:with-param name="raw" select="$text"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <result type="warning">
+        <xsl:call-template name="sourcehint"/>
+        <message>Function keycap
+          <xsl:call-template name="createid"/>
+          contains text.
+        </message>
+        <suggestion>Use a self-closing <tag>keycap</tag> element<xsl:if
+          test="$correct-attribute = 'meta'">, unless you are introducing this
+          key for the first time in this chapter</xsl:if>.
+        </suggestion>
+      </result>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="keycap|db5:keycap">
+
+    <xsl:variable name="text">
+      <xsl:value-of select="normalize-space(text())"/>
+    </xsl:variable>
+
+    <xsl:variable name="text-lower">
+      <xsl:call-template name="change-case">
+        <xsl:with-param name="text" select="$text"/>
+      </xsl:call-template>
+    </xsl:variable>
+
+    <xsl:choose>
+      <xsl:when test="$text-lower = 'alt' or $text-lower = 'backspace' or
+                    $text-lower = 'back' or $text-lower = '&lt;—' or
+                    $text-lower = '⌘' or $text-lower = 'command' or
+                    $text-lower = 'cmd' or
+                    $text-lower = 'ctrl' or $text-lower = 'control' or
+                    $text-lower = 'del' or
+                    $text-lower = 'delete' or $text-lower = 'down' or
+                    $text-lower = '↓' or $text-lower = 'end' or
+                    $text-lower = 'enter' or $text-lower = 'return' or
+                    $text-lower = 'esc' or $text-lower = 'escape' or
+                    $text-lower = 'home' or $text-lower = 'ins' or
+                    $text-lower = 'insert' or $text-lower = 'left' or
+                    $text-lower = '←' or $text-lower = 'meta' or
+                    $text-lower = 'super' or
+                    $text-lower = 'win' or $text-lower = 'windows' or
+                    $text-lower = 'windows logo' or
+                    $text-lower = 'windows-logo' or
+                    $text-lower = 'option' or $text-lower = '⌥' or
+                    $text-lower = 'page down' or $text-lower = 'pg down' or
+                    $text-lower = 'pgdown' or $text-lower = 'pagedown' or
+                    $text-lower = 'page ↓' or $text-lower = 'pg ↓' or
+                    $text-lower = 'page up' or $text-lower = 'pg up' or
+                    $text-lower = 'pgup' or $text-lower = 'pageup' or
+                    $text-lower = 'page ↑' or $text-lower = 'pg ↑' or
+                    $text-lower = 'right' or $text-lower = '→' or
+                    $text-lower = 'shift' or $text-lower = 'space' or
+                    $text-lower = ' ' or
+                    $text-lower = 'spacebar' or $text-lower = 'space bar' or
+                    $text-lower = 'tab' or $text-lower = '→|' or
+                    $text-lower = 'up' or $text-lower = '↑'">
+        <xsl:variable name="correct-attribute">
+          <xsl:call-template
+            name="correct-attribute">
+            <xsl:with-param name="raw" select="$text-lower"/>
+          </xsl:call-template>
+        </xsl:variable>
+
+        <result type="error">
+          <xsl:call-template name="sourcehint"/>
+          <message>Function keycap
+           <xsl:call-template name="createid"/>
+            does not use <quote>function</quote> attribute.
+          </message>
+          <suggestion>Use <tag>keycap function="<xsl:value-of
+            select="$correct-attribute"/>"</tag> instead<xsl:if
+            test="$correct-attribute = 'meta'">, unless you are introducing the
+            key for the first time in this chapter</xsl:if>.
+          </suggestion>
+        </result>
+      </xsl:when>
+
+      <xsl:when test="$text = 'a' or $text = 'b' or $text = 'c' or $text = 'd' or
+                    $text = 'e' or $text = 'f' or $text = 'g' or $text = 'h' or
+                    $text = 'i' or $text = 'j' or $text = 'k' or $text = 'l' or
+                    $text = 'm' or $text = 'n' or $text = 'o' or $text = 'p' or
+                    $text = 'q' or $text = 'r' or $text = 's' or $text = 't' or
+                    $text = 'u' or $text = 'v' or $text = 'w' or $text = 'x' or
+                    $text = 'y' or $text = 'z' or
+                    $text = 'f1' or $text = 'f2' or $text = 'f3' or
+                    $text = 'f4' or $text = 'f5' or $text = 'f6' or
+                    $text = 'f7' or $text = 'f8' or $text = 'f9' or
+                    $text = 'f10' or $text = 'f11' or $text = 'f12'">
+        <xsl:variable name="upper">
+          <xsl:call-template name="change-case">
+            <xsl:with-param name="text" select="$text"/>
+            <xsl:with-param name="case" select="'upper'"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <result type="error">
+          <xsl:call-template name="sourcehint"/>
+          <message>Keycap
+            <xsl:call-template name="createid"/>
+            uses a lowercase letter.
+          </message>
+          <suggestion>Use the uppercased version
+            <em><xsl:value-of select="$upper"/></em>
+            instead.
+          </suggestion>
+        </result>
+      </xsl:when>
+      <xsl:when test="(string-length($text) &lt; '2') or
+                    $text-lower = 'f1' or $text-lower = 'f2' or
+                    $text-lower = 'f3' or $text-lower = 'f4' or
+                    $text-lower = 'f5' or $text-lower = 'f6' or
+                    $text-lower = 'f7' or $text-lower = 'f8' or
+                    $text-lower = 'f9' or $text-lower = 'f10' or
+                    $text-lower = 'f11' or $text-lower = 'f12' or
+                    $text-lower = 'caps lock' or $text-lower = 'num lock' or
+                    $text-lower = 'scroll lock' or $text-lower = 'fn' or
+                    $text-lower = 'print' or $text-lower = 'print screen' or
+                    $text-lower = 'prt screen' or $text-lower = 'prtscreen' or
+                    $text-lower = 'highlighted letter' or
+                    $text-lower = 'highlighted-letter' or
+                    $text-lower = 'highlighted_letter' or
+                    $text-lower = 'letter' or
+                    $text-lower = 'highlighted number' or
+                    $text-lower = 'highlighted-number' or
+                    $text-lower = 'highlighted_number' or
+                    $text-lower = 'number'">
+        <!-- Nothing -->
+      </xsl:when>
+      <xsl:otherwise>
+        <result type="error">
+          <xsl:call-template name="sourcehint"/>
+          <message>Keycap
+           <xsl:call-template name="createid"/>
+            might have been used to mark up a GUI or other item.
+          </message>
+          <suggestion>If this is a GUI item, use <tag>guimenu</tag> instead.
+          </suggestion>
+          <suggestion>If this is another item, use other appropriate markup
+            instead.
+          </suggestion>
+        </result>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+
+  <xsl:template match="guimenu|db5:guimenu">
+
+    <xsl:variable name="text">
+      <xsl:value-of select="normalize-space(text())"/>
+    </xsl:variable>
+
+    <xsl:variable name="text-lower">
+      <xsl:call-template name="change-case">
+        <xsl:with-param name="text" select="$text"/>
+      </xsl:call-template>
+    </xsl:variable>
+
+    <!-- We do not check for the strings "windows," "delete," "down," "up,"
+    "left," "right," "insert," "home," "back," and "option" here. This avoids
+    false positives. E. g. GIMP has a menu called "Windows", "Back" buttons are
+    common in browsers etc. -->
+    <xsl:if test="$text-lower = 'alt' or $text-lower = 'backspace' or
+                  $text-lower = '&lt;—' or
+                  $text-lower = '⌘' or $text-lower = 'command' or
+                  $text-lower = 'cmd' or
+                  $text-lower = 'ctrl' or $text-lower = 'control' or
+                  $text-lower = 'del' or
+                  $text-lower = '↓' or $text-lower = 'end' or
+                  $text-lower = 'enter' or $text-lower = 'return' or
+                  $text-lower = 'esc' or $text-lower = 'escape' or
+                  $text-lower = 'ins' or
+                  $text-lower = '←' or $text-lower = 'meta' or
+                  $text-lower = 'super' or
+                  $text-lower = 'win' or
+                  $text-lower = 'windows logo' or
+                  $text-lower = 'windows-logo' or
+                  $text-lower = '⌥' or
+                  $text-lower = 'page down' or $text-lower = 'pg down' or
+                  $text-lower = 'pagedown' or $text-lower = 'pgdown' or
+                  $text-lower = 'page ↓' or $text-lower = 'pg ↓' or
+                  $text-lower = 'page up' or $text-lower = 'pg up' or
+                  $text-lower = 'pageup' or $text-lower = 'pgup' or
+                  $text-lower = 'page ↑' or $text-lower = 'pg ↑' or
+                  $text-lower = '→' or
+                  $text-lower = 'shift' or $text-lower = 'space' or
+                  $text-lower = 'spacebar' or $text-lower = 'space bar' or
+                  $text-lower = 'tab' or $text-lower = '→|' or
+                  $text-lower = '↑'">
+      <xsl:variable name="correct-attribute">
+        <xsl:call-template
+          name="correct-attribute">
+          <xsl:with-param name="raw" select="$text-lower"/>
+        </xsl:call-template>
+      </xsl:variable>
+
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>Guimenu
+         <xsl:call-template name="createid"/>
+          might have been used to mark up a key.
+        </message>
+        <suggestion>If this is markup for a key, use
+          <tag>keycap function="<xsl:value-of
+            select="$correct-attribute"/>"</tag> instead.
+        </suggestion>
+      </result>
+    </xsl:if>
+
+    <xsl:if test="$text-lower = 'f1' or $text-lower = 'f2' or
+                  $text-lower = 'f3' or $text-lower = 'f4' or
+                  $text-lower = 'f5' or $text-lower = 'f6' or
+                  $text-lower = 'f7' or $text-lower = 'f8' or
+                  $text-lower = 'f9' or $text-lower = 'f10' or
+                  $text-lower = 'f11' or $text-lower = 'f12'">
+      <xsl:variable name="upper">
+        <xsl:call-template name="change-case">
+          <xsl:with-param name="text" select="$text"/>
+          <xsl:with-param name="case" select="'upper'"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>Guimenu
+          <xsl:call-template name="createid"/>
+          might have been used to mark up a key.
+        </message>
+        <suggestion>If this is markup for a key, use <tag>keycap</tag> with the
+          text
+          <em><xsl:value-of select="$upper"/></em>
+          instead.
+        </suggestion>
+      </result>
+    </xsl:if>
+
+    <!-- Too many false positives. -->
+    <!-- <xsl:if test="$text-lower = 'a' or $text-lower = 'b' or $text-lower = 'c' or
+                  $text-lower = 'd' or $text-lower = 'e' or $text-lower = 'f' or
+                  $text-lower = 'g' or $text-lower = 'h' or $text-lower = 'i' or
+                  $text-lower = 'j' or $text-lower = 'k' or $text-lower = 'l' or
+                  $text-lower = 'm' or $text-lower = 'n' or $text-lower = 'o' or
+                  $text-lower = 'p' or $text-lower = 'q' or $text-lower = 'r' or
+                  $text-lower = 's' or $text-lower = 't' or $text-lower = 'u' or
+                  $text-lower = 'v' or $text-lower = 'w' or $text-lower = 'x' or
+                  $text-lower = 'y' or $text-lower = 'z' or
+                  $text-lower = '0' or $text-lower = '1' or $text-lower = '2' or
+                  $text-lower = '3' or $text-lower = '4' or $text-lower = '5' or
+                  $text-lower = '6' or $text-lower = '7' or $text-lower = '8' or
+                  $text-lower = '9'">
+      <xsl:variable name="upper">
+        <xsl:call-template name="change-case">
+          <xsl:with-param name="text" select="$text"/>
+          <xsl:with-param name="case" select="'upper'"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <result type="warning">
+        <xsl:call-template name="sourcehint"/>
+        <message>Guimenu
+          <xsl:call-template name="createid"/>
+          might have been used to mark up a key.
+        </message>
+        <suggestion>If this is markup for a key, use <tag>keycap</tag> with the
+          text
+          <em><xsl:value-of select="$upper"/></em>
+          instead.
+        </suggestion>
+      </result>
+    </xsl:if> -->
+  </xsl:template>
+
+  <xsl:template name="correct-attribute">
+    <xsl:param name="raw" select="'?'"/>
+
+    <xsl:choose>
+      <xsl:when test="$raw = 'alt'">alt</xsl:when>
+      <xsl:when test="$raw = 'backspace' or $raw = 'back' or
+                      $raw = '&lt;—'">backspace</xsl:when>
+      <xsl:when test="$raw = '⌘' or $raw = 'command' or
+                      $raw = 'cmd'">command</xsl:when>
+      <xsl:when test="$raw = 'ctrl' or $raw = 'control'">control</xsl:when>
+      <xsl:when test="$raw = 'del' or $raw = 'delete'">delete</xsl:when>
+      <xsl:when test="$raw = 'down' or $raw = '↓'">down</xsl:when>
+      <xsl:when test="$raw = 'end'">end</xsl:when>
+      <xsl:when test="$raw = 'enter' or $raw = 'return'">enter</xsl:when>
+      <xsl:when test="$raw = 'esc' or $raw = 'escape'">escape</xsl:when>
+      <xsl:when test="$raw = 'home'">home</xsl:when>
+      <xsl:when test="$raw = 'ins' or $raw = 'insert'">insert</xsl:when>
+      <xsl:when test="$raw = 'left' or $raw = '←'">left</xsl:when>
+      <xsl:when test="$raw = 'meta' or $raw = 'super' or $raw = 'win' or
+                      $raw = 'windows' or $raw = 'windows logo' or
+                      $raw = 'windows-logo'">meta</xsl:when>
+      <xsl:when test="$raw = 'option' or $raw = '⌥'">option</xsl:when>
+      <xsl:when test="$raw = 'page down' or $raw = 'pg down' or
+                      $raw = 'pagedown' or $raw = 'page ↓' or
+                      $raw = 'pg ↓' or $raw = 'pgdown'">pagedown</xsl:when>
+      <xsl:when test="$raw = 'page up' or $raw = 'pg up' or
+                      $raw = 'pageup' or $raw = 'page ↑' or
+                      $raw = 'pg ↑' or $raw = 'pgup'">pageup</xsl:when>
+      <xsl:when test="$raw = 'right' or $raw = '→'">right</xsl:when>
+      <xsl:when test="$raw = 'shift'">shift</xsl:when>
+      <xsl:when test="$raw = 'space' or $raw = 'spacebar' or $raw = ' ' or
+                      $raw = 'space bar'">space</xsl:when>
+      <xsl:when test="$raw = 'tab' or $raw = '→|'">tab</xsl:when>
+      <xsl:when test="$raw = 'up' or $raw = '↑'">up</xsl:when>
+      <xsl:otherwise>?</xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+</xsl:stylesheet>

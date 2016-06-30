@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.terminology">
+    <title>Terminology test</title>
+    <para xml:id="sdsc.expect.error.terminology.1">
+        Two 32 bit systems equal one 64 bit system.
+    </para>
+    <para xml:id="sdsc.valid.1">
+        Two 32-bit systems equal one 64-bit system.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.2">
+        I use Mac OS X at work.
+    </para>
+    <para xml:id="sdsc.valid.2">
+        I have several macOS boxes at home.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.3">
+        SUSE Linux is a great OS.
+    </para>
+    <para xml:id="sdsc.valid.3">
+        SUSE Linux Enterprise is a great OS.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.4">
+        S4S is the only OS based on SLES that is certified by SAP.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.5">
+        SUSE Linux Enterprise Server for SAP is the only OS based on SLES that is certified by SAP.
+    </para>
+    <para xml:id="sdsc.valid.5">
+        SUSE Linux Enterprise Server for SAP Applications is the only OS based on SLES that is certified by SAP.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.6">
+        SLE for SAP is the only OS based on SLES that is certified by SAP.
+    </para>
+    <para xml:id="sdsc.valid.6">
+        SLES for SAP Applications is the only OS based on SLES that is certified by SAP.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.7">
+        Try SUSE Linux Enterprise Storage today.
+    </para>
+    <para xml:id="sdsc.valid.7">
+        Try SUSE Enterprise Storage today.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.8">
+        The primary solution for the private-cloud market is SUSE Cloud.
+    </para>
+    <para xml:id="sdsc.valid.8">
+        The primary solution for the private-cloud market is SUSE OpenStack Cloud.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.9">
+        The new SUSE Server has been certified many partners.
+    </para>
+    <para xml:id="sdsc.valid.9">
+        The new SUSE Linux Enterprise Server has been certified by many
+        partners.
+    </para>
+</chapter>

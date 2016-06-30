@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.sentencelength">
+    <title>Sentencelength test</title>
+    <para xml:id="sdsc.expect.error.sentencelength">
+        This is supposed to be a very long (and thus very hard to read in one go) sentence,
+        with the intention of tripping the sentencelength check, which is written in XSLT,
+        a language that looks more like torture than an actual language,
+        <command>This should be highlighted as well</command>
+        where even very long sentences (such as this one) are relatively easy to
+        follow and do not require looking everywhere to be able to guess what an
+        XSLT file does.
+        <command>While this should not be highlighted</command>
+    </para>
+    <para xml:id="sdsc.expect.warning.sentencelength">
+        <command>This is a command and should be ignored</command>
+        This is supposed to be a long (and thus very hard to read in one go) sentence,
+        with the intention of tripping the sentencelength check, which is written in XSLT.
+        To additionally test highlighting of simple sentences, this one is short enough.
+    </para>
+    <para xml:id="sdsc.valid.1">
+        A valid sentence.
+    </para>
+    <para xml:id="sdsc.valid.2">
+        This is <userinput>a very long sentence if the content of this userinput tag
+        is used as part of the sentence, which would also cause the highlight tag
+        in the result xml file to not work correctly when highlighting this</userinput> sentence.
+    </para>
+    <para xml:id="sdsc.valid.3">
+        <!-- Bug 0: Each of those count as a word.
+             Bug 1: They are shown as ##@mono-0## in content-pretty. -->
+        <command/> <command/> <command/>
+        <command/> <command/> <command/>
+        <command/> <command/> <command/>
+        <command/> <command/> <command/>
+        <command/> <command/> <command/>
+        <command/> <command/> <command/>
+        <command/> <command/> <command/>
+        <command/> <command/> <command/>
+        <command/> <command/> <command/>
+    </para>
+</chapter>

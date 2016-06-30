@@ -1,5 +1,5 @@
-<!-- DTD to validate the the documentation style checker's terminology
-     check's terminology file.
+<!-- DTD to validate SUSE Documentation Style Checker "terminology files"
+     (the file type that is used for most kinds of word-level language check).
 -->
 <!--  To validate, do
         $ xmllint -dtdvalid [PATH TO THIS DTD] [PATH TO TERMINOLOGY FILE]

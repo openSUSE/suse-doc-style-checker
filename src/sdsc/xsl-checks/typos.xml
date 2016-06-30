@@ -1,0 +1,1205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Some rules converted from the English Grammar and Typo Rules for LanguageTool,
+Copyright (C) 2001-2012 Daniel Naber (http://www.danielnaber.de), licensed
+under LGPL 2.1+.
+
+Portions of rules are converted from After The Deadline grammar checker,
+available at http://open.afterthedeadline.com/, licensed under
+GNU GPL.
+-->
+<terminology useonepattern="no">
+
+  <term>
+    <accept>
+      <proposal>adapt</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>ad[eo]pt(ed|s|ing)?</pattern>
+      <contextpattern look="before">(always|(automatical|easi|usual|general)ly)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>ad[eo]pt(ed|s|ing)?</pattern>
+      <contextpattern match="negative">by</contextpattern>
+      <contextpattern mode="fuzzy" location="4">(your|their)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>ad[eo]pt(ed|s|ing)?</pattern>
+      <contextpattern mode="fuzzy" location="2">to</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>adaptation</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>adoptations?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>adept</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>adapt</pattern>
+      <contextpattern look="before">(be|is|are|were|was)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>adopt</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>adapt(ed|s|ing)?</pattern>
+      <contextpattern look="before">widely</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>a long</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>along</pattern>
+      <contextpattern look="before">for</contextpattern>
+      <contextpattern>time</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>although</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>all</pattern>
+      <pattern>though</pattern>
+      <contextpattern look="before">(of|not|at)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>all</pattern>
+      <pattern>though</pattern>
+      <contextpattern look="before">in</contextpattern>
+      <contextpattern look="before" location="2" match="negative">all</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>allowed</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>aloud</pattern>
+      <pattern>to</pattern>
+      <contextpattern look="before">(is|are|were|was|be|been)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>and</proposal>
+    </accept>
+    <!-- "an more" could also be "any more"/"anymore"... -->
+    <patterngroup>
+      <pattern case="keep">[Aa]n</pattern>
+      <contextpattern>(more|most|some|many|few|th(en|is|at|[eo]se|ere))</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern case="keep">[Aa]d(?!-)</pattern>
+      <contextpattern look="before" match="negative">(an?|the|my|your|his|her|their|our|802\.11)</contextpattern>
+      <contextpattern match="negative">hoc</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>[ai]n</pattern>
+      <contextpattern look="before">back</contextpattern>
+      <contextpattern>fou?rth</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>[ai]n</pattern>
+      <contextpattern look="before">one</contextpattern>
+      <contextpattern location="2">same</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>[ai]n</pattern>
+      <contextpattern look="before">(left|right)</contextpattern>
+      <contextpattern>(left|right)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>[ai]n</pattern>
+      <contextpattern look="before">(down|up)</contextpattern>
+      <contextpattern>(down|up)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>any</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>ant</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>anymore</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>any</pattern>
+      <pattern>more</pattern>
+      <contextpattern match="negative">(of|than)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>any more</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>anymore</pattern>
+      <contextpattern>(of|than)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>as</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>a(?![\.\-])</pattern>
+      <pattern>s(?![\.\-])</pattern>
+      <contextpattern>a(?![\.\-])</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>as opposed to</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>as</pattern>
+      <pattern>oppose</pattern>
+      <pattern>to</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>as</pattern>
+      <pattern>opposed</pattern>
+      <pattern>too</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>bear</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>bare</pattern>
+      <contextpattern>in</contextpattern>
+      <contextpattern location="2">mind</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>begin</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>being</pattern>
+      <contextpattern case="keep" look="before">To</contextpattern>
+      <contextpattern>with(?=,)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>as usual</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>as</pattern>
+      <pattern>per</pattern>
+      <pattern>usual(ly)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>as</pattern>
+      <pattern>per</pattern>
+      <pattern>the</pattern>
+      <pattern>usual(ly)?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>by</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>bye</pattern>
+      <contextpattern>the</contextpattern>
+      <contextpattern location="2">way</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>per</pattern>
+      <contextpattern>default</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>choose</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>chose</pattern>
+      <contextpattern look="before">to</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>compliant</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>complaint</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy">(be|is|are|were|was)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>conform</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>confirm(ed|s|ing)?</pattern>
+      <contextpattern>(to|with)</contextpattern>
+      <contextpattern location="5" mode="fuzzy">(style|schem[ea])s?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>consist of</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">consist(ed|ing|s|ances?)</pattern>
+      <pattern>on</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(compris(e[ds]|ing)|contain(ed|s|ing))</pattern>
+      <pattern>of</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>date</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>data</pattern>
+      <contextpattern look="before">to</contextpattern>
+      <contextpattern look="before" location="2">up</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>disk</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>dicks?</pattern>
+      <contextpattern look="before">hard</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>dicks?</pattern>
+      <contextpattern>(image|cache|size)s?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>done</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>doe</pattern>
+      <contextpattern look="before">ha(ve|s|d)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>from</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>form</pattern>
+      <contextpattern look="before">apart</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>exists</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>exits</pattern>
+      <contextpattern look="before">there</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>extent</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>extends?</pattern>
+      <contextpattern look="before">(some|certain|small(er|est)?|large(r|st)?|big(ger|gest)?)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>ensure</proposal>
+      <context>making sure of something</context>
+    </accept>
+    <patterngroup>
+      <pattern>insure</pattern>
+      <contextpattern look="before">that</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>formerly</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>formally</pattern>
+      <contextpattern>known</contextpattern>
+      <contextpattern location="2">as</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>forth</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>fourth</pattern>
+      <contextpattern look="before">and</contextpattern>
+      <contextpattern look="before" location="2">back</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>for</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>fro</pattern>
+      <contextpattern look="before" match="negative">(and|from)</contextpattern>
+      <contextpattern look="before" location="2" match="negative">to</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern case="keep">Fro</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>fro</pattern>
+      <contextpattern>an?</contextpattern>
+      <contextpattern location="2">(while|week(end)?|month|year|hour|minute|second)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>fro</pattern>
+      <contextpattern>some</contextpattern>
+      <contextpattern location="2">time</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>from</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>fro</pattern>
+      <contextpattern look="before">away</contextpattern>
+    </patterngroup>
+  </term>
+
+    <term>
+    <accept>
+      <proposal>fully</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>full</pattern>
+      <contextpattern>qualified</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>got</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>go</pattern>
+      <contextpattern look="before">(\w+?'|ha)(ve|d)</contextpattern>
+      <contextpattern>to</contextpattern>
+      <contextpattern location="2">go</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>hardware</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>hard</pattern>
+      <contextpattern>(and|or)</contextpattern>
+      <contextpattern location="2">software</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>hour</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>our</pattern>
+      <contextpattern look="before">half</contextpattern>
+      <contextpattern look="before" location="2">an?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>our</pattern>
+      <contextpattern look="before">an?</contextpattern>
+      <contextpattern look="before" location="2">half</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>if</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>i(?![-,])</pattern>
+      <contextpattern>you</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>insist on</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">insist(ed|ing|s|ances?)</pattern>
+      <contextpattern>of</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>in other</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">Another</pattern>
+      <contextpattern>words(?=,)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>issue</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>is</pattern>
+      <pattern case="keep">sue</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>issues</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>is</pattern>
+      <pattern case="keep">sues</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>itself</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>it</pattern>
+      <pattern>self</pattern>
+    </patterngroup>
+  </term>
+
+  <!-- It is probably a better idea to have a whitelist for this...
+       (or PoS tagging) -->
+  <!-- <term>
+    <accept>
+      <proposal>it is</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>its</pattern>
+      <contextpattern>\w+?ing</contextpattern>
+      <contextpattern match="negative">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir|includ)ing</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>its</pattern>
+      <contextpattern location="2">\w+?ing</contextpattern>
+      <contextpattern match="negative" location="2">(b?r|[bcfs]l|s(pr|t|w)?|w|p|d|z|alarm|amus|annoy|astonish|astound|bor|challeng|confus|disappoint|encourag|excit|frustrat|inspir|interest|satisfy|surpris|threaten|tir|includ)ing</contextpattern>
+    </patterngroup>
+  </term> -->
+
+  <term>
+    <accept>
+      <proposal>know</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>now</pattern>
+      <contextpattern look="before">to</contextpattern>
+      <contextpattern look="before" location="2" match="negative">up</contextpattern>
+      <!-- Actually: any verb. -->
+      <contextpattern match="negative">be</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>known</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>know(?!-)</pattern>
+      <contextpattern>(issue|problem|bug)s?</contextpattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>know(?!-)</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy">(be|is|are|was|were)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>lose</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>loos(e[ds]|ing)</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>loose</pattern>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|i|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>loose</pattern>
+      <contextpattern look="after">(to|your?|him|her|its|their|our|suse|novell|attachmate)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <!-- Fine-grained enough? -->
+  <term>
+    <accept>
+      <proposal>loose</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>lose</pattern>
+      <contextpattern>ends?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <!-- Needs to be reworked to avoid false positives. -->
+  <!-- <term>
+    <accept>
+      <proposal>may be</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>maybe</pattern>
+      <contextpattern look="before">it</contextpattern>
+    </patterngroup>
+  </term> -->
+
+  <term>
+    <accept>
+      <proposal>by</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>with</pattern>
+      <contextpattern look="before">multipl(y(ing)?|ie[ds])</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>message</proposal>
+      <context>receiving information</context>
+    </accept>
+    <patterngroup>
+      <pattern>massag(e[sd]?|ing)</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>no</pattern>
+      <contextpattern look="before">do</contextpattern>
+      <!-- This can't ever be comprehensive... maybe a blacklist approach is
+           better suited here? No wait, I got it ... we need POS tagging.-->
+      <contextpattern location="2" mode="fuzzy">access|((de|re)?activate|affect|appear|apply|(re)?announce|belong|block|care|(ex)?change|clash|((left|middle|right)-?)click|(re)?configure|correspond|depend|differ|do|(en|dis)able|enforce|enter|exert|expect|extract|(re)?fill|fit|follow|forbid|forget|format|grant|have|implement|(de|re|un)?install|integrate|involve|(in|ex)clude|leave|like|(un|re)?load|log|need|obstruct|offer|own|overlap|(re)paint|pass|permit|(dis|re)?place|plan|press|precede|proceed|prove|provide|make|match|meet|modify|(un|re)?mount|(re)?move|notice|(re|en)quire|reside|run|scrub|see|seem|(de|re)?select|(un|re)?set|share|specify|(re)?store|suit|support|switch|synchronize|(re)?title|try|(re)?use|want|work)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>note</pattern>
+      <contextpattern>the</contextpattern>
+      <contextpattern location="2">case</contextpattern>
+      <contextpattern look="before" location="4" mode="fuzzy">if</contextpattern>
+    </patterngroup>
+  </term>
+
+  <!-- Seems the following two are a bit too aggressive. -->
+  <!-- <term>
+    <accept>
+      <proposal>nor</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>not</pattern>
+      <contextpattern look="before" location="5">neither</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>not</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>nor</pattern>
+      <contextpattern>(be|is|are|was|were|will|would|do|does|did|can|could|shall|should|may|might|have|has|had)</contextpattern>
+      <contextpattern look="before" location="5" match="negative">neither</contextpattern>
+    </patterngroup>
+  </term> -->
+
+  <term>
+    <accept>
+      <proposal>note</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>not(ice)?</pattern>
+      <contextpattern look="before">please</contextpattern>
+    </patterngroup>
+    <!-- There is a difference between noting something and noticing something.
+         Often, indeed the former is meant, but not always, so avoid correcting
+         people on this. -->
+    <!-- <patterngroup>
+      <pattern>notice</pattern>
+      <contextpattern>that</contextpattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">(will|\w+'ll|can|could|may|might|shall|should)</contextpattern>
+    </patterngroup> -->
+  </term>
+
+  <term>
+    <accept>
+      <proposal>now</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>know</pattern>
+      <contextpattern look="before">(right|by|of|for|(un)?till?|it|this|has|have|is|are)</contextpattern>
+      <contextpattern match="negative">(issue|problem|bug)s?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>know</pattern>
+      <contextpattern>(they|you|attachmate|suse|novell|k?nows)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>know</pattern>
+      <contextpattern look="before">from</contextpattern>
+      <contextpattern>on</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>know</pattern>
+      <contextpattern>and</contextpattern>
+      <contextpattern location="2">then</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>know</pattern>
+      <contextpattern look="before">(and|but|by|even|from|so)</contextpattern>
+      <contextpattern look="before" location="2" match="negative">not</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>nowadays</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>now</pattern>
+      <pattern>a</pattern>
+      <pattern>days?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>now</pattern>
+      <pattern>days?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>now(-?|-a?-?)days?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>occur</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>happen(s|ed|ing)?</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy">situations?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>of</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>(if|on)</pattern>
+      <contextpattern>views?</contextpattern>
+      <contextpattern look="before">points?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(if|on)</pattern>
+      <contextpattern mode="fuzzy" location="2">[-a-z0-9]+s</contextpattern>
+      <contextpattern look="before">(amount|number)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>one</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>on</pattern>
+      <contextpattern>of</contextpattern>
+      <contextpattern location="2">the</contextpattern>
+      <contextpattern location="3">(more|most|less|least|best|worst)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <!-- Needs a check that no nouns like "things", "issues" etc. comes after. -->
+  <!-- <term>
+    <accept>
+      <proposal>others</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>other</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy">among</contextpattern>
+    </patterngroup>
+  </term> -->
+
+  <term>
+    <accept>
+      <proposal>other's</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>others</pattern>
+      <contextpattern look="before">each</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>parentheses</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>parenthesis</pattern>
+      <contextpattern look="before">in</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>peak</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>peek</pattern>
+      <contextpattern look="bothways" location="2" mode="fuzzy">(load|performance|time)s?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>peek</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>peak</pattern>
+      <contextpattern look="before">sneak</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>principle</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>principals?</pattern>
+      <contextpattern look="before">(in|on)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>remember</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>remind</pattern>
+      <contextpattern look="before">to</contextpattern>
+      <contextpattern look="before" location="2">eas(y|ier|iest)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>regarding</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>regrading</pattern>
+      <!-- <contextpattern/> necessary? -->
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>same</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>some</pattern>
+      <contextpattern case="keep" look="before">[Tt]he(?![,\)\]])</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>se</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>say</pattern>
+      <contextpattern look="before">per</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>software</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>soft</pattern>
+      <contextpattern>(and|or)</contextpattern>
+      <contextpattern location="2">hardware</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>somewhat</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>some</pattern>
+      <pattern>what</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>start</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>stare?(s|d|ing)?</pattern>
+      <contextpattern>with</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>starting point</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>staring</pattern>
+      <pattern>point</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>supposed</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>suppose</pattern>
+      <contextpattern>to</contextpattern>
+      <contextpattern location="2">be</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>tapping</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>taping</pattern>
+      <contextpattern look="bothways" location="3" mode="fuzzy">(touch(-?pads?)|systems?|machines?|computers?|connections?)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>there</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>their</pattern>
+      <contextpattern>are</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>than</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>then</pattern>
+      <contextpattern look="before">(less|more|better|worse|larger|smaller|(o|ra)ther)(?![,\)\]])</contextpattern>
+      <!-- Needs check that this is not the end of the sentence. -->
+    </patterngroup>
+    <patterngroup>
+      <pattern>then</pattern>
+      <contextpattern look="before" location="2">(less|more)(?![,\)\]])</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>that</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>whether</pattern>
+      <contextpattern look="before" location="2">mak(e[ds]?|ing)</contextpattern>
+      <contextpattern look="before" location="1">sure</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>the</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>the</pattern>
+      <pattern>(your|our|his|her|our|their)</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>there</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>(their|they're)</pattern>
+      <contextpattern>(are|is)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>throw</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>through</pattern>
+      <contextpattern location="2" mode="fuzzy">away</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>to</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>do</pattern>
+      <contextpattern look="before">(easy|simple|hard|difficult|low|high|best|worst|[-\w]+?[ia]ble|[-\w]+?ful|[-\w]+?like)(?![,\)\]])</contextpattern>
+      <contextpattern look="before" location="3" mode="fuzzy" match="negative">(if|when|how|whom?|when|where|why)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>t[ow]o(?![,\)\]])</pattern>
+      <contextpattern>(do|make|take|use|configure|add|remove|change|switch|install|uninstall|you|my|your|my|our|their)</contextpattern>
+      <contextpattern look="before" match="negative">to</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>to the</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>tot</pattern>
+      <pattern>he</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>to this</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>tot</pattern>
+      <pattern>his</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>too</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>two</pattern>
+      <contextpattern>(much|many|few|little)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to(?=\.)</pattern>
+      <contextpattern look="before">[-\w]+?(?=,)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>tool</pattern>
+      <contextpattern>long</contextpattern>
+      <contextpattern location="2" match="negative">ago</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>TLS</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">TSL</pattern>
+      <contextpattern case="keep" look="bothways" location="5" mode="fuzzy">(SSL|HTTPS|protocols?|security)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>TLS/SSL</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">(TSL/SSL|SSL/T(LS|SL))</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern case="keep">(TSL|SSL)</pattern>
+      <pattern case="keep">(/|and)</pattern>
+      <pattern case="keep">(TSL|SSL)</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>two</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>too</pattern>
+      <contextpattern look="before">(only|just)(?![,])</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>too</pattern>
+      <contextpattern>(different|alternatives?|ways|kinds|modes|standards|cases)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>too?</pattern>
+      <contextpattern look="before">the(?![,])</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>used</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>use</pattern>
+      <contextpattern look="before">(get(s|ting)?|got|is|are|was|be)</contextpattern>
+      <contextpattern>to</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>way</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>was</pattern>
+      <contextpattern look="before">an?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>where</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>were</pattern>
+      <contextpattern look="before">is</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>whether</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>wea?ther</pattern>
+      <contextpattern look="before">(ask|question)(ed|s|ing)?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>world</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>all</pattern>
+      <contextpattern>over</contextpattern>
+      <contextpattern location="2">the</contextpattern>
+      <contextpattern location="3">word</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>yet</proposal>
+    </accept>
+    <patterngroup>
+      <!-- May need some fleshing out to avoid too many false positives.
+      -->
+      <pattern>jet</pattern>
+      <contextpattern look="before" match="negative">(ink|private)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>you</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>your</pattern>
+      <contextpattern>((c|sh)ould|are)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern>you</pattern>
+      <contextpattern>yours?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>yours?</pattern>
+      <contextpattern>you</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern>(the|a)</pattern>
+      <contextpattern>(your|which|those)</contextpattern>
+    </patterngroup>
+  </term>
+
+</terminology>

@@ -1,0 +1,39 @@
+# include DESCRIPTION.rst
+# Include the test suite (FIXME: does not work yet)
+# recursive-include tests *
+# If using Python 2.6 or less, then have to include package data, even though
+# it's already declared in setup.py
+# include sample/*.dat
+
+graft man
+prune man/build
+
+include .bumpversion.cfg
+include .coverage*
+include .cookiecutterrc
+include .isort.cfg
+include .landscape.yml
+include .travis.yml
+include *requirements.txt
+include tox.ini
+include *.md
+
+graft bookmarklet
+graft bookmarklet
+graft validation
+graft src/sdsc/xsl-checks
+graft tests
+graft experimental-checks
+
+include ChangeLog
+include README*
+include LICENSE
+
+include make_devsetup.sh
+recursive-include ci *.ini
+recursive-include ci *.py
+recursive-include ci *.yml
+recursive-include packaging *.spec
+recursive-include src *.css
+
+global-exclude *.py[cod] __pycache__ *.so *.dylib *~ *.bak

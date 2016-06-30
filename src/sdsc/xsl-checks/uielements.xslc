@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:db5="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:py="https://www.github.com/openSUSE/suse-doc-style-checker"
+  xmlns:exslt="http://exslt.org/common"
+  exclude-result-prefixes="db5 xlink py exslt">
+  <xsl:import href="library.xsl"/>
+
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+
+  <xsl:template match="*" mode="part-title">User Interface Elements</xsl:template>
+
+  <xsl:template match="guimenu|db5:guimenu">
+    <xsl:variable name="end-of-text">
+      <xsl:value-of select="substring(text(), string-length(text()))"/>
+      <!-- This nets us just the last letter, use "string-length(text() - 1"
+           to get two letters. -->
+    </xsl:variable>
+
+    <xsl:if test="contains($end-of-text, '…') or
+                  contains($end-of-text, '.') or contains($end-of-text, ':') or
+                  contains($end-of-text, ',') or contains($end-of-text, ';') or
+                  contains($end-of-text, '?') or contains($end-of-text, '!')">
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>User interface element <xsl:call-template name="createid"/>
+          has punctation at its end.
+        </message>
+        <suggestion>Remove punctuation from the end of user interface elements.
+        </suggestion>
+        <suggestion>If this is end-of-sentence/end-of-clause punctuation,
+          place it outside of the <tag>guimenu</tag> element.
+        </suggestion>
+      </result>
+    </xsl:if>
+  </xsl:template>
+
+</xsl:stylesheet>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:db5="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:py="https://www.github.com/openSUSE/suse-doc-style-checker"
+  xmlns:exslt="http://exslt.org/common"
+  exclude-result-prefixes="db5 xlink py exslt">
+  <xsl:import href="library.xsl"/>
+
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+  <xsl:template match="/">
+    <part>
+      <xsl:attribute name="source"><xsl:apply-templates mode="part-source"/></xsl:attribute>
+      <part-title><xsl:apply-templates mode="part-title"/></part-title>
+      <xsl:apply-templates/>
+    </part>
+  </xsl:template>
+
+  <xsl:template match="*|db5:*" mode="part-title">Duplicated Words &amp; Phrases</xsl:template>
+
+  <!-- The following template should probably match more elements. -->
+  <xsl:template match="para|title|db5:para|db5:title">
+    <xsl:if test="self::entry/para|self::db5:entry/db5:para">
+      <xsl:apply-templates/>
+    </xsl:if>
+    <xsl:if test="not(ancestor-or-self::*/@role = 'legal') and
+                  not(ancestor-or-self::db5:*/@role = 'legal')">
+      <xsl:variable name="node" select="."/>
+      <xsl:variable name="withinid">
+        <xsl:call-template name="withinid-nomarkup"/>
+      </xsl:variable>
+      <xsl:variable name="file">
+        <xsl:call-template name="file-nomarkup"/>
+      </xsl:variable>
+      <xsl:variable name="content-candidate">
+        <xsl:apply-templates mode="terminology-content"/>
+      </xsl:variable>
+      <xsl:variable name="content-pretty-candidate">
+        <xsl:apply-templates mode="content-pretty"/>
+      </xsl:variable>
+      <xsl:variable name="content"><xsl:value-of
+        select="normalize-space($content-candidate)"/></xsl:variable>
+      <xsl:variable name="content-pretty"><xsl:value-of
+        select="normalize-space($content-pretty-candidate)"/></xsl:variable>
+
+      <xsl:copy-of
+        select="py:dupecheck($content, $content-pretty, $withinid, $file)"/>
+    </xsl:if>
+  </xsl:template>
+
+</xsl:stylesheet>

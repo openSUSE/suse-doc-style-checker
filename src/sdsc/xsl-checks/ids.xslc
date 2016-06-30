@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:db5="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:py="https://www.github.com/openSUSE/suse-doc-style-checker"
+  xmlns:exslt="http://exslt.org/common"
+  exclude-result-prefixes="db5 xlink py exslt">
+  <xsl:import href="library.xsl"/>
+
+  <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
+
+
+  <xsl:template match="*|db5:*" mode="part-title">Identifiers</xsl:template>
+
+  <xsl:template match="article[not(@id)]|chapter[not(@id)]|reference[not(@id)]|
+                       refentry[not(@id)]|appendix[not(@id)]|colophon[not(@id)]|
+                       section[not(@id)]|sect1[not(@id)]|sect2[not(@id)]|
+                       sect3[not(@id)]|sect4[not(@id)]|sect5[not(@id)]|
+                       db5:article[not(@xml:id)]|db5:chapter[not(@xml:id)]|
+                       db5:reference[not(@xml:id)]|db5:refentry[not(@xml:id)]|
+                       db5:appendix[not(@xml:id)]|db5:colophon[not(@xml:id)]|
+                       db5:section[not(@xml:id)]|db5:sect1[not(@xml:id)]|
+                       db5:sect2[not(@xml:id)]|db5:sect3[not(@xml:id)]|
+                       db5:sect4[not(@xml:id)]|db5:sect5[not(@xml:id)]">
+    <xsl:if test="not(ancestor::preface or ancestor-or-self::*/@role = 'legal')
+              and not(ancestor::db5:preface or ancestor-or-self::db5:*/@role = 'legal')">
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>Section <xsl:call-template name="createid"/> has no identifier.
+        </message>
+        <suggestion>Add an <em>id</em> attribute.
+        </suggestion>
+      </result>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="*[@id]|db5:*[@xml:id]">
+    <xsl:variable name="id" select="normalize-space(@id|@xml:id)"/>
+    <xsl:variable name="id-bad">
+      <xsl:call-template name="badcharacters">
+        <xsl:with-param name="input" select="$id"/>
+        <xsl:with-param name="characters" select="'a-z|0-9|._-'"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="correct-prefix">
+      <xsl:choose>
+        <xsl:when test="self::appendix or self::db5:appendix">app.</xsl:when>
+        <xsl:when test="self::book or self::db5:book">book.</xsl:when>
+        <xsl:when test="self::co or self::db5:co">co.</xsl:when>
+        <xsl:when test="self::chapter or self::db5:chapter">cha.</xsl:when>
+        <xsl:when test="self::example or self::db5:example">ex.</xsl:when>
+        <xsl:when test="self::figure or self::db5:figure">fig.</xsl:when>
+        <xsl:when test="self::glossary or self::glossterm or
+                        self::db5:glossary or self::db5:glossterm">gl.</xsl:when>
+        <xsl:when test="self::itemizedlist or self::db5:itemizedlist">il.</xsl:when>
+        <xsl:when test="self::listitem or self::db5:listitem">li.</xsl:when>
+        <xsl:when test="self::indexterm or self::db5:indexterm">idx.</xsl:when>
+        <xsl:when test="self::orderedlist or self::db5:orderedlist">ol.</xsl:when>
+        <xsl:when test="self::part or self::db5:part">part.</xsl:when>
+        <xsl:when test="self::procedure or self::db5:procedure">pro.</xsl:when>
+        <xsl:when test="self::qandaset or self::qandadiv or
+                        self::qandaentry or
+                        self::db5:qandaset or self::db5:qandadiv or
+                        self::db5:qandaentry">qa.</xsl:when>
+        <xsl:when test="self::sect1 or self::sect2 or self::sect3 or
+                        self::sect4 or self::sect5 or self::section or
+                        self::db5:sect1 or self::db5:sect2 or self::db5:sect3 or
+                        self::db5:sect4 or self::db5:sect5 or
+                        self::db5:section">sec.</xsl:when>
+        <xsl:when test="self::set or self::db5:set">set.</xsl:when>
+        <xsl:when test="self::step or self::db5:step">st.</xsl:when>
+        <xsl:when test="self::table or self::db5:table">tab.</xsl:when>
+        <xsl:when test="self::variablelist or self::db5:variablelist">vl.</xsl:when>
+        <xsl:when test="self::varlistentry or self::db5:varlistentry">vle.</xsl:when>
+        <xsl:otherwise>?</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+
+    <xsl:if test="not(starts-with($id, $correct-prefix)) and
+                  not($correct-prefix = '?')">
+      <result type="warning">
+        <xsl:call-template name="sourcehint"/>
+        <message>Identifier of
+          <xsl:call-template name="createid"/>
+          has an unusual prefix.
+        </message>
+        <suggestion>Use the prefix
+          <em><xsl:value-of select="$correct-prefix"/></em> instead.
+        </suggestion>
+      </result>
+    </xsl:if>
+
+    <xsl:if test="$id-bad = 'yes'">
+      <xsl:variable name="id-capital">
+        <xsl:call-template name="badcharacters">
+          <xsl:with-param name="input" select="$id"/>
+          <xsl:with-param name="mode" select="'wanted'"/>
+          <xsl:with-param name="characters" select="'A-Z'"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="id-latinextra">
+        <xsl:call-template name="badcharacters">
+          <xsl:with-param name="input" select="$id"/>
+          <xsl:with-param name="mode" select="'wanted'"/>
+          <xsl:with-param name="characters" select="'a-z[x]|A-Z[x]'"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="id-other">
+        <xsl:call-template name="badcharacters">
+          <xsl:with-param name="input" select="$id"/>
+          <xsl:with-param name="characters" select="'a-z|A-Z|a-z[x]|A-Z[x]|0-9|._-'"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <result type="warning">
+        <xsl:call-template name="sourcehint"/>
+        <message>Identifier
+          <xsl:call-template name="createid"/>
+          contains
+          <!-- This can't be the right way to construct a sentence... -->
+          <xsl:if test="$id-capital = 'yes'">
+            <xsl:text>capital letters</xsl:text>
+          </xsl:if>
+          <xsl:choose>
+            <xsl:when test="$id-capital = 'yes' and $id-latinextra = 'yes' and $id-other = 'yes'">
+              <xsl:text>, </xsl:text>
+            </xsl:when>
+            <xsl:when test="($id-capital = 'yes' and $id-latinextra = 'yes') or
+                             ($id-capital = 'yes' and $id-other = 'yes')">
+              <xsl:text> and </xsl:text>
+            </xsl:when>
+          </xsl:choose>
+          <xsl:if test="$id-latinextra = 'yes'">
+            <xsl:text>accented letters or umlauts</xsl:text>
+          </xsl:if>
+          <xsl:choose>
+            <xsl:when test="$id-capital = 'yes' and $id-latinextra = 'yes' and $id-other = 'yes'">
+              <xsl:text>, and </xsl:text>
+            </xsl:when>
+            <xsl:when test="$id-latinextra = 'yes' and $id-other = 'yes'">
+              <xsl:text> and </xsl:text>
+            </xsl:when>
+          </xsl:choose>
+          <xsl:if test="$id-other = 'yes'">
+            <xsl:text>special characters</xsl:text>
+          </xsl:if>
+          <xsl:text>.</xsl:text>
+        </message>
+        <xsl:if test="$id-capital = 'yes'">
+          <suggestion>When using letters in Identifiers, always use their
+           lowercase version.
+          </suggestion>
+        </xsl:if>
+        <xsl:if test="$id-latinextra = 'yes'">
+          <suggestion>When using letters in Identifiers, only use those
+            occurring in the English alphabet.
+          </suggestion>
+        </xsl:if>
+        <xsl:if test="$id-other = 'yes'">
+          <suggestion>Use only the following special characters in
+            Identifiers: ._-
+          </suggestion>
+        </xsl:if>
+      </result>
+    </xsl:if>
+    <xsl:apply-templates/>
+  </xsl:template>
+
+
+</xsl:stylesheet>
