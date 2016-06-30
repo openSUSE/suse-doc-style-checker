@@ -3592,6 +3592,41 @@
     </patterngroup>
   </term>
 
+  <term>
+    <accept>
+      <proposal>SLES for SAP Applications</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>s4s</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>s\.?l\.?e\.?(s\.)?[-_]?((for|4)[-_]?)?sap([-_]app(lication)?s?)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>s\.?l\.?e\.?(s\.)?([-_]?(for|4))?[-_]?sap</pattern>
+      <pattern>app(lication)?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>s\.?l\.?e(\.?s)?</pattern>
+      <pattern>for</pattern>
+      <pattern>sap</pattern>
+      <pattern>app(lication|s)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>s\.?l\.?e(\.?s)?</pattern>
+      <pattern>for</pattern>
+      <pattern>sap</pattern>
+      <contextpattern match="negative">applications</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>s\.?l\.?e\.?s</pattern>
+      <pattern>for</pattern>
+      <pattern>sap</pattern>
+      <pattern>applications</pattern>
+      <pattern>(ent(er|re)prise|linux|server)</pattern>
+    </patterngroup>
+  </term>
+
 
   <term>
     <accept>
@@ -3763,13 +3798,17 @@
     </accept>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>(linux|ent(er|re)prise)</pattern>
+      <pattern case="keep">Storage</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>linux</pattern>
       <pattern>storage</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>(linux|ent(er|re)prise)</pattern>
-      <pattern>(linux|ent(er|re)prise)</pattern>
+      <pattern>(linux|ent(er|re)prise)s?</pattern>
+      <pattern>(linux|ent(er|re)prise)s?</pattern>
       <pattern>storage</pattern>
     </patterngroup>
   </term>
@@ -3784,13 +3823,13 @@
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>(linux|ent(er|re)prise)</pattern>
+      <pattern>(linux|ent(er|re)prise)s?</pattern>
       <pattern>cloud</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>(linux|ent(er|re)prise)</pattern>
-      <pattern>(linux|ent(er|re)prise)</pattern>
+      <pattern>(linux|ent(er|re)prise)s?</pattern>
+      <pattern>(linux|ent(er|re)prise)s?</pattern>
       <pattern>openstack</pattern>
       <pattern>cloud</pattern>
     </patterngroup>
@@ -3818,12 +3857,12 @@
     </accept>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>ent(er|re)prise</pattern>
+      <pattern>ent(er|re)prises?</pattern>
       <pattern>linux</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>ent(er|re)prise</pattern>
+      <pattern>ent(er|re)prises?</pattern>
       <contextpattern match="negative">storage</contextpattern>
     </patterngroup>
     <patterngroup>
@@ -3833,7 +3872,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern case="keep">ent(er|re)prise</pattern>
+      <pattern case="keep">ent(er|re)prises?</pattern>
       <pattern case="keep">linux</pattern>
     </patterngroup>
   </term>
@@ -3854,6 +3893,10 @@
       <pattern>enterprise</pattern>
       <pattern case="keep">DESKTOP</pattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern case="keep">Desktop</pattern>
+    </patterngroup>
   </term>
 
   <term>
@@ -3872,6 +3915,61 @@
       <pattern>enterprise</pattern>
       <pattern case="keep">SERVER</pattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern case="keep">Server</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>SUSE Linux Enterprise Server for SAP Applications</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>linux</pattern>
+      <pattern>enterprise</pattern>
+      <pattern>server</pattern>
+      <pattern>for</pattern>
+      <pattern>sap</pattern>
+      <pattern>app(lication|s)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>linux</pattern>
+      <pattern>enterprise</pattern>
+      <pattern>server</pattern>
+      <pattern>for</pattern>
+      <pattern>sap</pattern>
+      <contextpattern match="negative">applications</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>linux</pattern>
+      <pattern>enterprise</pattern>
+      <pattern>server</pattern>
+      <pattern case="keep">F[Oo][Rr]</pattern>
+      <pattern>sap</pattern>
+      <pattern>applications</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>linux</pattern>
+      <pattern>enterprise</pattern>
+      <pattern>server</pattern>
+      <pattern>for</pattern>
+      <pattern case="keep">[Ss]\.?a\.?p</pattern>
+      <pattern>applications</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>linux</pattern>
+      <pattern>enterprise</pattern>
+      <pattern>server</pattern>
+      <pattern>for</pattern>
+      <pattern>sap</pattern>
+      <pattern case="keep">(applications|APPLICATIONS)</pattern>
+    </patterngroup>
   </term>
 
   <term>
@@ -3885,6 +3983,9 @@
     <patterngroup>
       <pattern>suse</pattern>
       <pattern case="keep">MANAGER</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(suse-?manager|su[-_]?man?)</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse-?manager</pattern>
