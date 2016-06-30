@@ -624,12 +624,23 @@
 
   <term>
     <accept>
-      <proposal/>
+      <proposal>for</proposal>
     </accept>
     <patterngroup>
       <pattern>in</pattern>
       <pattern>order</pattern>
-      <pattern>(to|for)</pattern>
+      <contextpattern>for</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>to</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>in</pattern>
+      <pattern>order</pattern>
+      <contextpattern>to</contextpattern>
     </patterngroup>
   </term>
 
