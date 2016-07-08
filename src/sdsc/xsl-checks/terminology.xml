@@ -976,7 +976,11 @@
       <pattern>(box|window)s?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>(dialogue|mask|dialog(ue)?(box|window))s?</pattern>
+      <pattern>(dialogue|dialog(ue)?(box|window))s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>masks?</pattern>
+      <contextpattern look="bothways" match="negative" mode="fuzzy" location="5" case="keep">(user|group|permission|acl)s?|fil(e[ds]?|ing)|(umask|(sub-?)?net(work)?)(s|ed|ing)?</contextpattern>
     </patterngroup>
   </term>
 
