@@ -4124,10 +4124,10 @@
     </accept>
     <patterngroup>
       <pattern>task</pattern>
-      <pattern>(bar|area)s?</pattern>
+      <pattern>(bars?|area)</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>task(-bar|-?area)s?</pattern>
+      <pattern>task(-bars?|-?area)</pattern>
     </patterngroup>
   </term>
 
