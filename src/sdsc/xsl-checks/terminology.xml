@@ -3471,7 +3471,7 @@
     <patterngroup>
       <pattern>shut-?downs?</pattern>
       <contextpattern>(the|an?)</contextpattern>
-      <contextpattern look="before" match="negative">(the|an?|one|[0-9]|another|each)</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="2">(the|an?|one|[0-9]|another|each|.+ful)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>shut-?downs?</pattern>
