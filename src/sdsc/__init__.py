@@ -41,6 +41,7 @@ flag_module = False
 # In manglepattern(), only catch patterns that are not literal and are not
 # followed by an indicator of a lookahead/lookbehind (?) or are already
 # non-capturing groups
+# FIXME: This will fail on character classes like: [(]
 parentheses = re.compile(r'(?<!\\)\((?![\?|\:])')
 
 
@@ -55,6 +56,7 @@ lastsentenceends = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?
 # trypatterns() checks if a sub-pattern of a given pattern matches nothing
 # (and looks unusual while doing that), i.e. subpatterns like (this|), (|this),
 # or (th||is)
+# FIXME: This will fail on character classes like: [(]
 emptysubpattern = re.compile(r'(?<!\\)(\|\)|\(\||\|\|)')
 
 
