@@ -4084,12 +4084,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>system</pattern>
-      <pattern case="keep">V</pattern>
-      <pattern>inits?</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>system</pattern>
-      <pattern>5</pattern>
+      <pattern case="keep">v|5</pattern>
       <pattern>inits?</pattern>
     </patterngroup>
     <patterngroup>
