@@ -298,6 +298,7 @@
       <pattern>back-?ups?</pattern>
       <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
       <contextpattern look="before" match="negative">(daily|hourly|monthly|yearly)</contextpattern>
+      <contextpattern look="before" location="3" mode="fuzzy" match="negative">appl(y(ing)?|ie[sd])</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>back-?ups?</pattern>
