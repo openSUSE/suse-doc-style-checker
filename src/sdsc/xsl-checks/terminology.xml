@@ -3509,7 +3509,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>ease</pattern>
-      <contextpattern match="negative">of</contextpattern>
+      <contextpattern match="negative">of|with</contextpattern>
     </patterngroup>
   </term>
 
