@@ -855,12 +855,12 @@
     </patterngroup>
     <patterngroup>
       <pattern>(sym(bolic)?|soft)-?links?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>(sym(bolic)?|soft)</pattern>
       <pattern>links?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
     </patterngroup>
   </term>
 
