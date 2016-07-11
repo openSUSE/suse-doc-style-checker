@@ -629,7 +629,7 @@
     <patterngroup>
       <pattern>in</pattern>
       <pattern>order</pattern>
-      <contextpattern>for</contextpattern>
+      <pattern>for</pattern>
     </patterngroup>
   </term>
 
@@ -640,7 +640,7 @@
     <patterngroup>
       <pattern>in</pattern>
       <pattern>order</pattern>
-      <contextpattern>to</contextpattern>
+      <pattern>to</pattern>
     </patterngroup>
   </term>
 
