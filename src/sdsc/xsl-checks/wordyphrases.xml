@@ -889,6 +889,23 @@
   </term>
 
   <term>
+    <accept/>
+    <patterngroup>
+      <pattern>up-?front</pattern>
+      <contextpattern>planning</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>up</pattern>
+      <pattern>front</pattern>
+      <contextpattern>planning</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>ahead</pattern>
+      <contextpattern look="bothways">planning</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
     <accept>
       <proposal/>
     </accept>
