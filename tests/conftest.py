@@ -15,10 +15,10 @@ def pytest_generate_tests(metafunc):
         testcases = glob.glob(location + "/cases/*")
         testcases.sort() # Sort them alphabetically
         metafunc.parametrize("xmltestcase", testcases)
-    elif 'terminologyvalidation' in metafunc.fixturenames:
+    elif 'terminologyxml' in metafunc.fixturenames:
         location = os.path.join(os.path.dirname(__file__), '../src/sdsc/xsl-checks')
         testcase = glob.glob(location + "/*.xml")
-        metafunc.parametrize("terminologyvalidation", testcase)
+        metafunc.parametrize("terminologyxml", testcase)
 
 @pytest.fixture(scope="session")
 def terminologydtd():

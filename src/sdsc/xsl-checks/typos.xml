@@ -704,7 +704,7 @@ GNU GPL.
       <contextpattern match="negative">(issue|problem|bug)s?</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>know</pattern>
+      <pattern>know(?![,\)\]])</pattern>
       <contextpattern>(they|you|attachmate|suse|novell|k?nows)</contextpattern>
     </patterngroup>
     <patterngroup>
@@ -960,12 +960,35 @@ GNU GPL.
     </accept>
     <patterngroup>
       <pattern>then</pattern>
-      <contextpattern look="before">(less|more|better|worse|larger|smaller|(o|ra)ther)(?![,\)\]])</contextpattern>
+      <contextpattern look="before">(less|fewer|more|better|worse|larger|smaller|other)(?![,\)\]])</contextpattern>
       <!-- Needs check that this is not the end of the sentence. -->
     </patterngroup>
     <patterngroup>
       <pattern>then</pattern>
-      <contextpattern look="before" location="2">(less|more)(?![,\)\]])</contextpattern>
+      <contextpattern look="before">rather(?![,\)\]])</contextpattern>
+      <contextpattern look="before" location="3" mode="fuzzy" match="negative">(be|been|is|are|was|were|will|would|do|does|did|can|could|shall|should|may|might|have|has|had)</contextpattern>
+      <!-- Needs check that this is not the end of the sentence. -->
+    </patterngroup>
+    <patterngroup>
+      <pattern>that</pattern>
+      <contextpattern look="before">(better|worse|larger|smaller|rather|other)(?![,\)\]])</contextpattern>
+      <contextpattern look="before" location="3" mode="fuzzy" match="negative">(be|been|is|are|was|were)</contextpattern>
+      <!-- "One or more that need help." -->
+      <contextpattern look="before" location="2" match="negative">or</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>that</pattern>
+      <contextpattern look="before">(less|fewer|more)(?![,\)\]])</contextpattern>
+      <contextpattern look="before" location="3" mode="fuzzy" match="negative">(be|been|is|are|was|were)</contextpattern>
+      <!-- Avoid false positives like "One or more that need help." -->
+      <contextpattern look="before" location="2" match="negative">or</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <!-- Adding that here seems dangerous... false positive, e.g.:
+      "Get _more_ data that you need." -->
+      <pattern>then</pattern>
+      <contextpattern look="before" location="2">(less|fewer|more)(?![,\)\]])</contextpattern>
+      <!-- Needs check that this is not the end of the sentence. -->
     </patterngroup>
   </term>
 

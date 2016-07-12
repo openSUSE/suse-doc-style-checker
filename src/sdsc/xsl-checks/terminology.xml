@@ -298,6 +298,7 @@
       <pattern>back-?ups?</pattern>
       <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
       <contextpattern look="before" match="negative">(daily|hourly|monthly|yearly)</contextpattern>
+      <contextpattern look="before" location="3" mode="fuzzy" match="negative">appl(y(ing)?|ie[sd])</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>back-?ups?</pattern>
@@ -854,12 +855,12 @@
     </patterngroup>
     <patterngroup>
       <pattern>(sym(bolic)?|soft)-?links?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>(sym(bolic)?|soft)</pattern>
       <pattern>links?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
     </patterngroup>
   </term>
 
@@ -976,7 +977,11 @@
       <pattern>(box|window)s?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>(dialogue|mask|dialog(ue)?(box|window))s?</pattern>
+      <pattern>(dialogue|dialog(ue)?(box|window))s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>masks?</pattern>
+      <contextpattern look="bothways" match="negative" mode="fuzzy" location="5" case="keep">(user|group|permission|acl)s?|fil(e[ds]?|ing)|(umask|(sub-?)?net(work)?)(s|ed|ing)?</contextpattern>
     </patterngroup>
   </term>
 
@@ -3466,7 +3471,7 @@
     <patterngroup>
       <pattern>shut-?downs?</pattern>
       <contextpattern>(the|an?)</contextpattern>
-      <contextpattern look="before" match="negative">(the|an?|one|[0-9]|another|each)</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="2">(the|an?|one|[0-9]|another|each|.+ful)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>shut-?downs?</pattern>
@@ -3509,7 +3514,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>ease</pattern>
-      <contextpattern match="negative">of</contextpattern>
+      <contextpattern match="negative">of|with</contextpattern>
     </patterngroup>
   </term>
 
@@ -4084,12 +4089,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>system</pattern>
-      <pattern case="keep">V</pattern>
-      <pattern>inits?</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>system</pattern>
-      <pattern>5</pattern>
+      <pattern case="keep">v|5</pattern>
       <pattern>inits?</pattern>
     </patterngroup>
     <patterngroup>
@@ -4125,10 +4125,10 @@
     </accept>
     <patterngroup>
       <pattern>task</pattern>
-      <pattern>(bar|area)s?</pattern>
+      <pattern>(bars?|area)</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>task(-bar|-?area)s?</pattern>
+      <pattern>task(-bars?|-?area)</pattern>
     </patterngroup>
   </term>
 

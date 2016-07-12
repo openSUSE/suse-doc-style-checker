@@ -7,7 +7,7 @@
   <!ENTITY command      "sdsc">
   <!ENTITY daps         "DAPS">
   <!ENTITY dapscommand  "daps">
-  <!ENTITY version      "2016.06.99.0">
+  <!ENTITY version      "2016.06.99.1">
   <!ENTITY nbsp         "&#xa0;">
 ]>
 <refentry id="sdsc" lang="en">
@@ -15,9 +15,19 @@
     <productname>&longname;</productname>
     <authorgroup>
       <author>
-        <contrib>Developer, Documenter</contrib>
+        <contrib>Development, Documentation</contrib>
         <firstname>Stefan</firstname>
         <surname>Knorr</surname>
+      </author>
+      <author>
+        <contrib>Development</contrib>
+        <firstname>Thomas</firstname>
+        <surname>Schraitle</surname>
+      </author>
+      <author>
+        <contrib>Development</contrib>
+        <firstname>Fabian</firstname>
+        <surname>Vogt</surname>
       </author>
     </authorgroup>
   </refentryinfo>
@@ -65,8 +75,8 @@
 
     <para>
       The input must be a single XML file without XIncludes or custom entities.
-      The checker is meant to be used with DocBook 4, DocBook 5 or Novdoc files
-      as input.
+      The checker is meant to be used with DocBook 5, GeekoDoc, DocBook 4, or
+      Novdoc files as input.
       Ideally, create the input file using DAPS:
     </para>
     <screen><command>&dapscommand; <option>-d <replaceable>DC-FILE</replaceable></option> <option>bigfile</option></command></screen>
@@ -79,7 +89,8 @@
     <title>Output</title>
 
     <para>The output of the checker is an XML report file containing messages
-      indicating all recognized problems with the input file.
+      indicating all recognized problems with the input file. The report file
+      can be viewed in a browser.
     </para>
   </refsect1>
 
@@ -174,7 +185,7 @@
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><ulink url="https://www.github.com/sknorr/suse-doc-style-checker/"/></term>
+        <term><ulink url="https://www.github.com/openSUSE/suse-doc-style-checker/"/></term>
         <listitem>
          <para>Web site of &longname;.
          </para>

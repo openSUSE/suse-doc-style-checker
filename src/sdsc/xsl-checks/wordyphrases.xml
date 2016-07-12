@@ -624,12 +624,23 @@
 
   <term>
     <accept>
-      <proposal/>
+      <proposal>for</proposal>
     </accept>
     <patterngroup>
       <pattern>in</pattern>
       <pattern>order</pattern>
-      <pattern>(to|for)</pattern>
+      <pattern>for</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>to</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>in</pattern>
+      <pattern>order</pattern>
+      <pattern>to</pattern>
     </patterngroup>
   </term>
 
@@ -874,6 +885,23 @@
       <pattern>and</pattern>
       <pattern>once</pattern>
       <pattern>only</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern>up-?front</pattern>
+      <contextpattern>planning</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>up</pattern>
+      <pattern>front</pattern>
+      <contextpattern>planning</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>ahead</pattern>
+      <contextpattern look="bothways">planning</contextpattern>
     </patterngroup>
   </term>
 
