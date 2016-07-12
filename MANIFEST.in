@@ -17,6 +17,7 @@ include .travis.yml
 include *requirements.txt
 include tox.ini
 include *.md
+include *.doap
 
 graft bookmarklet
 graft bookmarklet
