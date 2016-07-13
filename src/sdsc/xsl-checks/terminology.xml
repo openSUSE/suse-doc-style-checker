@@ -4003,11 +4003,7 @@
     </accept>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern case="keep">studio</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>suse</pattern>
-      <pattern case="keep">STUDIO</pattern>
+      <pattern case="keep">(studio|STUDIO)</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse-?studio</pattern>
