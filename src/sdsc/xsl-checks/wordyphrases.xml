@@ -1122,14 +1122,17 @@
 
   <term>
     <accept>
-      <proposal>to use</proposal>
+      <proposal>to</proposal>
     </accept>
     <patterngroup>
-      <pattern>(if|when)</pattern>
+      <pattern>if|when</pattern>
       <pattern>you</pattern>
       <pattern>want</pattern>
       <pattern>to</pattern>
-      <pattern>use</pattern>
+      <!-- FIXME: Would it make sense to put these in entities? -->
+      <!-- Sometimes, "if you want to" can't easily be replaced, e.g.
+      "if you want to...have/know". So, let's try to play this extra safe. -->
+      <contextpattern>add|adjust|authori[zs]e|avoid|cancel|change|create|do|find|import|install|list|make|prevent|save|see|switch|remove|retain|run|update|use</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>in</pattern>
@@ -1137,26 +1140,26 @@
       <pattern>you</pattern>
       <pattern>want</pattern>
       <pattern>to</pattern>
-      <pattern>use</pattern>
+      <contextpattern>add|adjust|authori[zs]e|avoid|cancel|change|create|do|find|import|install|list|make|prevent|save|see|switch|remove|retain|run|update|use</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>in</pattern>
+      <pattern>for|in</pattern>
       <pattern>the</pattern>
       <pattern>case</pattern>
       <pattern>you</pattern>
       <pattern>want</pattern>
       <pattern>to</pattern>
-      <pattern>use</pattern>
+      <contextpattern>add|adjust|authori[zs]e|avoid|cancel|change|create|do|find|import|install|list|make|prevent|save|see|switch|remove|retain|run|update|use</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>(for|in)</pattern>
+      <pattern>for|in</pattern>
       <pattern>the</pattern>
       <pattern>case</pattern>
       <pattern>that</pattern>
       <pattern>you</pattern>
       <pattern>want</pattern>
       <pattern>to</pattern>
-      <pattern>use</pattern>
+      <contextpattern>add|adjust|authori[zs]e|avoid|cancel|change|create|do|find|import|install|list|make|prevent|save|see|switch|remove|retain|run|update|use</contextpattern>
     </patterngroup>
   </term>
 
