@@ -53,4 +53,10 @@
         The new SUSE Linux Enterprise Server has been certified by many
         partners.
     </para>
+    <para xml:id="sdsc.valid.10">
+        <command>virt-p2v</command> is now available as a technology preview.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.10">
+        <command>virt-p2v</command> is now available as a technical preview.
+    </para>
 </chapter>

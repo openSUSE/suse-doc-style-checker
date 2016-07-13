@@ -4134,23 +4134,14 @@
 
   <term>
     <accept>
-      <proposal>text box</proposal>
+      <proposal>technology preview</proposal>
     </accept>
     <patterngroup>
-      <pattern>text</pattern>
-      <pattern>(area|field)s?</pattern>
+      <pattern>techn(ology|ical)-?previews?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>(input|entry)</pattern>
-      <pattern>(boxe?|area|field)s?</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>text</pattern>
-      <pattern>(entry|input)</pattern>
-      <pattern>(boxe?|area|field)s?</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>(text|entry|input)-?(boxe?|area|field)s?</pattern>
+      <pattern>technical</pattern>
+      <pattern>previews?</pattern>
     </patterngroup>
   </term>
 
@@ -4252,6 +4243,28 @@
     <patterngroup>
       <pattern>to</pattern>
       <pattern>wards?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>text box</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>text</pattern>
+      <pattern>(area|field)s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(input|entry)</pattern>
+      <pattern>(boxe?|area|field)s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>text</pattern>
+      <pattern>(entry|input)</pattern>
+      <pattern>(boxe?|area|field)s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(text|entry|input)-?(boxe?|area|field)s?</pattern>
     </patterngroup>
   </term>
 
