@@ -4161,6 +4161,28 @@
 
   <term>
     <accept>
+      <proposal>text box</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>text</pattern>
+      <pattern>(area|field)s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(input|entry)</pattern>
+      <pattern>(boxe?|area|field)s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>text</pattern>
+      <pattern>(entry|input)</pattern>
+      <pattern>(boxe?|area|field)s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(text|entry|input)-?(boxe?|area|field)s?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>TFTP</proposal>
     </accept>
     <patterngroup>
@@ -4243,28 +4265,6 @@
     <patterngroup>
       <pattern>to</pattern>
       <pattern>wards?</pattern>
-    </patterngroup>
-  </term>
-
-  <term>
-    <accept>
-      <proposal>text box</proposal>
-    </accept>
-    <patterngroup>
-      <pattern>text</pattern>
-      <pattern>(area|field)s?</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>(input|entry)</pattern>
-      <pattern>(boxe?|area|field)s?</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>text</pattern>
-      <pattern>(entry|input)</pattern>
-      <pattern>(boxe?|area|field)s?</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>(text|entry|input)-?(boxe?|area|field)s?</pattern>
     </patterngroup>
   </term>
 
