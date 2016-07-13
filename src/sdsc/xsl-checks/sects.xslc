@@ -35,8 +35,8 @@
     </xsl:variable>
 
 
-    <xsl:if test="not(para|abstract) and not(ancestor-or-self::*/@role = 'legal') and
-                  not(db5:para|db5:abstract) and not(ancestor-or-self::db5:*/@role = 'legal')">
+    <xsl:if test="not(para|abstract|*[contains(local-name(.),'info')]/abstract) and not(ancestor-or-self::*/@role = 'legal') and
+                  not(db5:para|db5:abstract|db5:info/db5:abstract) and not(ancestor-or-self::db5:*/@role = 'legal')">
       <result type="error">
         <xsl:call-template name="sourcehint"/>
         <message>Section <xsl:call-template name="createid"/> lacks an

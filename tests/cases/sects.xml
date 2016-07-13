@@ -10,8 +10,24 @@
         </sect2>
     </sect1>
 
-    <sect1 xml:id="sec.valid">
+    <sect1 xml:id="sec.valid.1">
         <title/>
         <para>content</para>
+    </sect1>
+
+    <sect1 xml:id="sec.valid.2">
+        <title/>
+        <abstract>
+            <para>content</para>
+        </abstract>
+    </sect1>
+
+    <sect1 xml:id="sec.valid.3">
+        <title/>
+        <info>
+            <abstract>
+                <para>content</para>
+            </abstract>
+        </info>
     </sect1>
 </chapter>
