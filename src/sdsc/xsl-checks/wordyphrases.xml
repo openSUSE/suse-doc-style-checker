@@ -1133,6 +1133,8 @@
       <!-- Sometimes, "if you want to" can't easily be replaced, e.g.
       "if you want to...have/know". So, let's try to play this extra safe. -->
       <contextpattern>add|adjust|authori[zs]e|avoid|cancel|change|create|do|find|import|install|list|make|prevent|save|see|switch|remove|retain|run|update|use</contextpattern>
+      <!-- Not completely confident we actually need this contraint. -->
+      <contextpattern look="before" location="2" match="negative">however</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>in</pattern>
@@ -1141,6 +1143,7 @@
       <pattern>want</pattern>
       <pattern>to</pattern>
       <contextpattern>add|adjust|authori[zs]e|avoid|cancel|change|create|do|find|import|install|list|make|prevent|save|see|switch|remove|retain|run|update|use</contextpattern>
+      <contextpattern look="before" location="2" match="negative">however</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>for|in</pattern>
@@ -1150,6 +1153,7 @@
       <pattern>want</pattern>
       <pattern>to</pattern>
       <contextpattern>add|adjust|authori[zs]e|avoid|cancel|change|create|do|find|import|install|list|make|prevent|save|see|switch|remove|retain|run|update|use</contextpattern>
+      <contextpattern look="before" location="2" match="negative">however</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>for|in</pattern>
@@ -1160,6 +1164,7 @@
       <pattern>want</pattern>
       <pattern>to</pattern>
       <contextpattern>add|adjust|authori[zs]e|avoid|cancel|change|create|do|find|import|install|list|make|prevent|save|see|switch|remove|retain|run|update|use</contextpattern>
+      <contextpattern look="before" location="2" match="negative">however</contextpattern>
     </patterngroup>
   </term>
 
