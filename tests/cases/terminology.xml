@@ -59,4 +59,20 @@
     <para xml:id="sdsc.expect.error.terminology.10">
         <command>virt-p2v</command> is now available as a technical preview.
     </para>
+    <para xml:id="sdsc.valid.11">
+        From the drop-down box <guimenu>Something</guimenu>, select
+        <guimenu>Something Else</guimenu>.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.11a">
+        From the pulldown menu <guimenu>Something</guimenu>, select
+        <guimenu>Something Else</guimenu>.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.11b">
+        From the drop-down <guimenu>Something</guimenu>, select
+        <guimenu>Something Else</guimenu>.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.11c">
+        From the drop-down-menu <guimenu>Something</guimenu>, select
+        <guimenu>Something Else</guimenu>.
+    </para>
 </chapter>

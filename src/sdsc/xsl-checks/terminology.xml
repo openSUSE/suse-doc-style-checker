@@ -1052,23 +1052,31 @@
       <proposal>drop-down box</proposal>
     </accept>
     <patterngroup>
-      <pattern>drop-down</pattern>
+      <pattern>dropdown</pattern>
+      <pattern>box(es)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>pull-?down</pattern>
+      <pattern>box(es)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(drop|pull)-down</pattern>
       <pattern>(list|menu)s?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>drop-?down</pattern>
+      <pattern>(drop|pull)-?downs?</pattern>
       <contextpattern match="negative">box(es)?</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>combo-?box(es)?</pattern>
+      <pattern>(comb(o|ination)|(drop|pull)-?down)-?(box|menu|list)(e?s)?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>drop</pattern>
+      <pattern>drop|pull</pattern>
       <pattern>down</pattern>
       <pattern>(boxe?|list|menu)s?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>drop</pattern>
+      <pattern>drop|pull</pattern>
       <pattern>downs?</pattern>
     </patterngroup>
     <patterngroup>
@@ -1076,7 +1084,7 @@
       <pattern>box(es)?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>drop-down</pattern>
+      <pattern>(drop|pull)-down</pattern>
       <pattern>list</pattern>
       <pattern>box(es)?</pattern>
     </patterngroup>
@@ -1993,13 +2001,13 @@
     <patterngroup>
       <pattern>left-?clicks?</pattern>
       <pattern>on(to)?</pattern>
-      <contextpattern look="before">(the|an?)</contextpattern>
+      <contextpattern look="before" match="negative">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>left</pattern>
       <pattern>clicks?</pattern>
       <pattern>on(to)?</pattern>
-      <contextpattern look="before">(the|an?)</contextpattern>
+      <contextpattern look="before" match="negative">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>leftclick(ed|ing|s)?</pattern>
