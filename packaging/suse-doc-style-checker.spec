@@ -18,13 +18,13 @@
 %define aliasname sdsc
 
 Name:           suse-doc-style-checker
-Version:        2014~02.2.99
+Version:        2016.6.99.1
 Release:        0
 Url:            http://www.gitorious.org/style-checker/style-checker
 Summary:        Style Checker for SUSE Documentation
 License:        LGPL-2.1+
 Group:          Productivity/Publishing/XML
-Source:         %{name}-%{version}.tar.gz
+Source:         %{name}-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -32,6 +32,8 @@ BuildRequires:  docbook-xsl-stylesheets
 BuildRequires:  libxslt-tools
 BuildRequires:  python3-devel
 BuildRequires:  python3-lxml
+BuildRequires:  python3-setuptools
+BuildRequires:  python3-pytest
 Requires:       python3
 Requires:       python3-lxml
 Recommends:     intel-clear-sans-fonts
@@ -48,10 +50,7 @@ for terminology, duplicated words, long sentences, and lone subsections.
 %build
 python3 setup.py build
 # Create man pages
-DB=/usr/share/xml/docbook/stylesheet/nwalsh/current/
-(cd man;
-xsltproc $DB/manpages/docbook.xsl suse-doc-style-checker.xml
-)
+(cd man;./create-man.sh)
 
 %install
 ./setup.py install --prefix=%{_prefix} --root=%{buildroot} --install-data=%_datadir/%{name}
@@ -59,13 +58,15 @@ xsltproc $DB/manpages/docbook.xsl suse-doc-style-checker.xml
 mkdir -p %{buildroot}%{_mandir}/man1 %{buildroot}%_bindir
 install -m644 man/%{aliasname}.1  %{buildroot}%{_mandir}/man1
 
-(cd %{buildroot}%_datadir/%{name}/source/;
-ln -sr %{aliasname} %{buildroot}%_bindir/%{aliasname};
+(cd %{buildroot}%{_bindir}/;
 ln -sr %{aliasname} %{buildroot}%_bindir/%{name}
 )
 (cd  %{buildroot}%{_mandir}/man1;
 ln -sr %{aliasname}.1 %{name}.1
 )
+
+%check
+./setup.py test
 
 %files
 %defattr(-,root,root,-)
@@ -74,8 +75,6 @@ ln -sr %{aliasname}.1 %{name}.1
 %{python3_sitelib}/*
 %_bindir/%{name}
 %_bindir/%{aliasname}
-%dir %_datadir/%{name}
-%_datadir/%{name}
 %{_mandir}/man1/%{name}.1%{ext_man}
 %{_mandir}/man1/%{aliasname}.1%{ext_man}
 
