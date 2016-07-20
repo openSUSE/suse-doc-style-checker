@@ -1001,6 +1001,12 @@ GNU GPL.
       <contextpattern look="before" location="2">mak(e[ds]?|ing)</contextpattern>
       <contextpattern look="before" location="1">sure</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>than</pattern>
+      <contextpattern>can|will</contextpattern>
+      <contextpattern location="2">be</contextpattern>
+      <contextpattern look="before" location="5" mode="fuzzy" match="negative">less|fewer|more</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
