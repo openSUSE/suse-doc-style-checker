@@ -284,7 +284,10 @@ GNU GPL.
       <pattern>on</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>(compris(e[ds]|ing)|contain(ed|s|ing))</pattern>
+      <!-- Compound tenses with "be" etc. are missing: "will be comprised of..."
+      and other such items. -->
+      <pattern>is|are|were</pattern>
+      <pattern>compris(e[ds]|ing)|contain(ed|s|ing)</pattern>
       <pattern>of</pattern>
     </patterngroup>
   </term>
