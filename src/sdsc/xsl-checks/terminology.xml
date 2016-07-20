@@ -1397,6 +1397,20 @@
 
   <term>
     <accept>
+      <proposal>TLS/SSL</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">(TSL/SSL|SSL/T(LS|SL))</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern case="keep">T(SL|LS)|SSL</pattern>
+      <pattern case="keep">and|or</pattern>
+      <pattern case="keep">T(SL|LS)|SSL</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>GNOME</proposal>
     </accept>
     <!-- Avoid matching executable names like gnome-terminal etc. -->
