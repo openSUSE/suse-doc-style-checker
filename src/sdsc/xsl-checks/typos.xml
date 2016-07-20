@@ -109,7 +109,7 @@ GNU GPL.
     <patterngroup>
       <pattern case="keep">[Aa]d(?!-)</pattern>
       <contextpattern look="before" match="negative">(an?|the|my|your|his|her|their|our|802\.11)</contextpattern>
-      <contextpattern match="negative">hoc</contextpattern>
+      <contextpattern match="negative">hoc|infinitum</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>[ai]n</pattern>
