@@ -864,6 +864,18 @@
 
   <term>
     <accept>
+      <proposal/>
+    </accept>
+    <patterngroup>
+      <pattern>of</pattern>
+      <pattern>the(se|m)|those</pattern>
+      <contextpattern look="before">many|few</contextpattern>
+      <contextpattern look="before" location="2">how</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>on</proposal>
     </accept>
     <patterngroup>

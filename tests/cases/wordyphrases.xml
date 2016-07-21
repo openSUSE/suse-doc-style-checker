@@ -21,4 +21,8 @@
         If you want to do the Moonwalk, move your left foot slightly to the
         side first.
     </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.7">
+        Snapshots younger than the value specified here will not be deleted,
+        regardless of how many of them exist.
+    </para>
 </chapter>
