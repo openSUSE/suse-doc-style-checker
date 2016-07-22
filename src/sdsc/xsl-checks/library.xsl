@@ -387,10 +387,16 @@
                       self::db5:menuchoice|self::db5:guimenu">
         <xsl:text>##@ui-</xsl:text><xsl:value-of select="$tokens"/><xsl:text>##</xsl:text>
       </xsl:when>
-      <xsl:when test="self::email|self::filename|self::ulink|self::uri|
-                      self::xref|
-                      self::db5:email|self::db5:filename|self::db5:link|
-                      self::db5:uri|self::db5:xref">
+      <xsl:when test="self::filename|self::db5:filename">
+        <xsl:text>##@file-</xsl:text><xsl:value-of select="$tokens"/><xsl:text>##</xsl:text>
+      </xsl:when>
+      <xsl:when test="self::email|self::db5:email">
+        <xsl:text>##@mail-</xsl:text><xsl:value-of select="$tokens"/><xsl:text>##</xsl:text>
+      </xsl:when>
+      <xsl:when test="self::ulink|self::uri|self::db5:link|self::db5:uri">
+        <xsl:text>##@web-</xsl:text><xsl:value-of select="$tokens"/><xsl:text>##</xsl:text>
+      </xsl:when>
+      <xsl:when test="self::xref|self::db5:xref">
         <xsl:text>##@ref-</xsl:text><xsl:value-of select="$tokens"/><xsl:text>##</xsl:text>
       </xsl:when>
       <xsl:when test="self::inlinemediaobject|self::db5:inlinemediaobject">

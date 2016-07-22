@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.typos">
+<chapter xmlns="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0"
+  xml:id="cha.test.typos">
     <title>Test for typos</title>
     <para xml:id="sdsc.expect.error.typos.1">
         Hence, the file is always adopted before it is used.
@@ -98,5 +100,9 @@
     </para>
     <para xml:id="sdsc.valid.32">
         There are many more commands than can be useful to any user.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.33">
+        For more information, see the official Web site on
+        <link xlink:href="http://example.com/"/>.
     </para>
 </chapter>
