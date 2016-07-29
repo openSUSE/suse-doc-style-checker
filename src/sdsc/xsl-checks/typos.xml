@@ -788,8 +788,7 @@ GNU GPL.
     <patterngroup>
       <pattern>on</pattern>
       <contextpattern>of</contextpattern>
-      <contextpattern location="2">the</contextpattern>
-      <contextpattern location="3">(more|most|less|least|best|worst)</contextpattern>
+      <contextpattern location="2">the|an?|our|my|your|his|her|their</contextpattern>
     </patterngroup>
   </term>
 
