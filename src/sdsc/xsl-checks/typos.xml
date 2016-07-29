@@ -1205,7 +1205,8 @@ GNU GPL.
     </accept>
     <patterngroup>
       <pattern>your</pattern>
-      <contextpattern>((c|sh)ould|are)</contextpattern>
+      <!-- "might"/"will"/"can" are also nouns, so don't check for them here. -->
+      <contextpattern>((c|sh|w)ould|shall|may|are)</contextpattern>
     </patterngroup>
   </term>
 
