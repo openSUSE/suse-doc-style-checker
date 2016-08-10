@@ -425,8 +425,8 @@
       <proposal/>
     </accept>
     <patterngroup>
-      <pattern>(different|possible)</pattern>
-      <contextpattern look="before">(several|few|many|various|numerous)</contextpattern>
+      <pattern>(different|possible|other)</pattern>
+      <contextpattern look="bothways">(several|few|many|various|numerous)</contextpattern>
     </patterngroup>
   </term>
 
