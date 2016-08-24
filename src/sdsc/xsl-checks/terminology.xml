@@ -3896,6 +3896,11 @@
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
+      <pattern>lun[iu]x|linix</pattern>
+      <pattern>ent(er|re)prises?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
       <pattern>ent(er|re)prises?</pattern>
       <contextpattern match="negative">storage</contextpattern>
     </patterngroup>
