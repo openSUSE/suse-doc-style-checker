@@ -645,7 +645,7 @@
   <term>
     <accept>
       <proposal>click</proposal>
-      <context>mouses and other pointing devices</context>
+      <context>using mouses and other pointing devices</context>
     </accept>
     <patterngroup>
       <pattern>click(ed|ing)</pattern>
@@ -669,12 +669,12 @@
       <pattern>clicks?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>press(e[ds]|ing)</pattern>
+      <pattern>press(e[ds]|ing)?</pattern>
       <pattern>on(to)?</pattern>
       <contextpattern location="2" mode="fuzzy">##@ui-[0-9]+##</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>press(e[ds]|ing)</pattern>
+      <pattern>press(e[ds]|ing)?</pattern>
       <contextpattern location="2" mode="fuzzy">##@ui-[0-9]+##</contextpattern>
     </patterngroup>
   </term>

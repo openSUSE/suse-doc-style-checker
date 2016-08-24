@@ -78,4 +78,7 @@
     <para xml:id="sdsc.expect.error.terminology.12">
         The printer will print out the test page.
     </para>
+    <para xml:id="sdsc.expect.error.terminology.13">
+        To continue, press the <guimenu>Select</guimenu> button.
+    </para>
 </chapter>
