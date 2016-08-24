@@ -2969,17 +2969,24 @@
     </patterngroup>
   </term>
 
-  <term>
+  <!-- The below two entries used to be one entry. However, due to limitations
+  in the terminology XML design, it could only give confusing suggestions.
+  The first one needed to be commented away, to avoid duplicate messages.
+  - sknorr, 2016-08-24 -->
+  <!-- <term>
     <accept>
       <proposal>print</proposal>
     </accept>
     <patterngroup>
-      <pattern>print(s|ed|ing)</pattern>
+      <pattern>print(s|ed|ing)?</pattern>
       <pattern>out</pattern>
     </patterngroup>
+   </term> -->
+   <term>
+    <accept/>
     <patterngroup>
-      <pattern>print(s|ed|ing)</pattern>
-      <contextpattern mode="fuzzy" location="3">out</contextpattern>
+      <pattern>out</pattern>
+      <contextpattern mode="fuzzy" location="3" look="before">print(s|ed|ing)?</contextpattern>
     </patterngroup>
   </term>
 

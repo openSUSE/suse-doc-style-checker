@@ -75,4 +75,7 @@
         From the drop-down-menu <guimenu>Something</guimenu>, select
         <guimenu>Something Else</guimenu>.
     </para>
+    <para xml:id="sdsc.expect.error.terminology.12">
+        The printer will print out the test page.
+    </para>
 </chapter>
