@@ -47,7 +47,7 @@
         The primary solution for the private-cloud market is SUSE OpenStack Cloud.
     </para>
     <para xml:id="sdsc.expect.error.terminology.9">
-        The new SUSE Server has been certified many partners.
+        The new SUSE Server has been certified by many partners.
     </para>
     <para xml:id="sdsc.valid.9">
         The new SUSE Linux Enterprise Server has been certified by many
@@ -83,5 +83,9 @@
     </para>
     <para xml:id="sdsc.expect.error.terminology.14">
         SUSE Lunix Enterprise is an advanced operating system.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.15">
+        And then came Ubuntu and invented the LiveCD which would go on to
+        revolutionize the way Linux is distributed forever.
     </para>
 </chapter>
