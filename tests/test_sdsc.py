@@ -44,14 +44,19 @@ def test_sdsc_version(capsys):
     out, _ = capsys.readouterr()
     assert sdsc.__version__ == out.split()[-1]
 
-
-def test_tokenizer():
+@pytest.mark.parametrize("tokens,expected",
+ (
+   # 1
+   ("This is a simple sentence.",
+    ["This", "is", "a", "simple", "sentence."]),
+   # 2
+   ("This is a less simple sentence with a\xa0nbsp.",
+    ["This", "is", "a", "less", "simple", "sentence", "with", "a", "nbsp."]),
+ )
+)
+def test_tokenizer(tokens, expected):
     """checks whether the tokenizer works as expected"""
-    tokens = sdsc.tokenizer("This is a simple sentence.")
-    assert tokens == ["This", "is", "a", "simple", "sentence."]
-    tokens = sdsc.tokenizer("This is a less simple sentence with a\xa0nbsp.")
-    assert tokens == ["This", "is", "a", "less",
-                      "simple", "sentence", "with", "a", "nbsp."]
+    assert sdsc.tokenizer(tokens) == expected
 
 
 @pytest.mark.parametrize("sentence,expected",
