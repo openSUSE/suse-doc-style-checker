@@ -71,17 +71,21 @@ def test_sentencesegmenter():
     assert sentences == ["An above average chance stands e.g. Michael",
                          "Marta is also on the list"]
 
-
-def test_isDupe():
+@pytest.mark.parametrize("tokens,result",
+ [
+     # 1
+     (["this", "is", "a", "test"], 0 ),
+     # 2
+     (["this", "is", "is", "a", "test"], 1),
+     # 3
+     (["this", "is", "this", "is", "a", "test"], 2),
+     # 4
+     (["this", "is", "(this", "is)", "a", "test"], 0),
+ ],
+)
+def test_isDupe(tokens, result):
     """checks whether isDupe is correct"""
-    tokens = ["this", "is", "a", "test"]
-    assert sdsc.isDupe(tokens, 2) == 0
-    tokens = ["this", "is", "is", "a", "test"]
-    assert sdsc.isDupe(tokens, 2) == 1
-    tokens = ["this", "is", "this", "is", "a", "test"]
-    assert sdsc.isDupe(tokens, 2) == 2
-    tokens = ["this", "is", "(this", "is)", "a", "test"]
-    assert sdsc.isDupe(tokens, 2) == 0
+    assert sdsc.isDupe(tokens, 2) == result
 
 
 def test_highlighter():
