@@ -26,3 +26,8 @@ def terminologydtd():
     dtd = etree.DTD(file=dtdfile)
     return dtd
 
+
+@pytest.fixture
+def casesdir():
+    """Fixture: Path to cases directory"""
+    return os.path.dirname(os.path.realpath(__file__)) + "/cases/"
