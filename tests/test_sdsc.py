@@ -54,22 +54,32 @@ def test_tokenizer():
                       "simple", "sentence", "with", "a", "nbsp."]
 
 
-def test_sentencesegmenter():
+@pytest.mark.parametrize("sentence,expected",
+ (
+   # 1
+   ("This is a simple ##@command-2## sentence. This one too.",
+    ["This is a simple ##@command-2## sentence", "This one too"]),
+   # 2
+   ("This is not a test in one go. openSUSE is not written with a capital letter.",
+    ["This is not a test in one go",
+     "openSUSE is not written with a capital letter"]),
+   # 3
+   ("This is a sentence, e.g. for me.",
+    ["This is a sentence, e.g. for me"]),
+   # 4
+   ("E. g. this is a sentence.",
+    ["E. g. this is a sentence"]),
+   # 5
+   ("An above average chance stands e.g. Michael. Marta is also on the list.",
+    ["An above average chance stands e.g. Michael",
+     "Marta is also on the list"]),
+  )
+)
+def test_sentencesegmenter(sentence, expected):
     """checks whether sentencesegmenter behaves sane"""
-    sentences = sdsc.sentencesegmenter("This is a simple ##@command-2## sentence. This one too.")
-    assert sentences == ["This is a simple ##@command-2## sentence", "This one too"]
-    sentences = sdsc.sentencesegmenter(
-        "This is not a test in one go. openSUSE is not written with a capital letter.")
-    assert sentences == ["This is not a test in one go",
-                         "openSUSE is not written with a capital letter"]
-    sentences = sdsc.sentencesegmenter("This is a sentence, e.g. for me.")
-    assert sentences == ["This is a sentence, e.g. for me"]
-    sentences = sdsc.sentencesegmenter("E. g. this is a sentence.")
-    assert sentences == ["E. g. this is a sentence"]
-    sentences = sdsc.sentencesegmenter(
-        "An above average chance stands e.g. Michael. Marta is also on the list.")
-    assert sentences == ["An above average chance stands e.g. Michael",
-                         "Marta is also on the list"]
+    sentences = sdsc.sentencesegmenter(sentence)
+    assert sentences == expected
+
 
 @pytest.mark.parametrize("tokens,result",
  [
