@@ -1081,19 +1081,17 @@ def main(cliargs=None):
         resultpath = os.path.dirname(os.path.realpath(args.inputfile.name))
 
     resultfile = os.path.join(resultpath, resultfilename)
-    resultfh = open(resultfile, 'w')
+    with open(resultfile, 'w') as resultfh:
+        try:
+            result = checkOneFile(args.inputfile.name)
+        except KeyboardInterrupt:
+            printcolor("Operation cancelled!", 'error')
+            return 1
+        except etree.Error as error:
+            printcolor("Syntax error in input: {0}!".format(error.msg), 'error')
+            return 1
 
-    try:
-        result = checkOneFile(args.inputfile.name)
-    except KeyboardInterrupt:
-        printcolor("Operation cancelled!", 'error')
-        return 1
-    except etree.Error as error:
-        printcolor("Syntax error in input: {0}!".format(error.msg), 'error')
-        return 1
-
-    resultfh.write(str(result))
-    resultfh.close()
+        resultfh.write(str(result))
 
     if args.show:
         webbrowser.open(resultfile, new=0, autoraise=True)
