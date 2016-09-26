@@ -17,7 +17,6 @@
 #
 
 __programname__ = "SUSE Documentation Style Checker"
-__version__ = "2016.06.99.1"
 __author__ = "Stefan Knorr, Thomas Schraitle, Fabian Vogt"
 __license__ = "LGPL-2.1+"
 __description__ = "checks a given DocBook XML file for stylistic errors"
@@ -32,6 +31,7 @@ import webbrowser
 
 from lxml import etree
 from .cli import printcolor, parseargs
+from .version import __version__
 
 # Global flags
 flag_performance = False

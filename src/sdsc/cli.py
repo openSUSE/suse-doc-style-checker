@@ -24,7 +24,8 @@
 import argparse
 import sys
 
-from . import __description__, __programname__, __version__
+from . import __description__, __programname__
+from .version import __version__
 
 # TODO: Get rid of the entire "positional arguments" thing that argparse adds
 # (self-explanatory anyway). Get rid of "optional arguments" header. Make sure
