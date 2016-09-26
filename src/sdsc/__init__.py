@@ -35,6 +35,7 @@ from .color import printcolor
 from .version import __version__
 from .regex import (parentheses, sentenceends, lastsentenceends,
                    emptysubpattern, re_compile)
+from .parser import XMLParser, SDSCNS
 
 # Global flags
 flag_performance = False
@@ -908,7 +909,7 @@ def splitpath(context, path, wantedsegment='filename'):
 prepared_checks = []
 
 # Global parser instance. Initialized by initialize()
-parser = None
+# parser = None
 
 
 def checkOneFile(inputfilepath):
@@ -925,7 +926,7 @@ def checkOneFile(inputfilepath):
     output.append(resultstitle)
 
     # Checking via XSLT
-    inputfile = etree.parse(inputfilepath, parser)
+    inputfile = etree.parse(inputfilepath, XMLParser)
 
     for check in prepared_checks:
         if flag_module or flag_performance:
@@ -965,20 +966,18 @@ def initialize():
     if sdsc_initialized:
         return True
 
-    # Prepare parser (add py: namespace)
-    ns = etree.FunctionNamespace('https://www.github.com/openSUSE/suse-doc-style-checker')
-    ns.prefix = 'py'
-    ns.update(dict(linenumber=linenumber, termcheck=termcheck,
-                   buildtermdata=buildtermdata, dupecheck=dupecheck,
-                   sentencelengthcheck=sentencelengthcheck,
-                   sentencesegmenter=sentencesegmenter,
-                   tokenizer=tokenizer, counttokens=counttokens,
-                   splitpath=splitpath))
+    # Update namespace dictionary with XSLT extension functions
+    # TODO: Move this into a separate file
+    SDSCNS.update(dict(linenumber=linenumber,
+                       termcheck=termcheck,
+                       buildtermdata=buildtermdata,
+                       dupecheck=dupecheck,
+                       sentencelengthcheck=sentencelengthcheck,
+                       sentencesegmenter=sentencesegmenter,
+                       tokenizer=tokenizer,
+                       counttokens=counttokens,
+                       splitpath=splitpath))
 
-    global parser
-    parser = etree.XMLParser(ns_clean=True,
-                             remove_pis=False,
-                             dtd_validation=False)
 
     # Prepare all checks
     global prepared_checks
@@ -994,7 +993,7 @@ def initialize():
         try:
             checkmodule = re.sub(r'^.*/', r'', checkfile)
             checkmodule = re.sub(r'.xslc$', r'', checkmodule)
-            transform = etree.XSLT(etree.parse(checkfile, parser))
+            transform = etree.XSLT(etree.parse(checkfile, XMLParser))
             prepared_checks.append({'name': checkmodule, 'transform': transform})
         except Exception as error:
             printcolor("! Syntax error in check file.\n  " + checkfile, 'error')
@@ -1017,7 +1016,6 @@ def main(cliargs=None):
 
     location = os.path.dirname(os.path.realpath(__file__))
 
-    global args
     try:
         args = parseargs(cliargs)
     except SystemExit as exc:
