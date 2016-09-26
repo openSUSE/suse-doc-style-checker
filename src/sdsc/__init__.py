@@ -30,7 +30,8 @@ import random
 import webbrowser
 
 from lxml import etree
-from .cli import printcolor, parseargs
+from .cli import parseargs
+from .color import printcolor
 from .version import __version__
 from .regex import (parentheses, sentenceends, lastsentenceends,
                    emptysubpattern, re_compile)
