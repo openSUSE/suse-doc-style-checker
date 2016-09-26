@@ -17,6 +17,16 @@
 #
 
 from lxml import etree
+from .xslt import (counttokens,
+                   # buildtermdata,
+                   dupecheck,
+                   linenumber,
+                   splitpath,
+                   sentencelengthcheck,
+                   sentencesegmenter,
+                   # termcheck,
+                   tokenizer,
+                   )
 
 # Prepare parser (add py: namespace)
 GITHUB_NS= 'https://www.github.com/openSUSE/suse-doc-style-checker'
@@ -24,15 +34,16 @@ SDSCNS = etree.FunctionNamespace(GITHUB_NS)
 SDSCNS.prefix = 'py'
 
 # FIXME: Update here the dictionary with XSLT extension functions
-#SDSCNS.update(dict(linenumber=linenumber,
+SDSCNS.update(dict(linenumber=linenumber,
 #                   termcheck=termcheck,
 #                   buildtermdata=buildtermdata,
-#                   dupecheck=dupecheck,
-#                   sentencelengthcheck=sentencelengthcheck,
-#                   sentencesegmenter=sentencesegmenter,
-#                   tokenizer=tokenizer,
-#                   counttokens=counttokens,
-#                   splitpath=splitpath))
+                   dupecheck=dupecheck,
+                   sentencelengthcheck=sentencelengthcheck,
+                   sentencesegmenter=sentencesegmenter,
+                   tokenizer=tokenizer,
+                   counttokens=counttokens,
+                   splitpath=splitpath
+              ))
 
 
 XMLParser = etree.XMLParser(ns_clean=True,
