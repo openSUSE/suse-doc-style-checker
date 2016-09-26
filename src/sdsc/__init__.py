@@ -32,50 +32,18 @@ import webbrowser
 from lxml import etree
 from .cli import printcolor, parseargs
 from .version import __version__
+from .regex import (parentheses, sentenceends, lastsentenceends,
+                   emptysubpattern, re_compile)
 
 # Global flags
 flag_performance = False
 flag_checkpatterns = False
 flag_module = False
 
-# In manglepattern(), only catch patterns that are not literal and are not
-# followed by an indicator of a lookahead/lookbehind (?) or are already
-# non-capturing groups
-# FIXME: This will fail on character classes like: [(]
-parentheses = re.compile(r'(?<!\\)\((?![\?|\:])')
-
-
-# Sentence end characters.
-# FIXME: English hardcoded
-# Lookbehinds need to have a fixed length... thus .ca
-# Do not use capture groups together with re.split, as it does additional splits
-# for each capture group it finds.
-sentenceends = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?]|[:;])\s+[[({]?(?=(?:[A-Z0-9#]|openSUSE))')
-lastsentenceends = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?][])}]?|[:;])\s*$')
-
-# trypatterns() checks if a sub-pattern of a given pattern matches nothing
-# (and looks unusual while doing that), i.e. subpatterns like (this|), (|this),
-# or (th||is)
-# FIXME: This will fail on character classes like: [(]
-emptysubpattern = re.compile(r'(?<!\\)(\|\)|\(\||\|\|)')
-
-
-re_cache = {}
-
-
-def re_compile(pattern, flags=0):
-    """Caching version of re.compile"""
-    try:
-        return re_cache[flags][pattern]
-    except KeyError:
-        if flags not in re_cache:
-            re_cache[flags] = {}
-        re_cache[flags][pattern] = re.compile(pattern, flags)
-
-        return re_cache[flags][pattern]
 
 
 def linenumber(context):
+    """TODO"""
     return context.context_node.sourceline
 
 
