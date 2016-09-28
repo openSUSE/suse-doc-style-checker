@@ -44,58 +44,96 @@ def test_sdsc_version(capsys):
     out, _ = capsys.readouterr()
     assert sdsc.__version__ == out.split()[-1]
 
-
-def test_tokenizer():
+@pytest.mark.parametrize("tokens,expected",
+ (
+   # 1
+   ("This is a simple sentence.",
+    ["This", "is", "a", "simple", "sentence."]),
+   # 2
+   ("This is a less simple sentence with a\xa0nbsp.",
+    ["This", "is", "a", "less", "simple", "sentence", "with", "a", "nbsp."]),
+ )
+)
+def test_tokenizer(tokens, expected):
     """checks whether the tokenizer works as expected"""
-    tokens = sdsc.tokenizer("This is a simple sentence.")
-    assert tokens == ["This", "is", "a", "simple", "sentence."]
-    tokens = sdsc.tokenizer("This is a less simple sentence with a\xa0nbsp.")
-    assert tokens == ["This", "is", "a", "less",
-                      "simple", "sentence", "with", "a", "nbsp."]
+    assert sdsc.tokenizer(tokens) == expected
 
 
-def test_sentencesegmenter():
+@pytest.mark.parametrize("sentence,expected",
+ (
+   # 1
+   ("This is a simple ##@command-2## sentence. This one too.",
+    ["This is a simple ##@command-2## sentence", "This one too"]),
+   # 2
+   ("This is not a test in one go. openSUSE is not written with a capital letter.",
+    ["This is not a test in one go",
+     "openSUSE is not written with a capital letter"]),
+   # 3
+   ("This is a sentence, e.g. for me.",
+    ["This is a sentence, e.g. for me"]),
+   # 4
+   ("E. g. this is a sentence.",
+    ["E. g. this is a sentence"]),
+   # 5
+   ("An above average chance stands e.g. Michael. Marta is also on the list.",
+    ["An above average chance stands e.g. Michael",
+     "Marta is also on the list"]),
+  )
+)
+def test_sentencesegmenter(sentence, expected):
     """checks whether sentencesegmenter behaves sane"""
-    sentences = sdsc.sentencesegmenter("This is a simple ##@command-2## sentence. This one too.")
-    assert sentences == ["This is a simple ##@command-2## sentence", "This one too"]
-    sentences = sdsc.sentencesegmenter(
-        "This is not a test in one go. openSUSE is not written with a capital letter.")
-    assert sentences == ["This is not a test in one go",
-                         "openSUSE is not written with a capital letter"]
-    sentences = sdsc.sentencesegmenter("This is a sentence, e.g. for me.")
-    assert sentences == ["This is a sentence, e.g. for me"]
-    sentences = sdsc.sentencesegmenter("E. g. this is a sentence.")
-    assert sentences == ["E. g. this is a sentence"]
-    sentences = sdsc.sentencesegmenter(
-        "An above average chance stands e.g. Michael. Marta is also on the list.")
-    assert sentences == ["An above average chance stands e.g. Michael",
-                         "Marta is also on the list"]
+    sentences = sdsc.sentencesegmenter(sentence)
+    assert sentences == expected
 
 
-def test_isDupe():
+@pytest.mark.parametrize("tokens,result",
+ [
+     # 1
+     (["this", "is", "a", "test"], 0 ),
+     # 2
+     (["this", "is", "is", "a", "test"], 1),
+     # 3
+     (["this", "is", "this", "is", "a", "test"], 2),
+     # 4
+     (["this", "is", "(this", "is)", "a", "test"], 0),
+ ],
+)
+def test_isDupe(tokens, result):
     """checks whether isDupe is correct"""
-    tokens = ["this", "is", "a", "test"]
-    assert sdsc.isDupe(tokens, 2) == 0
-    tokens = ["this", "is", "is", "a", "test"]
-    assert sdsc.isDupe(tokens, 2) == 1
-    tokens = ["this", "is", "this", "is", "a", "test"]
-    assert sdsc.isDupe(tokens, 2) == 2
-    tokens = ["this", "is", "(this", "is)", "a", "test"]
-    assert sdsc.isDupe(tokens, 2) == 0
+    assert sdsc.isDupe(tokens, 2) == result
 
 
-def test_highlighter():
+@pytest.mark.parametrize("tokens,start,end,expected",
+ (
+   # 1
+   (["highlight", "these", "two", "words"], 1, 2,
+     "highlight <highlight>these two</highlight> words"
+    ),
+   # 2
+   ("highlight these two words", 1, 2,
+    "highlight <highlight>these two</highlight> words"),
+ )
+)
+def test_highlighter(tokens, start, end, expected):
     """checks whether the highlight function works"""
-    xml = sdsc.highlight(["highlight", "these", "two", "words"], 1, 2)
-    assert xml == "highlight <highlight>these two</highlight> words"
+    assert sdsc.highlight(tokens, start, end) == expected
 
 
-def test_contextpatternlocations():
+@pytest.mark.parametrize("params,result",
+ (
+   # 1
+   (([1], [1]),        [1]),
+   # 2
+   (([2], [-1, 1]),    [-2, 2]),
+   # 3
+   (([3], [1], True),  [1, 2, 3]),
+   # 4
+   (([3], [-1], True), [-1, -2, -3]),
+ )
+)
+def test_contextpatternlocations(params, result):
     """checks the contextpatternlocations function"""
-    assert sdsc.contextpatternlocations([1], [1]) == [1]
-    assert sdsc.contextpatternlocations([2], [-1, 1]) == [-2, 2]
-    assert sdsc.contextpatternlocations([3], [1], True) == [1, 2, 3]
-    assert sdsc.contextpatternlocations([3], [-1], True) == [-1, -2, -3]
+    assert sdsc.contextpatternlocations(*params) == result
 
 
 def test_xml(xmltestcase):
