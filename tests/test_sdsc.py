@@ -13,26 +13,26 @@ def test_main(capsys):
         exec(compile(open(path).read(), path, "exec"), {}, {"__name__": "__main__"})
 
 
-def test_check_performance(capsys):
+def test_check_performance(capsys, casesdir):
     """checks whether the flag_performance stuff works"""
     sdsc.flag_performance = True
-    path = os.path.dirname(os.path.realpath(__file__)) + "/cases/a-an.xml"
+    path = "{}a-an.xml".format(casesdir)
     sdsc.checkOneFile(path)
     assert capsys.readouterr()[0].count("Running module") > 0
     sdsc.flag_performance = False
 
 
-def test_checkpatterns(capsys):
+def test_checkpatterns(capsys, casesdir):
     """checks whether the patterns are sane"""
     sdsc.flag_checkpatterns = True
-    path = os.path.dirname(os.path.realpath(__file__)) + "/cases/a-an.xml"
+    path = "{}a-an.xml".format(casesdir)
     sdsc.checkOneFile(path)
     sdsc.flag_checkpatterns = False
 
 
-def test_sdsc_output(capsys):
+def test_sdsc_output(capsys, casesdir):
     """checks whether output to files works"""
-    path = os.path.dirname(os.path.realpath(__file__)) + "/cases/a-an.xml"
+    path = "{}a-an.xml".format(casesdir)
     sdsc.main([path, "/dev/null"])
     out, _ = capsys.readouterr()
     assert out == "/dev/null\n"
