@@ -9,7 +9,7 @@ import sdsc
 
 
 def gatherallids(case):
-    """Gather all IDs (xml:id and id) and check if there are unique.
+    """Gather all IDs (xml:id and id) and check if they are unique.
 
     :param str case: path to testcase
     :return: list of unique IDs
@@ -95,7 +95,9 @@ def isolatewarnings(complaints):
 
 
 def searchforerrors(nr_errors, inputids, case, complaints):
-    """Check for missing errors and warnings
+    """Checks whether the style checker produces all expected
+       information/warning/error messages for terminology
+       file-based checks
 
     :param int nr_errors: existing errors
     :param list inputids: list of existing IDs
