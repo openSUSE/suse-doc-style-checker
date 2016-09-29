@@ -80,8 +80,9 @@ def removepunctuation(word, start=False, end=False):
 
 
 def canBeDupe(word):
-    """TAGIGNORE: character sequences that should be ignored by the duplicate
-    words check
+    """Checks if a word is eligible to be a duplicated word or if
+    it should be ignored because it is actually a tag replacement.
+
     Ignored contents from tags can take either of the two forms below:
        ##@lowercase-1##
        ##@lowercase##
@@ -114,9 +115,13 @@ def isDupe(tokens, pos):
 
 
 def highlight(tokens, highlightstart, highlightend):
-    """TODO@sknorr
+    """Takes a string and adds XML tags that lead to specified
+    tokens being highlighted in the output file
 
-    :param tokens:
+    :param tokens: A list of words or a string
+    :param int hightlightstart: Start of word to highlight (count from zero)
+    :param int highlightend: End of word to highlight
+    :return: string with highlighted words
 
     Example:
        tokens = ["highlight", "these", "two", "words"]
@@ -141,9 +146,10 @@ def highlight(tokens, highlightstart, highlightend):
 
 
 def xmlescape(text):
-    """TODO@sknorr
+    """Escapes XML input to enable working with it.
 
-    :param str text:
+    :param str text: String to be escaped
+    :return: escaped string
     """
     escapetable = {
         "&": "&amp;",
@@ -156,7 +162,15 @@ def xmlescape(text):
 
 
 def dupecheckmessage(context, quote, duplicate, contextid, basefile):
-    """TODO@sknorr"""
+    """Creates messages about duplicate words
+
+    :param context:
+    :param quote:
+    :param duplicate:
+    :param contextid: ID of the context
+    :param basefile:
+    :return: XML tree of the result
+    """
     filename = ""
     if basefile:
         filename = "<file>%s</file>" % str(basefile)
@@ -188,7 +202,7 @@ def linenumber(context):
 
 
 def splitpath(context, path, wantedsegment='filename'):
-    """Split a path into segments and return the wanted segment.
+    """Splits a path into segments and return the wanted segment.
 
     :param str context: Context node (ignored)
     :param str path: Input path or file name
@@ -219,9 +233,13 @@ def splitpath(context, path, wantedsegment='filename'):
 
 
 def counttokens(context, text):
-    """TODO@sknorr:
+    """Counts the number of tokens in a given string. This
+    is used to enable tag replacement for content that needs
+    to be skipped and conversely to re-insert skipped text and
+    enable highlighting.
 
     :param str context: Context node (ignored)
+    :param str text:
     """
 
     count = 0
@@ -231,7 +249,7 @@ def counttokens(context, text):
 
 
 def tokenizer(text):
-    """TODO@sknorr: Splits text into words
+    """Splits a string into a list of words
 
     :param str text:
     """
@@ -239,7 +257,8 @@ def tokenizer(text):
 
 
 def sentencesegmenter(text):
-    """TODO@sknorr:
+    """Splits a paragraph into a list of sentences. Removes
+    final punctuation from all sentences.
 
     :param str text:
     """
@@ -256,6 +275,10 @@ def sentencesegmenter(text):
 
 def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
                         lengthwarning, lengtherror):
+    """Takes a paragraph, splits up sentences and checks
+    whether the number of words in the sentences is longer
+    than a defined maximum.
+    """
     # Try to use sensible defaults. The following seems like better advice than
     # the SUSE Documentation Style Guide has to offer:
     # "Sometimes sentence length affects the quality of the writing. In general,
@@ -343,7 +366,15 @@ def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
 
 
 def dupecheck(context, content, contentpretty, contextid, basefile):
-    """TODO@sknorr
+    """Takes a paragraph and checks it for duplicated words and
+    phrases of up to three words in length.
+
+    :param context:
+    :param content:
+    :param contentpretty:
+    :param contextid:
+    :param basefile:
+    :return:
     """
     if not content:
         return []
