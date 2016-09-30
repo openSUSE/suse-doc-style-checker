@@ -1029,8 +1029,7 @@ def initialize():
 
     for checkfile in checkfiles:
         try:
-            checkmodule = re.sub(r'^.*/', r'', checkfile)
-            checkmodule = re.sub(r'.xslc$', r'', checkmodule)
+            checkmodule = os.path.splitext(os.path.basename(checkfile))[0]
             transform = etree.XSLT(etree.parse(checkfile, parser))
             prepared_checks.append({'name': checkmodule, 'transform': transform})
         except Exception as error:
