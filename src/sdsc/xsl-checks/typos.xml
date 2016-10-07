@@ -1225,8 +1225,12 @@ GNU GPL.
   <term>
     <accept/>
     <patterngroup>
-      <pattern>(the|a)</pattern>
-      <contextpattern>(your|which|those)</contextpattern>
+      <pattern>an?</pattern>
+      <contextpattern>(your|which|th[oe]se|the)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>the</pattern>
+      <contextpattern>(your|which|th[oe]se|an?)</contextpattern>
     </patterngroup>
   </term>
 

@@ -114,4 +114,13 @@
     <para xml:id="sdsc.valid.36">
         It is true that your will is limitless.
     </para>
+    <para xml:id="sdsc.expect.error.typos.37">
+        If the values differ, specify a the host name.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.38">
+        If the values differ, specify the your host name.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.39">
+        If the values differ, specify a these host names.
+    </para>
 </chapter>
