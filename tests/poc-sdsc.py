@@ -14,7 +14,6 @@
 # See also:
 # http://lxml.de/extensions.html#xpath-extension-functions
 
-from functools import partial
 import inspect
 import logging
 import logging.config
@@ -48,7 +47,8 @@ class MyXPathExtFunc:
     """Class which encapsulates XPath extension functions
     """
     # Add here your global variables...
-    def __init__(self, args):
+    def __init__(self, **args):
+        log.debug("Initialized %s with %s", type(self).__name__, args)
         self.args = args
 
     def test(self, context, arg):
@@ -90,7 +90,7 @@ def setup_extensions(**args):
     """
     log.debug("Called with %s", args)
     functions = getfunctions(MyXPathExtFunc)
-    module = MyXPathExtFunc(args)
+    module = MyXPathExtFunc(**args)
     extensions = etree.Extension(module,
                                  functions,
                                  ns=GITHUB_NS
