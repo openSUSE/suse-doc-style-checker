@@ -48,6 +48,8 @@ class MyXPathExtFunc:
     """Class which encapsulates XPath extension functions
     """
     # Add here your global variables...
+    def __init__(self, args):
+        self.args = args
 
     def test(self, context, arg):
         """Extension function test(arg)"""
@@ -58,7 +60,7 @@ class MyXPathExtFunc:
             arg = arg[0]
         if isinstance(arg, etree._Element):
             arg = arg.text
-        return 'test' + arg
+        return 'Hello %s, %s' % (self.args.get('name'), arg)
 
 
 def getfunctions(cls):
@@ -75,7 +77,7 @@ def getfunctions(cls):
                  if inspect.isfunction(cls.__dict__[f]))
 
 
-def setup_namespace():
+def setup_namespace(**args):
     """Setup namespace
 
     :return: dictionary with prefix:namespace entries
@@ -86,8 +88,9 @@ def setup_namespace():
 def setup_extensions(**args):
     """Setup XPath extension functions
     """
+    log.debug("Called with %s", args)
     functions = getfunctions(MyXPathExtFunc)
-    module = MyXPathExtFunc()
+    module = MyXPathExtFunc(args)
     extensions = etree.Extension(module,
                                  functions,
                                  ns=GITHUB_NS
@@ -95,17 +98,18 @@ def setup_extensions(**args):
     return extensions
 
 
-def main_xslt():
+def main_xslt(**args):
     """Proof of concept of extension function in XSLT"""
-    log.debug('Start.')
+    log.debug('Start with %s', args)
     XSLT = """<xsl:stylesheet version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:py="{NS}"
+    xmlns:{PREFIX}="{NS}"
     exclude-result-prefixes="py">
   <xsl:template match="a">
-    <A><xsl:value-of select="py:test(b)"/></A>
+    <A><xsl:value-of select="{PREFIX}:test(b)"/></A>
   </xsl:template>
-</xsl:stylesheet>""".format(NS=GITHUB_NS)
+</xsl:stylesheet>""".format(NS=GITHUB_NS,
+                            PREFIX=GITHUB_PREFIX)
 
     # Prepare stylesheet tree
     tree = etree.XML('<a><b>Hiho</b></a>').getroottree()
@@ -113,19 +117,19 @@ def main_xslt():
 
     # Create transformation function, pass extension functions
     transform = etree.XSLT(style,
-                           extensions=setup_extensions())
+                           extensions=setup_extensions(**args))
     result = transform(tree)
     log.debug("##### Result #####")
     print(etree.tostring(result, encoding="unicode"))
     log.debug('Finished.')
 
 
-def main_xpath():
+def main_xpath(**args):
     """Proof of concept of extension function in XPath"""
-    log.debug('Start.')
+    log.debug('Start with %s', args)
 
     tree = etree.XML('<a><b>Hiho</b></a>').getroottree()
-    extensions = setup_extensions()
+    extensions = setup_extensions(**args)
     ev = etree.XPathEvaluator(tree,
                               namespaces=setup_namespace(),
                               extensions=extensions
@@ -133,16 +137,16 @@ def main_xpath():
     log.debug("evaluator: %s", ev)
     log.debug("extensions: %s", extensions)
     log.debug("##### Result #####")
-    print(ev("py:test('you')"))
+    print(ev("py:test('jippi')"))
     log.debug('Finished.')
 
 
 if __name__ == "__main__":
     log.debug("Started...")
     try:
-        main_xslt()
+        main_xslt(name="Wilber")
         log.debug("-"*30)
-        main_xpath()
+        main_xpath(name="Tux")
     except Exception as err:
-        log.error(err, exc_info=True)
+        log.fatal(err, exc_info=True)
     log.debug("Finished.")
