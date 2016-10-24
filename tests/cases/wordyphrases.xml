@@ -25,4 +25,12 @@
         Snapshots younger than the value specified here will not be deleted,
         regardless of how many of them exist.
     </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.8">
+        These home directories look and feel entirely the same as standard
+        Linux home directories.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.9">
+        These home directories look and feel the exact the same as standard
+        Linux home directories.
+    </para>
 </chapter>

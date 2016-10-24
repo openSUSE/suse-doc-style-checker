@@ -571,25 +571,32 @@
       <proposal>identical</proposal>
     </accept>
     <patterngroup>
-      <pattern>exact(ly)?</pattern>
+      <pattern>(exact|entire)(ly)?</pattern>
       <pattern>the</pattern>
       <pattern>same</pattern>
+      <contextpattern match="negative">as</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>exact(ly)?</pattern>
+      <pattern>(exact|entire)(ly)?</pattern>
       <pattern>(same|identic(al)?)</pattern>
-      <contextpattern look="before" match="negative">(an?|the)</contextpattern>
+      <contextpattern match="negative">as</contextpattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <proposal>same</proposal>
+      <proposal>identical to</proposal>
     </accept>
     <patterngroup>
-      <pattern>exact</pattern>
+      <pattern>(exact|entire)(ly)?</pattern>
+      <pattern>the</pattern>
       <pattern>same</pattern>
-      <contextpattern look="before">the</contextpattern>
+      <pattern>as</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(exact|entire)(ly)?</pattern>
+      <pattern>(same|identic(al)?)</pattern>
+      <pattern>as</pattern>
     </patterngroup>
   </term>
 
