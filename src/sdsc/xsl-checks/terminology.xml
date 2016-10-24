@@ -1890,6 +1890,10 @@
       <pattern>just(?!-)</pattern>
       <contextpattern>need</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>just(?!-)</pattern>
+      <contextpattern look="before">not</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
