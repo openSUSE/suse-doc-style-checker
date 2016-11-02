@@ -33,4 +33,14 @@
         These home directories look and feel the exact the same as standard
         Linux home directories.
     </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.10">
+        There is no question at all that there cannot be a question.
+    </para>
+    <para xml:id="sdsc.valid.11">
+        The Kernel parameter <literal>cio_ignore</literal> prevents the Kernel
+        from looking at all the available hardware devices.
+    </para>
+    <para xml:id="sdsc.valid.12">
+        At all times, remain seated.
+    </para>
 </chapter>

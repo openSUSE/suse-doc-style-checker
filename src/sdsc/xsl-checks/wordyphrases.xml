@@ -148,7 +148,7 @@
     <patterngroup>
       <pattern>at</pattern>
       <pattern>all</pattern>
-      <contextpattern match="negative">times?</contextpattern>
+      <contextpattern match="negative">times?|the</contextpattern>
     </patterngroup>
   </term>
 
