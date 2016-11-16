@@ -88,4 +88,13 @@
         And then came Ubuntu and invented the LiveCD which would go on to
         revolutionize the way Linux is distributed forever.
     </para>
+    <para xml:id="sdsc.expect.error.terminology.16">
+        Start by filling your name, birth date and address into the GUI mask.
+    </para>
+    <para xml:id="sdsc.valid.16a">
+        There is a mask for every subnet.
+    </para>
+    <para xml:id="sdsc.valid.16b">
+        Knowing network masks is often helpful.
+    </para>
 </chapter>
