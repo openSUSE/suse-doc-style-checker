@@ -97,4 +97,10 @@
     <para xml:id="sdsc.valid.16b">
         Knowing network masks is often helpful.
     </para>
+    <para xml:id="sdsc.expect.error.terminology.17">
+        Hard-linking can be very convenient.
+    </para>
+    <para xml:id="sdsc.valid.17">
+        The link mode mediates access to hard links.
+    </para>
 </chapter>
