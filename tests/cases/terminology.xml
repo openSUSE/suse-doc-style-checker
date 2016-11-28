@@ -103,4 +103,11 @@
     <para xml:id="sdsc.valid.17">
         The link mode mediates access to hard links.
     </para>
+    <para xml:id="sdsc.expect.error.terminology.18">
+        The following UI mask allows you to set up your system.
+    </para>
+    <para xml:id="sdsc.valid.18">
+        Effective permissions can be different from the original permissions,
+        because they are filtered according to the mask entry.
+    </para>
 </chapter>

@@ -981,7 +981,10 @@
     </patterngroup>
     <patterngroup>
       <pattern>masks?</pattern>
-      <contextpattern look="bothways" match="negative" mode="fuzzy" location="5" case="keep">(user|group|permission|acl)s?|fil(e[ds]?|ing)|(umask|(sub-?)?net(work)?)(s|ed|ing)?</contextpattern>
+      <!-- Blacklisting & whitelisting at the same time = probably extremely slow -->
+      <contextpattern look="bothways" mode="fuzzy" location="2">(g?ui|dialog(ue)?|interface)s?</contextpattern>
+      <contextpattern look="bothways" match="negative" mode="fuzzy" location="5">(bits?|entr(y|ies)|creation|user|group|permission|acl)s?|fil(e[ds]?|ing)|(umask|(sub-?)?net(work)?)(s|ed|ing)?</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="2">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
     </patterngroup>
   </term>
 
