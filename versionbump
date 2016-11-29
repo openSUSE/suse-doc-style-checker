@@ -1,0 +1,45 @@
+#!/bin/bash
+# Bumps up the version of SDSC source files
+# Usage:
+#   versionbump                # Show current version
+#   versionbump xxxx.xx.x.x    # Set version number
+
+bumpedversion=$1
+config=.versionrc
+format=$(sed -r -n "s/^format: *(.+)\$/\1/ p" $config)
+currentversion=$(sed -r -n "s/^version: *($format)\$/\1/ p" $config)
+files=$(sed -r -n 's/^files: *(([-_./a-zA-Z0-9]+ *)+)/\1/ p' $config)
+
+if [[ $1 == '' ]]; then
+  currentversion=$(sed -r -n 's/^version: *(.+)$/\1/ p' $config)
+  echo "Old version number is $currentversion"
+  exit
+fi
+
+if [[ $currentversion == '' ]]; then
+  echo "Old version number does not adhere to format: $format. Continue anyway? y/[n]"
+  read DECISION
+  if [[ ! $DECISION == 'y' ]] && [[ ! $DECISION == 'yes' ]]; then
+    echo "(meh) Not setting new version number."
+    exit
+  else
+    currentversion=$(sed -r -n 's/^version: *(.+)$/\1/ p' $config)
+  fi
+fi
+
+if [[ ! $(echo $bumpedversion | grep -P "^$format\$") ]]; then
+  echo "(meh) New version number does not adhere to format: $format"
+  exit
+fi
+
+echo "Really set new version number $bumpedversion? y/[n]"
+read DECISION
+if [[ ! $DECISION == 'y' ]] && [[ ! $DECISION == 'yes' ]]; then
+  echo "(meh) Not setting new version number."
+  exit
+fi
+
+for versionfile in $config $files; do
+  sed -i -r "s/$currentversion/$bumpedversion/" $versionfile
+done
+echo "Set version number: $currentversion => $bumpedversion"

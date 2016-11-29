@@ -1,0 +1,3 @@
+version: 2016.06.99.1
+files: man/suse-doc-style-checker.xml src/sdsc/__init__.py
+format: [0-9]{4}\.[012][0-9]\.[0-9]{1,2}\.[0-9]
