@@ -7,6 +7,7 @@
   <!ENTITY command      "sdsc">
   <!ENTITY daps         "DAPS">
   <!ENTITY dapscommand  "daps">
+  <!ENTITY styleguide   "SUSE Documentation Style Guide">
   <!ENTITY version      "2016.06.99.1">
   <!ENTITY nbsp         "&#xa0;">
 ]>
@@ -63,8 +64,9 @@
   <refsect1>
     <title>Description</title>
 
-    <para>&longname; checks documentation for compliance with the SUSE
-      Documentation Style Guide. Among other things, it checks for terminology,
+    <para>
+      &longname; checks documentation for compliance with the &styleguide;.
+      Among other things, it checks for terminology,
       duplicated words, long sentences, and lone subsections. &longname; creates
       a report file as its output and is not interactive.
     </para>
@@ -75,13 +77,15 @@
 
     <para>
       The input must be a single XML file without XIncludes or custom entities.
-      The checker is meant to be used with DocBook 5, GeekoDoc, DocBook 4, or
-      Novdoc files as input.
+      The checker is meant to be used with a fully profiled GeekoDoc, Novdoc,
+      DocBook 5, or DocBook 4 file written in American English as the input.
       Ideally, create the input file using DAPS:
     </para>
     <screen><command>&dapscommand; <option>-d <replaceable>DC-FILE</replaceable></option> <option>bigfile</option></command></screen>
-    <para>All language checks assume that the input is written in American
-      English.
+    <para>
+      You can also use the command <command>daps stylecheck</command> instead
+      of using &longname; directly. When used that way, &daps; will
+      create a bigfile and then run &longname;.
     </para>
   </refsect1>
 
@@ -188,6 +192,13 @@
         <term><ulink url="https://www.github.com/openSUSE/suse-doc-style-checker/"/></term>
         <listitem>
          <para>Web site of &longname;.
+         </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><ulink url="https://www.github.com/SUSE/doc-styleguide/"/></term>
+        <listitem>
+         <para>Web site of SUSE Documentation Style Guide.
          </para>
         </listitem>
       </varlistentry>
