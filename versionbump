@@ -7,12 +7,16 @@
 bumpedversion=$1
 config=.versionrc
 format=$(sed -r -n "s/^format: *(.+)\$/\1/ p" $config)
+formathuman=$(sed -r -n 's/^formathuman: (.*)$/\1/ p' $config)
 currentversion=$(sed -r -n "s/^version: *($format)\$/\1/ p" $config)
 files=$(sed -r -n 's/^files: *(([-_./a-zA-Z0-9]+ *)+)/\1/ p' $config)
 
 if [[ $1 == '' ]]; then
   currentversion=$(sed -r -n 's/^version: *(.+)$/\1/ p' $config)
   echo "Old version number is $currentversion"
+  echo -n "Format: $formathuman"
+  echo -n "Format policy: "
+  sed -r -n 's/^formatpolicy: (.*)$/\1/ p' $config | sed -r 's/(^|; *)/\n  * /g'
   exit
 fi
 
@@ -28,7 +32,8 @@ if [[ $currentversion == '' ]]; then
 fi
 
 if [[ ! $(echo $bumpedversion | grep -P "^$format\$") ]]; then
-  echo "(meh) New version number does not adhere to format: $format"
+  echo "(meh) New version does not adhere to format: $formathuman"
+  echo "Format as regular expression: $format"
   exit
 fi
 
