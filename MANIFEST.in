@@ -44,7 +44,7 @@ prune bookmarklet
 global-exclude sdsc.1
 
 # Configuration files for automated testing & git repo maintenance
-global-exclude .bumpversion.cfg .cookiecutterrc .coveragerc .coverage .travis.yml
+global-exclude .cookiecutterrc .coveragerc .coverage .travis.yml .versionrc versionbump
 
 # Temporary files
 global-exclude *.py[cod] __pycache__ *.so *.dylib *~ *.bak *.gitignore *.doap
