@@ -1064,8 +1064,7 @@ def main(cliargs=None):
 
     if args.bookmarklet:
         webbrowser.open(
-            os.path.join(location, '..', 'bookmarklet',
-                'result-flagging-bookmarklet.html'),
+            os.path.join(location, 'result-flagging-bookmarklet.html'),
             new=0, autoraise=True)
         return 0
 
