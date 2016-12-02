@@ -82,7 +82,7 @@ setupdict = dict(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # http://python-packaging-user-guide.readthedocs.org/en/latest/single_source_version/
-    version = find_version("src", "sdsc", "__init__.py"), # __version__,
+    version = find_version("src", "sdsc", "version.py"), # __version__,
 
     description = __description__,
     long_description = "Checks a given DocBook XML file for stylistic errors using check files written in XSLT",
