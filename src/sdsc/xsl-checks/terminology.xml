@@ -3635,7 +3635,7 @@
 
   <term>
     <accept>
-      <proposal>SLES for SAP Applications</proposal>
+      <proposal>SLES for SAP</proposal>
     </accept>
     <patterngroup>
       <pattern>s4s</pattern>
@@ -3657,13 +3657,12 @@
       <pattern>s\.?l\.?e(\.?s)?</pattern>
       <pattern>for</pattern>
       <pattern>sap</pattern>
-      <contextpattern match="negative">applications</contextpattern>
+      <contextpattern>applications</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>s\.?l\.?e\.?s</pattern>
       <pattern>for</pattern>
       <pattern>sap</pattern>
-      <pattern>applications</pattern>
       <pattern>(ent(er|re)prise|l[iu]n[iu]x|server)</pattern>
     </patterngroup>
   </term>
