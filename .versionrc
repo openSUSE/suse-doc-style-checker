@@ -1,0 +1,5 @@
+version: 2016.06.99.2
+files: man/suse-doc-style-checker.xml src/sdsc/__init__.py
+format: [0-9]{4}\.(0[1-9]|1[012])\.([0-9]\.[0-9]|9[789].[1-5])
+formathuman: [year].[month].[minor].[bugfix]
+formatpolicy: [year], [month], and [minor] match the style guide version; [bugfix] is for style checker-specific changes; Alpha versions: [year].[month-1].97.4 = alpha 4; Beta versions: [year].[month-1].98.2 = beta 2; RC versions: [year].[month-1].99.1 = RC 1; Final versions: [year].[month].0.0

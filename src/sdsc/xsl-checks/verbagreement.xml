@@ -8,7 +8,7 @@
     <patterngroup>
       <pattern>(is|was|were)</pattern>
       <contextpattern look="before">will</contextpattern>
-      <contextpattern look="before" location="2" match="negative">(my|his|her|their|our|the|a)</contextpattern>
+      <contextpattern look="before" location="2" match="negative">(my|his|her|their|our|your|the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>(is|was|were)</pattern>

@@ -29,10 +29,10 @@
         SUSE Linux Enterprise Server for SAP Applications is the only OS based on SLES that is certified by SAP.
     </para>
     <para xml:id="sdsc.expect.error.terminology.6">
-        SLE for SAP is the only OS based on SLES that is certified by SAP.
+        SLE for SAP Applications is the only OS based on SLES that is certified by SAP.
     </para>
     <para xml:id="sdsc.valid.6">
-        SLES for SAP Applications is the only OS based on SLES that is certified by SAP.
+        SLES for SAP is the only OS based on SLES that is certified by SAP.
     </para>
     <para xml:id="sdsc.expect.error.terminology.7">
         Try SUSE Linux Enterprise Storage today.
@@ -47,10 +47,67 @@
         The primary solution for the private-cloud market is SUSE OpenStack Cloud.
     </para>
     <para xml:id="sdsc.expect.error.terminology.9">
-        The new SUSE Server has been certified many partners.
+        The new SUSE Server has been certified by many partners.
     </para>
     <para xml:id="sdsc.valid.9">
         The new SUSE Linux Enterprise Server has been certified by many
         partners.
+    </para>
+    <para xml:id="sdsc.valid.10">
+        <command>virt-p2v</command> is now available as a technology preview.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.10">
+        <command>virt-p2v</command> is now available as a technical preview.
+    </para>
+    <para xml:id="sdsc.valid.11">
+        From the drop-down box <guimenu>Something</guimenu>, select
+        <guimenu>Something Else</guimenu>.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.11a">
+        From the pulldown menu <guimenu>Something</guimenu>, select
+        <guimenu>Something Else</guimenu>.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.11b">
+        From the drop-down <guimenu>Something</guimenu>, select
+        <guimenu>Something Else</guimenu>.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.11c">
+        From the drop-down-menu <guimenu>Something</guimenu>, select
+        <guimenu>Something Else</guimenu>.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.12">
+        The printer will print out the test page.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.13">
+        To continue, press the <guimenu>Select</guimenu> button.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.14">
+        SUSE Lunix Enterprise is an advanced operating system.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.15">
+        And then came Ubuntu and invented the LiveCD which would go on to
+        revolutionize the way Linux is distributed forever.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.16">
+        Start by filling your name, birth date and address into the GUI mask.
+    </para>
+    <para xml:id="sdsc.valid.16a">
+        There is a mask for every subnet.
+    </para>
+    <para xml:id="sdsc.valid.16b">
+        Knowing network masks is often helpful.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.17">
+        Hard-linking can be very convenient.
+    </para>
+    <para xml:id="sdsc.valid.17">
+        The link mode mediates access to hard links.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.18">
+        The following UI mask allows you to set up your system.
+    </para>
+    <para xml:id="sdsc.valid.18">
+        Effective permissions can be different from the original permissions,
+        because they are filtered according to the mask entry.
     </para>
 </chapter>

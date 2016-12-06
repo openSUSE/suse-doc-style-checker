@@ -645,7 +645,7 @@
   <term>
     <accept>
       <proposal>click</proposal>
-      <context>mouses and other pointing devices</context>
+      <context>using mouses and other pointing devices</context>
     </accept>
     <patterngroup>
       <pattern>click(ed|ing)</pattern>
@@ -669,12 +669,12 @@
       <pattern>clicks?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>press(e[ds]|ing)</pattern>
+      <pattern>press(e[ds]|ing)?</pattern>
       <pattern>on(to)?</pattern>
       <contextpattern location="2" mode="fuzzy">##@ui-[0-9]+##</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>press(e[ds]|ing)</pattern>
+      <pattern>press(e[ds]|ing)?</pattern>
       <contextpattern location="2" mode="fuzzy">##@ui-[0-9]+##</contextpattern>
     </patterngroup>
   </term>
@@ -835,13 +835,13 @@
     <patterngroup>
       <pattern>hard-?links?</pattern>
       <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
-      <contextpattern look="before" location="2">access</contextpattern>
+      <contextpattern look="before" location="3" mode="fuzzy" match="negative">access</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>hard</pattern>
       <pattern>links?</pattern>
       <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
-      <contextpattern look="before" location="2">access</contextpattern>
+      <contextpattern look="before" location="3" mode="fuzzy" match="negative">access</contextpattern>
     </patterngroup>
   </term>
 
@@ -981,7 +981,10 @@
     </patterngroup>
     <patterngroup>
       <pattern>masks?</pattern>
-      <contextpattern look="bothways" match="negative" mode="fuzzy" location="5" case="keep">(user|group|permission|acl)s?|fil(e[ds]?|ing)|(umask|(sub-?)?net(work)?)(s|ed|ing)?</contextpattern>
+      <!-- Blacklisting & whitelisting at the same time = probably extremely slow -->
+      <contextpattern look="bothways" mode="fuzzy" location="2">(g?ui|dialog(ue)?|interface)s?</contextpattern>
+      <contextpattern look="bothways" match="negative" mode="fuzzy" location="5">(bits?|entr(y|ies)|creation|user|group|permission|acl)s?|fil(e[ds]?|ing)|(umask|(sub-?)?net(work)?)(s|ed|ing)?</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="2">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
     </patterngroup>
   </term>
 
@@ -1052,23 +1055,31 @@
       <proposal>drop-down box</proposal>
     </accept>
     <patterngroup>
-      <pattern>drop-down</pattern>
+      <pattern>dropdown</pattern>
+      <pattern>box(es)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>pull-?down</pattern>
+      <pattern>box(es)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(drop|pull)-down</pattern>
       <pattern>(list|menu)s?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>drop-?down</pattern>
+      <pattern>(drop|pull)-?downs?</pattern>
       <contextpattern match="negative">box(es)?</contextpattern>
     </patterngroup>
     <patterngroup>
-      <pattern>combo-?box(es)?</pattern>
+      <pattern>(comb(o|ination)|(drop|pull)-?down)-?(box|menu|list)(e?s)?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>drop</pattern>
+      <pattern>drop|pull</pattern>
       <pattern>down</pattern>
       <pattern>(boxe?|list|menu)s?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>drop</pattern>
+      <pattern>drop|pull</pattern>
       <pattern>downs?</pattern>
     </patterngroup>
     <patterngroup>
@@ -1076,7 +1087,7 @@
       <pattern>box(es)?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>drop-down</pattern>
+      <pattern>(drop|pull)-down</pattern>
       <pattern>list</pattern>
       <pattern>box(es)?</pattern>
     </patterngroup>
@@ -1384,6 +1395,20 @@
     <!-- Avoid matching executable names like gimp-print etc. -->
     <patterngroup>
       <pattern case="keep">[Gg]imp(?!-)</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>TLS/SSL</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">(TSL/SSL|SSL/T(LS|SL))</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern case="keep">T(SL|LS)|SSL</pattern>
+      <pattern case="keep">and|or</pattern>
+      <pattern case="keep">T(SL|LS)|SSL</pattern>
     </patterngroup>
   </term>
 
@@ -1868,6 +1893,10 @@
       <pattern>just(?!-)</pattern>
       <contextpattern>need</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>just(?!-)</pattern>
+      <contextpattern look="before">not</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
@@ -1993,13 +2022,13 @@
     <patterngroup>
       <pattern>left-?clicks?</pattern>
       <pattern>on(to)?</pattern>
-      <contextpattern look="before">(the|an?)</contextpattern>
+      <contextpattern look="before" match="negative">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>left</pattern>
       <pattern>clicks?</pattern>
       <pattern>on(to)?</pattern>
-      <contextpattern look="before">(the|an?)</contextpattern>
+      <contextpattern look="before" match="negative">(the|an?)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>leftclick(ed|ing|s)?</pattern>
@@ -2077,10 +2106,10 @@
       <proposal>Linux</proposal>
     </accept>
     <patterngroup>
-      <pattern case="keep">linux</pattern>
+      <pattern case="keep">l[iu]n[iu]x</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern case="keep">LINUX</pattern>
+      <pattern case="keep">L[IU]N[IU]X</pattern>
       <contextpattern look="before" match="negative">suse</contextpattern>
     </patterngroup>
   </term>
@@ -2947,17 +2976,24 @@
     </patterngroup>
   </term>
 
-  <term>
+  <!-- The below two entries used to be one entry. However, due to limitations
+  in the terminology XML design, it could only give confusing suggestions.
+  The first one needed to be commented away, to avoid duplicate messages.
+  - sknorr, 2016-08-24 -->
+  <!-- <term>
     <accept>
       <proposal>print</proposal>
     </accept>
     <patterngroup>
-      <pattern>print(s|ed|ing)</pattern>
+      <pattern>print(s|ed|ing)?</pattern>
       <pattern>out</pattern>
     </patterngroup>
+   </term> -->
+   <term>
+    <accept/>
     <patterngroup>
-      <pattern>print(s|ed|ing)</pattern>
-      <contextpattern mode="fuzzy" location="3">out</contextpattern>
+      <pattern>out</pattern>
+      <contextpattern mode="fuzzy" location="3" look="before">print(s|ed|ing)?</contextpattern>
     </patterngroup>
   </term>
 
@@ -3543,7 +3579,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>s\.?l\.?e</pattern>
-      <pattern>(ent(er|re)prise|linux)</pattern>
+      <pattern>(ent(er|re)prise|l[iu]n[iu]x)</pattern>
     </patterngroup>
   </term>
 
@@ -3559,7 +3595,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>s\.?l\.?e\.?d</pattern>
-      <pattern>(ent(er|re)prise|linux|desktop)</pattern>
+      <pattern>(ent(er|re)prise|l[iu]n[iu]x|desktop)</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>s\.?l\.?e</pattern>
@@ -3568,7 +3604,7 @@
     <patterngroup>
       <pattern>s\.?l\.?e</pattern>
       <pattern>desktop</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
     </patterngroup>
   </term>
 
@@ -3584,7 +3620,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>s\.?l\.?e\.?s</pattern>
-      <pattern>(ent(er|re)prise|linux|server)</pattern>
+      <pattern>(ent(er|re)prise|l[iu]n[iu]x|server)</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>s\.?l\.?e</pattern>
@@ -3593,13 +3629,13 @@
     <patterngroup>
       <pattern>s\.?l\.?e</pattern>
       <pattern>server</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
     </patterngroup>
   </term>
 
   <term>
     <accept>
-      <proposal>SLES for SAP Applications</proposal>
+      <proposal>SLES for SAP</proposal>
     </accept>
     <patterngroup>
       <pattern>s4s</pattern>
@@ -3621,14 +3657,13 @@
       <pattern>s\.?l\.?e(\.?s)?</pattern>
       <pattern>for</pattern>
       <pattern>sap</pattern>
-      <contextpattern match="negative">applications</contextpattern>
+      <contextpattern>applications</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>s\.?l\.?e\.?s</pattern>
       <pattern>for</pattern>
       <pattern>sap</pattern>
-      <pattern>applications</pattern>
-      <pattern>(ent(er|re)prise|linux|server)</pattern>
+      <pattern>(ent(er|re)prise|l[iu]n[iu]x|server)</pattern>
     </patterngroup>
   </term>
 
@@ -3807,13 +3842,13 @@
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
       <pattern>storage</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>(linux|ent(er|re)prise)s?</pattern>
-      <pattern>(linux|ent(er|re)prise)s?</pattern>
+      <pattern>(l[iu]n[iu]x|ent(er|re)prise)s?</pattern>
+      <pattern>(l[iu]n[iu]x|ent(er|re)prise)s?</pattern>
       <pattern>storage</pattern>
     </patterngroup>
   </term>
@@ -3828,13 +3863,13 @@
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>(linux|ent(er|re)prise)s?</pattern>
+      <pattern>(l[iu]n[iu]x|ent(er|re)prise)s?</pattern>
       <pattern>cloud</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>(linux|ent(er|re)prise)s?</pattern>
-      <pattern>(linux|ent(er|re)prise)s?</pattern>
+      <pattern>(l[iu]n[iu]x|ent(er|re)prise)s?</pattern>
+      <pattern>(l[iu]n[iu]x|ent(er|re)prise)s?</pattern>
       <pattern>openstack</pattern>
       <pattern>cloud</pattern>
     </patterngroup>
@@ -3863,7 +3898,12 @@
     <patterngroup>
       <pattern>suse</pattern>
       <pattern>ent(er|re)prises?</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>lun[iu]x|linix</pattern>
+      <pattern>ent(er|re)prises?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
@@ -3872,13 +3912,13 @@
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
       <contextpattern match="negative">(ent(er|re)prise|products|gmbh|ag)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
       <pattern case="keep">ent(er|re)prises?</pattern>
-      <pattern case="keep">linux</pattern>
+      <pattern case="keep">l[iu]n[iu]x</pattern>
     </patterngroup>
   </term>
 
@@ -3888,13 +3928,13 @@
     </accept>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
       <pattern>enterprise</pattern>
       <pattern case="keep">desktop</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
       <pattern>enterprise</pattern>
       <pattern case="keep">DESKTOP</pattern>
     </patterngroup>
@@ -3910,13 +3950,13 @@
     </accept>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
       <pattern>enterprise</pattern>
       <pattern case="keep">server</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
       <pattern>enterprise</pattern>
       <pattern case="keep">SERVER</pattern>
     </patterngroup>
@@ -3932,7 +3972,7 @@
     </accept>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
       <pattern>enterprise</pattern>
       <pattern>server</pattern>
       <pattern>for</pattern>
@@ -3941,7 +3981,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
       <pattern>enterprise</pattern>
       <pattern>server</pattern>
       <pattern>for</pattern>
@@ -3950,7 +3990,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
       <pattern>enterprise</pattern>
       <pattern>server</pattern>
       <pattern case="keep">F[Oo][Rr]</pattern>
@@ -3959,7 +3999,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
       <pattern>enterprise</pattern>
       <pattern>server</pattern>
       <pattern>for</pattern>
@@ -3968,7 +4008,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern>linux</pattern>
+      <pattern>l[iu]n[iu]x</pattern>
       <pattern>enterprise</pattern>
       <pattern>server</pattern>
       <pattern>for</pattern>
@@ -4003,11 +4043,7 @@
     </accept>
     <patterngroup>
       <pattern>suse</pattern>
-      <pattern case="keep">studio</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>suse</pattern>
-      <pattern case="keep">STUDIO</pattern>
+      <pattern case="keep">(studio|STUDIO)</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse-?studio</pattern>
@@ -4134,6 +4170,33 @@
 
   <term>
     <accept>
+      <proposal>technology preview</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>techn(ology|ical)-?previews?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>technical</pattern>
+      <pattern>previews?</pattern>
+    </patterngroup>
+  </term>
+
+  <!-- Good idea?-->
+  <term>
+    <accept>
+      <proposal>terminate</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>kill(ed|ing)</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>kills?</pattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>text box</proposal>
     </accept>
     <patterngroup>
@@ -4151,20 +4214,6 @@
     </patterngroup>
     <patterngroup>
       <pattern>(text|entry|input)-?(boxe?|area|field)s?</pattern>
-    </patterngroup>
-  </term>
-
-  <!-- Good idea?-->
-  <term>
-    <accept>
-      <proposal>terminate</proposal>
-    </accept>
-    <patterngroup>
-      <pattern>kill(ed|ing)</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern>kills?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
     </patterngroup>
   </term>
 

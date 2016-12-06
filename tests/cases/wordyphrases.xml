@@ -17,4 +17,30 @@
     <para xml:id="sdsc.expect.warning.wordyphrases.5">
         I always do some up-front planning.
     </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.6">
+        If you want to do the Moonwalk, move your left foot slightly to the
+        side first.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.7">
+        Snapshots younger than the value specified here will not be deleted,
+        regardless of how many of them exist.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.8">
+        These home directories look and feel entirely the same as standard
+        Linux home directories.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.9">
+        These home directories look and feel the exact the same as standard
+        Linux home directories.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.10">
+        There is no question at all that there cannot be a question.
+    </para>
+    <para xml:id="sdsc.valid.11">
+        The Kernel parameter <literal>cio_ignore</literal> prevents the Kernel
+        from looking at all the available hardware devices.
+    </para>
+    <para xml:id="sdsc.valid.12">
+        At all times, remain seated.
+    </para>
 </chapter>

@@ -109,7 +109,7 @@ GNU GPL.
     <patterngroup>
       <pattern case="keep">[Aa]d(?!-)</pattern>
       <contextpattern look="before" match="negative">(an?|the|my|your|his|her|their|our|802\.11)</contextpattern>
-      <contextpattern match="negative">hoc</contextpattern>
+      <contextpattern match="negative">hoc|infinitum</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>[ai]n</pattern>
@@ -187,6 +187,16 @@ GNU GPL.
       <pattern>as</pattern>
       <pattern>opposed</pattern>
       <pattern>too</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>at</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>on</pattern>
+      <contextpattern>##@web-[0-9]+##</contextpattern>
     </patterngroup>
   </term>
 
@@ -284,7 +294,10 @@ GNU GPL.
       <pattern>on</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>(compris(e[ds]|ing)|contain(ed|s|ing))</pattern>
+      <!-- Compound tenses with "be" etc. are missing: "will be comprised of..."
+      and other such items. -->
+      <pattern>is|are|were</pattern>
+      <pattern>compris(e[ds]|ing)|contain(ed|s|ing)</pattern>
       <pattern>of</pattern>
     </patterngroup>
   </term>
@@ -775,8 +788,7 @@ GNU GPL.
     <patterngroup>
       <pattern>on</pattern>
       <contextpattern>of</contextpattern>
-      <contextpattern location="2">the</contextpattern>
-      <contextpattern location="3">(more|most|less|least|best|worst)</contextpattern>
+      <contextpattern location="2">the|an?|our|my|your|his|her|their</contextpattern>
     </patterngroup>
   </term>
 
@@ -1001,6 +1013,12 @@ GNU GPL.
       <contextpattern look="before" location="2">mak(e[ds]?|ing)</contextpattern>
       <contextpattern look="before" location="1">sure</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>than</pattern>
+      <contextpattern>can|will</contextpattern>
+      <contextpattern location="2">be</contextpattern>
+      <contextpattern look="before" location="5" mode="fuzzy" match="negative">less|fewer|more</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
@@ -1100,20 +1118,6 @@ GNU GPL.
 
   <term>
     <accept>
-      <proposal>TLS/SSL</proposal>
-    </accept>
-    <patterngroup>
-      <pattern case="keep">(TSL/SSL|SSL/T(LS|SL))</pattern>
-    </patterngroup>
-    <patterngroup>
-      <pattern case="keep">(TSL|SSL)</pattern>
-      <pattern case="keep">(/|and)</pattern>
-      <pattern case="keep">(TSL|SSL)</pattern>
-    </patterngroup>
-  </term>
-
-  <term>
-    <accept>
       <proposal>two</proposal>
     </accept>
     <patterngroup>
@@ -1201,7 +1205,8 @@ GNU GPL.
     </accept>
     <patterngroup>
       <pattern>your</pattern>
-      <contextpattern>((c|sh)ould|are)</contextpattern>
+      <!-- "might"/"will"/"can" are also nouns, so don't check for them here. -->
+      <contextpattern>((c|sh|w)ould|shall|may|are)</contextpattern>
     </patterngroup>
   </term>
 
@@ -1220,8 +1225,12 @@ GNU GPL.
   <term>
     <accept/>
     <patterngroup>
-      <pattern>(the|a)</pattern>
-      <contextpattern>(your|which|those)</contextpattern>
+      <pattern>an?</pattern>
+      <contextpattern>(your|which|th[oe]se|the)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>the</pattern>
+      <contextpattern>(your|which|th[oe]se|an?)</contextpattern>
     </patterngroup>
   </term>
 
