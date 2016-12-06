@@ -1,4 +1,4 @@
-version: 2016.06.99.1
+version: 2016.06.99.2
 files: man/suse-doc-style-checker.xml src/sdsc/__init__.py
 format: [0-9]{4}\.(0[1-9]|1[012])\.([0-9]\.[0-9]|9[789].[1-5])
 formathuman: [year].[month].[minor].[bugfix]
