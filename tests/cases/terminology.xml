@@ -110,6 +110,10 @@
         Effective permissions can be different from the original permissions,
         because they are filtered according to the mask entry.
     </para>
+    <para xml:id="sdsc.valid.20">
+        When we moved the unbound kernel threads from root to two, their
+        affinity masks got automatically changed to only use CPU2.
+    </para>
     <legalnotice xml:id="sdsc.valid.legal.19a">
         <para>
             Two 32 bit systems equal one 64 bit system. This should be
