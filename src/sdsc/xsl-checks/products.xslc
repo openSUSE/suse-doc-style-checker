@@ -12,6 +12,9 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Productnames, Productnumbers, &amp; Dates</xsl:template>
 
+  <xsl:template priority="1"
+    match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice"/>
+
   <xsl:template match="book|article|set|db5:book|db5:article|db5:set">
 
     <xsl:if test="not(bookinfo/productname or articleinfo/productname or

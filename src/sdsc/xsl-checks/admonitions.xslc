@@ -11,6 +11,8 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Admonitions</xsl:template>
 
+  <xsl:template priority="1"
+    match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice"/>
 
   <xsl:template match="caution|warning|important|note|tip|
                           db5:caution|db5:warning|db5:important|db5:note|db5:tip">

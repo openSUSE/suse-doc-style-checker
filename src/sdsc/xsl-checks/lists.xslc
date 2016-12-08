@@ -12,6 +12,9 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Lists</xsl:template>
 
+  <xsl:template priority="1"
+    match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice"/>
+
   <xsl:template match="itemizedlist|orderedlist|variablelist|
                        db5:itemizedlist|db5:orderedlist|db5:variablelist">
     <xsl:variable name="items" select="count(listitem|varlistentry|db5:listitem|db5:varlistentry)"/>

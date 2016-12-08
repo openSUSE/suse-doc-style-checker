@@ -11,10 +11,11 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Sentence Length</xsl:template>
 
+  <xsl:template priority="1"
+    match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice"/>
+
   <!-- The following template should probably match more elements. -->
   <xsl:template match="para|title|entry|db5:para|db5:title|db5:entry">
-    <xsl:if test="not(ancestor-or-self::*/@role = 'legal') and
-                  not(ancestor-or-self::db5:*/@role = 'legal')">
       <xsl:variable name="node" select="."/>
       <xsl:variable name="withinid">
         <xsl:call-template name="withinid-nomarkup"/>
@@ -38,7 +39,6 @@
       <xsl:copy-of
         select="py:sentencelengthcheck($content, $content-pretty, $withinid,
                                        $file, $length-warning, $length-error)"/>
-    </xsl:if>
   </xsl:template>
 
 </xsl:stylesheet>

@@ -19,13 +19,14 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Duplicated Words &amp; Phrases</xsl:template>
 
+  <xsl:template priority="1"
+    match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice"/>
+
   <!-- The following template should probably match more elements. -->
   <xsl:template match="para|title|db5:para|db5:title">
     <xsl:if test="self::entry/para|self::db5:entry/db5:para">
       <xsl:apply-templates/>
     </xsl:if>
-    <xsl:if test="not(ancestor-or-self::*/@role = 'legal') and
-                  not(ancestor-or-self::db5:*/@role = 'legal')">
       <xsl:variable name="node" select="."/>
       <xsl:variable name="withinid">
         <xsl:call-template name="withinid-nomarkup"/>
@@ -46,7 +47,6 @@
 
       <xsl:copy-of
         select="py:dupecheck($content, $content-pretty, $withinid, $file)"/>
-    </xsl:if>
   </xsl:template>
 
 </xsl:stylesheet>

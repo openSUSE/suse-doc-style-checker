@@ -11,6 +11,9 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Computer Elements</xsl:template>
 
+  <xsl:template priority="1"
+    match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice"/>
+
   <xsl:template match="command|replaceable|option|literal|
                        db5:command|db5:replaceable|db5:option|db5:literal">
     <xsl:variable name="length" select="string-length(normalize-space(text()))"/>

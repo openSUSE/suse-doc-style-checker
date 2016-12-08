@@ -302,9 +302,6 @@
       <xsl:when test="(self::entry or self::db5:entry) and (para or db5:para)">
         <xsl:apply-templates mode="terminology"/>
       </xsl:when>
-      <xsl:when test="(ancestor-or-self::*/@role = 'legal') or (ancestor-or-self::db5:*/@role = 'legal')">
-        <!-- nothing -->
-      </xsl:when>
       <xsl:otherwise>
         <xsl:variable name="node" select="."/>
         <xsl:variable name="messagetype">
@@ -337,6 +334,8 @@
   <xsl:template match="*|db5:*" mode="terminology">
     <xsl:apply-templates mode="terminology"/>
   </xsl:template>
+
+  <xsl:template match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice" mode="terminology"/>
 
   <xsl:template name="messagetype">error</xsl:template>
 

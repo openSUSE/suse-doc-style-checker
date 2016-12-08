@@ -12,6 +12,9 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Sections</xsl:template>
 
+  <xsl:template priority="1"
+    match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice"/>
+
   <xsl:template match="article|chapter|reference|refentry|preface|appendix|colophon|
                        section|sect1|sect2|sect3|sect4|sect5|
                        db5:article|db5:chapter|db5:reference|db5:refentry|
@@ -35,8 +38,8 @@
     </xsl:variable>
 
 
-    <xsl:if test="not(para|abstract|*[contains(local-name(.),'info')]/abstract) and not(ancestor-or-self::*/@role = 'legal') and
-                  not(db5:para|db5:abstract|db5:info/db5:abstract) and not(ancestor-or-self::db5:*/@role = 'legal')">
+    <xsl:if test="not(para|abstract|*[contains(local-name(.),'info')]/abstract) and
+                  not(db5:para|db5:abstract|db5:info/db5:abstract)">
       <result type="error">
         <xsl:call-template name="sourcehint"/>
         <message>Section <xsl:call-template name="createid"/> lacks an

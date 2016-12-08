@@ -11,6 +11,9 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Keycaps</xsl:template>
 
+  <xsl:template priority="1"
+    match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice"/>
+
   <xsl:template match="keycap[@function]|db5:keycap[@function]">
     <xsl:variable name="function">
       <xsl:value-of select="normalize-space(@function)"/>

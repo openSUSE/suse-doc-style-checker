@@ -11,6 +11,9 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Links</xsl:template>
 
+  <xsl:template priority="1"
+    match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice"/>
+
   <xsl:template match="ulink|db5:link">
     <xsl:variable name="url" select="normalize-space(@url|@xlink:href)"/>
     <xsl:variable name="url-lower">

@@ -12,6 +12,9 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Identifiers</xsl:template>
 
+  <xsl:template priority="1"
+    match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice"/>
+
   <xsl:template match="article[not(@id)]|chapter[not(@id)]|reference[not(@id)]|
                        refentry[not(@id)]|appendix[not(@id)]|colophon[not(@id)]|
                        section[not(@id)]|sect1[not(@id)]|sect2[not(@id)]|
@@ -22,8 +25,7 @@
                        db5:section[not(@xml:id)]|db5:sect1[not(@xml:id)]|
                        db5:sect2[not(@xml:id)]|db5:sect3[not(@xml:id)]|
                        db5:sect4[not(@xml:id)]|db5:sect5[not(@xml:id)]">
-    <xsl:if test="not(ancestor::preface or ancestor-or-self::*/@role = 'legal')
-              and not(ancestor::db5:preface or ancestor-or-self::db5:*/@role = 'legal')">
+    <xsl:if test="not(ancestor::preface or ancestor::db5:preface)">
       <result type="error">
         <xsl:call-template name="sourcehint"/>
         <message>Section <xsl:call-template name="createid"/> has no identifier.

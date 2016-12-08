@@ -12,6 +12,9 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Callouts</xsl:template>
 
+  <xsl:template priority="1"
+    match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice"/>
+
   <xsl:template match="calloutlist|db5:calloutlist">
     <xsl:variable name="callouts" select="count(callout|db5:callout)"/>
 
