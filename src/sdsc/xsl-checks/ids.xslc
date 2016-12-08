@@ -12,9 +12,6 @@
 
   <xsl:template match="*|db5:*" mode="part-title">Identifiers</xsl:template>
 
-  <xsl:template priority="1"
-    match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice"/>
-
   <xsl:template match="article[not(@id)]|chapter[not(@id)]|reference[not(@id)]|
                        refentry[not(@id)]|appendix[not(@id)]|colophon[not(@id)]|
                        section[not(@id)]|sect1[not(@id)]|sect2[not(@id)]|
