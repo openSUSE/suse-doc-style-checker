@@ -48,3 +48,13 @@ for versionfile in $config $files; do
   sed -i -r "s/$currentversion/$bumpedversion/" $versionfile
 done
 echo "Set version number: $currentversion => $bumpedversion"
+
+echo "Commit and tag version $bumpedversion? y/[n]"
+read DECISION
+if [[ ! $DECISION == 'y' ]] && [[ ! $DECISION == 'yes' ]]; then
+  echo "(meh) Not creating commit and tag."
+  exit
+else
+  git commit -m "Set version to $bumpedversion" $files $config
+  git tag "$bumpedversion"
+fi
