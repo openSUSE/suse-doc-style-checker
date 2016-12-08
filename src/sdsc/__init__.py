@@ -17,7 +17,7 @@
 #
 
 __programname__ = "SUSE Documentation Style Checker"
-__version__ = "2016.6.99.2"
+__version__ = "2016.6.99.3"
 __author__ = "Stefan Knorr, Thomas Schraitle, Fabian Vogt"
 __license__ = "LGPL-2.1+"
 __description__ = "checks a given DocBook XML file for stylistic errors"
