@@ -38,4 +38,20 @@
         <command/> <command/> <command/>
         <command/> <command/> <command/>
     </para>
+    <para role="legal" xml:id="sdsc.valid.4">
+        This is a very long sentence if all of this stuff is
+        used as part of the sentence, which would also cause the highlight
+        tag in the result xml file to not work correctly when highlighting
+        this sentence, however, this para has role="legal" applied to it, so
+        it is ignored.
+    </para>
+    <legalnotice>
+        <para xml:id="sdsc.valid.5">
+            This is a very long sentence if all of this stuff is used as part
+            of the sentence, which would also cause the highlight tag in the
+            result xml file to not work correctly when highlighting this
+            sentence, however, this para is inside a legalnotice, so it is
+            ignored.
+        </para>
+    </legalnotice>
 </chapter>

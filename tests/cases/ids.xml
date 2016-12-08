@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="sdsc.expect.warning.ids.1">
     <title>ID test</title>
+    <!--<legalnotice xml:id="legal.valid.FOFO">
+      <para>
+        I should not be checked.
+      </para>
+    </legalnotice>-->
     <para/>
+
+    <sect1 role="legal" xml:id="legal.valid.section">
+        <title>License</title>
+        <para>I should not be checked because I have role="legal".</para>
+    </sect1>
 
     <sect1 xml:id="sec.sdsc.expect.error.ids.2">
         <para/>

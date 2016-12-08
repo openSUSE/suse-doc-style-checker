@@ -110,4 +110,14 @@
         Effective permissions can be different from the original permissions,
         because they are filtered according to the mask entry.
     </para>
+    <legalnotice xml:id="sdsc.valid.legal.19a">
+        <para>
+            Two 32 bit systems equal one 64 bit system. This should be
+            ignored because it is within a legalnotice.
+        </para>
+    </legalnotice>
+    <para role="legal" xml:id="sdsc.valid.legal.19b">
+        Two 32 bit systems equal one 64 bit system. This should be
+        ignored because it has role="legal".
+    </para>
 </chapter>
