@@ -30,9 +30,15 @@
           <xsl:with-param name="raw" select="$text"/>
         </xsl:call-template>
       </xsl:variable>
-      <result type="warning">
+      <xsl:variable name="messagetype">
+       <xsl:choose>
+         <xsl:when test="$correct-attribute = 'meta'">warning</xsl:when>
+         <xsl:otherwise>error</xsl:otherwise>
+       </xsl:choose>
+      </xsl:variable>
+      <result type="{$messagetype}">
         <xsl:call-template name="sourcehint"/>
-        <message>Function keycap
+        <message>Function keycap <xsl:value-of select="$messagetype"/>
           <xsl:call-template name="createid"/>
           contains text.
         </message>
