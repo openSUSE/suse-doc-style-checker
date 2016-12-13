@@ -226,7 +226,7 @@
         </xsl:call-template>
       </xsl:variable>
 
-      <result type="error">
+      <result type="warning">
         <xsl:call-template name="sourcehint"/>
         <message>Guimenu
          <xsl:call-template name="createid"/>
