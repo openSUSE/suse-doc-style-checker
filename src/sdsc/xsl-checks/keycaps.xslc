@@ -75,6 +75,8 @@
                     $text-lower = 'esc' or $text-lower = 'escape' or
                     $text-lower = 'home' or $text-lower = 'ins' or
                     $text-lower = 'insert' or $text-lower = 'left' or
+                    $text-lower = '&lt;-' or $text-lower = '-&gt;' or
+                    $text-lower = '-&gt;|' or $text-lower = '&lt;--' or
                     $text-lower = '←' or $text-lower = 'meta' or
                     $text-lower = 'super' or
                     $text-lower = 'win' or $text-lower = 'windows' or
@@ -208,6 +210,8 @@
                   $text-lower = 'enter' or $text-lower = 'return' or
                   $text-lower = 'esc' or $text-lower = 'escape' or
                   $text-lower = 'ins' or
+                  $text-lower = '&lt;-' or $text-lower = '-&gt;' or
+                  $text-lower = '-&gt;|' or $text-lower = '&lt;--' or
                   $text-lower = '←' or $text-lower = 'meta' or
                   $text-lower = 'super' or
                   $text-lower = 'win' or
@@ -312,7 +316,7 @@
     <xsl:choose>
       <xsl:when test="$raw = 'alt'">alt</xsl:when>
       <xsl:when test="$raw = 'backspace' or $raw = 'back' or
-                      $raw = '&lt;—'">backspace</xsl:when>
+                      $raw = '&lt;—' or $raw = '&lt;--'">backspace</xsl:when>
       <xsl:when test="$raw = '⌘' or $raw = 'command' or
                       $raw = 'cmd'">command</xsl:when>
       <xsl:when test="$raw = 'ctrl' or $raw = 'control'">control</xsl:when>
@@ -323,7 +327,7 @@
       <xsl:when test="$raw = 'esc' or $raw = 'escape'">escape</xsl:when>
       <xsl:when test="$raw = 'home'">home</xsl:when>
       <xsl:when test="$raw = 'ins' or $raw = 'insert'">insert</xsl:when>
-      <xsl:when test="$raw = 'left' or $raw = '←'">left</xsl:when>
+      <xsl:when test="$raw = 'left' or $raw = '←' or $raw = '&lt;-'">left</xsl:when>
       <xsl:when test="$raw = 'meta' or $raw = 'super' or $raw = 'win' or
                       $raw = 'windows' or $raw = 'windows logo' or
                       $raw = 'windows-logo'">meta</xsl:when>
@@ -334,11 +338,11 @@
       <xsl:when test="$raw = 'page up' or $raw = 'pg up' or
                       $raw = 'pageup' or $raw = 'page ↑' or
                       $raw = 'pg ↑' or $raw = 'pgup'">pageup</xsl:when>
-      <xsl:when test="$raw = 'right' or $raw = '→'">right</xsl:when>
+      <xsl:when test="$raw = 'right' or $raw = '→' or $raw = '-&gt;'">right</xsl:when>
       <xsl:when test="$raw = 'shift'">shift</xsl:when>
       <xsl:when test="$raw = 'space' or $raw = 'spacebar' or $raw = ' ' or
                       $raw = 'space bar'">space</xsl:when>
-      <xsl:when test="$raw = 'tab' or $raw = '→|'">tab</xsl:when>
+      <xsl:when test="$raw = 'tab' or $raw = '→|' or $raw = '-&gt;|'">tab</xsl:when>
       <xsl:when test="$raw = 'up' or $raw = '↑'">up</xsl:when>
       <xsl:otherwise>?</xsl:otherwise>
     </xsl:choose>
