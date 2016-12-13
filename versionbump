@@ -13,8 +13,8 @@ files=$(sed -r -n 's/^files: *(([-_./a-zA-Z0-9]+ *)+)/\1/ p' $config)
 
 if [[ $1 == '' ]]; then
   currentversion=$(sed -r -n 's/^version: *(.+)$/\1/ p' $config)
-  echo "Old version number is $currentversion"
-  echo -n "Format: $formathuman"
+  echo "Current version number is $currentversion"
+  echo "Format: $formathuman"
   echo -n "Format policy: "
   sed -r -n 's/^formatpolicy: (.*)$/\1/ p' $config | sed -r 's/(^|; *)/\n  * /g'
   exit
