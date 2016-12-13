@@ -1302,7 +1302,8 @@
     </patterngroup>
   </term>
 
-  <term>
+  <!-- Comment this away until doc-styleguide#34 is resolved. -->
+  <!-- <term>
     <accept>
       <proposal>flash disk</proposal>
     </accept>
@@ -1322,7 +1323,7 @@
     <patterngroup>
       <pattern>(flash|usb)-?(flash)?-?(dis[ck]|drive|stick|key)s?</pattern>
     </patterngroup>
-  </term>
+  </term> -->
 
   <term>
     <accept>
