@@ -38,7 +38,7 @@
       </xsl:variable>
       <result type="{$messagetype}">
         <xsl:call-template name="sourcehint"/>
-        <message>Function keycap <xsl:value-of select="$messagetype"/>
+        <message>Function keycap
           <xsl:call-template name="createid"/>
           contains text.
         </message>
