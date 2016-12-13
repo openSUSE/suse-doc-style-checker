@@ -8,7 +8,7 @@
   <!ENTITY daps         "DAPS">
   <!ENTITY dapscommand  "daps">
   <!ENTITY styleguide   "SUSE Documentation Style Guide">
-  <!ENTITY version      "2016.6.99.3">
+  <!ENTITY version      "2016.7.0.0">
   <!ENTITY nbsp         "&#xa0;">
 ]>
 <refentry id="sdsc" lang="en">

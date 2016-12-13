@@ -18,7 +18,7 @@
 %define aliasname sdsc
 
 Name:           suse-doc-style-checker
-Version:        2016.6.99.3
+Version:        2016.7.0.0
 Release:        0
 Url:            http://www.gitorious.org/style-checker/style-checker
 Summary:        Style Checker for SUSE Documentation
