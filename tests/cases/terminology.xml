@@ -110,10 +110,6 @@
         Effective permissions can be different from the original permissions,
         because they are filtered according to the mask entry.
     </para>
-    <para xml:id="sdsc.valid.20">
-        When we moved the unbound kernel threads from root to two, their
-        affinity masks got automatically changed to only use CPU2.
-    </para>
     <legalnotice xml:id="sdsc.valid.legal.19a">
         <para>
             Two 32 bit systems equal one 64 bit system. This should be
@@ -123,5 +119,18 @@
     <para role="legal" xml:id="sdsc.valid.legal.19b">
         Two 32 bit systems equal one 64 bit system. This should be
         ignored because it has role="legal".
+    </para>
+    <para xml:id="sdsc.valid.20">
+        When we moved the unbound kernel threads from root to two, their
+        affinity masks got automatically changed to only use CPU2.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.21">
+        After the session, we all moved on ward.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.22">
+        After the session, we all moved side wards.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.23">
+        After the session, we all moved upwards.
     </para>
 </chapter>

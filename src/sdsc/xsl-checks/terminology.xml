@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<terminology ignoredwords="(the|a|an|this|there|that|these|those|one|by|on|over|under|about|to|at|in|from|if|when|as|while|where|who|why|what)">
+<terminology ignoredwords="(the|a|an|this|there|that|these|those|one|by|over|under|about|to|at|in|from|if|when|as|while|where|who|why|what)">
 
   <term>
     <accept>
@@ -4446,6 +4446,19 @@
     <patterngroup>
       <pattern>upper</pattern>
       <pattern>cased</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>upward</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>upwards</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>up</pattern>
+      <pattern>wards?</pattern>
     </patterngroup>
   </term>
 
