@@ -2712,6 +2712,19 @@
 
   <term>
     <accept>
+      <proposal>onward</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>onwards</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>on</pattern>
+      <pattern>wards?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>OOo</proposal>
     </accept>
     <patterngroup>
