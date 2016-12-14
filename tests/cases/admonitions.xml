@@ -8,12 +8,21 @@
         </caution>
         <warning xml:id="sdsc.expect.error.admonitions.2">
             <para>
-                This needs a title.
+                This needs a title, otherwise we get an error.
             </para>
         </warning>
-        <warning xml:id="sdsc.valid.1">
-            <title>This should not be a caution tag.</title>
-            <para></para>
+        <note xml:id="sdsc.expect.warning.admonitions.3">
+            <para>
+                This needs a title, otherwise we get a warning.
+            </para>
+        </note>
+        <warning xml:id="sdsc.valid.4">
+            <title>This Is Fine</title>
+            <para>Hello from the other side!</para>
         </warning>
+        <note xml:id="sdsc.valid.5">
+            <title>This Is Fine</title>
+            <para>Hello from the other side!</para>
+        </note>
     </para>
 </chapter>
