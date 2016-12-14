@@ -2975,6 +2975,10 @@
       <pattern>(hitt?(ing|ed|s)?|(punch|depress)(e[ds]|ing)?|strike([ds]|ing)?|struck)</pattern>
       <contextpattern mode="fuzzy" location="3" look="before">(##@key-[0-9]*##|key)</contextpattern>
     </patterngroup>
+    <!--<patterngroup>
+      <pattern>click(ing|ed|s)?</pattern>
+      <contextpattern mode="fuzzy" location="2" look="after">(##@key-[0-9]*##|key)</contextpattern>
+    </patterngroup>-->
   </term>
 
   <!-- The below two entries used to be one entry. However, due to limitations
