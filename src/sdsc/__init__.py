@@ -64,7 +64,11 @@ re_cache = {}
 
 
 def re_compile(pattern, flags=0):
-    """Caching version of re.compile"""
+    """re.compile caches only a small number of regular expressions. Our
+    version can cache a much larger number of them which increases speed
+    since expressions do not have to be recompiled all the time.
+    """
+
     try:
         return re_cache[flags][pattern]
     except KeyError:
@@ -76,6 +80,16 @@ def re_compile(pattern, flags=0):
 
 
 def linenumber(context):
+    """ Find out line number from the source document. This is currently buggy
+    for two reasons:
+    1. libxml uses the wrong data type to provide this number which means that
+       we only get to around 65000 lines or so, which is often too little.
+    2. Line numbers in the profiled XML bigfile have little to do with the
+       original line numbers.
+    Nevertheless, this line number is added to the output but later hidden
+    via CSS.
+    """
+
     return context.context_node.sourceline
 
 
@@ -154,10 +168,22 @@ def findtagreplacement(text):
 
 
 def tokenizer(text):
+    """Splits a string into a list of words.
+
+    :param str text: text to split into tokens
+    """
     return text.split()
 
 
 def counttokens(context, text):
+    """Counts the number of tokens in a given string. This
+    is used to enable tag replacement for content that needs
+    to be skipped and conversely to re-insert skipped text and
+    enable highlighting.
+
+    :param str context: context node (ignored)
+    :param str text: text in which to count tokens
+    """
     del context  # not used
     count = 0
     if text:
@@ -166,6 +192,11 @@ def counttokens(context, text):
 
 
 def sentencesegmenter(text):
+    """Splits a paragraph into a list of sentences. Removes
+    final punctuation from all sentences.
+ 
+    :param str text: text to split into sentences
+    """
     sentences = sentenceends.split(text)
     # The last sentence's final punctuation has not yet been cut off, do that
     # now.
@@ -649,6 +680,11 @@ def emptypatternmessage(element):
 
 
 def xmlescape(text):
+    """Escapes XML input to enable working with it.
+
+    :param str text: string to be escaped
+    :return: escaped string
+     """
     escapetable = {
         "&": "&amp;",
         '"': "&quot;",
@@ -696,11 +732,15 @@ def termcheckmessage(acceptword, acceptcontext, word, line, content,
 
 
 def highlight(tokens, highlightstart, highlightend):
-    """tokens = ["highlight", "these", "two", "words"]
-       highlightstart = 1
-       highlightend = 2
-       return "highlight <highlight>these two</highlight> words"
-       tokens can be a string as well, it will be tokenized automatically."""
+    """Takes a string and adds XML tags that lead to specified
+    tokens being highlighted in the output file.
+
+    :param tokens: list of words or a string:
+        ["highlight", "these", "two", "words"] or
+        "highlight these two words" (will be tokenized automatically)
+    :param int highlightstart: start highlighting before this token (starting from zero)
+    :param int highlightend: stop highlighting after this token (starting from zero)
+    :return: string with <highlight> tags at appropriate places"""
 
     tokens = tokens[:]
     if isinstance(tokens, str):
@@ -719,6 +759,10 @@ def highlight(tokens, highlightstart, highlightend):
 
 def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
                         lengthwarning, lengtherror):
+    """Takes a paragraph, splits up sentences and checks whether the number
+    of words in the sentences is longer than a defined maximum.
+    """
+
     # Try to use sensible defaults. The following seems like better advice than
     # the SUSE Documentation Style Guide has to offer:
     # "Sometimes sentence length affects the quality of the writing. In general,
@@ -806,13 +850,15 @@ def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
 
 
 def canBeDupe(word):
-    """TAGIGNORE: character sequences that should be ignored by the duplicate
-    words check
+    """Checks if a word is eligible to be a duplicated word or if
+    it should be ignored because it is actually a tag replacement.
+
     Ignored contents from tags can take either of the two forms below:
        ##@lowercase-1##
        ##@lowercase##
     The second form is counted as one token, the first one is counted as as many
-    tokens as the number given after the dash."""
+    tokens as the number given after the dash.
+    """
 
     numberignore = re_compile(r'[[{(\'"\s]*[-+]?[0-9]+(?:[.,][0-9]+)*[]})\'";:.\s]*')
 
@@ -820,10 +866,12 @@ def canBeDupe(word):
 
 
 def isDupe(tokens, pos):
-    """Returns how many tokens at pos are duplicated
-       tokens = ["this", "is", "is", "a", "test"]
-       pos = 2
-       return 1"""
+    """Returns how many tokens at pos are duplicated.
+
+    tokens = ["this", "is", "is", "a", "test"]
+    pos = 2
+    return 1
+    """
     # FIXME: Find a clever way to be able to check for variants of the same
     # word, such as: a/an, singular/plural, verb tenses. It should ideally
     # not be hardcoded here.
@@ -840,6 +888,15 @@ def isDupe(tokens, pos):
 
 
 def dupecheckmessage(context, quote, duplicate, contextid, basefile):
+    """Creates messages about duplicate words
+
+    :param context:
+    :param quote:
+    :param duplicate:
+    :param contextid: ID of the context
+    :param basefile:
+    :return: XML tree of the result
+    """
     filename = ""
     if basefile:
         filename = "<file>%s</file>" % str(basefile)
@@ -858,6 +915,17 @@ def dupecheckmessage(context, quote, duplicate, contextid, basefile):
 
 
 def dupecheck(context, content, contentpretty, contextid, basefile):
+    """Takes a paragraph and checks it for duplicated words and phrases of up
+    to three words in length.
+
+    :param context:
+    :param content:
+    :param contentpretty:
+    :param contextid:
+    :param basefile:
+    :return:
+     """
+
     if not content:
         return []
 
@@ -910,7 +978,8 @@ average time per word: %s\n"""
 
 
 def splitpath(context, path, wantedsegment='filename'):
-    """Split a path into segments and return the wanted segment.
+    """Splits a path into segments and return the wanted segment.
+
     :param str context: Context node (ignored)
     :param str path: Input path or file name
     :param str wantedsegment: Segment that you want as output
@@ -918,6 +987,7 @@ def splitpath(context, path, wantedsegment='filename'):
         'filename' => filename without extension,
         'extension' => file extension with leading dot and in lowercase)
     """
+
     del context # not used
 
     if not path:
@@ -949,7 +1019,8 @@ parser = None
 
 
 def checkOneFile(inputfilepath):
-    """Checks one XML file and returns the result as XML. """
+    """Checks one XML file and returns the result as XML.
+    """
 
     location = os.path.dirname(os.path.realpath(__file__))
     inputfilename = os.path.basename(inputfilepath)
@@ -997,7 +1068,9 @@ sdsc_initialized = False
 
 def initialize():
     """ Initializes global values such as prepared_checks and parser
-    to avoid doing it for each file. """
+    to avoid doing it for each file.
+    """
+
     global sdsc_initialized
     if sdsc_initialized:
         return True
