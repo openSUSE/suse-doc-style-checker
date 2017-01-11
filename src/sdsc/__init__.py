@@ -119,8 +119,13 @@ def sanitizepunctuation(text, quotes=False, apostrophes=False):
         # FIXME: In enough cases, using this will lose the information whether this
         # was a opening quote or a closing quote.
         # Replace quotes only if they are at start/end of a word.
-        quote = re_compile(r'((?<=^)[«»‹›“”„‟‘’‚‛「」『』](?=[a-z0-9])|(?<=\s)[«»‹›“”„‟‘’‚‛「」『』](?=[a-z0-9])|(?<=[a-z0-9])[«»‹›“”„‟‘’‚‛「」『』](?=$|\s))', re.I)
+
+        quote = re_compile(r'((?<=^)[«»‹›“”„‟‘’‚‛「」『』](?=[\w\d])|(?<=\s)[«»‹›“”„‟‘’‚‛「」『』](?=[a-z0-9])|(?<=[\w\d])[«»‹›“”„‟‘’‚‛「」『』](?=$|[^\w\d]))', re.I)
+        # I need the quote_before version additionally because look-behinds must
+        # be fixed-length -- it is expensive to try to be correct. Bah.
+        quote_before = re_compile(r'((?<=[^\w\d])[«»‹›“”„‟‘’‚‛「」『』](?=[\w\d])|(?<=\s)[«»‹›“”„‟‘’‚‛「」『』](?=[a-z0-9]))', re.I)
         text = quote.sub('"', text)
+        text = quote_before.sub('"', text)
     if apostrophes:
         apostrophe = re_compile(r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]')
         text = apostrophe.sub('\'', text)
