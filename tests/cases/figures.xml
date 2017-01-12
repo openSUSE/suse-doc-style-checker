@@ -9,7 +9,7 @@
           <!-- Warning: no textobject/phrase -->
           <inlinemediaobject xml:id="sdsc.expect.warning.figures.1">
             <imageobject>
-              <imagedata fileref="file.name"/>
+              <imagedata fileref="file.name" width="75%"/>
             </imageobject>
           </inlinemediaobject>
         </para>
@@ -18,7 +18,7 @@
         <informalfigure xml:id="fig.sdsc.expect.warning.figures.2">
           <mediaobject>
             <imageobject>
-              <imagedata fileref="normal_file.name"/>
+              <imagedata fileref="normal_file.name" width="75%"/>
             </imageobject>
           </mediaobject>
         </informalfigure>
@@ -27,7 +27,7 @@
           <title>Title</title>
           <mediaobject>
             <imageobject>
-              <imagedata fileref="normal_file.name"/>
+              <imagedata fileref="normal_file.name" width="75%"/>
             </imageobject>
           </mediaobject>
         </figure>
@@ -36,7 +36,7 @@
           <title>Title</title>
           <mediaobject>
             <imageobject>
-              <imagedata fileref="normal_file.name"/>
+              <imagedata fileref="normal_file.name" width="75%"/>
             </imageobject>
             <textobject>
               <phrase>Nothing to see here.</phrase>
@@ -49,10 +49,10 @@
           <title>Title</title>
           <mediaobject>
             <imageobject>
-              <imagedata fileref="this_is_a.png"/>
+              <imagedata fileref="this_is_a.png" width="75%"/>
             </imageobject>
             <imageobject>
-              <imagedata fileref="this_is_a.png"/>
+              <imagedata fileref="this_is_a.png" width="75%"/>
             </imageobject>
           </mediaobject>
         </figure>
@@ -62,7 +62,7 @@
           <title>Title</title>
           <mediaobject>
             <imageobject role="fo">
-              <imagedata fileref="this_is_a.png" format="PNG"/>
+              <imagedata fileref="this_is_a.png" width="75%" format="PNG"/>
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="this_is_a_very_different.png" format="PNG"/>
@@ -75,7 +75,7 @@
           <title>Title</title>
           <mediaobject>
             <imageobject role="fo">
-              <imagedata fileref="this_is_a.png" format="PNG"/>
+              <imagedata fileref="this_is_a.png" width="75%" format="PNG"/>
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="this_is_a.svg" format="PNG"/>
@@ -87,7 +87,7 @@
           <title>Title</title>
           <mediaobject>
             <imageobject role="fo">
-              <imagedata fileref="this_is_a.png" format="PNG"/>
+              <imagedata fileref="this_is_a.png" width="75%" format="PNG"/>
             </imageobject>
             <imageobject role="html">
               <imagedata fileref="this_is_a.svg" format="SVG"/>
@@ -101,7 +101,7 @@
           <title>Title</title>
           <mediaobject>
             <imageobject role="fo">
-              <imagedata fileref="this_is_a.png" format="SVG"/>
+              <imagedata fileref="this_is_a.png" width="75%" format="SVG"/>
             </imageobject>
           </mediaobject>
         </figure>
@@ -109,7 +109,7 @@
         <!-- Errors: We only like lowercase alphanumeric file names -->
         <mediaobject>
             <imageobject role="fo">
-                <imagedata fileref="Uppercasefile.name" xml:id="sdsc.expect.error.figures.10"/>
+                <imagedata fileref="Uppercasefile.name" width="75%" xml:id="sdsc.expect.error.figures.10"/>
             </imageobject>
             <imageobject role="html">
                 <imagedata fileref="filename with.space" xml:id="sdsc.expect.error.figures.11"/>
@@ -117,10 +117,10 @@
             <textobject>
                 <phrase>Nothing to see here either.</phrase>
             </textobject>
-        <mediaobject>
         </mediaobject>
+        <mediaobject>
             <imageobject role="fo">
-                <imagedata fileref="$pecia!f1le.name" xml:id="sdsc.expect.error.figures.12"/>
+                <imagedata fileref="$pecia!f1le.name" width="75%" xml:id="sdsc.expect.error.figures.12"/>
             </imageobject>
             <imageobject role="html">
                 <imagedata fileref="ümlautfile.name2" xml:id="sdsc.expect.error.figures.13"/>
@@ -128,13 +128,120 @@
             <textobject>
                 <phrase>Nothing to see here either.</phrase>
             </textobject>
-        <mediaobject>
         </mediaobject>
+        <mediaobject>
             <imageobject role="fo">
-                <imagedata fileref="normal_file.name" xml:id="sdsc.valid.14"/>
+                <imagedata fileref="normal_file.name" width="75%" xml:id="sdsc.valid.14"/>
             </imageobject>
             <imageobject role="html">
                 <imagedata fileref="1-normalfile.name2" xml:id="sdsc.valid.15"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+
+        <!-- Errors when there is no width given (with our role or with role="fo"). -->
+        <mediaobject>
+            <imageobject role="fo">
+                <imagedata fileref="normal_file.name" xml:id="sdsc.expect.error.figures.16"/>
+            </imageobject>
+            <imageobject role="html">
+                <imagedata fileref="1-normalfile.name2" xml:id="sdsc.valid.17"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="normal_file.name" xml:id="sdsc.expect.error.figures.18"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+
+        <!-- Errors when the unit of width is invalid. -->
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="normal_file.name" width="10pv" xml:id="sdsc.expect.error.figures.19"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="normal_file.name" width="10m" xml:id="sdsc.expect.error.figures.20"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+
+        <!-- Errors when the value of width is invalid. -->
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="normal_file.name" width="10 mm" xml:id="sdsc.expect.error.figures.21"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="normal_file.name" width=" " xml:id="sdsc.expect.error.figures.22"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="normal_file.name" width="10%%" xml:id="sdsc.expect.error.figures.23"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+
+        <!-- Warnings when the image might be too wide. -->
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="normal_file.name" width="102%" xml:id="sdsc.expect.warning.figures.24"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="normal_file.name" width="600" xml:id="sdsc.expect.warning.figures.25"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="normal_file.name" width="550px" xml:id="sdsc.expect.warning.figures.26"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="normal_file.name" width="450" xml:id="sdsc.valid.27"/>
+            </imageobject>
+            <textobject>
+                <phrase>Nothing to see here either.</phrase>
+            </textobject>
+        </mediaobject>
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="normal_file.name" width="80%" xml:id="sdsc.valid.28"/>
             </imageobject>
             <textobject>
                 <phrase>Nothing to see here either.</phrase>
