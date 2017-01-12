@@ -161,7 +161,8 @@
   </xsl:template>
 
 
-  <xsl:template match="imagedata[@fileref]|db5:imagedata[@fileref]">
+  <xsl:template match="imagedata|db5:imagedata">
+    <!-- @fileref is mandatory, even in DocBook. -->
     <xsl:variable name="fileref" select="normalize-space(@fileref)"/>
     <xsl:variable name="fileref-bad">
       <xsl:call-template name="badcharacters">
@@ -169,6 +170,20 @@
         <xsl:with-param name="characters" select="'a-z|0-9|._-+'"/>
       </xsl:call-template>
     </xsl:variable>
+
+    <!-- Empty fileref is bad. -->
+    <xsl:if test="string-length($fileref) &lt; 1">
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>
+          No file name given for media object in
+          <xsl:call-template name="createid"/>.
+        </message>
+        <suggestion>
+         Make sure the image you want displayed is referenced.
+        </suggestion>
+      </result>
+    </xsl:if>
 
     <xsl:if test="$fileref-bad = 'yes'">
       <xsl:variable name="fileref-capital">
@@ -269,8 +284,129 @@
           not match the file extension in <quote>fileref</quote>.
         </message>
         <suggestion>Make sure both extensions match.</suggestion>
-      </result>
+        </result>
       </xsl:if>
+    </xsl:if>
+
+    <!-- Error if there is no width for fo images -->
+    <xsl:if test="
+       not(@width) and
+       (parent::imageobject[(@role='fo' or not(@role))] or
+        parent::db5:imageobject[(@role='fo' or not(@role))])"><!--]"> -->
+      <xsl:variable name="role">
+        <xsl:if test="parent::imageobject[@role] or
+                      parent::db5:imageobject[@role]"> role="<xsl:value-of select="@role"/>"</xsl:if>
+      </xsl:variable>
+      <result type="error">
+        <xsl:call-template name="sourcehint"/>
+        <message>
+          The media file reference
+          <xsl:call-template name="createid">
+            <xsl:with-param name="node" select="."/>
+            <xsl:with-param name="use-fileref-attribute" select="1"/>
+          </xsl:call-template>
+          has no <em>width</em> attribute.
+        </message>
+        <suggestion>
+          Within <tag>imageobject<xsl:value-of select="$role"/></tag>, add a
+          <em>width</em> attribute with a percentage value (such as
+          <quote>75%</quote>) to the <tag>imagedata</tag>.
+        </suggestion>
+      </result>
+    </xsl:if>
+
+    <!-- Error if the image width is too wide -->
+    <xsl:if test="@width">
+      <xsl:variable name="width" select="normalize-space(@width)"/>
+      <xsl:variable name="role">
+        <xsl:if test="parent::imageobject[@role] or
+                      parent::db5:imageobject[@role]"> role="<xsl:value-of select="@role"/>"</xsl:if>
+      </xsl:variable>
+      <xsl:variable name="numeric-value">
+        <xsl:value-of select="py:splitvalueunit($width)"/>
+      </xsl:variable>
+      <xsl:variable name="unit-candidate">
+        <xsl:value-of select="py:splitvalueunit($width,'unit')"/>
+      </xsl:variable>
+      <xsl:variable name="unit">
+        <xsl:choose>
+          <xsl:when
+            test="$unit-candidate = 'cm' or $unit-candidate = 'em' or
+                  $unit-candidate = 'in' or $unit-candidate = 'mm' or
+                  $unit-candidate = 'pc' or $unit-candidate = 'pt' or
+                  $unit-candidate = 'px' or $unit-candidate = '%'"><xsl:value-of select="$unit-candidate"/></xsl:when>
+          <xsl:when test="$unit-candidate = ''">px</xsl:when>
+          <xsl:otherwise>BAD_UNIT</xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="too-wide">
+        <xsl:choose>
+          <xsl:when test="$unit = '%' and $numeric-value &gt; 100">1</xsl:when>
+          <xsl:when test="$unit = 'px' and $numeric-value &gt; 500">1</xsl:when>
+          <!-- FIXME: The other units are not in wide use in our docs today,
+          but some refinement/additions might be nice. -->
+          <xsl:otherwise>0</xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+
+      <xsl:if test="$numeric-value = 'MALFORMED_VALUE'">
+        <result type="error">
+          <xsl:call-template name="sourcehint"/>
+          <message>
+            The media file reference
+            <xsl:call-template name="createid">
+              <xsl:with-param name="node" select="."/>
+              <xsl:with-param name="use-fileref-attribute" select="1"/>
+            </xsl:call-template>
+            has a <em>width</em> attribute with an invalid value.
+          </message>
+          <suggestion>
+            Correct the invalid value
+            <quote><xsl:value-of select="$width"/></quote>. Preferably use
+            a percentage (such as <quote>75%</quote>).
+          </suggestion>
+        </result>
+      </xsl:if>
+
+      <xsl:if test="$unit = 'BAD_UNIT' and not($numeric-value = 'MALFORMED_VALUE')">
+        <result type="error">
+          <xsl:call-template name="sourcehint"/>
+          <message>
+            The media file reference
+            <xsl:call-template name="createid">
+              <xsl:with-param name="node" select="."/>
+              <xsl:with-param name="use-fileref-attribute" select="1"/>
+            </xsl:call-template>
+            has a <em>width</em> attribute with an invalid unit.
+          </message>
+          <suggestion>
+            Correct the invalid unit
+            <quote><xsl:value-of select="$unit-candidate"/></quote>. Preferably use
+            a percentage (such as <quote>75%</quote>).
+          </suggestion>
+        </result>
+      </xsl:if>
+
+      <xsl:if test="$too-wide = '1'">
+        <result type="warning">
+          <xsl:call-template name="sourcehint"/>
+          <message>
+            The media file reference
+            <xsl:call-template name="createid">
+              <xsl:with-param name="node" select="."/>
+              <xsl:with-param name="use-fileref-attribute" select="1"/>
+            </xsl:call-template>
+            has a <em>width</em> attribute which might lead to the media
+            being wider than the page area allows.
+          </message>
+          <suggestion>
+            Correct the width
+            <quote><xsl:value-of select="$width"/></quote>. Preferably use
+            a percentage (such as <quote>75%</quote>).
+          </suggestion>
+        </result>
+      </xsl:if>
+
     </xsl:if>
 
   </xsl:template>

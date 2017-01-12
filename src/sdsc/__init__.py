@@ -1009,6 +1009,42 @@ def splitpath(context, path, wantedsegment='filename'):
     else:
         return path
 
+def splitvalueunit(context, value, part='value'):
+    """ From a combination of numeric value and unit (like "100px"), returns
+    either the value or the unit.
+
+    :param str context: context node (ignored)
+    :param str value: numeric value and unit
+    :param str part: wanted part of input value: 'value' or 'unit'
+    :return: numeric value or unit of input value
+    """
+
+    del context # not used
+
+    value = str(value)
+    part = str(part)
+
+    regex_valueformat = re_compile(r'[.\d]+([a-z]{2,3}|%)?')
+    regex_numericvalue = re_compile(r'^[.\d]+')
+    regex_unit = re_compile(r'([a-z]{1,3}|%)$')
+
+    if not value:
+        return "MALFORMED_VALUE"
+    if not regex_valueformat.fullmatch(value):
+        return "MALFORMED_VALUE"
+
+    if part == 'unit':
+        unit = regex_unit.search(value)
+        if unit:
+            return unit.group(0)
+        else:
+            return ""
+    else:
+        # This should be guaranteed, since we check for regex_valueformat
+        # before.
+        numericvalue = regex_numericvalue.search(value)
+        return numericvalue.group(0)
+
 
 # This list is filled by initialize() with the following entries:
 # { 'name': 'typos', 'transform': <function> }
@@ -1083,7 +1119,7 @@ def initialize():
                    sentencelengthcheck=sentencelengthcheck,
                    sentencesegmenter=sentencesegmenter,
                    tokenizer=tokenizer, counttokens=counttokens,
-                   splitpath=splitpath))
+                   splitpath=splitpath,splitvalueunit=splitvalueunit))
 
     global parser
     parser = etree.XMLParser(ns_clean=True,
