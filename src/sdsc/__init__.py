@@ -103,6 +103,7 @@ def removepunctuation(word, start=False, end=False):
     apos   - bool(): remove punctuation from end of token?
     """
 
+    # FIXME from toms: I'm not sure if I completely understand these lines...
     if isinstance(word, list):
         if start:
             word = [removepunctuation(word[0], start=True)] + word[1:]
@@ -110,6 +111,9 @@ def removepunctuation(word, start=False, end=False):
             word = word[:-1] + [removepunctuation(word[-1], end=True)]
         return word
 
+    # FIXME from toms: Is this really enough? What about <, @, ~ etc.?
+    # Check if you could merge your punctuation definition with
+    # string.punctuation
     startpunctuation = '([{"\'¡¿'
     endpunctuation = ')]}/\\"\',:;!?.‥…‼‽⁇⁈⁉'
 
@@ -144,6 +148,7 @@ def sanitizepunctuation(text, quotes=False, apostrophes=False):
         apostrophe = re_compile(r'[’՚\'ʼ＇｀̀́`´ʻʹʽ]')
         text = apostrophe.sub('\'', text)
     return text
+
 
 def findtagreplacement(text):
     """Search through a token to see whether it contains a replaced tag.
@@ -184,7 +189,12 @@ def counttokens(context, text):
     :param str context: context node (ignored)
     :param str text: text in which to count tokens
     """
-    del context  # not used
+    del context  # not used # FIXME toms: better remove this line
+
+    # FIXME from toms (simplification): Are you really need to check for text?
+    # If text is empty, tokenizer returns [] and as such len([]) == 0
+    # better use:
+    # return len(tokenizer(text[0]))
     count = 0
     if text:
         count = len(tokenizer(text[0]))
@@ -210,6 +220,7 @@ def sentencesegmenter(text):
 
 def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
               messagetype):
+    # FIXME toms (doc): Missing docstring ;)
     # FIXME: Modes: para, title?
 
     if not content:
@@ -227,6 +238,8 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
     contextid = contextid[0] if contextid else None
 
     # sanitize this...
+    # FIXME toms (simplification): use in operator?
+    # if messagetype not in ('warning', 'info'):
     if not messagetype == 'warning' or messagetype == 'info':
         messagetype = 'error'
 
@@ -240,6 +253,8 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
     #     5-10 words
     #   = worst case: similar time, best case: slight win,
     #     more compliant documentation will tip the scale in our favour
+
+    # FIXME toms (simplification): combine all the if expression into one line?
     if onepattern:
         if not onepattern.search(content):
             if flag_performance:
@@ -259,6 +274,8 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
     currenttokeninparagraph = -1
 
     messages = []
+    # FIXME toms (style): this for loop is waaaay too long...
+    # split into smaller parts
     for sentence in sentences:
         # FIXME: Get something better than s.split. Some
         # existing tokenisers are overzealous, such as the default one from
@@ -376,6 +393,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
                                 contenthighlighted, contextid, basefile,
                                 messagetype))
 
+    # FIXME toms (style): Use a decorator for performance
     if flag_performance:
         timeendmatch = time.time()
         timediffmatch = timeendmatch - timestartmatch
@@ -392,6 +410,7 @@ average time per word: %s\n"""
 
 def matchcontextpattern(words, wordposition, totalwords,
                         patterngrouppatternposition, contextpattern):
+    # FIXME toms (doc): missing docstring
     contextstring = ""
     for contextwhere in contextpattern[1]:
         contextposition = wordposition + contextwhere
@@ -412,6 +431,8 @@ def matchcontextpattern(words, wordposition, totalwords,
     return bool(contextpattern[2]) == match
 
 def preparetermpatterns(term, useonepattern):
+    # FIXME toms (doc): missing docstring
+    # FIXME toms (style): remove global variable
     global onepattern
     patternsofterm = []
     patterngroupxpaths = term.xpath('patterngroup')
@@ -439,6 +460,8 @@ def preparetermpatterns(term, useonepattern):
 
 
 def buildtermdata(context, terms, ignoredwords, useonepattern):
+    # FIXME toms (doc): missing docstring
+    # FIXME toms (style): remove global variable
     del context  # not used
 
     # random ID to find out if the termdata is still up-to-date
@@ -1009,6 +1032,7 @@ def splitpath(context, path, wantedsegment='filename'):
     else:
         return path
 
+
 def splitvalueunit(context, value, part='value'):
     """ From a combination of numeric value and unit (like "100px"), returns
     either the value or the unit.
@@ -1114,12 +1138,17 @@ def initialize():
     # Prepare parser (add py: namespace)
     ns = etree.FunctionNamespace('https://www.github.com/openSUSE/suse-doc-style-checker')
     ns.prefix = 'py'
-    ns.update(dict(linenumber=linenumber, termcheck=termcheck,
-                   buildtermdata=buildtermdata, dupecheck=dupecheck,
+    ns.update(dict(linenumber=linenumber,
+                   termcheck=termcheck,
+                   buildtermdata=buildtermdata,
+                   dupecheck=dupecheck,
                    sentencelengthcheck=sentencelengthcheck,
                    sentencesegmenter=sentencesegmenter,
-                   tokenizer=tokenizer, counttokens=counttokens,
-                   splitpath=splitpath,splitvalueunit=splitvalueunit))
+                   tokenizer=tokenizer,
+                   counttokens=counttokens,
+                   splitpath=splitpath,
+                   splitvalueunit=splitvalueunit,
+                   ))
 
     global parser
     parser = etree.XMLParser(ns_clean=True,
@@ -1141,6 +1170,9 @@ def initialize():
             checkmodule = os.path.splitext(os.path.basename(checkfile))[0]
             transform = etree.XSLT(etree.parse(checkfile, parser))
             prepared_checks.append({'name': checkmodule, 'transform': transform})
+        # FIXME toms (style): not good to check for Exception. This can hide too much.
+        # Better check for specific exceptions like XMLSyntaxError, XSLTParseError,
+        # XSLTApplyError, XSLTExtensionError, ...?
         except Exception as error:
             printcolor("! Syntax error in check file.\n  " + checkfile, 'error')
             printcolor("  " + str(error), 'error')
