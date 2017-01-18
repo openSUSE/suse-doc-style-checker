@@ -110,8 +110,8 @@ def removepunctuation(word, start=False, end=False):
             word = word[:-1] + [removepunctuation(word[-1], end=True)]
         return word
 
-    startpunctuation = '([{"\'¡¿'
-    endpunctuation = ')]}/\\"\',:;!?.‥…‼‽⁇⁈⁉'
+    startpunctuation = '([{"\'¡¿<“„‟‘‚‛「『【〚〖〘〔〈《'
+    endpunctuation = '〉》〕〙〗〛】”’‛」』>)]}/\\"\',:;!?.‥…‼‽⁇⁈⁉'
 
     if start:
         word = word.lstrip(startpunctuation)
@@ -210,6 +210,20 @@ def sentencesegmenter(text):
 
 def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
               messagetype):
+    """ Check a paragraph using text-level checks involving regular
+    expressions. If there is a match, issue a message.
+
+    :param ??? text: information about the context node
+    :param int termfileid: the expected ID of the terminology data; this is
+        used to check whether terminology was correctly initialized via
+        buildtermdata()
+    :param str content: content, as formatted for the terminology check itself
+    :param str contentpretty: content, as formatted for display in a message
+    :param str contextid: next element with id attribute around the content
+    :param str basefile: file in which content appears
+    :param str messagetype: print a 'warning', 'info', or 'error' message?
+    """
+
     # FIXME: Modes: para, title?
 
     if not content:
@@ -227,7 +241,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
     contextid = contextid[0] if contextid else None
 
     # sanitize this...
-    if not messagetype == 'warning' or messagetype == 'info':
+    if messagetype not in ('warning', 'info'):
         messagetype = 'error'
 
     # onepattern is a concatenated list of all patterns of the terminology
@@ -240,11 +254,10 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
     #     5-10 words
     #   = worst case: similar time, best case: slight win,
     #     more compliant documentation will tip the scale in our favour
-    if onepattern:
-        if not onepattern.search(content):
-            if flag_performance:
-                printcolor("skipped entire paragraph\n", 'debug')
-            return []
+    if onepattern and not onepattern.search(content):
+        if flag_performance:
+            printcolor("skipped entire paragraph\n", 'debug')
+        return []
 
     # This if/else block should not be necessary (if there is content,
     # there should always also be pretty content, but that depends on the
@@ -412,6 +425,15 @@ def matchcontextpattern(words, wordposition, totalwords,
     return bool(contextpattern[2]) == match
 
 def preparetermpatterns(term, useonepattern):
+    """ Prepare regular expression patterns contained in the <term/> elements
+    of an XML source by extracting their main pattern and context patterns
+    and appending the main pattern to onepattern (if use of onepattern is
+    enabled)
+
+    :param ??? term: XML source of one <term/> element
+    :param bool useonepattern: use onepattern?
+    """
+
     global onepattern
     patternsofterm = []
     patterngroupxpaths = term.xpath('patterngroup')
@@ -439,6 +461,19 @@ def preparetermpatterns(term, useonepattern):
 
 
 def buildtermdata(context, terms, ignoredwords, useonepattern):
+    """ From XML definitions containing regular expressions to check for
+    terminology/wording, create Python data structures. While we could also
+    read the XML definitions ad-hoc when checking terminology, that would be
+    significantly slower.
+
+    :param ??? context: information about context node
+    :param list terms: <term/> elements from terminology file
+    :param str ignoredwords: regular expression containing words that should be ignored globally
+    :param bool onepattern: should onepattern be used? (onepattern is a large
+        regular expression pattern that combines all the main search patterns
+        into one)
+    """
+
     del context  # not used
 
     # random ID to find out if the termdata is still up-to-date
@@ -517,6 +552,11 @@ def buildtermdata(context, terms, ignoredwords, useonepattern):
 # FIXME: This might be functionality better suited for a test case instead of
 # built-in
 def trypattern(pattern):
+    """ Checks that none of the regular expression patterns is invalid or
+    matches an empty string, before it is compiled.
+
+    :param str pattern: regular expression to test
+    """
 
     if not flag_checkpatterns:
         return True
@@ -548,11 +588,24 @@ def trypattern(pattern):
 
 
 def expressionerror(message, expression="muschebubu"):
+    """ Print error message about an invalid regular expression.
+
+    :param str message: message text
+    :param str expression: expression that failed
+    """
     printcolor(message + ": \"" + expression + "\"", 'error')
     sys.exit(1)
 
 
 def manglepattern(pattern, mode):
+    """ Modify regular expression patterns to work within our various
+    pattern matching modes. (Potentially fraught with errors. Beware when writing patterns.)
+
+    :param str pattern: the regular expression pattern
+    :param str mode: 'context' for context pattern treatment, 'one' for
+        onepattern treatment, anything else for regular treatment
+    """
+
     # Use (?: to create non-capturing groups: the re module's
     # implementation only supports up to 100 named groups per
     # expression. onepattern often contains more than 100 groups.
@@ -582,6 +635,12 @@ def manglepattern(pattern, mode):
 
 
 def prepareaccept(term):
+    """ From a <term/> element from XML source, extract the accepted spelling
+    (<accept/>), and if available, its context (<context/>).
+
+    :param ??? term: XML source of a <term/> element
+    """
+
     acceptwordxpath = term.xpath('accept[1]/proposal[1]')
     acceptwordxpathcontent = None
     if acceptwordxpath:
@@ -601,6 +660,12 @@ def prepareaccept(term):
 
 
 def preparepatterns(patterngroupxpath, useonepattern):
+    """ Create a list of main patterns from a <patterngroup/> XML source.
+
+    :param ??? patterngroupxpath: XML source of a <patterngroup/>
+    :param bool useonepattern: use onepattern?
+    """
+
     patternsofpatterngroup = []
     patternforonepattern = None
 
@@ -643,6 +708,14 @@ def contextpatternlocations(locations, factors, fuzzymode=False):
 
 
 def preparecontextpatterns(contextpatternxpath):
+    """ Create Python structure for a context pattern from a
+    <contextpattern/> XML source. This includes converting data whether the
+    pattern is case-sensitive, and where it should be located in relation to
+    the main pattern.
+
+    :param ??? contextpatternxpath: XML source of a <patterngroup/>
+    """
+
     contextpatternxpathcontent = contextpatternxpath.text
     if not contextpatternxpathcontent:
         emptypatternmessage('contextpattern')
@@ -675,6 +748,12 @@ def preparecontextpatterns(contextpatternxpath):
 
 
 def emptypatternmessage(element):
+    """ Print a message if there is an empty XML source element, as that
+    should not happen.
+
+    :param str element: name of the element
+    """
+
     printcolor("There is an empty {0} element in a terminology file.".format(element), 'error')
     sys.exit(1)
 
@@ -697,6 +776,18 @@ def xmlescape(text):
 
 def termcheckmessage(acceptword, acceptcontext, word, line, content,
                         contextid, basefile, messagetype):
+    """ Create a message after a terminology check has matched on something.
+
+    :param str acceptword: accepted spelling
+    :param str acceptcontext: context of accepted spelling
+    :param str word: spelling, as actually used
+    :param int line: line number (generally wrong at the moment)
+    :param str content: paragraph of text that "word" appears in
+    :param str contextid: value of id attribute on next node
+    :param str basefile: name of file that "word" appears in
+    :param str messagetype: print 'error', 'warning', or 'info' message?
+    """
+
     # FIXME: shorten content string (in the right place), to get closer toward
     # more focused results
     message = None
@@ -1114,12 +1205,18 @@ def initialize():
     # Prepare parser (add py: namespace)
     ns = etree.FunctionNamespace('https://www.github.com/openSUSE/suse-doc-style-checker')
     ns.prefix = 'py'
-    ns.update(dict(linenumber=linenumber, termcheck=termcheck,
-                   buildtermdata=buildtermdata, dupecheck=dupecheck,
-                   sentencelengthcheck=sentencelengthcheck,
-                   sentencesegmenter=sentencesegmenter,
-                   tokenizer=tokenizer, counttokens=counttokens,
-                   splitpath=splitpath,splitvalueunit=splitvalueunit))
+    ns.update(dict(
+        buildtermdata=buildtermdata,
+        counttokens=counttokens,
+        dupecheck=dupecheck,
+        linenumber=linenumber,
+        sentencelengthcheck=sentencelengthcheck,
+        sentencesegmenter=sentencesegmenter,
+        splitpath=splitpath,
+        splitvalueunit=splitvalueunit,
+        termcheck=termcheck,
+        tokenizer=tokenizer,
+    ))
 
     global parser
     parser = etree.XMLParser(ns_clean=True,
