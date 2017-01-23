@@ -18,6 +18,7 @@
 
 import re
 
+
 # In manglepattern(), only catch patterns that are not literal and are not
 # followed by an indicator of a lookahead/lookbehind (?) or are already
 # non-capturing groups
@@ -30,11 +31,15 @@ PARENTHESES = re.compile(r'(?<!\\)\((?![\?|\:])')
 # Lookbehinds need to have a fixed length... thus .ca
 # Do not use capture groups together with re.split, as it does additional splits
 # for each capture group it finds.
-SENTENCEENDS = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?]|[:;])\s+[[({]?(?=(?:[A-Z0-9#]|openSUSE))')
-LASTSENTENCEENDS = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?][])}]?|[:;])\s*$')
+SENTENCEENDS = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)'
+                          '(?:\.?\.?[.!?]|[:;])\s+[[({]?'
+                          '(?=(?:[A-Z0-9#]|openSUSE))')
+LASTSENTENCEENDS = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)'
+                              '(?:\.?\.?[.!?][])}]?|[:;])\s*$')
+
 
 # trypatterns() checks if a sub-pattern of a given pattern matches nothing
 # (and looks unusual while doing that), i.e. subpatterns like (this|), (|this),
 # or (th||is)
-# FIXME: This will fail on character classes like: [(]
+# FIXME: This will fail on character classes like: [(|]
 EMPTYSUBPATTERN = re.compile(r'(?<!\\)(\|\)|\(\||\|\|)')
