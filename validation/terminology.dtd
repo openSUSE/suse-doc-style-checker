@@ -7,11 +7,14 @@
 
 <!ELEMENT terminology     (term+)>
 
-<!ELEMENT term            (accept, patterngroup+) >
+
+<!ELEMENT term            (accept+, patterngroup+) >
+
 
 <!ELEMENT accept          (proposal?, context?) >
 
 <!ELEMENT patterngroup    (pattern+, contextpattern*) >
+
 
 <!ELEMENT pattern         (#PCDATA) >
 
@@ -30,7 +33,7 @@
 <!ATTLIST patterngroup
                           reason    (general|terminology|filler|projectspelling|
                                     contraction|abbreviation|tautology|
-                                    languagevariant)
+                                    languagevariant|ungrammatical)
                                                                     #IMPLIED >
 
 <!--  Default value is 1, ignore. -->

@@ -178,8 +178,9 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
 
             for accept, patterngroups in zip(accepts, patterns):
                 if trynextterm:
-                    acceptword = accept[0]
-                    acceptcontext = accept[1]
+                    acceptproposal = accept[0]
+                    acceptaltproposal = accept[1]
+                    acceptcontext = accept[2]
 
                     # FIXME: variable names are a bit of a mouthful
                     for patterngrouppatterns in patterngroups:
@@ -247,9 +248,15 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
                             line = linenumber(context)
                             contenthighlighted = highlight(xmlescape(contentpretty), highlightstart, highlightend)
                             messages.append(termcheckmessage(
-                                acceptword, acceptcontext, matchwords, line,
-                                contenthighlighted, contextid, basefile,
-                                messagetype))
+                                acceptproposal,
+                                acceptaltproposal,
+                                acceptcontext,
+                                matchwords,
+                                line,
+                                contenthighlighted,
+                                contextid,
+                                basefile,
+                                messagetype,))
 
     if flag_performance:
         timeendmatch = time.time()
@@ -344,13 +351,13 @@ def buildtermdata(context, terms, ignoredwords, useonepattern):
     # pattern of words that can be ignored right away
     global ignoredpattern
 
-    # list of accepted terms:
-    # accepts = [ [ 'proposal', 'context' ], [ 'proposal without context', None ], [ None, None ], ... ]
-    #             <accept/> #1,              <accept/> #2,                         <accept/> #3
+    # list of accepted terms, per term element:
+    # accepts = [ [ 'proposal', 'context' ], [ 'proposal without context', [], None ], [ None, [], None ], ... ]
+    #             <accept/> #1,                                                      <accept/> #2,                             <accept/> #3
     global accepts
     accepts = []
 
-    # list of main search patterns, per accepted term:
+    # list of main search patterns, per term element:
     # patterns = [ [ [ pattern, pattern, pattern ], [ pattern, pattern ] ], [ [ pattern, pattern ], ... ], ... ]
     #              <accept/> #1,                                            <accept/> #1
     #                <patterngroup/> #1,            <patterngroup/> #2,       <patterngroup/> #1
@@ -616,11 +623,12 @@ def emptypatternmessage(element):
     sys.exit(1)
 
 
-def termcheckmessage(acceptword, acceptcontext, word, line, content,
+def termcheckmessage(acceptproposal, acceptcontext, word, line, content,
                         contextid, basefile, messagetype):
     """ Create a message after a terminology check has matched on something.
 
-    :param str acceptword: accepted spelling
+    :param str acceptproposal: preferred accepted spelling
+    :param list acceptaltproposal: list of alternative accepted spelling
     :param str acceptcontext: context of accepted spelling
     :param str word: spelling, as actually used
     :param int line: line number (generally wrong at the moment)
@@ -654,9 +662,13 @@ def termcheckmessage(acceptword, acceptcontext, word, line, content,
             <quote>%s</quote> here:
             <quote>%s</quote></message>""" % (word, content)))
 
-    if acceptword:
+    if acceptproposal and acceptaltproposal and acceptaltproposal[0]:
+        message.append(etree.XML("""<suggestion>Instead use <quote>%s</quote>
+            (or: <quote>%s</quote>).</suggestion>""" % acceptproposal,
+                '</quote>, <quote>'.join(acceptaltproposal) ))
+    elif acceptproposal:
         message.append(etree.XML("""<suggestion>Use <quote>%s</quote>
-            instead.</suggestion>""" % acceptword))
+            instead.</suggestion>""" % acceptproposal))
     else:
         message.append(etree.XML("""<suggestion>Remove
             <quote>%s</quote>.</suggestion>""" % word))
