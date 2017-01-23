@@ -1,7 +1,8 @@
 #
 
 import pytest
-import sdsc
+from sdsc.tokens import sanitizepunctuation
+
 
 @pytest.mark.parametrize("params,result",
   (
@@ -21,4 +22,4 @@ import sdsc
 )
 def test_sanitizepunctuation(params,result):
     """checks whether punctuation is properly sanitized (i.e. whether quotes and apostrophes are removed properly)"""
-    assert sdsc.sanitizepunctuation(*params) == result
+    assert sanitizepunctuation(*params) == result

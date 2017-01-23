@@ -1,11 +1,12 @@
 #
 
 import pytest
-import sdsc
 
 #True
 #        tagtype = str(tagsreplaced.group(1))
 #        tokens = int(tagsreplaced.group(2))
+from sdsc.tokens import findtagreplacement
+
 
 @pytest.mark.parametrize("text,result",
   (
@@ -29,4 +30,4 @@ import sdsc
 )
 def test_findtagreplacement(text,result):
     """checks whether placeholders for special tags are found"""
-    assert sdsc.findtagreplacement(text) == result
+    assert findtagreplacement(text) == result
