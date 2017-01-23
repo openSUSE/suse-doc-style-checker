@@ -502,22 +502,19 @@ def prepareaccept(term):
     :param ??? term: XML source of a <term/> element
     """
 
-    acceptwordxpath = term.xpath('accept[1]/proposal[1]')
-    acceptwordxpathcontent = None
-    if acceptwordxpath:
-        acceptwordxpathcontent = acceptwordxpath[0].text
-    # If there is no accepted word, we don't care about the context
-    if acceptwordxpathcontent:
-        acceptlist = [acceptwordxpathcontent]
-        acceptcontextxpath = term.xpath('accept[1]/context[1]')
-        if acceptcontextxpath:
-            acceptlist.append(acceptcontextxpath[0].text)
-        else:
-            acceptlist.append(None)
-
-        return acceptlist
+    proposal = term.xpath('accept[1]/proposal[1]')
+    if proposal:
+        proposal = proposal[0].text
     else:
-        return [None, None]
+        proposal = None
+
+    context = term.xpath('accept[1]/context[1]')
+    if context:
+        context = context[0].text
+    else:
+        context = None
+
+    return [proposal, context]
 
 
 def preparepatterns(patterngroupxpath, useonepattern):
