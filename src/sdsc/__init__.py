@@ -32,33 +32,12 @@ import webbrowser
 
 from lxml import etree
 from .cli import printcolor, parseargs
+from .const import PARENTHESES, SENTENCEENDS, LASTSENTENCEENDS, EMPTYSUBPATTERN
 
 # Global flags
 flag_performance = False
 flag_checkpatterns = False
 flag_module = False
-
-# In manglepattern(), only catch patterns that are not literal and are not
-# followed by an indicator of a lookahead/lookbehind (?) or are already
-# non-capturing groups
-# FIXME: This will fail on character classes like: [(]
-parentheses = re.compile(r'(?<!\\)\((?![\?|\:])')
-
-
-# Sentence end characters.
-# FIXME: English hardcoded
-# Lookbehinds need to have a fixed length... thus .ca
-# Do not use capture groups together with re.split, as it does additional splits
-# for each capture group it finds.
-sentenceends = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?]|[:;])\s+[[({]?(?=(?:[A-Z0-9#]|openSUSE))')
-lastsentenceends = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)(?:\.?\.?[.!?][])}]?|[:;])\s*$')
-
-# trypatterns() checks if a sub-pattern of a given pattern matches nothing
-# (and looks unusual while doing that), i.e. subpatterns like (this|), (|this),
-# or (th||is)
-# FIXME: This will fail on character classes like: [(]
-emptysubpattern = re.compile(r'(?<!\\)(\|\)|\(\||\|\|)')
-
 
 re_cache = {}
 
@@ -197,10 +176,10 @@ def sentencesegmenter(text):
  
     :param str text: text to split into sentences
     """
-    sentences = sentenceends.split(text)
+    sentences = SENTENCEENDS.split(text)
     # The last sentence's final punctuation has not yet been cut off, do that
     # now.
-    sentences[-1] = lastsentenceends.sub('', sentences[-1])
+    sentences[-1] = LASTSENTENCEENDS.sub('', sentences[-1])
 
     # We also need to cut off parentheses etc. from the first word of the first
     # sentence, as that has not been done so far either.
@@ -577,7 +556,7 @@ def trypattern(pattern):
             message = "Expression matches single space"
             sys.exit(1)
 
-        tryresult = emptysubpattern.search(pattern)
+        tryresult = EMPTYSUBPATTERN.search(pattern)
         if tryresult:
             message = "Part of Expression matches empty string"
             sys.exit(1)
@@ -610,7 +589,7 @@ def manglepattern(pattern, mode):
     # implementation only supports up to 100 named groups per
     # expression. onepattern often contains more than 100 groups.
     if mode == 'one':
-        pattern = parentheses.sub('(?:', pattern)
+        pattern = PARENTHESES.sub('(?:', pattern)
 
     # Both contextpattern and onepattern are realised with re.search(),
     # thus need some more information about where a token should really
