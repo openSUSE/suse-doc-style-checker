@@ -49,7 +49,7 @@ class PatternGroup(object):
         self._patterns = patterns
 
     def __repr__(self):
-        return "<{}: {}>".format(type(self).__name__, len(self))
+        return "<{}({}): {}>".format(type(self).__name__, len(self), self._patterns)
 
     def __len__(self):
         return len(self._patterns)
@@ -60,6 +60,9 @@ class PatternGroup(object):
     def __getitem__(self, item):
         return self._patterns[item]
 
+    def check(self, tokens):
+        # TBD
+        pass
 
 # list of contextpatterns, per patterngroup:
 # patterns = [ [ [ contextpattern, [-2,-1], True ], [ contextpattern, [1], False ], ... ], [], ... ]
@@ -71,3 +74,20 @@ class PatternGroup(object):
 #                                                                     position(s) of tokens to check relative to last [positive numbers => after]
 #                                                                          matching mode [False => negative, pattern must not appear in any of given places]
 # global contextpatterns
+
+
+
+class Term(object):
+    def __init__(self, termelement):
+        self._term = termelement
+        # self._accepts = termelement[0]
+        # self._patterngroups = termelement[1:]
+        self._structure = []
+
+        self._buildaccepts(termelement[0])
+        self._buildpatterngroups(termelement[1:])
+
+
+    def check(self, tokens):
+        for pattern in self._patterngroups:
+            pattern.check(tokens)
