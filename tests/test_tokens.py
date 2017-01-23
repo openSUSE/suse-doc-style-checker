@@ -1,7 +1,8 @@
 #
 
 import pytest
-from sdsc import tokenizer, isDupe
+from sdsc import isDupe
+from sdsc.tokens import tokenizer
 
 
 @pytest.mark.parametrize("tokens,expected",
