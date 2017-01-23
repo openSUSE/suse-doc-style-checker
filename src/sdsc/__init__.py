@@ -374,11 +374,10 @@ def buildtermdata(context, terms, ignoredwords, useonepattern):
     global onepattern
 
     # Not much use, but ... let's make this a real boolean.
-    useonepatterntemp = True
-    if useonepattern:
-        if useonepattern[0] == 'no':
-            useonepatterntemp = False
-    useonepattern = useonepatterntemp
+    if useonepattern and useonepattern[0] == 'no':
+        useonepattern = False
+    else:
+        useonepattern = True
 
     onepattern = "" if useonepattern else None
 
