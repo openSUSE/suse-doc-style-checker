@@ -175,14 +175,14 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
             # Don't use enumerate with patterngroupposition, its value
             # depends on being defined in this scope.
             patterngroupposition = 0
-            for acceptposition, accept in enumerate(accepts):
+
+            for accept, patterngroups in zip(accepts, patterns):
                 if trynextterm:
                     acceptword = accept[0]
                     acceptcontext = accept[1]
 
                     # FIXME: variable names are a bit of a mouthful
-                    patterngroupstoaccept = patterns[acceptposition]
-                    for patterngrouppatterns in patterngroupstoaccept:
+                    for patterngrouppatterns in patterngroups:
                         if not trynextterm:
                             break
                         if (wordposition + len(patterngrouppatterns)) > totalwords:
