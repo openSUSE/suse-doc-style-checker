@@ -90,7 +90,8 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
     if not content:
         return []
 
-    assert int(termfileid[0]) == int(termdataid), "Terminology data was not correctly initialized."
+    if int(termfileid[0]) != int(termdataid):
+        raise ValueError('Terminology data was not correctly initialized.')
 
     # I get this as a list with one lxml.etree._ElementUnicodeResult.
     # I need a single string.
