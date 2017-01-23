@@ -30,6 +30,7 @@ import time
 import random
 import webbrowser
 
+
 from lxml import etree
 # all module names in singular for predictability.
 from .cli import printcolor, parseargs
@@ -44,7 +45,7 @@ from .textutil import (counttokens,
                        tokenizer,
                        xmlescape,
                        )
-
+from .struct import Accept, PatternGroup
 
 # Global flags
 flag_performance = False
@@ -178,8 +179,8 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
 
             for accept, patterngroups in  zip(accepts, patterns):
                 if trynextterm:
-                    acceptword = accept[0]
-                    acceptcontext = accept[1]
+                    acceptword = accept.context
+                    acceptcontext = accept.proposal
 
                     # FIXME: variable names are a bit of a mouthful
                     for patterngrouppatterns in patterngroups:
@@ -286,6 +287,7 @@ def matchcontextpattern(words, wordposition, totalwords,
     match = bool(contextstring) and bool(contextpattern[0].search(contextstring))
     return bool(contextpattern[2]) == match
 
+
 def preparetermpatterns(term, useonepattern):
     """ Prepare regular expression patterns contained in the <term/> elements
     of an XML source by extracting their main pattern and context patterns
@@ -374,11 +376,7 @@ def buildtermdata(context, terms, ignoredwords, useonepattern):
     global onepattern
 
     # Not much use, but ... let's make this a real boolean.
-    useonepatterntemp = True
-    if useonepattern:
-        if useonepattern[0] == 'no':
-            useonepatterntemp = False
-    useonepattern = useonepatterntemp
+    useonepattern = False if useonepattern and useonepattern[0] == 'no' else True
 
     onepattern = "" if useonepattern else None
 
@@ -396,8 +394,8 @@ def buildtermdata(context, terms, ignoredwords, useonepattern):
     else:
         ignoredpattern = False
 
-    accepts = [prepareaccept(term) for term in terms]
-    patterns = [preparetermpatterns(term, useonepattern) for term in terms]
+    accepts = [Accept(*prepareaccept(term)) for term in terms]
+    patterns = [PatternGroup(*preparetermpatterns(term, useonepattern)) for term in terms]
 
     if useonepattern:
         onepattern = onepattern[1:]
@@ -501,6 +499,8 @@ def prepareaccept(term):
     (<accept/>), and if available, its context (<context/>).
 
     :param ??? term: XML source of a <term/> element
+    :return: tuple of (proposal, context)
+    :rtype: tuple
     """
 
     acceptwordxpath = term.xpath('accept[1]/proposal[1]')
