@@ -50,10 +50,11 @@ def removepunctuation(word, start=False, end=False):
 def sanitizepunctuation(text, quotes=False, apostrophes=False):
     """Ensures that we always work on the same kind of quotes and apostrophes.
 
-    Parameters:
-    text   - str() of text that we want to look at
-    quotes - bool(): quotes should quotes be sanitized?
-    apos   - bool(): quotes should apostrophes be sanitized?
+    :param str text: text that we want to look at
+    :param bool quotes: quotes should quotes be sanitized?
+    :param bool apos: quotes should apostrophes be sanitized?
+    :return: quoted text
+    :rtype: str
     """
 
     if quotes:
@@ -61,10 +62,20 @@ def sanitizepunctuation(text, quotes=False, apostrophes=False):
         # was a opening quote or a closing quote.
         # Replace quotes only if they are at start/end of a word.
 
-        quote = re_compile(r'((?<=^)[«»‹›“”„‟‘’‚‛「」『』](?=[\w\d])|(?<=\s)[«»‹›“”„‟‘’‚‛「」『』](?=[a-z0-9])|(?<=[\w\d])[«»‹›“”„‟‘’‚‛「」『』](?=$|[^\w\d]))', re.I)
+        quote = re_compile(r'((?<=^)[«»‹›“”„‟‘’‚‛「」『』]'
+                           r'(?=[\w\d])|'
+                           r'(?<=\s)[«»‹›“”„‟‘’‚‛「」『』]'
+                           r'(?=[a-z0-9])|'
+                           r'(?<=[\w\d])[«»‹›“”„‟‘’‚‛「」『』]'
+                           r'(?=$|[^\w\d]))',
+                           re.I)
         # I need the quote_before version additionally because look-behinds must
         # be fixed-length -- it is expensive to try to be correct. Bah.
-        quote_before = re_compile(r'((?<=[^\w\d])[«»‹›“”„‟‘’‚‛「」『』](?=[\w\d])|(?<=\s)[«»‹›“”„‟‘’‚‛「」『』](?=[a-z0-9]))', re.I)
+        quote_before = re_compile(r'((?<=[^\w\d])[«»‹›“”„‟‘’‚‛「」『』]'
+                                  r'(?=[\w\d])|'
+                                  r'(?<=\s)[«»‹›“”„‟‘’‚‛「」『』]'
+                                  r'(?=[a-z0-9]))',
+                                  re.I)
         text = quote.sub('"', text)
         text = quote_before.sub('"', text)
     if apostrophes:
