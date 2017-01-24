@@ -11,6 +11,7 @@ Thumbs.db
 .DS_Store
 MANIFEST
 /src/*.xml
+.idea
 
 # Manpages
 man/*.1
