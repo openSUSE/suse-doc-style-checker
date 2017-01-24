@@ -43,3 +43,7 @@ LASTSENTENCEENDS = re.compile(r'(?<![Ee]\.g|etc|[Ii]\.e|.ca|[Nn]\.[Bb]|[Ii]nc)'
 # or (th||is)
 # FIXME: This will fail on character classes like: [(|]
 EMPTYSUBPATTERN = re.compile(r'(?<!\\)(\|\)|\(\||\|\|)')
+
+
+STARTPUNCTUATION = '([{"\'¡¿<“„‟‘‚‛「『【〚〖〘〔〈《'
+ENDPUNCTUATION = '〉》〕〙〗〛】”’‛」』>)]}/\\"\',:;!?.‥…‼‽⁇⁈⁉'
