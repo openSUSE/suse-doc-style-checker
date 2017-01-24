@@ -24,10 +24,11 @@ def removepunctuation(word, start=False, end=False):
     """Removes punctuation from beginning/end of tokens (i.e. does not
     expect sentences!).
 
-    Parameters:
-    text  - str(), token that we want to look at
-    start  - bool(): remove punctuation from start of token?
-    apos   - bool(): remove punctuation from end of token?
+    :param str text: token that we want to look at
+    :param bool start: remove punctuation from start of token?
+    :param bool end: remove punctuation from end of token?
+    :return: word without quotes
+    :rtype: str
     """
 
     if isinstance(word, list):
@@ -37,6 +38,7 @@ def removepunctuation(word, start=False, end=False):
             word = word[:-1] + [removepunctuation(word[-1], end=True)]
         return word
 
+    # FIXME: Maybe move this as constant into const.py?
     startpunctuation = '([{"\'¡¿<“„‟‘‚‛「『【〚〖〘〔〈《'
     endpunctuation = '〉》〕〙〗〛】”’‛」』>)]}/\\"\',:;!?.‥…‼‽⁇⁈⁉'
 
