@@ -1,26 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
 <chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.lists">
     <title>Lists test</title>
-    <para xml:id="sdsc.expect.warning.lists.2">
-        <variablelist>
-            <varlistentry><term/><listitem>
-                <variablelist>
-                    <varlistentry><term/><listitem>
+    <para>
+        And the water had abated.
+    </para>
+   <!-- Deeply nested lists. -->
+    <variablelist xml:id="vl.sdsc.valid.1">
+        <varlistentry><term/><listitem><para/></listitem></varlistentry>
+        <varlistentry><term/><listitem><para/></listitem></varlistentry>
+    </variablelist>
+    <variablelist xml:id="vl.sdsc.expect.warning.lists.2">
+        <varlistentry><term/><listitem>
+            <variablelist>
+                <varlistentry>
+                    <term/>
+                    <listitem>
                         <variablelist>
                             <varlistentry><term/><listitem><para/></listitem></varlistentry>
                             <varlistentry><term/><listitem><para/></listitem></varlistentry>
                         </variablelist>
-                    </listitem></varlistentry>
-                    <varlistentry><term/><listitem><para/></listitem></varlistentry>
-                 </variablelist>
-            </listitem></varlistentry>
-            <varlistentry><term/><listitem><para/></listitem></varlistentry>
-            </variablelist>
-    </para>
-    <para xml:id="sdsc.valid">
-        <variablelist>
-            <varlistentry><term/><listitem><para/></listitem></varlistentry>
-            <varlistentry><term/><listitem><para/></listitem></varlistentry>
-        </variablelist>
-    </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                <term/>
+                <listitem>
+                <para/>
+                </listitem>
+                </varlistentry>
+             </variablelist>
+        </listitem></varlistentry>
+        <varlistentry><term/><listitem><para/></listitem></varlistentry>
+    </variablelist>
+    <variablelist xml:id="vl.sdsc.expect.warning.lists.3">
+     <varlistentry>
+      <term/>
+      <listitem>
+       <para/>
+       <itemizedlist>
+        <listitem>
+         <para/>
+         <orderedlist>
+          <listitem>
+           <para/>
+          </listitem>
+          <listitem>
+           <para/>
+          </listitem>
+         </orderedlist>
+        </listitem>
+        <listitem>
+         <para/>
+        </listitem>
+       </itemizedlist>
+      </listitem>
+     </varlistentry>
+     <varlistentry>
+       <term/>
+       <listitem>
+        <para/>
+       </listitem>
+     </varlistentry>
+    </variablelist>
+
+    <itemizedlist xml:id="il.sdsc.expect.warning.lists.4">
+     <listitem>
+      <para/>
+      <orderedlist>
+       <listitem>
+        <para/>
+        <orderedlist>
+         <listitem>
+          <para/>
+         </listitem>
+         <listitem>
+          <para/>
+         </listitem>
+        </orderedlist>
+       </listitem>
+       <listitem>
+        <para/>
+       </listitem>
+      </orderedlist>
+     </listitem>
+     <listitem>
+      <para/>
+     </listitem>
+    </itemizedlist>
+
+    <!-- Lists with low counts of entries. -->
+    <itemizedlist xml:id="il.sdsc.expect.error.lists.5">
+     <listitem>
+      <para/>
+     </listitem>
+    </itemizedlist>
+    <orderedlist xml:id="ol.sdsc.expect.error.lists.6">
+     <listitem>
+      <para/>
+     </listitem>
+    </orderedlist>
+    <orderedlist xml:id="ol.sdsc.valid.7">
+     <listitem>
+      <para/>
+     </listitem>
+     <listitem>
+      <para/>
+     </listitem>
+     <listitem>
+      <para/>
+     </listitem>
+    </orderedlist>
+    <table>
+    <title>A List in a Table</title>
+    <tgroup cols="2">
+     <thead>
+      <row>
+       <entry>
+        <para>
+         Category
+        </para>
+       </entry>
+       <entry>
+        <para>
+         List
+        </para>
+       </entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>
+        <para>
+         This list is good:
+        </para>
+       </entry>
+       <entry>
+        <itemizedlist  xml:id="il.sdsc.valid.8">
+         <listitem>
+          <para>List entry 0</para>
+         </listitem>
+         <listitem>
+          <para>List entry 1</para>
+         </listitem>
+         <listitem>
+          <para>List entry 2</para>
+         </listitem>
+         <listitem>
+          <para>List entry 3</para>
+         </listitem>
+        </itemizedlist>
+       </entry>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
+   <table>
+    <title>A List in a Table</title>
+    <tgroup cols="2">
+     <thead>
+      <row>
+       <entry>
+        <para>
+         Category
+        </para>
+       </entry>
+       <entry>
+        <para>
+         List
+        </para>
+       </entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>
+        <para>
+         This list is bad:
+        </para>
+       </entry>
+       <entry>
+        <itemizedlist xml:id="il.sdsc.expect.error.lists.9">
+         <listitem>
+          <para>List entry 0</para>
+         </listitem>
+        </itemizedlist>
+       </entry>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
 </chapter>
