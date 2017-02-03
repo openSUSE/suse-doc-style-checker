@@ -171,10 +171,11 @@
       <context>time</context>
     </accept>
     <patterngroup>
-      <pattern>once</pattern>
+      <pattern>once(?![-,:;])</pattern>
       <!-- *.ed is for constructs with verbs in past tense: "Once typed, ..."-->
-      <contextpattern>(the|a|an|it|they|.*?ed)</contextpattern>
+      <contextpattern>(the|a|an|you|s?he|it|we|us|they|i|.*?ed)</contextpattern>
       <contextpattern match="negative" location="2">(second|minute|hour|day|week|year|half|quarter)</contextpattern>
+      <contextpattern match="negative" look="before">at|only</contextpattern>
     </patterngroup>
   </term>
 

@@ -133,4 +133,21 @@
     <para xml:id="sdsc.expect.error.terminology.23">
         After the session, we all moved upwards.
     </para>
+    <para xml:id="sdsc.expect.error.terminology.24">
+        Once you have deployed OpenStack, test the environment.
+    </para>
+    <para xml:id="sdsc.valid.25">
+        Once a day, start whistling.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.26">
+        Once the computer has booted, do things with it.
+    </para>
+    <para xml:id="sdsc.valid.27">
+        To count multiple types of events at once the list was created.
+    </para>
+    <para xml:id="sdsc.valid.28">
+        <!-- Idiotic example to make sure the that comma detection thing
+        works. -->
+        To count types of events once, the list was created.
+    </para>
 </chapter>
