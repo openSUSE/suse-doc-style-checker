@@ -173,7 +173,9 @@
     <patterngroup>
       <pattern>once(?![-,:;])</pattern>
       <!-- *.ed is for constructs with verbs in past tense: "Once typed, ..."-->
-      <contextpattern>(the|a|an|you|s?he|it|we|us|they|i|.*?ed)</contextpattern>
+      <!-- Note that "i" is used case-insensitively here which may lead to
+      false positives -->
+      <contextpattern>(the|a|an|I|you|s?he|it|we|us|they|.*?ed)</contextpattern>
       <contextpattern match="negative" location="2">(second|minute|hour|day|week|year|half|quarter)</contextpattern>
       <contextpattern match="negative" look="before">at|only</contextpattern>
     </patterngroup>
