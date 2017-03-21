@@ -478,6 +478,15 @@
     </patterngroup>
   </term>
 
+  <term>
+    <accept>
+      <proposal>business case</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>business-?cases?</pattern>
+    </patterngroup>
+  </term>
+
   <!-- Not sure how to check for this the right way. -->
   <!-- <term>
     <accept>
@@ -4475,6 +4484,15 @@
     <patterngroup>
       <pattern>up</pattern>
       <pattern>wards?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>use case</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>use-?cases?</pattern>
     </patterngroup>
   </term>
 
