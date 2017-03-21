@@ -2816,11 +2816,11 @@
       <proposal>operating system</proposal>
     </accept>
     <patterngroup>
-      <pattern>operations?</pattern>
+      <pattern>operati(on|ve)s?</pattern>
       <pattern>systems?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>operati(ons?|ng)-?systems?</pattern>
+      <pattern>operati(on|ve|ng)s?-?systems?</pattern>
     </patterngroup>
   </term>
 
