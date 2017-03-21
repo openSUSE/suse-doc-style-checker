@@ -2804,6 +2804,19 @@
 
   <term>
     <accept>
+      <proposal>operating system</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>operations?</pattern>
+      <pattern>systems?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>operati(ons?|ng)-?systems?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>outward</proposal>
     </accept>
     <patterngroup>
