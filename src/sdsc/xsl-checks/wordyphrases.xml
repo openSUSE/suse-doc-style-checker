@@ -983,6 +983,21 @@
 
   <term>
     <accept>
+      <proposal>similar to</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>not</pattern>
+      <pattern>unlike</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>not</pattern>
+      <pattern>[-a-z0-9]+</pattern>
+      <pattern>unlike</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>show</proposal>
     </accept>
     <patterngroup>
