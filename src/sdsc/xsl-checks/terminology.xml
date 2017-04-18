@@ -1999,11 +1999,15 @@
       <proposal>key combination</proposal>
     </accept>
     <patterngroup>
-      <pattern>keycombos?</pattern>
+      <pattern>(key-?combo|hot-?key)s?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>key(board)?</pattern>
       <pattern>(accelerator|combo|shortcut)s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>hot</pattern>
+      <pattern>keys?</pattern>
     </patterngroup>
   </term>
 

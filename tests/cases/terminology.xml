@@ -165,4 +165,13 @@
     <para xml:id="sdsc.valid.33">
         My business case is better than yours.
     </para>
+    <para xml:id="sdsc.valid.34">
+        Use a key combination to change the sort field.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.35">
+        YaST has a set of advanced hotkeys.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.36">
+        To edit a key combo, first click the row.
+    </para>
 </chapter>
