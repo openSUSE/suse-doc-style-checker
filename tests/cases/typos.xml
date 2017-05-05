@@ -121,6 +121,14 @@
         If the values differ, specify the your host name.
     </para>
     <para xml:id="sdsc.expect.error.typos.39">
-        If the values differ, specify a these host names.
+        This is a minimal setup to run Slurm with "munge" support on one
+        compute note and multiple control nodes.
+    </para>
+    <para xml:id="sdsc.valid.40">
+        This is a minimal setup to run Slurm with "munge" support on one
+        compute node and multiple control nodes.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.41">
+        For more information, see the release node.
     </para>
 </chapter>

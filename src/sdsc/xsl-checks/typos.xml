@@ -650,6 +650,29 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>node</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>notes?</pattern>
+      <!-- would love to check for "cluster note" too, but then again if
+      someone makes themselves notes about using clusters, that might be too
+      far-reaching-->
+      <contextpattern look="before">(compute|control|(misbehav|fail)(ing|ed)|failover)</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>notes</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>nodes?</pattern>
+      <contextpattern look="before">release</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>not</proposal>
     </accept>
     <patterngroup>
