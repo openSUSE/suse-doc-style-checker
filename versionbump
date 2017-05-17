@@ -10,6 +10,7 @@ format=$(sed -r -n "s/^format: *(.+)\$/\1/ p" $config)
 formathuman=$(sed -r -n 's/^formathuman: (.*)$/\1/ p' $config)
 currentversion=$(sed -r -n "s/^version: *($format)\$/\1/ p" $config)
 files=$(sed -r -n 's/^files: *(([-_./a-zA-Z0-9]+ *)+)/\1/ p' $config)
+changes=$(sed -r -n 's/^changesfile: *(([-_./a-zA-Z0-9]+ *)+)/\1/ p' $config)
 
 if [[ $1 == '' ]]; then
   currentversion=$(sed -r -n 's/^version: *(.+)$/\1/ p' $config)
@@ -21,7 +22,7 @@ if [[ $1 == '' ]]; then
 fi
 
 if [[ $currentversion == '' ]]; then
-  echo "Old version number does not adhere to format: $format. Continue anyway? y/[n]"
+  echo -n "Old version number does not adhere to format: $format. Continue anyway? y/[n] "
   read DECISION
   if [[ ! $DECISION == 'y' ]] && [[ ! $DECISION == 'yes' ]]; then
     echo "(meh) Not setting new version number."
@@ -37,7 +38,7 @@ if [[ ! $(echo $bumpedversion | grep -P "^$format\$") ]]; then
   exit
 fi
 
-echo "Really set new version number $bumpedversion? y/[n]"
+echo -n "Really set new version number $bumpedversion? y/[n] "
 read DECISION
 if [[ ! $DECISION == 'y' ]] && [[ ! $DECISION == 'yes' ]]; then
   echo "(meh) Not setting new version number."
@@ -49,12 +50,25 @@ for versionfile in $config $files; do
 done
 echo "Set version number: $currentversion => $bumpedversion"
 
-echo "Commit and tag version $bumpedversion? y/[n]"
+if [[ $(grep -o "$bumpedversion" $changes) ]]; then
+  echo "(yay) Changes file appears to mention version $bumpedversion already."
+else
+  echo "(aem) Changes file does not appear to mention $bumpedversion yet."
+fi
+echo -n "Open changes file for editing? [y]/n "
+read DECISION
+if [[ ! $DECISION == 'n' ]] && [[ ! $DECISION == 'no' ]]; then
+  $EDITOR $changes
+else
+  echo "(kay) Using changes as-is."
+fi
+
+echo -n "Commit and tag version $bumpedversion? y/[n] "
 read DECISION
 if [[ ! $DECISION == 'y' ]] && [[ ! $DECISION == 'yes' ]]; then
   echo "(meh) Not creating commit and tag."
   exit
 else
-  git commit -m "Set version to $bumpedversion" $files $config
+  git commit -m "Set version to $bumpedversion" $files $changes $config
   git tag "$bumpedversion"
 fi
