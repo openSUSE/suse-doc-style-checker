@@ -20,6 +20,7 @@ install:
   - easy_install --version
   - pip --version
   - tox --version
+  - pip install -r test_requirements.txt
 script:
   - tox -v
 after_failure:
@@ -27,6 +28,8 @@ after_failure:
   - more .tox/*/log/* | cat
 after_success:
   - coveralls
+  - coverage xml
+  - python-codacy-coverage -r coverage.xml
 notifications:
   email:
     on_success: never
