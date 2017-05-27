@@ -28,7 +28,7 @@ See the wiki for how to set up your test environment:
 Lucky Charms
 ------------
 
-[![Build Status](https://travis-ci.org/openSUSE/suse-doc-style-checker.svg?branch=develop)](https://travis-ci.org/openSUSE/suse-doc-style-checker)^M
+[![Build Status](https://travis-ci.org/openSUSE/suse-doc-style-checker.svg?branch=develop)](https://travis-ci.org/openSUSE/suse-doc-style-checker)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/456aa12ad22b4550a9d91f34b850a3ea)](https://www.codacy.com/app/tomschr/suse-doc-style-checker?utm_source=github.com&utm_medium=referral&utm_content=openSUSE/suse-doc-style-checker&utm_campaign=badger)
 [![Coverage Status](https://coveralls.io/repos/github/openSUSE/suse-doc-style-checker/badge.svg?branch=feature%2Fcoverage)](https://coveralls.io/github/openSUSE/suse-doc-style-checker?branch=feature%2Fcoverage)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/openSUSE/suse-doc-style-checker/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/openSUSE/suse-doc-style-checker/?branch=develop)
