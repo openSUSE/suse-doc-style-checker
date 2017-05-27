@@ -20,6 +20,7 @@ install:
   - easy_install --version
   - pip --version
   - tox --version
+  - pip install -r test_requirements.txt
 script:
   - tox -v
 after_failure:
