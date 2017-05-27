@@ -3,3 +3,4 @@ tox
 pytest
 pytest-cov
 coveralls
+codacy-coverage
