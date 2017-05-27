@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 
 import io
-import sys
 import os
 import os.path
 import re
 
 from setuptools import setup, find_packages
-from setuptools.command.test import test as TestCommand
 
 # FIXME: this information should come from the script itself...
 __projectname__ = "suse-doc-style-checker"
@@ -39,23 +37,6 @@ def find_version(*file_paths):
     if version_match:
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
-
-
-def listdir(path, ignore=None):
-    """Lists all files recursively, starting from a given directory
-    """
-    result = []
-    for root, sub, files in os.walk(path):
-        for f in files:
-            result.append(os.path.join(root, f))
-    if ignore is not None:
-        delete=[]
-        for i in result:
-           for j in ignore:
-              if re.search(j, i) and (i not in delete):
-                  delete.append(i)
-        result=set(result) - set(delete)
-    return result
 
 
 setupdict = dict(
