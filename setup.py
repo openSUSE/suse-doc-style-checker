@@ -25,6 +25,7 @@ def read(*names, **kwargs):
                  encoding=kwargs.get("encoding", "utf8")) as fp:
         return fp.read()
 
+
 def find_version(*file_paths):
     """Read __version__ string from file paths
 
@@ -40,25 +41,25 @@ def find_version(*file_paths):
 
 
 setupdict = dict(
-    name = __projectname__,
+    name=__projectname__,
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # http://python-packaging-user-guide.readthedocs.org/en/latest/single_source_version/
-    version = find_version("src", "sdsc", "__init__.py"), # __version__,
+    version=find_version("src", "sdsc", "__init__.py"),  # __version__,
 
-    description = __description__,
-    long_description = "Checks a given DocBook XML file for stylistic errors using check files written in XSLT",
+    description=__description__,
+    long_description="Checks a given DocBook XML file for stylistic errors using check files written in XSLT",
 
     # The project's main homepage.
-    url = 'https://www.github.org/openSUSE/suse-doc-style-checker',
-    download_url = 'https://github.org/openSUSE/suse-doc-style-checker/releases',
+    url='https://www.github.org/openSUSE/suse-doc-style-checker',
+    download_url='https://github.org/openSUSE/suse-doc-style-checker/releases',
 
     # Author details
-    author = __authors__,
-    author_email = 'sknorr@suse.de',
+    author=__authors__,
+    author_email='sknorr@suse.de',
 
-    license = __license__,
+    license=__license__,
 
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
@@ -89,7 +90,7 @@ setupdict = dict(
     # See also:
     # http://stackoverflow.com/a/16576850
     # https://pythonhosted.org/setuptools/setuptools.html#including-data-files
-    include_package_data = True,
+    include_package_data=True,
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
@@ -106,12 +107,12 @@ setupdict = dict(
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
-    #package_data={
+    # package_data={
     #    '':              ['LICENSE' ],
     #    },
 
     # toms: data_files is not needed anymore as it is all handled by MANIFEST.in
-    #data_files =  [('.',                 ['LICENSE', ]),
+    # data_files =  [('.',                 ['LICENSE', ]),
     #  #...
     #                ],
 
@@ -120,7 +121,7 @@ setupdict = dict(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'console_scripts': ['sdsc=sdsc:main'],
-        },
+    },
 
     # Required packages for using "setup.py test"
     setup_requires=['pytest-runner'],
@@ -128,7 +129,7 @@ setupdict = dict(
 
     # Actually run tests
     # cmdclass = {'test': PyTest},
-    )
+)
 
 
 # Call it:
