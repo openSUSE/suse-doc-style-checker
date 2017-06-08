@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminology useonepattern="yes">
+
+  <term>
+    <accept>
+      <proposal>their</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>his|her</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>them</proposal>
+    </accept>
+    <patterngroup>
+      <!-- I suspect we need a more sophisticated check for "her," because
+      it can, depending on position be replaced with either "them" and "their".
+      -->
+      <pattern>he|she|him</pattern>
+    </patterngroup>
+  </term>
+
+</terminology>
