@@ -174,4 +174,22 @@
     <para xml:id="sdsc.expect.error.terminology.36">
         To edit a key combo, first click the row.
     </para>
+    <para xml:id="sdsc.expect.error.terminology.37">
+        The prepared structure also already provides for aarch64 systems.
+    </para>
+    <para xml:id="sdsc.valid.38">
+        The prepared structure also already provides for AArch64 systems.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.39">
+        The prepared structure also already provides for AArch 64 systems.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.40">
+        The prepared structure also already provides for AArch-64 systems.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.41">
+        The prepared structure also already provides for armv8 systems.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.42">
+        The prepared structure also already provides for Arch64 systems.
+    </para>
 </chapter>

@@ -153,11 +153,14 @@
       <proposal>AArch64</proposal>
     </accept>
     <patterngroup>
-      <pattern>arm-?(64|v8)</pattern>
+      <pattern>(((arm|arch)[-_]?|aarch[-_])v?(64|8)|aarch[-_]?v?8)</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>arm</pattern>
-      <pattern>(64(-?bit)?|v8)</pattern>
+      <pattern case="keep">([Aa]arch|a[aA][rR][cC][hH]|AARCH)64</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(arm|aarch|arch)</pattern>
+      <pattern>(64(-?bit)?|v?8)</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>64(-?bit)?</pattern>
