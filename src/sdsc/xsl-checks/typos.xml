@@ -347,6 +347,21 @@ GNU GPL.
     </patterngroup>
   </term>
 
+  <!-- Might be a bit trigger-happy. There are valid sentences that can be
+  formed with both "for instants" and "for instances" (though "for instant"
+  is very likely inaccurate, but it is the still unclear if it supposed to
+  mean "for an instant" or "for (some) instants"). Can we do something with
+  context here? -->
+  <!-- <term>
+    <accept>
+      <proposal>instance</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>instan(ts?|ces)</pattern>
+      <contextpattern look="before">for</contextpattern>
+    </patterngroup>
+  </term> -->
+
   <term>
     <accept>
       <proposal>exists</proposal>
