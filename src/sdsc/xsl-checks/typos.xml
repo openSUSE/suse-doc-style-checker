@@ -530,6 +530,25 @@ GNU GPL.
 
   <term>
     <accept>
+      <!-- FIXME: 3 proposals would be better:
+      1. remove "is"
+      2. use "it"
+      3. do /s$/d$/ for the second verb
+      -->
+      <proposal>it</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>is</pattern>
+      <!-- FIXME: verb list is not a great idea... better than nothing for
+      now. Maybe possible via entity at least? -->
+      <!-- Need to avoid words that can be both verb or noun: changes,
+      limits, overrides, passes, fixes, fails, moves, writes -->
+      <contextpattern>has|does|makes|was|wants|lets|tries|installs|configures|shows|gives|reduces|improves|(de|in)creases|requires|means|helps|allows|denies|prevents|(in|ex)cludes|elimiantes|terminates|happens|creates|removes|adds|starts|generates|(dis|en)ables|guarantees|controls|runs|provides|occurs|[ei]nsures|integrates|refers|defines|describes|tells|opens|closes|prints</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>issue</proposal>
     </accept>
     <patterngroup>
