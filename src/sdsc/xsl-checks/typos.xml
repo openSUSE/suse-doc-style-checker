@@ -119,6 +119,7 @@ GNU GPL.
     <patterngroup>
       <pattern>[ai]n</pattern>
       <contextpattern look="before">one</contextpattern>
+      <contextpattern>the</contextpattern>
       <contextpattern location="2">same</contextpattern>
     </patterngroup>
     <patterngroup>
@@ -1282,6 +1283,8 @@ GNU GPL.
   <term>
     <accept/>
     <patterngroup>
+      <!-- Two proposals would be better for "an the/your/...", because
+      it is equally likely that "and the/your/..." is meant. -->
       <pattern>an?</pattern>
       <contextpattern>(your|which|th[oe]se|the)</contextpattern>
     </patterngroup>
