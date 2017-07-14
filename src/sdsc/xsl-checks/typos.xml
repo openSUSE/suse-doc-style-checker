@@ -1251,10 +1251,15 @@ GNU GPL.
       <proposal>world</proposal>
     </accept>
     <patterngroup>
-      <pattern>all</pattern>
-      <contextpattern>over</contextpattern>
-      <contextpattern location="2">the</contextpattern>
-      <contextpattern location="3">word</contextpattern>
+      <pattern>words?</pattern>
+      <contextpattern location="3" look="before">all</contextpattern>
+      <contextpattern location="2" look="before">over</contextpattern>
+      <contextpattern look="before">the</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>words?</pattern>
+      <contextpattern location="2" look="before">around</contextpattern>
+      <contextpattern look="before">the</contextpattern>
     </patterngroup>
   </term>
 
