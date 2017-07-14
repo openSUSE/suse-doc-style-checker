@@ -1236,6 +1236,14 @@ GNU GPL.
       <pattern>wea?ther</pattern>
       <contextpattern look="before">(ask|question)(ed|s|ing)?</contextpattern>
     </patterngroup>
+    <patterngroup>
+      <!-- Catch just the typo here, the style rule about not using "whether
+      or not" is independent. -->
+      <pattern>wea?ther</pattern>
+      <contextpattern>or</contextpattern>
+      <contextpattern location="2">not</contextpattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">good|bad|rainy|cloudy|sunny|stormy</contextpattern>
+    </patterngroup>
   </term>
 
   <term>
