@@ -968,7 +968,7 @@ GNU GPL.
       <proposal>se</proposal>
     </accept>
     <patterngroup>
-      <pattern>say</pattern>
+      <pattern>say|see|sea</pattern>
       <contextpattern look="before">per</contextpattern>
     </patterngroup>
   </term>

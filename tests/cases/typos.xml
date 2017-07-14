@@ -176,4 +176,13 @@
     <para xml:id="sdsc.valid.56">
         The papers went through a peer review process in early May before being published.
     </para>
+    <para xml:id="sdsc.expect.error.typos.57">
+        This is not bad per see, but not convenient either.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.58">
+        This is not bad per say, but not convenient either.
+    </para>
+    <para xml:id="sdsc.valid.59">
+        This is not bad per se, but not convenient either.
+    </para>
 </chapter>
