@@ -906,6 +906,22 @@ GNU GPL.
     </patterngroup>
   </term>
 
+   <term>
+     <accept>
+      <proposal>peer</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>((pe[ae]r|pair|pare)[-_]?(to|2)[-_]?(pe[ea]r|pair|pare)|pear|pair|pare)</pattern>
+      <contextpattern>review</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>pe[ae]r|pair|pare</pattern>
+      <pattern>to|2</pattern>
+      <pattern>pe[ae]r|pair|pare</pattern>
+      <contextpattern>review</contextpattern>
+    </patterngroup>
+  </term>
+
   <term>
     <accept>
       <proposal>principle</proposal>

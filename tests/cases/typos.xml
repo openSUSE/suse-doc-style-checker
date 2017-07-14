@@ -164,4 +164,16 @@
     <para xml:id="sdsc.valid.52">
         Follow the instruction exactly as shown in the first chapter.
     </para>
+    <para xml:id="sdsc.expect.error.typos.53">
+        The papers went through a peer-to-peer review process in early May before being published.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.54">
+        The papers went through a peer 2 peer review process in early May before being published.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.55">
+        The papers went through a pear review process in early May before being published.
+    </para>
+    <para xml:id="sdsc.valid.56">
+        The papers went through a peer review process in early May before being published.
+    </para>
 </chapter>
