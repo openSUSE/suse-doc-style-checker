@@ -2,6 +2,7 @@
 <!DOCTYPE chapter
 [
   <!ENTITY verbs "add|allow|be|build|change|check|choose|configure|create|define|disable|do|edit|enable|find|get|give|have|install|make|modify|run|see|select|set|specify|start|switch|tell|try|use">
+  <!ENTITY companynames "suse|novell|attachmate|mf|micro(focus)?">
 ]>
 <!--
 Some rules converted from the English Grammar and Typo Rules for LanguageTool,
@@ -620,7 +621,7 @@ GNU GPL.
     <patterngroup>
       <pattern>know(?!-)</pattern>
       <contextpattern>(issue|problem|bug)s?</contextpattern>
-      <contextpattern look="before" location="2" mode="fuzzy" match="negative">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|&companynames;)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>know(?!-)</pattern>
@@ -637,11 +638,11 @@ GNU GPL.
     </patterngroup>
     <patterngroup>
       <pattern>loose</pattern>
-      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|i|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
+      <contextpattern look="before">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|i|you|he|she|it|they|we|&companynames;)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>loose</pattern>
-      <contextpattern look="after">(to|your?|him|her|its|their|our|suse|novell|attachmate)</contextpattern>
+      <contextpattern look="after">(to|your?|him|her|its|their|our|&companynames;)</contextpattern>
     </patterngroup>
   </term>
 
@@ -780,7 +781,7 @@ GNU GPL.
     </patterngroup>
     <patterngroup>
       <pattern>know(?![,\)\]])</pattern>
-      <contextpattern>(they|you|attachmate|suse|novell|k?nows)</contextpattern>
+      <contextpattern>(they|you|k?nows|&companynames;)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>know</pattern>
