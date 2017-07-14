@@ -957,6 +957,17 @@ GNU GPL.
     </patterngroup>
   </term>
 
+   <term>
+     <accept>
+      <proposal>shown</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>show</pattern>
+      <contextpattern look="before">as</contextpattern>
+      <contextpattern>on|in|at</contextpattern>
+    </patterngroup>
+  </term>
+
   <term>
     <accept>
       <proposal>software</proposal>

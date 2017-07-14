@@ -158,4 +158,10 @@
     <para xml:id="sdsc.expect.error.typos.50">
         All over the word, movie poster are asking questions that seem irrelevant.
     </para>
+    <para xml:id="sdsc.expect.error.typos.51">
+        Follow the instruction exactly as show in the first chapter.
+    </para>
+    <para xml:id="sdsc.valid.52">
+        Follow the instruction exactly as shown in the first chapter.
+    </para>
 </chapter>
