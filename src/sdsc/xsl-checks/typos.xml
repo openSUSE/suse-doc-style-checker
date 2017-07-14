@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter
+[
+  <!ENTITY verbs "add|allow|be|build|change|check|choose|configure|create|define|disable|do|edit|enable|find|get|give|have|install|make|modify|run|see|select|set|specify|start|switch|tell|try|use">
+]>
 <!--
 Some rules converted from the English Grammar and Typo Rules for LanguageTool,
 Copyright (C) 2001-2012 Daniel Naber (http://www.danielnaber.de), licensed
@@ -1263,8 +1267,18 @@ GNU GPL.
     </accept>
     <patterngroup>
       <pattern>your</pattern>
-      <!-- "might"/"will"/"can" are also nouns, so don't check for them here. -->
-      <contextpattern>((c|sh|w)ould|shall|may|are)</contextpattern>
+       <!-- "might"/"will"/"can"/"may" are also nouns, so don't check for them here. -->
+      <contextpattern>(c|sh|w)ould|shall|are</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <!-- Very incomplete check... there are just too many verbs that could
+      be at position 3. -->
+      <pattern>your</pattern>
+      <contextpattern>can|may|might|will</contextpattern>
+      <!-- Only use verbs here: words like "also", "either" (that often
+      appear at this position) are no indicators: "Your can either sinks or
+      floats.") -->
+      <contextpattern location="2">&verbs;</contextpattern>
     </patterngroup>
   </term>
 
