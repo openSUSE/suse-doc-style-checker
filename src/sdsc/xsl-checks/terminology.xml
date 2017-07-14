@@ -2505,6 +2505,30 @@
 
   <term>
     <accept>
+      <proposal>Micro Focus</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>mi[cr]{2}o[-_]?focus</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern case="keep">MF</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>mirco</pattern>
+      <pattern>focus</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern case="keep">m[iI][cC][rR][oO]|MICRO</pattern>
+      <pattern>focus</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>micro</pattern>
+      <pattern case="keep">f[oO][cC][uU][sS]|FOCUS</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>middle-click</proposal>
     </accept>
     <patterngroup>
