@@ -297,7 +297,7 @@
   </xsl:template>
 
   <!-- Template that starts terminology check. -->
-  <xsl:template match="para|title|entry|db5:para|db5:title|db5:entry" mode="terminology">
+  <xsl:template match="para|simpara|title|entry|db5:para|db5:simpara|db5:title|db5:entry" mode="terminology">
     <xsl:choose>
       <xsl:when test="(self::entry or self::db5:entry) and (para or db5:para)">
         <xsl:apply-templates mode="terminology"/>
