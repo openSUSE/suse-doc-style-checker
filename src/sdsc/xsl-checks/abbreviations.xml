@@ -79,16 +79,18 @@ min., max.
     </patterngroup>
   </term>
 
+  <!-- We cast an extra-wide net for i.e. and e.g. because those are used so
+  often, even by speakers that are less proficient. -->
   <term>
     <accept>
       <proposal>for example</proposal>
     </accept>
     <patterngroup>
-      <pattern>e\.g\.?</pattern>
+      <pattern>e\.?g\.?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>e\.</pattern>
-      <pattern>g\.</pattern>
+      <pattern>g\.?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>f\.[ie]\.?</pattern>
@@ -128,16 +130,22 @@ min., max.
     </patterngroup>
   </term>
 
+  <!-- We cast an extra-wide net for i.e. and e.g. because those are used so
+  often, even by speakers that are less proficient. -->
   <term>
     <accept>
       <proposal>that is</proposal>
     </accept>
     <patterngroup>
+      <!-- IE might also be Internet Explorer, so let's avoid flagging that here. -->
+      <pattern case="keep">[Ii]\.?e\.?</pattern>
+    </patterngroup>
+    <patterngroup>
       <pattern>i\.e\.?</pattern>
     </patterngroup>
     <patterngroup>
       <pattern>i\.</pattern>
-      <pattern>e\.</pattern>
+      <pattern>e\.?</pattern>
     </patterngroup>
   </term>
 

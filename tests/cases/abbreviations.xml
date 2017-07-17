@@ -44,4 +44,28 @@
     <para xml:id="sdsc.expect.error.abbreviations.14">
         We are not sure atm.
     </para>
+    <para xml:id="sdsc.expect.error.abbreviations.15">
+        Humanity has brought forth over ten awesome inventions, eg. XSLT.
+    </para>
+    <para xml:id="sdsc.expect.error.abbreviations.16">
+        Humanity has brought forth over ten awesome inventions, e.g XSLT.
+    </para>
+    <para xml:id="sdsc.expect.error.abbreviations.17">
+        Eg, Humanity has brought forth over ten awesome inventions like XSLT.
+    </para>
+    <para xml:id="sdsc.expect.error.abbreviations.18">
+        Humanity has brought forth over ten awesome inventions, e. g XSLT.
+    </para>
+    <para xml:id="sdsc.expect.error.abbreviations.19">
+        I am not sure this works well, ie. there may be issues.
+    </para>
+    <para xml:id="sdsc.expect.error.abbreviations.20">
+        I am not sure this works well, ie there may be issues.
+    </para>
+    <para xml:id="sdsc.expect.error.abbreviations.21">
+        I am not sure this works well, i.e. there may be issues.
+    </para>
+    <para xml:id="sdsc.valid.22">
+        I am not sure this works well: In IE, there may be issues.
+    </para>
 </chapter>
