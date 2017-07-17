@@ -35,6 +35,24 @@ min., max.
 
   <term>
     <accept>
+      <proposal>as soon as possible</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>asap</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>at the moment</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>atm</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>compared to</proposal>
     </accept>
     <patterngroup>
@@ -141,11 +159,10 @@ min., max.
     </patterngroup>
   </term>
 
-  <!-- Someone really used ASAP in SUSE's documentation... -->
   <term>
     <accept/>
     <patterngroup>
-      <pattern>(asap|im((ns)?h)?o|afai(c[ts]|k)|ftfy|lol|rofl|idk|yolo|ymmv|tia)</pattern>
+      <pattern>(im((ns)?h)?o|afai(c[ts]|k)|ftfy|lol|rofl|idk|yolo|z?omg|jk|ymmv|tia)</pattern>
     </patterngroup>
   </term>
 
