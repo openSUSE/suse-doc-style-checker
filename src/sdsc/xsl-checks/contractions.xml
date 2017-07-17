@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<terminology ignoredwords="[^cdhimostwy].+">
+<terminology ignoredwords="[^acdhimostwy].+">
   <term>
     <accept>
       <proposal>are not</proposal>
@@ -277,6 +277,24 @@
     </accept>
     <patterngroup>
       <pattern>they'd</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>this will</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>this'll</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>this would</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>this'd</pattern>
     </patterngroup>
   </term>
 
