@@ -201,4 +201,81 @@
     <para xml:id="sdsc.valid.45">
         Micro Focus Vibe remains available.
     </para>
+    <para xml:id="sdsc.valid.46">
+        SUSE CaaS Platform is your platform for next-generation container-based
+        applications.
+    </para>
+    <para xml:id="sdsc.valid.47">
+        SUSE Container as a Service Platform is your platform for
+        next-generation container-based applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.48">
+        CaaS Platform is your platform for next-generation
+        container-based applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.49">
+        CaaSP is your platform for next-generation container-based
+        applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.50">
+        SUSE Container as Service Platform is your platform for
+        next-generation container-based applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.51">
+        SUSE Container as a Services Platform is your platform for
+        next-generation container-based applications.
+    </para>
+    <!-- Don't check for "as as" or "as an" because that creates two
+    messages, one from terminology and one from dupes, respectively a/an. -->
+    <para xml:id="sdsc.expect.error.terminology.52">
+        SUSE Container ass as Services Platform is your platform for
+        next-generation container-based applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.53">
+        SUSE Containers as Services Platform is your platform for
+        next-generation container-based applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.54">
+        SUSE CASP is your platform for next-generation container-based
+        applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.55">
+        CASP is your platform for next-generation container-based
+        applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.56">
+        CASP is your platform for next-generation container-based
+        applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.57">
+        SUSE Containers aaS Platform is your platform for next-generation
+        container-based applications.
+    </para>
+    <para xml:id="sdsc.valid.58">
+        SUSE Cloud Application Platform is your platform for next-generation
+        container-based applications.
+    </para>
+    <para xml:id="sdsc.valid.59">
+        SUSE CAP is your platform for next-generation container-based
+        applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.60">
+        SUSE CA Platforms is your platform for next-generation container-based
+        applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.61">
+        SUSE CA-Platform is your platform for next-generation container-based
+        applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.62">
+        CAP is your platform for next-generation container-based applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.63">
+        SUSE Cloud Applications Platform is your platform for next-generation
+        container-based applications.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.64">
+        Cloud Applications Platform is your platform for next-generation
+        container-based applications.
+    </para>
 </chapter>

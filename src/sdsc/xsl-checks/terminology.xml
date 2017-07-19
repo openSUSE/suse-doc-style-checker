@@ -3904,6 +3904,245 @@
 
   <term>
     <accept>
+      <proposal>SUSE CaaS Platform</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>c[-_]?aa?s[-_]?p(latform'?s?)?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern case="keep">CAA?S|caa?s</pattern>
+      <pattern>Platforms?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>caa?s</pattern>
+      <pattern case="keep">platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>c(ontainer'?s?)?</pattern>
+      <pattern>aa?s</pattern>
+      <pattern case="keep">platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>c</pattern>
+      <pattern>aa?s</pattern>
+      <pattern>platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>caas</pattern>
+      <contextpattern match="negative">platform'?s?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>c[-_]?aa?s[-_]?(p(latform'?s?)?)</pattern>
+      <contextpattern match="negative" look="before">suse</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>caas</pattern>
+      <pattern>platform'?s?</pattern>
+      <contextpattern match="negative" look="before">suse</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>c(ontainer'?s?)?</pattern>
+      <pattern>aas</pattern>
+      <pattern>platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>c(ontainer'?s?)?</pattern>
+      <pattern>aas</pattern>
+      <pattern>platform'?s?</pattern>
+      <contextpattern match="negative" look="before">suse</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>SUSE Container as a Service Platform</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>container'?s</pattern>
+      <pattern>a[ns]*</pattern>
+      <pattern>a[ns]*</pattern>
+      <pattern>service'?s?</pattern>
+      <pattern>platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>container'?s?</pattern>
+      <pattern>a[ns]*</pattern>
+      <pattern>a[ns]*</pattern>
+      <pattern>service'?s</pattern>
+      <pattern>platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>container'?s?</pattern>
+      <pattern>a(n|ss+)</pattern>
+      <pattern>a[ns]*</pattern>
+      <pattern>service'?s?</pattern>
+      <pattern>platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>container'?s?</pattern>
+      <pattern>a[ns]*</pattern>
+      <pattern>a[ns]+</pattern>
+      <pattern>service'?s?</pattern>
+      <pattern>platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>container'?s?</pattern>
+      <pattern>a[ns]*</pattern>
+      <pattern>a[ns]*</pattern>
+      <pattern>service'?s?</pattern>
+      <!-- Don't flag if there is an apostrophe in platform's because then it
+      might be used as a legitimate possessive. -->
+      <pattern>platforms</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>container'?s?</pattern>
+      <pattern>a[ns]*</pattern>
+      <pattern>service'?s?</pattern>
+      <pattern>platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>container'?s?</pattern>
+      <pattern>a[ns]*</pattern>
+      <pattern>service'?s?</pattern>
+      <pattern>platform'?s?</pattern>
+      <contextpattern match="negative" look="before">suse</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>container'?s?</pattern>
+      <pattern>a[ns]*</pattern>
+      <pattern>a[ns]*</pattern>
+      <pattern>service'?s?</pattern>
+      <pattern>platform'?s?</pattern>
+      <contextpattern match="negative" look="before">suse</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern case="keep">container|CO[Nn][Tt][Aa][Ii][Nn][Ee][Rr]</pattern>
+      <pattern>ass?</pattern>
+      <pattern>a</pattern>
+      <pattern>service</pattern>
+      <pattern>platforms?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>container</pattern>
+      <pattern case="keep">AS[Ss]?</pattern>
+      <pattern>a</pattern>
+      <pattern>service</pattern>
+      <pattern>platform</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>container</pattern>
+      <pattern>ass?</pattern>
+      <pattern case="keep">A</pattern>
+      <pattern>service</pattern>
+      <pattern>platform</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>container</pattern>
+      <pattern>ass?</pattern>
+      <pattern>a</pattern>
+      <pattern case="keep">service|SE[Rr][Vv][Ii][Cc][Ee]</pattern>
+      <pattern>platform</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>container</pattern>
+      <pattern>ass?</pattern>
+      <pattern>a</pattern>
+      <pattern>service</pattern>
+      <pattern case="keep">platform|PL[Aa][Tt][Ff][Oo][Rr][Mm]</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>SUSE CAP</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>caps|capp+s?|ca[-_]p(latform'?s?)?|ca[-_]?p(latform'?s?)</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>ca</pattern>
+      <pattern>platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern case="keep">Cap|c[Aa][Pp]</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern case="keep">CAP</pattern>
+      <contextpattern match="negative" look="before">suse</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>SUSE Cloud Application Platform</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>cloud'?s</pattern>
+      <pattern>application'?s?</pattern>
+      <pattern>platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>cloud'?s?</pattern>
+      <pattern>application'?s</pattern>
+      <pattern>platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>cloud'?s?</pattern>
+      <pattern>application'?s?</pattern>
+      <pattern>platforms</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>cloud'?s?</pattern>
+      <pattern>application'?s?</pattern>
+      <pattern>platform'?s?</pattern>
+      <contextpattern match="negative" look="before">suse</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern case="keep">cloud|CL[Oo][Uu][Dd]</pattern>
+      <pattern>application</pattern>
+      <pattern>platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>cloud</pattern>
+      <pattern case="keep">application|AP[Pp][Ll][Ii][Cc][Aa][Tt][Ii][Oo][Nn]</pattern>
+      <pattern>platform'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>suse</pattern>
+      <pattern>cloud</pattern>
+      <pattern>application</pattern>
+      <pattern case="keep">platform|PL[Aa][Tt][Ff][Oo][Rr][Mm]'?[Ss]?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>SUSE Enterprise Storage</proposal>
     </accept>
     <patterngroup>
@@ -3930,6 +4169,8 @@
     <patterngroup>
       <pattern>suse</pattern>
       <pattern>cloud</pattern>
+      <contextpattern match="negative">application'?s?</contextpattern>
+      <contextpattern match="negative" location="2">platform'?s?</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>suse</pattern>
