@@ -2739,6 +2739,15 @@
   </term>
 
   <term>
+    <accept>
+      <proposal>OBS</proposal>
+    </accept>
+    <patterngroup>
+      <pattern case="keep">OSB|oBS|obs</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
     <accept/>
     <patterngroup>
       <pattern>obvious</pattern>
@@ -2791,6 +2800,47 @@
     </patterngroup>
   </term>
 
+  <term>
+    <accept>
+      <proposal>Open Build Service</proposal>
+    </accept>
+    <!-- Not sure whether to check for openSUSE Build Service which usually
+    refers to the openSUSE-specific instance... -->
+    <patterngroup>
+      <pattern>open(ed|s)?[-_]?build'?s?[-_]?serv(ice|er)'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>open(ed|s)</pattern>
+      <pattern>build'?s?</pattern>
+      <pattern>serv(ice|er)'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>open(ed|s)?</pattern>
+      <pattern>build'?s</pattern>
+      <pattern>serv(ice|er)'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>open(ed|s)?</pattern>
+      <pattern>build'?s?</pattern>
+      <pattern>serv(ices|er'?s?)</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern case="keep">open|OP[Ee][Nn]</pattern>
+      <pattern>build</pattern>
+      <pattern>service'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>open</pattern>
+      <pattern case="keep">build|BU[Ii][Ll][Dd]</pattern>
+      <pattern>service'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>open</pattern>
+      <pattern>build</pattern>
+      <pattern case="keep">service|SE[Rr][Vv][Ii][Cc][Ee]'?[Ss]?</pattern>
+    </patterngroup>
+  </term>
+
   <!-- Not sure this helps much, since this name is outdated anyway -->
   <!-- <term>
     <accept>
@@ -2839,6 +2889,26 @@
     <patterngroup>
       <pattern>open</pattern>
       <pattern case="keep">Source</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
+      <proposal>openQA</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>open[-_]qa'?s?|open(ed|s)?[-_]?qa</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern case="keep">(O[Pp][Ee][Nn][Qq][Aa]|open[Qq]a)'?[Ss]?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>open</pattern>
+      <pattern>qa'?s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>open(ed|s)</pattern>
+      <pattern>qa</pattern>
     </patterngroup>
   </term>
 
