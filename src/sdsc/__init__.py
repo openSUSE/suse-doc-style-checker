@@ -44,6 +44,9 @@ from .textutil import (counttokens,
                        tokenizer,
                        xmlescape,
                        )
+from .spellcheck import (spellcheck,
+                         spellcheckmessage,
+                       )
 
 
 # Global flags
@@ -74,7 +77,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
     """ Check a paragraph using text-level checks involving regular
     expressions. If there is a match, issue a message.
 
-    :param ??? text: information about the context node
+    :param ??? context: information about the context node
     :param int termfileid: the expected ID of the terminology data; this is
         used to check whether terminology was correctly initialized via
         buildtermdata()
@@ -1060,6 +1063,7 @@ def initialize():
         splitpath=splitpath,
         splitvalueunit=splitvalueunit,
         termcheck=termcheck,
+        spellcheck=spellcheck,
         tokenizer=tokenizer,
     ))
 

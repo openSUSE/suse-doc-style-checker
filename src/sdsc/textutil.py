@@ -137,4 +137,13 @@ def tokenizer(text):
 
     :param str text: text to split into tokens
     """
+    # FIXME: For non-XML content, we need to split at /, however, in
+    #content-pretty, we might destroy XML tags doing that. Ugh!
+    # FIXME: We also currently cut away '—', again, that is (mostly) fine for
+    # normal content but it is not for pretty content.
+    #return text.split(' \n\r\t\v—/\\')
+    # replace "client/server" with "client / server", but avoid breaking up
+    # "server</quote>"
+    # FIXME: Paths like /usr/bin/foo are split up as /usr / bin / foo
+    text = re.sub(r'([\w\d])([—/])([\w\d])', r'\1 \2 \3', text)
     return text.split()

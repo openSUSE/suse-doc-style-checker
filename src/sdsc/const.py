@@ -47,3 +47,7 @@ EMPTYSUBPATTERN = re.compile(r'(?<!\\)(\|\)|\(\||\|\|)')
 
 STARTPUNCTUATION = '([{"\'¡¿<“„‟‘‚‛「『【〚〖〘〔〈《'
 ENDPUNCTUATION = '〉》〕〙〗〛】”’‛」』>)]}/\\"\',:;!?.‥…‼‽⁇⁈⁉'
+
+# Filter for the spell checker
+# FIXME: Our use case is hardcoded
+SPELLFILTER = re.compile('(#?[0-9]+|[-—.?<>/\\|\'"{}~`!@#$%^&*()\[\]_=+]+|[a-z]+://.*|[a-z]+\.(log|conf(ig)?|ini|h(xx)?|c(xx)?|o|ldif|diff|xml|xsl|html?|pl|do[ct]x?|xl[st]x?|pp[st]x?|odt|ods|odg|odp))', re.I)

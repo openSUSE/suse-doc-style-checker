@@ -35,6 +35,6 @@
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="*|db5:*" mode="part-title">Typos</xsl:template>
+  <xsl:template match="*|db5:*" mode="part-title">Extended Spelling and Grammar</xsl:template>
 
 </xsl:stylesheet>

@@ -298,9 +298,13 @@
 
   <!-- Template that starts terminology check. -->
   <xsl:template match="para|simpara|title|entry|db5:para|db5:simpara|db5:title|db5:entry" mode="terminology">
+    <!-- Allows switching to "spellcheck" mode. -->
+    <xsl:param name="submode" select="termcheck"/>
     <xsl:choose>
       <xsl:when test="(self::entry or self::db5:entry) and (para or db5:para)">
-        <xsl:apply-templates mode="terminology"/>
+        <xsl:apply-templates mode="terminology">
+          <xsl:with-param name="submode" select="$submode"/>
+        </xsl:apply-templates>
       </xsl:when>
       <xsl:otherwise>
         <xsl:variable name="node" select="."/>
@@ -324,15 +328,27 @@
         <xsl:variable name="content-pretty"><xsl:value-of
           select="normalize-space($content-pretty-candidate)"/></xsl:variable>
 
-        <xsl:copy-of
-          select="py:termcheck($termdataid, $content, $content-pretty, $withinid,
-                               $file, normalize-space($messagetype))"/>
+        <xsl:choose>
+          <xsl:when test="$submode='spellcheck'">
+           <xsl:copy-of
+             select="py:spellcheck($main-dictionary, $custom-dictionary, $content, $content-pretty, $withinid,
+                                  $file, normalize-space($messagetype))"/>
+          </xsl:when>
+          <xsl:otherwise>
+           <xsl:copy-of
+             select="py:termcheck($termdataid, $content, $content-pretty, $withinid,
+                                  $file, normalize-space($messagetype))"/>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
 
   <xsl:template match="*|db5:*" mode="terminology">
-    <xsl:apply-templates mode="terminology"/>
+    <xsl:param name="submode" select="termcheck"/>
+    <xsl:apply-templates mode="terminology">
+      <xsl:with-param name="submode" select="$submode"/>
+    </xsl:apply-templates>
   </xsl:template>
 
   <xsl:template match="*[@role='legal']|legalnotice|db5:*[@role='legal']|db5:legalnotice" mode="terminology"/>
