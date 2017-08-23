@@ -362,7 +362,7 @@
   <term>
     <accept/>
     <patterngroup>
-      <pattern>basically</pattern>
+      <pattern>basically|essentially</pattern>
     </patterngroup>
   </term>
 
