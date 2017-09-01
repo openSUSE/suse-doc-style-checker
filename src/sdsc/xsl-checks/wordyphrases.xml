@@ -805,6 +805,19 @@
 
   <term>
     <accept>
+      <proposal>ensure</proposal>
+    </accept>
+    <!-- Don't check "make sure": "make sure" is used much more often and
+    unlike "ensure." It also seems simpler (in terms of language level) than
+    "make certain." -->
+    <patterngroup>
+      <pattern>make</pattern>
+      <pattern>certain</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>many</proposal>
     </accept>
     <patterngroup>
