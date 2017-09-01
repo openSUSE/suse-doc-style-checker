@@ -3,6 +3,16 @@
 
   <term>
     <accept>
+      <proposal/>
+    </accept>
+    <patterngroup>
+      <pattern>additional|extra|more|further</pattern>
+      <contextpattern look="before">add(ed|s|ing)?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>be about</proposal>
     </accept>
     <patterngroup>
