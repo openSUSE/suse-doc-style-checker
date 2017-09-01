@@ -425,8 +425,13 @@
       <proposal/>
     </accept>
     <patterngroup>
-      <pattern>(different|possible|other)</pattern>
-      <contextpattern look="bothways">(several|few|many|various|numerous)</contextpattern>
+      <pattern>(different|possible)</pattern>
+      <contextpattern look="bothways">(several|few|many|various|numerous|various|multiple)</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(several|few|many|various|numerous|various|multiple)</pattern>
+      <!-- Add "more" to contextpattern too? For e.g. "many more..." -->
+      <contextpattern>other</contextpattern>
     </patterngroup>
   </term>
 
