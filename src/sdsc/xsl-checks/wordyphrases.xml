@@ -1304,11 +1304,11 @@
 
   <term>
     <accept>
-      <proposal>with</proposal>
+      <proposal>together with</proposal>
     </accept>
     <patterngroup>
       <pattern>in</pattern>
-      <pattern>conjunctions?</pattern>
+      <pattern>co(njunc|mbina)tions?</pattern>
       <pattern>with</pattern>
     </patterngroup>
   </term>
