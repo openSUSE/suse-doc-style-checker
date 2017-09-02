@@ -396,6 +396,32 @@
       <pattern>considerations?</pattern>
       <pattern>to</pattern>
     </patterngroup>
+    <patterngroup>
+      <pattern>you</pattern>
+      <pattern>can|may|shall|could|might|should</pattern>
+      <pattern>consider</pattern>
+      <!-- The ones with this contextpattern in front of it still seem
+      needlessly long, but I did not have a good idea what do about them. -->
+      <contextpattern look="before" match="negative">whom?|where|when|how|why|which|that</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>you</pattern>
+      <pattern>can|may|shall|could|might|should</pattern>
+      <pattern>want|like</pattern>
+      <pattern>to</pattern>
+      <pattern>consider</pattern>
+      <contextpattern look="before" match="negative">whom?|where|when|how|why|which|that</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>you</pattern>
+      <pattern>can|may|shall|could|might|should</pattern>
+      <pattern>want|like</pattern>
+      <pattern>to</pattern>
+      <!-- for, e.g.: "you might want to /actively/ consider ..." -->
+      <pattern>[-a-z0-9]+ly</pattern>
+      <pattern>consider</pattern>
+      <contextpattern look="before" match="negative">whom?|where|when|how|why|which|that</contextpattern>
+    </patterngroup>
   </term>
 
   <term>

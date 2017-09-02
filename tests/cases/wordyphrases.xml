@@ -75,4 +75,16 @@
     <para xml:id="sdsc.expect.warning.wordyphrases.unless-when">
         This procedure works unless when the frobnicator is active.
     </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.might-want-consider">
+        In this case, you might want to actively consider switching.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.could-consider">
+        In this case, you could consider switching.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.may-like-consider">
+        In this case, you may like to consider switching.
+    </para>
+    <para xml:id="sdsc.valid.might-consider">
+        Frobnicator is great which is why you should consider switching to it.
+    </para>
 </chapter>
