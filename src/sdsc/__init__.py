@@ -679,10 +679,13 @@ def highlight(tokens, highlightstart, highlightend):
     if isinstance(tokens, str):
         return highlight(tokenizer(tokens), highlightstart, highlightend)
 
+    highlightstart = max(highlightstart, 0)
+    highlightend = max(highlightend, 0)
+    highlightend = min(highlightend, len(tokens) - 1)
+
     if highlightstart >= len(tokens) or highlightend < highlightstart:
         return ""  # Nothing to highlight
 
-    highlightend = min(highlightend, len(tokens) - 1)
 
     tokens[highlightstart] = "<highlight>" + tokens[highlightstart]
     tokens[highlightend] = tokens[highlightend] + "</highlight>"
