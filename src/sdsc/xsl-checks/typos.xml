@@ -1341,11 +1341,11 @@ GNU GPL.
       <!-- Two proposals would be better for "an the/your/...", because
       it is equally likely that "and the/your/..." is meant. -->
       <pattern>an?</pattern>
-      <contextpattern>(your|which|th[oe]se|the)</contextpattern>
+      <contextpattern>(y?our|my|his|her|their|which|th[oe]se|the)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>the</pattern>
-      <contextpattern>(your|which|th[oe]se|an?)</contextpattern>
+      <contextpattern>(y?our|my|his|her|their|which|th[oe]se|an?)</contextpattern>
     </patterngroup>
   </term>
 

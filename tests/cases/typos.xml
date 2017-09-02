@@ -185,4 +185,7 @@
     <para xml:id="sdsc.valid.59">
         This is not bad per se, but not convenient either.
     </para>
+    <para xml:id="sdsc.expect.error.typos.the-our">
+        We use Git for the our branch.
+    </para>
 </chapter>
