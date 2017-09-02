@@ -87,4 +87,19 @@
     <para xml:id="sdsc.valid.might-consider">
         Frobnicator is great which is why you should consider switching to it.
     </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.worth-noting">
+        It is worth noting that Web engines may depart from the specification.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.important-to-note">
+        It is important to note that <command>seccheck</command> can be used
+        to improve the file security.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.also-important-mention">
+        It is also important to mention that <command>seccheck</command> can
+        be used to improve the file security.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.may-make-sense-mention">
+        It may make sense to mention that <command>seccheck</command> can
+        be used to improve the file security.
+    </para>
 </chapter>

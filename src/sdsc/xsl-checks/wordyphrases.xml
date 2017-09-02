@@ -878,6 +878,74 @@
 
   <term>
     <accept>
+      <proposal>note</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>do</pattern>
+      <pattern>note</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>do</pattern>
+      <pattern>take</pattern>
+      <pattern>note</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>take</pattern>
+      <pattern>note</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>it</pattern>
+      <pattern>is</pattern>
+      <pattern>worth</pattern>
+      <pattern>noting|mentioning</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>it</pattern>
+      <pattern>is</pattern>
+      <pattern>important</pattern>
+      <pattern>to</pattern>
+      <pattern>note|mention</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>it</pattern>
+      <pattern>is</pattern>
+      <pattern>also</pattern>
+      <pattern>important</pattern>
+      <pattern>to</pattern>
+      <pattern>note|mention</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>it's</pattern>
+      <pattern>important</pattern>
+      <pattern>to</pattern>
+      <pattern>note|mention</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>it's</pattern>
+      <pattern>also</pattern>
+      <pattern>important</pattern>
+      <pattern>to</pattern>
+      <pattern>note|mention</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>it</pattern>
+      <pattern>makes</pattern>
+      <pattern>sense</pattern>
+      <pattern>to</pattern>
+      <pattern>note|mention</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>it</pattern>
+      <pattern>may|might|could|would</pattern>
+      <pattern>makes?</pattern>
+      <pattern>sense</pattern>
+      <pattern>to</pattern>
+      <pattern>note|mention</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>now</proposal>
     </accept>
     <patterngroup>
