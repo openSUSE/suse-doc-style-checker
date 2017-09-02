@@ -1258,6 +1258,16 @@
     </patterngroup>
   </term>
 
+  <!-- Not sure whether this actually belongs here or whether this is an
+  actual grammar error too. -->
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern>when</pattern>
+      <contextpattern look="before">unless</contextpattern>
+    </patterngroup>
+  </term>
+
   <term>
     <accept>
       <proposal>until</proposal>
