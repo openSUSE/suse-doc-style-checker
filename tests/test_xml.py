@@ -79,7 +79,12 @@ def isolatewarnings(complaints):
     errors = 0
     for checkmodule, complaintList in complaints.items():
         for complaint in complaintList:
-            expect = complaint["id"].count(
+            # Cut out prefixes (so we can give the IDs in our test cases
+            # names that comply with our prefix rules for IDs.)
+            relevantpattern = 'sdsc.(valid|expect.(error|warning|info).[^.]+)'
+            idrelevant = re.search(relevantpattern, complaint["id"]).group(0)
+
+            expect = idrelevant.count(
                 "sdsc.expect.{0}.{1}".format(complaint["type"],
                                              checkmodule))
             if not expect:
