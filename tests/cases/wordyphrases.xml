@@ -1,53 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.wordyphrases">
     <title>Wordyphrases test</title>
-    <para xml:id="sdsc.expect.warning.wordyphrases.1">
+    <para xml:id="sdsc.expect.warning.wordyphrases.having-to-do-with">
         This is having to do with XML in a way.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.2">
+    <para xml:id="sdsc.expect.warning.wordyphrases.adequate-enough">
         In my opinion, using XML here is not adequate enough.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.3">
+    <para xml:id="sdsc.expect.warning.wordyphrases.after-periods">
         After periods of creating and testing tests, it is slowly starting to
         dawn on me how useful they are.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.4">
+    <para xml:id="sdsc.expect.warning.wordyphrases.alternative-choice">
         Fortunately, I do not have alternative choices.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.5">
+    <para xml:id="sdsc.expect.warning.wordyphrases.up-front-planning">
         I always do some up-front planning.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.6">
+    <para xml:id="sdsc.expect.warning.wordyphrases.if-you-want-to">
         If you want to do the Moonwalk, move your left foot slightly to the
         side first.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.7">
+    <para xml:id="sdsc.expect.warning.wordyphrases.of-them">
         Snapshots younger than the value specified here will not be deleted,
         regardless of how many of them exist.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.8">
+    <para xml:id="sdsc.expect.warning.wordyphrases.entirely-same">
         These home directories look and feel entirely the same as standard
         Linux home directories.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.9">
+    <para xml:id="sdsc.expect.warning.wordyphrases.exact-same">
         These home directories look and feel the exact the same as standard
         Linux home directories.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.10">
+    <para xml:id="sdsc.expect.warning.wordyphrases.at-all">
         There is no question at all that there cannot be a question.
     </para>
-    <para xml:id="sdsc.valid.11">
+    <para xml:id="sdsc.valid.at-all">
         The Kernel parameter <literal>cio_ignore</literal> prevents the Kernel
         from looking at all the available hardware devices.
     </para>
-    <para xml:id="sdsc.valid.12">
+    <para xml:id="sdsc.valid.at-all-2">
         At all times, remain seated.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.13">
+    <para xml:id="sdsc.expect.warning.wordyphrases.not-unlike">
         R is a language which is not entirely unlike the S language developed
         at AT&amp;T Bell Laboratories.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.14">
+    <para xml:id="sdsc.expect.warning.wordyphrases.one-same">
         It is all one and the same.
+    </para>
+    <para xml:id="sdsc.valid.together-with">
+        Together with them, we celebrated.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.conjunction-with">
+        To clean the larynx, use gargle in conjunction with frobnicator.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.combination-with">
+        To clean the larynx, use gargle in combination with frobnicator.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.add-more">
+        Add more rows by clicking <guimenu>Do stuff</guimenu>.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.add-additional">
+        Try to add additional moves to your repertoire by wildly swinging the
+        laser sword.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.several-other">
+        Several other kernel interfaces were injured and felt the pain too.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.make-certain">
+        Make certain you are using Linux.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.unless-when">
+        This procedure works unless when the frobnicator is active.
     </para>
 </chapter>
