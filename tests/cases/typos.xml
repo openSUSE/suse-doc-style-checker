@@ -188,4 +188,19 @@
     <para xml:id="sdsc.expect.error.typos.the-our">
         We use Git for the our branch.
     </para>
+    <para xml:id="sdsc.valid.for-more">
+        For more cool information, see our home page.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.form-ore">
+        Form ore great information, see our home page.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.from-ore">
+        From ore information, see our home page.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.fro-more">
+        Fro more than a year, it was possible.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.fro-less">
+        Fro less than a year, it was impossible.
+    </para>
 </chapter>

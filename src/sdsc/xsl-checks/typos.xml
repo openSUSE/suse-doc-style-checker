@@ -412,6 +412,19 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>for more</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>f(or|ro)m</pattern>
+      <pattern>ore?</pattern>
+      <!-- 'than' might also make sense in the contextpattern, but seemed
+      risky - though we don't have any guides about mining anyway. -->
+      <contextpattern location="2" mode="fuzzy">(information|detail|option)s?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>forth</proposal>
     </accept>
     <patterngroup>
@@ -442,6 +455,10 @@ GNU GPL.
       <pattern>fro</pattern>
       <contextpattern>some</contextpattern>
       <contextpattern location="2">time</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>fro</pattern>
+      <contextpattern>more|less|fewer</contextpattern>
     </patterngroup>
   </term>
 
