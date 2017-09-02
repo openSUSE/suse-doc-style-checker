@@ -102,4 +102,16 @@
         It may make sense to mention that <command>seccheck</command> can
         be used to improve the file security.
     </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.name-but-select-few-them">
+        The suite consists of many applications, including Frobnicator and
+        Finaglemaster, to name but a select few of them.
+    </para>
+    <para xml:id="sdsc.valid.name-but-select-few-examples">
+        If I needed to name but a select few examples of excellent software,
+        those would be Frobnicator and Finaglemaster.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.mention-only-some-examples">
+        Frobnicator and Finaglemaster, to mention only some examples, have
+        garnered very positive critiques.
+    </para>
 </chapter>

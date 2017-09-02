@@ -597,6 +597,171 @@
 
   <term>
     <accept>
+      <proposal>for example</proposal>
+    </accept>
+    <!-- Ugh, this list-each-pattern-individually thing does not scale! -->
+    <!-- All of the main patterns in one regex:
+    "To (name|mention)( (but|just|only))? (a( select)? few|some)( (of them|(ex|s)amples|items))?"
+    Admittedly not great either, but much better than the copypasta below. -->
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>a</pattern>
+      <pattern>few</pattern>
+      <pattern>of</pattern>
+      <pattern>them</pattern>
+      <!-- Excepted items ("want/would like/wish to name a few") are still
+      too long, but I have no good idea how to shorten them. -->
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>but|just|only</pattern>
+      <pattern>a</pattern>
+      <pattern>few</pattern>
+      <pattern>of</pattern>
+      <pattern>them</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>a</pattern>
+      <pattern>select</pattern>
+      <pattern>few</pattern>
+      <pattern>of</pattern>
+      <pattern>them</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>but|just|only</pattern>
+      <pattern>a</pattern>
+      <pattern>select</pattern>
+      <pattern>few</pattern>
+      <pattern>of</pattern>
+      <pattern>them</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>a</pattern>
+      <pattern>few</pattern>
+      <pattern>(item|example|sample)s?</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>but|just|only</pattern>
+      <pattern>a</pattern>
+      <pattern>few</pattern>
+      <pattern>(item|example|sample)s?</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>a</pattern>
+      <pattern>select</pattern>
+      <pattern>few</pattern>
+      <pattern>(item|example|sample)s?</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>but|just|only</pattern>
+      <pattern>a</pattern>
+      <pattern>select</pattern>
+      <pattern>few</pattern>
+      <pattern>(item|example|sample)s?</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>a</pattern>
+      <pattern>few</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>but|just|only</pattern>
+      <pattern>a</pattern>
+      <pattern>few</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>a</pattern>
+      <pattern>select</pattern>
+      <pattern>few</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>but|just|only</pattern>
+      <pattern>a</pattern>
+      <pattern>select</pattern>
+      <pattern>few</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>some</pattern>
+      <pattern>of</pattern>
+      <pattern>them</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>but|just|only</pattern>
+      <pattern>some</pattern>
+      <pattern>of</pattern>
+      <pattern>them</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>some</pattern>
+      <pattern>(item|example|sample)s?</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>but|just|only</pattern>
+      <pattern>some</pattern>
+      <pattern>(item|example|sample)s?</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>some</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>name|mention</pattern>
+      <pattern>but|just|only</pattern>
+      <pattern>some</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy" match="negative">had|needed|wish|want|would</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>how much</proposal>
     </accept>
     <patterngroup>
