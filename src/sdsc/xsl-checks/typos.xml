@@ -674,6 +674,16 @@ GNU GPL.
     </patterngroup>
   </term>
 
+  <term>
+    <accept>
+      <proposal>lots</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>lot's</pattern>
+      <contextpattern>of</contextpattern>
+    </patterngroup>
+  </term>
+
   <!-- Needs to be reworked to avoid false positives. -->
   <!-- <term>
     <accept>

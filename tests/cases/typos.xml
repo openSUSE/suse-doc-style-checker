@@ -203,4 +203,16 @@
     <para xml:id="sdsc.expect.error.typos.fro-less">
         Fro less than a year, it was impossible.
     </para>
+    <para xml:id="sdsc.expect.error.typos.lots-of">
+        Lot`s of people insisted that there was a spelling error in this
+        sentence.
+    </para>
+    <para xml:id="sdsc.valid.lots-of">
+        Lots of people told me that correcting the sentence was not hard.
+    </para>
+    <para xml:id="sdsc.valid.lots">
+        <!-- I failed at constructing a sentence with "lot's, of" in it.
+        Which does not mean much. -->
+        From that lot's fruit, most was thrown out.
+    </para>
 </chapter>
