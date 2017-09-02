@@ -648,6 +648,18 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>latter</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>later</pattern>
+      <contextpattern look="before">the</contextpattern>
+      <!-- We could also look for regular third-person verbs (-s) here. -->
+      <contextpattern>options?|cases?|is|can|could|may|might|shall|should</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>lose</proposal>
     </accept>
     <patterngroup>

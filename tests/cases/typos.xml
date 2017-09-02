@@ -221,4 +221,19 @@
     <para xml:id="sdsc.expect.error.typos.watch-our">
         We need a referee to watch our for users.
     </para>
+    <para xml:id="sdsc.valid.latter">
+        The latter is useful to force a service to reload its configuration.
+    </para>
+    <para xml:id="sdsc.valid.latter-2">
+        Choose the latter option if there are issues with the configuration.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.later">
+        The later is useful to force a service to reload its configuration.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.later-2">
+        The later can help with configuration issues.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.later-3">
+        In the later case, there are issues with the configuration.
+    </para>
 </chapter>
