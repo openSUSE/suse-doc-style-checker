@@ -3,186 +3,186 @@
   xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0"
   xml:id="cha.test.typos">
     <title>Test for typos</title>
-    <para xml:id="sdsc.expect.error.typos.1">
+    <para xml:id="sdsc.expect.error.typos.adopt">
         Hence, the file is always adopted before it is used.
     </para>
-    <para xml:id="sdsc.expect.error.typos.2">
+    <para xml:id="sdsc.expect.error.typos.fro">
         This is a test fro typos.
     </para>
-    <para xml:id="sdsc.expect.error.typos.3">
+    <para xml:id="sdsc.expect.error.typos.adopt-2">
         adoptation
     </para>
-    <para xml:id="sdsc.expect.error.typos.4">
+    <para xml:id="sdsc.expect.error.typos.adapt">
         He was adapt at creating test cases.
     </para>
-    <para xml:id="sdsc.expect.error.typos.5">
-        XML is widely adapted standard.
+    <para xml:id="sdsc.expect.error.typos.adapt-2">
+        XML is a widely adapted standard.
     </para>
-    <para xml:id="sdsc.expect.error.typos.6">
+    <para xml:id="sdsc.expect.error.typos.along-time">
         For along time, however, it was shunned by many people.
     </para>
-    <para xml:id="sdsc.expect.error.typos.7">
+    <para xml:id="sdsc.expect.error.typos.all-though">
         in all though
     </para>
-    <para xml:id="sdsc.expect.error.typos.8">
+    <para xml:id="sdsc.expect.error.typos.aloud-to">
         I was aloud to write these wonderful tests.
     </para>
-    <para xml:id="sdsc.expect.error.typos.9">
+    <para xml:id="sdsc.expect.error.typos.left-in-right">
         The tests are flying in left in right.
     </para>
-    <para xml:id="sdsc.expect.error.typos.10">
+    <para xml:id="sdsc.expect.error.typos.ant-one">
         If you look at ant one of these sentences, you will see they do not make
         a lot of sense.
     </para>
-    <para xml:id="sdsc.expect.error.typos.11">
+    <para xml:id="sdsc.expect.error.typos.any-more">
         I do not want to write XML any more
     </para>
-    <para xml:id="sdsc.expect.error.typos.12">
+    <para xml:id="sdsc.expect.error.typos.anymore">
         Anymore of those and I will open a rainbow factory.
     </para>
-    <para xml:id="sdsc.expect.error.typos.13">
+    <para xml:id="sdsc.expect.error.typos.a-s-a">
         Try to format your documentation a s a Markdown file.
     </para>
-    <para xml:id="sdsc.expect.error.typos.14">
+    <para xml:id="sdsc.expect.error.typos.as-oppose-to">
         A bear market as oppose to a bull market.
     </para>
-    <para xml:id="sdsc.expect.error.typos.15">
+    <para xml:id="sdsc.expect.error.typos.bare-in-mind">
         You need to bare in mind, that nothing is bad.
     </para>
-    <para xml:id="sdsc.expect.error.typos.16">
+    <para xml:id="sdsc.expect.error.typos.being-with">
         To being with, I expected more people to show up.
     </para>
-    <para xml:id="sdsc.expect.error.typos.17">
+    <para xml:id="sdsc.expect.error.typos.per-the-usual">
         As per the usually, meetings start at 4 AM.
     </para>
-    <para xml:id="sdsc.expect.error.typos.18">
+    <para xml:id="sdsc.expect.error.typos.bye-the-way">
         Bye the way: Try a new programming language once in a while.
     </para>
-    <para xml:id="sdsc.expect.error.typos.19">
+    <para xml:id="sdsc.expect.error.typos.per-default">
         I was trying to do good things "per default".
     </para>
-    <para xml:id="sdsc.expect.error.typos.20">
+    <para xml:id="sdsc.expect.error.typos.to-chose">
         To chose wisely is to choose to write documentation.
     </para>
-    <para xml:id="sdsc.expect.error.typos.21">
+    <para xml:id="sdsc.expect.error.typos.complaint">
         If I had a chance, I would have made sure it was complaint!
     </para>
-    <para xml:id="sdsc.expect.error.typos.22">
+    <para xml:id="sdsc.expect.error.typos.confirm-to">
         Everything confirmed to style.
     </para>
-    <para xml:id="sdsc.expect.error.typos.23">
+    <para xml:id="sdsc.expect.error.typos.consist-on">
         It consisted on various things.
     </para>
-    <para xml:id="sdsc.expect.error.typos.24">
+    <para xml:id="sdsc.expect.error.typos.up-to-data">
         Having an up to data system is very important.
     </para>
-    <para xml:id="sdsc.expect.error.typos.25">
+    <para xml:id="sdsc.expect.error.typos.disk-image">
         Before you can start the VM, create a hard dick image.
     </para>
-    <para xml:id="sdsc.expect.error.typos.26">
+    <para xml:id="sdsc.expect.error.typos.had-doe">
         We later found out what we had doe.
     </para>
-    <para xml:id="sdsc.expect.error.typos.27">
+    <para xml:id="sdsc.expect.error.typos.apart-from">
         But apart form minor hiccups, there was nothing.
     </para>
-    <para xml:id="sdsc.valid.28">
+    <para xml:id="sdsc.valid.more-that">
         One or more recipients that are in the cc line of the notification
         e-mail.
     </para>
-    <para xml:id="sdsc.expect.error.typos.29">
+    <para xml:id="sdsc.expect.error.typos.more-that">
         We had more that enough supporters.
     </para>
-    <para xml:id="sdsc.expect.error.typos.30">
+    <para xml:id="sdsc.expect.error.typos.rather-then">
         For once, I tried rather then giving up immediately.
     </para>
-    <para xml:id="sdsc.expect.error.typos.31">
+    <para xml:id="sdsc.expect.error.typos.run-be">
         Commands than can be run be users.
     </para>
-    <para xml:id="sdsc.valid.32">
+    <para xml:id="sdsc.valid.more-than">
         There are many more commands than can be useful to any user.
     </para>
-    <para xml:id="sdsc.expect.error.typos.33">
+    <para xml:id="sdsc.expect.error.typos.web-site-on">
         For more information, see the official Web site on
         <link xlink:href="http://example.com/"/>.
     </para>
-    <para xml:id="sdsc.expect.error.typos.34">
+    <para xml:id="sdsc.expect.error.typos.on-of">
         On of our customers knows this very well.
     </para>
-    <para xml:id="sdsc.expect.error.typos.35">
+    <para xml:id="sdsc.expect.error.typos.your-could">
         It turned out that your could do a lot better.
     </para>
-    <para xml:id="sdsc.valid.36">
+    <para xml:id="sdsc.valid.your-will">
         It is true that your will is limitless.
     </para>
-    <para xml:id="sdsc.expect.error.typos.37">
+    <para xml:id="sdsc.expect.error.typos.a-the">
         If the values differ, specify a the host name.
     </para>
-    <para xml:id="sdsc.expect.error.typos.38">
+    <para xml:id="sdsc.expect.error.typos.the-your">
         If the values differ, specify the your host name.
     </para>
-    <para xml:id="sdsc.expect.error.typos.39">
+    <para xml:id="sdsc.expect.error.typos.compute-note">
         This is a minimal setup to run Slurm with "munge" support on one
         compute note and multiple control nodes.
     </para>
-    <para xml:id="sdsc.valid.40">
+    <para xml:id="sdsc.valid.compute-node">
         This is a minimal setup to run Slurm with "munge" support on one
         compute node and multiple control nodes.
     </para>
-    <para xml:id="sdsc.expect.error.typos.41">
+    <para xml:id="sdsc.expect.error.typos.release-node">
         For more information, see the release node.
     </para>
-    <para xml:id="sdsc.expect.error.typos.42">
+    <para xml:id="sdsc.expect.error.typos.is-has">
         It is has no influence on Language settings.
     </para>
-    <para xml:id="sdsc.expect.error.typos.43">
+    <para xml:id="sdsc.expect.error.typos.one-an-same">
         It is all one an the same.
     </para>
-    <para xml:id="sdsc.expect.error.typos.44">
+    <para xml:id="sdsc.expect.error.typos.your-shall">
         Your shall not know in advance.
     </para>
-    <para xml:id="sdsc.expect.error.typos.45">
+    <para xml:id="sdsc.expect.error.typos.your-can">
         Your can choose whether to install now or later.
     </para>
-    <para xml:id="sdsc.valid.46">
+    <para xml:id="sdsc.valid.your-can">
         Your can may not sink but that does not mean it has enough bounce.
     </para>
-    <para xml:id="sdsc.valid.47">
+    <para xml:id="sdsc.valid.you-can">
         You can install now.
     </para>
-    <para xml:id="sdsc.expect.error.typos.48">
+    <para xml:id="sdsc.expect.error.typos.weather-or-not">
         Weather or not you are affected, you can find out from the mail.
     </para>
-    <para xml:id="sdsc.expect.error.typos.49">
+    <para xml:id="sdsc.expect.error.typos.around-the-word">
         Around the word, movie poster are asking questions that seem irrelevant.
     </para>
-    <para xml:id="sdsc.expect.error.typos.50">
+    <para xml:id="sdsc.expect.error.typos.over-the-word">
         All over the word, movie poster are asking questions that seem irrelevant.
     </para>
-    <para xml:id="sdsc.expect.error.typos.51">
+    <para xml:id="sdsc.expect.error.typos.as-show">
         Follow the instruction exactly as show in the first chapter.
     </para>
-    <para xml:id="sdsc.valid.52">
+    <para xml:id="sdsc.valid.as-shown">
         Follow the instruction exactly as shown in the first chapter.
     </para>
-    <para xml:id="sdsc.expect.error.typos.53">
+    <para xml:id="sdsc.expect.error.typos.peer-review">
         The papers went through a peer-to-peer review process in early May before being published.
     </para>
-    <para xml:id="sdsc.expect.error.typos.54">
+    <para xml:id="sdsc.expect.error.typos.peer-review-2">
         The papers went through a peer 2 peer review process in early May before being published.
     </para>
-    <para xml:id="sdsc.expect.error.typos.55">
+    <para xml:id="sdsc.expect.error.typos.pear-review">
         The papers went through a pear review process in early May before being published.
     </para>
-    <para xml:id="sdsc.valid.56">
+    <para xml:id="sdsc.valid.peer-review">
         The papers went through a peer review process in early May before being published.
     </para>
-    <para xml:id="sdsc.expect.error.typos.57">
+    <para xml:id="sdsc.expect.error.typos.per-see">
         This is not bad per see, but not convenient either.
     </para>
-    <para xml:id="sdsc.expect.error.typos.58">
+    <para xml:id="sdsc.expect.error.typos.per-say">
         This is not bad per say, but not convenient either.
     </para>
-    <para xml:id="sdsc.valid.59">
+    <para xml:id="sdsc.valid.per-se">
         This is not bad per se, but not convenient either.
     </para>
     <para xml:id="sdsc.expect.error.typos.the-our">
