@@ -215,4 +215,10 @@
         Which does not mean much. -->
         From that lot's fruit, most was thrown out.
     </para>
+    <para xml:id="sdsc.expect.error.typos.look-our">
+        We need a referee looking our for users.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.watch-our">
+        We need a referee to watch our for users.
+    </para>
 </chapter>

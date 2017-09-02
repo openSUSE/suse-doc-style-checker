@@ -905,6 +905,17 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>out</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>our</pattern>
+      <contextpattern look="before">watch(ed|es|ing)?|look(ed|s|ing)?</contextpattern>
+      <contextpattern>for</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>parentheses</proposal>
     </accept>
     <patterngroup>
