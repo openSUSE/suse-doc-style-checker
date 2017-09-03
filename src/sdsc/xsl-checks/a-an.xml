@@ -10,7 +10,7 @@
     </accept>
     <patterngroup>
       <pattern>an</pattern>
-      <contextpattern case="keep">([0-79]|[BCDGJKPQTUVWYZ][A-Z0-9]|[BCDGHJ-NP-TVWYZbcdgj-np-tvwyz][aeiou]|h[aeiu]|ho[^u]|hou[^r]|f([eiou]|a(?!q))|xy|[bcdfgkpt]r|st[aeiuo]|us|uni[ovt])[^\-]+</contextpattern>
+      <contextpattern case="keep">([0-79]|[BCDGJKPQTUVWYZ][A-Z0-9]|SCH|RE|[BCDGHJ-NP-TVWYZbcdgj-np-tvwyz][aeiou]|h[aeiu]|ho[^u]|hou[^r]|f([eiou]|a(?!q))|xy|[bcdfgkpt]r|st[aeiuo]|us|uni[ovt])[^\-]+</contextpattern>
     </patterngroup>
   </term>
 
@@ -28,7 +28,7 @@
       <contextpattern look="before" match="negative" location="2">q\.?</contextpattern>
       <contextpattern match="negative" mode="fuzzy" location="2">[bco]\.?</contextpattern>
       <contextpattern match="negative">and|or|with|but</contextpattern>
-      <contextpattern case="keep" match="negative">HOWTO|FAT|MAC|MANIFEST|NIS|NFS|RADIUS|RADOS|RAID[0-9]*|RAM|README|RELAX|REST(-?ful)?|SAN|i?SCSI|SCHED|SIP|SLE[DS]?|STONITH|STIX[A-Za-z]*|[LW]AN|HIT|MISS|NUMA|LUN|SYN|SASL</contextpattern>
+      <contextpattern case="keep" match="negative">HOWTO|FAT|MAC|MANIFEST|NIS|NFS|RADIUS|RADOS|RAID[0-9]*|RAM|README|RELAX|REST(-?ful)?|SAN|i?SCSI|SCH.*|RE.*|SIP|SLE[DS]?|STONITH|STIX[A-Za-z]*|[LW]AN|HIT|MISS|NUMA|LUN|SYN|SASL</contextpattern>
     </patterngroup>
   </term>
 
