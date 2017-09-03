@@ -760,6 +760,32 @@
     </patterngroup>
   </term>
 
+  <!-- Try to find lists like "This includes, for example, this and that, etc." -->
+  <term>
+    <accept/>
+    <patterngroup>
+      <pattern>as</pattern>
+      <pattern>(s|ex)amples?</pattern>
+      <contextpattern look="bothways" mode="fuzzy" location="9">etc|examples?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>as</pattern>
+      <pattern>an?</pattern>
+      <pattern>(s|ex)amples?</pattern>
+      <contextpattern look="bothways" mode="fuzzy" location="9">etc|examples?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>for</pattern>
+      <pattern>(example|instance)s?</pattern>
+      <contextpattern look="bothways" mode="fuzzy" location="9">etc|examples?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>among</pattern>
+      <pattern>others?</pattern>
+      <contextpattern look="bothways" mode="fuzzy" location="9">etc|examples?</contextpattern>
+    </patterngroup>
+  </term>
+
   <term>
     <accept>
       <proposal>how much</proposal>

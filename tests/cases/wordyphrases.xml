@@ -120,4 +120,13 @@
     <para xml:id="sdsc.expect.warning.wordyphrases.not-very">
         Consequently, it is not very useful to translate a password.
     </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.for-example-etc">
+        This includes, for example, this and that, etc.
+    </para>
+    <para xml:id="sdsc.valid.among-others">
+        This includes, among others, this and that.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.among-others-for-example">
+        This includes, among others, this, these, here, there and that, for example.
+    </para>
 </chapter>
