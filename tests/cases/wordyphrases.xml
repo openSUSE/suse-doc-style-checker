@@ -114,4 +114,10 @@
         Frobnicator and Finaglemaster, to mention only some examples, have
         garnered very positive critiques.
     </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.not-really">
+        Consequently, it is not really useful to translate a password.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.not-very">
+        Consequently, it is not very useful to translate a password.
+    </para>
 </chapter>

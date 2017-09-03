@@ -1201,6 +1201,14 @@
   <term>
     <accept/>
     <patterngroup>
+      <pattern>particularly|really|overly|especially|actually|very</pattern>
+      <contextpattern look="before">not</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept/>
+    <patterngroup>
       <pattern>up-?front</pattern>
       <contextpattern>planning</contextpattern>
     </patterngroup>
