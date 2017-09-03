@@ -15,7 +15,10 @@ acpid
 Acronis
 Adaptec
 adblock
+add-on
+add-ons
 ADI
+Adminer
 ADSL
 AES
 AFS
@@ -35,6 +38,7 @@ ALUA
 amaroK
 AMaViS
 AMD
+AMD64
 AMI
 AMIs
 AMQP
@@ -271,6 +275,8 @@ CET
 CEX
 CGI
 ChangeHat
+changelog
+changelogs
 ChangeLog
 ChargeHUP
 charityware
@@ -400,7 +406,7 @@ CUSE
 CVE
 CVS
 cvt
-CX
+cx
 cyrus
 DAC
 DAE
@@ -506,6 +512,7 @@ dialog
 dialogs
 dialpad
 Diffie
+Diffie-Hellman
 digiKam
 DIN
 dir
@@ -679,6 +686,9 @@ exim
 EXIT
 expander
 expr
+ext2
+ext3
+ext4
 extendable
 facto
 FADT
@@ -915,7 +925,7 @@ hdx
 hdX
 HeartBeat
 heartbeating
-Helman
+Hellman
 helpdesk
 Helvetica
 Heuser
@@ -975,7 +985,7 @@ hyperthreaded
 hyperthreading
 hypervisor
 hypervisors
-ia
+ia64
 IaaS
 iAMT
 iasl
@@ -1116,7 +1126,8 @@ IPsec
 IPsrcaddr
 iptables
 IPTC
-IPv
+IPv4
+IPv6
 IPVS
 ipvsadm
 IPX
@@ -2003,7 +2014,12 @@ preload
 preloading
 PReP
 prepend
+preprocessor
+preprocessors
+preprogram
 preprogrammed
+preprogramming
+preprograms
 prerouting
 preselection
 preshared
@@ -2328,6 +2344,8 @@ Scribus
 scriptability
 scriptable
 Scrobbler
+scrollbar
+scrollbars
 scServerContainer
 scService
 SCSI
@@ -2383,6 +2401,11 @@ sfex
 SFTP
 SGI
 SHA
+SHA-1
+SHA-2
+SHA-256
+SHA-384
+SHA-512
 ShamirAdleman
 shareable
 sharefs
@@ -2460,6 +2483,12 @@ SoundForge
 SourceForge
 SourceSafe
 SP
+SP1
+SP2
+SP2
+SP3
+SP4
+SP5
 SPAM
 SPARC
 S/PDIF
@@ -2532,7 +2561,8 @@ STYLEROOT
 stylesheet
 stylesheets
 su
-SubCA
+sub-CA
+sub-CAs
 subcommand
 subcommands
 subdialog
@@ -2777,6 +2807,7 @@ unaccessible
 uname
 unary
 unbold
+unbootable
 uncheck
 unchecked
 unchecking
@@ -2793,6 +2824,7 @@ underruns
 UNDI
 undock
 undocking
+unencrypted
 unformatted
 unfragmented
 Ungroup
@@ -2810,6 +2842,10 @@ uniprocessor
 unistroke
 unix
 UNKNOWN
+unlink
+unlinked
+unlinking
+unlinks
 unmaintained
 unmanaged
 unmap
@@ -3078,6 +3114,9 @@ Xft
 Xgl
 xhost
 XHTML
+x86
+x86-64
+x86_64
 XInclude
 XIncludes
 xine
