@@ -53,6 +53,7 @@ from .spellcheck import (spellcheck,
 flag_performance = False
 flag_checkpatterns = False
 flag_module = False
+flag_moduleselection = False
 
 
 def sentencesegmenter(text):
@@ -1010,7 +1011,19 @@ def checkOneFile(inputfilepath):
     # Checking via XSLT
     inputfile = etree.parse(inputfilepath, parser)
 
+    selected = ()
+    if flag_moduleselection:
+        selected = flag_moduleselection.split()
+
     for check in prepared_checks:
+        if selected:
+            runthis = False
+            for module in selected:
+                if module == check["name"]:
+                    runthis = True
+            if not runthis:
+                continue
+
         if flag_module or flag_performance:
             print("Running module {0!r}...".format(check["name"]))
 
@@ -1117,9 +1130,11 @@ def main(cliargs=None):
     global flag_checkpatterns
     global flag_performance
     global flag_module
+    global flag_moduleselection
     flag_checkpatterns = args.checkpatterns
     flag_performance = args.performance
     flag_module = args.module
+    flag_moduleselection = args.moduleselection
 
     if args.bookmarklet:
         webbrowser.open(
