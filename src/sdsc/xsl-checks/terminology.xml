@@ -302,7 +302,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>back-?ups?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
       <contextpattern look="before" match="negative">(daily|hourly|monthly|yearly)</contextpattern>
       <contextpattern look="before" location="3" mode="fuzzy" match="negative">appl(y(ing)?|ie[sd])</contextpattern>
     </patterngroup>
@@ -445,12 +445,12 @@
     </patterngroup>
     <patterngroup>
       <pattern>pxe-?boots?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>pxe</pattern>
       <pattern>boots?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
   </term>
 
@@ -817,7 +817,7 @@
     <patterngroup>
       <pattern>ssh</pattern>
       <pattern>in</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>ssh</pattern>
@@ -828,7 +828,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>ssh</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
       <!-- Crudely avoid false positive: ... access to SSH... -->
       <contextpattern look="before" location="2" match="negative">access</contextpattern>
     </patterngroup>
@@ -849,13 +849,13 @@
     </patterngroup>
     <patterngroup>
       <pattern>hard-?links?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
       <contextpattern look="before" location="3" mode="fuzzy" match="negative">access</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>hard</pattern>
       <pattern>links?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
       <contextpattern look="before" location="3" mode="fuzzy" match="negative">access</contextpattern>
     </patterngroup>
   </term>
@@ -870,12 +870,12 @@
     </patterngroup>
     <patterngroup>
       <pattern>(sym(bolic)?|soft)-?links?</pattern>
-      <contextpattern look="before">(to|not|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>(sym(bolic)?|soft)</pattern>
       <pattern>links?</pattern>
-      <contextpattern look="before">(to|not|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
   </term>
 
@@ -999,7 +999,7 @@
       <!-- Blacklisting & whitelisting at the same time = probably extremely slow -->
       <contextpattern look="bothways" mode="fuzzy" location="2">(g?ui|dialog(ue)?|interface)s?</contextpattern>
       <contextpattern look="bothways" match="negative" mode="fuzzy" location="5">(bits?|entr(y|ies)|creation|user|group|permission|acl)s?|fil(e[ds]?|ing)|(umask|(sub-?)?net(work)?)(s|ed|ing)?</contextpattern>
-      <contextpattern look="before" match="negative" mode="fuzzy" location="2">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="2">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
   </term>
 
@@ -1048,13 +1048,13 @@
     <patterngroup>
       <pattern>double-?clicks?</pattern>
       <pattern>on(to)?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>double</pattern>
       <pattern>clicks?</pattern>
       <pattern>on(to)?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>doubleclick(ed|ing|s)?</pattern>
@@ -1716,7 +1716,7 @@
     <patterngroup>
       <pattern>inits?</pattern>
       <contextpattern match="negative">s(cript)s?</contextpattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>initialis(e?[ds]?|ing)?</pattern>
@@ -2277,7 +2277,7 @@
     <patterngroup>
       <pattern>signs</pattern>
       <pattern>[io]n</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>logg?(ed|ing|s)</pattern>
@@ -2287,7 +2287,7 @@
     <patterngroup>
       <pattern>log</pattern>
       <pattern>on</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
   </term>
 
@@ -2341,7 +2341,7 @@
     <patterngroup>
       <pattern>sign</pattern>
       <pattern>o(ff|ut)</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>logg?(ed|ing|s)</pattern>
@@ -2350,7 +2350,7 @@
     <patterngroup>
       <pattern>log</pattern>
       <pattern>off</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
   </term>
 
@@ -2982,7 +2982,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>plug-?ins?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
       <contextpattern>(program(me)|software|module|app(lication)?)s?</contextpattern>
     </patterngroup>
   </term>
@@ -3613,7 +3613,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>sets?-?ups?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
   </term>
 
@@ -3634,6 +3634,7 @@
            following is a far cry from being complete but makes the checker
            shut up in one situation... -->
       <contextpattern match="negative">(the|an?|in|for|on|at|your|new|old|large|small|better|worse|more|less|most|least)</contextpattern>
+      <contextpattern match="negative" look="before">\w+ly</contextpattern>
     </patterngroup>
   </term>
 
@@ -3651,7 +3652,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>shut-?downs?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>shutt?(s|ed|ing)-?down</pattern>
@@ -3671,6 +3672,7 @@
       <contextpattern look="before" match="negative" mode="fuzzy" location="2">(when|if|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate)</contextpattern>
       <contextpattern look="before" match="negative" mode="fuzzy" location="3">to</contextpattern>
       <contextpattern match="negative">(the|an?|in|for|on|at)</contextpattern>
+      <contextpattern match="negative" look="before">\w+ly</contextpattern>
     </patterngroup>
   </term>
 
@@ -3905,7 +3907,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>starts?-?ups?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
   </term>
 
@@ -3926,6 +3928,7 @@
            following is a far cry from being complete but makes the checker
            shut up in one situation... -->
       <contextpattern match="negative">(the|an?|in|for|on|at|your|our|their|new|old|large|small|better|worse|more|less|most|least)</contextpattern>
+      <contextpattern match="negative" look="before">\w+ly</contextpattern>
     </patterngroup>
   </term>
 
@@ -4466,7 +4469,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>synch?(ronise)?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
   </term>
 
@@ -4572,7 +4575,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>kills?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
   </term>
 
@@ -4983,7 +4986,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>wish(es)?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>wish(ed|ing|s)?</pattern>
@@ -5106,7 +5109,7 @@
     </patterngroup>
     <patterngroup>
       <pattern>pipes?</pattern>
-      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+?ly)</contextpattern>
+      <contextpattern look="before">(to|not|will|ha(s|d|ve)|can|could|may|might|shall|should|you|he|she|it|they|we|suse|novell|attachmate|\w+ly)</contextpattern>
       <contextpattern match="negative">in</contextpattern>
     </patterngroup>
   </term>
