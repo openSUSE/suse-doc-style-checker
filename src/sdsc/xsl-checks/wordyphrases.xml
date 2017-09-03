@@ -263,7 +263,6 @@
     </patterngroup>
   </term>
 
-  <!-- FIXME: need separate entries for modal verb + be able to... -->
   <term>
     <accept>
       <proposal>can</proposal>
@@ -1489,12 +1488,6 @@
       <pattern>means</pattern>
       <pattern>of</pattern>
     </patterngroup>
-  </term>
-
-  <term>
-    <accept>
-      <proposal>to</proposal>
-    </accept>
     <patterngroup>
       <pattern>if|when</pattern>
       <pattern>you</pattern>
@@ -1536,6 +1529,20 @@
       <pattern>to</pattern>
       <contextpattern>add|adjust|authori[zs]e|avoid|cancel|change|create|do|find|import|install|list|make|prevent|save|see|switch|remove|retain|run|update|use</contextpattern>
       <contextpattern look="before" location="2" match="negative">however</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>so</pattern>
+      <pattern>as</pattern>
+      <pattern>to</pattern>
+      <pattern>be</pattern>
+      <pattern>able</pattern>
+      <pattern>to</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>to</pattern>
+      <pattern>be</pattern>
+      <pattern>able</pattern>
+      <pattern>to</pattern>
     </patterngroup>
   </term>
 

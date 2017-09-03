@@ -129,4 +129,8 @@
     <para xml:id="sdsc.expect.warning.wordyphrases.among-others-for-example">
         This includes, among others, this, these, here, there and that, for example.
     </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.so-be-able">
+        Move to the latest machine type, so as to be able to take advantage
+        of changes.
+    </para>
 </chapter>
