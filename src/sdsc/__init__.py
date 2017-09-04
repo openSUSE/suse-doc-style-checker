@@ -53,7 +53,7 @@ from .spellcheck import (spellcheck,
 flag_performance = False
 flag_checkpatterns = False
 flag_module = False
-flag_moduleselection = False
+flag_moduleselection = None
 
 
 def sentencesegmenter(text):
