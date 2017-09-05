@@ -250,8 +250,8 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
         printcolor("""words: %s
 time for this para: %s
 average time per word: %s\n"""
-            % (str(totalwords), str(timediffmatch),
-                str(timeperword)), 'debug')
+            % (totalwords), timediffmatch,
+                timeperword), 'debug')
 
     return messages
 
@@ -397,7 +397,7 @@ def buildtermdata(context, terms, ignoredwords, useonepattern):
 
     if flag_performance:
         timeendbuild = time.time()
-        printcolor("time to build: %s" % str(timeendbuild - timestartbuild), 'debug')
+        printcolor("time to build: %s" % timeendbuild - timestartbuild, 'debug')
     return termdataid
 
 
@@ -626,15 +626,15 @@ def termcheckmessage(acceptword, acceptcontext, word, line, content,
     message = None
     filename = ""
     if basefile:
-        filename = "<file>%s</file>" % str(basefile)
+        filename = "<file>%s</file>" % basefile
 
     withinid = ""
     if contextid:
-        withinid = "<withinid>%s</withinid>" % str(contextid)
+        withinid = "<withinid>%s</withinid>" % contextid
 
     message = etree.XML("""<result type="%s">
             <location>%s%s<line>%s</line></location>
-        </result>""" % (messagetype, filename, withinid, str(line)))
+        </result>""" % (messagetype, filename, withinid, line))
 
     if acceptcontext:
         message.append(etree.XML("""<message>In the context of %s,
@@ -739,8 +739,8 @@ def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
                         </message>
                         <suggestion>Remove unnecessary words.</suggestion>
                         <suggestion>Split the sentence.</suggestion>
-                    </result>""" % (messagetype, filename, withinid, str(line),
-                                    str(wordcount), highlightedcontent)))
+                    </result>""" % (messagetype, filename, withinid, line,
+                                    wordcount, highlightedcontent)))
 
         sentencestart = sentenceend
 
@@ -797,11 +797,11 @@ def dupecheckmessage(context, quote, duplicate, contextid, basefile):
     """
     filename = ""
     if basefile:
-        filename = "<file>%s</file>" % str(basefile)
+        filename = "<file>%s</file>" % basefile
 
     withinid = ""
     if contextid:
-        withinid = "<withinid>%s</withinid>" % str(contextid)
+        withinid = "<withinid>%s</withinid>" % contextid
 
     return etree.XML("""<result type="error">
             <location>%s%s<line>%s</line></location>
@@ -809,7 +809,7 @@ def dupecheckmessage(context, quote, duplicate, contextid, basefile):
                 <quote>%s</quote>
             </message>
             <suggestion>Remove one instance of <quote>%s</quote>.</suggestion>
-        </result>""" % (filename, withinid, str(linenumber(context)), duplicate, quote, duplicate))
+        </result>""" % (filename, withinid, linenumber(context), duplicate, quote, duplicate))
 
 
 def dupecheck(context, content, contentpretty, contextid, basefile):
@@ -869,8 +869,8 @@ def dupecheck(context, content, contentpretty, contextid, basefile):
         printcolor("""words: %s
 time for this para: %s
 average time per word: %s\n"""
-            % (str(len(words)), str(timediffmatch),
-                str(timediffmatch / len(words))), 'debug')
+            % (len(words), timediffmatch,
+                timediffmatch / len(words)), 'debug')
 
     return messages
 
