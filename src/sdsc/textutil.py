@@ -18,7 +18,12 @@
 
 import re
 from .generic import re_compile
-from .const import STARTPUNCTUATION, ENDPUNCTUATION
+from .const import (
+        ENDPUNCTUATION,
+        STARTPUNCTUATION,
+        SENTENCEENDS,
+        LASTSENTENCEENDS,
+                   )
 
 
 def removepunctuation(word, start=False, end=False):
@@ -147,3 +152,20 @@ def tokenizer(text):
     # FIXME: Paths like /usr/bin/foo are split up as /usr / bin / foo
     text = re.sub(r'([\w\d])([—/])([\w\d])', r'\1 \2 \3', text)
     return text.split()
+
+
+def sentencesegmenter(text):
+    """Splits a paragraph into a list of sentences. Removes
+    final punctuation from all sentences.
+
+    :param str text: text to split into sentences
+    """
+    sentences = SENTENCEENDS.split(text)
+    # The last sentence's final punctuation has not yet been cut off, do that
+    # now.
+    sentences[-1] = LASTSENTENCEENDS.sub('', sentences[-1])
+
+    # We also need to cut off parentheses etc. from the first word of the first
+    # sentence, as that has not been done so far either.
+    sentences[0] = removepunctuation(sentences[0], start=True)
+    return sentences

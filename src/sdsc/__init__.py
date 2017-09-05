@@ -41,12 +41,16 @@ from .textutil import (counttokens,
                        findtagreplacement,
                        removepunctuation,
                        sanitizepunctuation,
+                       sentencesegmenter,
                        tokenizer,
                        xmlescape,
                        )
 from .spellcheck import (spellcheck,
                          spellcheckmessage,
                        )
+from .markup import (
+        highlight,
+                    )
 
 
 # Global flags
@@ -54,23 +58,6 @@ flag_performance = False
 flag_checkpatterns = False
 flag_module = False
 flag_moduleselection = None
-
-
-def sentencesegmenter(text):
-    """Splits a paragraph into a list of sentences. Removes
-    final punctuation from all sentences.
-
-    :param str text: text to split into sentences
-    """
-    sentences = SENTENCEENDS.split(text)
-    # The last sentence's final punctuation has not yet been cut off, do that
-    # now.
-    sentences[-1] = LASTSENTENCEENDS.sub('', sentences[-1])
-
-    # We also need to cut off parentheses etc. from the first word of the first
-    # sentence, as that has not been done so far either.
-    sentences[0] = removepunctuation(sentences[0], start=True)
-    return sentences
 
 
 def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
@@ -666,35 +653,6 @@ def termcheckmessage(acceptword, acceptcontext, word, line, content,
             <quote>%s</quote>.</suggestion>""" % word))
 
     return message
-
-
-def highlight(tokens, highlightstart, highlightend):
-    """Takes a string and adds XML tags that lead to specified
-    tokens being highlighted in the output file.
-
-    :param tokens: list of words or a string:
-        ["highlight", "these", "two", "words"] or
-        "highlight these two words" (will be tokenized automatically)
-    :param int highlightstart: start highlighting before this token (starting from zero)
-    :param int highlightend: stop highlighting after this token (starting from zero)
-    :return: string with <highlight> tags at appropriate places"""
-
-    tokens = tokens[:]
-    if isinstance(tokens, str):
-        return highlight(tokenizer(tokens), highlightstart, highlightend)
-
-    highlightstart = max(highlightstart, 0)
-    highlightend = max(highlightend, 0)
-    highlightend = min(highlightend, len(tokens) - 1)
-
-    if highlightstart >= len(tokens) or highlightend < highlightstart:
-        return ""  # Nothing to highlight
-
-
-    tokens[highlightstart] = "<highlight>" + tokens[highlightstart]
-    tokens[highlightend] = tokens[highlightend] + "</highlight>"
-
-    return " ".join(tokens)
 
 
 def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
