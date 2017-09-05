@@ -25,7 +25,6 @@ from .const import SPELLFILTER
 from .cli import printcolor
 from .generic import (
         linenumber,
-        re_compile,
                      )
 from .markup import (
         highlight,
@@ -117,6 +116,7 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
             word = removepunctuation(word, start=True, end=True)
 
             # FIXME: English hardcoded
+            # FIXME: store this
             word = re.sub('(^[^-_.\d\w]+|(\'s|[®*!?.:;^])+$)', '', word)
 
             # removepunctuation can lead to empty strings...
