@@ -969,19 +969,7 @@ def checkOneFile(inputfilepath):
     # Checking via XSLT
     inputfile = etree.parse(inputfilepath, parser)
 
-    selected = ()
-    if flag_moduleselection:
-        selected = flag_moduleselection.split()
-
     for check in prepared_checks:
-        if selected:
-            runthis = False
-            for module in selected:
-                if module == check["name"]:
-                    runthis = True
-            if not runthis:
-                continue
-
         if flag_module or flag_performance:
             print("Running module {0!r}...".format(check["name"]))
 
@@ -1053,9 +1041,20 @@ def initialize():
         printcolor("! No check files found.\n  Add check files to " + os.path.join(location, 'xsl-checks'), 'error')
         return False
 
+    selected = None
+    if flag_moduleselection:
+        selected = flag_moduleselection.split(' ')
+
     for checkfile in checkfiles:
         try:
             checkmodule = os.path.splitext(os.path.basename(checkfile))[0]
+            if selected:
+                runthis = False
+                for module in selected:
+                    if module == checkmodule:
+                        runthis = True
+                if not runthis:
+                    continue
             transform = etree.XSLT(etree.parse(checkfile, parser))
             prepared_checks.append({'name': checkmodule, 'transform': transform})
         except Exception as error:
