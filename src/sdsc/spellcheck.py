@@ -21,19 +21,20 @@ import enchant
 import os.path
 from lxml import etree
 
-# remove this line later, we only need it for sentencesegmenterREMOVEME
-from .const import PARENTHESES, SENTENCEENDS, LASTSENTENCEENDS, EMPTYSUBPATTERN
-
 from .const import SPELLFILTER
 from .cli import printcolor
 from .generic import (
         linenumber,
         re_compile,
                      )
+from .markup import (
+        highlight,
+                    )
 from .textutil import (
         findtagreplacement,
         removepunctuation,
         sanitizepunctuation,
+        sentencesegmenter,
         tokenizer,
         xmlescape,
                       )
@@ -89,9 +90,9 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
     elif maindict:
         spelldict = enchant.Dict(str(maindict))
     else:
-        printcolor
+        printcolor('No dictionary for spellchecking selected.', 'error')
 
-    sentences = sentencesegmenterREMOVEME(content)
+    sentences = sentencesegmenter(content)
 
     # the counter goes up for the first word already, i.e. token[0],
     # thus we just start at -1, so the first word gets to be 0.
@@ -135,7 +136,7 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
                 suggestions = spelldict.suggest(word)
 
                 line = linenumber(context)
-                contenthighlighted = highlightREMOVEME(xmlescape(contentpretty), currenttokeninparagraph, currenttokeninparagraph)
+                contenthighlighted = highlight(xmlescape(contentpretty), currenttokeninparagraph, currenttokeninparagraph)
                 messages.append(spellcheckmessage(
                     suggestions, word, line,
                     contenthighlighted, contextid, basefile,
@@ -180,53 +181,9 @@ def spellcheckmessage(suggestions, word, line, content,
         # Sometimes enchant will give eight or ten suggestions. This clutters
         # the view quite a bit, so show at most 5 suggestions -- still not
         # quite sure if this is a good idea, though: Sometimes relevant
-        # suggestions are removed now.
-        suggestions = suggestions[:5]
-        for suggestion in suggestions:
+        # suggestions are removed because of this.
+        for suggestion in suggestions[:5]:
             message.append(etree.XML("""<suggestion>Correct to
                 <quote>%s</quote>.</suggestion>""" % suggestion))
 
     return message
-
-#### REMOVE EVERYTHING BELOW WHEN I KNOW HOW TO PROPERLY IMPORT FROM MAIN!
-
-def highlightREMOVEME(tokens, highlightstart, highlightend):
-    """Takes a string and adds XML tags that lead to specified
-    tokens being highlighted in the output file.
-
-    :param tokens: list of words or a string:
-        ["highlight", "these", "two", "words"] or
-        "highlight these two words" (will be tokenized automatically)
-    :param int highlightstart: start highlighting before this token (starting from zero)
-    :param int highlightend: stop highlighting after this token (starting from zero)
-    :return: string with <highlight> tags at appropriate places"""
-
-    tokens = tokens[:]
-    if isinstance(tokens, str):
-        return highlightREMOVEME(tokenizer(tokens), highlightstart, highlightend)
-
-    if highlightstart >= len(tokens) or highlightend < highlightstart:
-        return ""  # Nothing to highlight
-
-    highlightend = min(highlightend, len(tokens) - 1)
-
-    tokens[highlightstart] = "<highlight>" + tokens[highlightstart]
-    tokens[highlightend] = tokens[highlightend] + "</highlight>"
-
-    return " ".join(tokens)
- 
-def sentencesegmenterREMOVEME(text):
-    """Splits a paragraph into a list of sentences. Removes
-    final punctuation from all sentences.
-
-    :param str text: text to split into sentences
-    """
-    sentences = SENTENCEENDS.split(text)
-    # The last sentence's final punctuation has not yet been cut off, do that
-    # now.
-    sentences[-1] = LASTSENTENCEENDS.sub('', sentences[-1])
-
-    # We also need to cut off parentheses etc. from the first word of the first
-    # sentence, as that has not been done so far either.
-    sentences[0] = removepunctuation(sentences[0], start=True)
-    return sentences
