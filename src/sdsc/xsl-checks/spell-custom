@@ -1176,6 +1176,7 @@ JFS
 jing
 JOBSPEC
 Joliet
+journalctl
 journaled
 journaler
 journaling
@@ -1653,7 +1654,10 @@ NeXTSTEP
 NFS
 NFSroot
 NFSserver
-NFSv
+NFSv1
+NFSv2
+NFSv3
+NFSv4
 NG
 NGPT
 NI
@@ -1960,6 +1964,7 @@ posGetIP
 posInitBranchserver
 posInitLdap
 POSIX
+POSIX.1e
 posReadPassword
 PosrgeSQL
 possyncimages
@@ -3087,6 +3092,9 @@ www
 wwwrun
 Wyman
 X.509
+X.509v1
+X.509v2
+X.509v3
 xauth
 xawtv
 Xbase
