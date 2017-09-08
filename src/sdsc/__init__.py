@@ -639,18 +639,18 @@ def termcheckmessage(acceptword, acceptcontext, word, line, content,
     if acceptcontext:
         message.append(etree.XML("""<message>In the context of %s,
             do not use <quote>%s</quote>:
-            <quote>%s</quote></message>""" % (acceptcontext, word, content)))
+            <quote>%s</quote></message>""" % (xmlescape(acceptcontext), xmlescape(word), content)))
     else:
         message.append(etree.XML("""<message>Do not use
             <quote>%s</quote> here:
-            <quote>%s</quote></message>""" % (word, content)))
+            <quote>%s</quote></message>""" % (xmlescape(word), content)))
 
     if acceptword:
         message.append(etree.XML("""<suggestion>Use <quote>%s</quote>
-            instead.</suggestion>""" % acceptword))
+            instead.</suggestion>""" % xmlescape(acceptword)))
     else:
         message.append(etree.XML("""<suggestion>Remove
-            <quote>%s</quote>.</suggestion>""" % word))
+            <quote>%s</quote>.</suggestion>""" % xmlescape(word)))
 
     return message
 
