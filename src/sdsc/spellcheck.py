@@ -128,7 +128,36 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
 
             correct = spelldict.check(word)
 
+            createmessage = False
             if not correct:
+                # unfortunately,
+                # enchant treats custom words differently in that it will not
+                # try combinations of custom-word hyphen other-word, instead it
+                # gives up. so we pick up the slack here and retest all parts
+                # of each failing hyphenated word:
+                # e.g. "Kerberos-compatible" -> "Kerberos" (custom list) +
+                # "compatible" (normal dictionary).
+
+                # hm, this might work for /, \ and mdash too... otoh, if i removed
+                # that handling from tokenizer(), it would break other checks
+                # (again -- not that we noticed for the past three years).
+
+                partdelimiters = '-'
+                if word.find('-') > -1:
+                    wordparts = word.split('-')
+                    for wordpart in wordparts:
+                        # avoid our old companion, enchant's super-helpful
+                        # "can't check empty string" error
+                        if not wordpart:
+                            break
+                        partcorrect = spelldict.check(wordpart)
+                        if not partcorrect:
+                            createmessage = True
+                            break
+                else:
+                    createmessage = True
+
+            if createmessage:
                 # FIXME: can we order suggestions, e.g. for "ipc" (which is in
                 # our dictionary as "IPC"), we only get irrelevant lower-case
                 # suggestions and "IPC" removed later when we limit the choice
@@ -171,11 +200,11 @@ def spellcheckmessage(suggestions, word, line, content,
 
     message = etree.XML("""<result type="%s">
             <location>%s%s<line>%s</line></location>
-        </result>""" % (messagetype, filename, withinid, str(line)))
+        </result>""" % (messagetype, filename, withinid, line))
 
     message.append(etree.XML("""<message>Do not use
         <quote>%s</quote>:
-        <quote>%s</quote></message>""" % (word, content)))
+        <quote>%s</quote></message>""" % (xmlescape(word), content)))
 
     if suggestions:
         # Sometimes enchant will give eight or ten suggestions. This clutters
@@ -184,6 +213,6 @@ def spellcheckmessage(suggestions, word, line, content,
         # suggestions are removed because of this.
         for suggestion in suggestions[:5]:
             message.append(etree.XML("""<suggestion>Correct to
-                <quote>%s</quote>.</suggestion>""" % suggestion))
+                <quote>%s</quote>.</suggestion>""" % xmlescape(suggestion)))
 
     return message
