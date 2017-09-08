@@ -1048,15 +1048,15 @@ def initialize():
     for checkfile in checkfiles:
         try:
             checkmodule = os.path.splitext(os.path.basename(checkfile))[0]
+            runthis = True
             if selected:
                 runthis = False
                 for module in selected:
                     if module == checkmodule:
                         runthis = True
-                if not runthis:
-                    continue
-            transform = etree.XSLT(etree.parse(checkfile, parser))
-            prepared_checks.append({'name': checkmodule, 'transform': transform})
+            if runthis:
+                transform = etree.XSLT(etree.parse(checkfile, parser))
+                prepared_checks.append({'name': checkmodule, 'transform': transform})
         except Exception as error:
             printcolor("! Syntax error in check file.\n  " + checkfile, 'error')
             printcolor("  " + str(error), 'error')
@@ -1070,13 +1070,6 @@ def main(cliargs=None):
 
     :param list cliargs: Arguments to parse or None (=use sys.argv)
     """
-
-    if not initialize():
-        return 1
-
-    timestart = time.time()
-
-    location = os.path.dirname(os.path.realpath(__file__))
 
     global args
     try:
@@ -1098,6 +1091,13 @@ def main(cliargs=None):
             os.path.join(location, 'result-flagging-bookmarklet.html'),
             new=0, autoraise=True)
         return 0
+
+    if not initialize():
+        return 1
+
+    timestart = time.time()
+
+    location = os.path.dirname(os.path.realpath(__file__))
 
     if args.outputfile:
         resultfilename = args.outputfile
