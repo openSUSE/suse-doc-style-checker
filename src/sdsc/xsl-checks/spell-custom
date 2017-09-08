@@ -1238,7 +1238,6 @@ KGet
 KGpg
 KiB
 Kickstart
-KILL
 killall
 kinit
 Kino
@@ -1853,6 +1852,7 @@ paravirtualizes
 paravirtualizing
 parmfile
 parmfiles
+parseable
 parserFunction
 PART
 partitioner
@@ -2674,6 +2674,7 @@ sysmaster
 SysRq
 sysstat
 systables
+systemctl
 systemd
 systemwide
 SYSV
@@ -2682,7 +2683,6 @@ TAO
 tapeipl
 TAR
 tarball
-taroth
 taskbar
 Taskjuggler
 Tcl
