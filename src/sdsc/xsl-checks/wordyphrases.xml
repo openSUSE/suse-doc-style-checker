@@ -1156,9 +1156,12 @@
       <pattern>(present|this)</pattern>
       <pattern>time</pattern>
     </patterngroup>
-    <patterngroup>
+    <!-- This proposal is pretty weird and usually does not fit well. Not
+    sure why we originally included it, probably some Novell style guide
+    thing. -->
+    <!-- <patterngroup>
       <pattern>presently</pattern>
-    </patterngroup>
+    </patterngroup>-->
   </term>
 
   <term>
