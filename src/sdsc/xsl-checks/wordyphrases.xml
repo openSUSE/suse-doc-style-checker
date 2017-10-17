@@ -1249,6 +1249,18 @@
   </term>
 
   <term>
+    <accept/>
+    <patterngroup>
+      <pattern>positive</pattern>
+      <contextpattern>(advantage|benefit)s?</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>negative</pattern>
+      <contextpattern>(disadvantage|drawback)s?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
     <accept>
       <proposal/>
     </accept>

@@ -133,4 +133,10 @@
         Move to the latest machine type, so as to be able to take advantage
         of changes.
     </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.positive-advantage">
+        The positive advantage is that there are no benefits.
+    </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.negative-drawback">
+        The negative drawbacks are that there are no disadvantages.
+    </para>
 </chapter>
