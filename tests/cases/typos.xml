@@ -85,6 +85,9 @@
     <para xml:id="sdsc.expect.error.typos.apart-from">
         But apart form minor hiccups, there was nothing.
     </para>
+    <para xml:id="sdsc.expect.error.typos.apart-of">
+        But apart of minor hiccups, there was nothing.
+    </para>
     <para xml:id="sdsc.valid.more-that">
         One or more recipients that are in the cc line of the notification
         e-mail.

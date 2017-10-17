@@ -348,7 +348,7 @@ GNU GPL.
       <proposal>from</proposal>
     </accept>
     <patterngroup>
-      <pattern>form</pattern>
+      <pattern>form|of</pattern>
       <contextpattern look="before">apart</contextpattern>
     </patterngroup>
   </term>
