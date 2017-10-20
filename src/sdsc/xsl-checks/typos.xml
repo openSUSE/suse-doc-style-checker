@@ -308,6 +308,20 @@ GNU GPL.
     </patterngroup>
   </term>
 
+  <!-- FIXME: People whose mothertongue is a slavic languages often forget
+  articles. This might lead to situations where people write "This is
+  constraint" in lieu of "This is _a_ constraint." In such cases, the
+  correction will be misleading. -->
+  <term>
+    <accept>
+      <proposal>constrained</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>constraints?</pattern>
+      <contextpattern look="before">be|is|are|was|were</contextpattern>
+    </patterngroup>
+  </term>
+
   <term>
     <accept>
       <proposal>date</proposal>

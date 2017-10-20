@@ -239,4 +239,12 @@
     <para xml:id="sdsc.expect.error.typos.later-3">
         In the later case, there are issues with the configuration.
     </para>
+    <para xml:id="sdsc.expect.error.typos.constraint">
+        Since the environment is constraint, this is not a problem on an
+        installed system.
+    </para>
+    <para xml:id="sdsc.valid.constraint">
+        Since the environment is constrained, this is not a problem on an
+        installed system.
+    </para>
 </chapter>
