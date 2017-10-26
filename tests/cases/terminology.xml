@@ -329,4 +329,19 @@
     <para xml:id="sdsc.valid.77">
         You would definitely know if you opened QA's Web Site.
     </para>
+    <para xml:id="sdsc.valid.ibmz">
+        IBM Z is the future of the past.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.ibmzsystems">
+        IBM z Systems is the future of the mainframe.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.zsystems">
+        z Systems is the future of the mainframe.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.ibmz-lower">
+        IBM z is the future of the mainframe.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.ibmcsystems">
+        IBM cSystems is the future of the mainframe.
+    </para>
 </chapter>

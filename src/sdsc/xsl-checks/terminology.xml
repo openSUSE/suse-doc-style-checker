@@ -5212,25 +5212,37 @@
 
   <term>
     <accept>
-      <proposal>z Systems</proposal>
+      <proposal>IBM Z</proposal>
     </accept>
     <patterngroup>
+      <!-- final dot allows for (R), (TM), or * chars -->
+      <pattern>I\.?B\.?M\.?.?</pattern>
       <pattern>s(erie|ystem)s?</pattern>
-      <pattern>z</pattern>
+      <pattern>z|c</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>z</pattern>
-      <pattern>s(eries?|ystem)</pattern>
+      <pattern>I\.?B\.?M\.?.?</pattern>
+      <pattern>z|c</pattern>
+      <pattern>s(erie|ystem)s?</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>c</pattern>
-      <pattern>s(ystem|erie)s</pattern>
-    </patterngroup>
-    <patterngroup>
+      <pattern>I\.?B\.?M\.?.?</pattern>
       <pattern>([zc]-?s(erie|ystem)s?|s(erie|ystem)s?-?[zc])</pattern>
     </patterngroup>
     <patterngroup>
-      <pattern>s390x?</pattern>
+      <pattern>s(erie|ystem)s?</pattern>
+      <pattern>z|c</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>I\.?B\.?M\.?.?</pattern>
+      <pattern case="keep">z|c|C</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>z|c</pattern>
+      <pattern>s(erie|ystem)s?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>(I\.?B\.?M\.?.?[-_]?)?([zc][-_]?s(erie|ystem)s?|s(erie|ystem)s?[-_]?[zc]|s390x?)</pattern>
     </patterngroup>
   </term>
 
