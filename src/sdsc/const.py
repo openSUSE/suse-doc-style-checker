@@ -48,6 +48,12 @@ EMPTYSUBPATTERN = re.compile(r'(?<!\\)(\|\)|\(\||\|\|)')
 STARTPUNCTUATION = '([{"\'¡¿<“„‟‘‚‛「『【〚〖〘〔〈《'
 ENDPUNCTUATION = '〉》〕〙〗〛】”’‛」』>)]}/\\"\',:;!?.‥…‼‽⁇⁈⁉'
 
-# Filter for the spell checker
+# Filters for the spell checker
+# SPELLFILTER -- Used to kick out bare-text file names etc.
+# SPELLPUNCTATION -- To remove any punctuation that is still at the beginning
+#  or end of the word (and also `'s` possessive endings).
+
 # FIXME: Our use case is hardcoded
-SPELLFILTER = re.compile('(#?[0-9]+|[-—.?<>/\\|\'"{}~`!@#$%^&*()\[\]_=+]+|[a-z]+://.*|[a-z]+\.(log|conf(ig)?|ini|h(xx)?|c(xx)?|o|ldif|diff|xml|xsl|html?|pl|do[ct]x?|xl[st]x?|pp[st]x?|odt|ods|odg|odp))', re.I)
+SPELLFILTER = re.compile('(([a-z]{3,6}#?)[0-9]+|[-—.?<>/\\|\'"{}~`!@#$%^&*()\[\]_=+]+|[a-z]+://.*|[a-z]+\.(log|conf(ig)?|ini|h(xx)?|c(xx)?|o|ldif|diff|xml|xsl|html?|pl|do[ct]x?|xl[st]x?|pp[st]x?|odt|ods|odg|odp))', re.I)
+SPELLSIMPLIFIER = re.compile('(^[^-_.\d\w]+|(\'s|[®*!?.:;^])+$)')
+SPELLWORDSEPARATORS = re.compile('[-–—+/\\]')

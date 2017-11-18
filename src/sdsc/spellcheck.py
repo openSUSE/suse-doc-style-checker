@@ -21,7 +21,11 @@ import enchant
 import os.path
 from lxml import etree
 
-from .const import SPELLFILTER
+from .const import (
+        SPELLFILTER,
+        SPELLSIMPLIFIER,
+        SPELLWORDSEPARATORS,
+                   )
 from .cli import printcolor
 from .generic import (
         linenumber,
@@ -37,6 +41,39 @@ from .textutil import (
         tokenizer,
         xmlescape,
                       )
+
+def buildspelldata(maindict, customdict):
+    """ Set up spelling dictionary globally and return 0. If the
+    dictionary is already set up, just return 0.
+
+    :param str maindict: system-wide main dictionary to use
+    :param str customdict: extra word list to use (optional)
+    """
+
+    try:
+        spellidtentative = '%s//%s' % (maindict, customdict)
+        # FIXME: Nothing actually cares about the return value here. The
+        # important part are the globals... any more elegant way to do this?
+        if spellid == spellidtentative:
+            return 0
+
+        if maindict and customdict:
+            customdict = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'xsl-checks', str(customdict))
+            spelldict = enchant.DictWithPWL(str(maindict), customdict)
+        elif maindict:
+            spelldict = enchant.Dict(str(maindict))
+        else:
+            printcolor('No dictionary for spellchecking selected.', 'error')
+        spellid = spellidtentative
+        return 0
+
+    except NameError:
+        global spelldict
+        global spellid
+        spellid = None
+        spelldict = None
+
+        buildspelldata(maindict, customdict)
 
 
 def spellcheck(context, maindict, customdict, content, contentpretty,
@@ -61,6 +98,8 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
     if not content:
         return []
 
+    buildspelldata(maindict,customdict)
+
     # I get this as a list with one lxml.etree._ElementUnicodeResult.
     # I need a single string.
     # For whatever reason, this made spellcheckmessage() crash
@@ -78,18 +117,6 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
     # there should always also be pretty content, but that depends on the
     # XSLT used for checking). It hopefully won't hurt either.
     contentpretty = str(contentpretty[0]) if contentpretty else content
-
-    # FIXME: profile this for speed -- we might have to make this global(ler).
-    # Also, the approach o
-    # need to convert byte string to string
-    spelldict = 0
-    if maindict and customdict:
-        customdict = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'xsl-checks', str(customdict))
-        spelldict = enchant.DictWithPWL(str(maindict), customdict)
-    elif maindict:
-        spelldict = enchant.Dict(str(maindict))
-    else:
-        printcolor('No dictionary for spellchecking selected.', 'error')
 
     sentences = sentencesegmenter(content)
 
@@ -113,11 +140,10 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
             if istag:
                 continue
 
+            # FIXME: Are we sure this sequence of operations is ideal? The two
+            # are awfully similar.
             word = removepunctuation(word, start=True, end=True)
-
-            # FIXME: English hardcoded
-            # FIXME: store this
-            word = re.sub('(^[^-_.\d\w]+|(\'s|[®*!?.:;^])+$)', '', word)
+            word = SPELLSIMPLIFIER.sub('', word)
 
             # removepunctuation can lead to empty strings...
             if not word:
@@ -130,26 +156,17 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
 
             createmessage = False
             if not correct:
-                # unfortunately,
-                # enchant treats custom words differently in that it will not
-                # try combinations of custom-word hyphen other-word, instead it
-                # gives up. so we pick up the slack here and retest all parts
+                # unfortunately, enchant treats custom words differently in
+                # that it will not
+                # try combinations of {custom_word}-{dictionary_word}, instead
+                # it gives up. so we pick up the slack here and retest all parts
                 # of each failing hyphenated word:
                 # e.g. "Kerberos-compatible" -> "Kerberos" (custom list) +
                 # "compatible" (normal dictionary).
 
-                # hm, this might work for /, \ and mdash too... otoh, if i removed
-                # that handling from tokenizer(), it would break other checks
-                # (again -- not that we noticed for the past three years).
-
-                partdelimiters = '-'
-                if word.find('-') > -1:
-                    wordparts = word.split('-')
+                tokenparts = splittokenparts(word)
+                if len(tokenparts) > 1:
                     for wordpart in wordparts:
-                        # avoid our old companion, enchant's super-helpful
-                        # "can't check empty string" error
-                        if not wordpart:
-                            break
                         partcorrect = spelldict.check(wordpart)
                         if not partcorrect:
                             createmessage = True
@@ -160,8 +177,10 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
             if createmessage:
                 # FIXME: can we order suggestions, e.g. for "ipc" (which is in
                 # our dictionary as "IPC"), we only get irrelevant lower-case
-                # suggestions and "IPC" removed later when we limit the choice
-                # to 5 suggestions.
+                # suggestions and "IPC" is removed later when we limit the choice
+                # to 5 suggestions. again, enchant treats custom words as
+                # second-class... here, they are probably more important than
+                # the regular ones.
                 suggestions = spelldict.suggest(word)
 
                 line = linenumber(context)
@@ -172,6 +191,20 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
                     messagetype))
 
     return messages
+
+def splittokenparts(token):
+    """ Reduce words to just their alphabetic components, to avoid confusing
+    enchant with hyphens or slashes.
+
+    :param str word: input token
+    """
+
+    tokenpartstentative = SPELLWORDSEPARATORS.split(token)
+    tokenparts = []
+    for part in wordpartstentative:
+        if part:
+            tokenparts.append(part)
+    return tokenparts
 
 
 def spellcheckmessage(suggestions, word, line, content,
@@ -207,12 +240,17 @@ def spellcheckmessage(suggestions, word, line, content,
         <quote>%s</quote></message>""" % (xmlescape(word), content)))
 
     if suggestions:
-        # Sometimes enchant will give eight or ten suggestions. This clutters
-        # the view quite a bit, so show at most 5 suggestions -- still not
-        # quite sure if this is a good idea, though: Sometimes relevant
-        # suggestions are removed because of this.
-        for suggestion in suggestions[:5]:
-            message.append(etree.XML("""<suggestion>Correct to
-                <quote>%s</quote>.</suggestion>""" % xmlescape(suggestion)))
+        # Sometimes enchant will give eight or ten suggestions. Instead of
+        # creating a suggestion tag for each of those, just create one
+        # with all the suggestions to avoid the clutter.
+        escapedsuggestions = []
+        for suggestion in suggestions:
+            escapedsuggestions.append(xmlescape(suggestion))
+
+        # FIXME: unnatural sentence, because ", or " is missing...
+        suggestionstring=", ".join(", " % xmlescape(suggestion)
+
+        message.append(etree.XML("""<suggestion>Correct to
+            %s.</suggestion>""" % suggestionstring))
 
     return message
