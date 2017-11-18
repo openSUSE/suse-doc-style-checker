@@ -626,15 +626,15 @@ def termcheckmessage(acceptword, acceptcontext, word, line, content,
     message = None
     filename = ""
     if basefile:
-        filename = "<file>%s</file>" % str(basefile)
+        filename = "<file>%s</file>" % basefile
 
     withinid = ""
     if contextid:
-        withinid = "<withinid>%s</withinid>" % str(contextid)
+        withinid = "<withinid>%s</withinid>" % contextid
 
     message = etree.XML("""<result type="%s">
             <location>%s%s<line>%s</line></location>
-        </result>""" % (messagetype, filename, withinid, str(line)))
+        </result>""" % (messagetype, filename, withinid, line))
 
     if acceptcontext:
         message.append(etree.XML("""<message>In the context of %s,
@@ -739,8 +739,8 @@ def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
                         </message>
                         <suggestion>Remove unnecessary words.</suggestion>
                         <suggestion>Split the sentence.</suggestion>
-                    </result>""" % (messagetype, filename, withinid, str(line),
-                                    str(wordcount), highlightedcontent)))
+                    </result>""" % (messagetype, filename, withinid, line,
+                                    wordcount, highlightedcontent)))
 
         sentencestart = sentenceend
 
