@@ -25,6 +25,7 @@ from .const import (
         SPELLFILTER,
         SPELLSIMPLIFIER,
         SPELLWORDSEPARATORS,
+        NOTANUMBER,
                    )
 from .cli import printcolor
 from .generic import (
@@ -68,6 +69,9 @@ def buildspelldata(maindict, customdict):
         return 0
 
     except NameError:
+        # FIXME: Assigning these here gives a syntax warning. Methinks the
+        # warning is not really warranted. But what do I know? Python surely
+        # knows best.
         global spelldict
         global spellid
         spellid = None
@@ -151,6 +155,11 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
             # filter for numbers, punctuation, URLs, file names
             if SPELLFILTER.match(word):
                 continue
+            # filter for names like RFC334 etc. -- everything that is 50% or
+            # more digits can go.
+            wordnumbers = NOTANUMBER.sub('', word)
+            if (len(wordnumbers) / len(word)) >= .5:
+                continue
 
             correct = spelldict.check(word)
 
@@ -166,8 +175,8 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
 
                 tokenparts = splittokenparts(word)
                 if len(tokenparts) > 1:
-                    for wordpart in wordparts:
-                        partcorrect = spelldict.check(wordpart)
+                    for tokenpart in tokenparts:
+                        partcorrect = spelldict.check(tokenpart)
                         if not partcorrect:
                             createmessage = True
                             break
@@ -183,12 +192,15 @@ def spellcheck(context, maindict, customdict, content, contentpretty,
                 # the regular ones.
                 suggestions = spelldict.suggest(word)
 
-                line = linenumber(context)
-                contenthighlighted = highlight(xmlescape(contentpretty), currenttokeninparagraph, currenttokeninparagraph)
-                messages.append(spellcheckmessage(
-                    suggestions, word, line,
-                    contenthighlighted, contextid, basefile,
-                    messagetype))
+                # enchant will sometimes suggest words from the custom
+                # dictionary as wrong... remove those messages.
+                if not word in suggestions:
+                    line = linenumber(context)
+                    contenthighlighted = highlight(xmlescape(contentpretty), currenttokeninparagraph, currenttokeninparagraph)
+                    messages.append(spellcheckmessage(
+                        suggestions, word, line,
+                        contenthighlighted, contextid, basefile,
+                        messagetype))
 
     return messages
 
@@ -201,7 +213,7 @@ def splittokenparts(token):
 
     tokenpartstentative = SPELLWORDSEPARATORS.split(token)
     tokenparts = []
-    for part in wordpartstentative:
+    for part in tokenpartstentative:
         if part:
             tokenparts.append(part)
     return tokenparts
@@ -245,10 +257,11 @@ def spellcheckmessage(suggestions, word, line, content,
         # with all the suggestions to avoid the clutter.
         escapedsuggestions = []
         for suggestion in suggestions:
-            escapedsuggestions.append(xmlescape(suggestion))
+            escapedsuggestions.append("<quote>%s</quote>" % xmlescape(suggestion))
 
-        # FIXME: unnatural sentence, because ", or " is missing...
-        suggestionstring=", ".join(", " % xmlescape(suggestion)
+        # FIXME: unnatural sentence, because ", or " is missing before last
+        # element...
+        suggestionstring=", ".join(escapedsuggestions)
 
         message.append(etree.XML("""<suggestion>Correct to
             %s.</suggestion>""" % suggestionstring))
