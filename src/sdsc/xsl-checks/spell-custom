@@ -1,3 +1,5 @@
+2G
+3G
 AAC
 AArch64
 aaS
@@ -282,6 +284,7 @@ CD-ROMs
 CD-Rs
 CD-RW
 CD-RWs
+CDATA
 CDB
 CDBoot
 CDBs
@@ -348,6 +351,7 @@ CIBs
 cid
 CIDR
 CIFS
+Ciliendo
 CIM
 CIMOM
 CinderSupportMatrix
@@ -402,6 +406,7 @@ Corel
 CorelDraw
 Coreutils
 Corosync
+Cortex-A53
 Cortex-A57
 CoW
 Cowan
@@ -632,6 +637,7 @@ DoS
 DPDK
 DPMS
 DRAC
+dracut
 DRBD
 DRDB
 DRI
@@ -694,6 +700,7 @@ eBook
 Ebps
 EBS
 ec
+ECC
 ECE
 ECKD
 ECOM
@@ -1003,6 +1010,7 @@ GStreamer
 gswitchit
 gte
 gThumb
+GTK
 GTK+
 gtkacpiw
 GUEST
@@ -1012,6 +1020,7 @@ GUIDs
 GUIs
 gunzip
 Gutenprint
+Gutmann
 GVFS
 Gwenview
 gz
@@ -1020,6 +1029,7 @@ gzipped
 HA
 Habanero
 Hadoop
+Hagen
 HAE
 HAL
 HANA
@@ -1203,6 +1213,7 @@ inet
 inetd
 inetOrgPerson
 InfiniBand
+InfiniBands
 infinitum
 INFO
 Infoblox
@@ -1211,6 +1222,7 @@ INFORMIXDIR
 INFORMIXSERVER
 infrared
 INIT
+init
 initramfs
 initrd
 inittab
@@ -1533,9 +1545,7 @@ LICENSING
 licensor
 licensors
 Lifebook
-lifecycle
 LifeMeeting
-LiliPond
 LILO
 LilyPond
 Linbit
@@ -1845,6 +1855,7 @@ MySQL
 mysqld
 naa
 Nagios
+NALAAP
 namcd
 NAME
 NAMEs
@@ -3193,6 +3204,7 @@ transcoding
 Trojan
 Trojans
 TrueType
+TrustedGRUB2
 TryExec
 TSC
 tsclient
@@ -3233,6 +3245,7 @@ UIDs
 ulimit
 ulimits
 umask
+Umberto
 UML
 umount
 UMTS
@@ -3428,6 +3441,7 @@ Vinagre
 VIPArip
 virsh
 virtfs
+VirtFS
 VirtIO
 VirtualBox
 VirtualDomain
@@ -3531,6 +3545,7 @@ whitespaced
 whitespaces
 whitespacing
 whois
+Wi
 Wi-Fi
 widescreen
 widescreens
