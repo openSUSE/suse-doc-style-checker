@@ -539,6 +539,25 @@
 
   <term>
     <accept>
+      <proposal>fail</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>result(s|ed|ing)?</pattern>
+      <pattern>in</pattern>
+      <pattern>an?</pattern>
+      <pattern>failures?</pattern>
+      <contextpattern match="negative">in|of|during|while</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>result(s|ed|ing)?</pattern>
+      <pattern>in</pattern>
+      <pattern>failures?</pattern>
+      <contextpattern match="negative">in|of|during|while</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>few</proposal>
     </accept>
     <patterngroup>

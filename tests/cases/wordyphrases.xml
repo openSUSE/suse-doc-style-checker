@@ -139,4 +139,10 @@
     <para xml:id="sdsc.expect.warning.wordyphrases.negative-drawback">
         The negative drawbacks are that there are no disadvantages.
     </para>
+    <para xml:id="sdsc.expect.warning.wordyphrases.result-in-failure">
+        This will likely result in a failure.
+    </para>
+    <para xml:id="sdsc.valid.result-in-failure">
+        This will likely result in a failure of the upgrade.
+    </para>
 </chapter>
