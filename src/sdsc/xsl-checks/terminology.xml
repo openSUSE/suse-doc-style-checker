@@ -2688,6 +2688,19 @@
 
   <term>
     <accept>
+      <proposal>namespace</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>name-spaces?|name[ds]-?spaces?</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>name[ds]?</pattern>
+      <pattern>spaces?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>need to</proposal>
     </accept>
     <patterngroup>

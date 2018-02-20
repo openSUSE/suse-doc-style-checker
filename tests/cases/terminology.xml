@@ -344,4 +344,16 @@
     <para xml:id="sdsc.expect.error.terminology.ibmcsystems">
         IBM cSystems is the future of the mainframe.
     </para>
+    <para xml:id="sdsc.expect.error.terminology.name-space">
+        Name-spaces are defined first.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.name_space">
+        Name spaces are defined first.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.named_space">
+        Named spaces are defined first.
+    </para>
+    <para xml:id="sdsc.valid.namespace">
+        Namespaces are defined first.
+    </para>
 </chapter>
