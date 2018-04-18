@@ -1,0 +1,7 @@
+rm -r env 2> /dev/null
+pyvenv env
+. env/bin/activate
+pip install -U pip setuptools
+pip install -r test_requirements.txt
+pip install -r requirements.txt
+./setup.py develop
