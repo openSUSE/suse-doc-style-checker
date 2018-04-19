@@ -19,7 +19,13 @@
     <xsl:variable name="length" select="string-length(normalize-space(text()))"/>
     <!-- Deliberately higher than the styleguide asks for. Try to avoid annoying
          people. -->
-    <xsl:if test="$length &gt; 50">
+    <xsl:if test="$length &gt; 50 and
+                  not(self::*/ancestor::*[
+                    local-name(.) = 'screen' or
+                    local-name(.) = 'programlisting' or
+                    local-name(.) = 'userinput' or
+                    local-name(.) = 'literallayout'
+                  ])">
       <result type="warning">
         <xsl:call-template name="sourcehint"/>
         <message>
@@ -37,7 +43,13 @@
     <xsl:variable name="length" select="string-length(normalize-space(text()))"/>
     <!-- Deliberately higher than the styleguide asks for. Try to avoid annoying
          people. -->
-    <xsl:if test="$length &gt; 50">
+    <xsl:if test="$length &gt; 50 and
+                  not(self::*/ancestor::*[
+                    local-name(.) = 'screen' or
+                    local-name(.) = 'programlisting' or
+                    local-name(.) = 'userinput' or
+                    local-name(.) = 'literallayout'
+                  ])">
       <xsl:variable name="references-file">
         <xsl:call-template name="parse-filename-file">
           <xsl:with-param name="text" select="normalize-space(text())"/>

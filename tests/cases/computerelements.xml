@@ -17,4 +17,6 @@
             /proc/kcore
         </filename>
     </para>
+<screen xml:id="sdsc.valid.screen-long-file"><filename>/boot/sandal/pump/sneaker/wellington/ghillies/slipper/platform/balletflat/stiletto/clog/monkstrap/balmoral.slipon</filename></screen>
+<screen xml:id="sdsc.valid.screen-long-command"><command>boot --sandal=pump --sneaker "wellington/ghillies/slipper" <replaceable>PLATFORM</replaceable> balletflat-{stiletto,clog,monkstrap,balmoral} slipon</command></screen>
 </chapter>
