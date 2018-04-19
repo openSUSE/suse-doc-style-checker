@@ -2319,11 +2319,16 @@
       <pattern>(log-out|log-?off|sign-?o(ut|ff))s?</pattern>
       <contextpattern look="before" match="negative" location="2" mode="fuzzy">(to|not|is|was|be(en)?|will|ha(s|d|ve)|(we|a)re|can|could|may|might|shall|should)</contextpattern>
       <contextpattern look="before">(the|an?)</contextpattern>
+      <contextpattern match="negative" location="2" mode="fuzzy">off?|from</contextpattern>
+      <contextpattern match="negative" look="bothways">[-a-z0-9]*ly</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>(log|sign)</pattern>
       <pattern>o(ut|ff)s?</pattern>
       <contextpattern look="before" mode="fuzzy" location="2">(the|an?)</contextpattern>
+      <contextpattern look="before" match="negative" location="2" mode="fuzzy">to</contextpattern>
+      <contextpattern look="bothways" match="negative">\w+ly</contextpattern>
+      <contextpattern match="negative" location="2" mode="fuzzy">of|from</contextpattern>
     </patterngroup>
   </term>
 
@@ -2333,6 +2338,21 @@
     </accept>
     <patterngroup>
       <pattern>((logg?|sign)(ed|ing)-?o(ut|ff)|(sign|log)-?o(ut|ff)(ed|ing))</pattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>logout</pattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="2">(the|an?)</contextpattern>
+      <contextpattern look="before" location="2" mode="fuzzy">to</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>logout</pattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="2">(the|an?)</contextpattern>
+      <contextpattern look="bothways">\w+ly</contextpattern>
+    </patterngroup>
+    <patterngroup>
+      <pattern>logout</pattern>
+      <contextpattern look="before" match="negative" mode="fuzzy" location="2">(the|an?)</contextpattern>
+      <contextpattern>of|from</contextpattern>
     </patterngroup>
     <patterngroup>
       <pattern>sign(ed|ing|s)</pattern>

@@ -356,4 +356,15 @@
     <para xml:id="sdsc.valid.namespace">
         Namespaces are defined first.
     </para>
+    <para xml:id="sdsc.valid.log-out">
+        Unmount the partitions, log out of the change-root environment, and
+        reboot the system.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.log-out-from">
+        Unmount the partitions, log out from the change-root environment, and
+        reboot the system
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.logout-of">
+        To logout of the system, press <keycap function="escape"/> five times.
+    </para>
 </chapter>
