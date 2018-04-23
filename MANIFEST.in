@@ -40,6 +40,8 @@ graft tests
 prune experimental-checks
 prune bookmarklet
 
+exclude init-venv
+
 # The pre-built version of the man page
 global-exclude sdsc.1
 
