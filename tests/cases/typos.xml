@@ -247,4 +247,14 @@
         Since the environment is constrained, this is not a problem on an
         installed system.
     </para>
+    <para xml:id="sdsc.expect.error.typos.part-of">
+        This is similar to version 3 which is included as part the Product.
+    </para>
+    <para xml:id="sdsc.expect.error.typos.part-of-2">
+        This is similar to version 3 which is included as an important part
+        the Product.
+    </para>
+    <para xml:id="sdsc.valid.part-of">
+        This is similar to version 3 which is included as part of the Product.
+    </para>
 </chapter>

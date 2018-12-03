@@ -952,6 +952,17 @@ GNU GPL.
 
   <term>
     <accept>
+      <proposal>part of</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>parts?</pattern>
+      <contextpattern look="before" location="2" mode="fuzzy">the|an?|as</contextpattern>
+      <contextpattern look="after">the|an?</contextpattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>peak</proposal>
     </accept>
     <patterngroup>
