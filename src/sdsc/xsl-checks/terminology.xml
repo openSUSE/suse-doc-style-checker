@@ -724,6 +724,15 @@
 
   <term>
     <accept>
+      <proposal>Cloud Foundry</proposal>
+    </accept>
+    <patterngroup>
+      <pattern>Cloud[-_]?Foundry'?s?</pattern>
+    </patterngroup>
+  </term>
+
+  <term>
+    <accept>
       <proposal>Common Unix Printing System</proposal>
     </accept>
     <patterngroup>
@@ -4275,7 +4284,7 @@
     <patterngroup>
       <pattern>suse</pattern>
       <pattern>cloud</pattern>
-      <contextpattern match="negative">application'?s?</contextpattern>
+      <contextpattern match="negative">(application|foundry)'?s?</contextpattern>
       <contextpattern match="negative" location="2">platform'?s?</contextpattern>
     </patterngroup>
     <patterngroup>

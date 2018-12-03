@@ -278,6 +278,18 @@
         Cloud Applications Platform is your platform for next-generation
         container-based applications.
     </para>
+    <para xml:id="sdsc.valid.cloud-foundry">
+        This is similar to Cloud Foundry.
+    </para>
+    <para xml:id="sdsc.valid.suse-cloud-foundry">
+        This is similar to SUSE Cloud Foundry.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.cloudfoundry">
+        This is similar to Cloud-Foundry.
+    </para>
+    <para xml:id="sdsc.expect.error.terminology.suse-cloudfoundry">
+        This is similar to SUSE CloudFoundry.
+    </para>
     <para xml:id="sdsc.valid.65">
         With Open Build Service, release your software for a wide range of
         operating systems and hardware architectures.
