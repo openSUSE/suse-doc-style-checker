@@ -8,7 +8,7 @@
   <xsl:import href="library.xsl"/>
 
   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
-  <xsl:param name="terminologyfile" select="'a-an.xml'"/>
+  <xsl:param name="terminologyfile" select="'aan.xml'"/>
   <xsl:variable name="terminology" select="document($terminologyfile)/terminology"/>
   <xsl:variable name="termnodes" select="$terminology/term"/>
   <xsl:variable name="ignoredwords">

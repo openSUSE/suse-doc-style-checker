@@ -7,7 +7,7 @@ import sdsc
 def test_checkpatterns(capsys, casesdir):
     """checks whether the patterns are sane"""
     sdsc.flag_checkpatterns = True
-    path = "{}a-an.xml".format(casesdir)
+    path = "{}aan.xml".format(casesdir)
     sdsc.checkOneFile(path)
     sdsc.flag_checkpatterns = False
 

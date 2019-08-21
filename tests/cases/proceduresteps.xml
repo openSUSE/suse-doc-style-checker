@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.procedure-steps">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha-test-proceduresteps">
     <title>Test</title>
         <para>
             Wonder how they got so pretty? Were singing hurray quite often!
         </para>
-        <procedure xml:id="pro.sdsc.expect.error.procedure-steps.1">
+        <procedure xml:id="pro-sdsc-expect-error-proceduresteps-1">
             <step><para>Add steps</para></step>
         </procedure>
-        <procedure xml:id="pro.sdsc.expect.warning.procedure-steps.2">
+        <procedure xml:id="pro-sdsc-expect-warning-proceduresteps-2">
             <step><para>Remove steps</para></step>
             <step><para>Maybe</para></step>
             <step><para>What if I like steps?</para></step>
@@ -20,7 +20,7 @@
             <step><para>Not quite</para></step>
             <step><para>Now we got it!</para></step>
         </procedure>
-        <procedure xml:id="pro.sdsc.valid">
+        <procedure xml:id="pro-sdsc-valid">
             <step><para>Have money</para></step>
             <step><para>???</para></step>
             <step><para>Profit!</para></step>

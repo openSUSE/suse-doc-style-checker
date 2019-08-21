@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="sdsc.expect.warning.ids.1">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="sdsc-expect-warning-ids-1">
     <title>ID test</title>
 
     <para/>
 
-    <sect1 xml:id="sec.sdsc.expect.error.ids.2">
+    <sect1 xml:id="sec-sdsc-expect-error-ids-2">
         <para/>
         <sect2>
             <para>I do not have an ID.</para>
@@ -17,54 +17,60 @@
             <sect3>
                 <para>This should be ok because my parent has role="legal".</para>
             </sect3>
-            <sect3 xml:id="sec.sdsc.valid.4">
+            <sect3 xml:id="sec-sdsc-valid-4">
                 <para>This should be ok too.</para>
             </sect3>
-            <sect3 xml:id="sec.sdsc.expect.warning.ids.4ä">
+            <sect3 xml:id="sec-sdsc-expect-warning-ids-4ä">
                 <para>This should be not be ok.</para>
             </sect3>
         </sect2>
     </sect1>
 
-    <sect1 xml:id="sec.bad.prefix">
+    <sect1 xml:id="sec-bad-prefix">
         <para/>
-        <sect2 xml:id="badprefix.sdsc.expect.warning.ids.5">
+        <sect2 xml:id="badprefix-sdsc-expect-warning-ids-5">
             <para>I have a badly prefixed ID.</para>
         </sect2>
-        <sect2 xml:id="badprefix.sdsc.expect.warning.ids.6">
+        <sect2 xml:id="badprefix-sdsc-expect-warning-ids-6">
             <para>Me too.</para>
         </sect2>
-        <sect2 role="legal" xml:id="badprefix-legal.sdsc.expect.warning.ids.6">
+        <sect2 role="legal" xml:id="badprefix-legal-sdsc-expect-warning-ids-6">
             <title>License</title>
             <para>
                 Despite being having role="legal", my ID should still be
                 checked.
             </para>
-            <sect3 xml:id="badprefix.sdsc.expect.warning.ids.7">
+            <sect3 xml:id="badprefix-sdsc-expect-warning-ids-7">
                 <para>Mine should be checked too.</para>
             </sect3>
-            <sect3 xml:id="badprefix.sdsc.expect.warning.ids.8">
+            <sect3 xml:id="badprefix-sdsc-expect-warning-ids-8">
                 <para>Mine should be checked too.</para>
             </sect3>
         </sect2>
     </sect1>
 
-    <sect1 xml:id="sec.bad.specialcharacters">
+    <sect1 xml:id="sec-bad-specialcharacters">
         <para/>
-        <sect2 xml:id="sec.sdsc.expect.warning.ids.9ü">
+        <sect2 xml:id="sec-sdsc-expect-warning-ids-9ü">
             <para>I have an ID with special characters.</para>
         </sect2>
-        <sect2 xml:id="sec.sdsc.expect.warning.ids.10ß">
+        <sect2 xml:id="sec-sdsc-expect-warning-ids-10ß">
+            <para>Me too.</para>
+        </sect2>
+        <sect2 xml:id="sec-sdsc-expect-warning-ids-11_id">
+            <para>Me too.</para>
+        </sect2>
+        <sect2 xml:id="sec-sdsc-expect-warning-ids-12.id">
             <para>Me too.</para>
         </sect2>
     </sect1>
 
-    <sect1 xml:id="sec.valid.ids">
+    <sect1 xml:id="sec-valid-ids">
         <para/>
-        <sect2 xml:id="sec.valid.11">
+        <sect2 xml:id="sec-valid-11">
             <para>I have a good ID.</para>
         </sect2>
-        <sect2 xml:id="sec.valid.12">
+        <sect2 xml:id="sec-valid-12">
             <para>I do too.</para>
         </sect2>
     </sect1>

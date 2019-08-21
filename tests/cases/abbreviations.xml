@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.abbreviations">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha-test-abbreviations">
     <title>Abbreviations test</title>
-    <para xml:id="sdsc.expect.error.abbreviations.1">
+    <para xml:id="sdsc-expect-error-abbreviations-1">
         My feelings about XSLT are ca. 100% love.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.2">
+    <para xml:id="sdsc-expect-error-abbreviations-2">
         Who would win in a race of 100 chameleon-sized horses vs. 1 horse-sized
         chameleon?
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.3">
+    <para xml:id="sdsc-expect-error-abbreviations-3">
         This was summarily disproven by Brontosaurus et al.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.4">
+    <para xml:id="sdsc-expect-error-abbreviations-4">
         Ibid., see page 347.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.5">
+    <para xml:id="sdsc-expect-error-abbreviations-5">
         Humanity has brought forth over ten awesome inventions, e.g. XSLT.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.6">
+    <para xml:id="sdsc-expect-error-abbreviations-6">
         NB that I am serious about this.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.7">
+    <para xml:id="sdsc-expect-error-abbreviations-7">
         For more information, q. v. the other page.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.8">
+    <para xml:id="sdsc-expect-error-abbreviations-8">
         I am not sure this works well, i. e. there may be issues.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.9">
+    <para xml:id="sdsc-expect-error-abbreviations-9">
         Bernd, re: our recent discussion, I think you are right.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.10">
+    <para xml:id="sdsc-expect-error-abbreviations-10">
         Resp., our tried and true approach of argumentation.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.11">
+    <para xml:id="sdsc-expect-error-abbreviations-11">
         IMHO, this should happen.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.12">
+    <para xml:id="sdsc-expect-error-abbreviations-12">
         This should happen asap.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.13">
+    <para xml:id="sdsc-expect-error-abbreviations-13">
         This should happen as soon as possible, but IDK.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.14">
+    <para xml:id="sdsc-expect-error-abbreviations-14">
         We are not sure atm.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.15">
+    <para xml:id="sdsc-expect-error-abbreviations-15">
         Humanity has brought forth over ten awesome inventions, eg. XSLT.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.16">
+    <para xml:id="sdsc-expect-error-abbreviations-16">
         Humanity has brought forth over ten awesome inventions, e.g XSLT.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.17">
+    <para xml:id="sdsc-expect-error-abbreviations-17">
         Eg, Humanity has brought forth over ten awesome inventions like XSLT.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.18">
+    <para xml:id="sdsc-expect-error-abbreviations-18">
         Humanity has brought forth over ten awesome inventions, e. g XSLT.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.19">
+    <para xml:id="sdsc-expect-error-abbreviations-19">
         I am not sure this works well, ie. there may be issues.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.20">
+    <para xml:id="sdsc-expect-error-abbreviations-20">
         I am not sure this works well, ie there may be issues.
     </para>
-    <para xml:id="sdsc.expect.error.abbreviations.21">
+    <para xml:id="sdsc-expect-error-abbreviations-21">
         I am not sure this works well, i.e. there may be issues.
     </para>
-    <para xml:id="sdsc.valid.22">
+    <para xml:id="sdsc-valid-22">
         I am not sure this works well: In IE, there may be issues.
     </para>
 </chapter>

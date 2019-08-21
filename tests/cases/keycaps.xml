@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.keycaps">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha-test-keycaps">
     <title>Keycaps test</title>
     <para/>
-    <para xml:id="sdsc.expect.error.keycaps.1">
+    <para xml:id="sdsc-expect-error-keycaps-1">
         Hold <keycap function="control">text</keycap> pressed for 3 seconds.
     </para>
-    <para xml:id="sdsc.expect.warning.keycaps.2">
+    <para xml:id="sdsc-expect-warning-keycaps-2">
         The <keycap function="meta">Windows</keycap> has many important
         functions. Because the this key has so many (legitimate) names,
         we output only a warning here.
     </para>
-    <para xml:id="sdsc.valid.3">
+    <para xml:id="sdsc-valid-3">
         To unlock the secret chamber, press <keycap function="enter"/>.
     </para>
-    <para xml:id="sdsc.expect.warning.keycaps.4">
+    <para xml:id="sdsc-expect-warning-keycaps-4">
         Hold <guimenu>Ctrl</guimenu> pressed for 3 seconds.
     </para>
-    <para xml:id="sdsc.expect.error.keycaps.5">
+    <para xml:id="sdsc-expect-error-keycaps-5">
         To go to the left, use <keycap>-></keycap>.
     </para>
-    <para xml:id="sdsc.expect.error.keycaps.6">
+    <para xml:id="sdsc-expect-error-keycaps-6">
         To edit, press <keycap>e</keycap>.
     </para>
-    <para xml:id="sdsc.valid.7">
+    <para xml:id="sdsc-valid-7">
         To edit, press <keycap>E</keycap>.
     </para>
-    <para xml:id="sdsc.expect.error.keycaps.8">
+    <para xml:id="sdsc-expect-error-keycaps-8">
         For help, press <keycap>f1</keycap>.
     </para>
-    <para xml:id="sdsc.valid.9">
+    <para xml:id="sdsc-valid-9">
         For help, press <keycap>F1</keycap>.
     </para>
-    <para xml:id="sdsc.expect.error.keycaps.10">
+    <para xml:id="sdsc-expect-error-keycaps-10">
         To start the engine, click <keycap>Accelerate!</keycap>.
     </para>
 </chapter>

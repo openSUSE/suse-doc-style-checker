@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.callouts">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha-test-callouts">
     <title>Callouts test</title>
     <para>
-        <calloutlist xml:id="sdsc.expect.error.callouts.1">
-            <callout arearefs="cha.test.callouts"><para>There</para></callout>
-            <callout arearefs="cha.test.callouts"><para>are</para></callout>
-            <callout arearefs="cha.test.callouts"><para>way</para></callout>
-            <callout arearefs="cha.test.callouts"><para>too</para></callout>
-            <callout arearefs="cha.test.callouts"><para>many</para></callout>
-            <callout arearefs="cha.test.callouts"><para>callouts</para></callout>
-            <callout arearefs="cha.test.callouts"><para>in</para></callout>
-            <callout arearefs="cha.test.callouts"><para>this</para></callout>
-            <callout arearefs="cha.test.callouts"><para>callout</para></callout>
-            <callout arearefs="cha.test.callouts"><para>tag</para></callout>
-            <callout arearefs="cha.test.callouts"><para></para></callout>
-            <callout arearefs="cha.test.callouts"><para></para></callout>
-            <callout arearefs="cha.test.callouts"><para></para></callout>
+        <calloutlist xml:id="sdsc-expect-error-callouts-1">
+            <callout arearefs="cha-test-callouts"><para>There</para></callout>
+            <callout arearefs="cha-test-callouts"><para>are</para></callout>
+            <callout arearefs="cha-test-callouts"><para>way</para></callout>
+            <callout arearefs="cha-test-callouts"><para>too</para></callout>
+            <callout arearefs="cha-test-callouts"><para>many</para></callout>
+            <callout arearefs="cha-test-callouts"><para>callouts</para></callout>
+            <callout arearefs="cha-test-callouts"><para>in</para></callout>
+            <callout arearefs="cha-test-callouts"><para>this</para></callout>
+            <callout arearefs="cha-test-callouts"><para>callout</para></callout>
+            <callout arearefs="cha-test-callouts"><para>tag</para></callout>
+            <callout arearefs="cha-test-callouts"><para>Really</para></callout>
+            <callout arearefs="cha-test-callouts"><para>a</para></callout>
+            <callout arearefs="cha-test-callouts"><para>lot</para></callout>
         </calloutlist>
-        <calloutlist xml:id="sdsc.valid.1">
-            <callout arearefs="cha.test.callouts"><para>There</para></callout>
-            <callout arearefs="cha.test.callouts"><para>are</para></callout>
-            <callout arearefs="cha.test.callouts"><para>not</para></callout>
-            <callout arearefs="cha.test.callouts"><para>too</para></callout>
-            <callout arearefs="cha.test.callouts"><para>many</para></callout>
-            <callout arearefs="cha.test.callouts"><para>callouts</para></callout>
-            <callout arearefs="cha.test.callouts"><para>in</para></callout>
-            <callout arearefs="cha.test.callouts"><para>here</para></callout>
+        <calloutlist xml:id="sdsc-valid-1">
+            <callout arearefs="cha-test-callouts"><para>There</para></callout>
+            <callout arearefs="cha-test-callouts"><para>are</para></callout>
+            <callout arearefs="cha-test-callouts"><para>not</para></callout>
+            <callout arearefs="cha-test-callouts"><para>fewer</para></callout>
+            <callout arearefs="cha-test-callouts"><para>callouts</para></callout>
+            <callout arearefs="cha-test-callouts"><para>here</para></callout>
         </calloutlist>
     </para>
 </chapter>

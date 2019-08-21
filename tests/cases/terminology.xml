@@ -1,382 +1,382 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.terminology">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha-test-terminology">
     <title>Terminology test</title>
-    <para xml:id="sdsc.expect.error.terminology.1">
+    <para xml:id="sdsc-expect-error-terminology-1">
         Two 32 bit systems equal one 64 bit system.
     </para>
-    <para xml:id="sdsc.valid.1">
+    <para xml:id="sdsc-valid-1">
         Two 32-bit systems equal one 64-bit system.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.2">
+    <para xml:id="sdsc-expect-error-terminology-2">
         I use Mac OS X at work.
     </para>
-    <para xml:id="sdsc.valid.2">
+    <para xml:id="sdsc-valid-2">
         I have several macOS boxes at home.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.3">
+    <para xml:id="sdsc-expect-error-terminology-3">
         SUSE Linux is a great OS.
     </para>
-    <para xml:id="sdsc.valid.3">
+    <para xml:id="sdsc-valid-3">
         SUSE Linux Enterprise is a great OS.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.4">
+    <para xml:id="sdsc-expect-error-terminology-4">
         S4S is the only OS based on SLES that is certified by SAP.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.5">
+    <para xml:id="sdsc-expect-error-terminology-5">
         SUSE Linux Enterprise Server for SAP is the only OS based on SLES that is certified by SAP.
     </para>
-    <para xml:id="sdsc.valid.5">
+    <para xml:id="sdsc-valid-5">
         SUSE Linux Enterprise Server for SAP Applications is the only OS based on SLES that is certified by SAP.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.6">
+    <para xml:id="sdsc-expect-error-terminology-6">
         SLE for SAP Applications is the only OS based on SLES that is certified by SAP.
     </para>
-    <para xml:id="sdsc.valid.6">
+    <para xml:id="sdsc-valid-6">
         SLES for SAP is the only OS based on SLES that is certified by SAP.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.7">
+    <para xml:id="sdsc-expect-error-terminology-7">
         Try SUSE Linux Enterprise Storage today.
     </para>
-    <para xml:id="sdsc.valid.7">
+    <para xml:id="sdsc-valid-7">
         Try SUSE Enterprise Storage today.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.8">
+    <para xml:id="sdsc-expect-error-terminology-8">
         The primary solution for the private-cloud market is SUSE Cloud.
     </para>
-    <para xml:id="sdsc.valid.8">
+    <para xml:id="sdsc-valid-8">
         The primary solution for the private-cloud market is SUSE OpenStack Cloud.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.9">
+    <para xml:id="sdsc-expect-error-terminology-9">
         The new SUSE Server has been certified by many partners.
     </para>
-    <para xml:id="sdsc.valid.9">
+    <para xml:id="sdsc-valid-9">
         The new SUSE Linux Enterprise Server has been certified by many
         partners.
     </para>
-    <para xml:id="sdsc.valid.10">
+    <para xml:id="sdsc-valid-10">
         <command>virt-p2v</command> is now available as a technology preview.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.10">
+    <para xml:id="sdsc-expect-error-terminology-10">
         <command>virt-p2v</command> is now available as a technical preview.
     </para>
-    <para xml:id="sdsc.valid.11">
+    <para xml:id="sdsc-valid-11">
         From the drop-down box <guimenu>Something</guimenu>, select
         <guimenu>Something Else</guimenu>.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.11a">
+    <para xml:id="sdsc-expect-error-terminology-11a">
         From the pulldown menu <guimenu>Something</guimenu>, select
         <guimenu>Something Else</guimenu>.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.11b">
+    <para xml:id="sdsc-expect-error-terminology-11b">
         From the drop-down <guimenu>Something</guimenu>, select
         <guimenu>Something Else</guimenu>.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.11c">
+    <para xml:id="sdsc-expect-error-terminology-11c">
         From the drop-down-menu <guimenu>Something</guimenu>, select
         <guimenu>Something Else</guimenu>.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.12">
+    <para xml:id="sdsc-expect-error-terminology-12">
         The printer will print out the test page.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.13">
+    <para xml:id="sdsc-expect-error-terminology-13">
         To continue, press the <guimenu>Select</guimenu> button.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.14">
+    <para xml:id="sdsc-expect-error-terminology-14">
         SUSE Lunix Enterprise is an advanced operating system.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.15">
+    <para xml:id="sdsc-expect-error-terminology-15">
         And then came Ubuntu and invented the LiveCD which would go on to
         revolutionize the way Linux is distributed forever.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.16">
+    <para xml:id="sdsc-expect-error-terminology-16">
         Start by filling your name, birth date and address into the GUI mask.
     </para>
-    <para xml:id="sdsc.valid.16a">
+    <para xml:id="sdsc-valid-16a">
         There is a mask for every subnet.
     </para>
-    <para xml:id="sdsc.valid.16b">
+    <para xml:id="sdsc-valid-16b">
         Knowing network masks is often helpful.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.17">
+    <para xml:id="sdsc-expect-error-terminology-17">
         Hard-linking can be very convenient.
     </para>
-    <para xml:id="sdsc.valid.17">
+    <para xml:id="sdsc-valid-17">
         The link mode mediates access to hard links.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.18">
+    <para xml:id="sdsc-expect-error-terminology-18">
         The following UI mask allows you to set up your system.
     </para>
-    <para xml:id="sdsc.valid.18">
+    <para xml:id="sdsc-valid-18">
         Effective permissions can be different from the original permissions,
         because they are filtered according to the mask entry.
     </para>
-    <legalnotice xml:id="sdsc.valid.legal.19a">
+    <legalnotice xml:id="sdsc-valid-legal64bit">
         <para>
             Two 32 bit systems equal one 64 bit system. This should be
             ignored because it is within a legalnotice.
         </para>
     </legalnotice>
-    <para role="legal" xml:id="sdsc.valid.legal.19b">
+    <para role="legal" xml:id="sdsc-valid-legal64bit2">
         Two 32 bit systems equal one 64 bit system. This should be
         ignored because it has role="legal".
     </para>
-    <para xml:id="sdsc.valid.20">
+    <para xml:id="sdsc-valid-20">
         When we moved the unbound kernel threads from root to two, their
         affinity masks got automatically changed to only use CPU2.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.21">
+    <para xml:id="sdsc-expect-error-terminology-21">
         After the session, we all moved on ward.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.22">
+    <para xml:id="sdsc-expect-error-terminology-22">
         After the session, we all moved side wards.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.23">
+    <para xml:id="sdsc-expect-error-terminology-23">
         After the session, we all moved upwards.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.24">
+    <para xml:id="sdsc-expect-error-terminology-24">
         Once you have deployed OpenStack, test the environment.
     </para>
-    <para xml:id="sdsc.valid.25">
+    <para xml:id="sdsc-valid-25">
         Once a day, start whistling.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.26">
+    <para xml:id="sdsc-expect-error-terminology-26">
         Once the computer has booted, do things with it.
     </para>
-    <para xml:id="sdsc.valid.27">
+    <para xml:id="sdsc-valid-27">
         To count multiple types of events at once the list was created.
     </para>
-    <para xml:id="sdsc.valid.28">
+    <para xml:id="sdsc-valid-28">
         <!-- Idiotic example to make sure that the comma detection thing
         works. -->
         To count types of events once, the list was created.
     </para>
-    <para xml:id="sdsc.valid.29">
+    <para xml:id="sdsc-valid-29">
         Operating systems are very good.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.30">
+    <para xml:id="sdsc-expect-error-terminology-30">
         The operation systems smell nice.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.31">
+    <para xml:id="sdsc-expect-error-terminology-31">
         Using the operative system, you can feel a fresh breeze.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.32">
+    <para xml:id="sdsc-expect-error-terminology-32">
         My use-cases are better than yours.
     </para>
-    <para xml:id="sdsc.valid.33">
+    <para xml:id="sdsc-valid-33">
         My business case is better than yours.
     </para>
-    <para xml:id="sdsc.valid.34">
+    <para xml:id="sdsc-valid-34">
         Use a key combination to change the sort field.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.35">
+    <para xml:id="sdsc-expect-error-terminology-35">
         YaST has a set of advanced hotkeys.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.36">
+    <para xml:id="sdsc-expect-error-terminology-36">
         To edit a key combo, first click the row.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.37">
+    <para xml:id="sdsc-expect-error-terminology-37">
         The prepared structure also already provides for aarch64 systems.
     </para>
-    <para xml:id="sdsc.valid.38">
+    <para xml:id="sdsc-valid-38">
         The prepared structure also already provides for AArch64 systems.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.39">
+    <para xml:id="sdsc-expect-error-terminology-39">
         The prepared structure also already provides for AArch 64 systems.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.40">
+    <para xml:id="sdsc-expect-error-terminology-40">
         The prepared structure also already provides for AArch-64 systems.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.41">
+    <para xml:id="sdsc-expect-error-terminology-41">
         The prepared structure also already provides for armv8 systems.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.42">
+    <para xml:id="sdsc-expect-error-terminology-42">
         The prepared structure also already provides for Arch64 systems.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.43">
+    <para xml:id="sdsc-expect-error-terminology-43">
         A new version of MICRO FOCUS Vibe is now available.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.44">
+    <para xml:id="sdsc-expect-error-terminology-44">
         Older versions of MicroFocus Vibe are also available.
     </para>
-    <para xml:id="sdsc.valid.45">
+    <para xml:id="sdsc-valid-45">
         Micro Focus Vibe remains available.
     </para>
-    <para xml:id="sdsc.valid.46">
+    <para xml:id="sdsc-valid-46">
         SUSE CaaS Platform is your platform for next-generation container-based
         applications.
     </para>
-    <para xml:id="sdsc.valid.47">
+    <para xml:id="sdsc-valid-47">
         SUSE Container as a Service Platform is your platform for
         next-generation container-based applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.48">
+    <para xml:id="sdsc-expect-error-terminology-48">
         CaaS Platform is your platform for next-generation
         container-based applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.49">
+    <para xml:id="sdsc-expect-error-terminology-49">
         CaaSP is your platform for next-generation container-based
         applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.50">
+    <para xml:id="sdsc-expect-error-terminology-50">
         SUSE Container as Service Platform is your platform for
         next-generation container-based applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.51">
+    <para xml:id="sdsc-expect-error-terminology-51">
         SUSE Container as a Services Platform is your platform for
         next-generation container-based applications.
     </para>
     <!-- Don't check for "as as" or "as an" because that creates two
     messages, one from terminology and one from dupes, respectively a/an. -->
-    <para xml:id="sdsc.expect.error.terminology.52">
+    <para xml:id="sdsc-expect-error-terminology-52">
         SUSE Container ass as Services Platform is your platform for
         next-generation container-based applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.53">
+    <para xml:id="sdsc-expect-error-terminology-53">
         SUSE Containers as Services Platform is your platform for
         next-generation container-based applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.54">
+    <para xml:id="sdsc-expect-error-terminology-54">
         SUSE CASP is your platform for next-generation container-based
         applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.55">
+    <para xml:id="sdsc-expect-error-terminology-55">
         CASP is your platform for next-generation container-based
         applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.56">
+    <para xml:id="sdsc-expect-error-terminology-56">
         CASP is your platform for next-generation container-based
         applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.57">
+    <para xml:id="sdsc-expect-error-terminology-57">
         SUSE Containers aaS Platform is your platform for next-generation
         container-based applications.
     </para>
-    <para xml:id="sdsc.valid.58">
+    <para xml:id="sdsc-valid-58">
         SUSE Cloud Application Platform is your platform for next-generation
         container-based applications.
     </para>
-    <para xml:id="sdsc.valid.59">
+    <para xml:id="sdsc-valid-59">
         SUSE CAP is your platform for next-generation container-based
         applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.60">
+    <para xml:id="sdsc-expect-error-terminology-60">
         SUSE CA Platforms is your platform for next-generation container-based
         applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.61">
+    <para xml:id="sdsc-expect-error-terminology-61">
         SUSE CA-Platform is your platform for next-generation container-based
         applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.62">
+    <para xml:id="sdsc-expect-error-terminology-62">
         CAP is your platform for next-generation container-based applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.63">
+    <para xml:id="sdsc-expect-error-terminology-63">
         SUSE Cloud Applications Platform is your platform for next-generation
         container-based applications.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.64">
+    <para xml:id="sdsc-expect-error-terminology-64">
         Cloud Applications Platform is your platform for next-generation
         container-based applications.
     </para>
-    <para xml:id="sdsc.valid.cloud-foundry">
+    <para xml:id="sdsc-valid-cloudfoundry">
         This is similar to Cloud Foundry.
     </para>
-    <para xml:id="sdsc.valid.suse-cloud-foundry">
+    <para xml:id="sdsc-valid-susecloudfoundry">
         This is similar to SUSE Cloud Foundry.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.cloudfoundry">
+    <para xml:id="sdsc-expect-error-terminology-cloudfoundry">
         This is similar to Cloud-Foundry.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.suse-cloudfoundry">
+    <para xml:id="sdsc-expect-error-terminology-susecloudfoundry">
         This is similar to SUSE CloudFoundry.
     </para>
-    <para xml:id="sdsc.valid.65">
+    <para xml:id="sdsc-valid-65">
         With Open Build Service, release your software for a wide range of
         operating systems and hardware architectures.
     </para>
-    <para xml:id="sdsc.valid.66">
+    <para xml:id="sdsc-valid-66">
         With OBS, release your software for a wide range of operating systems
         and hardware architectures.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.67">
+    <para xml:id="sdsc-expect-error-terminology-67">
         With Open Builds Server, release your software for a wide range of
         operating systems and hardware architectures.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.68">
+    <para xml:id="sdsc-expect-error-terminology-68">
         With Open Builds Server, release your software for a wide range of
         operating systems and hardware architectures.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.69">
+    <para xml:id="sdsc-expect-error-terminology-69">
         With Open Build Services, release your software for a wide range of
-        operating systems and hardware architectures.
+        operating systems and hardware architectures-
     </para>
-    <para xml:id="sdsc.expect.error.terminology.70">
+    <para xml:id="sdsc-expect-error-terminology-70">
         With open build service, release your software for a wide range of
         operating systems and hardware architectures.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.71">
+    <para xml:id="sdsc-expect-error-terminology-71">
         With open builds service, release your software for a wide range of
         operating systems and hardware architectures.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.72">
+    <para xml:id="sdsc-expect-error-terminology-72">
         With obs, release your software for a wide range of
         operating systems and hardware architectures.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.73">
+    <para xml:id="sdsc-expect-error-terminology-73">
         openQA is an automated test tool for operating systems and the engine
         at the heart of openSUSE's automated testing initiative.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.74">
+    <para xml:id="sdsc-expect-error-terminology-74">
         openQa is an automated test tool for operating systems and the engine
         at the heart of openSUSE's automated testing initiative.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.75">
+    <para xml:id="sdsc-expect-error-terminology-75">
         OpenQA is an automated test tool for operating systems and the engine
         at the heart of openSUSE's automated testing initiative.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.76">
+    <para xml:id="sdsc-expect-error-terminology-76">
         Open QA is an automated test tool for operating systems and the engine
         at the heart of openSUSE's automated testing initiative.
     </para>
-    <para xml:id="sdsc.valid.77">
+    <para xml:id="sdsc-valid-77">
         You would definitely know if you opened QA's Web Site.
     </para>
-    <para xml:id="sdsc.valid.ibmz">
+    <para xml:id="sdsc-valid-ibmz">
         IBM Z is the future of the past.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.ibmzsystems">
+    <para xml:id="sdsc-expect-error-terminology-ibmzsystems">
         IBM z Systems is the future of the mainframe.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.zsystems">
+    <para xml:id="sdsc-expect-error-terminology-zsystems">
         z Systems is the future of the mainframe.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.ibmz-lower">
+    <para xml:id="sdsc-expect-error-terminology-ibmzlower">
         IBM z is the future of the mainframe.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.ibmcsystems">
+    <para xml:id="sdsc-expect-error-terminology-ibmcsystems">
         IBM cSystems is the future of the mainframe.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.name-space">
+    <para xml:id="sdsc-expect-error-terminology-namespace">
         Name-spaces are defined first.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.name_space">
+    <para xml:id="sdsc-expect-error-terminology-namespace2">
         Name spaces are defined first.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.named_space">
+    <para xml:id="sdsc-expect-error-terminology-namedspace">
         Named spaces are defined first.
     </para>
-    <para xml:id="sdsc.valid.namespace">
+    <para xml:id="sdsc-valid-namespace">
         Namespaces are defined first.
     </para>
-    <para xml:id="sdsc.valid.log-out">
+    <para xml:id="sdsc-valid-logout">
         Unmount the partitions, log out of the change-root environment, and
         reboot the system.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.log-out-from">
+    <para xml:id="sdsc-expect-error-terminology-logoutfrom">
         Unmount the partitions, log out from the change-root environment, and
-        reboot the system
+        reboot the system.
     </para>
-    <para xml:id="sdsc.expect.error.terminology.logout-of">
+    <para xml:id="sdsc-expect-error-terminology-logoutof">
         To logout of the system, press <keycap function="escape"/> five times.
     </para>
 </chapter>

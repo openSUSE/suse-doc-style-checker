@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.contractions">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha-test-contractions">
     <title>Contractions test</title>
-    <para xml:id="sdsc.expect.error.contractions.1">
+    <para xml:id="sdsc-expect-error-contractions-1">
         I'm a contraction.
     </para>
-    <para xml:id="sdsc.valid.1">
+    <para xml:id="sdsc-valid-1">
         I am not.
     </para>
-    <para xml:id="sdsc.expect.error.contractions.3">
+    <para xml:id="sdsc-expect-error-contractions-3">
         This isn’t funny!
     </para>
-    <para xml:id="sdsc.expect.error.contractions.4">
+    <para xml:id="sdsc-expect-error-contractions-4">
         Ain`t we happy about that?
     </para>
-    <para xml:id="sdsc.expect.error.contractions.5">
+    <para xml:id="sdsc-expect-error-contractions-5">
         This can't be true.
     </para>
-    <para xml:id="sdsc.expect.error.contractions.6">
+    <para xml:id="sdsc-expect-error-contractions-6">
         It's all fake fax.
     </para>
-    <para xml:id="sdsc.expect.error.contractions.7">
+    <para xml:id="sdsc-expect-error-contractions-7">
         I am not happy with this covfefe and I don't accept it.
     </para>
-    <para xml:id="sdsc.expect.error.contractions.8">
+    <para xml:id="sdsc-expect-error-contractions-8">
         This'll be the end.
     </para>
-    <para xml:id="sdsc.expect.error.contractions.9">
+    <para xml:id="sdsc-expect-error-contractions-9">
         She'd not be happy with me.
     </para>
-    <para xml:id="sdsc.expect.error.contractions.10">
+    <para xml:id="sdsc-expect-error-contractions-10">
         He'd not be happy with me.
     </para>
 </chapter>

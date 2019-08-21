@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.computerelements">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha-test-computerelements">
     <title>Computerelements test</title>
     <para>
-        <command xml:id="sdsc.expect.warning.computerelements">
+        <command xml:id="sdsc-expect-warning-computerelements-1">
             This is a very long command with mode than 50 characters
             so it should trip the XSLT test and cause an error here, hopefully.
         </command>
-        <command xml:id="sdsc.valid.1">
+        <command xml:id="sdsc-valid-1">
             a short command.
         </command>
         
-        <filename xml:id="sdsc.expect.warning.computerelements.2">
+        <filename xml:id="sdsc-expect-warning-computerelements-2">
             /boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot/boot
         </filename>
-        <filename xml:id="sdsc.valid.2">
+        <filename xml:id="sdsc-valid-2">
             /proc/kcore
         </filename>
     </para>
-<screen xml:id="sdsc.valid.screen-long-file"><filename>/boot/sandal/pump/sneaker/wellington/ghillies/slipper/platform/balletflat/stiletto/clog/monkstrap/balmoral.slipon</filename></screen>
-<screen xml:id="sdsc.valid.screen-long-command"><command>boot --sandal=pump --sneaker "wellington/ghillies/slipper" <replaceable>PLATFORM</replaceable> balletflat-{stiletto,clog,monkstrap,balmoral} slipon</command></screen>
+<screen xml:id="sdsc-valid-screen-longfile"><filename>/boot/sandal/pump/sneaker/wellington/ghillies/slipper/platform/balletflat/stiletto/clog/monkstrap/balmoral.slipon</filename></screen>
+<screen xml:id="sdsc-valid-screen-longcommand"><command>boot --sandal=pump --sneaker "wellington/ghillies/slipper" <replaceable>PLATFORM</replaceable> balletflat-{stiletto,clog,monkstrap,balmoral} slipon</command></screen>
 </chapter>

@@ -1,148 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.wordyphrases">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha-test-wordyphrases">
     <title>Wordyphrases test</title>
-    <para xml:id="sdsc.expect.warning.wordyphrases.having-to-do-with">
+    <para xml:id="sdsc-expect-warning-wordyphrases-havingtodowith">
         This is having to do with XML in a way.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.adequate-enough">
+    <para xml:id="sdsc-expect-warning-wordyphrases-adequateenough">
         In my opinion, using XML here is not adequate enough.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.after-periods">
+    <para xml:id="sdsc-expect-warning-wordyphrases-afterperiods">
         After periods of creating and testing tests, it is slowly starting to
         dawn on me how useful they are.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.alternative-choice">
+    <para xml:id="sdsc-expect-warning-wordyphrases-alternativechoice">
         Fortunately, I do not have alternative choices.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.up-front-planning">
+    <para xml:id="sdsc-expect-warning-wordyphrases-upfrontplanning">
         I always do some up-front planning.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.if-you-want-to">
+    <para xml:id="sdsc-expect-warning-wordyphrases-ifyouwantto">
         If you want to do the Moonwalk, move your left foot slightly to the
         side first.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.of-them">
+    <para xml:id="sdsc-expect-warning-wordyphrases-ofthem">
         Snapshots younger than the value specified here will not be deleted,
         regardless of how many of them exist.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.entirely-same">
+    <para xml:id="sdsc-expect-warning-wordyphrases-entirelysame">
         These home directories look and feel entirely the same as standard
         Linux home directories.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.exact-same">
+    <para xml:id="sdsc-expect-warning-wordyphrases-exactsame">
         These home directories look and feel the exact the same as standard
         Linux home directories.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.at-all">
+    <para xml:id="sdsc-expect-warning-wordyphrases-atall">
         There is no question at all that there cannot be a question.
     </para>
-    <para xml:id="sdsc.valid.at-all">
+    <para xml:id="sdsc-valid-atall">
         The Kernel parameter <literal>cio_ignore</literal> prevents the Kernel
         from looking at all the available hardware devices.
     </para>
-    <para xml:id="sdsc.valid.at-all-2">
+    <para xml:id="sdsc-valid-atall2">
         At all times, remain seated.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.not-unlike">
+    <para xml:id="sdsc-expect-warning-wordyphrases-notunlike">
         R is a language which is not entirely unlike the S language developed
         at AT&amp;T Bell Laboratories.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.one-same">
+    <para xml:id="sdsc-expect-warning-wordyphrases-onesame">
         It is all one and the same.
     </para>
-    <para xml:id="sdsc.valid.together-with">
+    <para xml:id="sdsc-valid-togetherwith">
         Together with them, we celebrated.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.conjunction-with">
+    <para xml:id="sdsc-expect-warning-wordyphrases-conjunctionwith">
         To clean the larynx, use gargle in conjunction with frobnicator.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.combination-with">
+    <para xml:id="sdsc-expect-warning-wordyphrases-combinationwith">
         To clean the larynx, use gargle in combination with frobnicator.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.add-more">
+    <para xml:id="sdsc-expect-warning-wordyphrases-addmore">
         Add more rows by clicking <guimenu>Do stuff</guimenu>.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.add-additional">
+    <para xml:id="sdsc-expect-warning-wordyphrases-addadditional">
         Try to add additional moves to your repertoire by wildly swinging the
         laser sword.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.several-other">
+    <para xml:id="sdsc-expect-warning-wordyphrases-severalother">
         Several other kernel interfaces were injured and felt the pain too.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.make-certain">
+    <para xml:id="sdsc-expect-warning-wordyphrases-makecertain">
         Make certain you are using Linux.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.unless-when">
+    <para xml:id="sdsc-expect-warning-wordyphrases-unlesswhen">
         This procedure works unless when the frobnicator is active.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.might-want-consider">
+    <para xml:id="sdsc-expect-warning-wordyphrases-mightwantconsider">
         In this case, you might want to actively consider switching.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.could-consider">
+    <para xml:id="sdsc-expect-warning-wordyphrases-couldconsider">
         In this case, you could consider switching.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.may-like-consider">
+    <para xml:id="sdsc-expect-warning-wordyphrases-maylikeconsider">
         In this case, you may like to consider switching.
     </para>
-    <para xml:id="sdsc.valid.might-consider">
+    <para xml:id="sdsc-valid-mightconsider">
         Frobnicator is great which is why you should consider switching to it.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.worth-noting">
+    <para xml:id="sdsc-expect-warning-wordyphrases-worthnoting">
         It is worth noting that Web engines may depart from the specification.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.important-to-note">
+    <para xml:id="sdsc-expect-warning-wordyphrases-importanttonote">
         It is important to note that <command>seccheck</command> can be used
         to improve the file security.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.also-important-mention">
+    <para xml:id="sdsc-expect-warning-wordyphrases-alsoimportantmention">
         It is also important to mention that <command>seccheck</command> can
         be used to improve the file security.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.may-make-sense-mention">
+    <para xml:id="sdsc-expect-warning-wordyphrases-maymakesensemention">
         It may make sense to mention that <command>seccheck</command> can
         be used to improve the file security.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.name-but-select-few-them">
+    <para xml:id="sdsc-expect-warning-wordyphrases-namebutselectfewthem">
         The suite consists of many applications, including Frobnicator and
         Finaglemaster, to name but a select few of them.
     </para>
-    <para xml:id="sdsc.valid.name-but-select-few-examples">
+    <para xml:id="sdsc-valid-namebutselectfewexamples">
         If I needed to name but a select few examples of excellent software,
         those would be Frobnicator and Finaglemaster.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.mention-only-some-examples">
+    <para xml:id="sdsc-expect-warning-wordyphrases-mentiononlysomeexamples">
         Frobnicator and Finaglemaster, to mention only some examples, have
         garnered very positive critiques.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.not-really">
+    <para xml:id="sdsc-expect-warning-wordyphrases-notreally">
         Consequently, it is not really useful to translate a password.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.not-very">
+    <para xml:id="sdsc-expect-warning-wordyphrases-notvery">
         Consequently, it is not very useful to translate a password.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.for-example-etc">
+    <para xml:id="sdsc-expect-warning-wordyphrases-forexampleetc">
         This includes, for example, this and that, etc.
     </para>
-    <para xml:id="sdsc.valid.among-others">
+    <para xml:id="sdsc-valid-amongothers">
         This includes, among others, this and that.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.among-others-for-example">
+    <para xml:id="sdsc-expect-warning-wordyphrases-amongothersforexample">
         This includes, among others, this, these, here, there and that, for example.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.so-be-able">
+    <para xml:id="sdsc-expect-warning-wordyphrases-sobeable">
         Move to the latest machine type, so as to be able to take advantage
         of changes.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.positive-advantage">
+    <para xml:id="sdsc-expect-warning-wordyphrases-positiveadvantage">
         The positive advantage is that there are no benefits.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.negative-drawback">
+    <para xml:id="sdsc-expect-warning-wordyphrases-negativedrawback">
         The negative drawbacks are that there are no disadvantages.
     </para>
-    <para xml:id="sdsc.expect.warning.wordyphrases.result-in-failure">
+    <para xml:id="sdsc-expect-warning-wordyphrases-resultinfailure">
         This will likely result in a failure.
     </para>
-    <para xml:id="sdsc.valid.result-in-failure">
+    <para xml:id="sdsc-valid-resultinfailure">
         This will likely result in a failure of the upgrade.
     </para>
 </chapter>

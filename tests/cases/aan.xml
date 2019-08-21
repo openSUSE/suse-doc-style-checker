@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha.test.a-an" xml:base="a-an.xml">
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="cha-test-aan">
     <title>A-An test</title>
-    <para xml:id="sdsc.expect.error.a-an.an-useless">
+    <para xml:id="sdsc-expect-error-aan-anuseless">
         We have an useless sentence here.
     </para>
-    <para xml:id="sdsc.valid.a-useless">
+    <para xml:id="sdsc-valid-auseless">
         This is also a useless sentence.
     </para>
-    <para xml:id="sdsc.valid.a-sched-other">
+    <para xml:id="sdsc-valid-aschedother">
         Minimum task weight for a SCHED_OTHER task is 15
     </para>
-    <para xml:id="sdsc.expect.error.a-an.an-sched-other">
+    <para xml:id="sdsc-expect-error-aan-anschedother">
         Minimum task weight for an SCHED_OTHER task is 15
     </para>
 </chapter>

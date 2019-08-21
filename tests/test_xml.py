@@ -82,11 +82,11 @@ def isolatewarnings(complaints):
         for complaint in complaintList:
             # Cut out prefixes (so we can give the IDs in our test cases
             # names that comply with our prefix rules for IDs.)
-            relevantpattern = 'sdsc.(valid|expect.(error|warning|info).[^.]+)'
+            relevantpattern = 'sdsc-(valid|expect-(error|warning|info)-[^-]+)'
             idrelevant = re.search(relevantpattern, complaint["id"]).group(0)
 
             expect = idrelevant.count(
-                "sdsc.expect.{0}.{1}".format(complaint["type"],
+                "sdsc-expect-{0}-{1}".format(complaint["type"],
                                              checkmodule))
             if not expect:
                 print("Unexpected {0} {1!r} "
@@ -112,8 +112,8 @@ def searchforerrors(nr_errors, inputids, case, complaints):
     """
     testname = os.path.basename(case)
     for eid in inputids:
-        # Regex for test_sdsc special ids ("stuff.sdsc.expect.warning.a-an.1")
-        findExpect = re.search(r'.*sdsc\.expect\.([^.]+)\.([^.]+)(?:\..*|$)', eid)
+        # Regex for test_sdsc special ids ("stuff-sdsc-expect-warning-a-an-1")
+        findExpect = re.search(r'.*sdsc-expect-([^-]+)-([^-]+)(?:-.*|$)', eid)
         if not findExpect:
             continue
         found = False
