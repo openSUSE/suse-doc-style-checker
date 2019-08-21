@@ -1,32 +1,21 @@
-Style Checker for SUSE Documentation
-====================================
+# SUSE Documentation Style Checker
 
-Tries as hard as its little mind can to check whether documentation is compliant with the
+With its little mind tries very hard to check whether documentation is compliant with the
 [SUSE Documentation Style Guide](https://github.com/SUSE/doc-styleguide).
 
 Releases are usually aligned with releases of the Style Guide.
 
 
-Usage
------
+## Usage
 
-You can test the style checker from your Git checkout by executing:
+* To use SDSC from this Git repository, set up a
+  [Python 3 Virtual Environment](https://github.com/openSUSE/suse-doc-style-checker/wiki/Initializing-Python3-Virtual-Environment)
 
-```
-$ PYTHONPATH=src python3 -m sdsc -h
-```
+* On openSUSE systems, you can install the RPM version of SDSC from
+  [the Documentation:Tools project](https://build.opensuse.org/project/show/Documentation:Tools)
 
 
-Developing/Testing Releases
----------------------------
-
-See the wiki for how to set up your test environment:
-
-+ [Development Setup](https://github.com/sknorr/suse-doc-style-checker/wiki/Developing-SDSC)
-+ [Python Virtual Environment](https://github.com/sknorr/suse-doc-style-checker/wiki/Initializing-Python3-Virtual-Environment)
-
-Lucky Charms
-------------
+## Lucky Charms
 
 [![Build Status](https://travis-ci.org/openSUSE/suse-doc-style-checker.svg?branch=develop)](https://travis-ci.org/openSUSE/suse-doc-style-checker)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/456aa12ad22b4550a9d91f34b850a3ea)](https://www.codacy.com/app/tomschr/suse-doc-style-checker?utm_source=github.com&utm_medium=referral&utm_content=openSUSE/suse-doc-style-checker&utm_campaign=badger)
