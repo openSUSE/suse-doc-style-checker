@@ -78,8 +78,9 @@ setupdict = dict(
         'License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)',
 
         # Supported Python versions
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
 
     keywords=["docbook5", "style", "style-checking"],
