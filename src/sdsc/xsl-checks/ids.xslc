@@ -40,39 +40,39 @@
     <xsl:variable name="id-bad">
       <xsl:call-template name="badcharacters">
         <xsl:with-param name="input" select="$id"/>
-        <xsl:with-param name="characters" select="'a-z|0-9|._-'"/>
+        <xsl:with-param name="characters" select="'a-z|0-9|-'"/>
       </xsl:call-template>
     </xsl:variable>
     <xsl:variable name="correct-prefix">
       <xsl:choose>
-        <xsl:when test="self::appendix or self::db5:appendix">app.</xsl:when>
-        <xsl:when test="self::book or self::db5:book">book.</xsl:when>
-        <xsl:when test="self::co or self::db5:co">co.</xsl:when>
-        <xsl:when test="self::chapter or self::db5:chapter">cha.</xsl:when>
-        <xsl:when test="self::example or self::db5:example">ex.</xsl:when>
-        <xsl:when test="self::figure or self::db5:figure">fig.</xsl:when>
+        <xsl:when test="self::appendix or self::db5:appendix">app-</xsl:when>
+        <xsl:when test="self::book or self::db5:book">book-</xsl:when>
+        <xsl:when test="self::co or self::db5:co">co-</xsl:when>
+        <xsl:when test="self::chapter or self::db5:chapter">cha-</xsl:when>
+        <xsl:when test="self::example or self::db5:example">ex-</xsl:when>
+        <xsl:when test="self::figure or self::db5:figure">fig-</xsl:when>
         <xsl:when test="self::glossary or self::glossterm or
-                        self::db5:glossary or self::db5:glossterm">gl.</xsl:when>
-        <xsl:when test="self::itemizedlist or self::db5:itemizedlist">il.</xsl:when>
-        <xsl:when test="self::listitem or self::db5:listitem">li.</xsl:when>
-        <xsl:when test="self::indexterm or self::db5:indexterm">idx.</xsl:when>
-        <xsl:when test="self::orderedlist or self::db5:orderedlist">ol.</xsl:when>
-        <xsl:when test="self::part or self::db5:part">part.</xsl:when>
-        <xsl:when test="self::procedure or self::db5:procedure">pro.</xsl:when>
+                        self::db5:glossary or self::db5:glossterm">gl-</xsl:when>
+        <xsl:when test="self::itemizedlist or self::db5:itemizedlist">il-</xsl:when>
+        <xsl:when test="self::listitem or self::db5:listitem">li-</xsl:when>
+        <xsl:when test="self::indexterm or self::db5:indexterm">idx-</xsl:when>
+        <xsl:when test="self::orderedlist or self::db5:orderedlist">ol-</xsl:when>
+        <xsl:when test="self::part or self::db5:part">part-</xsl:when>
+        <xsl:when test="self::procedure or self::db5:procedure">pro-</xsl:when>
         <xsl:when test="self::qandaset or self::qandadiv or
                         self::qandaentry or
                         self::db5:qandaset or self::db5:qandadiv or
-                        self::db5:qandaentry">qa.</xsl:when>
+                        self::db5:qandaentry">qa-</xsl:when>
         <xsl:when test="self::sect1 or self::sect2 or self::sect3 or
                         self::sect4 or self::sect5 or self::section or
                         self::db5:sect1 or self::db5:sect2 or self::db5:sect3 or
                         self::db5:sect4 or self::db5:sect5 or
-                        self::db5:section">sec.</xsl:when>
-        <xsl:when test="self::set or self::db5:set">set.</xsl:when>
-        <xsl:when test="self::step or self::db5:step">st.</xsl:when>
-        <xsl:when test="self::table or self::db5:table">tab.</xsl:when>
-        <xsl:when test="self::variablelist or self::db5:variablelist">vl.</xsl:when>
-        <xsl:when test="self::varlistentry or self::db5:varlistentry">vle.</xsl:when>
+                        self::db5:section">sec-</xsl:when>
+        <xsl:when test="self::set or self::db5:set">set-</xsl:when>
+        <xsl:when test="self::step or self::db5:step">st-</xsl:when>
+        <xsl:when test="self::table or self::db5:table">tab-</xsl:when>
+        <xsl:when test="self::variablelist or self::db5:variablelist">vl-</xsl:when>
+        <xsl:when test="self::varlistentry or self::db5:varlistentry">vle-</xsl:when>
         <xsl:otherwise>?</xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
@@ -110,7 +110,7 @@
       <xsl:variable name="id-other">
         <xsl:call-template name="badcharacters">
           <xsl:with-param name="input" select="$id"/>
-          <xsl:with-param name="characters" select="'a-z|A-Z|a-z[x]|A-Z[x]|0-9|._-'"/>
+          <xsl:with-param name="characters" select="'a-z|A-Z|a-z[x]|A-Z[x]|0-9|-'"/>
         </xsl:call-template>
       </xsl:variable>
       <result type="warning">
@@ -159,7 +159,7 @@
         </xsl:if>
         <xsl:if test="$id-other = 'yes'">
           <suggestion>Use only the following special characters in
-            Identifiers: ._-
+            Identifiers: -
           </suggestion>
         </xsl:if>
       </result>
