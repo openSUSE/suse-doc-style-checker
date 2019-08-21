@@ -8,12 +8,12 @@ env:
 matrix:
   include:
     - env: TOXENV=check
-    - env: TOXENV=3.4
-      python: 3.4
     - env: TOXENV=3.5
       python: 3.5
     - env: TOXENV=3.6
       python: 3.6
+    - env: TOXENV=3.7
+      python: 3.7
 install:
   - pip install tox coveralls
   - virtualenv --version
