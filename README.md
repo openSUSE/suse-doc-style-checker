@@ -18,6 +18,5 @@ Releases are usually aligned with releases of the Style Guide.
 ## Lucky Charms
 
 [![Build Status](https://travis-ci.org/openSUSE/suse-doc-style-checker.svg?branch=main)](https://travis-ci.org/openSUSE/suse-doc-style-checker)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/456aa12ad22b4550a9d91f34b850a3ea)](https://www.codacy.com/app/tomschr/suse-doc-style-checker)
-[![Coverage Status](https://coveralls.io/repos/github/openSUSE/suse-doc-style-checker/badge.svg?branch=feature%2Fcoverage)](https://coveralls.io/github/openSUSE/suse-doc-style-checker?branch=feature%2Fcoverage)
+[![Coverage Status](https://coveralls.io/repos/github/openSUSE/suse-doc-style-checker/badge.svg?branch=main)](https://coveralls.io/github/openSUSE/suse-doc-style-checker?branch=main)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/openSUSE/suse-doc-style-checker/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/openSUSE/suse-doc-style-checker/?branch=main)
