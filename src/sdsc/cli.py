@@ -58,6 +58,12 @@ def parseargs(cliargs=None):
             editor will open; in such cases, set the BROWSER variable with:
             export BROWSER=/MY/BROWSER ; Chromium or Firefox will both
             do the right thing""")
+    parser.add_argument('--check-only',
+                        dest='moduleselection',
+                        default=None,
+                        metavar='MODULES',
+                        help="""only run modules from that are specified in
+            this space-separated list""")
     parser.add_argument('--module',
                         action='store_true',
                         default=False,

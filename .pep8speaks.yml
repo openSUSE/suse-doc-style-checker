@@ -1,0 +1,20 @@
+message:
+    opened:
+        header: "Yo, this Peppy."
+                # The keyword {name} is converted into the author's username
+        footer: "Here's a [guide](https://goo.gl/hqbW4r)."
+                # The messages can be written as they would over GitHub
+    updated:  # Messages when new commits are added to the PR
+        header: "Yo, Peppy again!"
+        footer: ""
+    no_errors: "I likes you."
+
+scanner:
+    diff_only: True
+
+pycodestyle:
+    max-line-length: 100
+#    ignore:
+#        - W391
+
+only_mention_files_with_errors: True
