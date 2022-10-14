@@ -15,6 +15,19 @@ Releases are usually aligned with releases of the Style Guide.
   [the Documentation:Tools project](https://build.opensuse.org/project/show/Documentation:Tools)
 
 
+## Testing the branch
+1. Create a new Python environment with the command: <pre>python3 -m venv .env</pre>
+2. Activate the environment with: <pre>source .env/bin/activate</pre>
+3. Update the environment: <pre>pip3 install --upgrade pip setuptools</pre>
+4. "Install" the SUSE stylechecker inside the environment with: <pre>./setup.py develop</pre>
+5. Use any existing XML file for testing: <pre>sdsc <XML_FILE></pre>
+6. To compare with the system stylechecker, use the absolute path to the script like: <pre>/usr/bin/sdsc <XML_FILE></pre>
+
+To get rid of the environment in your GitHub repo, execute these final steps:
+1. Deactivate the environment first: <pre>deactivate</pre>
+2. Remove the <strong>.env</strong> folder with: <pre>rm -rf .env</pre>
+
+
 ## Lucky Charms
 
 [![Build Status](https://travis-ci.org/openSUSE/suse-doc-style-checker.svg?branch=main)](https://travis-ci.org/openSUSE/suse-doc-style-checker)
