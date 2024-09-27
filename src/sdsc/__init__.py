@@ -41,32 +41,23 @@ from .textutil import (counttokens,
                        findtagreplacement,
                        removepunctuation,
                        sanitizepunctuation,
+                       sentencesegmenter,
                        tokenizer,
                        xmlescape,
                        )
+from .spellcheck import (spellcheck,
+                         spellcheckmessage,
+                       )
+from .markup import (
+        highlight,
+                    )
 
 
 # Global flags
 flag_performance = False
 flag_checkpatterns = False
 flag_module = False
-
-
-def sentencesegmenter(text):
-    """Splits a paragraph into a list of sentences. Removes
-    final punctuation from all sentences.
-
-    :param str text: text to split into sentences
-    """
-    sentences = SENTENCEENDS.split(text)
-    # The last sentence's final punctuation has not yet been cut off, do that
-    # now.
-    sentences[-1] = LASTSENTENCEENDS.sub('', sentences[-1])
-
-    # We also need to cut off parentheses etc. from the first word of the first
-    # sentence, as that has not been done so far either.
-    sentences[0] = removepunctuation(sentences[0], start=True)
-    return sentences
+flag_moduleselection = None
 
 
 def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
@@ -74,7 +65,7 @@ def termcheck(context, termfileid, content, contentpretty, contextid, basefile,
     """ Check a paragraph using text-level checks involving regular
     expressions. If there is a match, issue a message.
 
-    :param ??? text: information about the context node
+    :param ??? context: information about the context node
     :param int termfileid: the expected ID of the terminology data; this is
         used to check whether terminology was correctly initialized via
         buildtermdata()
@@ -635,62 +626,33 @@ def termcheckmessage(acceptword, acceptcontext, word, line, content,
     message = None
     filename = ""
     if basefile:
-        filename = "<file>%s</file>" % str(basefile)
+        filename = "<file>%s</file>" % basefile
 
     withinid = ""
     if contextid:
-        withinid = "<withinid>%s</withinid>" % str(contextid)
+        withinid = "<withinid>%s</withinid>" % contextid
 
     message = etree.XML("""<result type="%s">
             <location>%s%s<line>%s</line></location>
-        </result>""" % (messagetype, filename, withinid, str(line)))
+        </result>""" % (messagetype, filename, withinid, line))
 
     if acceptcontext:
         message.append(etree.XML("""<message>In the context of %s,
             do not use <quote>%s</quote>:
-            <quote>%s</quote></message>""" % (acceptcontext, word, content)))
+            <quote>%s</quote></message>""" % (xmlescape(acceptcontext), xmlescape(word), content)))
     else:
         message.append(etree.XML("""<message>Do not use
             <quote>%s</quote> here:
-            <quote>%s</quote></message>""" % (word, content)))
+            <quote>%s</quote></message>""" % (xmlescape(word), content)))
 
     if acceptword:
         message.append(etree.XML("""<suggestion>Use <quote>%s</quote>
-            instead.</suggestion>""" % acceptword))
+            instead.</suggestion>""" % xmlescape(acceptword)))
     else:
         message.append(etree.XML("""<suggestion>Remove
-            <quote>%s</quote>.</suggestion>""" % word))
+            <quote>%s</quote>.</suggestion>""" % xmlescape(word)))
 
     return message
-
-
-def highlight(tokens, highlightstart, highlightend):
-    """Takes a string and adds XML tags that lead to specified
-    tokens being highlighted in the output file.
-
-    :param tokens: list of words or a string:
-        ["highlight", "these", "two", "words"] or
-        "highlight these two words" (will be tokenized automatically)
-    :param int highlightstart: start highlighting before this token (starting from zero)
-    :param int highlightend: stop highlighting after this token (starting from zero)
-    :return: string with <highlight> tags at appropriate places"""
-
-    tokens = tokens[:]
-    if isinstance(tokens, str):
-        return highlight(tokenizer(tokens), highlightstart, highlightend)
-
-    highlightstart = max(highlightstart, 0)
-    highlightend = max(highlightend, 0)
-    highlightend = min(highlightend, len(tokens) - 1)
-
-    if highlightstart >= len(tokens) or highlightend < highlightstart:
-        return ""  # Nothing to highlight
-
-
-    tokens[highlightstart] = "<highlight>" + tokens[highlightstart]
-    tokens[highlightend] = tokens[highlightend] + "</highlight>"
-
-    return " ".join(tokens)
 
 
 def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
@@ -777,8 +739,8 @@ def sentencelengthcheck(context, content, contentpretty, contextid, basefile,
                         </message>
                         <suggestion>Remove unnecessary words.</suggestion>
                         <suggestion>Split the sentence.</suggestion>
-                    </result>""" % (messagetype, filename, withinid, str(line),
-                                    str(wordcount), highlightedcontent)))
+                    </result>""" % (messagetype, filename, withinid, line,
+                                    wordcount, highlightedcontent)))
 
         sentencestart = sentenceend
 
@@ -1060,6 +1022,7 @@ def initialize():
         splitpath=splitpath,
         splitvalueunit=splitvalueunit,
         termcheck=termcheck,
+        spellcheck=spellcheck,
         tokenizer=tokenizer,
     ))
 
@@ -1078,11 +1041,22 @@ def initialize():
         printcolor("! No check files found.\n  Add check files to " + os.path.join(location, 'xsl-checks'), 'error')
         return False
 
+    selected = None
+    if flag_moduleselection:
+        selected = flag_moduleselection.split(' ')
+
     for checkfile in checkfiles:
         try:
             checkmodule = os.path.splitext(os.path.basename(checkfile))[0]
-            transform = etree.XSLT(etree.parse(checkfile, parser))
-            prepared_checks.append({'name': checkmodule, 'transform': transform})
+            runthis = True
+            if selected:
+                runthis = False
+                for module in selected:
+                    if module == checkmodule:
+                        runthis = True
+            if runthis:
+                transform = etree.XSLT(etree.parse(checkfile, parser))
+                prepared_checks.append({'name': checkmodule, 'transform': transform})
         except Exception as error:
             printcolor("! Syntax error in check file.\n  " + checkfile, 'error')
             printcolor("  " + str(error), 'error')
@@ -1097,13 +1071,6 @@ def main(cliargs=None):
     :param list cliargs: Arguments to parse or None (=use sys.argv)
     """
 
-    if not initialize():
-        return 1
-
-    timestart = time.time()
-
-    location = os.path.dirname(os.path.realpath(__file__))
-
     global args
     try:
         args = parseargs(cliargs)
@@ -1113,15 +1080,24 @@ def main(cliargs=None):
     global flag_checkpatterns
     global flag_performance
     global flag_module
+    global flag_moduleselection
     flag_checkpatterns = args.checkpatterns
     flag_performance = args.performance
     flag_module = args.module
+    flag_moduleselection = args.moduleselection
 
     if args.bookmarklet:
         webbrowser.open(
             os.path.join(location, 'result-flagging-bookmarklet.html'),
             new=0, autoraise=True)
         return 0
+
+    if not initialize():
+        return 1
+
+    timestart = time.time()
+
+    location = os.path.dirname(os.path.realpath(__file__))
 
     if args.outputfile:
         resultfilename = args.outputfile
