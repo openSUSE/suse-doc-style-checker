@@ -1,5 +1,7 @@
 # SUSE Documentation Style Checker
 
+**This repository is archieved. Use vscode-suse-vale-styleguide and suse-vscode-doc.**
+
 With its little mind tries very hard to check whether documentation is compliant with the
 [SUSE Documentation Style Guide](https://github.com/SUSE/doc-styleguide).
 
